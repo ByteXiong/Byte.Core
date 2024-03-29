@@ -1,0 +1,5 @@
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\obj\Debug\net8.0\Byte.Core.EntityFramework.csproj.AssemblyReference.cache
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\obj\Debug\net8.0\Byte.Core.EntityFramework.GeneratedMSBuildEditorConfig.editorconfig
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\obj\Debug\net8.0\Byte.Core.EntityFramework.AssemblyInfoInputs.cache
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\obj\Debug\net8.0\Byte.Core.EntityFramework.AssemblyInfo.cs
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\obj\Debug\net8.0\Byte.Core.EntityFramework.csproj.CoreCompileInputs.cache

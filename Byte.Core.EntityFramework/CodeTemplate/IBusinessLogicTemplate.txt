@@ -1,0 +1,40 @@
+﻿
+using Byte.Core.EntityFramework.IDbContext;
+using {ModelsNamespace};
+using {ModelRequestNamespace};
+
+namespace {IBusinessLogicNamespace}
+{
+    /// <summary>
+    /// {Comment}
+    /// </summary>
+    public interface I{TableName}Logic:IBusinessLogic<{TableName}, {KeyTypeName}>
+    {
+
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        Task<PagedResults<{TableName}DTO>> GetPageAsync({TableName}Param param);
+        /// <summary>
+        /// 查询详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<{TableName}Info> GetInfoAsync(Guid id);
+        /// <summary>
+        /// 新增
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        Task<int> AddAsync(Add{TableName}Param param);
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        Task<int> UpdateAsync(Update{TableName}Param param);
+      
+    }
+}

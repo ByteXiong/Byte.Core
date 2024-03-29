@@ -1,0 +1,71 @@
+﻿<template>
+      <el-dialog :title="title" v-model="visible" width="80%"  destroy-on-close    @close="close">
+
+          <el-form :model="form"  ref="ruleFormRef" label-width="100px">
+
+         
+            {FormNamespace}
+          </el-form>
+
+      <template #footer>
+      <span class="dialog-footer">
+  
+        <el-button  @click="visible = false">取消</el-button>
+        <el-button type="primary" @click="handleSubmit">  保存 </el-button> 
+      </span>
+    </template>
+  </el-dialog >
+</template>
+<script lang="ts" setup>
+import { ref,nextTick,defineEmits   } from "vue";
+import {  Post,Get } from "@/utils/request";
+const ruleFormRef = ref()
+ const form =ref<any>({})//reactive<any>({})// reactive({account:"",name:"",phone:''});
+ const visible= ref(false);
+ const title = ref('用户');
+
+const close=()=>{
+  console.log("清空",form)
+
+}
+   //打开
+    const openForm= async(id?:string)=> {
+      debugger
+      visible.value=true;
+      await nextTick(async ()=>{
+        console.log("加载完成")
+    ruleFormRef.value.resetFields()
+  })
+     if (id) {
+        const { data,success }=    await Get("/{TableName}/getInfo", { id: id})
+         form.value =data
+         console.log(form)
+          }
+        }
+
+
+const emit = defineEmits(['refresh'])
+//   clickChild(){
+	   
+//    }
+
+    //保存
+    async function handleSubmit() { 
+
+      await ruleFormRef.value.validate(async (valid, fields):Promise<void> => {
+        if (!valid) {
+          return;
+        }
+           const { data,success }=  await  Post("/{TableName}/Submit", form.value)
+           emit('refresh')
+        })
+    }
+
+
+defineExpose({
+	visible,
+  openForm,
+});
+
+
+</script>

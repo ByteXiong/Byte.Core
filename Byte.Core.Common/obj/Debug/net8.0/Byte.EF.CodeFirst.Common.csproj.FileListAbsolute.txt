@@ -1,0 +1,15 @@
+E:\MyCode\Byte.EF.CodeFirst\Byte.EF.CodeFirst.Common\obj\Debug\net8.0\Byte.EF.CodeFirst.Common.csproj.AssemblyReference.cache
+E:\MyCode\Byte.EF.CodeFirst\Byte.EF.CodeFirst.Common\obj\Debug\net8.0\Byte.EF.CodeFirst.Common.GeneratedMSBuildEditorConfig.editorconfig
+E:\MyCode\Byte.EF.CodeFirst\Byte.EF.CodeFirst.Common\obj\Debug\net8.0\Byte.EF.CodeFirst.Common.AssemblyInfoInputs.cache
+E:\MyCode\Byte.EF.CodeFirst\Byte.EF.CodeFirst.Common\obj\Debug\net8.0\Byte.EF.CodeFirst.Common.AssemblyInfo.cs
+E:\MyCode\Byte.EF.CodeFirst\Byte.EF.CodeFirst.Common\obj\Debug\net8.0\Byte.EF.CodeFirst.Common.csproj.CoreCompileInputs.cache
+E:\MyCode\Byte.EF.CodeFirst\Byte.EF.CodeFirst.Common\bin\Debug\net8.0\Byte.EF.CodeFirst.Common.deps.json
+E:\MyCode\Byte.EF.CodeFirst\Byte.EF.CodeFirst.Common\bin\Debug\net8.0\Byte.EF.CodeFirst.Common.runtimeconfig.json
+E:\MyCode\Byte.EF.CodeFirst\Byte.EF.CodeFirst.Common\bin\Debug\net8.0\Byte.EF.CodeFirst.Common.dll
+E:\MyCode\Byte.EF.CodeFirst\Byte.EF.CodeFirst.Common\bin\Debug\net8.0\Byte.EF.CodeFirst.Common.pdb
+E:\MyCode\Byte.EF.CodeFirst\Byte.EF.CodeFirst.Common\bin\Debug\net8.0\Byte.EF.CodeFirst.Common.xml
+E:\MyCode\Byte.EF.CodeFirst\Byte.EF.CodeFirst.Common\obj\Debug\net8.0\Byte.EF.CodeFirst.Common.dll
+E:\MyCode\Byte.EF.CodeFirst\Byte.EF.CodeFirst.Common\obj\Debug\net8.0\refint\Byte.EF.CodeFirst.Common.dll
+E:\MyCode\Byte.EF.CodeFirst\Byte.EF.CodeFirst.Common\obj\Debug\net8.0\Byte.EF.CodeFirst.Common.pdb
+E:\MyCode\Byte.EF.CodeFirst\Byte.EF.CodeFirst.Common\obj\Debug\net8.0\Byte.EF.CodeFirst.Common.genruntimeconfig.cache
+E:\MyCode\Byte.EF.CodeFirst\Byte.EF.CodeFirst.Common\obj\Debug\net8.0\ref\Byte.EF.CodeFirst.Common.dll

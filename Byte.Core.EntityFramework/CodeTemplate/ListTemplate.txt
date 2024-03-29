@@ -1,0 +1,173 @@
+﻿<template>
+       <div class="main-conent main-conent-minheight">
+        <el-card shadow="never" class="border-none">
+             <div slot="header">
+        <div class="flex-between">
+          <div class="flex-left flex-wrap">
+            <label>
+              <el-input style="width:180px;" placeholder="请输入搜索内容" v-model="param.keyWord">
+                <i slot="suffix" class="el-input__icon el-icon-search cursor-pointer" @click="searchClikc()"></i>
+              </el-input>
+            </label>
+                </div>
+          <data-excel name="{Comment}" tid="excel_{TableName}" style="margin-bottom:10px;"></data-excel>
+        </div>
+      </div>
+
+           <el-table
+           id="excel_{TableName}"
+           border
+             stripe
+             highlight-current-row
+            @sort-change="sortChange"
+            @row-dblclick="(row)=>{this.handleEdit(row)}" 
+               :data="data">
+                  {TableColumnNamespace}
+                    <el-table-column
+                        label="操作"
+                        width="200"
+                        class="blockExportExcel" >
+                       <template slot-scope="scope">
+         <el-dropdown class="margin-l5">
+                            <span class="cursor-pointer">
+                                <el-button type="text" >更多<i class="el-icon-arrow-down el-icon--right"></i></el-button>
+                            </span>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item   @click="handleEdit( scope.row)">编辑</el-dropdown-item>
+                                <el-dropdown-item  @click="handleDelete(scope.row)">删除</el-dropdown-item>
+                            </el-dropdown-menu>
+         </el-dropdown>
+      </template>
+                    </el-table-column>
+            </el-table>
+
+
+            <div class="screen-footer text-right">
+               <el-pagination
+                    background
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :page-sizes="[100, 200, 300, 400]"
+                    :page-size="pagerInfo.pageSize"
+                    :total="pagerInfo.totalRowCount"
+                     @size-change="sizeChenge"
+                     @current-change="pageChange"
+                     @prev-click="pageChange"
+                     @next-click="pageChange"
+                    >
+                </el-pagination>
+            </div>
+<!--  -----------------------------------------------------------------子页 -->
+</el-card>
+<edit-form   ref="editForm"   :parentObj="this"   ></edit-form>
+  
+            
+    </div>
+</template>
+<script>
+import editForm from './editForm'
+export default {
+    components: {
+          editForm
+    },
+    data () {
+      return {
+        input1: '',
+        svalue2: '',
+         param:{
+  pageIndex: 1,//当前页
+  pageSize: 10,//当前显示
+  sortOrderDesc: "descending",//排序
+  sortName: "id",//排序字段
+  sortList: {},
+  keyWord: ""
+        },
+        data: [],
+           pagerInfo:{
+      hasNext: false,//是否有上一页
+    hasPrev: false,//下一页
+    isFirst: true,//是否第一页
+    isLast: true,//是否最后一页
+    pageIndex: 1,//当前页
+    pageSize: 10,//条数
+    startIndex: 0,//起始页(0开始)
+    totalPageCount: 0,//总页数
+    totalRowCount: 0,//总条数
+    },
+    // ---------------------------------------子页--------------------------------------------------
+    drawer:false,//弹框
+    form:{},//表单
+    
+        };
+    },
+    mounted(){
+                this.searchClikc();
+    },
+    methods: {
+            //查询
+         searchClikc(){
+            this.param.pageIndex=1;
+            this.getData();
+            },
+        //获取所有数据
+          getData(){
+     this.$api.get('/api/{TableName}/getPage', this.param).then(resJson =>{
+       if(resJson .success){
+            this.data=resJson .data.data;
+           this.pagerInfo=resJson .data.pagerInfo;
+           }
+           })
+          },
+
+ //点击页数事件
+sizeChenge(e){
+    this.param.pageIndex=1;
+    this.param.pageSize=e;
+    this.getData();
+},
+
+//点击数字事件
+pageChange(e){
+   this.param.pageIndex=e;
+    this.getData();
+},
+    //排序
+sortChange(e){
+   this.param.sortOrderDesc=e.order||'';//排序
+   this.param.sortName=[e.prop];//排序字段
+   //  this.param.sortList[e.prop] = e.order;//POST 请求可用
+   this.param.pageIndex=1;
+   this.getData();
+},     
+//删除
+handleDelete(row){
+ this.$confirm('此操作将删除该数据, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+
+    this.$api.post(`/api/{TableName}/delete?id=${row.id}`).then(resJson =>{
+       if(resJson .success){
+          this.$message({  type: 'success', message: '删除成功!'  });
+              this.getData();
+           }
+           })
+        }).catch(() => {
+          this.$message({ type: 'info',message: '已取消删除' });          
+        });
+
+
+},
+// ---------------------------------------------------子页--------------------
+    //打开子页
+    hanldleAdd() {
+      this.$refs.editForm.openForm()
+    },
+    //编辑子页
+    handleEdit(row) {
+      this.$refs.editForm.openForm(row.id)
+    },
+  
+    }
+};
+</script>

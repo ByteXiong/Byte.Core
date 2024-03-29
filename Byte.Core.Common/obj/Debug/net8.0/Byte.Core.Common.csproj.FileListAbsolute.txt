@@ -1,0 +1,13 @@
+E:\MyCode\Byte.Core\Byte.Core.Common\obj\Debug\net8.0\Byte.Core.Common.csproj.AssemblyReference.cache
+E:\MyCode\Byte.Core\Byte.Core.Common\obj\Debug\net8.0\Byte.Core.Common.GeneratedMSBuildEditorConfig.editorconfig
+E:\MyCode\Byte.Core\Byte.Core.Common\obj\Debug\net8.0\Byte.Core.Common.AssemblyInfoInputs.cache
+E:\MyCode\Byte.Core\Byte.Core.Common\obj\Debug\net8.0\Byte.Core.Common.AssemblyInfo.cs
+E:\MyCode\Byte.Core\Byte.Core.Common\obj\Debug\net8.0\Byte.Core.Common.csproj.CoreCompileInputs.cache
+E:\MyCode\Byte.Core\Byte.Core.Common\bin\Debug\net8.0\Byte.Core.Common.deps.json
+E:\MyCode\Byte.Core\Byte.Core.Common\bin\Debug\net8.0\Byte.Core.Common.dll
+E:\MyCode\Byte.Core\Byte.Core.Common\bin\Debug\net8.0\Byte.Core.Common.pdb
+E:\MyCode\Byte.Core\Byte.Core.Common\bin\Debug\net8.0\Byte.Core.Common.xml
+E:\MyCode\Byte.Core\Byte.Core.Common\obj\Debug\net8.0\Byte.Core.Common.dll
+E:\MyCode\Byte.Core\Byte.Core.Common\obj\Debug\net8.0\refint\Byte.Core.Common.dll
+E:\MyCode\Byte.Core\Byte.Core.Common\obj\Debug\net8.0\Byte.Core.Common.pdb
+E:\MyCode\Byte.Core\Byte.Core.Common\obj\Debug\net8.0\ref\Byte.Core.Common.dll
