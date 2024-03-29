@@ -19,10 +19,6 @@
       "RelativeMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|solutionrelative:byte.core.entityframework\\attributes\\abstractinterceptorattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|e:\\mycode\\byte.core\\byte.core.entityframework\\attributes\\fromdbcontextfactoryattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|solutionrelative:byte.core.entityframework\\attributes\\fromdbcontextfactoryattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|e:\\mycode\\byte.core\\byte.core.entityframework\\dbcontextcore\\mysqldbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|solutionrelative:byte.core.entityframework\\dbcontextcore\\mysqldbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -39,10 +35,6 @@
       "RelativeMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|solutionrelative:byte.core.entityframework\\dbcontextcore\\basedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|e:\\mycode\\byte.core\\byte.core.entityframework\\repositories\\imongodbrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|solutionrelative:byte.core.entityframework\\repositories\\imongodbrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|e:\\mycode\\byte.core\\byte.core.entityframework\\repositories\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|solutionrelative:byte.core.entityframework\\repositories\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -55,20 +47,28 @@
       "RelativeMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|solutionrelative:byte.core.entityframework\\codegenerator\\dbfirst\\idbfirst.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|e:\\mycode\\byte.core\\byte.core.entityframework\\dbcontextcore\\mongodbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|solutionrelative:byte.core.entityframework\\dbcontextcore\\mongodbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|e:\\mycode\\byte.core\\byte.core.entityframework\\repositories\\mongodbrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|solutionrelative:byte.core.entityframework\\repositories\\mongodbrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|e:\\mycode\\byte.core\\byte.core.entityframework\\codegenerator\\codefirst\\icodefirst.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|solutionrelative:byte.core.entityframework\\codegenerator\\codefirst\\icodefirst.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|e:\\mycode\\byte.core\\byte.core.entityframework\\byte.core.entityframework.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|solutionrelative:byte.core.entityframework\\byte.core.entityframework.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\IMongoDbRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Byte.Core.EntityFramework\\Repositories\\IMongoDbRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Attributes\\FromDbContextFactoryAttribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Byte.Core.EntityFramework\\Attributes\\FromDbContextFactoryAttribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\DbContextCore\\MongoDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Byte.Core.EntityFramework\\DbContextCore\\MongoDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\MongoDbRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Byte.Core.EntityFramework\\Repositories\\MongoDbRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -78,60 +78,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HttpHelper.cs",
-              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Helpers\\HttpHelper.cs",
-              "RelativeDocumentMoniker": "Byte.Core.Common\\Helpers\\HttpHelper.cs",
-              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Helpers\\HttpHelper.cs",
-              "RelativeToolTip": "Byte.Core.Common\\Helpers\\HttpHelper.cs",
-              "ViewState": "AQIAADUAAAAAAAAAAAAQwAEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:31:59.312Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RuntimeHelper.cs",
-              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
-              "RelativeDocumentMoniker": "Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
-              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
-              "RelativeToolTip": "Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAlwBAAAAAoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:31:50.411Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Byte.Core.Common",
-              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Byte.Core.Common.csproj",
-              "RelativeDocumentMoniker": "Byte.Core.Common\\Byte.Core.Common.csproj",
-              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Byte.Core.Common.csproj",
-              "RelativeToolTip": "Byte.Core.Common\\Byte.Core.Common.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-03-29T08:27:52.991Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AbstractInterceptorAttribute.cs",
-              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Attributes\\AbstractInterceptorAttribute.cs",
-              "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Attributes\\AbstractInterceptorAttribute.cs",
-              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Attributes\\AbstractInterceptorAttribute.cs",
-              "RelativeToolTip": "Byte.Core.EntityFramework\\Attributes\\AbstractInterceptorAttribute.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:27:41.067Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -150,7 +98,56 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
+              "Title": "HttpHelper.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Helpers\\HttpHelper.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Common\\Helpers\\HttpHelper.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Helpers\\HttpHelper.cs",
+              "RelativeToolTip": "Byte.Core.Common\\Helpers\\HttpHelper.cs",
+              "ViewState": "AQIAADUAAAAAAAAAAAAQwAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-29T08:31:59.312Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RuntimeHelper.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
+              "RelativeToolTip": "Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAlwBkAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-29T08:31:50.411Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Byte.Core.Common.csproj",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Byte.Core.Common.csproj",
+              "RelativeDocumentMoniker": "Byte.Core.Common\\Byte.Core.Common.csproj",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Byte.Core.Common.csproj",
+              "RelativeToolTip": "Byte.Core.Common\\Byte.Core.Common.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-03-29T08:27:52.991Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AbstractInterceptorAttribute.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Attributes\\AbstractInterceptorAttribute.cs",
+              "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Attributes\\AbstractInterceptorAttribute.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Attributes\\AbstractInterceptorAttribute.cs",
+              "RelativeToolTip": "Byte.Core.EntityFramework\\Attributes\\AbstractInterceptorAttribute.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-29T08:27:41.067Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "IDbContextCore.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\IDbContext\\IDbContextCore.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\IDbContext\\IDbContextCore.cs",
@@ -158,12 +155,11 @@
               "RelativeToolTip": "Byte.Core.EntityFramework\\IDbContext\\IDbContextCore.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:25:45.609Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T08:25:45.609Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "MySqlDbContext.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\DbContextCore\\MySqlDbContext.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\DbContextCore\\MySqlDbContext.cs",
@@ -171,12 +167,11 @@
               "RelativeToolTip": "Byte.Core.EntityFramework\\DbContextCore\\MySqlDbContext.cs",
               "ViewState": "AQIAACsAAAAAAAAAAAAnwDoAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:25:33.914Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T08:25:33.914Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "IMongoDbRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\IMongoDbRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Repositories\\IMongoDbRepository.cs",
@@ -184,12 +179,11 @@
               "RelativeToolTip": "Byte.Core.EntityFramework\\Repositories\\IMongoDbRepository.cs",
               "ViewState": "AQIAAJ4AAAAAAAAAAAAiwK8AAABgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:24:59.21Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T08:24:59.21Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "BaseDbContext.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\DbContextCore\\BaseDbContext.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\DbContextCore\\BaseDbContext.cs",
@@ -197,12 +191,11 @@
               "RelativeToolTip": "Byte.Core.EntityFramework\\DbContextCore\\BaseDbContext.cs",
               "ViewState": "AQIAADsBAAAAAAAAAAAnwEoBAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:23:26.937Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T08:23:26.937Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 10,
               "Title": "IDbFirst.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\CodeGenerator\\DbFirst\\IDbFirst.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\CodeGenerator\\DbFirst\\IDbFirst.cs",
@@ -210,12 +203,11 @@
               "RelativeToolTip": "Byte.Core.EntityFramework\\CodeGenerator\\DbFirst\\IDbFirst.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:23:12.946Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T08:23:12.946Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 9,
               "Title": "ShardDbContextFactory.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\DbContextCore\\ShardDbContextFactory.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\DbContextCore\\ShardDbContextFactory.cs",
@@ -223,12 +215,11 @@
               "RelativeToolTip": "Byte.Core.EntityFramework\\DbContextCore\\ShardDbContextFactory.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:23:12.315Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T08:23:12.315Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 14,
               "Title": "FromDbContextFactoryAttribute.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Attributes\\FromDbContextFactoryAttribute.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Attributes\\FromDbContextFactoryAttribute.cs",
@@ -236,12 +227,11 @@
               "RelativeToolTip": "Byte.Core.EntityFramework\\Attributes\\FromDbContextFactoryAttribute.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:23:10.185Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T08:23:10.185Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "MongoDbContext.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\DbContextCore\\MongoDbContext.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\DbContextCore\\MongoDbContext.cs",
@@ -249,12 +239,11 @@
               "RelativeToolTip": "Byte.Core.EntityFramework\\DbContextCore\\MongoDbContext.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:22:49.267Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T08:22:49.267Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 8,
               "Title": "IRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\IRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Repositories\\IRepository.cs",
@@ -262,12 +251,11 @@
               "RelativeToolTip": "Byte.Core.EntityFramework\\Repositories\\IRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:22:21.828Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T08:22:21.828Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "MongoDbRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\MongoDbRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Repositories\\MongoDbRepository.cs",
@@ -275,12 +263,11 @@
               "RelativeToolTip": "Byte.Core.EntityFramework\\Repositories\\MongoDbRepository.cs",
               "ViewState": "AQIAAHwBAAAAAAAAAAArwI4BAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:18:58.035Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T08:18:58.035Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 11,
               "Title": "ICodeFirst.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\CodeGenerator\\CodeFirst\\ICodeFirst.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\CodeGenerator\\CodeFirst\\ICodeFirst.cs",
@@ -288,12 +275,11 @@
               "RelativeToolTip": "Byte.Core.EntityFramework\\CodeGenerator\\CodeFirst\\ICodeFirst.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:18:47.587Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T08:18:47.587Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "BaseRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\BaseRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Repositories\\BaseRepository.cs",
@@ -301,21 +287,19 @@
               "RelativeToolTip": "Byte.Core.EntityFramework\\Repositories\\BaseRepository.cs",
               "ViewState": "AQIAAMQAAAAAAAAAAAAhwO8AAABeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:18:36.691Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T08:18:36.691Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Byte.Core.EntityFramework",
+              "DocumentIndex": 12,
+              "Title": "Byte.Core.EntityFramework.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj",
               "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj",
               "RelativeToolTip": "Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACgAAABOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-03-29T08:17:59.052Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T08:17:59.052Z"
             }
           ]
         }

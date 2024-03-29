@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("封装Code")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("8.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("8.0.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("8.0.0.0+a7bad1f7354364534adccec51d6abcde794432a8")]
 [assembly: System.Reflection.AssemblyProductAttribute("Byte.EF.CodeFirst")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Byte.Core.Common")]
 [assembly: System.Reflection.AssemblyVersionAttribute("8.0.0.0")]

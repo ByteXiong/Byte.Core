@@ -1545,6 +1545,27 @@ namespace Byte.Core.Common.Extensions
         }
 
 
+
+        /// <summary>
+        /// 不等于NULL？
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static bool IsNotNull(this object obj)
+        {
+            return obj != null;
+        }
+
+        /// <summary>
+        /// 等于NULL？
+        /// </summary>
+        /// <param name="obj">对象</param>
+        /// <returns></returns>
+        public static bool IsNull(this object obj)
+        {
+            return obj == null;
+        }
+
         /// <summary>
         /// 实体类转json数据，速度快
         /// </summary>
