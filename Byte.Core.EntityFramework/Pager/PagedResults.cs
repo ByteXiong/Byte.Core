@@ -1,4 +1,4 @@
-﻿namespace Byte.Core.EntityFramework.IDbContext
+﻿namespace Byte.Core.EntityFramework.Pager
 {
     //
     // 摘要:

@@ -1,4 +1,4 @@
-﻿namespace Byte.Core.EntityFramework.IDbContext
+﻿namespace Byte.Core.EntityFramework.Pager
 {
     public class PageParam
     {

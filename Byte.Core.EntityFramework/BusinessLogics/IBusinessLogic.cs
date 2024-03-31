@@ -1,19 +1,20 @@
 ﻿using Byte.Core.Common.IoC;
 using Byte.Core.EntityFramework.Models;
+using Byte.Core.EntityFramework.Pager;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
 using System.Data.Common;
 using System.Linq.Expressions;
 
-namespace Byte.Core.EntityFramework.IDbContext
+namespace Byte.Code.BusinessLogics
 {
-    public interface IRepository<T, in TKey> : ITransientDependency, IDisposable where T : IBaseModel<TKey>
+    public interface IBusinessLogic<T, TKey> : ITransientDependency, IDisposable where T : IBaseModel<TKey>
     {
+
         #region Insert
 
         int Add(T entity, bool withTrigger = false);
         Task<int> AddAsync(T entity, bool withTrigger = false);
-    
         int AddRange(ICollection<T> entities, bool withTrigger = false);
         Task<int> AddRangeAsync(ICollection<T> entities, bool withTrigger = false);
         void BulkInsert(IList<T> entities, string destinationTableName = null);
@@ -36,9 +37,9 @@ namespace Byte.Core.EntityFramework.IDbContext
         Task<int> UpdateRangeAsync(ICollection<T> entities, bool withTrigger = false);
         int UpdateRange(ICollection<T> entities, bool withTrigger = false, params string[] updateColumns);
         Task<int> UpdateRangeAsync(ICollection<T> entities, bool withTrigger = false, params string[] updateColumns);
+
         int UpdateRange(ICollection<T> entities, Expression<Func<T, object>> updateColumns, bool withTrigger = false);
         Task<int> UpdateRangeAsync(ICollection<T> entities, Expression<Func<T, object>> updateColumns, bool withTrigger = false);
-
         #endregion
 
         #region Delete
@@ -51,7 +52,13 @@ namespace Byte.Core.EntityFramework.IDbContext
         Task<int> DeleteRangeAsync(ICollection<T> entities, bool withTrigger = false);
 
         #endregion
+        #region SaveChangesUpdate
+         int SaveChanges() ;
+         int SaveChanges(bool acceptAllChangesOnSuccess) ;
+         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
+         Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken));
 
+        #endregion
 
         #region Query
 
@@ -69,27 +76,15 @@ namespace Byte.Core.EntityFramework.IDbContext
         IList<T> Get(Expression<Func<T, bool>> @where = null);
         Task<List<T>> GetAsync(Expression<Func<T, bool>> @where = null);
 
-
         #endregion
-
-        #region 分页
-
-        PagedResults<TOut> PageQuery<TOut>(PageParam queryParam, Expression<Func<T, bool>> where = null, Func<T, TOut> selectFunc = null);
-        Task<PagedResults<TOut>> PageQueryAsync<TOut>(PageParam queryParam, Expression<Func<T, bool>> where = null, Func<T, TOut> selectFunc = null);
-
-        #endregion
-        #region  sql语句
-
+        #region sql
         IEnumerable<TView> ExecuteQuery<TView>(string sql, int cmdTimeout = 30, params DbParameter[] parameters) where TView : new();
         Task<IEnumerable<TView>> ExecuteQueryAsync<TView>(string sql, int cmdTimeout = 30, params DbParameter[] parameters) where TView : new();
 
         Task<TView> ExecuteScalarAsync<TView>(string sql, int cmdTimeout = 30, params DbParameter[] parameters);
         TView ExecuteScalar<TView>(string sql, int cmdTimeout = 30, params DbParameter[] parameters);
-
         DataTable GetDataTable(string sql, int cmdTimeout = 30, params DbParameter[] parameters);
         Task<DataTable> GetDataTableAsync(string sql, int cmdTimeout = 30, params DbParameter[] parameters);
-
-
         /// <summary>
         /// 执行SQL语句，返回影响的记录数
         /// </summary>
@@ -107,22 +102,18 @@ namespace Byte.Core.EntityFramework.IDbContext
         /// <returns></returns>
         Task<int> ExecuteNonQueryAsync(string sql, int cmdTimeout = 30, params DbParameter[] parameters);
         #endregion
-        #region  SaveChange
-        int SaveChanges();
 
-        int SaveChanges(bool acceptAllChangesOnSuccess);
 
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
 
-        Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken));
 
+
+
+        #region 分页
+
+        PagedResults<TOut> PageQuery<TOut>(PageParam queryParam, Expression<Func<T, bool>> where = null, Func<T, TOut> selectFunc = null);
+        Task<PagedResults<TOut>> PageQueryAsync<TOut>(PageParam queryParam, Expression<Func<T, bool>> where = null, Func<T, TOut> selectFunc = null);
 
         #endregion
-
-
-        TModel ConvertToModel<TModel>(T entity) where TModel : class, new();
-
-
 
 
         #region 事务

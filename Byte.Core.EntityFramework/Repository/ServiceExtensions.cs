@@ -1,4 +1,5 @@
 ﻿using Byte.Core.EntityFramework.Models;
+using Byte.Core.EntityFramework.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;

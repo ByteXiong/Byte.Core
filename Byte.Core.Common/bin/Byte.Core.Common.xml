@@ -1265,6 +1265,20 @@
             <param name="obj">对象</param>
             <returns></returns>
         </member>
+        <member name="M:Byte.Core.Common.Extensions.ObjectExtension.IsNotNull(System.Object)">
+            <summary>
+            不等于NULL？
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Byte.Core.Common.Extensions.ObjectExtension.IsNull(System.Object)">
+            <summary>
+            等于NULL？
+            </summary>
+            <param name="obj">对象</param>
+            <returns></returns>
+        </member>
         <member name="M:Byte.Core.Common.Extensions.ObjectExtension.EntityToJson(System.Object)">
             <summary>
             实体类转json数据，速度快

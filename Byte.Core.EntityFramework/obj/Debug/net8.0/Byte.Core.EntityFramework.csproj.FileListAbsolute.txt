@@ -3,3 +3,16 @@ E:\MyCode\Byte.Core\Byte.Core.EntityFramework\obj\Debug\net8.0\Byte.Core.EntityF
 E:\MyCode\Byte.Core\Byte.Core.EntityFramework\obj\Debug\net8.0\Byte.Core.EntityFramework.AssemblyInfoInputs.cache
 E:\MyCode\Byte.Core\Byte.Core.EntityFramework\obj\Debug\net8.0\Byte.Core.EntityFramework.AssemblyInfo.cs
 E:\MyCode\Byte.Core\Byte.Core.EntityFramework\obj\Debug\net8.0\Byte.Core.EntityFramework.csproj.CoreCompileInputs.cache
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\bin\Debug\net8.0\Byte.Core.EntityFramework.deps.json
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\bin\Debug\net8.0\Byte.Core.EntityFramework.runtimeconfig.json
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\bin\Debug\net8.0\Byte.Core.EntityFramework.dll
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\bin\Debug\net8.0\Byte.Core.EntityFramework.pdb
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\bin\Debug\net8.0\Byte.Core.Common.dll
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\bin\Debug\net8.0\Byte.Core.Common.pdb
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\bin\Debug\net8.0\Byte.Core.Common.xml
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\obj\Debug\net8.0\Byte.Cor.970E724D.Up2Date
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\obj\Debug\net8.0\Byte.Core.EntityFramework.dll
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\obj\Debug\net8.0\refint\Byte.Core.EntityFramework.dll
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\obj\Debug\net8.0\Byte.Core.EntityFramework.pdb
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\obj\Debug\net8.0\Byte.Core.EntityFramework.genruntimeconfig.cache
+E:\MyCode\Byte.Core\Byte.Core.EntityFramework\obj\Debug\net8.0\ref\Byte.Core.EntityFramework.dll

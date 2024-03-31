@@ -1,15 +1,15 @@
 ﻿using Byte.Core.Common.Extensions;
-using Byte.Core.EntityFramework.Extensions;
 using Byte.Core.EntityFramework.IDbContext;
 using Byte.Core.EntityFramework.Models;
 using Microsoft.EntityFrameworkCore;
+using Byte.Core.Common.Helpers;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Data.Common;
 using System.Reflection;
 using System.Text;
 
-namespace Byte.Core.EntityFramework.Extensions
+namespace Byte.Core.Common.Extensions
 {
     public static class EntityFrameworkCoreExtensions
     {
@@ -162,7 +162,7 @@ namespace Byte.Core.EntityFramework.Extensions
             {
                 throw new NotImplementedException("This method does not support current database yet.");
             }
-            var tables = context.GetCurrentDatabaseAllTables().ToInt<DbTable>().Where(selector).ToList();
+            var tables = context.GetCurrentDatabaseAllTables().ToList<DbTable>().Where(selector).ToList();
             var columns = context.GetTableColumns(tables.Select(m => m.TableName).ToArray()).ToList<DbTableColumn>();
             tables.ForEach(item =>
             {
@@ -175,7 +175,7 @@ namespace Byte.Core.EntityFramework.Extensions
                 switch (dbType)
                 {
                     case DatabaseType.MySQL:
-                         sql = $"select* from {item.TableName} where 1 != 1";
+                        sql = $"select* from {item.TableName} where 1 != 1";
                         break;
                     case DatabaseType.Oracle:
                         sql = $"select* from \"{item.TableName}\" where 1 != 1";
@@ -222,7 +222,7 @@ namespace Byte.Core.EntityFramework.Extensions
         /// <returns></returns>
         public static IList<DbTableColumn> GetTableColumnsList(this IDbContextCore context, params string[] tableNames)
         {
-            var tables = context.GetTableColumns(tableNames).ToInt<DbTableColumn>();
+            var tables = context.GetTableColumns(tableNames).ToList<DbTableColumn>();
             return tables;
         }
 
@@ -268,6 +268,7 @@ namespace Byte.Core.EntityFramework.Extensions
         }
         private static IEnumerable<T> Execute<T>(this IDbContextCore context, string sql, CommandType type, params DbParameter[] sqlParams) where T : new()
         {
+    
             var db = context.GetDatabase();
             var connection = db.GetDbConnection();
             var cmd = connection.CreateCommand();

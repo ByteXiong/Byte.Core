@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Reflection;
-
+using Byte.Core.Common.Extensions;
 namespace Byte.Core.EntityFramework.IDbContext
 {
     public class SqlServerDbContext : BaseDbContext, ISqlServerDbContext

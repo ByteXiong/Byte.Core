@@ -8565,19 +8565,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Yonatan\\.nuget\\packages\\": {}
+    "C:\\Users\\admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "8.0.0",
     "restore": {
       "projectUniqueName": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Byte.Core.Common.csproj",
-      "projectName": "Byte.EF.CodeFirst",
+      "projectName": "Byte.Core",
       "projectPath": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Byte.Core.Common.csproj",
-      "packagesPath": "C:\\Users\\Yonatan\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
       "outputPath": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Yonatan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8585,7 +8585,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "\\\\YANGFANGRONG\\Nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8722,7 +8721,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

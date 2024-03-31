@@ -1,4 +1,5 @@
-﻿using Byte.Core.SqlSugar.ConfigOptions;
+﻿using Byte.Core.Common.Extensions;
+using Byte.Core.SqlSugar.ConfigOptions;
 using Microsoft.Extensions.Options;
 using SqlSugar;
 using System;
@@ -71,7 +72,7 @@ namespace Byte.Core.SqlSugar
         private ConnectionItem GetCurrentDataBase()
         {
             var defaultConnectionItem =
-                Configs.DataConnection.ConnectionItem.FirstOrDefault(x => x.ConnId == Configs.DefaultDataBase);
+                Configs.DataConnection.ConnectionItem.FirstOrDefault();
             if (defaultConnectionItem.IsNull())
             {
                 throw new Exception("数据库配置出错，请检查！");

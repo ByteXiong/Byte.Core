@@ -4,6 +4,7 @@ using Byte.Core.EntityFramework.Models;
 using Byte.Core.EntityFramework.Options;
 using Microsoft.Extensions.Options;
 using System.Data;
+using Byte.Core.Common.Extensions;
 
 namespace Byte.Core.EntityFramework.CodeGenerator.DbFirst
 {

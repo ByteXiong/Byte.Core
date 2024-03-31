@@ -1,13 +1,15 @@
 ﻿using Byte.Core.Common.Extensions;
 using Byte.Core.Common.Helpers;
+using Byte.Core.EntityFramework.IDbContext;
 using Byte.Core.EntityFramework.Models;
+using Byte.Core.EntityFramework.Pager;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
 using System.Data.Common;
 using System.Linq.Expressions;
 
-namespace Byte.Core.EntityFramework.IDbContext
+namespace Byte.Core.EntityFramework.Repository
 {
     public abstract class BaseRepository<T, TKey> : IRepository<T, TKey> where T : BaseModel<TKey>
     {

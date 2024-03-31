@@ -6,6 +6,8 @@ using Castle.Core.Internal;
 using System.Data;
 using System.Reflection;
 using System.Text;
+using Byte.Core.Common.Extensions;
+using Byte.Core.Common.Extensions;
 
 namespace Byte.Core.EntityFramework.CodeGenerator
 {

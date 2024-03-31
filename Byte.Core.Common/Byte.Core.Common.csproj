@@ -6,8 +6,8 @@
 		<Version>8.0.0.0</Version>
 		<Description>封装Code</Description>
 		<Authors>Byte</Authors>
-		<Product>Byte.EF.CodeFirst</Product>
-		<PackageId>Byte.EF.CodeFirst</PackageId>
+		<Product>Byte.Core</Product>
+		<PackageId>Byte.Core</PackageId>
 		<AssemblyVersion>8.0.0.0</AssemblyVersion>
 		<FileVersion>8.0.0.0</FileVersion>
 		<Nullable>disable</Nullable>

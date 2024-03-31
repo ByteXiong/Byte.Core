@@ -1,9 +1,11 @@
-﻿using Byte.Core.EntityFramework.Extensions;
+﻿using Byte.Core.Common.Extensions;
+using Byte.Core.EntityFramework.Extensions;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 
-namespace Byte.Core.EntityFramework.IDbContext
+namespace Byte.Core.EntityFramework.Pager
 {
 
     public static class LinqExt
