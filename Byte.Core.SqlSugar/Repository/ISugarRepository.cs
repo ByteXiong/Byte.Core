@@ -1,14 +1,12 @@
 using SqlSugar;
-using System.Data;
-using System.Linq.Expressions;
 
-namespace YZB.Core.Repository.SugarHandler;
+namespace Byte.Core.SqlSugar.Repository;
 
 /// <summary>
 /// sqlSugar接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public interface ISugarRepository<TEntity> where TEntity : class
+public interface ISugarRepository<TEntity>  where TEntity : class
 {
     ISqlSugarClient SugarClient { get; }
 

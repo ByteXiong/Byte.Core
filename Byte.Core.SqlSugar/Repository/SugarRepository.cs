@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace YZB.Core.Repository.SugarHandler;
+namespace Byte.Core.SqlSugar.Repository;
 
 /// <summary>
 /// SqlSugar仓储
@@ -13,18 +13,18 @@ namespace YZB.Core.Repository.SugarHandler;
 /// <typeparam name="TEntity"></typeparam>
 public class SugarRepository<TEntity> : ISugarRepository<TEntity> where TEntity : class, new()
 {
-    public SugarRepository(IUnitOfWork unitOfWork)
-    {
-        var sqlSugarScope = unitOfWork.GetDbClient();
-        var tenantAttribute = typeof(TEntity).GetCustomAttribute<TenantAttribute>();
-        if (tenantAttribute == null)
-        {
-            SugarClient = sqlSugarScope;
-            return;
-        }
+    //public SugarRepository(IUnitOfWork unitOfWork)
+    //{
+    //    var sqlSugarScope = unitOfWork.GetDbClient();
+    //    var tenantAttribute = typeof(TEntity).GetCustomAttribute<TenantAttribute>();
+    //    if (tenantAttribute == null)
+    //    {
+    //        SugarClient = sqlSugarScope;
+    //        return;
+    //    }
 
-        SugarClient = sqlSugarScope.GetConnectionScope(tenantAttribute.configId.ToString());
-    }
+    //    SugarClient = sqlSugarScope.GetConnectionScope(tenantAttribute.configId.ToString());
+    //}
 
     public ISqlSugarClient SugarClient { get; }
 
