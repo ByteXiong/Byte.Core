@@ -7,7 +7,7 @@ using Byte.Core.SqlSugar.SnowflakeIdHelper;
 using Microsoft.Extensions.DependencyInjection;
 using SqlSugar;
 
-namespace YZB.Core.Api.Extensions;
+namespace Byte.Core.SqlSugar.Extensions;
 
 /// <summary>
 /// SqlSugar 启动器

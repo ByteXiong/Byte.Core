@@ -1,6 +1,7 @@
 ﻿using Byte.Core.Common.IoC;
 using Byte.Core.SqlSugar.Repository;
 using SqlSugar;
+using System.Linq.Expressions;
 
 namespace Byte.Core.SqlSugar.BusinessLogics
 {
@@ -39,5 +40,17 @@ namespace Byte.Core.SqlSugar.BusinessLogics
             }
             throw new ApplicationException("IRepository cannot be null");
         }
+
+        #region 查询操作
+
+        /// <summary>
+        /// 获取IQueryable
+        /// </summary>
+        /// <param name="where"></param>
+        /// <returns></returns>
+        public ISugarQueryable<TEntity> GetIQueryable(Expression<Func<TEntity, bool>> where = null)=> Repository.GetIQueryable(where);
+
+
+        #endregion
     }
 }

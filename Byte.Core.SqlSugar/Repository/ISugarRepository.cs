@@ -1,4 +1,7 @@
+using Byte.Core.Common.IoC;
+using NPOI.SS.Formula.Functions;
 using SqlSugar;
+using System.Linq.Expressions;
 
 namespace Byte.Core.SqlSugar.Repository;
 
@@ -6,10 +9,20 @@ namespace Byte.Core.SqlSugar.Repository;
 /// sqlSugar接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public interface ISugarRepository<TEntity>  where TEntity : class
+public interface ISugarRepository<TEntity> : ITransientDependency where TEntity : class
 {
     ISqlSugarClient SugarClient { get; }
 
+    #region 查询操作
+
+    /// <summary>
+    /// 获取IQueryable
+    /// </summary>
+    /// <param name="where"></param>
+    /// <returns></returns>
+    ISugarQueryable<TEntity> GetIQueryable(Expression<Func<TEntity, bool>> where = null);
+
+    #endregion
 
     //#region 新增操作
 

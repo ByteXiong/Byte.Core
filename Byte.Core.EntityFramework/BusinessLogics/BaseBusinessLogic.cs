@@ -31,8 +31,6 @@ namespace Byte.Code.BusinessLogics
             }
             throw new ApplicationException("IRepository cannot be null");
         }
-
-
         #region Insert
 
         public virtual int Add(T entity, bool withTrigger = false) => Repository.Add(entity, withTrigger);

@@ -10,9 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using DbType = SqlSugar.DbType;
 
-namespace Byte.Core.SqlSugar
+namespace Byte.Core.SqlSugar.IDbContext
 {
-    internal class DbContext
+    public class SugarDbContext
     {
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace Byte.Core.SqlSugar
         /// <param name="sqlSugarClient"></param>
         /// <param name="configs"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public DbContext(ISqlSugarClient sqlSugarClient, IOptionsMonitor<Configs> configs = null)
+        public SugarDbContext(ISqlSugarClient sqlSugarClient, IOptionsMonitor<Configs> configs = null)
         {
             _configs = configs?.CurrentValue ?? new Configs();
             if (string.IsNullOrEmpty(ConnectionString))

@@ -1,4 +1,5 @@
 using Byte.Core.Common.Extensions;
+using Byte.Core.Common.IoC;
 using Byte.Core.SqlSugar.Repository;
 using SqlSugar;
 using System.Data;
@@ -13,21 +14,37 @@ namespace Byte.Core.SqlSugar.Repository;
 /// <typeparam name="TEntity"></typeparam>
 public class SugarRepository<TEntity> : ISugarRepository<TEntity> where TEntity : class, new()
 {
-    //public SugarRepository(IUnitOfWork unitOfWork)
-    //{
-    //    var sqlSugarScope = unitOfWork.GetDbClient();
-    //    var tenantAttribute = typeof(TEntity).GetCustomAttribute<TenantAttribute>();
-    //    if (tenantAttribute == null)
-    //    {
-    //        SugarClient = sqlSugarScope;
-    //        return;
-    //    }
+    public SugarRepository()
+    {
+       var  unitOfWork = AutofacContainer.Resolve<IUnitOfWork>();
+        var sqlSugarScope = unitOfWork.GetDbClient();
+        var tenantAttribute = typeof(TEntity).GetCustomAttribute<TenantAttribute>();
+        if (tenantAttribute == null)
+        {
+            SugarClient = sqlSugarScope;
+            return;
+        }
 
-    //    SugarClient = sqlSugarScope.GetConnectionScope(tenantAttribute.configId.ToString());
-    //}
+        SugarClient = sqlSugarScope.GetConnectionScope(tenantAttribute.configId.ToString());
+    }
 
     public ISqlSugarClient SugarClient { get; }
 
+
+    #region 查询操作
+
+    /// <summary>
+    /// 获取IQueryable
+    /// </summary>
+    /// <param name="where"></param>
+    /// <returns></returns>
+    public virtual ISugarQueryable<TEntity> GetIQueryable(Expression<Func<TEntity, bool>> where = null)
+    {
+        return SugarClient.Queryable<TEntity>().Where(where);
+    }
+
+
+    #endregion
 
     //#region 新增操作
 
