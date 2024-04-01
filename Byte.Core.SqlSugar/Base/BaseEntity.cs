@@ -1,7 +1,7 @@
 using System;
 using SqlSugar;
 
-namespace Byte.Core.Entity.Base
+namespace Byte.Core.SqlSugar.Base
 {
     /// <summary>
     /// 实体基类

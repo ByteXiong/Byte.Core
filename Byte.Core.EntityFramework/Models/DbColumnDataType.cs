@@ -11,18 +11,12 @@
 
     public enum DatabaseType
     {
-        MSSQL,
-        MySQL,
-        PostgreSQL,
-        SQLite,
-        InMemory,
-        Oracle,
-        MariaDB,
-        MyCat,
-        Firebird,
-        DB2,
-        Access,
-        MongoDb
+
+        MySQL = 0,
+        MSSQL = 1,
+        Sqlite = 2,
+        Oracle = 3,
+        PostgreSQL = 4
     }
 
     public class DbColumnTypeCollection

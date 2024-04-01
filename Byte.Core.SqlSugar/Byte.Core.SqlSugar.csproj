@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Byte.Core.Common\Byte.Core.Common.csproj" />
+    <ProjectReference Include="..\Byte.Core.EntityFramework\Byte.Core.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>
