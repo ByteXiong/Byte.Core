@@ -7,14 +7,14 @@ using System.Linq.Expressions;
 namespace Byte.Core.SqlSugar.BusinessLogics
 {
     public abstract class SugarLogic<TEntity, TRepository> : ISugarLogic<TEntity> where TEntity : class, new()
-          where TRepository : ISugarRepository<TEntity>
+          where TRepository : IRepository<TEntity>
     {
         #region 字段
 
         /// <summary>
         /// 当前操作对象仓储
         /// </summary>
-        public ISugarRepository<TEntity> SugarRepository { get; set; }
+        public IRepository<TEntity> SugarRepository { get; set; }
 
         /// <summary>
         /// sugarClient

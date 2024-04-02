@@ -16,9 +16,9 @@ namespace Byte.Core.SqlSugar.Repository;
 /// SqlSugar仓储
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public class SugarRepository<TEntity> : ISugarRepository<TEntity> where TEntity : class, new()
+public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, new()
 {
-    public SugarRepository()
+    public BaseRepository()
     {
        var  unitOfWork = AutofacContainer.Resolve<IUnitOfWork>();
         var sqlSugarScope = unitOfWork.GetDbClient();

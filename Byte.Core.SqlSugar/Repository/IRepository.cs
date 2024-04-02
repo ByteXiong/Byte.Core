@@ -10,7 +10,7 @@ namespace Byte.Core.SqlSugar.Repository;
 /// sqlSugar接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public interface ISugarRepository<TEntity> : ITransientDependency where TEntity : class
+public interface IRepository<TEntity> : ITransientDependency where TEntity : class
 {
     ISqlSugarClient SugarClient { get; }
 
