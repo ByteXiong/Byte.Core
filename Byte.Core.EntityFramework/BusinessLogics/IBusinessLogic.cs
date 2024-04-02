@@ -1,4 +1,5 @@
 ﻿using Byte.Core.Common.IoC;
+using Byte.Core.Common.Pager;
 using Byte.Core.EntityFramework.Models;
 using Byte.Core.EntityFramework.Pager;
 using Microsoft.EntityFrameworkCore.Storage;

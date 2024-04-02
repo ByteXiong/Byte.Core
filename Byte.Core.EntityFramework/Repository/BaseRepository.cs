@@ -1,5 +1,6 @@
 ﻿using Byte.Core.Common.Extensions;
 using Byte.Core.Common.Helpers;
+using Byte.Core.Common.Pager;
 using Byte.Core.EntityFramework.IDbContext;
 using Byte.Core.EntityFramework.Models;
 using Byte.Core.EntityFramework.Pager;
