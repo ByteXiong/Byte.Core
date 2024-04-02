@@ -1,11 +1,11 @@
-﻿using Byte.Core.EntityFramework.CodeGenerator.CodeFirst;
-using Byte.Core.EntityFramework.CodeGenerator.DbFirst;
-using Byte.Core.EntityFramework.IDbContext;
-using Byte.Core.EntityFramework.Models;
-using Byte.Core.EntityFramework.Options;
+﻿using Byte.Core.Common.CodeGenerator.CodeFirst;
+using Byte.Core.Common.CodeGenerator.DbFirst;
+using Byte.Core.Common.IDbContext;
+using Byte.Core.Common.Models;
+using Byte.Core.Common.Options;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Byte.Core.EntityFramework.CodeGenerator
+namespace Byte.Core.Common.CodeGenerator
 {
     public static class CodeGeneratorExtenstions
     {
@@ -16,6 +16,7 @@ namespace Byte.Core.EntityFramework.CodeGenerator
         {
             dbContext.DbFirst().Generate(selector, type, ifExistCovered);
         }
+
         public static void UseCodeGenerator(this IServiceCollection services, CodeGenerateOption option)
         {
             if (option == null)

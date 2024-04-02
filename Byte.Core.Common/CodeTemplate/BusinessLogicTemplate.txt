@@ -1,0 +1,90 @@
+﻿
+using Byte.Core.Common.IDbContext;
+using Byte.Core.Common.Extensions;
+using Byte.Core.Common.Filters;
+using {ModelRequestNamespace};
+using {IBusinessLogicNamespace};
+using {IRepositoriesNamespace};
+using {ModelsNamespace};
+using System.Linq.Expressions;
+
+
+namespace {BusinessLogicNamespace}
+{
+    /// <summary>
+    /// {Comment}
+    /// </summary>
+    public class {TableName}Logic: BaseBusinessLogic<{TableName}, {KeyTypeName},I{TableName}Repository>,I{TableName}Logic
+    {
+        public {TableName}Logic(I{TableName}Repository repository) : base(repository)
+        {
+        }
+
+        
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public async Task<PagedResults<{TableName}DTO>> GetPageAsync({TableName}Param param) {
+            Expression<Func<{TableName}, bool>> where = x => true;
+            if (!string.IsNullOrWhiteSpace(param.KeyWord))
+            {
+                param.KeyWord = param.KeyWord.Trim();
+                where = where.And(x => x.Name.Contains(param.KeyWord));
+            }
+
+            var page = await Repository.PageQueryAsync<{TableName}DTO>(param, where);
+
+            return page;
+        }
+
+        /// <summary>
+        /// 查询详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<{TableName}Info> GetInfoAsync(Guid id) {
+            var entity =await  Repository.GetIQueryable(x=>x.Id==id).Select(x=>new {TableName}Info()
+            {
+                Id = x.Id,
+                {ModelString}
+            }).FirstOrDefaultAsync();
+            return entity;
+        }
+
+        
+        /// <summary>
+        /// 新增
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public async Task<int> AddAsync(Add{TableName}Param param)
+        {
+                {TableName} model =new {TableName}(){
+                     Id = Guid.NewGuid(),
+                     {ModelString}
+                 };
+                
+
+                return await base.AddAsync(model);
+            
+        }
+
+
+
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public async Task<int> UpdateAsync(Update{TableName}Param param)
+        {
+           return await base.UpdateAsync(x => x.Id == param.Id, x => new {TableName}
+            {
+                       {ModelString}
+            });
+
+        }
+    }
+}

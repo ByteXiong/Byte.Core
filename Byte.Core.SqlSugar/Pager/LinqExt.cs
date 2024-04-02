@@ -24,20 +24,20 @@ namespace Byte.Core.SqlSugar
                 throw new InvalidOperationException("每页记录数不能小于0");
             }
 
-            var pagerInfo = new PagerInfo(queryParam)
-            {
-                TotalRowCount = source.Count()
-            };
+            var pagerInfo = new PagerInfo(queryParam);
+
+            if (queryParam.SortList != null && queryParam.SortList.Count > 0) {
+                source = source.OrderBy(string.Join(",", queryParam.SortList.Select(x => $"{x.Key} {x.Value}")));
+            }
+            RefAsync<int> totalCount = 0;
+            var data = await source.ToPageListAsync(pagerInfo.PageIndex, pagerInfo.PageSize, totalCount);
+            pagerInfo.TotalRowCount = totalCount;
             if (queryParam.StartIndex >= pagerInfo.TotalRowCount)
             {
                 pagerInfo.StartIndex = ((pagerInfo.StartIndex != 0) ? pagerInfo.TotalRowCount : 0);
                 pagerInfo.StartIndex = ((pagerInfo.StartIndex != -1) ? pagerInfo.StartIndex : 0);
             }
 
-
-            source = source.OrderByIF(queryParam.SortList.Count > 0, string.Join(",", queryParam.SortList .Select(x => $"{x.Key} {x.Value}")));
-
-            var data = await source.ToPageListAsync(pagerInfo.PageIndex, pagerInfo.PageSize, pagerInfo.TotalRowCount);
             return new PagedResults<TOut>
             {
                 PagerInfo = pagerInfo,

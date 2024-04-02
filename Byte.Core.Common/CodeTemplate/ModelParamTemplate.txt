@@ -1,0 +1,34 @@
+﻿using Byte.Core.Common.IDbContext;
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace {ModelParamNamespace}
+{
+	/// <summary>
+	///  {Comment}分页查询
+	/// </summary>
+	public class {TableName}Param : PageParam
+	{
+		public string KeyWord { get; set; }	
+	}
+	/// <summary>
+	///  {Comment} 修改
+	/// </summary>
+	public class Update{TableName}Param: Add{TableName}Param
+	{
+
+		/// <summary>
+		///  
+		/// </summary>
+		public Guid? Id { get; set; }
+	}
+
+	/// <summary>
+	///  {Comment} 添加
+	/// </summary>
+	public class Add{TableName}Param
+	{
+
+		{ModelProperties}
+	}
+}

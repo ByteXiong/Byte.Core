@@ -1,0 +1,24 @@
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+namespace {ModelRequestNamespace}
+{
+	
+
+	/// <summary>
+	/// {Comment} 单条
+	/// </summary>
+	public class {TableName}DTO
+	{
+	{ModelProperties}
+	}
+
+
+	/// <summary>
+	/// {Comment} 详情
+	/// </summary>
+	public class {TableName}Info
+	{
+	{ModelProperties}
+
+	}
+}

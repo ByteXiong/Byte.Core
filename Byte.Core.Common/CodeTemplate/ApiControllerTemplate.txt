@@ -1,0 +1,77 @@
+﻿using {IBusinessLogicNamespace};
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using {ControllersNamespace}.Common;
+namespace {ControllersNamespace}.Controllers
+{
+    /// <summary>
+    /// {Comment}
+    /// </summary>
+    [Route("api/[controller]/[action]")]
+    public class {TableName}Controller : BaseApiController
+    {
+        private I{TableName}Logic _logic;
+        
+        public {TableName}Controller(I{TableName}Logic @logic)
+        {
+           _logic= @logic ?? throw new ArgumentNullException(nameof(@logic));
+        }
+
+
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<PagedResults<{TableName}DTO>> GetPageAsync([FromQuery] {TableName}Param param)=> await _logic.GetPageAsync(param);
+
+        /// <summary>
+        /// 查询详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<{TableName}Info> GetInfoAsync(Guid id) => await _logic.GetInfoAsync(id);
+
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ExcutedResult> SubmitAsync(Update{TableName}Param param)
+        {
+
+            if (param.Id == null)
+            {
+
+                {TableName} model = param.FastClone<Update{TableName}Param, {TableName}>();//复制
+                model.Id = Guid.NewGuid();
+                return await _logic.CreateAsync(model);
+            }
+            else
+            {
+                {TableName} model = param.FastClone<Update{TableName}Param, {TableName}>();//复制
+                model.Id = param.Id.Value;
+                return await _logic.UpdateAsync(model);
+            }
+        }
+
+        /// <summary>
+        ///  删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ExcutedResult> DeleteAsync(Guid id) => await _logic.DeleteAsync(id);
+
+
+
+
+
+
+
+	}
+}

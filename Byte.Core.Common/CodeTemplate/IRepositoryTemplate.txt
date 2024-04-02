@@ -1,0 +1,13 @@
+﻿using System;
+using Byte.Core.Common.IDbContext;
+using {ModelsNamespace};
+
+namespace {IRepositoriesNamespace}
+{
+    /// <summary>
+    /// {Comment}
+    /// </summary>
+    public interface I{TableName}Repository:IRepository<{TableName}, {KeyTypeName}>
+    {
+    }
+}

@@ -1,0 +1,17 @@
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Byte.Core.Common.Models;
+
+namespace {ModelsNamespace}
+{
+	/// <summary>
+	/// {Comment}
+	/// </summary>
+	[Serializable]
+	[Table("{TableName}")]
+	public class {TableName}:BaseModel<{KeyTypeName}>
+	{
+{ModelProperties}
+	}
+}

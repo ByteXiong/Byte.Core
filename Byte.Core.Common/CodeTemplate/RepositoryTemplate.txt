@@ -1,0 +1,17 @@
+﻿using System;
+using Byte.Core.Common.IDbContext;
+using {IRepositoriesNamespace};
+using {ModelsNamespace};
+
+namespace {RepositoriesNamespace}
+{   
+    /// <summary>
+    /// {Comment}
+    /// </summary>
+    public class {TableName}Repository : BaseRepository<{TableName}, {KeyTypeName}>, I{TableName}Repository
+    {
+        public {TableName}Repository(IDbContextCore dbContext) : base(dbContext)
+        {
+        }
+    }
+}
