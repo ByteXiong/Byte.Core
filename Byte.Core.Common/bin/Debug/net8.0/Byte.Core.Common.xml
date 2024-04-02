@@ -1286,7 +1286,7 @@
             <param name="t">实体类</param>
             <returns></returns>
         </member>
-        <member name="M:Byte.Core.Common.Extensions.ObjectExtension.DeepClone``1(``0)">
+        <member name="M:Byte.Core.Common.Extensions.ObjectExtension.DeepClone``2(``0)">
             <summary>
             深复制
             </summary>

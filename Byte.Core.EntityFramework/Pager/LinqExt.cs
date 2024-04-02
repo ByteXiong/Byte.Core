@@ -1,4 +1,5 @@
 ﻿using Byte.Core.Common.Extensions;
+using Byte.Core.Common.Pager;
 using Byte.Core.EntityFramework.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;

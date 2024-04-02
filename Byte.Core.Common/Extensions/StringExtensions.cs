@@ -542,9 +542,10 @@ namespace Byte.Core.Common.Extensions
         /// <returns></returns>
         public static long ToLong(this string str)
         {
-            str = str.Replace("\0", "");
+     
             if (string.IsNullOrEmpty(str))
                 return 0;
+            str = str.Replace("\0", "");
 
             return Convert.ToInt64(str);
         }

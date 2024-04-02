@@ -1594,12 +1594,12 @@ namespace Byte.Core.Common.Extensions
         /// <typeparam name="T">类型</typeparam>
         /// <param name="obj">对象</param>
         /// <returns></returns>
-        public static T DeepClone<T>(this T obj) where T : class
+        public static TOut DeepClone<T,TOut>(this T obj) where T : class where TOut : class
         {
             if (obj == null)
                 return null;
 
-            return obj.ToJson().ToObject<T>();
+            return obj.ToJson().ToObject<TOut>();
         }
 
 /// <summary>

@@ -1,4 +1,4 @@
-﻿namespace Byte.Core.Common.Model;
+﻿namespace Byte.Core.SqlSugar.Model;
 
 /// <summary>
 /// 删除接口

@@ -1,10 +1,14 @@
 using Byte.Core.Common.Extensions;
 using Byte.Core.Common.IoC;
+using Byte.Core.Common.Pager;
+using Byte.Core.SqlSugar.Base;
 using Byte.Core.SqlSugar.Repository;
+using NPOI.SS.Formula.Functions;
 using SqlSugar;
 using System.Data;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace Byte.Core.SqlSugar.Repository;
 
@@ -46,6 +50,158 @@ public class SugarRepository<TEntity> : ISugarRepository<TEntity> where TEntity 
 
     #endregion
 
+
+    #region 新增操作
+
+    /// <summary>
+    /// 新增实体
+    /// </summary>
+    /// <param name="entity">实体对象</param>
+    /// <returns>受影响行数</returns>
+    public async Task<int> AddAsync(TEntity entity)
+    {
+        var insert = SugarClient.Insertable(entity);
+        return await insert.ExecuteCommandAsync();
+    }
+
+    #endregion
+
+    #region 更新操作
+    /// <summary>
+    /// 更新实体
+    /// </summary>
+    /// <param name="where"></param>
+    /// <param name="updateFactory"></param>
+    /// <param name="isLock"></param>
+    /// <returns></returns>
+    public virtual async Task<int> UpdateAsync(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TEntity>> updateFactory, bool isLock = true) {
+
+        IUpdateable<TEntity> up = SugarClient.Updateable<TEntity>().SetColumns(updateFactory) ;
+        if (where != null)
+        {
+            up = up.Where(where);
+        }
+
+        if (isLock)
+        {
+            up = up.With(SqlWith.UpdLock);
+        }
+
+        var result = await up.ExecuteCommandAsync();
+        return 1;
+
+
+    }
+    #endregion
+
+
+    #region 删除操作
+
+    /// <summary>
+    /// 删除实体
+    /// </summary>
+    /// <param name="id">主键ID</param>
+    /// <param name="isLock">是否加锁</param>
+    /// <returns>受影响行数</returns>
+    public virtual async Task<int> DeleteAsync<TKey>(TKey id, bool isLock = true)
+    {
+        //return await _db.Deleteable<TEntity>(id).ExecuteCommandHasChangeAsync();
+
+        var del = SugarClient.Deleteable<TEntity>(id);
+        if (isLock)
+        {
+            del = del.With(SqlWith.RowLock);
+        }
+
+        return await del.ExecuteCommandAsync() ;
+    }
+
+    ///// <summary>
+    ///// 批量删除实体
+    ///// </summary>
+    ///// <param name="primaryKeyValues">主键ID集合</param>
+    ///// <param name="isLock">是否加锁</param>
+    ///// <returns>受影响行数</returns>
+    //public virtual async Task<int> DeleteByPrimaryAsync(List<object> primaryKeyValues, bool isLock = true)
+    //{
+    //    var del = SugarClient.Deleteable<TEntity>().In(primaryKeyValues);
+    //    if (isLock)
+    //    {
+    //        del = del.With(SqlWith.RowLock);
+    //    }
+
+    //    return await del.ExecuteCommandAsync();
+    //}
+
+    ///// <summary>
+    ///// 删除实体
+    ///// </summary>
+    ///// <param name="entity">实体对象</param>
+    ///// <param name="isLock">是否加锁</param>
+    ///// <returns>受影响行数</returns>
+    //public virtual async Task<int> DeleteAsync(TEntity entity, bool isLock = true)
+    //{
+    //    var del = SugarClient.Deleteable(entity);
+    //    if (isLock)
+    //    {
+    //        del = del.With(SqlWith.RowLock);
+    //    }
+
+    //    return await del.ExecuteCommandAsync();
+    //}
+
+    ///// <summary>
+    ///// 批量删除实体
+    ///// </summary>
+    ///// <param name="entitys">实体集合</param>
+    ///// <param name="isLock">是否加锁</param>
+    ///// <returns>受影响行数</returns>
+    //public virtual async Task<int> DeleteAsync(List<TEntity> entitys, bool isLock = true)
+    //{
+    //    var del = SugarClient.Deleteable(entitys);
+    //    if (isLock)
+    //    {
+    //        del = del.With(SqlWith.RowLock);
+    //    }
+
+    //    return await del.ExecuteCommandAsync();
+    //}
+
+    /// <summary>
+    /// 删除实体
+    /// </summary>
+    /// <param name="where">条件表达式</param>
+    /// <param name="isLock">是否加锁</param>
+    /// <returns>受影响行数</returns>
+    public virtual async Task<int> DeleteAsync(Expression<Func<TEntity, bool>> where, bool isLock = true)
+    {
+        var del = SugarClient.Deleteable<TEntity>().Where(where);
+        if (isLock)
+        {
+            del = del.With(SqlWith.RowLock);
+        }
+
+        return await del.ExecuteCommandAsync();
+    }
+
+    /// <summary>
+    /// 删除实体
+    /// </summary>
+    /// <param name=",">主键集合</param>
+    /// <param name="isLock">是否加锁</param>
+    /// <returns>受影响行数</returns>
+    public virtual async Task<int> DeleteAsync<Tkey>(Tkey[] ids, bool isLock = true)
+    {
+        var del = SugarClient.Deleteable<TEntity>().In(ids);
+        if (isLock)
+        {
+            del = del.With(SqlWith.RowLock);
+        }
+
+        return await del.ExecuteCommandAsync();
+    }
+
+    #endregion
     //#region 新增操作
 
     ///// <summary>

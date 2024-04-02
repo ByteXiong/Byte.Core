@@ -1,4 +1,4 @@
-﻿namespace Byte.Core.EntityFramework.Pager
+﻿namespace Byte.Core.Common.Pager
 {
     public class PageQueryParam : TimePageParam
     {

@@ -17,8 +17,11 @@
 		<PackageOutputPath>E:\MyCode\nuget</PackageOutputPath>
 	</PropertyGroup>
   <ItemGroup>
+    <Compile Remove="AutoMapper\**" />
     <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="AutoMapper\**" />
     <EmbeddedResource Remove="Services\**" />
+    <None Remove="AutoMapper\**" />
     <None Remove="Services\**" />
   </ItemGroup>
 
