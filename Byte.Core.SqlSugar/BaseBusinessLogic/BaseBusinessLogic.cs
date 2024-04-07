@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Byte.Core.SqlSugar.BusinessLogics
 {
-    public abstract class SugarLogic<TEntity, TRepository> : ISugarLogic<TEntity> where TEntity : class, new()
+    public abstract class BaseBusinessLogic<TEntity, TRepository> : IBusinessLogic<TEntity> where TEntity : class, new()
           where TRepository : IRepository<TEntity>
     {
         #region 字段
@@ -26,7 +26,7 @@ namespace Byte.Core.SqlSugar.BusinessLogics
 
 
         public TRepository Repository { get; set; }
-        protected SugarLogic(TRepository repository)
+        protected BaseBusinessLogic(TRepository repository)
         {
             if (repository != null)
             {

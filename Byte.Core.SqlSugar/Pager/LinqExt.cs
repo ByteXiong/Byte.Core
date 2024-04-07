@@ -1,5 +1,6 @@
 ﻿using Byte.Core.Common.Extensions;
 using Byte.Core.Common.Pager;
+using NPOI.SS.Formula.Functions;
 using SqlSugar;
 using System.Linq.Expressions;
 
@@ -43,6 +44,19 @@ namespace Byte.Core.SqlSugar
                 PagerInfo = pagerInfo,
                 Data = data
             };
+        }
+
+
+        public static  async Task<T> FirstOrDefaultAsync<T>(this ISugarQueryable<T> queryable, Expression<Func<T, bool>> whereLambda=null)
+        {
+            if (whereLambda == null) {
+                return await queryable.SingleAsync();
+            }
+            else
+            {
+                return await queryable.SingleAsync(whereLambda);
+            }
+      
         }
 
     }

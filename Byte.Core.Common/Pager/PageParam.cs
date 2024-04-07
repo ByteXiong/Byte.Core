@@ -17,11 +17,7 @@
         }
 
      
-        public string SortName
-        {
-            get;
-            set;
-        }
+   
 
         public IDictionary<string, string> SortList
         {

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Byte.Core.SqlSugar.BusinessLogics
 {
-    public interface ISugarLogic<TEntity> :ITransientDependency where TEntity : class,new()
+    public interface IBusinessLogic<TEntity> :ITransientDependency where TEntity : class,new()
     {
 
 
