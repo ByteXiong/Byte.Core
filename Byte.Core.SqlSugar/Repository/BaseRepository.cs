@@ -88,7 +88,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
         }
 
         var result = await up.ExecuteCommandAsync();
-        return 1;
+        return result;
 
 
     }

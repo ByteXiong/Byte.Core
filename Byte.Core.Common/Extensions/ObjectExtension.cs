@@ -1292,9 +1292,12 @@ namespace Byte.Core.Common.Extensions
         /// <returns></returns>
         public static string ToUnixTimeStamp(this DateTime date)
         {
-            DateTime startTime = TimeZoneInfo.ConvertTimeToUtc(new DateTime(1970, 1, 1));
-            string timeStamp = date.Subtract(startTime).Ticks.ToString();
-            return timeStamp.Substring(0, timeStamp.Length - 7);
+            //DateTime startTime = TimeZoneInfo.ConvertTimeToUtc(new DateTime(1970, 1, 1));
+            //string timeStamp = date.Subtract(startTime).Ticks.ToString();
+            //return timeStamp.Substring(0, timeStamp.Length - 7);
+            DateTime startTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            long unixTimeStamp = (long)(date.ToUniversalTime() - startTime).TotalSeconds;
+            return unixTimeStamp.ToString();
         }
 
         /// <summary>
@@ -1304,9 +1307,12 @@ namespace Byte.Core.Common.Extensions
         /// <returns></returns>
         public static string ToTimeStamp(this DateTime date)
         {
-            DateTime startTime = TimeZoneInfo.ConvertTime(new DateTime(1970, 1, 1), TimeZoneInfo.Local);
-            string timeStamp = date.Subtract(startTime).Ticks.ToString();
-            return timeStamp.Substring(0, timeStamp.Length - 7);
+            //DateTime startTime = TimeZoneInfo.ConvertTime(new DateTime(1970, 1, 1), TimeZoneInfo.Local);
+            //string timeStamp = date.Subtract(startTime).Ticks.ToString();
+            //return timeStamp.Substring(0, timeStamp.Length - 7);
+            DateTimeOffset startTime = new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero);
+            long unixTimeStamp = (date.ToUniversalTime() - startTime).Ticks / TimeSpan.TicksPerSecond;
+            return unixTimeStamp.ToString();
         }
 
         private static Regex MobileRegex = new Regex("^1[3|4|5|7|8][0-9]\\d{4,8}$");
