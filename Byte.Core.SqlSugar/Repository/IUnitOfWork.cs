@@ -1,6 +1,6 @@
 ﻿using SqlSugar;
 
-namespace Byte.Core.SqlSugar.Repository;
+namespace Byte.Core.SqlSugar;
 
 public interface IUnitOfWork
 {

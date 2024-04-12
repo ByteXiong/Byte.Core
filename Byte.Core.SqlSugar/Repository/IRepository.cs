@@ -4,13 +4,13 @@ using NPOI.SS.Formula.Functions;
 using SqlSugar;
 using System.Linq.Expressions;
 
-namespace Byte.Core.SqlSugar.Repository;
+namespace Byte.Core.SqlSugar;
 
 /// <summary>
 /// sqlSugar接口
 /// </summary>
-/// <typeparam name="TEntity"></typeparam>
-public interface IRepository<TEntity> : ITransientDependency where TEntity : class
+/// <typeparam name="T"></typeparam>
+public interface IRepository<T> : ITransientDependency where T : class
 {
     ISqlSugarClient SugarClient { get; }
 
@@ -21,7 +21,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     /// </summary>
     /// <param name="where"></param>
     /// <returns></returns>
-    ISugarQueryable<TEntity> GetIQueryable(Expression<Func<TEntity, bool>> where = null);
+    ISugarQueryable<T> GetIQueryable(Expression<Func<T, bool>> where = null);
 
     #endregion
 
@@ -32,12 +32,36 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     /// </summary>
     /// <param name="entity">实体对象</param>
     /// <returns>受影响行数</returns>
-    Task<int> AddAsync(TEntity entity);
+    Task<int> AddAsync(T entity);
+
+    /// <summary>
+    /// 新增实体
+    /// </summary>
+    /// <param name="entitys">实体对象</param>
+    /// <returns>受影响行数</returns>
+    Task<int> AddRangeAsync(List<T> entitys);
 
     #endregion
 
 
     #region 更新操作
+
+    /// <summary>
+    /// 更新实体
+    /// </summary>
+    /// <param name="entity">实体对象</param>
+    /// <param name="lstIgnoreColumns">忽略列</param>
+    /// <param name="isLock">是否加锁</param>
+    /// <returns>受影响行数</returns>
+    Task<int> UpdateAsync(T entity, List<string> lstIgnoreColumns = null, bool isLock = true);
+    /// <summary>
+    /// 批量更新实体
+    /// </summary>
+    /// <param name="entitys">实体集合</param>
+    /// <param name="lstIgnoreColumns">忽略列</param>
+    /// <param name="isLock">是否加锁</param>
+    /// <returns>受影响行数</returns>
+    Task<int> UpdateRangeAsync(List<T> entitys, List<string> lstIgnoreColumns = null,bool isLock = true);
     /// <summary>
     /// 更新实体
     /// </summary>
@@ -45,7 +69,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     /// <param name="updateFactory"></param>
     /// <param name="isLock"></param>
     /// <returns></returns>
-    Task<int> UpdateAsync(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TEntity>> updateFactory, bool isLock = true);
+    Task<int> UpdateAsync(Expression<Func<T, bool>> where, Expression<Func<T, T>> updateFactory, bool isLock = true);
     #endregion
 
 
@@ -67,7 +91,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <returns>受影响行数</returns>
     //public virtual async Task<int> DeleteByPrimaryAsync(List<object> primaryKeyValues, bool isLock = true)
     //{
-    //    var del = SugarClient.Deleteable<TEntity>().In(primaryKeyValues);
+    //    var del = SugarClient.Deleteable<T>().In(primaryKeyValues);
     //    if (isLock)
     //    {
     //        del = del.With(SqlWith.RowLock);
@@ -82,7 +106,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="entity">实体对象</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //public virtual async Task<int> DeleteAsync(TEntity entity, bool isLock = true)
+    //public virtual async Task<int> DeleteAsync(T entity, bool isLock = true)
     //{
     //    var del = SugarClient.Deleteable(entity);
     //    if (isLock)
@@ -99,7 +123,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="entitys">实体集合</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //public virtual async Task<int> DeleteAsync(List<TEntity> entitys, bool isLock = true)
+    //public virtual async Task<int> DeleteAsync(List<T> entitys, bool isLock = true)
     //{
     //    var del = SugarClient.Deleteable(entitys);
     //    if (isLock)
@@ -116,7 +140,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     /// <param name="where">条件表达式</param>
     /// <param name="isLock">是否加锁</param>
     /// <returns>受影响行数</returns>
-    Task<int> DeleteAsync(Expression<Func<TEntity, bool>> where, bool isLock = true);
+    Task<int> DeleteAsync(Expression<Func<T, bool>> where, bool isLock = true);
 
     /// <summary>
     /// 删除实体
@@ -134,14 +158,14 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// </summary>
     ///// <param name="entity">实体对象</param>
     ///// <returns>受影响行数</returns>
-    //Task<int> AddAsync(TEntity entity);
+    //Task<int> AddAsync(T entity);
 
     ///// <summary>
     ///// 批量新增实体
     ///// </summary>
     ///// <param name="entitys">实体集合</param>
     ///// <returns>受影响行数</returns>
-    //Task<int> AddAsync(List<TEntity> entitys);
+    //Task<int> AddAsync(List<T> entitys);
 
     ///// <summary>
     ///// 新增实体
@@ -155,14 +179,14 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// </summary>
     ///// <param name="entity">实体对象</param>
     ///// <returns>返回当前实体</returns>
-    //Task<TEntity> AddReturnEntityAsync(TEntity entity);
+    //Task<T> AddReturnEntityAsync(T entity);
 
     ///// <summary>
     ///// 新增实体
     ///// </summary>
     ///// <param name="entity">实体对象</param>
     ///// <returns>自增ID</returns>
-    //Task<int> AddReturnIdentityAsync(TEntity entity);
+    //Task<int> AddReturnIdentityAsync(T entity);
 
 
     //#endregion
@@ -176,7 +200,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="lstIgnoreColumns">忽略列</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //Task<int> UpdateAsync(TEntity entity, List<string> lstIgnoreColumns = null, bool isLock = true);
+    //Task<int> UpdateAsync(T entity, List<string> lstIgnoreColumns = null, bool isLock = true);
 
     ///// <summary>
     ///// 批量更新实体
@@ -185,7 +209,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="lstIgnoreColumns">忽略列</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //Task<int> UpdateAsync(List<TEntity> entitys, List<string> lstIgnoreColumns = null, bool isLock = true);
+    //Task<int> UpdateAsync(List<T> entitys, List<string> lstIgnoreColumns = null, bool isLock = true);
 
     ///// <summary>
     ///// 更新实体
@@ -195,7 +219,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="lstIgnoreColumns">忽略列</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //Task<int> UpdateAsync(TEntity entity, Expression<Func<TEntity, bool>> where,
+    //Task<int> UpdateAsync(T entity, Expression<Func<T, bool>> where,
     //    List<string> lstIgnoreColumns = null,
     //    bool isLock = true);
 
@@ -206,7 +230,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="where">条件表达式</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //Task<int> UpdateAsync(Expression<Func<TEntity, TEntity>> update, Expression<Func<TEntity, bool>> where = null,
+    //Task<int> UpdateAsync(Expression<Func<T, T>> update, Expression<Func<T, bool>> where = null,
     //    bool isLock = true);
 
     ///// <summary>
@@ -216,7 +240,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="where">条件表达式</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //Task<int> UpdateAsync(Dictionary<string, object> keyValues, Expression<Func<TEntity, bool>> where = null,
+    //Task<int> UpdateAsync(Dictionary<string, object> keyValues, Expression<Func<T, bool>> where = null,
     //    bool isLock = true);
 
     ///// <summary>
@@ -227,8 +251,8 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="wherecolumns">条件列</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //Task<int> UpdateColumnsAsync(List<TEntity> entitys, Expression<Func<TEntity, object>> updateColumns,
-    //    Expression<Func<TEntity, object>> wherecolumns = null, bool isLock = true);
+    //Task<int> UpdateColumnsAsync(List<T> entitys, Expression<Func<T, object>> updateColumns,
+    //    Expression<Func<T, object>> wherecolumns = null, bool isLock = true);
 
     ///// <summary>
     ///// 更新实体
@@ -237,7 +261,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="lstIgnoreColumns">忽略列</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //Task<int> UpdateRowVerAsync(TEntity entity, List<string> lstIgnoreColumns = null, bool isLock = true);
+    //Task<int> UpdateRowVerAsync(T entity, List<string> lstIgnoreColumns = null, bool isLock = true);
 
     ///// <summary>
     ///// 更新实体
@@ -246,7 +270,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="where">键:字段名称 值:值</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //Task<int> UpdateRowVerAsync(Expression<Func<TEntity, TEntity>> update, Dictionary<string, object> where,
+    //Task<int> UpdateRowVerAsync(Expression<Func<T, T>> update, Dictionary<string, object> where,
     //    bool isLock = true);
 
     //#endregion
@@ -275,7 +299,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="entity">实体对象</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //Task<int> DeleteAsync(TEntity entity, bool isLock = true);
+    //Task<int> DeleteAsync(T entity, bool isLock = true);
 
     ///// <summary>
     ///// 批量删除实体
@@ -283,7 +307,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="entitys">实体集合</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //Task<int> DeleteAsync(List<TEntity> entitys, bool isLock = true);
+    //Task<int> DeleteAsync(List<T> entitys, bool isLock = true);
 
     ///// <summary>
     ///// 删除实体
@@ -291,7 +315,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="whereLambda">条件表达式</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //Task<int> DeleteAsync(Expression<Func<TEntity, bool>> whereLambda, bool isLock = true);
+    //Task<int> DeleteAsync(Expression<Func<T, bool>> whereLambda, bool isLock = true);
 
     ///// <summary>
     ///// 删除实体
@@ -312,8 +336,8 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="whereLambda">条件表达式</param>
     ///// <typeparam name="TResult">返回对象</typeparam>
     ///// <returns>自定义数据</returns>
-    //Task<TResult> QueryAsync<TResult>(Expression<Func<TEntity, TResult>> expression,
-    //    Expression<Func<TEntity, bool>> whereLambda = null);
+    //Task<TResult> QueryAsync<TResult>(Expression<Func<T, TResult>> expression,
+    //    Expression<Func<T, bool>> whereLambda = null);
 
     ///// <summary>
     ///// 实体列表
@@ -322,15 +346,15 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="whereLambda">条件表达式</param>
     ///// <typeparam name="TResult">返回对象</typeparam>
     ///// <returns>自定义数据</returns>
-    //Task<List<TResult>> QueryListExpAsync<TResult>(Expression<Func<TEntity, TResult>> expression,
-    //    Expression<Func<TEntity, bool>> whereLambda = null);
+    //Task<List<TResult>> QueryListExpAsync<TResult>(Expression<Func<T, TResult>> expression,
+    //    Expression<Func<T, bool>> whereLambda = null);
 
     ///// <summary>
     ///// 查询单个
     ///// </summary>
     ///// <param name="whereLambda">条件表达式</param>
     ///// <returns>实体对象</returns>
-    //Task<TEntity> QueryFirstAsync(Expression<Func<TEntity, bool>> whereLambda = null);
+    //Task<T> QueryFirstAsync(Expression<Func<T, bool>> whereLambda = null);
 
     ///// <summary>
     ///// 实体列表
@@ -339,8 +363,8 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="orderFileds"></param>
     ///// <param name="orderByType"></param>
     ///// <returns>实体列表</returns>
-    //Task<List<TEntity>> QueryListAsync(Expression<Func<TEntity, bool>> whereLambda = null,
-    //    Expression<Func<TEntity, object>> orderFileds = null, OrderByType orderByType = OrderByType.Desc);
+    //Task<List<T>> QueryListAsync(Expression<Func<T, bool>> whereLambda = null,
+    //    Expression<Func<T, object>> orderFileds = null, OrderByType orderByType = OrderByType.Desc);
 
 
     ///// <summary>
@@ -348,7 +372,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// </summary>
     ///// <param name="sql">SQL</param>
     ///// <returns>实体列表</returns>
-    //Task<List<TEntity>> QuerySqlListAsync(string sql);
+    //Task<List<T>> QuerySqlListAsync(string sql);
 
     ///// <summary>
     ///// 实体列表 分页查询
@@ -358,8 +382,8 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="selectExpression">查询表达式</param>
     ///// /// <param name="isSplitTable">是否分表</param>
     ///// <returns></returns>
-    //Task<List<TEntity>> QueryPageListAsync(Expression<Func<TEntity, bool>> whereLambda, Pagination pagination,
-    //    Expression<Func<TEntity, TEntity>> selectExpression = null, bool isSplitTable = false);
+    //Task<List<T>> QueryPageListAsync(Expression<Func<T, bool>> whereLambda, Pagination pagination,
+    //    Expression<Func<T, T>> selectExpression = null, bool isSplitTable = false);
 
     ///// <summary>
     ///// 实体列表 分页查询
@@ -371,12 +395,12 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="navigationExpression2"></param>
     ///// <param name="navigationExpression3"></param>
     ///// <returns></returns>
-    //Task<List<TEntity>> QueryPageListAsync<T, T2, T3>(Expression<Func<TEntity, bool>> whereLambda,
+    //Task<List<T>> QueryPageListAsync<T, T2, T3>(Expression<Func<T, bool>> whereLambda,
     //    Pagination pagination,
-    //    Expression<Func<TEntity, TEntity>> selectExpression = null,
-    //    Expression<Func<TEntity, T>> navigationExpression = null,
-    //    Expression<Func<TEntity, List<T2>>> navigationExpression2 = null,
-    //    Expression<Func<TEntity, List<T3>>> navigationExpression3 = null);
+    //    Expression<Func<T, T>> selectExpression = null,
+    //    Expression<Func<T, T>> navigationExpression = null,
+    //    Expression<Func<T, List<T2>>> navigationExpression2 = null,
+    //    Expression<Func<T, List<T3>>> navigationExpression3 = null);
 
 
     ///// <summary>
@@ -390,13 +414,13 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="navigationExpression3"></param>
     ///// <param name="navigationExpression4"></param>
     ///// <returns></returns>
-    //Task<List<TEntity>> QueryPageListAsync<T, T2, T3, T4>(Expression<Func<TEntity, bool>> whereLambda,
+    //Task<List<T>> QueryPageListAsync<T, T2, T3, T4>(Expression<Func<T, bool>> whereLambda,
     //    Pagination pagination,
-    //    Expression<Func<TEntity, TEntity>> selectExpression = null,
-    //    Expression<Func<TEntity, T>> navigationExpression = null,
-    //    Expression<Func<TEntity, List<T2>>> navigationExpression2 = null,
-    //    Expression<Func<TEntity, List<T3>>> navigationExpression3 = null,
-    //    Expression<Func<TEntity, List<T4>>> navigationExpression4 = null);
+    //    Expression<Func<T, T>> selectExpression = null,
+    //    Expression<Func<T, T>> navigationExpression = null,
+    //    Expression<Func<T, List<T2>>> navigationExpression2 = null,
+    //    Expression<Func<T, List<T3>>> navigationExpression3 = null,
+    //    Expression<Func<T, List<T4>>> navigationExpression4 = null);
 
     ///// <summary>
     ///// 实体列表
@@ -404,7 +428,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="inFieldName">指定字段名</param>
     ///// <param name="inValues">值</param>
     ///// <returns>实体列表</returns>
-    //Task<List<TEntity>> QueryListInAsync(string inFieldName, List<dynamic> inValues);
+    //Task<List<T>> QueryListInAsync(string inFieldName, List<dynamic> inValues);
 
     ///// <summary>
     ///// 查询单个对象
@@ -412,7 +436,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="key">列值</param>
     ///// <param name="columnName">列名 默认ID</param>
     ///// <returns>实体对象</returns>
-    //Task<TEntity> QuerySingleAsync(object key, string columnName = "id");
+    //Task<T> QuerySingleAsync(object key, string columnName = "id");
 
     ///// <summary>
     ///// 实体列表
@@ -420,14 +444,14 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="values">主键集合</param>
     ///// <param name="columnName">列名 默认ID</param>
     ///// <returns>实体列表</returns>
-    //Task<List<TEntity>> QueryListInAsync(List<long> values, string columnName = "id");
+    //Task<List<T>> QueryListInAsync(List<long> values, string columnName = "id");
 
     ///// <summary>
     ///// DataTable数据源
     ///// </summary>
     ///// <param name="whereLambda">条件表达式</param>
     ///// <returns>DataTable</returns>
-    //Task<DataTable> QueryDataTableAsync(Expression<Func<TEntity, bool>> whereLambda = null);
+    //Task<DataTable> QueryDataTableAsync(Expression<Func<T, bool>> whereLambda = null);
 
     ///// <summary>
     ///// DataTable数据源
@@ -448,7 +472,7 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// </summary>
     ///// <param name="whereLambda">条件表达式</param>
     ///// <returns>对象.json</returns>
-    //Task<string> QueryJsonAsync(Expression<Func<TEntity, bool>> whereLambda = null);
+    //Task<string> QueryJsonAsync(Expression<Func<T, bool>> whereLambda = null);
 
     //#endregion
 
@@ -577,8 +601,8 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="mapperAction">委托方法体</param>
     ///// <param name="whereLambda">条件表达式</param>
     ///// <returns>泛型对象集合</returns>
-    //Task<List<TEntity>> QueryMapperAsync(Action<TEntity> mapperAction,
-    //    Expression<Func<TEntity, bool>> whereLambda = null);
+    //Task<List<T>> QueryMapperAsync(Action<T> mapperAction,
+    //    Expression<Func<T, bool>> whereLambda = null);
 
     ///// <summary>
     ///// 一对一 一对多查询
@@ -587,8 +611,8 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="whereLambda">条件表达式</param>
     ///// <param name="pagination"></param>
     ///// <returns>泛型对象集合</returns>
-    //Task<List<TEntity>> QueryMapperPageListAsync(Action<TEntity> mapperAction,
-    //    Expression<Func<TEntity, bool>> whereLambda, Pagination pagination);
+    //Task<List<T>> QueryMapperPageListAsync(Action<T> mapperAction,
+    //    Expression<Func<T, bool>> whereLambda, Pagination pagination);
 
     ///// <summary>
     ///// 一对一 一对多查询
@@ -598,9 +622,9 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="mapperObject"></param>
     ///// <param name="pagination"></param>
     ///// <returns>泛型对象集合</returns>
-    //Task<List<TEntity>> QueryMapperPageListAsync<TObject>(Expression<Func<TEntity, List<TObject>>> mapperObject,
-    //    Expression<Func<TEntity, object>> mapperField,
-    //    Expression<Func<TEntity, bool>> whereLambda, Pagination pagination);
+    //Task<List<T>> QueryMapperPageListAsync<TObject>(Expression<Func<T, List<TObject>>> mapperObject,
+    //    Expression<Func<T, object>> mapperField,
+    //    Expression<Func<T, bool>> whereLambda, Pagination pagination);
 
     ///// <summary>
     ///// 一对一 一对多查询
@@ -609,8 +633,8 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="whereLambda">条件表达式</param>
     ///// <param name="sortField"></param>
     ///// <returns>泛型对象集合</returns>
-    //Task<List<TEntity>> QueryMapperAsync(Action<TEntity, MapperCache<TEntity>> mapperAction,
-    //    Expression<Func<TEntity, bool>> whereLambda, string sortField = "");
+    //Task<List<T>> QueryMapperAsync(Action<T, MapperCache<T>> mapperAction,
+    //    Expression<Func<T, bool>> whereLambda, string sortField = "");
 
     ///// <summary>
     ///// 一对一 一对多查询
@@ -619,8 +643,8 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="whereLambda">条件表达式</param>
     ///// <param name="pagination">分页对象</param>
     ///// <returns>泛型对象集合</returns>
-    //Task<List<TEntity>> QueryMapperPageListAsync(Action<TEntity, MapperCache<TEntity>> mapperAction,
-    //    Expression<Func<TEntity, bool>> whereLambda, Pagination pagination);
+    //Task<List<T>> QueryMapperPageListAsync(Action<T, MapperCache<T>> mapperAction,
+    //    Expression<Func<T, bool>> whereLambda, Pagination pagination);
 
     //#endregion
 
@@ -660,14 +684,14 @@ public interface IRepository<TEntity> : ITransientDependency where TEntity : cla
     ///// <param name="whereLambda">条件表达式</param>
     ///// <param name="topNum">要多少条</param>
     ///// <returns>泛型对象集合</returns>
-    //Task<List<TEntity>> TakeAsync(int topNum, Expression<Func<TEntity, bool>> whereLambda = null);
+    //Task<List<T>> TakeAsync(int topNum, Expression<Func<T, bool>> whereLambda = null);
 
     ///// <summary>
     ///// 对象是否存在
     ///// </summary>
     ///// <param name="whereLambda">条件表达式</param>
     ///// <returns>True or False</returns>
-    //Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> whereLambda = null);
+    //Task<bool> IsExistAsync(Expression<Func<T, bool>> whereLambda = null);
 
     ///// <summary>
     ///// 总和

@@ -2,7 +2,7 @@ using Byte.Core.Common.Extensions;
 using Byte.Core.Common.IoC;
 using Byte.Core.Common.Pager;
 using Byte.Core.SqlSugar.Base;
-using Byte.Core.SqlSugar.Repository;
+using Byte.Core.SqlSugar;
 using NPOI.SS.Formula.Functions;
 using SqlSugar;
 using System.Data;
@@ -10,19 +10,19 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace Byte.Core.SqlSugar.Repository;
+namespace Byte.Core.SqlSugar;
 
 /// <summary>
 /// SqlSugar仓储
 /// </summary>
-/// <typeparam name="TEntity"></typeparam>
-public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, new()
+/// <typeparam name="T"></typeparam>
+public class BaseRepository<T> : IRepository<T> where T : class, new()
 {
     public BaseRepository()
     {
        var  unitOfWork = AutofacContainer.Resolve<IUnitOfWork>();
         var sqlSugarScope = unitOfWork.GetDbClient();
-        var tenantAttribute = typeof(TEntity).GetCustomAttribute<TenantAttribute>();
+        var tenantAttribute = typeof(T).GetCustomAttribute<TenantAttribute>();
         if (tenantAttribute == null)
         {
             SugarClient = sqlSugarScope;
@@ -42,9 +42,9 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     /// </summary>
     /// <param name="where"></param>
     /// <returns></returns>
-    public virtual ISugarQueryable<TEntity> GetIQueryable(Expression<Func<TEntity, bool>> where = null)
+    public virtual ISugarQueryable<T> GetIQueryable(Expression<Func<T, bool>> where = null)
     {
-        return SugarClient.Queryable<TEntity>().Where(where);
+        return SugarClient.Queryable<T>().Where(where);
     }
 
 
@@ -58,15 +58,77 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     /// </summary>
     /// <param name="entity">实体对象</param>
     /// <returns>受影响行数</returns>
-    public async Task<int> AddAsync(TEntity entity)
+    public async Task<int> AddAsync(T entity)
     {
         var insert = SugarClient.Insertable(entity);
+        return await insert.ExecuteCommandAsync();
+    }
+
+    /// <summary>
+    /// 新增实体
+    /// </summary>
+    /// <param name="entity">实体对象</param>
+    /// <returns>受影响行数</returns>
+    public async Task<int> AddRangeAsync(List<T> entitys)
+    {
+        var insert = SugarClient.Insertable(entitys);
         return await insert.ExecuteCommandAsync();
     }
 
     #endregion
 
     #region 更新操作
+
+    /// <summary>
+    /// 更新实体
+    /// </summary>
+    /// <param name="entity">实体对象</param>
+    /// <param name="lstIgnoreColumns">忽略列</param>
+    /// <param name="isLock">是否加锁</param>
+    /// <returns>受影响行数</returns>
+    public async Task<int> UpdateAsync(T entity, List<string> lstIgnoreColumns = null, bool isLock = true)
+    {
+        IUpdateable<T> up = SugarClient.Updateable(entity);
+        if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
+        {
+            up = up.IgnoreColumns(lstIgnoreColumns.ToArray());
+        }
+
+        if (isLock)
+        {
+            up = up.With(SqlWith.UpdLock);
+        }
+
+        var result = await up.ExecuteCommandAsync();
+        return result;
+    }
+
+    /// <summary>
+    /// 批量更新实体
+    /// </summary>
+    /// <param name="entitys">实体集合</param>
+    /// <param name="lstIgnoreColumns">忽略列</param>
+    /// <param name="isLock">是否加锁</param>
+    /// <returns>受影响行数</returns>
+    public async Task<int> UpdateRangeAsync(List<T> entitys, List<string> lstIgnoreColumns = null,
+        bool isLock = true)
+    {
+        IUpdateable<T> up = SugarClient.Updateable(entitys);
+        if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
+        {
+            up = up.IgnoreColumns(lstIgnoreColumns.ToArray());
+        }
+
+        if (isLock)
+        {
+            up = up.With(SqlWith.UpdLock);
+        }
+
+        var result = await up.ExecuteCommandAsync();
+        return result;
+    }
+
+
     /// <summary>
     /// 更新实体
     /// </summary>
@@ -74,9 +136,9 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     /// <param name="updateFactory"></param>
     /// <param name="isLock"></param>
     /// <returns></returns>
-    public virtual async Task<int> UpdateAsync(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TEntity>> updateFactory, bool isLock = true) {
+    public virtual async Task<int> UpdateAsync(Expression<Func<T, bool>> where, Expression<Func<T, T>> updateFactory, bool isLock = true) {
 
-        IUpdateable<TEntity> up = SugarClient.Updateable<TEntity>().SetColumns(updateFactory) ;
+        IUpdateable<T> up = SugarClient.Updateable<T>().SetColumns(updateFactory) ;
         if (where != null)
         {
             up = up.Where(where);
@@ -105,9 +167,9 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     /// <returns>受影响行数</returns>
     public virtual async Task<int> DeleteAsync<TKey>(TKey id, bool isLock = true)
     {
-        //return await _db.Deleteable<TEntity>(id).ExecuteCommandHasChangeAsync();
+        //return await _db.Deleteable<T>(id).ExecuteCommandHasChangeAsync();
 
-        var del = SugarClient.Deleteable<TEntity>(id);
+        var del = SugarClient.Deleteable<T>(id);
         if (isLock)
         {
             del = del.With(SqlWith.RowLock);
@@ -124,7 +186,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <returns>受影响行数</returns>
     //public virtual async Task<int> DeleteByPrimaryAsync(List<object> primaryKeyValues, bool isLock = true)
     //{
-    //    var del = SugarClient.Deleteable<TEntity>().In(primaryKeyValues);
+    //    var del = SugarClient.Deleteable<T>().In(primaryKeyValues);
     //    if (isLock)
     //    {
     //        del = del.With(SqlWith.RowLock);
@@ -139,7 +201,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="entity">实体对象</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //public virtual async Task<int> DeleteAsync(TEntity entity, bool isLock = true)
+    //public virtual async Task<int> DeleteAsync(T entity, bool isLock = true)
     //{
     //    var del = SugarClient.Deleteable(entity);
     //    if (isLock)
@@ -156,7 +218,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="entitys">实体集合</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //public virtual async Task<int> DeleteAsync(List<TEntity> entitys, bool isLock = true)
+    //public virtual async Task<int> DeleteAsync(List<T> entitys, bool isLock = true)
     //{
     //    var del = SugarClient.Deleteable(entitys);
     //    if (isLock)
@@ -173,9 +235,9 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     /// <param name="where">条件表达式</param>
     /// <param name="isLock">是否加锁</param>
     /// <returns>受影响行数</returns>
-    public virtual async Task<int> DeleteAsync(Expression<Func<TEntity, bool>> where, bool isLock = true)
+    public virtual async Task<int> DeleteAsync(Expression<Func<T, bool>> where, bool isLock = true)
     {
-        var del = SugarClient.Deleteable<TEntity>().Where(where);
+        var del = SugarClient.Deleteable<T>().Where(where);
         if (isLock)
         {
             del = del.With(SqlWith.RowLock);
@@ -192,7 +254,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     /// <returns>受影响行数</returns>
     public virtual async Task<int> DeleteAsync<Tkey>(Tkey[] ids, bool isLock = true)
     {
-        var del = SugarClient.Deleteable<TEntity>().In(ids);
+        var del = SugarClient.Deleteable<T>().In(ids);
         if (isLock)
         {
             del = del.With(SqlWith.RowLock);
@@ -209,7 +271,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// </summary>
     ///// <param name="entity">实体对象</param>
     ///// <returns>受影响行数</returns>
-    //public async Task<int> AddAsync(TEntity entity)
+    //public async Task<int> AddAsync(T entity)
     //{
     //    var insert = SugarClient.Insertable(entity);
     //    return await insert.ExecuteCommandAsync();
@@ -220,7 +282,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// </summary>
     ///// <param name="entitys">实体集合</param>
     ///// <returns>受影响行数</returns>
-    //public async Task<int> AddRange(List<TEntity> entitys)
+    //public async Task<int> AddRange(List<T> entitys)
     //{
     //    return await SugarClient.Insertable(entitys.ToArray()).ExecuteCommandAsync();
     //}
@@ -247,9 +309,9 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="lstIgnoreColumns">忽略列</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //public async Task<int> UpdateAsync(TEntity entity, List<string> lstIgnoreColumns = null, bool isLock = true)
+    //public async Task<int> UpdateAsync(T entity, List<string> lstIgnoreColumns = null, bool isLock = true)
     //{
-    //    IUpdateable<TEntity> up = SugarClient.Updateable(entity);
+    //    IUpdateable<T> up = SugarClient.Updateable(entity);
     //    if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
     //    {
     //        up = up.IgnoreColumns(lstIgnoreColumns.ToArray());
@@ -271,10 +333,10 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="lstIgnoreColumns">忽略列</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //public async Task<int> UpdateAsync(List<TEntity> entitys, List<string> lstIgnoreColumns = null,
+    //public async Task<int> UpdateAsync(List<T> entitys, List<string> lstIgnoreColumns = null,
     //    bool isLock = true)
     //{
-    //    IUpdateable<TEntity> up = SugarClient.Updateable(entitys);
+    //    IUpdateable<T> up = SugarClient.Updateable(entitys);
     //    if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
     //    {
     //        up = up.IgnoreColumns(lstIgnoreColumns.ToArray());
@@ -297,10 +359,10 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="lstIgnoreColumns">忽略列</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //public async Task<int> UpdateAsync(TEntity entity, Expression<Func<TEntity, bool>> where,
+    //public async Task<int> UpdateAsync(T entity, Expression<Func<T, bool>> where,
     //    List<string> lstIgnoreColumns = null, bool isLock = true)
     //{
-    //    IUpdateable<TEntity> up = SugarClient.Updateable(entity);
+    //    IUpdateable<T> up = SugarClient.Updateable(entity);
     //    if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
     //    {
     //        up = up.IgnoreColumns(lstIgnoreColumns.ToArray());
@@ -323,10 +385,10 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="where">条件表达式</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //public async Task<int> UpdateAsync(Expression<Func<TEntity, TEntity>> update,
-    //    Expression<Func<TEntity, bool>> where = null, bool isLock = true)
+    //public async Task<int> UpdateAsync(Expression<Func<T, T>> update,
+    //    Expression<Func<T, bool>> where = null, bool isLock = true)
     //{
-    //    IUpdateable<TEntity> up = SugarClient.Updateable<TEntity>().SetColumns(update);
+    //    IUpdateable<T> up = SugarClient.Updateable<T>().SetColumns(update);
     //    if (where != null)
     //    {
     //        up = up.Where(where);
@@ -349,9 +411,9 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
     //public async Task<int> UpdateAsync(Dictionary<string, object> keyValues,
-    //    Expression<Func<TEntity, bool>> where = null, bool isLock = true)
+    //    Expression<Func<T, bool>> where = null, bool isLock = true)
     //{
-    //    IUpdateable<TEntity> up = SugarClient.Updateable<TEntity>(keyValues);
+    //    IUpdateable<T> up = SugarClient.Updateable<T>(keyValues);
     //    if (where != null)
     //    {
     //        up = up.Where(where);
@@ -374,11 +436,11 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="wherecolumns">条件列</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //public async Task<int> UpdateColumnsAsync(List<TEntity> entitys,
-    //    Expression<Func<TEntity, object>> updateColumns, Expression<Func<TEntity, object>> wherecolumns = null,
+    //public async Task<int> UpdateColumnsAsync(List<T> entitys,
+    //    Expression<Func<T, object>> updateColumns, Expression<Func<T, object>> wherecolumns = null,
     //    bool isLock = true)
     //{
-    //    IUpdateable<TEntity> up = SugarClient.Updateable(entitys).UpdateColumns(updateColumns);
+    //    IUpdateable<T> up = SugarClient.Updateable(entitys).UpdateColumns(updateColumns);
     //    if (wherecolumns != null)
     //    {
     //        up = up.WhereColumns(wherecolumns);
@@ -400,7 +462,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="lstIgnoreColumns">忽略列</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //public async Task<int> UpdateRowVerAsync(TEntity entity, List<string> lstIgnoreColumns = null,
+    //public async Task<int> UpdateRowVerAsync(T entity, List<string> lstIgnoreColumns = null,
     //    bool isLock = true)
     //{
     //    Type ts = entity.GetType();
@@ -430,7 +492,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     //    var codeValue = codeProperty.GetValue(entity, null).ToString();
     //    var sqlWhere = $" RowVer={rowVerValue} AND Code='{codeValue}'";
     //    rowVerProperty.SetValue(entity, rowVerValue + 1, null);
-    //    IUpdateable<TEntity> up = SugarClient.Updateable(entity);
+    //    IUpdateable<T> up = SugarClient.Updateable(entity);
     //    if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
     //    {
     //        up = up.IgnoreColumns(lstIgnoreColumns.ToArray());
@@ -453,7 +515,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="where">键:字段名称 值:值</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //public async Task<int> UpdateRowVerAsync(Expression<Func<TEntity, TEntity>> update,
+    //public async Task<int> UpdateRowVerAsync(Expression<Func<T, T>> update,
     //    Dictionary<string, object> where, bool isLock = true)
     //{
     //    if (!where.ContainsKey("RowVer"))
@@ -479,7 +541,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     //            : $" and {item.Key}='{item.Value}'";
     //    }
 
-    //    IUpdateable<TEntity> up = SugarClient.Updateable<TEntity>().SetColumns(update).Where(sqlWhere);
+    //    IUpdateable<T> up = SugarClient.Updateable<T>().SetColumns(update).Where(sqlWhere);
     //    if (isLock)
     //    {
     //        up = up.With(SqlWith.UpdLock);
@@ -501,9 +563,9 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <returns>受影响行数</returns>
     //public async Task<bool> DeleteByPrimaryAsync(object id, bool isLock = true)
     //{
-    //    //return await _db.Deleteable<TEntity>(id).ExecuteCommandHasChangeAsync();
+    //    //return await _db.Deleteable<T>(id).ExecuteCommandHasChangeAsync();
 
-    //    var del = SugarClient.Deleteable<TEntity>(id);
+    //    var del = SugarClient.Deleteable<T>(id);
     //    if (isLock)
     //    {
     //        del = del.With(SqlWith.RowLock);
@@ -520,7 +582,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <returns>受影响行数</returns>
     //public async Task<int> DeleteByPrimaryAsync(List<object> primaryKeyValues, bool isLock = true)
     //{
-    //    var del = SugarClient.Deleteable<TEntity>().In(primaryKeyValues);
+    //    var del = SugarClient.Deleteable<T>().In(primaryKeyValues);
     //    if (isLock)
     //    {
     //        del = del.With(SqlWith.RowLock);
@@ -535,7 +597,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="entity">实体对象</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //public async Task<int> DeleteAsync(TEntity entity, bool isLock = true)
+    //public async Task<int> DeleteAsync(T entity, bool isLock = true)
     //{
     //    var del = SugarClient.Deleteable(entity);
     //    if (isLock)
@@ -552,7 +614,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="entitys">实体集合</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //public async Task<int> DeleteAsync(List<TEntity> entitys, bool isLock = true)
+    //public async Task<int> DeleteAsync(List<T> entitys, bool isLock = true)
     //{
     //    var del = SugarClient.Deleteable(entitys);
     //    if (isLock)
@@ -569,9 +631,9 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="whereLambda">条件表达式</param>
     ///// <param name="isLock">是否加锁</param>
     ///// <returns>受影响行数</returns>
-    //public async Task<int> DeleteAsync(Expression<Func<TEntity, bool>> whereLambda, bool isLock = true)
+    //public async Task<int> DeleteAsync(Expression<Func<T, bool>> whereLambda, bool isLock = true)
     //{
-    //    var del = SugarClient.Deleteable<TEntity>().Where(whereLambda);
+    //    var del = SugarClient.Deleteable<T>().Where(whereLambda);
     //    if (isLock)
     //    {
     //        del = del.With(SqlWith.RowLock);
@@ -588,7 +650,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <returns>受影响行数</returns>
     //public async Task<int> DeleteInAsync(List<dynamic> inValues, bool isLock = true)
     //{
-    //    var del = SugarClient.Deleteable<TEntity>().In(inValues);
+    //    var del = SugarClient.Deleteable<T>().In(inValues);
     //    if (isLock)
     //    {
     //        del = del.With(SqlWith.RowLock);
@@ -608,10 +670,10 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="whereLambda">条件表达式</param>
     ///// <typeparam name="TResult">返回对象</typeparam>
     ///// <returns>自定义数据</returns>
-    //public async Task<TResult> QueryAsync<TResult>(Expression<Func<TEntity, TResult>> expression,
-    //    Expression<Func<TEntity, bool>> whereLambda = null)
+    //public async Task<TResult> QueryAsync<TResult>(Expression<Func<T, TResult>> expression,
+    //    Expression<Func<T, bool>> whereLambda = null)
     //{
-    //    return await SugarClient.Queryable<TEntity>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda)
+    //    return await SugarClient.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda)
     //        .Select(expression)
     //        .FirstAsync();
     //}
@@ -623,10 +685,10 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="whereLambda">条件表达式</param>
     ///// <typeparam name="TResult">返回对象</typeparam>
     ///// <returns>自定义数据</returns>
-    //public async Task<List<TResult>> QueryListExpAsync<TResult>(Expression<Func<TEntity, TResult>> expression,
-    //    Expression<Func<TEntity, bool>> whereLambda = null)
+    //public async Task<List<TResult>> QueryListExpAsync<TResult>(Expression<Func<T, TResult>> expression,
+    //    Expression<Func<T, bool>> whereLambda = null)
     //{
-    //    return await SugarClient.Queryable<TEntity>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda)
+    //    return await SugarClient.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda)
     //        .Select(expression)
     //        .ToListAsync();
     //}
@@ -636,9 +698,9 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// </summary>
     ///// <param name="whereLambda">条件表达式</param>
     ///// <returns>实体对象</returns>
-    //public async Task<TEntity> QueryFirstAsync(Expression<Func<TEntity, bool>> whereLambda = null)
+    //public async Task<T> QueryFirstAsync(Expression<Func<T, bool>> whereLambda = null)
     //{
-    //    return await SugarClient.Queryable<TEntity>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda)
+    //    return await SugarClient.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda)
     //        .FirstAsync();
     //}
 
@@ -649,10 +711,10 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="orderFileds"></param>
     ///// <param name="orderByType"></param>
     ///// <returns>实体列表</returns>
-    //public async Task<List<TEntity>> QueryListAsync(Expression<Func<TEntity, bool>> whereLambda = null,
-    //    Expression<Func<TEntity, object>> orderFileds = null, OrderByType orderByType = OrderByType.Desc)
+    //public async Task<List<T>> QueryListAsync(Expression<Func<T, bool>> whereLambda = null,
+    //    Expression<Func<T, object>> orderFileds = null, OrderByType orderByType = OrderByType.Desc)
     //{
-    //    return await SugarClient.Queryable<TEntity>().WhereIF(whereLambda.IsNotNull(), whereLambda)
+    //    return await SugarClient.Queryable<T>().WhereIF(whereLambda.IsNotNull(), whereLambda)
     //        .OrderByIF(orderFileds.IsNotNull(), orderFileds, orderByType)
     //        .ToListAsync();
     //}
@@ -662,9 +724,9 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// </summary>
     ///// <param name="sql">SQL</param>
     ///// <returns>实体列表</returns>
-    //public async Task<List<TEntity>> QuerySqlListAsync(string sql)
+    //public async Task<List<T>> QuerySqlListAsync(string sql)
     //{
-    //    return await SugarClient.SqlQueryable<TEntity>(sql).ToListAsync();
+    //    return await SugarClient.SqlQueryable<T>(sql).ToListAsync();
     //}
 
     ///// <summary>
@@ -675,11 +737,11 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="selectExpression"></param>
     ///// <param name="isSplitTable">分表查询</param>
     ///// <returns></returns>
-    //public async Task<List<TEntity>> QueryPageListAsync(Expression<Func<TEntity, bool>> whereLambda,
-    //    Pagination pagination, Expression<Func<TEntity, TEntity>> selectExpression = null, bool isSplitTable = false)
+    //public async Task<List<T>> QueryPageListAsync(Expression<Func<T, bool>> whereLambda,
+    //    Pagination pagination, Expression<Func<T, T>> selectExpression = null, bool isSplitTable = false)
     //{
     //    RefAsync<int> totalCount = 0;
-    //    var query = SugarClient.Queryable<TEntity>();
+    //    var query = SugarClient.Queryable<T>();
     //    query = query.WhereIF(whereLambda != null, whereLambda);
     //    if (selectExpression != null)
     //    {
@@ -707,14 +769,14 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="navigationExpression2"></param>
     ///// <param name="navigationExpression3"></param>
     ///// <returns></returns>
-    //public async Task<List<TEntity>> QueryPageListAsync<T, T2, T3>(Expression<Func<TEntity, bool>> whereLambda,
-    //    Pagination pagination, Expression<Func<TEntity, TEntity>> selectExpression = null,
-    //    Expression<Func<TEntity, T>> navigationExpression = null,
-    //    Expression<Func<TEntity, List<T2>>> navigationExpression2 = null,
-    //    Expression<Func<TEntity, List<T3>>> navigationExpression3 = null)
+    //public async Task<List<T>> QueryPageListAsync<T, T2, T3>(Expression<Func<T, bool>> whereLambda,
+    //    Pagination pagination, Expression<Func<T, T>> selectExpression = null,
+    //    Expression<Func<T, T>> navigationExpression = null,
+    //    Expression<Func<T, List<T2>>> navigationExpression2 = null,
+    //    Expression<Func<T, List<T3>>> navigationExpression3 = null)
     //{
     //    RefAsync<int> totalCount = 0;
-    //    var query = SugarClient.Queryable<TEntity>();
+    //    var query = SugarClient.Queryable<T>();
 
     //    if (navigationExpression != null)
     //    {
@@ -756,15 +818,15 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="navigationExpression3"></param>
     ///// <param name="navigationExpression4"></param>
     ///// <returns></returns>
-    //public async Task<List<TEntity>> QueryPageListAsync<T, T2, T3, T4>(Expression<Func<TEntity, bool>> whereLambda,
-    //    Pagination pagination, Expression<Func<TEntity, TEntity>> selectExpression = null,
-    //    Expression<Func<TEntity, T>> navigationExpression = null,
-    //    Expression<Func<TEntity, List<T2>>> navigationExpression2 = null,
-    //    Expression<Func<TEntity, List<T3>>> navigationExpression3 = null,
-    //    Expression<Func<TEntity, List<T4>>> navigationExpression4 = null)
+    //public async Task<List<T>> QueryPageListAsync<T, T2, T3, T4>(Expression<Func<T, bool>> whereLambda,
+    //    Pagination pagination, Expression<Func<T, T>> selectExpression = null,
+    //    Expression<Func<T, T>> navigationExpression = null,
+    //    Expression<Func<T, List<T2>>> navigationExpression2 = null,
+    //    Expression<Func<T, List<T3>>> navigationExpression3 = null,
+    //    Expression<Func<T, List<T4>>> navigationExpression4 = null)
     //{
     //    RefAsync<int> totalCount = 0;
-    //    var query = SugarClient.Queryable<TEntity>();
+    //    var query = SugarClient.Queryable<T>();
 
     //    if (navigationExpression != null)
     //    {
@@ -804,9 +866,9 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="inFieldName">指定字段名</param>
     ///// <param name="inValues">值</param>
     ///// <returns>实体列表</returns>
-    //public async Task<List<TEntity>> QueryListInAsync(string inFieldName, List<dynamic> inValues)
+    //public async Task<List<T>> QueryListInAsync(string inFieldName, List<dynamic> inValues)
     //{
-    //    return await SugarClient.Queryable<TEntity>().In(inFieldName, inValues).ToListAsync();
+    //    return await SugarClient.Queryable<T>().In(inFieldName, inValues).ToListAsync();
     //}
 
     ///// <summary>
@@ -815,7 +877,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="id">列值</param>
     ///// <param name="columnName">列名 默认ID</param>
     ///// <returns>实体对象</returns>
-    //public async Task<TEntity> QuerySingleAsync(object id, string columnName = "id")
+    //public async Task<T> QuerySingleAsync(object id, string columnName = "id")
     //{
     //    if (id.IsNull())
     //    {
@@ -833,9 +895,9 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     //        //     FieldName = "is_deleted", ConditionalType = ConditionalType.Equal, FieldValue = "0"
     //        // }
     //    };
-    //    return await SugarClient.Queryable<TEntity>().Where(conModels).SingleAsync();
+    //    return await SugarClient.Queryable<T>().Where(conModels).SingleAsync();
     //    // 这种方式不适合软删除模式
-    //    // return await _db.Queryable<TEntity>().InSingleAsync(id);
+    //    // return await _db.Queryable<T>().InSingleAsync(id);
     //}
 
     ///// <summary>
@@ -844,7 +906,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="values">列值集合</param>
     ///// <param name="columnName">列名 默认ID</param>
     ///// <returns>实体列表</returns>
-    //public async Task<List<TEntity>> QueryListInAsync(List<long> values, string columnName = "id")
+    //public async Task<List<T>> QueryListInAsync(List<long> values, string columnName = "id")
     //{
     //    var conModels = new List<IConditionalModel>
     //    {
@@ -854,8 +916,8 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     //            FieldValue = string.Join(",", values)
     //        }
     //    };
-    //    return await SugarClient.Queryable<TEntity>().Where(conModels).ToListAsync();
-    //    //return await _db.Queryable<TEntity>().In(values).ToListAsync();
+    //    return await SugarClient.Queryable<T>().Where(conModels).ToListAsync();
+    //    //return await _db.Queryable<T>().In(values).ToListAsync();
     //}
 
     ///// <summary>
@@ -863,9 +925,9 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// </summary>
     ///// <param name="whereLambda">条件表达式</param>
     ///// <returns>DataTable</returns>
-    //public async Task<DataTable> QueryDataTableAsync(Expression<Func<TEntity, bool>> whereLambda = null)
+    //public async Task<DataTable> QueryDataTableAsync(Expression<Func<T, bool>> whereLambda = null)
     //{
-    //    return await SugarClient.Queryable<TEntity>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda)
+    //    return await SugarClient.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda)
     //        .ToDataTableAsync();
     //}
 
@@ -894,9 +956,9 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// </summary>
     ///// <param name="whereLambda">条件表达式</param>
     ///// <returns>对象.json</returns>
-    //public async Task<string> QueryJsonAsync(Expression<Func<TEntity, bool>> whereLambda = null)
+    //public async Task<string> QueryJsonAsync(Expression<Func<T, bool>> whereLambda = null)
     //{
-    //    ISugarQueryable<TEntity> up = SugarClient.Queryable<TEntity>();
+    //    ISugarQueryable<T> up = SugarClient.Queryable<T>();
     //    if (whereLambda != null)
     //    {
     //        up = up.Where(whereLambda);
@@ -1223,10 +1285,10 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
 
     //#region 一对一 一对多查询
 
-    //public async Task<List<TEntity>> QueryMapperAsync(Action<TEntity> mapperAction,
-    //    Expression<Func<TEntity, bool>> whereLambda = null)
+    //public async Task<List<T>> QueryMapperAsync(Action<T> mapperAction,
+    //    Expression<Func<T, bool>> whereLambda = null)
     //{
-    //    ISugarQueryable<TEntity> up = SugarClient.Queryable<TEntity>();
+    //    ISugarQueryable<T> up = SugarClient.Queryable<T>();
     //    if (whereLambda != null)
     //    {
     //        up = up.Where(whereLambda);
@@ -1236,11 +1298,11 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     //    return datas;
     //}
 
-    //public async Task<List<TEntity>> QueryMapperPageListAsync(Action<TEntity> mapperAction,
-    //    Expression<Func<TEntity, bool>> whereLambda, Pagination pagination)
+    //public async Task<List<T>> QueryMapperPageListAsync(Action<T> mapperAction,
+    //    Expression<Func<T, bool>> whereLambda, Pagination pagination)
     //{
     //    RefAsync<int> totalCount = 0;
-    //    ISugarQueryable<TEntity> up = SugarClient.Queryable<TEntity>();
+    //    ISugarQueryable<T> up = SugarClient.Queryable<T>();
     //    if (!whereLambda.IsNullOrEmpty())
     //    {
     //        up = up.Where(whereLambda);
@@ -1257,13 +1319,13 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     //    return datas;
     //}
 
-    //public async Task<List<TEntity>> QueryMapperPageListAsync<TObject>(
-    //    Expression<Func<TEntity, List<TObject>>> mapperObject,
-    //    Expression<Func<TEntity, object>> mapperField, Expression<Func<TEntity, bool>> whereLambda,
+    //public async Task<List<T>> QueryMapperPageListAsync<TObject>(
+    //    Expression<Func<T, List<TObject>>> mapperObject,
+    //    Expression<Func<T, object>> mapperField, Expression<Func<T, bool>> whereLambda,
     //    Pagination pagination)
     //{
     //    RefAsync<int> totalCount = 0;
-    //    ISugarQueryable<TEntity> up = SugarClient.Queryable<TEntity>();
+    //    ISugarQueryable<T> up = SugarClient.Queryable<T>();
     //    if (!whereLambda.IsNullOrEmpty())
     //    {
     //        up = up.Where(whereLambda);
@@ -1280,10 +1342,10 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     //    return datas;
     //}
 
-    //public async Task<List<TEntity>> QueryMapperAsync(Action<TEntity, MapperCache<TEntity>> mapperAction,
-    //    Expression<Func<TEntity, bool>> whereLambda, string sortField = "")
+    //public async Task<List<T>> QueryMapperAsync(Action<T, MapperCache<T>> mapperAction,
+    //    Expression<Func<T, bool>> whereLambda, string sortField = "")
     //{
-    //    ISugarQueryable<TEntity> up = SugarClient.Queryable<TEntity>();
+    //    ISugarQueryable<T> up = SugarClient.Queryable<T>();
     //    if (!whereLambda.IsNullOrEmpty())
     //    {
     //        up = up.Where(whereLambda);
@@ -1298,12 +1360,12 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     //    return datas;
     //}
 
-    //public async Task<List<TEntity>> QueryMapperPageListAsync(
-    //    Action<TEntity, MapperCache<TEntity>> mapperAction,
-    //    Expression<Func<TEntity, bool>> whereLambda, Pagination pagination)
+    //public async Task<List<T>> QueryMapperPageListAsync(
+    //    Action<T, MapperCache<T>> mapperAction,
+    //    Expression<Func<T, bool>> whereLambda, Pagination pagination)
     //{
     //    RefAsync<int> totalCount = 0;
-    //    ISugarQueryable<TEntity> up = SugarClient.Queryable<TEntity>();
+    //    ISugarQueryable<T> up = SugarClient.Queryable<T>();
     //    if (!whereLambda.IsNullOrEmpty())
     //    {
     //        up = up.Where(whereLambda);
@@ -1373,9 +1435,9 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <param name="whereLambda">条件表达式</param>
     ///// <param name="topNum">要多少条</param>
     ///// <returns>泛型对象集合</returns>
-    //public async Task<List<TEntity>> TakeAsync(int topNum, Expression<Func<TEntity, bool>> whereLambda = null)
+    //public async Task<List<T>> TakeAsync(int topNum, Expression<Func<T, bool>> whereLambda = null)
     //{
-    //    return await SugarClient.Queryable<TEntity>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda).Take(topNum)
+    //    return await SugarClient.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda).Take(topNum)
     //        .ToListAsync();
     //}
 
@@ -1384,9 +1446,9 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// </summary>
     ///// <param name="whereLambda">条件表达式</param>
     ///// <returns>True or False</returns>
-    //public async Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> whereLambda = null)
+    //public async Task<bool> IsExistAsync(Expression<Func<T, bool>> whereLambda = null)
     //{
-    //    return await SugarClient.Queryable<TEntity>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda).AnyAsync();
+    //    return await SugarClient.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda).AnyAsync();
     //}
 
     ///// <summary>
@@ -1396,7 +1458,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <returns>总和</returns>
     //public async Task<int> SumAsync(string field)
     //{
-    //    return await SugarClient.Queryable<TEntity>().SumAsync<int>(field);
+    //    return await SugarClient.Queryable<T>().SumAsync<int>(field);
     //}
 
     ///// <summary>
@@ -1407,7 +1469,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <returns>最大值</returns>
     //public async Task<TResult> MaxAsync<TResult>(string field)
     //{
-    //    return await SugarClient.Queryable<TEntity>().MaxAsync<TResult>(field);
+    //    return await SugarClient.Queryable<T>().MaxAsync<TResult>(field);
     //}
 
     ///// <summary>
@@ -1418,7 +1480,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <returns>最小值</returns>
     //public async Task<TResult> MinAsync<TResult>(string field)
     //{
-    //    return await SugarClient.Queryable<TEntity>().MinAsync<TResult>(field);
+    //    return await SugarClient.Queryable<T>().MinAsync<TResult>(field);
     //}
 
     ///// <summary>
@@ -1428,7 +1490,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     ///// <returns>平均值</returns>
     //public async Task<int> AvgAsync(string field)
     //{
-    //    return await SugarClient.Queryable<TEntity>().AvgAsync<int>(field);
+    //    return await SugarClient.Queryable<T>().AvgAsync<int>(field);
     //}
 
     //#endregion
@@ -1449,7 +1511,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     //    List<string> numbers = new List<string>();
     //    var dateValue = dateFomart == "" ? "" : DateTime.Now.ToString(dateFomart);
     //    var fix = prefix.ToUpper() + dateValue;
-    //    var maxValue = await SugarClient.Queryable<TEntity>()
+    //    var maxValue = await SugarClient.Queryable<T>()
     //        .Where(key + " LIKE '" + fix + "%' AND LEN(" + key + ")=" + (fix.Length + fixedLength)).Select(key)
     //        .MaxAsync<string>(key);
 

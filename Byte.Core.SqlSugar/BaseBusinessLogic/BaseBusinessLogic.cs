@@ -1,20 +1,20 @@
 ﻿using Byte.Core.Common.IoC;
 using Byte.Core.Common.Pager;
-using Byte.Core.SqlSugar.Repository;
+using Byte.Core.SqlSugar;
 using SqlSugar;
 using System.Linq.Expressions;
 
-namespace Byte.Core.SqlSugar.BusinessLogics
+namespace Byte.Core.SqlSugar
 {
-    public abstract class BaseBusinessLogic<TEntity, TRepository> : IBusinessLogic<TEntity> where TEntity : class, new()
-          where TRepository : IRepository<TEntity>
+    public abstract class BaseBusinessLogic<T, TRepository> : IBusinessLogic<T> where T : class, new()
+          where TRepository : IRepository<T>
     {
         #region 字段
 
         /// <summary>
         /// 当前操作对象仓储
         /// </summary>
-        public IRepository<TEntity> SugarRepository { get; set; }
+        public IRepository<T> SugarRepository { get; set; }
 
         /// <summary>
         /// sugarClient
@@ -49,7 +49,7 @@ namespace Byte.Core.SqlSugar.BusinessLogics
         /// </summary>
         /// <param name="where"></param>
         /// <returns></returns>
-        public  ISugarQueryable<TEntity> GetIQueryable(Expression<Func<TEntity, bool>> where = null)=> Repository.GetIQueryable(where);
+        public  ISugarQueryable<T> GetIQueryable(Expression<Func<T, bool>> where = null)=> Repository.GetIQueryable(where);
         #endregion
         #region 新增操作
 
@@ -58,12 +58,38 @@ namespace Byte.Core.SqlSugar.BusinessLogics
         /// </summary>
         /// <param name="entity">实体对象</param>
         /// <returns>受影响行数</returns>
-        public   Task<int> AddAsync(TEntity entity) => Repository.AddAsync(entity);
+        public   Task<int> AddAsync(T entity) => Repository.AddAsync(entity);
 
+        
+        /// <summary>
+        /// 新增实体
+        /// </summary>
+        /// <param name="entitys">实体对象</param>
+        /// <returns>受影响行数</returns>
+        public   Task<int> AddRangeAsync(List<T> entitys) => Repository.AddRangeAsync(entitys);
         #endregion
 
 
         #region 更新操作
+
+        /// <summary>
+        /// 更新实体
+        /// </summary>
+        /// <param name="entity">实体对象</param>
+        /// <param name="lstIgnoreColumns">忽略列</param>
+        /// <param name="isLock">是否加锁</param>
+        /// <returns>受影响行数</returns>
+        public Task<int> UpdateAsync(T entity, List<string> lstIgnoreColumns = null, bool isLock = true) => Repository.UpdateAsync(entity, lstIgnoreColumns, isLock);
+        /// <summary>
+        /// 批量更新实体
+        /// </summary>
+        /// <param name="entitys">实体集合</param>
+        /// <param name="lstIgnoreColumns">忽略列</param>
+        /// <param name="isLock">是否加锁</param>
+        /// <returns>受影响行数</returns>
+        public Task<int> UpdateRangeAsync(List<T> entitys, List<string> lstIgnoreColumns = null, bool isLock = true) => Repository.UpdateRangeAsync(entitys, lstIgnoreColumns, isLock);
+
+
         /// <summary>
         /// 更新实体
         /// </summary>
@@ -71,7 +97,7 @@ namespace Byte.Core.SqlSugar.BusinessLogics
         /// <param name="updateFactory"></param>
         /// <param name="isLock"></param>
         /// <returns></returns>
-        public   Task<int> UpdateAsync(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TEntity>> updateFactory, bool isLock = true)=> Repository.UpdateAsync(where, updateFactory, isLock);
+        public Task<int> UpdateAsync(Expression<Func<T, bool>> where, Expression<Func<T, T>> updateFactory, bool isLock = true)=> Repository.UpdateAsync(where, updateFactory, isLock);
         #endregion
 
 #region 删除操作
@@ -92,7 +118,7 @@ public Task<int> DeleteAsync<TKey>(TKey id, bool isLock = true) => Repository.De
 ///// <returns>受影响行数</returns>
 //public virtual async Task<int> DeleteByPrimaryAsync(List<object> primaryKeyValues, bool isLock = true)
 //{
-//    var del = SugarClient.Deleteable<TEntity>().In(primaryKeyValues);
+//    var del = SugarClient.Deleteable<T>().In(primaryKeyValues);
 //    if (isLock)
 //    {
 //        del = del.With(SqlWith.RowLock);
@@ -107,7 +133,7 @@ public Task<int> DeleteAsync<TKey>(TKey id, bool isLock = true) => Repository.De
 ///// <param name="entity">实体对象</param>
 ///// <param name="isLock">是否加锁</param>
 ///// <returns>受影响行数</returns>
-//public virtual async Task<int> DeleteAsync(TEntity entity, bool isLock = true)
+//public virtual async Task<int> DeleteAsync(T entity, bool isLock = true)
 //{
 //    var del = SugarClient.Deleteable(entity);
 //    if (isLock)
@@ -124,7 +150,7 @@ public Task<int> DeleteAsync<TKey>(TKey id, bool isLock = true) => Repository.De
 ///// <param name="entitys">实体集合</param>
 ///// <param name="isLock">是否加锁</param>
 ///// <returns>受影响行数</returns>
-//public virtual async Task<int> DeleteAsync(List<TEntity> entitys, bool isLock = true)
+//public virtual async Task<int> DeleteAsync(List<T> entitys, bool isLock = true)
 //{
 //    var del = SugarClient.Deleteable(entitys);
 //    if (isLock)
@@ -141,7 +167,7 @@ public Task<int> DeleteAsync<TKey>(TKey id, bool isLock = true) => Repository.De
 /// <param name="where">条件表达式</param>
 /// <param name="isLock">是否加锁</param>
 /// <returns>受影响行数</returns> 
-public Task<int> DeleteAsync(Expression<Func<TEntity, bool>> where, bool isLock = true) => Repository.DeleteAsync(where, isLock);
+public Task<int> DeleteAsync(Expression<Func<T, bool>> where, bool isLock = true) => Repository.DeleteAsync(where, isLock);
 
 /// <summary>
 /// 删除实体

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using SqlSugar;
 
-namespace Byte.Core.SqlSugar.Repository;
+namespace Byte.Core.SqlSugar;
 
 public class UnitOfWork : IUnitOfWork
 {
