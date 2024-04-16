@@ -44,6 +44,10 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     /// <returns></returns>
     public virtual ISugarQueryable<T> GetIQueryable(Expression<Func<T, bool>> where = null)
     {
+        if (where == null)
+        { 
+            return SugarClient.Queryable<T>();
+        }
         return SugarClient.Queryable<T>().Where(where);
     }
 
