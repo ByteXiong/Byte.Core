@@ -21,6 +21,7 @@ namespace Byte.Core.Common.Extensions
 {
     public static class ObjectExtension
     {
+   
         static ObjectExtension()
         {
             JsonConvert.DefaultSettings = () => DefaultJsonSetting;
@@ -62,6 +63,29 @@ namespace Byte.Core.Common.Extensions
                 value = property.GetValue(value, null);
             }
             return value;
+        }
+        /// <summary>
+        /// 获取某属性值
+        /// </summary>
+        /// <param name="obj">对象</param>
+        /// <param name="propertyName">属性名</param>
+        /// <returns></returns>
+        public static object GetPropertyValue(this object obj, string propertyName)
+        {
+            var pi = obj.GetType().GetProperty(propertyName, _bindingFlags);
+            if (pi == null) return null;
+            var type = pi.PropertyType;
+            if (type == typeof(DateTime))
+            {
+                return Convert.ToDateTime(pi.GetValue(obj)).ToString("yyyy-MM-dd HH:mm:ss");
+            }
+
+            if (type.IsEnum)
+            {
+                return (int)pi.GetValue(obj)!;
+            }
+
+            return pi.GetValue(obj);
         }
 
         /// <summary>
@@ -1667,17 +1691,7 @@ namespace Byte.Core.Common.Extensions
             return obj.GetType().GetProperty(propertyName, _bindingFlags) != null;
         }
 
-        /// <summary>
-        /// 获取某属性值
-        /// </summary>
-        /// <param name="obj">对象</param>
-        /// <param name="propertyName">属性名</param>
-        /// <returns></returns>
-        public static object GetPropertyValue(this object obj, string propertyName)
-        {
-            return obj.GetType().GetProperty(propertyName, _bindingFlags).GetValue(obj);
-        }
-
+    
         /// <summary>
         /// 设置某属性值
         /// </summary>
