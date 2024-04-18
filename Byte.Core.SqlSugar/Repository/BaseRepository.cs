@@ -62,7 +62,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     /// </summary>
     /// <param name="entity">实体对象</param>
     /// <returns>受影响行数</returns>
-    public async Task<int> AddAsync(T entity)
+    public virtual async Task<int> AddAsync(T entity)
     {
         var insert = SugarClient.Insertable(entity);
         return await insert.ExecuteCommandAsync();
@@ -73,7 +73,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     /// </summary>
     /// <param name="entity">实体对象</param>
     /// <returns>受影响行数</returns>
-    public async Task<int> AddRangeAsync(List<T> entitys)
+    public virtual async Task<int> AddRangeAsync(List<T> entitys)
     {
         var insert = SugarClient.Insertable(entitys);
         return await insert.ExecuteCommandAsync();
@@ -90,7 +90,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     /// <param name="lstIgnoreColumns">忽略列</param>
     /// <param name="isLock">是否加锁</param>
     /// <returns>受影响行数</returns>
-    public async Task<int> UpdateAsync(T entity, List<string> lstIgnoreColumns = null, bool isLock = true)
+    public virtual async Task<int> UpdateAsync(T entity, List<string> lstIgnoreColumns = null, bool isLock = true)
     {
         IUpdateable<T> up = SugarClient.Updateable(entity);
         if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
@@ -114,7 +114,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     /// <param name="lstIgnoreColumns">忽略列</param>
     /// <param name="isLock">是否加锁</param>
     /// <returns>受影响行数</returns>
-    public async Task<int> UpdateRangeAsync(List<T> entitys, List<string> lstIgnoreColumns = null,
+    public virtual async Task<int> UpdateRangeAsync(List<T> entitys, List<string> lstIgnoreColumns = null,
         bool isLock = true)
     {
         IUpdateable<T> up = SugarClient.Updateable(entitys);

@@ -20,8 +20,8 @@ namespace Byte.Core.Common.Attributes
         public async virtual Task OnActionExecuting(ActionExecutingContext context)
         {
 
-
-            //Console.WriteLine("在行为方法执行前执行");
+   
+            //Console.WriteLine($"在行为方法执行前执行{DateTime.Now.ToString()}");
             await Task.CompletedTask;
         }
         /// <summary>
@@ -31,7 +31,7 @@ namespace Byte.Core.Common.Attributes
         /// <returns></returns>
         public async virtual Task OnActionExecuted(ActionExecutedContext context)
         {
-            //Console.WriteLine("在行为方法执行后执行");
+            //Console.WriteLine($"在行为方法执行后执行{DateTime.Now.ToString()}");
             await Task.CompletedTask;
         }
 
@@ -52,7 +52,7 @@ namespace Byte.Core.Common.Attributes
         /// <returns></returns>
         public async virtual Task OnResultExecuted(ResultExecutingContext context)
         {
-            //Console.WriteLine("在行为方法返回后执行");
+            //Console.WriteLine($"在行为方法返回后执行{DateTime.Now.ToString()}");
             await Task.CompletedTask;
         }
 

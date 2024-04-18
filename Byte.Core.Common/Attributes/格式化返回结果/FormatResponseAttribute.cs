@@ -25,7 +25,7 @@ namespace Byte.Core.Common.Attributes
 
                     context.Result = Result1(res.Value);
             }
-
+            
             await Task.CompletedTask;
 
 
