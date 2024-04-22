@@ -199,6 +199,7 @@ namespace Byte.Core.Common.Extensions
             }
             return null;
         }
+   
 
         public static int? ToInt32(this string input)
         {
@@ -832,5 +833,37 @@ namespace Byte.Core.Common.Extensions
             else
                 return false;
         }
+        /// <summary>
+        /// UTF8转GBK
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public static string UTF8ToGBK(this string text)
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            Encoding utf8 = Encoding.UTF8;
+            Encoding gbk = Encoding.GetEncoding("gb2312");//Encoding.Default ,936
+            byte[] temp = utf8.GetBytes(text);
+            byte[] temp1 = Encoding.Convert(utf8, gbk, temp);
+            string result = gbk.GetString(temp1 );
+            return result;
+        }
+        /// <summary>
+        /// GBK转UTF8
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string GBKToUTF8(this string str)
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            Encoding utf8;
+            Encoding gbk;
+            utf8 = Encoding.GetEncoding("utf-8");
+            gbk = Encoding.GetEncoding("gbk");
+            byte[] gb = gbk.GetBytes(str);
+            gb = Encoding.Convert(gbk, utf8, gb);
+            return utf8.GetString(gb);
+        }
+
     }
 }

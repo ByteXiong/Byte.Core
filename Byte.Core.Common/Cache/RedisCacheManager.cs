@@ -1,6 +1,7 @@
 ﻿using Byte.Core.Common.Helpers;
 using Byte.Core.Common.IoC;
 using Microsoft.Extensions.Caching.Distributed;
+using Quartz.Util;
 
 namespace Byte.Core.Common.Cache
 {
@@ -62,7 +63,10 @@ namespace Byte.Core.Common.Cache
         }
 
 
-        public static void Remove(string key) => Instance.Remove(key);
+    //    public static void Remove(string key) =>{
+   
+    //           return  RedisHelper.Remove( key);
+    //}
 
         public static async Task RemoveAsync(string key) => await Instance.RemoveAsync(key);
 

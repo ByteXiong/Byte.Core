@@ -1,600 +1,503 @@
 ﻿using Byte.Core.Common.Extensions;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System.IO.Compression;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
+
 
 namespace Byte.Core.Common.Helpers
 {
     public static class HttpHelper
     {
-        public static async Task<string> PostAsync() {
-            throw new NotImplementedException("系统提供http请求方法,此处作为Dome,参考");
-            //using var httpClient = new HttpClient();
-            //var requestContent = new StringContent(content, System.Text.Encoding.UTF8, "application/json");
-            //httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer my-token");
-            //// send POST request
-            //var response = await httpClient.PostAsync(url, requestContent);
-           
-            //// read response content
-            //var responseContent = await response.Content.ReadAsStringAsync();
-            ////获取里面内容
-            //dynamic data = responseContent.ToObject<dynamic>();
-            //return responseContent;
+        #region 构造函数
 
+        /// <summary>
+        /// 静态构造函数
+        /// </summary>
+        static HttpHelper()
+        {
+            ServicePointManager.SecurityProtocol =
+                SecurityProtocolType.Tls12
+                | SecurityProtocolType.Tls11
+                | SecurityProtocolType.Tls;
+
+            ServicePointManager.DefaultConnectionLimit = int.MaxValue;
+            ServicePointManager.ServerCertificateValidationCallback =
+                (sender, certificate, chain, sslPolicyErrors) => true;
         }
 
-        public static async Task<string> GetAsync(string url, Dictionary<string, string> headers = null,int timeout=60000)
+        #endregion
+
+        #region 外部接口
+
+        /// <summary>
+        /// 发起GET请求
+        /// 注：若使用证书,推荐使用X509Certificate2的pkcs12证书
+        /// </summary>
+        /// <param name="url">地址</param>
+        /// <param name="paramters">参数</param>
+        /// <param name="headers">请求头</param>
+        /// <param name="cerFile">证书</param>
+        /// <returns></returns>
+        public static string GetData(string url, Dictionary<string, object> paramters = null,
+            Dictionary<string, string> headers = null, X509Certificate cerFile = null)
         {
-            using var httpClient = new HttpClient();
-            if (headers != null)
-            {
-                foreach (var header in headers)
-                {
-                    httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
-                }
-            }
-            httpClient.Timeout = TimeSpan.FromMilliseconds(timeout); 
-             var response = await httpClient.GetAsync(url);
-            // read response content
-            var responseContent = await response.Content.ReadAsStringAsync();
-            //获取里面内容
-            dynamic data = responseContent.ToObject<dynamic>();
-            return responseContent;
+            return RequestData(HttpMethod.Get, url, paramters, headers, ContentType.Form, cerFile);
         }
 
         /// <summary>
-        /// 
+        /// 发起POST请求
+        /// 注：若使用证书,推荐使用X509Certificate2的pkcs12证书
         /// </summary>
-        /// <param name="url"></param>
-        /// <param name="paramStr"> 使用tojson 转换</param>
-        /// <param name="headers"></param>
-        /// <param name="encoding"></param>
-        /// <param name="mediaType"></param>
-        /// <param name="timeout"></param>
+        /// <param name="url">地址</param>
+        /// <param name="paramters">参数</param>
+        /// <param name="headers">请求头</param>
+        /// <param name="contentType">请求的ContentType</param>
+        /// <param name="cerFile">证书</param>
         /// <returns></returns>
-        public static async Task<string> PostAsync(string url,string paramStr, Dictionary<string, string> headers = null, Encoding encoding = null, string mediaType = "application/json", int timeout = 60000)
+        public static string PostData(string url, Dictionary<string, object> paramters = null,
+            Dictionary<string, string> headers = null, ContentType contentType = ContentType.Form,
+            X509Certificate cerFile = null)
         {
-            using var httpClient = new HttpClient();
-            httpClient.Timeout = TimeSpan.FromMilliseconds(timeout);
-            var requestContent = new StringContent(paramStr, encoding, mediaType);
-            if (headers != null)
-            {
-                foreach (var header in headers)
-                {
-                    httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
-                }
-            }
-        
-            var response = await httpClient.PostAsync(url, requestContent);
+            Dictionary<ContentType, string> mapping = new Dictionary<ContentType, string>();
+            mapping.Add(ContentType.Form, "application/x-www-form-urlencoded");
+            mapping.Add(ContentType.Json, "application/json");
 
-            if (response.IsSuccessStatusCode)
-            {
-                string responseBody = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(responseBody);
-            }
-            else
-            {
-                Console.WriteLine($"Request failed with status code {response.StatusCode}");
-            }
-
-            // read response content
-            var responseContent = await response.Content.ReadAsStringAsync();
-         
-            return responseContent;
+            string body = BuildBody(paramters, contentType);
+            return PostData(url, body, mapping[contentType], headers, cerFile);
         }
 
-        //#region 同步方法
+        /// <summary>
+        /// 发起POST请求
+        /// 注：若使用证书,推荐使用X509Certificate2的pkcs12证书
+        /// </summary>
+        /// <param name="url">地址</param>
+        /// <param name="body">请求体</param>
+        /// <param name="contentType">请求的ContentType</param>
+        /// <param name="headers">请求头</param>
+        /// <param name="cerFile">证书</param>
+        /// <returns></returns>
+        public static string PostData(string url, string body, string contentType, Dictionary<string, string> headers=null,
+            X509Certificate cerFile=null)
+        {
+            return RequestData("POST", url, body, contentType, headers, cerFile);
+        }
 
-        ///// <summary>
-        ///// 使用Get方法获取字符串结果（加入Cookie）
-        ///// </summary>
-        ///// <param name="url"></param>
-        ///// <param name="encoding"></param>
-        ///// <returns></returns>
-        //public static string HttpGet(string url, Encoding encoding = null, int timeOut = 60000)
-        //{
-        //    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-        //    request.Method = "GET";
-        //    request.Timeout = timeOut;
+        /// <summary>
+        /// 请求数据
+        /// 注：若使用证书,推荐使用X509Certificate2的pkcs12证书
+        /// </summary>
+        /// <param name="method">请求方法</param>
+        /// <param name="url">URL地址</param>
+        /// <param name="paramters">参数</param>
+        /// <param name="headers">请求头信息</param>
+        /// <param name="contentType">请求数据类型</param>
+        /// <param name="cerFile">证书</param>
+        /// <returns></returns>
+        public static string RequestData(HttpMethod method, string url, Dictionary<string, object> paramters = null,
+            Dictionary<string, string> headers = null, ContentType contentType = ContentType.Form,
+            X509Certificate cerFile = null)
+        {
+            if (string.IsNullOrEmpty(url))
+                throw new System.Exception("请求地址不能为NULL或空！");
 
-        //    //if (cookieContainer != null)
-        //    //{
-        //    //    request.CookieContainer = cookieContainer;
-        //    //}
+            string newUrl = url;
+            if (method == HttpMethod.Get)
+            {
+                StringBuilder paramBuilder = new StringBuilder();
+                var paramList = new List<KeyValuePair<string, object>>();
+                paramList = paramters?.ToList() ?? new List<KeyValuePair<string, object>>();
+                for (int i = 0; i < paramList.Count; i++)
+                {
+                    var theParamter = paramList[i];
+                    string key = theParamter.Key;
+                    string value = theParamter.Value.ToString();
 
-        //    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    string head = string.Empty;
+                    if (i == 0 && !UrlHaveParam(url))
+                        head = "?";
+                    else
+                        head = "&";
 
-        //    //if (cookieContainer != null)
-        //    //{
-        //    //    response.Cookies = cookieContainer.GetCookies(response.ResponseUri);
-        //    //}
+                    paramBuilder.Append($@"{head}{key}={value}");
+                }
 
-        //    using (Stream responseStream = response.GetResponseStream())
-        //    {
-        //        using (StreamReader myStreamReader = new StreamReader(responseStream, encoding ?? Encoding.GetEncoding("utf-8")))
-        //        {
-        //            string retString = myStreamReader.ReadToEnd();
-        //            return retString;
-        //        }
-        //    }
-        //}
-        ///// <summary>
-        ///// (异步)使用Get方法获取字符串结果（加入Cookie）
-        ///// </summary>
-        ///// <param name="url"></param>
-        ///// <param name="encoding"></param>
-        ///// <returns></returns>
-        //public static async Task<string> HttpGetAsync(string url, Encoding encoding = null, int timeOut = 60000)
-        //{
-        //    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-        //    request.Method = "GET";
-        //    request.Timeout = timeOut;
+                newUrl = url + paramBuilder;
+            }
 
-        //    //if (cookieContainer != null)
-        //    //{
-        //    //    request.CookieContainer = cookieContainer;
-        //    //}
+            string body = BuildBody(paramters, contentType);
+            return RequestData(method.ToString().ToUpper(), newUrl, body, GetContentTypeStr(contentType), headers,
+                cerFile);
+        }
 
-        //    HttpWebResponse response = (HttpWebResponse)(await request.GetResponseAsync());
+        /// <summary>
+        /// 请求数据
+        /// 注：若使用证书,推荐使用X509Certificate2的pkcs12证书
+        /// </summary>
+        /// <param name="method">请求方法</param>
+        /// <param name="url">请求地址</param>
+        /// <param name="body">请求的body内容</param>
+        /// <param name="contentType">请求数据类型</param>
+        /// <param name="headers">请求头</param>
+        /// <param name="cerFile">证书</param>
+        /// <returns></returns>
+        public static string RequestData(string method, string url, string body, string contentType,
+            Dictionary<string, string> headers = null, X509Certificate cerFile = null)
+        {
+            if (string.IsNullOrEmpty(url))
+                throw new System.Exception("请求地址不能为NULL或空！");
 
-        //    //if (cookieContainer != null)
-        //    //{
-        //    //    response.Cookies = cookieContainer.GetCookies(response.ResponseUri);
-        //    //}
+            string newUrl = url;
+#pragma warning disable CS0618
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(newUrl);
+#pragma warning restore CS0618
+            request.Method = method.ToUpper();
+            request.ContentType = contentType;
+            headers?.ForEach(aHeader => { request.Headers.Add(aHeader.Key, aHeader.Value); });
 
-        //    using (Stream responseStream = response.GetResponseStream())
-        //    {
-        //        using (StreamReader myStreamReader = new StreamReader(responseStream, encoding ?? Encoding.GetEncoding("utf-8")))
-        //        {
-        //            string retString = await myStreamReader.ReadToEndAsync();
-        //            return retString;
-        //        }
-        //    }
-        //}
+            //HTTPS证书
+            if (cerFile != null)
+                request.ClientCertificates.Add(cerFile);
 
-        ///// <summary>
-        ///// 使用Post方法获取字符串结果，常规提交
-        ///// </summary>
-        ///// <returns></returns>
-        //public static string HttpPost(string url, Dictionary<string, string> formData = null, Encoding encoding = null, int timeOut = 60000, Dictionary<string, string> headers = null)
-        //{
-        //    MemoryStream ms = new MemoryStream();
-        //    formData.FillFormDataStream(ms);//填充formData
-        //    return HttpPost(url, ms, "application/x-www-form-urlencoded", encoding, headers, timeOut);
-        //}
+            if (method.ToUpper() != "GET")
+            {
+                byte[] data = Encoding.UTF8.GetBytes(body);
+                request.ContentLength = data.Length;
 
-        ///// <summary>
-        ///// 发送HttpPost请求，使用JSON格式传输数据
-        ///// </summary>
-        ///// <param name="url"></param>
-        ///// <param name="postData"></param>
-        ///// <param name="encoding"></param>
-        ///// <returns></returns>
-        //public static string HttpPost(string url, string postData, Encoding encoding = null, Dictionary<string, string> headers = null)
-        //{
-        //    if (encoding == null)
-        //        encoding = Encoding.UTF8;
-        //    if (string.IsNullOrWhiteSpace(postData))
-        //        throw new ArgumentNullException("postData");
-        //    byte[] data = encoding.GetBytes(postData);
-        //    MemoryStream stream = new MemoryStream();
-        //    var formDataBytes = postData == null ? new byte[0] : Encoding.UTF8.GetBytes(postData);
-        //    stream.Write(formDataBytes, 0, formDataBytes.Length);
-        //    stream.Seek(0, SeekOrigin.Begin);//设置指针读取位置
-        //    return HttpPost(url, stream, "application/json", encoding, headers);
-        //}
+                using (Stream requestStream = request.GetRequestStream())
+                {
+                    requestStream.Write(data, 0, data.Length);
+                }
+            }
 
-        ///// <summary>
-        ///// 使用POST请求数据，使用JSON传输数据
-        ///// </summary>
-        ///// <param name="url"></param>
-        ///// <param name="dataObj">传输对象，转换为JSON传输</param>
-        ///// <param name="encoding"></param>
-        ///// <returns></returns>
-        //public static string HttpPost(string url, object dataObj, Encoding encoding = null, Dictionary<string, string> headers = null)
-        //{
-        //    if (encoding == null)
-        //        encoding = Encoding.UTF8;
-        //    if (dataObj == null)
-        //        throw new ArgumentNullException("dataObj");
-        //    string postData = JsonConvert.SerializeObject(dataObj, new JsonSerializerSettings() { DateFormatString = "yyyy-MM-dd HH:mm:ss" });
-        //    byte[] data = encoding.GetBytes(postData);
-        //    MemoryStream stream = new MemoryStream();
-        //    var formDataBytes = postData == null ? new byte[0] : Encoding.UTF8.GetBytes(postData);
-        //    stream.Write(formDataBytes, 0, formDataBytes.Length);
-        //    stream.Seek(0, SeekOrigin.Begin);//设置指针读取位置
-        //    return HttpPost(url, stream, "application/json", encoding, headers);
-        //}
+            using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+            {
+                int httpStatusCode = (int)response.StatusCode;
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                    string resData = reader.ReadToEnd();
 
-        ///// <summary>
-        ///// 使用Post方法获取字符串结果
-        ///// </summary>
-        ///// <param name="url"></param>
-        ///// <param name="postStream"></param>
-        ///// <param name="contentType"></param>
-        ///// <param name="encoding"></param>
-        ///// <param name="timeOut"></param>
-        ///// <returns></returns>
-        //public static string HttpPost(string url, Stream postStream = null, string contentType = "application/x-www-form-urlencoded", Encoding encoding = null, Dictionary<string, string> headers = null, int timeOut = 60000)
-        //{
-        //    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-        //    request.Method = "POST";
-        //    request.Timeout = timeOut;
+                    return resData;
+                }
+            }
+        }
 
-        //    request.ContentLength = postStream != null ? postStream.Length : 0;
-        //    request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
-        //    request.KeepAlive = false;
+        /// <summary>
+        /// 获取所有请求的参数（包括get参数和post参数）
+        /// </summary>
+        /// <param name="context">请求上下文</param>
+        /// <returns></returns>
+        public static Dictionary<string, object> GetAllRequestParams(HttpContext context)
+        {
+            Dictionary<string, object> allParams = new Dictionary<string, object>();
 
-        //    request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.87 Safari/537.36 QQBrowser/9.2.5748.400";
-        //    request.ContentType = contentType;
+            var request = context.Request;
+            List<string> paramKeys = new List<string>();
+            var getParams = request.Query.Keys.ToList();
+            var postParams = new List<string>();
+            try
+            {
+                if (request.Method.ToLower() != "get")
+                    postParams = request.Form.Keys.ToList();
+            }
+            catch
+            {
+                // ignored
+            }
 
-        //    //request.Headers.Add("Access-Control-Allow-Origin","http://517best.com");
-        //    if (headers != null)
-        //    {
-        //        foreach (var header in headers)
-        //        {
-        //            request.Headers.Add(header.Key, header.Value);
-        //        }
-        //    }
+            paramKeys.AddRange(getParams);
+            paramKeys.AddRange(postParams);
 
-        //    #region 输入二进制流
-        //    if (postStream != null)
-        //    {
-        //        postStream.Position = 0;
+            paramKeys.ForEach(aParam =>
+            {
+                object value = null;
+                if (request.Query.ContainsKey(aParam))
+                {
+                    value = request.Query[aParam].ToString();
+                }
+                else if (request.Form.ContainsKey(aParam))
+                {
+                    value = request.Form[aParam].ToString();
+                }
 
-        //        //直接写入流
-        //        Stream requestStream = request.GetRequestStream();
+                if (aParam == "Password")
+                {
+                    allParams.Add("Password", "********");
+                }
+                else
+                {
+                    allParams.Add(aParam, value);
+                }
+            });
 
-        //        byte[] buffer = new byte[1024];
-        //        int bytesRead = 0;
-        //        while ((bytesRead = postStream.Read(buffer, 0, buffer.Length)) != 0)
-        //        {
-        //            requestStream.Write(buffer, 0, bytesRead);
-        //        }
+            string contentType = request.ContentType?.ToLower() ?? "";
 
-        //        postStream.Close();//关闭文件访问
-        //    }
-        //    #endregion
+            //若为POST的application/json
+            if (contentType.Contains("application/json"))
+            {
+                var stream = request.Body;
+                string str = stream.ReadToString(Encoding.UTF8);
 
-        //    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                if (!str.IsNullOrEmpty())
+                {
+                    var obj = str.ToJObject();
+                    foreach (var aProperty in obj)
+                    {
+                        allParams[aProperty.Key] = aProperty.Value;
+                    }
+                }
+            }
 
-        //    using (Stream responseStream = response.GetResponseStream())
-        //    {
-        //        using (StreamReader myStreamReader = new StreamReader(responseStream, encoding ?? Encoding.GetEncoding("utf-8")))
-        //        {
-        //            string retString = myStreamReader.ReadToEnd();
-        //            return retString;
-        //        }
-        //    }
-        //}
+            return allParams;
+        }
 
-        ///// <summary>
-        ///// (异步)使用Post方法获取字符串结果，常规提交
-        ///// </summary>
-        ///// <returns></returns>
-        //public static async Task<string> HttpPostAsync(string url, Dictionary<string, string> formData = null, string contentType = "application/json",  Encoding encoding = null, int timeOut = 60000, Dictionary<string, string> headers = null)
-        //{
-        //    MemoryStream ms = new MemoryStream();
-        //    formData.FillFormDataStream(ms);//填充formData
-        //    return await HttpPostAsync(url, ms, contentType, encoding, headers, timeOut);
-        //}
+        /// <summary>
+        /// 构建完全Url
+        /// </summary>
+        /// <param name="url">Url</param>
+        /// <param name="parameters">参数</param>
+        /// <returns></returns>
+        public static string BuildGetFullUrl(string url, Dictionary<string, object> parameters = null)
+        {
+            StringBuilder paramBuilder = new StringBuilder();
+            var paramList = new List<KeyValuePair<string, object>>();
+            paramList = parameters?.ToList();
+            for (int i = 0; i < paramList.Count; i++)
+            {
+                var theParamter = paramList[i];
+                string key = theParamter.Key;
+                string value = theParamter.Value.ToString();
 
-        ///// <summary>
-        ///// (异步)发送HttpPost请求，使用JSON格式传输数据
-        ///// </summary>
-        ///// <param name="url"></param>
-        ///// <param name="postData"></param>
-        ///// <param name="encoding"></param>
-        ///// <returns></returns>
-        //public static async Task<string> HttpPostAsync(string url, string postData, string contentType = "application/json", Encoding encoding = null, Dictionary<string, string> headers = null)
-        //{
-        //    if (encoding == null)
-        //        encoding = Encoding.UTF8;
-        //    if (string.IsNullOrWhiteSpace(postData))
-        //        throw new ArgumentNullException("postData");
-        //    byte[] data = encoding.GetBytes(postData);
-        //    MemoryStream stream = new MemoryStream();
-        //    var formDataBytes = postData == null ? new byte[0] : Encoding.UTF8.GetBytes(postData);
-        //    await stream.WriteAsync(formDataBytes, 0, formDataBytes.Length);
-        //    stream.Seek(0, SeekOrigin.Begin);//设置指针读取位置
-        //    return await HttpPostAsync(url, stream, contentType, encoding, headers);
-        //}
+                string head = string.Empty;
+                if (i == 0 && !UrlHaveParam(url))
+                    head = "?";
+                else
+                    head = "&";
 
-        ///// <summary>
-        ///// (异步)使用POST请求数据，使用JSON传输数据
-        ///// </summary>
-        ///// <param name="url"></param>
-        ///// <param name="dataObj">传输对象，转换为JSON传输</param>
-        ///// <param name="encoding"></param>
-        ///// <returns></returns>
-        //public static async Task<string> HttpPostAsync(string url, object dataObj, string contentType = "application/json", Encoding encoding = null, Dictionary<string, string> headers = null)
-        //{
-        //    if (encoding == null)
-        //        encoding = Encoding.UTF8;
-        //    if (dataObj == null)
-        //        throw new ArgumentNullException("dataObj");
-        //    string postData = JsonConvert.SerializeObject(dataObj, new JsonSerializerSettings() { DateFormatString = "yyyy-MM-dd HH:mm:ss" });
-        //    byte[] data = encoding.GetBytes(postData);
-        //    MemoryStream stream = new MemoryStream();
-        //    var formDataBytes = postData == null ? new byte[0] : Encoding.UTF8.GetBytes(postData);
-        //    await stream.WriteAsync(formDataBytes, 0, formDataBytes.Length);
-        //    stream.Seek(0, SeekOrigin.Begin);//设置指针读取位置
-        //    return await HttpPostAsync(url, stream, contentType, encoding, headers);
-        //}
+                paramBuilder.Append($@"{head}{key}={value}");
+            }
 
+            return url + paramBuilder;
+        }
 
+        /// <summary>
+        /// 从URL获取html文档
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static string GetHtml(string url)
+        {
+            string htmlCode;
+            for (int i = 0; i < 3; i++)
+            {
+                try
+                {
+#pragma warning disable CS0618
+                    var webRequest = (HttpWebRequest)WebRequest.Create(url);
+#pragma warning restore CS0618
+                    webRequest.Timeout = 10000;
+                    webRequest.Method = "GET";
+                    webRequest.UserAgent = "Mozilla/4.0";
+                    webRequest.Headers.Add("Accept-Encoding", "gzip, deflate");
 
-        ///// <summary>
-        ///// (异步)使用Post方法获取字符串结果
-        ///// </summary>
-        ///// <param name="url"></param>
-        ///// <param name="postStream"></param>
-        ///// <param name="contentType"></param>
-        ///// <param name="encoding"></param>
-        ///// <param name="timeOut"></param>
-        ///// <returns></returns>
-        //public static async Task<string>  HttpPostAsync(string url, Stream postStream = null, string contentType = "application/x-www-form-urlencoded", Encoding encoding = null, Dictionary<string, string> headers = null, int timeOut = 60000)
-        //{
-        //    HttpWebRequest request = (HttpWebRequest)WebRequest.CreateHttp(url);
-        //    request.Method = "POST";
-        //    request.Timeout = timeOut;
+                    HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
+                    //获取目标网站的编码格式
+                    string contentype = webResponse.Headers["Content-Type"];
+                    Regex regex = new Regex("charset\\s*=\\s*[\\W]?\\s*([\\w-]+)", RegexOptions.IgnoreCase);
+                    //如果使用了GZip则先解压
+                    if (webResponse.ContentEncoding.ToLower() == "gzip")
+                    {
+                        Stream streamReceive = webResponse.GetResponseStream();
+                        MemoryStream ms = new MemoryStream();
+                        streamReceive.CopyTo(ms);
+                        ms.Seek(0, SeekOrigin.Begin);
+                        var zipStream = new GZipStream(ms, CompressionMode.Decompress);
+                        //匹配编码格式
+                        if (regex.IsMatch(contentype))
+                        {
+                            Encoding ending = Encoding.GetEncoding(regex.Match(contentype).Groups[1].Value.Trim());
+                            using (StreamReader sr = new StreamReader(zipStream, ending))
+                            {
+                                htmlCode = sr.ReadToEnd();
+                            }
+                        }
+                        else //匹配不到则自动转换成utf-8
+                        {
+                            StreamReader sr = new StreamReader(zipStream, Encoding.GetEncoding("utf-8"));
 
-        //    request.ContentLength = postStream != null ? postStream.Length : 0;
-        //    request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
-        //    request.KeepAlive = false;
+                            htmlCode = sr.ReadToEnd();
+                            string subStr = htmlCode.Substring(0, 2000);
+                            string pattern = "charset=(.*?)\"";
+                            Encoding encoding;
+                            foreach (Match match in Regex.Matches(subStr, pattern))
+                            {
+                                if (match.Groups[1].ToString().ToLower() == "utf-8")
+                                    break;
+                                encoding = Encoding.GetEncoding(match.Groups[1].ToString().ToLower());
+                                ms.Seek(0, SeekOrigin.Begin); //设置流的初始位置
+                                var zipStream2 = new GZipStream(ms, CompressionMode.Decompress);
+                                StreamReader sr2 = new StreamReader(zipStream2, encoding);
+                                htmlCode = sr2.ReadToEnd();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        using (Stream streamReceive = webResponse.GetResponseStream())
+                        {
+                            using (StreamReader sr = new StreamReader(streamReceive, Encoding.Default))
+                            {
+                                htmlCode = sr.ReadToEnd();
+                            }
+                        }
+                    }
 
-        //    request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.87 Safari/537.36 QQBrowser/9.2.5748.400";
-        //    request.ContentType = contentType;
+                    return htmlCode;
+                }
+                catch (System.Exception e)
+                {
+                    Console.WriteLine(e);
+                    Console.WriteLine("重试中....................");
+                }
+            }
 
-        //    //request.Headers.Add("Access-Control-Allow-Origin","http://517best.com");
-        //    if (headers != null)
-        //    {
-        //        foreach (var header in headers)
-        //        {
-        //            request.Headers.Add(header.Key, header.Value);
-        //        }
-        //    }
+            return "";
+        }
 
-        //    #region 输入二进制流
-        //    if (postStream != null)
-        //    {
-        //        postStream.Position = 0;
+        /// <summary>
+        /// 发起安全签名请求
+        /// 注：使用本框架签名算法,ContentType为application/json
+        /// </summary>
+        /// <param name="url">地址</param>
+        /// <param name="body">请求body</param>
+        /// <param name="appId">应用Id</param>
+        /// <param name="appSecret">应用密钥</param>
+        /// <returns></returns>
+        public static string SafeSignRequest(string url, string body, string appId, string appSecret)
+        {
+            string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string guid = Guid.NewGuid().ToString();
+            Dictionary<string, string> headers = new Dictionary<string, string>
+        {
+            { "appId", appId },
+            { "time", time },
+            { "guid", guid },
+            { "sign", BuildApiSign(appId, appSecret, guid, time.ToDateTime(), body) }
+        };
 
-        //        //直接写入流
-        //        Stream requestStream =await request.GetRequestStreamAsync();
+            return RequestData("post", url, body, "application/json", headers);
+        }
 
-        //        byte[] buffer = new byte[1024];
-        //        int bytesRead = 0;
-        //        while ((bytesRead =await postStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
-        //        {
-        //            requestStream.Write(buffer, 0, bytesRead);
-        //        }
+        /// <summary>
+        /// 生成接口签名sign
+        /// 注：md5(appId+time+guid+body+appSecret)
+        /// </summary>
+        /// <param name="appId">应用Id</param>
+        /// <param name="appSecret">应用密钥</param>
+        /// <param name="guid">唯一GUID</param>
+        /// <param name="time">时间</param>
+        /// <param name="body">请求体</param>
+        /// <returns></returns>
+        public static string BuildApiSign(string appId, string appSecret, string guid, DateTime? time, string body)
+        {
+            return $"{appId}{time.ToString("yyyy-MM-dd HH:mm:ss")}{guid}{body}{appSecret}".ToMD5String();
+        }
 
-        //        postStream.Close();//关闭文件访问
-        //    }
-        //    #endregion
+        #endregion
 
-        //    HttpWebResponse response = (HttpWebResponse)(await request.GetResponseAsync());
+        #region 内部成员
 
-        //    using (Stream responseStream = response.GetResponseStream())
-        //    {
-        //        using (StreamReader myStreamReader = new StreamReader(responseStream, encoding ?? Encoding.GetEncoding("utf-8")))
-        //        {
-        //            string retString = await myStreamReader.ReadToEndAsync();
-        //            return retString;
-        //        }
-        //    }
-        //}
+        private static string BuildBody(Dictionary<string, object> parameters, ContentType contentType)
+        {
+            StringBuilder bodyBuilder = new StringBuilder();
+            switch (contentType)
+            {
+                case ContentType.Form:
+                    {
+                        var paramList = parameters?.ToList() ?? new List<KeyValuePair<string, object>>();
+                        for (int i = 0; i < paramList.Count; i++)
+                        {
+                            var theParamter = paramList[i];
+                            string key = theParamter.Key;
+                            string value = theParamter.Value?.ToString();
 
-        //public static string HttpPostFile(UploadParameterType parameter)
-        //{
-        //    using (MemoryStream memoryStream = new MemoryStream())
-        //    {
+                            string head = string.Empty;
+                            if (i != 0)
+                                head = "&";
 
-        //        // 1.分界线
-        //        string boundary = string.Format("----{0}", DateTime.Now.Ticks.ToString("x")),       // 分界线可以自定义参数
-        //            beginBoundary = string.Format("--{0}\r\n", boundary),
-        //            endBoundary = string.Format("\r\n--{0}--\r\n", boundary);
-        //        byte[] beginBoundaryBytes = parameter.Encoding.GetBytes(beginBoundary),
-        //            endBoundaryBytes = parameter.Encoding.GetBytes(endBoundary);
-        //        // 2.组装开始分界线数据体 到内存流中
-        //        memoryStream.Write(beginBoundaryBytes, 0, beginBoundaryBytes.Length);
-        //        // 3.组装 上传文件附加携带的参数 到内存流中
-        //        if (parameter.PostParameters != null && parameter.PostParameters.Count > 0)
-        //        {
-        //            foreach (KeyValuePair<string, string> keyValuePair in parameter.PostParameters)
-        //            {
-        //                string parameterHeaderTemplate = string.Format("Content-Disposition: form-data; name=\"{0}\"\r\n\r\n{1}\r\n{2}", keyValuePair.Key, keyValuePair.Value, beginBoundary);
-        //                byte[] parameterHeaderBytes = parameter.Encoding.GetBytes(parameterHeaderTemplate);
+                            bodyBuilder.Append($@"{head}{key}={value}");
+                        }
+                    }
+                    ;
+                    break;
+                case ContentType.Json:
+                    {
+                        bodyBuilder.Append(JsonConvert.SerializeObject(parameters));
+                    }
+                    ;
+                    break;
+            }
 
-        //                memoryStream.Write(parameterHeaderBytes, 0, parameterHeaderBytes.Length);
-        //            }
-        //        }
+            return bodyBuilder.ToString();
+        }
 
-        //        // 4.组装文件头数据体 到内存流中
-        //        string fileHeaderTemplate = string.Format("Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: application/octet-stream\r\n\r\n", parameter.FileNameKey, parameter.FileNameValue);
-        //        byte[] fileHeaderBytes = parameter.Encoding.GetBytes(fileHeaderTemplate);
-        //        memoryStream.Write(fileHeaderBytes, 0, fileHeaderBytes.Length);
-        //        // 5.组装文件流 到内存流中
-        //        byte[] buffer = new byte[1024 * 1024 * 1];
-        //        int size = parameter.UploadStream.Read(buffer, 0, buffer.Length);
-        //        while (size > 0)
-        //        {
-        //            memoryStream.Write(buffer, 0, size);
-        //            size = parameter.UploadStream.Read(buffer, 0, buffer.Length);
-        //        }
+        private static bool UrlHaveParam(string url)
+        {
+            return url.Contains("?");
+        }
 
+        private static string GetContentTypeStr(ContentType contentType)
+        {
+            string contentTypeStr = string.Empty;
+            switch (contentType)
+            {
+                case ContentType.Form:
+                    contentTypeStr = "application/x-www-form-urlencoded";
+                    break;
+                case ContentType.Json:
+                    contentTypeStr = "application/json";
+                    break;
+            }
 
+            return contentTypeStr;
+        }
 
-        //        // 6.组装结束分界线数据体 到内存流中
-        //        memoryStream.Write(endBoundaryBytes, 0, endBoundaryBytes.Length);
-        //        // 7.获取二进制数据
-        //        byte[] postBytes = memoryStream.ToArray();
-        //        memoryStream.Close();
-        //        GC.Collect();
-        //        // 8.HttpWebRequest 组装
-        //        HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(new Uri(parameter.Url, UriKind.RelativeOrAbsolute));
-        //        webRequest.AllowWriteStreamBuffering = false;
-        //        webRequest.Method = "POST";
-        //        webRequest.Timeout = 1800000;
-        //        webRequest.ContentType = string.Format("multipart/form-data; boundary={0}", boundary);
-        //        webRequest.ContentLength = postBytes.Length;
-
-        //        // 9.写入上传请求数据
-        //        using (Stream requestStream = webRequest.GetRequestStream())
-        //        {
-        //            requestStream.Write(postBytes, 0, postBytes.Length);
-        //            requestStream.Close();
-        //        }
-        //        // 10.获取响应
-        //        using (HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse())
-        //        {
-        //            using (StreamReader reader = new StreamReader(webResponse.GetResponseStream(), parameter.Encoding))
-        //            {
-        //                string body = reader.ReadToEnd();
-        //                reader.Close();
-        //                return body;
-        //            }
-        //        }
-        //    }
-        //}
-
-        //#endregion
-
-        //public static void FillFormDataStream(this Dictionary<string, string> formData, Stream stream)
-        //{
-        //    string dataString = GetQueryString(formData);
-        //    var formDataBytes = formData == null ? new byte[0] : Encoding.UTF8.GetBytes(dataString);
-        //    stream.Write(formDataBytes, 0, formDataBytes.Length);
-        //    stream.Seek(0, SeekOrigin.Begin);//设置指针读取位置
-        //}
-
-        ///// <summary>
-        ///// 组装QueryString的方法
-        ///// 参数之间用&amp;连接，首位没有符号，如：a=1&amp;b=2&amp;c=3
-        ///// </summary>
-        ///// <param name="formData"></param>
-        ///// <returns></returns>
-        //public static string GetQueryString(this Dictionary<string, string> formData)
-        //{
-        //    if (formData == null || formData.Count == 0)
-        //    {
-        //        return "";
-        //    }
-        //    StringBuilder sb = new StringBuilder();
-        //    var i = 0;
-        //    foreach (var kv in formData)
-        //    {
-        //        i++;
-        //        sb.AppendFormat("{0}={1}", kv.Key, kv.Value);
-        //        if (i < formData.Count)
-        //        {
-        //            sb.Append("&");
-        //        }
-        //    }
-        //    return sb.ToString();
-        //}
-
-
-
-        /////// <summary>
-        /////// 判断是否为AJAX请求
-        /////// </summary>
-        /////// <param name="req"></param>
-        /////// <returns></returns>
-        ////public static bool IsAjaxRequest(this HttpRequest req)
-        ////{
-        ////    bool result = false;
-
-        ////    var xreq = req.Headers.ContainsKey("x-requested-with");
-        ////    if (xreq)
-        ////    {
-        ////        result = req.Headers["x-requested-with"] == "XMLHttpRequest";
-        ////    }
-
-        ////    return result;
-        ////}
-
-        ///// <summary>
-        ///// 获取去掉查询参数的Url
-        ///// </summary>
-        ///// <param name="req">请求</param>
-        ///// <returns></returns>
-        //public static string GetDisplayUrlNoQuery(this HttpRequest req)
-        //{
-        //    var queryStr = req.QueryString.ToString();
-        //    var displayUrl = req.GetDisplayUrl();
-
-        //    return queryStr.IsNullOrEmpty() ? displayUrl : displayUrl.Replace(queryStr, "");
-        //}
-
-        ///// <summary>
-        ///// 获取Token
-        ///// </summary>
-        ///// <param name="req">请求</param>
-        ///// <returns></returns>
-        //public static string GetToken(this HttpRequest req)
-        //{
-        //    string tokenHeader = req.Headers["Authorization"].ToString();
-        //    if (tokenHeader.IsNullOrEmpty())
-        //        return null;
-
-        //    string pattern = "^Bearer (.*?)$";
-        //    if (!Regex.IsMatch(tokenHeader, pattern))
-        //        throw new Exception("token格式不对!格式为:Bearer {token}");
-
-        //    string token = Regex.Match(tokenHeader, pattern).Groups[1]?.ToString();
-        //    if (token.IsNullOrEmpty())
-        //        throw new Exception("token不能为空!");
-
-        //    return token;
-        //}
-
-        ///// <summary>
-        ///// 获取Token中的Payload
-        ///// </summary>
-        ///// <param name="req">请求</param>
-        ///// <returns></returns>
-        //public static JWTPayload GetJWTPayload(this HttpRequest req)
-        //{
-        //    string token = req.GetToken();
-        //    var payload = JWTHelper.GetPayload<JWTPayload>(token);
-
-        //    return payload;
-        //}
-        ///// <summary>
-        ///// 上传文件 - 请求参数类
-        ///// </summary>
-        //public class UploadParameterType
-        //{
-        //    public UploadParameterType()
-        //    {
-        //        FileNameKey = "fileName";
-        //        Encoding = Encoding.UTF8;
-        //        PostParameters = new Dictionary<string, string>();
-        //    }
-        //    /// <summary>
-        //    /// 上传地址
-        //    /// </summary>
-        //    public string Url { get; set; }
-        //    /// <summary>
-        //    /// 文件名称key
-        //    /// </summary>
-        //    public string FileNameKey { get; set; }
-        //    /// <summary>
-        //    /// 文件名称value
-        //    /// </summary>
-        //    public string FileNameValue { get; set; }
-        //    /// <summary>
-        //    /// 编码格式
-        //    /// </summary>
-        //    public Encoding Encoding { get; set; }
-        //    /// <summary>
-        //    /// 上传文件的流
-        //    /// </summary>
-        //    public Stream UploadStream { get; set; }
-        //    /// <summary>
-        //    /// 上传文件 携带的参数集合
-        //    /// </summary>
-        //    public IDictionary<string, string> PostParameters { get; set; }
-        //}
+        #endregion
     }
+
+    #region 类型定义
+
+    /// <summary>
+    /// Http请求方法定义
+    /// </summary>
+    public enum HttpMethod
+    {
+        Get,
+        Post,
+        Put,
+        Delete,
+        Head,
+        Options,
+        Trace,
+        Connect
+    }
+
+    public enum ContentType
+    {
+        /// <summary>
+        /// 传统Form表单,即application/x-www-form-urlencoded
+        /// </summary>
+        Form,
+
+        /// <summary>
+        /// 使用Json,即application/json
+        /// </summary>
+        Json
+    }
+
+    #endregion
 }

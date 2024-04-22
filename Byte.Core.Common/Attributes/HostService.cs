@@ -67,7 +67,7 @@ namespace Byte.Core.Common.Attributes
         /// <summary>
         /// 释放托管资源，释放时触发
         /// </summary>
-        public async void Dispose()
+        public  void Dispose()
         {
             //Common.WriteEmailLog("定时任务被释放闭", "...Dispose...");
 
@@ -77,7 +77,7 @@ namespace Byte.Core.Common.Attributes
             //_timer?.Dispose();
             //iis会回收这个定时任务，这边在回收的时候触发一个请求，来再次唤醒该服务
             Thread.Sleep(5000);
-           await HttpHelper.GetAsync("http://localhost:4050/API/Quartz/");
+            HttpHelper.GetData("http://localhost:4050/API/Quartz/");
         }
     }
 }

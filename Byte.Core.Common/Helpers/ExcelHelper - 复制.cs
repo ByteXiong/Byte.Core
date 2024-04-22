@@ -5,6 +5,8 @@ using NPOI.HSSF.Util;
 using NPOI.SS.UserModel;
 using NPOI.SS.Util;
 using NPOI.XSSF.UserModel;
+using Org.BouncyCastle.Bcpg.Sig;
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.IO.Compression;
 using System.Reflection;
@@ -12,7 +14,7 @@ using System.Text.RegularExpressions;
 
 namespace Byte.Core.Common.Helpers
 {
-    public class ExcelHelper
+    public class ExcelHelper假
     {
         public int ExportMaxCount { get; set; }
         public int ExportExcelCount { get; set; }
@@ -138,10 +140,10 @@ namespace Byte.Core.Common.Helpers
             //创建表头样式
             ICellStyle headerStyle = book.CreateCellStyle();
             headerStyle.FillBackgroundColor =
-                ExportTitleBackColor == null ? HSSFColor.BlueGrey.Index : ExportTitleBackColor.Value;
+                ExportTitleBackColor == null ? HSSFColor.LightBlue.Index : ExportTitleBackColor.Value;
             headerStyle.FillPattern = FillPattern.SolidForeground;
             headerStyle.FillForegroundColor =
-                ExportTitleBackColor == null ? HSSFColor.BlueGrey.Index : ExportTitleBackColor.Value;
+                ExportTitleBackColor == null ? HSSFColor.LightBlue.Index : ExportTitleBackColor.Value;
             headerStyle.BorderBottom = BorderStyle.Thin;
             headerStyle.BorderTop = BorderStyle.Thin;
             headerStyle.BorderLeft = BorderStyle.Thin;
@@ -161,14 +163,161 @@ namespace Byte.Core.Common.Helpers
             //生成表头
             var props = exportBases[0].GetType().GetProperties(BindingFlags.Instance | BindingFlags.NonPublic |
                                                                BindingFlags.Public);
-            MakeExcelHeader(sheet, props, 0, 0, headerStyle);
+            MakeExcelHeader(sheet, props, 0, 0, headerStyle, exportBases[0]);
+            
+            
 
+            MakeExcelValue(sheet, props, 1, 0 , cellStyle,exportBases);
+            ////放入数据
+            //for (var i = 0; i < exportBases.Count; i++)
+            //{
+            //    var colIndex = 0;
+            //    var row = sheet.CreateRow(i + 1);
+            //    foreach (var pi in props)
+            //    {
+            //        if (pi.Name.ToUpper().Equals("ID"))
+            //        {
+            //            continue;
+            //        }
+
+            //        var propertyValue = exportBases[i].GetPropertyValue(pi.Name);
+            //        var text = Regex.Replace(
+            //            propertyValue == null ? string.Empty : propertyValue.ToString() ?? string.Empty,
+            //            @"<[^>]*>", string.Empty);
+
+            //        var piType = pi.PropertyType;
+            //        if (piType.IsEnum())
+            //        {
+            //            if (int.TryParse(text, out var enumValue))
+            //            {
+            //                var eName = piType.GetEnumName(enumValue);
+            //                if (string.IsNullOrEmpty(eName))
+            //                {
+            //                    text = "";
+            //                }
+            //                else
+            //                {
+            //                    var field = piType.GetField(eName);
+            //                    if (field != null)
+            //                    {
+            //                        var display = field
+            //                            .GetCustomAttributes(typeof(DisplayAttribute), true)
+            //                            .OfType<DisplayAttribute>()
+            //                            .FirstOrDefault();
+            //                        text = display == null ? field.Name : display.Name;
+            //                        //}
+            //                    }
+            //                }
+            //            }
+            //        }
+            //        else if (piType.IsBool())
+            //        {
+            //            text = propertyValue.ToString().ToLower() == "true" ? "是" : "否";
+
+            //        }
+
+
+            //        //建立excel单元格
+            //        ICell cell;
+            //        if (piType.IsNumber())
+            //        {
+            //            cell = row.CreateCell(colIndex, CellType.Numeric);
+            //            try
+            //            {
+            //                cell.SetCellValue(Convert.ToDouble(text));
+            //            }
+            //            catch
+            //            {
+            //                // ignored
+            //            }
+            //        }
+            //        else
+            //        {
+            //            cell = row.CreateCell(colIndex);
+            //            cell.SetCellValue(text);
+            //        }
+
+            //        cell.CellStyle = cellStyle;
+            //        colIndex++;
+            //    }
+            //}
+
+            return book;
+        }
+
+        private void MakeExcelHeader(ISheet sheet, PropertyInfo[] propertyInfos, int rowIndex, int colIndex,
+            ICellStyle style , ExportBase exportBase)
+        {
+            var row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
+             
+
+            //循环所有属性
+            foreach (var p in propertyInfos)
+            {
+                if (p.PropertyType.IsList())
+                {
+                    var list = p.GetValue(exportBase) as IList;
+                    var pr = list[0].GetType().GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                    MakeExcelHeader(sheet, pr, rowIndex, colIndex, style, exportBase);
+                    continue;
+                }
+
+                if (p.Name.ToUpper().Equals("ID"))
+                {
+                    continue;
+                }
+             
+
+                //添加新单元格
+                var cell = row.CreateCell(colIndex);
+                cell.CellStyle = style;
+
+
+                var display = p
+                    .GetCustomAttributes(typeof(DisplayAttribute), true)
+                    .OfType<DisplayAttribute>()
+                    .FirstOrDefault();
+                cell.SetCellValue(display == null ? p.Name : display.Name);
+
+                var cellRangeAddress = new CellRangeAddress(rowIndex, rowIndex, colIndex, colIndex);
+                //sheet.AddMergedRegion(cellRangeAddress);
+                // 居中
+                //cell.CellStyle.Alignment = HorizontalAlignment.Center;
+                //cell.CellStyle.VerticalAlignment = VerticalAlignment.Center;
+
+                for (int i = cellRangeAddress.FirstRow; i <= cellRangeAddress.LastRow; i++)
+                {
+                    IRow r = CellUtil.GetRow(i, sheet);
+                    for (int j = cellRangeAddress.FirstColumn; j <= cellRangeAddress.LastColumn; j++)
+                    {
+                        ICell c = CellUtil.GetCell(r, (short)j);
+                        c.CellStyle = style;
+                    }
+                }
+
+                colIndex++;
+            }
+        }
+        private void MakeExcelValue<T>(ISheet sheet, PropertyInfo[] propertyInfos, int rowIndex, int colIndex,  ICellStyle cellStyle, T exportBases) where T : class,IList
+        {
             //放入数据
             for (var i = 0; i < exportBases.Count; i++)
             {
-                var colIndex = 0;
-                var row = sheet.CreateRow(i + 1);
-                foreach (var pi in props)
+                int count = 1;
+
+                //判断主体是否存在list
+                var lists = propertyInfos.Where(x => x.PropertyType.IsList()).ToList();
+                lists.ForEach(propertyInfo =>
+                {
+                 var c=    (propertyInfo.GetValue(exportBases[i]) as IList).Count;
+                    if (c > count) count = c;
+
+                });
+
+
+       
+             
+                foreach (var pi in propertyInfos)
                 {
                     if (pi.Name.ToUpper().Equals("ID"))
                     {
@@ -210,7 +359,16 @@ namespace Byte.Core.Common.Helpers
                         text = propertyValue.ToString().ToLower() == "true" ? "是" : "否";
 
                     }
+                    else if (piType.IsList()) {
 
+                     
+                        var list = pi.GetValue(exportBases[i])  as IList;
+                        var pr = list[0].GetType().GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                        MakeExcelValue<IList>(sheet, pr, rowIndex , colIndex ,cellStyle , list);
+                         
+                        continue;
+                    }
+                    var row = sheet.CreateRow(rowIndex);
                     //建立excel单元格
                     ICell cell;
                     if (piType.IsNumber())
@@ -234,52 +392,7 @@ namespace Byte.Core.Common.Helpers
                     cell.CellStyle = cellStyle;
                     colIndex++;
                 }
-            }
-
-            return book;
-        }
-
-        private void MakeExcelHeader(ISheet sheet, PropertyInfo[] propertyInfos, int rowIndex, int colIndex,
-            ICellStyle style)
-        {
-            var row = sheet.GetRow(rowIndex) ?? sheet.CreateRow(rowIndex);
-
-            //循环所有属性
-            foreach (var p in propertyInfos)
-            {
-                if (p.Name.ToUpper().Equals("ID"))
-                {
-                    continue;
-                }
-
-                //添加新单元格
-                var cell = row.CreateCell(colIndex);
-                cell.CellStyle = style;
-
-
-                var display = p
-                    .GetCustomAttributes(typeof(DisplayAttribute), true)
-                    .OfType<DisplayAttribute>()
-                    .FirstOrDefault();
-                cell.SetCellValue(display == null ? p.Name : display.Name);
-
-                var cellRangeAddress = new CellRangeAddress(rowIndex, rowIndex, colIndex, colIndex);
-                //sheet.AddMergedRegion(cellRangeAddress);
-                // 居中
-                //cell.CellStyle.Alignment = HorizontalAlignment.Center;
-                //cell.CellStyle.VerticalAlignment = VerticalAlignment.Center;
-
-                for (int i = cellRangeAddress.FirstRow; i <= cellRangeAddress.LastRow; i++)
-                {
-                    IRow r = CellUtil.GetRow(i, sheet);
-                    for (int j = cellRangeAddress.FirstColumn; j <= cellRangeAddress.LastColumn; j++)
-                    {
-                        ICell c = CellUtil.GetCell(r, (short)j);
-                        c.CellStyle = style;
-                    }
-                }
-
-                colIndex++;
+                rowIndex ++;
             }
         }
     }
