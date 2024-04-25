@@ -268,6 +268,9 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     }
 
     #endregion
+
+    #region 事务
+    #endregion
     //#region 新增操作
 
     ///// <summary>
