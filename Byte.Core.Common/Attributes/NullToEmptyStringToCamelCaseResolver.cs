@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Byte.Core.Common.Extensions;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Reflection;
 
@@ -84,7 +85,7 @@ namespace Byte.Core.Common.Attributes
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer)
         {
-            if ((reader.ValueType == null || reader.ValueType == typeof(long?)) && reader.Value == null)
+            if ((reader.ValueType == null || reader.ValueType == typeof(long?) || reader.ValueType == typeof(string)) && (reader.Value == null  || reader.Value.ToString() == ""))
             {
                 return null;
             }

@@ -17,11 +17,8 @@
 		<PackageOutputPath>E:\MyCode\nuget</PackageOutputPath>
 	</PropertyGroup>
   <ItemGroup>
-    <Compile Remove="AutoMapper\**" />
     <Compile Remove="Services\**" />
-    <EmbeddedResource Remove="AutoMapper\**" />
     <EmbeddedResource Remove="Services\**" />
-    <None Remove="AutoMapper\**" />
     <None Remove="Services\**" />
   </ItemGroup>
 
@@ -38,8 +35,6 @@
 		<PackageReference Include="AspectCore.Extensions.Hosting" Version="2.2.0" />
 		<PackageReference Include="AspectCore.Extensions.LightInject" Version="2.4.0" />
 		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
-		<PackageReference Include="AutoMapper" Version="11.0.1" />
-		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 		<PackageReference Include="DotNetCore.NPOI" Version="1.2.0" />
 		<PackageReference Include="CSRedisCore" Version="3.8.802" />
 		<PackageReference Include="DotNetCore.NPOI" Version="1.2.3" />

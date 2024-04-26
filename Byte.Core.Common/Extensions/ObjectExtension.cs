@@ -1,5 +1,4 @@
 ﻿using AspectCore.Extensions.Reflection;
-using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -9,7 +8,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -1641,9 +1639,10 @@ namespace Byte.Core.Common.Extensions
 /// <returns></returns>
         public static T Map<T, TT>(this TT obj) where T : class
         {
-        var config = new MapperConfiguration(cfg => cfg.CreateMap<TT, T>());
-        var mapper = config.CreateMapper();
-         return   mapper.Map<T>(obj);
+            throw new NotImplementedException();
+        //var config = new MapperConfiguration(cfg => cfg.CreateMap<TT, T>());
+        //var mapper = config.CreateMapper();
+        // return   mapper.Map<T>(obj);
         }
 
 

@@ -1,5 +1,6 @@
-﻿using AutoMapper;
+﻿
 using System.Reflection;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace Byte.Core.Common.Extensions
 {
@@ -15,8 +16,9 @@ namespace Byte.Core.Common.Extensions
         /// <summary>
         /// 配置提供器
         /// </summary>
-        private static IConfigurationProvider _config;
+        //private static IConfigurationProvider _config;
 
+        //private static IMapper _mapper;
         /// <summary>
         /// 将源对象映射到目标对象
         /// </summary>
@@ -82,24 +84,28 @@ namespace Byte.Core.Common.Extensions
         /// </summary>
         private static bool Exists(Type sourceType, Type destinationType)
         {
-            throw new NotImplementedException("有问题");
-            return true;
-            //_config?.FindTypeMapFor(sourceType, destinationType) != null;
-            //return _config?.FindTypeMapFor(sourceType, destinationType) != null;
+            //if (_config == null)
+            //{
+            //    return false; // 如果 _config 为空，则返回 false，表示映射配置不存在
+            //}
+
+            return true; // 如果没有找到匹配的映射配置，则返回 false
         }
 
         /// <summary>
         /// 初始化映射配置
         /// </summary>
         private static void Init(Type sourceType, Type destinationType)
-        {
-            if (_config == null)
-            {
-                _config = new MapperConfiguration(t => t.CreateMap(sourceType, destinationType));
-                return;
-            }
-            throw new NotImplementedException("异常,没有");
-            //var maps = _config.GetAllTypeMaps();
+        { 
+           
+             
+            //if (_config == null)
+            //{
+            //    _config = new MapperConfiguration(t => t.CreateMap(sourceType, destinationType));
+            //    return;
+            //}
+            //_mapper = _config.CreateMapper();
+            ////throw new NotImplementedException("异常,没有");
             //_config = new MapperConfiguration(t => t.CreateMap(sourceType, destinationType));
             //foreach (var map in maps)
             //    _config.RegisterTypeMap(map);
@@ -110,7 +116,8 @@ namespace Byte.Core.Common.Extensions
         /// </summary>
         private static TDestination GetResult<TDestination>(object source, TDestination destination)
         {
-            return new Mapper(_config).Map(source, destination);
+            throw new NotImplementedException("异常,没有");
+            //return new Mapper(_config).Map(source, destination);
         }
 
         /// <summary>
