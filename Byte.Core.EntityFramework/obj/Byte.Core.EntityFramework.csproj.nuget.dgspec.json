@@ -22,7 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "\\\\YANGFANGRONG\\Nuget": {},
+          "E:\\MyCode\\nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -66,29 +66,13 @@
               "target": "Package",
               "version": "[2.4.0, )"
             },
-            "AutoMapper": {
-              "target": "Package",
-              "version": "[11.0.1, )"
-            },
-            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[11.0.0, )"
-            },
             "Autofac.Extensions.DependencyInjection": {
               "target": "Package",
               "version": "[8.0.0, )"
             },
             "CSRedisCore": {
               "target": "Package",
-              "version": "[3.8.3, )"
-            },
-            "Caching.CSRedis": {
-              "target": "Package",
-              "version": "[3.8.3, )"
-            },
-            "DotNetCore.NPOI": {
-              "target": "Package",
-              "version": "[1.2.0, )"
+              "version": "[3.8.802, )"
             },
             "Exceptionless": {
               "target": "Package",
@@ -118,9 +102,9 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
-            "NPOI": {
+            "Npoi.Mapper": {
               "target": "Package",
-              "version": "[2.5.6, )"
+              "version": "[6.2.1, )"
             },
             "Quartz": {
               "target": "Package",
@@ -193,7 +177,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "\\\\YANGFANGRONG\\Nuget": {},
+          "E:\\MyCode\\nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
