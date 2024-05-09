@@ -31,11 +31,5 @@ namespace Byte.Core.SqlSugar.Base
         /// </summary>
         [SugarColumn(IsNullable = true)]
         public DateTime? UpdateTime { get; set; }
-
-        /// <summary>
-        /// 评星
-        /// </summary>
-        [SugarColumn(IsNullable = true)]
-        public int Level { get; set; }
     }
 }
