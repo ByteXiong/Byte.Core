@@ -26,7 +26,7 @@ namespace Byte.Core.Common.Attributes
         /// <returns></returns>
         protected override JsonConverter ResolveContractConverter(Type objectType)
         {
-            if (objectType == typeof(long))
+            if (objectType == typeof(long)|| objectType == typeof(long?))
             {
                 return new JsonConverterLong();
             }
