@@ -6,7 +6,7 @@ namespace Byte.Core.SqlSugar.Base
     /// <summary>
     /// 实体基类
     /// </summary>
-    public class BaseEntity : RootKey<long>
+    public class BaseEntity : RootKey<Guid>
     {
         /// <summary>
         /// 创建者名称
