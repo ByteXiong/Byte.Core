@@ -48,13 +48,13 @@
         //}
 
         ///// <summary>
-        ///// 判断是否为超级管理员
+        ///// 判断是否为系统
         ///// </summary>
         ///// <returns></returns>
         //public bool IsAdmin()
         //{
         //    var role = Property.RoleType;
-        //    if (UserId == GlobalData.ADMINID || role.HasFlag(RoleTypes.超级管理员))
+        //    if (UserId == GlobalData.ADMINID || role.HasFlag(RoleTypes.系统))
         //        return true;
         //    else
         //        return false;

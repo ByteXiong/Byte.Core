@@ -15,7 +15,7 @@
         //#region 操作方法
 
         ///// <summary>
-        ///// 判断是否为超级管理员
+        ///// 判断是否为系统
         ///// </summary>
         ///// <returns></returns>
         //bool IsAdmin();
