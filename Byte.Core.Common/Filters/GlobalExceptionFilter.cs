@@ -2,6 +2,7 @@
 using Byte.Core.Common.Attributes;
 using Byte.Core.Common.Helpers;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Data.SqlTypes;
 
 namespace Byte.Core.Common.Filters
 {
@@ -22,7 +23,7 @@ namespace Byte.Core.Common.Filters
             if (ex is BusException busEx)
             {
 
-                Log4NetHelper.WriteError(typeof(GlobalExceptionFilter), busEx.Message);
+                Log4NetHelper.WriteWarn(typeof(GlobalExceptionFilter), busEx.Message);
                 context.Result = Error(busEx.Message, busEx.ErrorCode);
             }
             else
