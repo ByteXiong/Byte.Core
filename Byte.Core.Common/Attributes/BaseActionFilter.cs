@@ -20,7 +20,7 @@ namespace Byte.Core.Common.Attributes
         public async virtual Task OnActionExecuting(ActionExecutingContext context)
         {
 
-   
+
             //Console.WriteLine($"在行为方法执行前执行{DateTime.Now.ToString()}");
             await Task.CompletedTask;
         }

@@ -80,8 +80,8 @@ namespace Byte.Core.Common.Helpers
         /// <param name="headers">请求头</param>
         /// <param name="cerFile">证书</param>
         /// <returns></returns>
-        public static string PostData(string url, string body, string contentType, Dictionary<string, string> headers=null,
-            X509Certificate cerFile=null)
+        public static string PostData(string url, string body, string contentType, Dictionary<string, string> headers = null,
+            X509Certificate cerFile = null)
         {
             return RequestData("POST", url, body, contentType, headers, cerFile);
         }

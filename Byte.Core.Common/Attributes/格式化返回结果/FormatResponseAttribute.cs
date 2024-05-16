@@ -8,7 +8,8 @@ namespace Byte.Core.Common.Attributes
     /// <summary>
     /// 若Action返回对象为自定义对象,则将其转为JSON
     /// </summary>
-    public class FormatResponseAttribute : BaseActionFilter  {
+    public class FormatResponseAttribute : BaseActionFilter
+    {
         public override async Task OnActionExecuted(ActionExecutedContext context)
         {
             if (context.ContainsFilter<NoFormatResponseAttribute>())
@@ -25,7 +26,7 @@ namespace Byte.Core.Common.Attributes
 
                     context.Result = Result1(res.Value);
             }
-            
+
             await Task.CompletedTask;
 
 

@@ -199,7 +199,7 @@ namespace Byte.Core.Common.Extensions
             }
             return null;
         }
-   
+
 
         public static int? ToInt32(this string input)
         {
@@ -543,7 +543,7 @@ namespace Byte.Core.Common.Extensions
         /// <returns></returns>
         public static long ToLong(this string str)
         {
-     
+
             if (string.IsNullOrEmpty(str))
                 return 0;
             str = str.Replace("\0", "");
@@ -845,7 +845,7 @@ namespace Byte.Core.Common.Extensions
             Encoding gbk = Encoding.GetEncoding("gb2312");//Encoding.Default ,936
             byte[] temp = utf8.GetBytes(text);
             byte[] temp1 = Encoding.Convert(utf8, gbk, temp);
-            string result = gbk.GetString(temp1 );
+            string result = gbk.GetString(temp1);
             return result;
         }
         /// <summary>

@@ -1,6 +1,5 @@
 ﻿
 using System.Reflection;
-using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace Byte.Core.Common.Extensions
 {
@@ -96,9 +95,9 @@ namespace Byte.Core.Common.Extensions
         /// 初始化映射配置
         /// </summary>
         private static void Init(Type sourceType, Type destinationType)
-        { 
-           
-             
+        {
+
+
             //if (_config == null)
             //{
             //    _config = new MapperConfiguration(t => t.CreateMap(sourceType, destinationType));

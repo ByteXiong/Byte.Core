@@ -1,5 +1,4 @@
-﻿using Byte.Core.SqlSugar;
-using SqlSugar;
+﻿using SqlSugar;
 using System.Linq.Expressions;
 
 namespace Byte.Core.SqlSugar

@@ -1,10 +1,5 @@
 ﻿using Byte.Core.Common.Helpers;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Byte.Core.Common.Attributes
 {
@@ -25,7 +20,7 @@ namespace Byte.Core.Common.Attributes
 
             Log4NetHelper.WriteInfo(typeof(HostService), "服务启动");
             Console.WriteLine("启动服务" + DateTime.Now.ToString());
-           
+
             //绑定定时任务
             //设置延迟时间
             //_timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromSeconds(60 * Interval));
@@ -56,8 +51,8 @@ namespace Byte.Core.Common.Attributes
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task StopAsync(CancellationToken cancellationToken)
-        { 
-             
+        {
+
             Log4NetHelper.WriteInfo(typeof(HostService), "服务被关闭");
             Console.WriteLine("服务被关闭" + DateTime.Now.ToString());
             //_timer?.Change(Timeout.Inf;inite, 0)
@@ -67,7 +62,7 @@ namespace Byte.Core.Common.Attributes
         /// <summary>
         /// 释放托管资源，释放时触发
         /// </summary>
-        public  void Dispose()
+        public void Dispose()
         {
             //Common.WriteEmailLog("定时任务被释放闭", "...Dispose...");
 

@@ -2,7 +2,6 @@
 using Byte.Core.Common.Attributes;
 using Byte.Core.Common.Helpers;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System.Data.SqlTypes;
 
 namespace Byte.Core.Common.Filters
 {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Byte.Core.Common.Global
+﻿namespace Byte.Core.Common.Global
 {
     /// <summary>
     /// 常用的MimeType集合

@@ -19,7 +19,7 @@ namespace Byte.Core.Common.Extensions
 {
     public static class ObjectExtension
     {
-   
+
         static ObjectExtension()
         {
             JsonConvert.DefaultSettings = () => DefaultJsonSetting;
@@ -1622,7 +1622,7 @@ namespace Byte.Core.Common.Extensions
         /// <typeparam name="T">类型</typeparam>
         /// <param name="obj">对象</param>
         /// <returns></returns>
-        public static TOut DeepClone<T,TOut>(this T obj) where T : class where TOut : class
+        public static TOut DeepClone<T, TOut>(this T obj) where T : class where TOut : class
         {
             if (obj == null)
                 return null;
@@ -1630,19 +1630,19 @@ namespace Byte.Core.Common.Extensions
             return obj.ToJson().ToObject<TOut>();
         }
 
-/// <summary>
-/// 对象映射(AutoMapper)
-/// </summary>
-/// <typeparam name="T"></typeparam>
-/// <typeparam name="TT"></typeparam>
-/// <param name="obj"></param>
-/// <returns></returns>
+        /// <summary>
+        /// 对象映射(AutoMapper)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TT"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static T Map<T, TT>(this TT obj) where T : class
         {
             throw new NotImplementedException();
-        //var config = new MapperConfiguration(cfg => cfg.CreateMap<TT, T>());
-        //var mapper = config.CreateMapper();
-        // return   mapper.Map<T>(obj);
+            //var config = new MapperConfiguration(cfg => cfg.CreateMap<TT, T>());
+            //var mapper = config.CreateMapper();
+            // return   mapper.Map<T>(obj);
         }
 
 
@@ -1690,7 +1690,7 @@ namespace Byte.Core.Common.Extensions
             return obj.GetType().GetProperty(propertyName, _bindingFlags) != null;
         }
 
-    
+
         /// <summary>
         /// 设置某属性值
         /// </summary>
@@ -1797,55 +1797,55 @@ namespace Byte.Core.Common.Extensions
             DateFormatString = "yyyy-MM-dd HH:mm:ss.fff"
         };
 
-    /// <summary>
-    /// 将流Stream转为byte数组
-    /// </summary>
-    /// <param name="stream"></param>
-    /// <returns></returns>
-    public static byte[] ReadToBytes(this Stream stream)
-    {
-        stream.Seek(0, SeekOrigin.Begin);
-        byte[] bytes = new byte[stream.Length];
-        stream.Read(bytes, 0, bytes.Length);
-        stream.Seek(0, SeekOrigin.Begin);
-
-        return bytes;
-    }
-
-    /// <summary>
-    /// 将流读为字符串
-    /// 注：默认使用UTF-8编码
-    /// </summary>
-    /// <param name="stream">流</param>
-    /// <returns></returns>
-    public static string ReadToString(this Stream stream)
-    {
-        return ReadToString(stream, Encoding.UTF8);
-    }
-
-    /// <summary>
-    /// 将流读为字符串
-    /// 注：使用指定编码
-    /// </summary>
-    /// <param name="stream">流</param>
-    /// <param name="encoding">指定编码</param>
-    /// <returns></returns>
-    public static string ReadToString(this Stream stream, Encoding encoding)
-    {
-        if (stream.CanSeek)
+        /// <summary>
+        /// 将流Stream转为byte数组
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <returns></returns>
+        public static byte[] ReadToBytes(this Stream stream)
         {
             stream.Seek(0, SeekOrigin.Begin);
-        }
-
-        string resStr = string.Empty;
-        resStr = new StreamReader(stream, encoding).ReadToEnd();
-
-        if (stream.CanSeek)
-        {
+            byte[] bytes = new byte[stream.Length];
+            stream.Read(bytes, 0, bytes.Length);
             stream.Seek(0, SeekOrigin.Begin);
+
+            return bytes;
         }
 
-        return resStr;
-    }
+        /// <summary>
+        /// 将流读为字符串
+        /// 注：默认使用UTF-8编码
+        /// </summary>
+        /// <param name="stream">流</param>
+        /// <returns></returns>
+        public static string ReadToString(this Stream stream)
+        {
+            return ReadToString(stream, Encoding.UTF8);
+        }
+
+        /// <summary>
+        /// 将流读为字符串
+        /// 注：使用指定编码
+        /// </summary>
+        /// <param name="stream">流</param>
+        /// <param name="encoding">指定编码</param>
+        /// <returns></returns>
+        public static string ReadToString(this Stream stream, Encoding encoding)
+        {
+            if (stream.CanSeek)
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+            }
+
+            string resStr = string.Empty;
+            resStr = new StreamReader(stream, encoding).ReadToEnd();
+
+            if (stream.CanSeek)
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+            }
+
+            return resStr;
+        }
     }
 }

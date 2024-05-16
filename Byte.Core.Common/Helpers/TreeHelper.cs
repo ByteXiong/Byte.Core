@@ -1,10 +1,5 @@
 ﻿using Byte.Core.Common.Extensions;
 using Byte.Core.Common.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Byte.Core.Common.Helpers
 {
@@ -25,7 +20,7 @@ namespace Byte.Core.Common.Helpers
         {
             List<T> resData = new List<T>();
 
-            var rootNodes = allNodes.Where(x => x.Id.Equals(parentId) ).ToList();
+            var rootNodes = allNodes.Where(x => x.Id.Equals(parentId)).ToList();
             resData = rootNodes;
             resData.ForEach(aRootNode =>
             {
@@ -45,14 +40,14 @@ namespace Byte.Core.Common.Helpers
         /// <param name="parentId">父节点</param>
         /// <param name="isMy">是否包括自己</param>
         /// <returns></returns>
-        public static List<T> GetChildren<T, TKey>(List<T> allNodes, TKey parentId, bool? isMy=true) where T : TreeModel<TKey>, new()
+        public static List<T> GetChildren<T, TKey>(List<T> allNodes, TKey parentId, bool? isMy = true) where T : TreeModel<TKey>, new()
         {
             List<T> resList = new List<T>();
-            var pmodel = allNodes.FirstOrDefault(x => x.Id.Equals(parentId) );
+            var pmodel = allNodes.FirstOrDefault(x => x.Id.Equals(parentId));
             if (pmodel == null) return null;
-                if (isMy==true)
+            if (isMy == true)
                 resList.Add(pmodel);
-           
+
             _getChildren(allNodes, pmodel, resList);
 
             return resList;
@@ -75,7 +70,7 @@ namespace Byte.Core.Common.Helpers
         /// <typeparam name="TKey"></typeparam>
         /// <param name="allNodes"></param>
         /// <returns></returns>
-        public static List<T> GetTreeAry<T,TKey>(List<T> allNodes) where T : TreeModel<TKey>, new()
+        public static List<T> GetTreeAry<T, TKey>(List<T> allNodes) where T : TreeModel<TKey>, new()
         {
 
             List<T> resList = new List<T>();
@@ -97,9 +92,9 @@ namespace Byte.Core.Common.Helpers
                 });
             }
 
-            
+
         }
-        
+
 
 
         ///// <summary>
@@ -183,7 +178,7 @@ namespace Byte.Core.Common.Helpers
                 newNode.Level = parentNode.Level + 1;
 
                 if (HaveChildren(nodes, aChildren.Id))
-                    newNode.Children = _GetChildren<T,TKey>(nodes, newNode);
+                    newNode.Children = _GetChildren<T, TKey>(nodes, newNode);
             });
 
             return resData;
@@ -196,9 +191,9 @@ namespace Byte.Core.Common.Helpers
         /// <param name="nodes">所有节点</param>
         /// <param name="nodeId">当前节点Id</param>
         /// <returns></returns>
-        private static bool HaveChildren<T,TKey>(List<T> nodes, TKey nodeId) where T : TreeModel<TKey>, new()
+        private static bool HaveChildren<T, TKey>(List<T> nodes, TKey nodeId) where T : TreeModel<TKey>, new()
         {
-            return nodes.Exists(x => x.ParentId.Equals(nodeId) );
+            return nodes.Exists(x => x.ParentId.Equals(nodeId));
         }
 
         #endregion

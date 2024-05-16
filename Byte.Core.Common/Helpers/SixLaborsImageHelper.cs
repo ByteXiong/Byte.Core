@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Byte.Core.Common.Extensions;
+﻿using Byte.Core.Common.Extensions;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing.Processing;

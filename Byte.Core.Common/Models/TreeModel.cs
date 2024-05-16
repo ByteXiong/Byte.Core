@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Byte.Core.Common.Models
+﻿namespace Byte.Core.Common.Models
 {
     /// <summary>
     /// 树模型（可以作为父类）

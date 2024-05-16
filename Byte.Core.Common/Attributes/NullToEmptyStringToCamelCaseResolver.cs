@@ -26,7 +26,7 @@ namespace Byte.Core.Common.Attributes
         /// <returns></returns>
         protected override JsonConverter ResolveContractConverter(Type objectType)
         {
-            if (objectType == typeof(long)|| objectType == typeof(long?))
+            if (objectType == typeof(long) || objectType == typeof(long?))
             {
                 return new JsonConverterLong();
             }
@@ -85,7 +85,7 @@ namespace Byte.Core.Common.Attributes
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer)
         {
-            if ((reader.ValueType == null || reader.ValueType == typeof(long?) || reader.ValueType == typeof(string)) && (reader.Value == null  || reader.Value.ToString() == ""))
+            if ((reader.ValueType == null || reader.ValueType == typeof(long?) || reader.ValueType == typeof(string)) && (reader.Value == null || reader.Value.ToString() == ""))
             {
                 return null;
             }
