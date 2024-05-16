@@ -1,6 +1,10 @@
 ﻿using Byte.Core.Common.Extensions;
 using Microsoft.Extensions.Caching.Distributed;
+using Org.BouncyCastle.Utilities;
+using SixLabors.ImageSharp.Drawing;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 
 namespace Byte.Core.Common.Cache
 {
@@ -44,13 +48,13 @@ namespace Byte.Core.Common.Cache
         public object Get(string key)
         {
             var data = _cache.Get(key);
-            return data?.ToObject();
+            return data?.ToObject<object>();
         }
 
         public async Task<object> GetAsync(string key)
         {
             var data = await _cache.GetAsync(key);
-            return data?.ToObject();
+            return data?.ToObject<object>();
         }
 
         public object Get(string key, Type type)
@@ -66,13 +70,13 @@ namespace Byte.Core.Common.Cache
         public T Get<T>(string key)
         {
             var data = _cache.Get(key);
-            return (T)data?.ToObject();
+            return  data.ToObject<T>();
         }
 
         public async Task<T> GetAsync<T>(string key)
         {
             var data = await _cache.GetAsync(key);
-            return (T)data?.ToObject();
+            return data.ToObject<T>();
         }
 
         public object Get(string key, Func<object> func)
@@ -176,5 +180,25 @@ namespace Byte.Core.Common.Cache
             return result;
         }
 
+
+        public async Task Del(string key)
+        {
+                    _cache.Remove(key);
+        }
+        public async Task DelAsync(string key)
+        {
+            await _cache.RemoveAsync(key);
+        }
+
+        public async Task<bool> Exists(string key)
+        {
+            var result = Get(key);
+            return result != null;
+        }
+        public async Task<bool> ExistsAsync(string key)
+        {
+            var result = await GetAsync(key);
+            return result != null;
+        }
     }
 }
