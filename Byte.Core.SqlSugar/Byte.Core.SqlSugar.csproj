@@ -25,9 +25,6 @@
     <PackageReference Include="SqlSugarCore" Version="5.1.4.148" />
   </ItemGroup>
 
-  <ItemGroup>
-     <ProjectReference Include="E:\MyCode\Byte.Core\Byte.Core.Common\Byte.Core.Common.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Middleware\" />

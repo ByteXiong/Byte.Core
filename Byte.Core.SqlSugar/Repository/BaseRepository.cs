@@ -1,4 +1,3 @@
-using Byte.Core.Common.IoC;
 using SqlSugar;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -11,9 +10,8 @@ namespace Byte.Core.SqlSugar;
 /// <typeparam name="T"></typeparam>
 public class BaseRepository<T> : IRepository<T> where T : class, new()
 {
-    public BaseRepository()
+    public BaseRepository(IUnitOfWork unitOfWork)
     {
-       var  unitOfWork = AutofacContainer.Resolve<IUnitOfWork>();
         var sqlSugarScope = unitOfWork.GetDbClient();
         var tenantAttribute = typeof(T).GetCustomAttribute<TenantAttribute>();
         if (tenantAttribute == null)
@@ -21,7 +19,6 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
             SugarClient = sqlSugarScope;
             return;
         }
-
         SugarClient = sqlSugarScope.GetConnectionScope(tenantAttribute.configId.ToString());
     }
 
@@ -38,7 +35,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     public virtual ISugarQueryable<T> GetIQueryable(Expression<Func<T, bool>> where = null)
     {
         if (where == null)
-        { 
+        {
             return SugarClient.Queryable<T>();
         }
         return SugarClient.Queryable<T>().Where(where);
@@ -133,9 +130,10 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     /// <param name="updateFactory"></param>
     /// <param name="isLock"></param>
     /// <returns></returns>
-    public virtual async Task<int> UpdateAsync(Expression<Func<T, bool>> where, Expression<Func<T, T>> updateFactory, bool isLock = true) {
+    public virtual async Task<int> UpdateAsync(Expression<Func<T, bool>> where, Expression<Func<T, T>> updateFactory, bool isLock = true)
+    {
 
-        IUpdateable<T> up = SugarClient.Updateable<T>().SetColumns(updateFactory) ;
+        IUpdateable<T> up = SugarClient.Updateable<T>().SetColumns(updateFactory);
         if (where != null)
         {
             up = up.Where(where);
@@ -172,7 +170,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
             del = del.With(SqlWith.RowLock);
         }
 
-        return await del.ExecuteCommandAsync() ;
+        return await del.ExecuteCommandAsync();
     }
 
     ///// <summary>

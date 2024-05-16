@@ -1,4 +1,4 @@
-﻿namespace Byte.Core.Common.Pager
+﻿namespace Byte.Core.SqlSugar
 {
     public class PageParam
     {
@@ -16,21 +16,21 @@
             set;
         }
 
-     
-   
+
+
 
         public IDictionary<string, string> SortList
         {
             get;
             set;
         }
-  
+
 
         public PageParam()
         {
             PageSize = 10;
             PageIndex = 1;
         }
-        
+
     }
 }

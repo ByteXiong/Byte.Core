@@ -1,17 +1,14 @@
-﻿using Microsoft.Extensions.Logging;
-using SqlSugar;
+﻿using SqlSugar;
 
 namespace Byte.Core.SqlSugar;
 
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ISqlSugarClient _sqlSugarClient;
-    private readonly ILogger<UnitOfWork> _logger;
 
-    public UnitOfWork(ISqlSugarClient sqlSugarClient, ILogger<UnitOfWork> logger)
+    public UnitOfWork(ISqlSugarClient sqlSugarClient)
     {
         _sqlSugarClient = sqlSugarClient;
-        _logger = logger;
     }
 
     /// <summary>
@@ -37,7 +34,6 @@ public class UnitOfWork : IUnitOfWork
         catch (Exception ex)
         {
             GetDbClient().RollbackTran();
-            _logger.LogCritical(ex.Message);
             throw;
         }
     }

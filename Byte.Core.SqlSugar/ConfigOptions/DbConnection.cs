@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Byte.Core.SqlSugar.ConfigOptions;
+﻿namespace Byte.Core.SqlSugar.ConfigOptions;
 
 public class DbConnection
 {

@@ -1,4 +1,4 @@
-﻿namespace Byte.Core.Common.Pager
+﻿namespace Byte.Core.SqlSugar
 {
     //
     // 摘要:

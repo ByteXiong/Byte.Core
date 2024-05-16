@@ -1,13 +1,6 @@
-﻿using Byte.Core.Common.Extensions;
-using Byte.Core.SqlSugar.ConfigOptions;
+﻿using Byte.Core.SqlSugar.ConfigOptions;
 using Microsoft.Extensions.Options;
 using SqlSugar;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DbType = SqlSugar.DbType;
 
 namespace Byte.Core.SqlSugar.IDbContext
@@ -73,7 +66,7 @@ namespace Byte.Core.SqlSugar.IDbContext
         {
             var defaultConnectionItem =
                 Configs.DataConnection.ConnectionItem.FirstOrDefault();
-            if (defaultConnectionItem.IsNull())
+            if (defaultConnectionItem == null)
             {
                 throw new Exception("数据库配置出错，请检查！");
             }

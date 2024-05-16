@@ -1,4 +1,3 @@
-using System;
 using SqlSugar;
 
 namespace Byte.Core.SqlSugar.Base

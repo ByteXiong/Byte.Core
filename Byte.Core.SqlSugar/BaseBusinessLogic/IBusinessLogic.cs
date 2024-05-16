@@ -1,11 +1,9 @@
-﻿using Byte.Core.Common.IoC;
-using Byte.Core.Common.Pager;
-using SqlSugar;
+﻿using SqlSugar;
 using System.Linq.Expressions;
 
 namespace Byte.Core.SqlSugar
 {
-    public interface IBusinessLogic<T> :ITransientDependency where T : class,new()
+    public interface IBusinessLogic<T> where T : class, new()
     {
 
 

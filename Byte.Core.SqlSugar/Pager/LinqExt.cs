@@ -1,6 +1,4 @@
-﻿using Byte.Core.Common.Extensions;
-using Byte.Core.Common.Pager;
-using NPOI.SS.Formula.Functions;
+﻿using Byte.Core.SqlSugar;
 using SqlSugar;
 using System.Linq.Expressions;
 
@@ -11,7 +9,7 @@ namespace Byte.Core.SqlSugar
     {
 
 
-   
+
         public static async Task<PagedResults<TOut>> ToPagedResultsAsync<TOut>(this ISugarQueryable<TOut> source, PageParam queryParam)
         {
 
@@ -27,8 +25,8 @@ namespace Byte.Core.SqlSugar
 
             var pagerInfo = new PagerInfo(queryParam);
 
-           source = source.OrderByIF(queryParam.SortList != null && queryParam.SortList.Count > 0,string.Join(",", queryParam.SortList.Select(x => $"{x.Key} {x.Value}")));
-     
+            source = source.OrderByIF(queryParam.SortList != null && queryParam.SortList.Count > 0, string.Join(",", queryParam.SortList.Select(x => $"{x.Key} {x.Value}")));
+
             RefAsync<int> totalCount = 0;
             var data = await source.ToPageListAsync(queryParam.PageIndex, queryParam.PageSize, totalCount);
             pagerInfo.TotalRowCount = totalCount;
@@ -46,16 +44,17 @@ namespace Byte.Core.SqlSugar
         }
 
 
-        public static  async Task<T> FirstOrDefaultAsync<T>(this ISugarQueryable<T> queryable, Expression<Func<T, bool>> whereLambda=null)
+        public static async Task<T> FirstOrDefaultAsync<T>(this ISugarQueryable<T> queryable, Expression<Func<T, bool>> whereLambda = null)
         {
-            if (whereLambda == null) {
+            if (whereLambda == null)
+            {
                 return await queryable.SingleAsync();
             }
             else
             {
                 return await queryable.SingleAsync(whereLambda);
             }
-      
+
         }
 
     }

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Byte.Core.SqlSugar.ConfigOptions;
+﻿namespace Byte.Core.SqlSugar.ConfigOptions;
 
 /// <summary>
 /// 全局配置类

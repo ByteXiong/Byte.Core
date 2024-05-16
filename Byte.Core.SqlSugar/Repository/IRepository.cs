@@ -1,6 +1,3 @@
-using Byte.Core.Common.IoC;
-using Byte.Core.Common.Pager;
-using NPOI.SS.Formula.Functions;
 using SqlSugar;
 using System.Linq.Expressions;
 
@@ -10,7 +7,7 @@ namespace Byte.Core.SqlSugar;
 /// sqlSugar接口
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public interface IRepository<T> : ITransientDependency where T : class
+public interface IRepository<T> where T : class
 {
     ISqlSugarClient SugarClient { get; }
 
@@ -61,7 +58,7 @@ public interface IRepository<T> : ITransientDependency where T : class
     /// <param name="lstIgnoreColumns">忽略列</param>
     /// <param name="isLock">是否加锁</param>
     /// <returns>受影响行数</returns>
-    Task<int> UpdateRangeAsync(List<T> entitys, List<string> lstIgnoreColumns = null,bool isLock = true);
+    Task<int> UpdateRangeAsync(List<T> entitys, List<string> lstIgnoreColumns = null, bool isLock = true);
     /// <summary>
     /// 更新实体
     /// </summary>
@@ -148,7 +145,7 @@ public interface IRepository<T> : ITransientDependency where T : class
     /// <param name=",">主键集合</param>
     /// <param name="isLock">是否加锁</param>
     /// <returns>受影响行数</returns>
-     Task<int> DeleteAsync<Tkey>(Tkey[] ids, bool isLock = true);
+    Task<int> DeleteAsync<Tkey>(Tkey[] ids, bool isLock = true);
     #endregion
 
     //#region 新增操作
