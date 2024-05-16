@@ -1,4 +1,4 @@
-﻿namespace Byte.Core.SqlSugar.SnowflakeIdHelper;
+﻿namespace Byte.Core.Common.SnowflakeIdHelper;
 
 /// <summary>
 /// 雪花ID生成工具

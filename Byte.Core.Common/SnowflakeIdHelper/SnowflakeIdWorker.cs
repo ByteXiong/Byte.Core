@@ -1,4 +1,4 @@
-﻿namespace Byte.Core.SqlSugar.SnowflakeIdHelper;
+﻿namespace Byte.Core.Common.SnowflakeIdHelper;
 
 /**
      * tweeter的snowflake 移植到Java翻译成Net:
