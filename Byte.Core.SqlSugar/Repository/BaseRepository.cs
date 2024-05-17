@@ -8,21 +8,28 @@ namespace Byte.Core.SqlSugar;
 /// SqlSugar仓储
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class BaseRepository<T> : IRepository<T> where T : class, new()
+public class BaseRepository<T> : SimpleClient<T>, IRepository<T> where T : class, new()
 {
-    public BaseRepository(IUnitOfWork unitOfWork)
-    {
-        var sqlSugarScope = unitOfWork.GetDbClient();
-        var tenantAttribute = typeof(T).GetCustomAttribute<TenantAttribute>();
-        if (tenantAttribute == null)
-        {
-            SugarClient = sqlSugarScope;
-            return;
-        }
-        SugarClient = sqlSugarScope.GetConnectionScope(tenantAttribute.configId.ToString());
-    }
 
-    public ISqlSugarClient SugarClient { get; }
+    public BaseRepository(ISqlSugarClient sqlSugarClient) {
+
+
+        base.Context = sqlSugarClient;
+    }
+    //{
+    //public BaseRepository(IUnitOfWork unitOfWork)
+    //{
+    //    var sqlSugarScope = unitOfWork.GetDbClient();
+    //    var tenantAttribute = typeof(T).GetCustomAttribute<TenantAttribute>();
+    //    if (tenantAttribute == null)
+    //    {
+    //        SugarClient = sqlSugarScope;
+    //        return;
+    //    }
+    //    SugarClient = sqlSugarScope.GetConnectionScope(tenantAttribute.configId.ToString());
+    //}
+
+    public ISqlSugarClient SugarClient { get { return base.Context; } }
 
 
     #region 查询操作
@@ -36,9 +43,9 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     {
         if (where == null)
         {
-            return SugarClient.Queryable<T>();
+            return base.Context.Queryable<T>();
         }
-        return SugarClient.Queryable<T>().Where(where);
+        return base.Context.Queryable<T>().Where(where);
     }
 
 
@@ -54,7 +61,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     /// <returns>受影响行数</returns>
     public virtual async Task<int> AddAsync(T entity)
     {
-        var insert = SugarClient.Insertable(entity);
+        var insert = base.Context.Insertable(entity);
         return await insert.ExecuteCommandAsync();
     }
 
@@ -65,7 +72,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     /// <returns>受影响行数</returns>
     public virtual async Task<int> AddRangeAsync(List<T> entitys)
     {
-        var insert = SugarClient.Insertable(entitys);
+        var insert = base.Context.Insertable(entitys);
         return await insert.ExecuteCommandAsync();
     }
 
@@ -82,7 +89,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     /// <returns>受影响行数</returns>
     public virtual async Task<int> UpdateAsync(T entity, List<string> lstIgnoreColumns = null, bool isLock = true)
     {
-        IUpdateable<T> up = SugarClient.Updateable(entity);
+        IUpdateable<T> up = base.Context.Updateable(entity);
         if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
         {
             up = up.IgnoreColumns(lstIgnoreColumns.ToArray());
@@ -107,7 +114,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     public virtual async Task<int> UpdateRangeAsync(List<T> entitys, List<string> lstIgnoreColumns = null,
         bool isLock = true)
     {
-        IUpdateable<T> up = SugarClient.Updateable(entitys);
+        IUpdateable<T> up = base.Context.Updateable(entitys);
         if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
         {
             up = up.IgnoreColumns(lstIgnoreColumns.ToArray());
@@ -133,7 +140,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     public virtual async Task<int> UpdateAsync(Expression<Func<T, bool>> where, Expression<Func<T, T>> updateFactory, bool isLock = true)
     {
 
-        IUpdateable<T> up = SugarClient.Updateable<T>().SetColumns(updateFactory);
+        IUpdateable<T> up = base.Context.Updateable<T>().SetColumns(updateFactory);
         if (where != null)
         {
             up = up.Where(where);
@@ -164,7 +171,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     {
         //return await _db.Deleteable<T>(id).ExecuteCommandHasChangeAsync();
 
-        var del = SugarClient.Deleteable<T>(id);
+        var del = base.Context.Deleteable<T>(id);
         if (isLock)
         {
             del = del.With(SqlWith.RowLock);
@@ -181,7 +188,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>受影响行数</returns>
     //public virtual async Task<int> DeleteByPrimaryAsync(List<object> primaryKeyValues, bool isLock = true)
     //{
-    //    var del = SugarClient.Deleteable<T>().In(primaryKeyValues);
+    //    var del = base.Context.Deleteable<T>().In(primaryKeyValues);
     //    if (isLock)
     //    {
     //        del = del.With(SqlWith.RowLock);
@@ -198,7 +205,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>受影响行数</returns>
     //public virtual async Task<int> DeleteAsync(T entity, bool isLock = true)
     //{
-    //    var del = SugarClient.Deleteable(entity);
+    //    var del = base.Context.Deleteable(entity);
     //    if (isLock)
     //    {
     //        del = del.With(SqlWith.RowLock);
@@ -215,7 +222,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>受影响行数</returns>
     //public virtual async Task<int> DeleteAsync(List<T> entitys, bool isLock = true)
     //{
-    //    var del = SugarClient.Deleteable(entitys);
+    //    var del = base.Context.Deleteable(entitys);
     //    if (isLock)
     //    {
     //        del = del.With(SqlWith.RowLock);
@@ -232,7 +239,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     /// <returns>受影响行数</returns>
     public virtual async Task<int> DeleteAsync(Expression<Func<T, bool>> where, bool isLock = true)
     {
-        var del = SugarClient.Deleteable<T>().Where(where);
+        var del = base.Context.Deleteable<T>().Where(where);
         if (isLock)
         {
             del = del.With(SqlWith.RowLock);
@@ -249,7 +256,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     /// <returns>受影响行数</returns>
     public virtual async Task<int> DeleteAsync<Tkey>(Tkey[] ids, bool isLock = true)
     {
-        var del = SugarClient.Deleteable<T>().In(ids);
+        var del = base.Context.Deleteable<T>().In(ids);
         if (isLock)
         {
             del = del.With(SqlWith.RowLock);
@@ -271,7 +278,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>受影响行数</returns>
     //public async Task<int> AddAsync(T entity)
     //{
-    //    var insert = SugarClient.Insertable(entity);
+    //    var insert = base.Context.Insertable(entity);
     //    return await insert.ExecuteCommandAsync();
     //}
 
@@ -282,7 +289,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>受影响行数</returns>
     //public async Task<int> AddRange(List<T> entitys)
     //{
-    //    return await SugarClient.Insertable(entitys.ToArray()).ExecuteCommandAsync();
+    //    return await base.Context.Insertable(entitys.ToArray()).ExecuteCommandAsync();
     //}
 
     ///// <summary>
@@ -292,7 +299,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>受影响行数</returns>
     //public async Task<int> AddAsync(Dictionary<string, object> keyValues)
     //{
-    //    var result = await SugarClient.Insertable(keyValues).ExecuteCommandAsync();
+    //    var result = await base.Context.Insertable(keyValues).ExecuteCommandAsync();
     //    return result;
     //}
 
@@ -309,7 +316,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>受影响行数</returns>
     //public async Task<int> UpdateAsync(T entity, List<string> lstIgnoreColumns = null, bool isLock = true)
     //{
-    //    IUpdateable<T> up = SugarClient.Updateable(entity);
+    //    IUpdateable<T> up = base.Context.Updateable(entity);
     //    if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
     //    {
     //        up = up.IgnoreColumns(lstIgnoreColumns.ToArray());
@@ -334,7 +341,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //public async Task<int> UpdateAsync(List<T> entitys, List<string> lstIgnoreColumns = null,
     //    bool isLock = true)
     //{
-    //    IUpdateable<T> up = SugarClient.Updateable(entitys);
+    //    IUpdateable<T> up = base.Context.Updateable(entitys);
     //    if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
     //    {
     //        up = up.IgnoreColumns(lstIgnoreColumns.ToArray());
@@ -360,7 +367,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //public async Task<int> UpdateAsync(T entity, Expression<Func<T, bool>> where,
     //    List<string> lstIgnoreColumns = null, bool isLock = true)
     //{
-    //    IUpdateable<T> up = SugarClient.Updateable(entity);
+    //    IUpdateable<T> up = base.Context.Updateable(entity);
     //    if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
     //    {
     //        up = up.IgnoreColumns(lstIgnoreColumns.ToArray());
@@ -386,7 +393,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //public async Task<int> UpdateAsync(Expression<Func<T, T>> update,
     //    Expression<Func<T, bool>> where = null, bool isLock = true)
     //{
-    //    IUpdateable<T> up = SugarClient.Updateable<T>().SetColumns(update);
+    //    IUpdateable<T> up = base.Context.Updateable<T>().SetColumns(update);
     //    if (where != null)
     //    {
     //        up = up.Where(where);
@@ -411,7 +418,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //public async Task<int> UpdateAsync(Dictionary<string, object> keyValues,
     //    Expression<Func<T, bool>> where = null, bool isLock = true)
     //{
-    //    IUpdateable<T> up = SugarClient.Updateable<T>(keyValues);
+    //    IUpdateable<T> up = base.Context.Updateable<T>(keyValues);
     //    if (where != null)
     //    {
     //        up = up.Where(where);
@@ -438,7 +445,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, object>> updateColumns, Expression<Func<T, object>> wherecolumns = null,
     //    bool isLock = true)
     //{
-    //    IUpdateable<T> up = SugarClient.Updateable(entitys).UpdateColumns(updateColumns);
+    //    IUpdateable<T> up = base.Context.Updateable(entitys).UpdateColumns(updateColumns);
     //    if (wherecolumns != null)
     //    {
     //        up = up.WhereColumns(wherecolumns);
@@ -490,7 +497,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    var codeValue = codeProperty.GetValue(entity, null).ToString();
     //    var sqlWhere = $" RowVer={rowVerValue} AND Code='{codeValue}'";
     //    rowVerProperty.SetValue(entity, rowVerValue + 1, null);
-    //    IUpdateable<T> up = SugarClient.Updateable(entity);
+    //    IUpdateable<T> up = base.Context.Updateable(entity);
     //    if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
     //    {
     //        up = up.IgnoreColumns(lstIgnoreColumns.ToArray());
@@ -539,7 +546,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //            : $" and {item.Key}='{item.Value}'";
     //    }
 
-    //    IUpdateable<T> up = SugarClient.Updateable<T>().SetColumns(update).Where(sqlWhere);
+    //    IUpdateable<T> up = base.Context.Updateable<T>().SetColumns(update).Where(sqlWhere);
     //    if (isLock)
     //    {
     //        up = up.With(SqlWith.UpdLock);
@@ -563,7 +570,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //{
     //    //return await _db.Deleteable<T>(id).ExecuteCommandHasChangeAsync();
 
-    //    var del = SugarClient.Deleteable<T>(id);
+    //    var del = base.Context.Deleteable<T>(id);
     //    if (isLock)
     //    {
     //        del = del.With(SqlWith.RowLock);
@@ -580,7 +587,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>受影响行数</returns>
     //public async Task<int> DeleteByPrimaryAsync(List<object> primaryKeyValues, bool isLock = true)
     //{
-    //    var del = SugarClient.Deleteable<T>().In(primaryKeyValues);
+    //    var del = base.Context.Deleteable<T>().In(primaryKeyValues);
     //    if (isLock)
     //    {
     //        del = del.With(SqlWith.RowLock);
@@ -597,7 +604,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>受影响行数</returns>
     //public async Task<int> DeleteAsync(T entity, bool isLock = true)
     //{
-    //    var del = SugarClient.Deleteable(entity);
+    //    var del = base.Context.Deleteable(entity);
     //    if (isLock)
     //    {
     //        del = del.With(SqlWith.RowLock);
@@ -614,7 +621,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>受影响行数</returns>
     //public async Task<int> DeleteAsync(List<T> entitys, bool isLock = true)
     //{
-    //    var del = SugarClient.Deleteable(entitys);
+    //    var del = base.Context.Deleteable(entitys);
     //    if (isLock)
     //    {
     //        del = del.With(SqlWith.RowLock);
@@ -631,7 +638,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>受影响行数</returns>
     //public async Task<int> DeleteAsync(Expression<Func<T, bool>> whereLambda, bool isLock = true)
     //{
-    //    var del = SugarClient.Deleteable<T>().Where(whereLambda);
+    //    var del = base.Context.Deleteable<T>().Where(whereLambda);
     //    if (isLock)
     //    {
     //        del = del.With(SqlWith.RowLock);
@@ -648,7 +655,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>受影响行数</returns>
     //public async Task<int> DeleteInAsync(List<dynamic> inValues, bool isLock = true)
     //{
-    //    var del = SugarClient.Deleteable<T>().In(inValues);
+    //    var del = base.Context.Deleteable<T>().In(inValues);
     //    if (isLock)
     //    {
     //        del = del.With(SqlWith.RowLock);
@@ -671,7 +678,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //public async Task<TResult> QueryAsync<TResult>(Expression<Func<T, TResult>> expression,
     //    Expression<Func<T, bool>> whereLambda = null)
     //{
-    //    return await SugarClient.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda)
+    //    return await base.Context.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda)
     //        .Select(expression)
     //        .FirstAsync();
     //}
@@ -686,7 +693,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //public async Task<List<TResult>> QueryListExpAsync<TResult>(Expression<Func<T, TResult>> expression,
     //    Expression<Func<T, bool>> whereLambda = null)
     //{
-    //    return await SugarClient.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda)
+    //    return await base.Context.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda)
     //        .Select(expression)
     //        .ToListAsync();
     //}
@@ -698,7 +705,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>实体对象</returns>
     //public async Task<T> QueryFirstAsync(Expression<Func<T, bool>> whereLambda = null)
     //{
-    //    return await SugarClient.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda)
+    //    return await base.Context.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda)
     //        .FirstAsync();
     //}
 
@@ -712,7 +719,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //public async Task<List<T>> QueryListAsync(Expression<Func<T, bool>> whereLambda = null,
     //    Expression<Func<T, object>> orderFileds = null, OrderByType orderByType = OrderByType.Desc)
     //{
-    //    return await SugarClient.Queryable<T>().WhereIF(whereLambda.IsNotNull(), whereLambda)
+    //    return await base.Context.Queryable<T>().WhereIF(whereLambda.IsNotNull(), whereLambda)
     //        .OrderByIF(orderFileds.IsNotNull(), orderFileds, orderByType)
     //        .ToListAsync();
     //}
@@ -724,7 +731,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>实体列表</returns>
     //public async Task<List<T>> QuerySqlListAsync(string sql)
     //{
-    //    return await SugarClient.SqlQueryable<T>(sql).ToListAsync();
+    //    return await base.Context.SqlQueryable<T>(sql).ToListAsync();
     //}
 
     ///// <summary>
@@ -739,7 +746,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Pagination pagination, Expression<Func<T, T>> selectExpression = null, bool isSplitTable = false)
     //{
     //    RefAsync<int> totalCount = 0;
-    //    var query = SugarClient.Queryable<T>();
+    //    var query = base.Context.Queryable<T>();
     //    query = query.WhereIF(whereLambda != null, whereLambda);
     //    if (selectExpression != null)
     //    {
@@ -774,7 +781,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, List<T3>>> navigationExpression3 = null)
     //{
     //    RefAsync<int> totalCount = 0;
-    //    var query = SugarClient.Queryable<T>();
+    //    var query = base.Context.Queryable<T>();
 
     //    if (navigationExpression != null)
     //    {
@@ -824,7 +831,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, List<T4>>> navigationExpression4 = null)
     //{
     //    RefAsync<int> totalCount = 0;
-    //    var query = SugarClient.Queryable<T>();
+    //    var query = base.Context.Queryable<T>();
 
     //    if (navigationExpression != null)
     //    {
@@ -866,7 +873,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>实体列表</returns>
     //public async Task<List<T>> QueryListInAsync(string inFieldName, List<dynamic> inValues)
     //{
-    //    return await SugarClient.Queryable<T>().In(inFieldName, inValues).ToListAsync();
+    //    return await base.Context.Queryable<T>().In(inFieldName, inValues).ToListAsync();
     //}
 
     ///// <summary>
@@ -893,7 +900,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //        //     FieldName = "is_deleted", ConditionalType = ConditionalType.Equal, FieldValue = "0"
     //        // }
     //    };
-    //    return await SugarClient.Queryable<T>().Where(conModels).SingleAsync();
+    //    return await base.Context.Queryable<T>().Where(conModels).SingleAsync();
     //    // 这种方式不适合软删除模式
     //    // return await _db.Queryable<T>().InSingleAsync(id);
     //}
@@ -914,7 +921,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //            FieldValue = string.Join(",", values)
     //        }
     //    };
-    //    return await SugarClient.Queryable<T>().Where(conModels).ToListAsync();
+    //    return await base.Context.Queryable<T>().Where(conModels).ToListAsync();
     //    //return await _db.Queryable<T>().In(values).ToListAsync();
     //}
 
@@ -925,7 +932,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>DataTable</returns>
     //public async Task<DataTable> QueryDataTableAsync(Expression<Func<T, bool>> whereLambda = null)
     //{
-    //    return await SugarClient.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda)
+    //    return await base.Context.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda)
     //        .ToDataTableAsync();
     //}
 
@@ -936,7 +943,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>DataTable</returns>
     //public async Task<DataTable> QueryDataTableAsync(string sql)
     //{
-    //    return await SugarClient.Ado.GetDataTableAsync(sql);
+    //    return await base.Context.Ado.GetDataTableAsync(sql);
     //}
 
     ///// <summary>
@@ -946,7 +953,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>Object</returns>
     //public async Task<object> QuerySqlScalarAsync(string sql)
     //{
-    //    return await SugarClient.Ado.GetScalarAsync(sql);
+    //    return await base.Context.Ado.GetScalarAsync(sql);
     //}
 
     ///// <summary>
@@ -956,7 +963,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>对象.json</returns>
     //public async Task<string> QueryJsonAsync(Expression<Func<T, bool>> whereLambda = null)
     //{
-    //    ISugarQueryable<T> up = SugarClient.Queryable<T>();
+    //    ISugarQueryable<T> up = base.Context.Queryable<T>();
     //    if (whereLambda != null)
     //    {
     //        up = up.Where(whereLambda);
@@ -975,7 +982,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, T2, object>> groupExpression = null,
     //    string sortField = "")
     //{
-    //    var query = SugarClient.Queryable(joinExpression);
+    //    var query = base.Context.Queryable(joinExpression);
     //    if (groupExpression.IsNotNull())
     //    {
     //        query = query.GroupBy(groupExpression);
@@ -997,7 +1004,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, T2, T3, bool>> whereLambda = null,
     //    Expression<Func<T, T2, T3, object>> groupExpression = null)
     //{
-    //    var query = SugarClient.Queryable(joinExpression);
+    //    var query = base.Context.Queryable(joinExpression);
     //    if (groupExpression.IsNotNull())
     //    {
     //        query = query.GroupBy(groupExpression);
@@ -1014,7 +1021,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, T2, T3, T4, bool>> whereLambda = null,
     //    Expression<Func<T, T2, T3, T4, object>> groupExpression = null)
     //{
-    //    var query = SugarClient.Queryable(joinExpression);
+    //    var query = base.Context.Queryable(joinExpression);
     //    if (!groupExpression.IsNullOrEmpty())
     //    {
     //        query = query.GroupBy(groupExpression);
@@ -1031,7 +1038,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, T2, T3, T4, T5, bool>> whereLambda = null,
     //    Expression<Func<T, T2, T3, T4, T5, object>> groupExpression = null)
     //{
-    //    var query = SugarClient.Queryable(joinExpression);
+    //    var query = base.Context.Queryable(joinExpression);
     //    if (!groupExpression.IsNullOrEmpty())
     //    {
     //        query = query.GroupBy(groupExpression);
@@ -1048,7 +1055,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, T2, T3, T4, T5, T6, bool>> whereLambda = null,
     //    Expression<Func<T, T2, T3, T4, T5, T6, object>> groupExpression = null)
     //{
-    //    var query = SugarClient.Queryable(joinExpression);
+    //    var query = base.Context.Queryable(joinExpression);
     //    if (!groupExpression.IsNullOrEmpty())
     //    {
     //        query = query.GroupBy(groupExpression);
@@ -1065,7 +1072,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, T2, T3, T4, T5, T6, T7, bool>> whereLambda = null,
     //    Expression<Func<T, T2, T3, T4, T5, T6, T7, object>> groupExpression = null)
     //{
-    //    var query = SugarClient.Queryable(joinExpression);
+    //    var query = base.Context.Queryable(joinExpression);
     //    if (!groupExpression.IsNullOrEmpty())
     //    {
     //        query = query.GroupBy(groupExpression);
@@ -1082,7 +1089,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, T2, T3, T4, T5, T6, T7, T8, bool>> whereLambda = null,
     //    Expression<Func<T, T2, T3, T4, T5, T6, T7, T8, object>> groupExpression = null)
     //{
-    //    var query = SugarClient.Queryable(joinExpression);
+    //    var query = base.Context.Queryable(joinExpression);
     //    if (!groupExpression.IsNullOrEmpty())
     //    {
     //        query = query.GroupBy(groupExpression);
@@ -1099,7 +1106,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, T2, T3, T4, T5, T6, T7, T8, T9, bool>> whereLambda = null,
     //    Expression<Func<T, T2, T3, T4, T5, T6, T7, T8, T9, object>> groupExpression = null)
     //{
-    //    var query = SugarClient.Queryable(joinExpression);
+    //    var query = base.Context.Queryable(joinExpression);
     //    if (!groupExpression.IsNullOrEmpty())
     //    {
     //        query = query.GroupBy(groupExpression);
@@ -1116,7 +1123,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>> whereLambda = null,
     //    Expression<Func<T, T2, T3, T4, T5, T6, T7, T8, T9, T10, object>> groupExpression = null)
     //{
-    //    var query = SugarClient.Queryable(joinExpression);
+    //    var query = base.Context.Queryable(joinExpression);
     //    if (!groupExpression.IsNullOrEmpty())
     //    {
     //        query = query.GroupBy(groupExpression);
@@ -1138,7 +1145,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    where T : class, new()
     //{
     //    RefAsync<int> totalCount = 0;
-    //    var query = SugarClient.Queryable(joinExpression);
+    //    var query = base.Context.Queryable(joinExpression);
     //    if (groupExpression.IsNotNull())
     //    {
     //        query = query.GroupBy(groupExpression);
@@ -1159,7 +1166,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, T2, T3, object>> groupExpression = null) where T : class, new()
     //{
     //    RefAsync<int> totalCount = 0;
-    //    var query = SugarClient.Queryable(joinExpression);
+    //    var query = base.Context.Queryable(joinExpression);
     //    if (groupExpression.IsNotNull())
     //    {
     //        query = query.GroupBy(groupExpression);
@@ -1180,7 +1187,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, T2, T3, T4, object>> groupExpression = null) where T : class, new()
     //{
     //    RefAsync<int> totalCount = 0;
-    //    var query = SugarClient.Queryable(joinExpression);
+    //    var query = base.Context.Queryable(joinExpression);
     //    if (groupExpression.IsNotNull())
     //    {
     //        query = query.GroupBy(groupExpression);
@@ -1201,7 +1208,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, T2, T3, T4, T5, object>> groupExpression = null) where T : class, new()
     //{
     //    RefAsync<int> totalCount = 0;
-    //    var query = SugarClient.Queryable(joinExpression);
+    //    var query = base.Context.Queryable(joinExpression);
     //    if (groupExpression.IsNotNull())
     //    {
     //        query = query.GroupBy(groupExpression);
@@ -1222,7 +1229,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, T2, T3, T4, T5, T6, object>> groupExpression = null) where T : class, new()
     //{
     //    RefAsync<int> totalCount = 0;
-    //    var query = SugarClient.Queryable(joinExpression);
+    //    var query = base.Context.Queryable(joinExpression);
     //    if (groupExpression.IsNotNull())
     //    {
     //        query = query.GroupBy(groupExpression);
@@ -1244,7 +1251,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, T2, T3, T4, T5, T6, T7, object>> groupExpression = null) where T : class, new()
     //{
     //    RefAsync<int> totalCount = 0;
-    //    var query = SugarClient.Queryable(joinExpression);
+    //    var query = base.Context.Queryable(joinExpression);
     //    if (groupExpression.IsNotNull())
     //    {
     //        query = query.GroupBy(groupExpression);
@@ -1265,7 +1272,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, T2, T3, T4, T5, T6, T7, T8, object>> groupExpression = null) where T : class, new()
     //{
     //    RefAsync<int> totalCount = 0;
-    //    var query = SugarClient.Queryable(joinExpression);
+    //    var query = base.Context.Queryable(joinExpression);
     //    if (groupExpression.IsNotNull())
     //    {
     //        query = query.GroupBy(groupExpression);
@@ -1286,7 +1293,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //public async Task<List<T>> QueryMapperAsync(Action<T> mapperAction,
     //    Expression<Func<T, bool>> whereLambda = null)
     //{
-    //    ISugarQueryable<T> up = SugarClient.Queryable<T>();
+    //    ISugarQueryable<T> up = base.Context.Queryable<T>();
     //    if (whereLambda != null)
     //    {
     //        up = up.Where(whereLambda);
@@ -1300,7 +1307,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, bool>> whereLambda, Pagination pagination)
     //{
     //    RefAsync<int> totalCount = 0;
-    //    ISugarQueryable<T> up = SugarClient.Queryable<T>();
+    //    ISugarQueryable<T> up = base.Context.Queryable<T>();
     //    if (!whereLambda.IsNullOrEmpty())
     //    {
     //        up = up.Where(whereLambda);
@@ -1323,7 +1330,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Pagination pagination)
     //{
     //    RefAsync<int> totalCount = 0;
-    //    ISugarQueryable<T> up = SugarClient.Queryable<T>();
+    //    ISugarQueryable<T> up = base.Context.Queryable<T>();
     //    if (!whereLambda.IsNullOrEmpty())
     //    {
     //        up = up.Where(whereLambda);
@@ -1343,7 +1350,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //public async Task<List<T>> QueryMapperAsync(Action<T, MapperCache<T>> mapperAction,
     //    Expression<Func<T, bool>> whereLambda, string sortField = "")
     //{
-    //    ISugarQueryable<T> up = SugarClient.Queryable<T>();
+    //    ISugarQueryable<T> up = base.Context.Queryable<T>();
     //    if (!whereLambda.IsNullOrEmpty())
     //    {
     //        up = up.Where(whereLambda);
@@ -1363,7 +1370,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    Expression<Func<T, bool>> whereLambda, Pagination pagination)
     //{
     //    RefAsync<int> totalCount = 0;
-    //    ISugarQueryable<T> up = SugarClient.Queryable<T>();
+    //    ISugarQueryable<T> up = base.Context.Queryable<T>();
     //    if (!whereLambda.IsNullOrEmpty())
     //    {
     //        up = up.Where(whereLambda);
@@ -1393,7 +1400,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //public async Task<DataSet> QueryProcedureDataSetAsync(string procedureName, List<SugarParameter> parameters)
     //{
     //    var listParams = ConvetParameter(parameters);
-    //    var datas = await SugarClient.Ado.UseStoredProcedure().GetDataSetAllAsync(procedureName, listParams);
+    //    var datas = await base.Context.Ado.UseStoredProcedure().GetDataSetAllAsync(procedureName, listParams);
     //    return datas;
     //}
 
@@ -1406,7 +1413,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //public async Task<DataTable> QueryProcedureAsync(string procedureName, List<SugarParameter> parameters)
     //{
     //    var listParams = ConvetParameter(parameters);
-    //    var datas = await SugarClient.Ado.UseStoredProcedure().GetDataTableAsync(procedureName, listParams);
+    //    var datas = await base.Context.Ado.UseStoredProcedure().GetDataTableAsync(procedureName, listParams);
     //    return datas;
     //}
 
@@ -1419,7 +1426,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //public async Task<object> QueryProcedureScalarAsync(string procedureName, List<SugarParameter> parameters)
     //{
     //    var listParams = ConvetParameter(parameters);
-    //    var datas = await SugarClient.Ado.UseStoredProcedure().GetScalarAsync(procedureName, listParams);
+    //    var datas = await base.Context.Ado.UseStoredProcedure().GetScalarAsync(procedureName, listParams);
     //    return datas;
     //}
 
@@ -1435,7 +1442,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>泛型对象集合</returns>
     //public async Task<List<T>> TakeAsync(int topNum, Expression<Func<T, bool>> whereLambda = null)
     //{
-    //    return await SugarClient.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda).Take(topNum)
+    //    return await base.Context.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda).Take(topNum)
     //        .ToListAsync();
     //}
 
@@ -1446,7 +1453,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>True or False</returns>
     //public async Task<bool> IsExistAsync(Expression<Func<T, bool>> whereLambda = null)
     //{
-    //    return await SugarClient.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda).AnyAsync();
+    //    return await base.Context.Queryable<T>().WhereIF(!whereLambda.IsNullOrEmpty(), whereLambda).AnyAsync();
     //}
 
     ///// <summary>
@@ -1456,7 +1463,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>总和</returns>
     //public async Task<int> SumAsync(string field)
     //{
-    //    return await SugarClient.Queryable<T>().SumAsync<int>(field);
+    //    return await base.Context.Queryable<T>().SumAsync<int>(field);
     //}
 
     ///// <summary>
@@ -1467,7 +1474,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>最大值</returns>
     //public async Task<TResult> MaxAsync<TResult>(string field)
     //{
-    //    return await SugarClient.Queryable<T>().MaxAsync<TResult>(field);
+    //    return await base.Context.Queryable<T>().MaxAsync<TResult>(field);
     //}
 
     ///// <summary>
@@ -1478,7 +1485,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>最小值</returns>
     //public async Task<TResult> MinAsync<TResult>(string field)
     //{
-    //    return await SugarClient.Queryable<T>().MinAsync<TResult>(field);
+    //    return await base.Context.Queryable<T>().MinAsync<TResult>(field);
     //}
 
     ///// <summary>
@@ -1488,7 +1495,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     ///// <returns>平均值</returns>
     //public async Task<int> AvgAsync(string field)
     //{
-    //    return await SugarClient.Queryable<T>().AvgAsync<int>(field);
+    //    return await base.Context.Queryable<T>().AvgAsync<int>(field);
     //}
 
     //#endregion
@@ -1509,7 +1516,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     //    List<string> numbers = new List<string>();
     //    var dateValue = dateFomart == "" ? "" : DateTime.Now.ToString(dateFomart);
     //    var fix = prefix.ToUpper() + dateValue;
-    //    var maxValue = await SugarClient.Queryable<T>()
+    //    var maxValue = await base.Context.Queryable<T>()
     //        .Where(key + " LIKE '" + fix + "%' AND LEN(" + key + ")=" + (fix.Length + fixedLength)).Select(key)
     //        .MaxAsync<string>(key);
 

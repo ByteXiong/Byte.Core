@@ -1,4 +1,5 @@
 ﻿using Byte.Core.Common.Extensions;
+using Byte.Core.Common.Filters;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
@@ -38,11 +39,11 @@ namespace Byte.Core.Common.Helpers
 
             string pattern = "^Bearer (.*?)$";
             if (!Regex.IsMatch(tokenHeader, pattern))
-                throw new Exception("token格式不对!格式为:Bearer {token}");
+                throw new BusException("token格式不对!格式为:Bearer {token}");
 
             string token = Regex.Match(tokenHeader, pattern).Groups[1]?.ToString();
             if (token.IsNullOrEmpty())
-                throw new Exception("token不能为空!");
+                throw new BusException("token不能为空!");
 
             return token;
         }

@@ -1,7 +1,7 @@
-﻿using AspectCore.DynamicProxy;
-using Byte.Core.Common.Attributes;
+﻿using Byte.Core.Common.Attributes;
 using Byte.Core.Common.Helpers;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Data.SqlClient;
 
 namespace Byte.Core.Common.Filters
 {
@@ -15,20 +15,23 @@ namespace Byte.Core.Common.Filters
 
         public async Task OnExceptionAsync(ExceptionContext context)
         {
-            Exception ex = context.Exception;
-            if (ex is AspectInvocationException aspectEx)
-                ex = aspectEx.InnerException;
+            //Exception ex = context.Exception;
 
-            if (ex is BusException busEx)
+            if (context.Exception is BusException busEx)
             {
 
-                Log4NetHelper.WriteWarn(typeof(GlobalExceptionFilter), busEx.Message);
+                Log4NetHelper.WriteWarn( typeof(GlobalExceptionFilter), busEx);
                 context.Result = Error(busEx.Message, busEx.ErrorCode);
+            }
+            else if (context.Exception is SqlException sqlEx)
+            {
+                Log4NetHelper.WriteError(typeof(GlobalExceptionFilter), sqlEx);
+                context.Result = Error(sqlEx.Message, sqlEx.Number);
             }
             else
             {
-                Log4NetHelper.WriteError(typeof(GlobalExceptionFilter), ex);
-                context.Result = Error(ex.Message);
+                Log4NetHelper.WriteError(typeof(GlobalExceptionFilter), context.Exception);
+                context.Result = Error(context.Exception.Message,500);
             }
 
             await Task.CompletedTask;
