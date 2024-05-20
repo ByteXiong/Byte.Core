@@ -74,13 +74,14 @@ namespace Byte.Core.SqlSugar.IDbContext
             return defaultConnectionItem;
         }
 
+
         #region 实例方法
 
         /// <summary>
         /// 获取数据库处理对象
         /// </summary>
         /// <returns>返回值</returns>
-        public SimpleClient<T> GeTDb<T>() where T : class, new()
+        public SimpleClient<T> GetEntityDb<T>() where T : class, new()
         {
             return new SimpleClient<T>(_db);
         }
@@ -90,12 +91,13 @@ namespace Byte.Core.SqlSugar.IDbContext
         /// </summary>
         /// <param name="db">db</param>
         /// <returns>返回值</returns>
-        public SimpleClient<T> GeTDb<T>(SqlSugarClient db) where T : class, new()
+        public SimpleClient<T> GetEntityDb<T>(SqlSugarClient db) where T : class, new()
         {
             return new SimpleClient<T>(db);
         }
 
         #endregion
+
 
 
         #region 根据实体类生成数据库表

@@ -1,4 +1,6 @@
-﻿namespace Byte.Core.SqlSugar.ConfigOptions;
+﻿using System;
+
+namespace Byte.Core.SqlSugar.ConfigOptions;
 
 /// <summary>
 /// 全局配置类
@@ -114,4 +116,91 @@ public class Configs
         set => _dbConnection = value;
     }
     #endregion
+
+    #region 输入日志
+
+    private SqlLog _sqlLog;
+
+    /// <summary>
+    /// 输入日志
+    /// </summary>
+    public SqlLog SqlLog
+    {
+        get
+        {
+            if (_sqlLog == null)
+            {
+                _sqlLog = new SqlLog();
+                _sqlLog.Enabled = false;
+                _sqlLog.ToDb ??= new ToDb()
+                {
+                    Enabled = false
+                };
+                _sqlLog.ToFile ??= new ToFile()
+                {
+                    Enabled = false
+                };
+                _sqlLog.ToConsole ??= new ToConsole()
+                {
+                    Enabled = false
+                };
+                _sqlLog.ToElasticsearch ??= new ToElasticsearch()
+                {
+                    Enabled = false
+                };
+            }
+
+            return _sqlLog;
+        }
+        set => _sqlLog = value;
+    }
+
+    #endregion
+
+    #region 中间件
+
+    private Middleware _middleware;
+    /// <summary>
+    /// 中间件
+    /// </summary>
+    public Middleware Middleware
+    {
+        get
+        {
+            if (_middleware == null)
+            {
+                _middleware = new Middleware();
+
+                _middleware.QuartzNetJob ??= new QuartzNetJob
+                {
+                    Enabled = false
+                };
+                _middleware.IpLimit ??= new IpLimit
+                {
+                    Enabled = false
+                };
+                _middleware.MiniProfiler ??= new MiniProfiler
+                {
+                    Enabled = false
+                };
+                _middleware.RabbitMq ??= new RabbitMq
+                {
+                    Enabled = false
+                };
+                _middleware.RedisMq ??= new RedisMq
+                {
+                    Enabled = false
+                };
+                _middleware.Elasticsearch ??= new Elasticsearch
+                {
+                    Enabled = false
+                };
+            }
+
+            return _middleware;
+        }
+        set => _middleware = value;
+    }
+
+#endregion
 }
