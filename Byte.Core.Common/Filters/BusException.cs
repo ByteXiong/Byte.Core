@@ -27,7 +27,7 @@
         /// </summary>
         /// <param name="message">错误信息</param>
         /// <param name="errorCode">错误代码</param>
-        public BusException(string message, int errorCode = 500)
+        public BusException(string message, int errorCode = 400)
             : base(message)
         {
             ErrorCode = errorCode;
