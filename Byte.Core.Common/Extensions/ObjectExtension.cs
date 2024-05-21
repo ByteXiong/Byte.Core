@@ -645,11 +645,10 @@ namespace Byte.Core.Common.Extensions
             return System.Text.Encoding.UTF8.GetBytes(jsonString);
         }
 
-        public static T ToObject<T>(this byte[] source)
+        public static object ToObject(this byte[] source)
         {
-            if(source==null)  return default(T);
             var jsonString = System.Text.Encoding.UTF8.GetString(source);
-            return JsonConvert.DeserializeObject<T>(jsonString);
+            return System.Text.Json.JsonSerializer.Deserialize<object>(jsonString);
         }
 
 
@@ -1507,7 +1506,10 @@ namespace Byte.Core.Common.Extensions
         }
         #endregion
 
-   
+        public static T ToObject<T>(this byte[] source)
+        {
+            return (T)source.ToObject();
+        }
 
         public static string Join(this IEnumerable<object> source, string separator)
         {

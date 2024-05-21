@@ -1,6 +1,5 @@
 using SqlSugar;
 using System.Linq.Expressions;
-using System.Reflection;
 
 namespace Byte.Core.SqlSugar;
 
@@ -11,7 +10,8 @@ namespace Byte.Core.SqlSugar;
 public class BaseRepository<T> : SimpleClient<T>, IRepository<T> where T : class, new()
 {
 
-    public BaseRepository(ISqlSugarClient sqlSugarClient) {
+    public BaseRepository(ISqlSugarClient sqlSugarClient)
+    {
 
 
         base.Context = sqlSugarClient;

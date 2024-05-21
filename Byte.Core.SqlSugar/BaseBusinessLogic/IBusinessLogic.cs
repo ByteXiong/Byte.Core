@@ -1,9 +1,10 @@
-﻿using SqlSugar;
+﻿using Byte.Core.Common.IoC;
+using SqlSugar;
 using System.Linq.Expressions;
 
 namespace Byte.Core.SqlSugar
 {
-    public interface IBusinessLogic<T> where T : class, new()
+    public interface IBusinessLogic<T>  where T : class, new()
     {
 
 

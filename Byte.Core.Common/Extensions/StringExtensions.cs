@@ -1,5 +1,4 @@
 ﻿using Byte.Core.Common.ClassLibrary;
-using Byte.Core.Common.Filters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Data;
@@ -826,7 +825,7 @@ namespace Byte.Core.Common.Extensions
         public static bool IsWeakPwd(this string pwd)
         {
             if (pwd.IsNullOrEmpty())
-                throw new BusException("pwd不能为空");
+                throw new Exception("pwd不能为空");
 
             string pattern = "(^[0-9]+$)|(^[a-z]+$)|(^[A-Z]+$)|(^.{0,8}$)";
             if (Regex.IsMatch(pwd, pattern))

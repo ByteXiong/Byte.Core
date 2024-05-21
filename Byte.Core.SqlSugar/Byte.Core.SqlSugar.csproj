@@ -30,4 +30,9 @@
     <Folder Include="Middleware\" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\Byte.Core.Common\Byte.Core.Common.csproj" />
+  </ItemGroup>
+
 </Project>

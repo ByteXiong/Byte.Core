@@ -25,7 +25,19 @@ namespace Byte.Core.SqlSugar
         public TRepository Repository { get; set; }
         protected BaseBusinessLogic(TRepository repository)
         {
-            Repository = repository ?? throw new ApplicationException("IRepository cannot be null");
+            Repository = repository ?? throw new ApplicationException("IRepository cannot be null"); ;
+            //if (repository != null)
+            //{
+            
+            //    return;
+            //}
+
+            //Repository = AutofacContainer.Resolve<TRepository>();
+            //if (Repository != null)
+            //{
+            //    return;
+            //}
+          
         }
 
         #region 查询操作
