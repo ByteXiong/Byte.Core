@@ -189,16 +189,5 @@ namespace Byte.Core.Common.Cache
         {
             await _cache.RemoveAsync(key);
         }
-
-        public async Task<bool> Exists(string key)
-        {
-            var result = Get(key);
-            return result != null;
-        }
-        public async Task<bool> ExistsAsync(string key)
-        {
-            var result = await GetAsync(key);
-            return result != null;
-        }
     }
 }

@@ -80,12 +80,12 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     /// <param name="lstIgnoreColumns">忽略列</param>
     /// <param name="isLock">是否加锁</param>
     /// <returns>受影响行数</returns>
-    public virtual async Task<int> UpdateAsync(T entity, List<string> lstIgnoreColumns = null, bool isLock = true)
+    public virtual async Task<int> UpdateAsync(T entity, Expression<Func<T, object>> lstIgnoreColumns = null, bool isLock = true)
     {
         IUpdateable<T> up = SugarClient.Updateable(entity);
-        if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
+        if (lstIgnoreColumns != null )
         {
-            up = up.IgnoreColumns(lstIgnoreColumns.ToArray());
+            up = up.IgnoreColumns(lstIgnoreColumns);
         }
 
         if (isLock)
@@ -104,13 +104,13 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     /// <param name="lstIgnoreColumns">忽略列</param>
     /// <param name="isLock">是否加锁</param>
     /// <returns>受影响行数</returns>
-    public virtual async Task<int> UpdateRangeAsync(List<T> entitys, List<string> lstIgnoreColumns = null,
+    public virtual async Task<int> UpdateRangeAsync(List<T> entitys, Expression<Func<T, object>> lstIgnoreColumns = null,
         bool isLock = true)
     {
         IUpdateable<T> up = SugarClient.Updateable(entitys);
-        if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
+        if (lstIgnoreColumns != null)
         {
-            up = up.IgnoreColumns(lstIgnoreColumns.ToArray());
+            up = up.IgnoreColumns(lstIgnoreColumns);
         }
 
         if (isLock)

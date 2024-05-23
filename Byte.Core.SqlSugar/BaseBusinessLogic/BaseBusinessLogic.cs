@@ -77,7 +77,7 @@ namespace Byte.Core.SqlSugar
         /// <param name="lstIgnoreColumns">忽略列</param>
         /// <param name="isLock">是否加锁</param>
         /// <returns>受影响行数</returns>
-        public Task<int> UpdateAsync(T entity, List<string> lstIgnoreColumns = null, bool isLock = true) => Repository.UpdateAsync(entity, lstIgnoreColumns, isLock);
+        public Task<int> UpdateAsync(T entity, Expression<Func<T, object>> lstIgnoreColumns = null, bool isLock = true) => Repository.UpdateAsync(entity, lstIgnoreColumns, isLock);
         /// <summary>
         /// 批量更新实体
         /// </summary>
@@ -85,8 +85,7 @@ namespace Byte.Core.SqlSugar
         /// <param name="lstIgnoreColumns">忽略列</param>
         /// <param name="isLock">是否加锁</param>
         /// <returns>受影响行数</returns>
-        public Task<int> UpdateRangeAsync(List<T> entitys, List<string> lstIgnoreColumns = null, bool isLock = true) => Repository.UpdateRangeAsync(entitys, lstIgnoreColumns, isLock);
-
+        public Task<int> UpdateRangeAsync(List<T> entitys, Expression<Func<T, object>>  lstIgnoreColumns = null, bool isLock = true) => Repository.UpdateRangeAsync(entitys, lstIgnoreColumns, isLock);
 
         /// <summary>
         /// 更新实体

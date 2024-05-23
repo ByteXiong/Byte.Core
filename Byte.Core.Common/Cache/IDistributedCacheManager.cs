@@ -22,7 +22,6 @@
         Task<T> GetAsync<T>(string key, Func<T> func, int expiredSeconds);
         Task Del(string key);
         Task DelAsync(string key);
-        Task<bool> Exists(string key);
-        Task<bool> ExistsAsync(string key);
+ 
     }
 }

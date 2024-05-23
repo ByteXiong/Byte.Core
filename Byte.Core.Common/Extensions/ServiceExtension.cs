@@ -294,7 +294,7 @@ namespace Byte.Core.Common.Extensions
             RedisHelper.Initialization(redisClient);
             //////注册mvc分布式缓存
             //services.AddSingleton<IDistributedCache>(new Microsoft.Extensions.Caching.Redis.CSRedisCache(RedisHelper.Instance));
-            services.AddSingleton<IDistributedCacheManager, DistributedCacheManager>();
+            //services.AddSingleton<IDistributedCacheManager, DistributedCacheManager>();
             return services;
         }
         public static IServiceProvider BuildAutofacServiceProvider(this IServiceCollection services)
