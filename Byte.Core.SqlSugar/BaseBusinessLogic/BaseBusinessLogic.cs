@@ -8,15 +8,15 @@ namespace Byte.Core.SqlSugar
     {
         #region 字段
 
-        /// <summary>
-        /// 当前操作对象仓储
-        /// </summary>
-        public IRepository<T> SugarRepository { get; set; }
+        ///// <summary>
+        ///// 当前操作对象仓储
+        ///// </summary>
+        //public IRepository<T> SugarRepository { get; set; }
 
         /// <summary>
         /// sugarClient
         /// </summary>
-        public ISqlSugarClient SugarClient => SugarRepository.SugarClient;
+        public ISqlSugarClient SugarClient => Repository.SugarClient;
 
         #endregion
 
@@ -26,9 +26,11 @@ namespace Byte.Core.SqlSugar
         protected BaseBusinessLogic(TRepository repository)
         {
             Repository = repository ?? throw new ApplicationException("IRepository cannot be null"); ;
+
+            //SugarRepository = Repository;
             //if (repository != null)
             //{
-            
+
             //    return;
             //}
 
@@ -37,7 +39,7 @@ namespace Byte.Core.SqlSugar
             //{
             //    return;
             //}
-          
+
         }
 
         #region 查询操作
