@@ -30,14 +30,14 @@ namespace Byte.Core.Common.Cache
         /// <param name="seconds">滑动过期时长（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
         /// <param name="secondsAbsoulte">绝对过期时长</param>
         /// <returns></returns>
-        public static bool Set(string key, object value, int seconds, int secondsAbsoulte)
+        public static bool Set<T>(string key, T value, int seconds, int secondsAbsoulte)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
-            _memoryCache.Set(key, value,
+            _memoryCache.Set<T>(key, value,
                 new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(seconds))
                     .SetAbsoluteExpiration(TimeSpan.FromSeconds(secondsAbsoulte)));
             return Exists(key);
@@ -51,14 +51,14 @@ namespace Byte.Core.Common.Cache
         /// <param name="secondsIn">缓存时长</param>
         /// <param name="isSliding">是否滑动过期（如果在过期时间内有操作，则以当前时间点延长过期时间）</param>
         /// <returns></returns>
-        public static bool Set(string key, object value, int secondsIn, bool isSliding = false)
+        public static bool Set<T>(string key, T value, int secondsIn, bool isSliding = false)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
-            _memoryCache.Set(key, value,
+            _memoryCache.Set<T>(key, value,
                 isSliding
                     ? new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(secondsIn))
                     : new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(secondsIn)));
