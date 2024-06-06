@@ -53,6 +53,8 @@
 		<PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.1.2" />
 	
 		<PackageReference Include="StackExchange.Redis.Extensions.JilCore" Version="1.0.1" />
+	
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
 		<PackageReference Include="System.Reflection" Version="4.3.0" />
 		<PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
 		<PackageReference Include="Quartz" Version="3.4.0" />

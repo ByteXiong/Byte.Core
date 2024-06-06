@@ -1,6 +1,7 @@
 ﻿using Byte.Core.Common.Attributes;
 using Byte.Core.Common.Helpers;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Data.SqlClient;
 
 namespace Byte.Core.Common.Filters
 {
@@ -22,11 +23,11 @@ namespace Byte.Core.Common.Filters
                 Log4NetHelper.WriteWarn( typeof(GlobalExceptionFilter), busEx);
                 context.Result = Error(busEx.Message, busEx.ErrorCode);
             }
-            //else if (context.Exception is SqlException sqlEx)
-            //{
-            //    Log4NetHelper.WriteError(typeof(GlobalExceptionFilter), sqlEx);
-            //    context.Result = Error(sqlEx.Message, sqlEx.Number);
-            //}
+            else if (context.Exception is SqlException sqlEx)
+            {
+                Log4NetHelper.WriteError(typeof(GlobalExceptionFilter), sqlEx);
+                context.Result = Error(sqlEx.Message, sqlEx.Number);
+            }
             else
             {
                 Log4NetHelper.WriteError(typeof(GlobalExceptionFilter), context.Exception);
