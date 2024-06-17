@@ -1,7 +1,8 @@
 ﻿using Byte.Core.Common.Attributes;
 using Byte.Core.Common.Helpers;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
+
 
 namespace Byte.Core.Common.Filters
 {
@@ -28,6 +29,13 @@ namespace Byte.Core.Common.Filters
                 Log4NetHelper.WriteError(typeof(GlobalExceptionFilter), sqlEx);
                 context.Result = Error(sqlEx.Message, sqlEx.Number);
             }
+            //else
+
+            //if (context.Exception is SystemException  systemException)
+            //{
+            //    Log4NetHelper.WriteError(typeof(GlobalExceptionFilter), systemException);
+            //    context.Result = Error(systemException.Message, systemException.HResult);
+            //}
             else
             {
                 Log4NetHelper.WriteError(typeof(GlobalExceptionFilter), context.Exception);
