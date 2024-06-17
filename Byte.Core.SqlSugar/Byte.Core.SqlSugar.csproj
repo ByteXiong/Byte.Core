@@ -2,18 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Version>5.0.0.0</Version>
+    <Version>8.0.0.0</Version>
     <Description>封装SqlSugar</Description>
     <Authors>Byte</Authors>
     <Product>Byte.Core</Product>
     <PackageId>Byte.Core.SqlSugar</PackageId>
-    <AssemblyVersion>5.0.0.0</AssemblyVersion>
-    <FileVersion>5.0.0.0</FileVersion>
+    <AssemblyVersion>8.0.0.0</AssemblyVersion>
+    <FileVersion>8.0.0.0</FileVersion>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <DocumentationFile>bin\Byte.Core.SqlSugar.xml</DocumentationFile>
     <PackageOutputPath>E:\MyCode\nuget</PackageOutputPath>
+    <PackageProjectUrl>https://gitee.com/ByteXiong/Byte.Core</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,7 +26,6 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
     <PackageReference Include="SqlSugarCore" Version="5.1.4.148" />
   </ItemGroup>
-
 
   <ItemGroup>
     <Folder Include="Middleware\" />
