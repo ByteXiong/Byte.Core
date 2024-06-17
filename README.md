@@ -1,5 +1,7 @@
 ### Byte.Core
 基础版 :joy:  后续会更新
+### 开箱即用
+nuget已发布 搜索: Byte.Code
 
 
 ### 配置
