@@ -47,11 +47,11 @@ namespace Byte.Core.SqlSugar
         {
             if (whereLambda == null)
             {
-                return await queryable.SingleAsync();
+                return await queryable.FirstAsync();
             }
             else
             {
-                return await queryable.SingleAsync(whereLambda);
+                return await queryable.FirstAsync(whereLambda);
             }
 
         }
