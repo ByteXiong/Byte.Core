@@ -39,6 +39,10 @@
         {
             return new ExcutedResult(false, msg, null, code);
         }
+        public static ExcutedResult FailedResult(bool success=false, object data = null, string msg = null, int? code = 400)
+        {
+            return new ExcutedResult(false, msg, data, code);
+        }
     }
 
     public class PaginationResult : ExcutedResult
