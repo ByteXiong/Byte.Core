@@ -48,8 +48,9 @@ namespace Byte.Core.SqlSugar
         /// 获取IQueryable
         /// </summary>
         /// <param name="where"></param>
+        /// <param name="needAuth">是否鉴权</param>
         /// <returns></returns>
-        public ISugarQueryable<T> GetIQueryable(Expression<Func<T, bool>> where = null) => Repository.GetIQueryable(where);
+        public ISugarQueryable<T> GetIQueryable(Expression<Func<T, bool>> where = null, bool needAuth = true) => Repository.GetIQueryable(where, needAuth);
         #endregion
         #region 新增操作
 

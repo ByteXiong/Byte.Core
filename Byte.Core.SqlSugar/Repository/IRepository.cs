@@ -17,8 +17,9 @@ public interface IRepository<T> where T : class
     /// 获取IQueryable
     /// </summary>
     /// <param name="where"></param>
+    /// <param name="needAuth">是否鉴权</param>
     /// <returns></returns>
-    ISugarQueryable<T> GetIQueryable(Expression<Func<T, bool>> where = null);
+    ISugarQueryable<T> GetIQueryable(Expression<Func<T, bool>> where = null, bool needAuth = true);
 
     #endregion
 

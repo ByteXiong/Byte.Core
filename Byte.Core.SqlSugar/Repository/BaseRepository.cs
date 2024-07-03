@@ -28,11 +28,12 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
     #region 查询操作
 
     /// <summary>
-    /// 获取IQueryable
+    ///  查询
     /// </summary>
-    /// <param name="where"></param>
+    /// <param name="where">表达式</param>
+    /// <param name="needAuth">是否跳过重新</param>
     /// <returns></returns>
-    public virtual ISugarQueryable<T> GetIQueryable(Expression<Func<T, bool>> where = null)
+    public virtual ISugarQueryable<T> GetIQueryable(Expression<Func<T, bool>> where = null, bool needAuth = true)
     {
         if (where == null)
         {
