@@ -92,8 +92,7 @@ public class BaseRepository<T> : IRepository<T> where T : class, new()
         {
             up = up.With(SqlWith.UpdLock);
         }
-
-        var result = await up.ExecuteCommandAsync();
+        var result =await up.ExecuteCommandAsync();
         return result;
     }
 

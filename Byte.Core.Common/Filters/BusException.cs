@@ -1,4 +1,6 @@
-﻿namespace Byte.Core.Common.Filters
+﻿using log4net.Core;
+
+namespace Byte.Core.Common.Filters
 {
 
     /// <summary>
@@ -17,7 +19,7 @@
         /// </summary>
         public BusException()
         {
-
+            ErrorCode = 400;
         }
 
 
