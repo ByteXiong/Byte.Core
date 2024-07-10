@@ -8,7 +8,7 @@ namespace Byte.Core.SqlSugar;
 /// SqlSugar仓储
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public abstract class BaseRepository<T>: IRepository<T> where T : class, new()
+public abstract class BaseRepository<TKey,T>: IRepository<TKey,T > where T : class, new()
 {
     public BaseRepository(IUnitOfWork unitOfWork)
     {
@@ -160,7 +160,7 @@ public abstract class BaseRepository<T>: IRepository<T> where T : class, new()
     /// <param name="id">主键ID</param>
     /// <param name="isLock">是否加锁</param>
     /// <returns>受影响行数</returns>
-    public virtual async Task<int> DeleteAsync<TKey>(TKey id, bool isLock = true)
+    public virtual async Task<int> DeleteAsync(TKey id, bool isLock = true)
     {
         //return await _db.Deleteable<T>(id).ExecuteCommandHasChangeAsync();
 
@@ -247,7 +247,7 @@ public abstract class BaseRepository<T>: IRepository<T> where T : class, new()
     /// <param name=",">主键集合</param>
     /// <param name="isLock">是否加锁</param>
     /// <returns>受影响行数</returns>
-    public virtual async Task<int> DeleteAsync<Tkey>(Tkey[] ids, bool isLock = true)
+    public virtual async Task<int> DeleteAsync(TKey[] ids, bool isLock = true)
     {
         var del = SugarClient.Deleteable<T>().In(ids);
         if (isLock)

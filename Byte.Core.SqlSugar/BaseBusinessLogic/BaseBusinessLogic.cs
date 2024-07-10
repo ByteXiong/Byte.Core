@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Byte.Core.SqlSugar
 {
-    public abstract class BaseBusinessLogic<T, TRepository>  where T : class, new() where TRepository : class, IRepository<T>
+    public abstract class BaseBusinessLogic<TKey,T, TRepository>  where T : class, new() where TRepository : class, IRepository<TKey,T >
     {
         #region 字段
 
@@ -108,7 +108,7 @@ namespace Byte.Core.SqlSugar
         /// <param name="id">主键ID</param>
         /// <param name="isLock">是否加锁</param>
         /// <returns>受影响行数</returns>
-        public Task<int> DeleteAsync<TKey>(TKey id, bool isLock = true) => Repository.DeleteAsync(id, isLock);
+        public Task<int> DeleteAsync(TKey id, bool isLock = true) => Repository.DeleteAsync(id, isLock);
 
         ///// <summary>
         ///// 批量删除实体
@@ -175,7 +175,7 @@ namespace Byte.Core.SqlSugar
         /// <param name=",">主键集合</param>
         /// <param name="isLock">是否加锁</param>
         /// <returns>受影响行数</returns>
-        public Task<int> DeleteAsync<Tkey>(Tkey[] ids, bool isLock = true) => Repository.DeleteAsync(ids, isLock);
+        public Task<int> DeleteAsync(TKey[] ids, bool isLock = true) => Repository.DeleteAsync(ids, isLock);
 
         #endregion
     }

@@ -7,7 +7,7 @@ namespace Byte.Core.SqlSugar;
 /// sqlSugar接口
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public interface IRepository<T> where T : class
+public interface IRepository<TKey,T > where T : class
 {
     ISqlSugarClient SugarClient { get; }
 
@@ -79,7 +79,7 @@ public interface IRepository<T> where T : class
     /// <param name="id">主键ID</param>
     /// <param name="isLock">是否加锁</param>
     /// <returns>受影响行数</returns>
-    Task<int> DeleteAsync<TKey>(TKey id, bool isLock = true);
+    Task<int> DeleteAsync(TKey id, bool isLock = true);
 
     ///// <summary>
     ///// 批量删除实体
@@ -146,7 +146,7 @@ public interface IRepository<T> where T : class
     /// <param name=",">主键集合</param>
     /// <param name="isLock">是否加锁</param>
     /// <returns>受影响行数</returns>
-    Task<int> DeleteAsync<Tkey>(Tkey[] ids, bool isLock = true);
+    Task<int> DeleteAsync(TKey[] ids, bool isLock = true);
     #endregion
 
     //#region 新增操作
