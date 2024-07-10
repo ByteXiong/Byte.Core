@@ -32,10 +32,16 @@ namespace Byte.Core.Common.Helpers
             return list;
         }
 
-        public static Assembly GetAssembly(string assemblyName)
+        public static Assembly GetAssembly( string assemblyName)
         {
             return GetAllAssemblies().FirstOrDefault(assembly => assembly.FullName.Contains(assemblyName));
         }
+        public static List<Assembly> GetAssemblys( string[] assemblyNames)
+        {
+            return GetAllAssemblies().Where(assembly => assemblyNames.Equals(assembly.FullName)).ToList();
+        }
+
+
 
         public static IList<Type> GetAllTypes()
         {

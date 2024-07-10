@@ -8,7 +8,7 @@ namespace Byte.Core.SqlSugar;
 /// SqlSugar仓储
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class BaseRepository<T> : IRepository<T> where T : class, new()
+public class BaseRepository<T> where T : class, new()
 {
     public BaseRepository(IUnitOfWork unitOfWork)
     {

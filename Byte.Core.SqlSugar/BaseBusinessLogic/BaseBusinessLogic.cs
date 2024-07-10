@@ -3,8 +3,7 @@ using System.Linq.Expressions;
 
 namespace Byte.Core.SqlSugar
 {
-    public abstract class BaseBusinessLogic<T, TRepository> : IBusinessLogic<T> where T : class, new()
-          where TRepository : IRepository<T>
+    public abstract class BaseBusinessLogic<T, TRepository>  where T : class, new() where TRepository : class, IRepository<T>
     {
         #region 字段
 
@@ -25,6 +24,7 @@ namespace Byte.Core.SqlSugar
         public TRepository Repository { get; set; }
         protected BaseBusinessLogic(TRepository repository)
         {
+          
             Repository = repository ?? throw new ApplicationException("IRepository cannot be null"); ;
 
             //SugarRepository = Repository;
