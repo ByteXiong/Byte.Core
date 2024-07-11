@@ -3,6 +3,7 @@
 ### 开箱即用
 nuget已发布 搜索: Byte.Core
 
+###  QQ交流群:929412850
 
 ### 配置
   Byte.Core.Common 独立的公共模块
