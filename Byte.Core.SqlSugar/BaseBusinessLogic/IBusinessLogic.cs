@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Byte.Core.SqlSugar
 {
-    public interface IBusinessLogic<T>  where T : class, new()
+    public interface IBusinessLogic<TKey,T>  where T : class, new()
     {
 
 
@@ -75,7 +75,7 @@ namespace Byte.Core.SqlSugar
         /// <param name="id">主键ID</param>
         /// <param name="isLock">是否加锁</param>
         /// <returns>受影响行数</returns>
-        Task<int> DeleteAsync<TKey>(TKey id, bool isLock = true);
+        Task<int> DeleteAsync(TKey id, bool isLock = true);
 
         ///// <summary>
         ///// 批量删除实体
@@ -142,7 +142,7 @@ namespace Byte.Core.SqlSugar
         /// <param name=",">主键集合</param>
         /// <param name="isLock">是否加锁</param>
         /// <returns>受影响行数</returns>
-        Task<int> DeleteAsync<Tkey>(Tkey[] ids, bool isLock = true);
+        Task<int> DeleteAsync(TKey[] ids, bool isLock = true);
         #endregion
     }
 }
