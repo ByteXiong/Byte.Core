@@ -230,7 +230,8 @@ builder.Services.AddSqlSugarSetup(configuration);
 
 #region 各种 注入
 builder.Services
- .AddAutoServices("Byte.Core.DataAccess")
+ .AddAutoServices("Byte.Core.Repository")
+  .AddAutoServices("Byte.Core.Business")
 //.AddScopedAssembly("Byte.Core.DataAccess", "Byte.Core.DataAccess")//注入仓储
 .AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 #endregion
