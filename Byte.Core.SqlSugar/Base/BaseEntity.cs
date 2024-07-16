@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using SqlSugar;
 
-namespace Byte.Core.SqlSugar.Base
+namespace Byte.Core.SqlSugar
 {
     /// <summary>
     /// 实体基类

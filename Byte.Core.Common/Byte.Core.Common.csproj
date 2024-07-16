@@ -19,8 +19,11 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Enums\**" />
     <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Enums\**" />
     <EmbeddedResource Remove="Services\**" />
+    <None Remove="Enums\**" />
     <None Remove="Services\**" />
   </ItemGroup>
 

@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Lazy.Captcha.Core" Version="2.0.7" />
+		<PackageReference Include="Asp.Versioning.Mvc" Version="8.0.0" />
+		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.0.0" />
+		<PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.3.8" />
+		<PackageReference Include="MiniProfiler.Shared" Version="4.3.8" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Byte.Core.Business\Byte.Core.Business.csproj" />
+    <ProjectReference Include="..\Byte.Core.Common\Byte.Core.Common.csproj" />
+    <ProjectReference Include="..\Byte.Core.Entity\Byte.Core.Entity.csproj" />
+    <ProjectReference Include="..\Byte.Core.Models\Byte.Core.Models.csproj" />
+    <ProjectReference Include="..\Byte.Core.Repository\Byte.Core.Repository.csproj" />
+    <ProjectReference Include="..\Byte.Core.SqlSugar\Byte.Core.SqlSugar.csproj" />
+  </ItemGroup>
+
+</Project>

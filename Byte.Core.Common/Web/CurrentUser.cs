@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Byte.Core.Common.IoC;
+using Byte.Core.Common.Models;
+using Microsoft.AspNetCore.Http;
 using System.Text;
 
 namespace Byte.Core.Common.Web
@@ -6,85 +8,67 @@ namespace Byte.Core.Common.Web
     public static class CurrentUser
     {
         #region Initialize
+        private static IHttpContextAccessor _context => ServiceLocator.Resolve<IHttpContextAccessor>();
+        private static ISession _session => _context.HttpContext?.Session;
 
-        private static IHttpContextAccessor _httpContextAccessor;
 
-        private static ISession _session => _httpContextAccessor.HttpContext.Session;
 
-        public static void Configure(IHttpContextAccessor httpContextAccessor)
+        public static void Configure(JWTPayload param)
         {
-            _httpContextAccessor = httpContextAccessor;
+            Id = param.Id;
+            Account = param.Account;
+            Type= param.Type;
+            Name = param.Name;
+            DeptId = param.DeptId;
+            Role = param.Role;
         }
+  
 
 
         #endregion
 
-
         #region Attribute
 
-        /// <summary>
-        /// 用户主键
-        /// </summary>
-        public static string UserOID
+        public static Guid Id
+
         {
-            get => _session == null ? "" : _session.GetString("CurrentUser_UserOID");
-            set => _session.SetString("CurrentUser_UserOID", !string.IsNullOrEmpty(value) ? value : "");
+            get => _session == null ? default : Guid.Parse(_session.GetString("CurrentUser_Id"));
+            set => _session.SetString("CurrentUser_Id", value.ToString());
         }
 
-        /// <summary>
-        ///用户编号 
-        /// </summary>
-        public static long UserId
+        public static string Account
         {
-            get => _session == null ? 0 : Convert.ToInt64(_session.GetString("CurrentUser_UserId"));
-            set => _session.SetString("CurrentUser_UserId", value != 0 ? value.ToString() : "0");
+            get => _session == null ? "" : _session.GetString("CurrentUser_Account");
+            set => _session.SetString("CurrentUser_Account", !string.IsNullOrEmpty(value) ? value : "");
         }
 
-        /// <summary>
-        /// 用户姓名
-        /// </summary>
-        public static string UserName
+        public static string Phone
         {
-            get => _session == null ? "" : _session.GetString("CurrentUser_UserName");
-            set => _session.SetString("CurrentUser_UserName", !string.IsNullOrEmpty(value) ? value : "");
+            get => _session == null ? "" : _session.GetString("CurrentUser_Phone");
+            set => _session.SetString("CurrentUser_Phone", !string.IsNullOrEmpty(value) ? value : "");
+        }
+        public static string Name
+        {
+            get => _session == null ? "" : _session.GetString("CurrentUser_Name");
+            set => _session.SetString("CurrentUser_Name", !string.IsNullOrEmpty(value) ? value : "");
+        }
+        public static Guid DeptId
+
+        {
+            get => _session == null ? default : Guid.Parse(_session.GetString("CurrentUser_DeptId"));
+            set => _session.SetString("CurrentUser_DeptId", value.ToString());
         }
 
-        /// <summary>
-        /// 用户登录账户
-        /// </summary>
-        public static string UserAccount
+        public static UserType Type
         {
-            get => _session == null ? "" : _session.GetString("CurrentUser_UserAccount");
-            set => _session.SetString("CurrentUser_UserAccount", !string.IsNullOrEmpty(value) ? value : "");
+            get => _session == null ? default : (UserType)Enum.Parse(typeof(UserType), _session.GetString("CurrentUser_Type"));
+            set => _session.SetString("CurrentUser_Type", value.ToString());
         }
-
-        /// <summary>
-        /// 用户头像地址
-        /// </summary>
-        public static string UserImage
+        public static string Role
         {
-            get => _session == null ? "" : _session.GetString("CurrentUser_UserImage");
-            set => _session.SetString("CurrentUser_UserImage", !string.IsNullOrEmpty(value) ? value : "");
+            get => _session == null ? "" : _session.GetString("CurrentUser_Role");
+            set => _session.SetString("CurrentUser_Role", !string.IsNullOrEmpty(value) ? value : "");
         }
-
-        /// <summary>
-        /// 用户角色
-        /// </summary>
-        public static string UserRole
-        {
-            get => _session == null ? "" : _session.GetString("CurrentUser_UserRole");
-            set => _session.SetString("CurrentUser_UserRole", !string.IsNullOrEmpty(value) ? value : "");
-        }
-
-        /// <summary>
-        /// 主页地址
-        /// </summary>
-        public static string UserPage
-        {
-            get => _session == null ? "" : _session.GetString("CurrentUser_UserPage");
-            set => _session.SetString("CurrentUser_UserPage", !string.IsNullOrEmpty(value) ? value : "");
-        }
-
 
         #endregion
     }

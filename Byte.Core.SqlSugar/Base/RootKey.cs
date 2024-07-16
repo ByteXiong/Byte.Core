@@ -1,6 +1,6 @@
 using SqlSugar;
 
-namespace Byte.Core.SqlSugar.Base
+namespace Byte.Core.SqlSugar
 {
     /// <summary>
     /// 泛型主键

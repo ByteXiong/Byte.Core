@@ -3,6 +3,126 @@
   "WorkspaceRootPath": "E:\\MyCode\\Byte.Core\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4287B5E6-4E30-4397-9AD7-98BAB61F547E}|Byte.Core.Common\\Byte.Core.Common.csproj|e:\\mycode\\byte.core\\byte.core.common\\models\\jwtpayload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4287B5E6-4E30-4397-9AD7-98BAB61F547E}|Byte.Core.Common\\Byte.Core.Common.csproj|solutionrelative:byte.core.common\\models\\jwtpayload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4287B5E6-4E30-4397-9AD7-98BAB61F547E}|Byte.Core.Common\\Byte.Core.Common.csproj|e:\\mycode\\byte.core\\byte.core.common\\attributes\\jwt\u6821\u9A8C\\checkjwtattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4287B5E6-4E30-4397-9AD7-98BAB61F547E}|Byte.Core.Common\\Byte.Core.Common.csproj|solutionrelative:byte.core.common\\attributes\\jwt\u6821\u9A8C\\checkjwtattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\controllers\\codecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\controllers\\codecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\log4net.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\log4net.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\byte.core.api.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\byte.core.api.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\byte.core.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\byte.core.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4287B5E6-4E30-4397-9AD7-98BAB61F547E}|Byte.Core.Common\\Byte.Core.Common.csproj|e:\\mycode\\byte.core\\byte.core.common\\byte.core.common.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{4287B5E6-4E30-4397-9AD7-98BAB61F547E}|Byte.Core.Common\\Byte.Core.Common.csproj|solutionrelative:byte.core.common\\byte.core.common.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4287B5E6-4E30-4397-9AD7-98BAB61F547E}|Byte.Core.Common\\Byte.Core.Common.csproj|e:\\mycode\\byte.core\\byte.core.common\\web\\currentuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4287B5E6-4E30-4397-9AD7-98BAB61F547E}|Byte.Core.Common\\Byte.Core.Common.csproj|solutionrelative:byte.core.common\\web\\currentuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4287B5E6-4E30-4397-9AD7-98BAB61F547E}|Byte.Core.Common\\Byte.Core.Common.csproj|e:\\mycode\\byte.core\\byte.core.common\\models\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4287B5E6-4E30-4397-9AD7-98BAB61F547E}|Byte.Core.Common\\Byte.Core.Common.csproj|solutionrelative:byte.core.common\\models\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\extensions\\sqlsugarsetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\extensions\\sqlsugarsetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93DDE5FC-6986-4A88-A3BB-025E55759452}|Byte.Core.Entity\\Byte.Core.Entity.csproj|e:\\mycode\\byte.core\\byte.core.entity\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93DDE5FC-6986-4A88-A3BB-025E55759452}|Byte.Core.Entity\\Byte.Core.Entity.csproj|solutionrelative:byte.core.entity\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93DDE5FC-6986-4A88-A3BB-025E55759452}|Byte.Core.Entity\\Byte.Core.Entity.csproj|e:\\mycode\\byte.core\\byte.core.entity\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93DDE5FC-6986-4A88-A3BB-025E55759452}|Byte.Core.Entity\\Byte.Core.Entity.csproj|solutionrelative:byte.core.entity\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93DDE5FC-6986-4A88-A3BB-025E55759452}|Byte.Core.Entity\\Byte.Core.Entity.csproj|e:\\mycode\\byte.core\\byte.core.entity\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93DDE5FC-6986-4A88-A3BB-025E55759452}|Byte.Core.Entity\\Byte.Core.Entity.csproj|solutionrelative:byte.core.entity\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93DDE5FC-6986-4A88-A3BB-025E55759452}|Byte.Core.Entity\\Byte.Core.Entity.csproj|e:\\mycode\\byte.core\\byte.core.entity\\byte.core.entity.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{93DDE5FC-6986-4A88-A3BB-025E55759452}|Byte.Core.Entity\\Byte.Core.Entity.csproj|solutionrelative:byte.core.entity\\byte.core.entity.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\common\\baseapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\common\\baseapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\common\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\common\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\extensions\\dataseedermiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\extensions\\dataseedermiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93DDE5FC-6986-4A88-A3BB-025E55759452}|Byte.Core.Entity\\Byte.Core.Entity.csproj|e:\\mycode\\byte.core\\byte.core.entity\\user_dept.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93DDE5FC-6986-4A88-A3BB-025E55759452}|Byte.Core.Entity\\Byte.Core.Entity.csproj|solutionrelative:byte.core.entity\\user_dept.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93DDE5FC-6986-4A88-A3BB-025E55759452}|Byte.Core.Entity\\Byte.Core.Entity.csproj|e:\\mycode\\byte.core\\byte.core.entity\\role_menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93DDE5FC-6986-4A88-A3BB-025E55759452}|Byte.Core.Entity\\Byte.Core.Entity.csproj|solutionrelative:byte.core.entity\\role_menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93DDE5FC-6986-4A88-A3BB-025E55759452}|Byte.Core.Entity\\Byte.Core.Entity.csproj|e:\\mycode\\byte.core\\byte.core.entity\\dept.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93DDE5FC-6986-4A88-A3BB-025E55759452}|Byte.Core.Entity\\Byte.Core.Entity.csproj|solutionrelative:byte.core.entity\\dept.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{287FFA61-3022-40D3-B91A-E020C65029B7}|Byte.Core.Models\\Byte.Core.Models.csproj|e:\\mycode\\byte.core\\byte.core.models\\byte.core.models.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{287FFA61-3022-40D3-B91A-E020C65029B7}|Byte.Core.Models\\Byte.Core.Models.csproj|solutionrelative:byte.core.models\\byte.core.models.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C302F42-593E-4186-AFF5-F6DC18019E74}|Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj|e:\\mycode\\byte.core\\byte.core.sqlsugar\\base\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C302F42-593E-4186-AFF5-F6DC18019E74}|Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj|solutionrelative:byte.core.sqlsugar\\base\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C302F42-593E-4186-AFF5-F6DC18019E74}|Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj|e:\\mycode\\byte.core\\byte.core.sqlsugar\\base\\rootkey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C302F42-593E-4186-AFF5-F6DC18019E74}|Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj|solutionrelative:byte.core.sqlsugar\\base\\rootkey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C302F42-593E-4186-AFF5-F6DC18019E74}|Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj|e:\\mycode\\byte.core\\byte.core.sqlsugar\\byte.core.sqlsugar.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{0C302F42-593E-4186-AFF5-F6DC18019E74}|Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj|solutionrelative:byte.core.sqlsugar\\byte.core.sqlsugar.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4CA06C-AF9A-4D54-97CE-E65C788301D7}|Byte.Core.Repository\\Byte.Core.Repository.csproj|e:\\mycode\\byte.core\\byte.core.repository\\byte.core.repository.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{6F4CA06C-AF9A-4D54-97CE-E65C788301D7}|Byte.Core.Repository\\Byte.Core.Repository.csproj|solutionrelative:byte.core.repository\\byte.core.repository.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|e:\\mycode\\byte.core\\byte.core.entityframework\\byte.core.entityframework.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|solutionrelative:byte.core.entityframework\\byte.core.entityframework.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
@@ -17,10 +137,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{4287B5E6-4E30-4397-9AD7-98BAB61F547E}|Byte.Core.Common\\Byte.Core.Common.csproj|e:\\mycode\\byte.core\\byte.core.common\\helpers\\httphelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4287B5E6-4E30-4397-9AD7-98BAB61F547E}|Byte.Core.Common\\Byte.Core.Common.csproj|solutionrelative:byte.core.common\\helpers\\httphelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4287B5E6-4E30-4397-9AD7-98BAB61F547E}|Byte.Core.Common\\Byte.Core.Common.csproj|e:\\mycode\\byte.core\\byte.core.common\\byte.core.common.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{4287B5E6-4E30-4397-9AD7-98BAB61F547E}|Byte.Core.Common\\Byte.Core.Common.csproj|solutionrelative:byte.core.common\\byte.core.common.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EABE3A18-F017-4897-A5B5-AA481E2A24FC}|Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj|e:\\mycode\\byte.core\\byte.core.entityframework\\attributes\\abstractinterceptorattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -82,111 +198,205 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "LinqExt.cs",
-              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Pager\\LinqExt.cs",
-              "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Pager\\LinqExt.cs",
-              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Pager\\LinqExt.cs",
-              "RelativeToolTip": "Byte.Core.EntityFramework\\Pager\\LinqExt.cs",
-              "ViewState": "AQIAADgAAAAAAAAAAAAAAEEAAAApAAAA",
+              "Title": "CheckJWTAttribute.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Attributes\\JWT\u6821\u9A8C\\CheckJWTAttribute.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Common\\Attributes\\JWT\u6821\u9A8C\\CheckJWTAttribute.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Attributes\\JWT\u6821\u9A8C\\CheckJWTAttribute.cs",
+              "RelativeToolTip": "Byte.Core.Common\\Attributes\\JWT\u6821\u9A8C\\CheckJWTAttribute.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAIAzwCQAAAA9AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T05:54:43.861Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RuntimeHelper.cs",
-              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
-              "RelativeDocumentMoniker": "Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
-              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
-              "RelativeToolTip": "Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAlwBoAAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:31:50.411Z"
+              "WhenOpened": "2024-07-16T13:21:18.123Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "AbstractInterceptorAttribute.cs",
-              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Attributes\\AbstractInterceptorAttribute.cs",
-              "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Attributes\\AbstractInterceptorAttribute.cs",
-              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Attributes\\AbstractInterceptorAttribute.cs",
-              "RelativeToolTip": "Byte.Core.EntityFramework\\Attributes\\AbstractInterceptorAttribute.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:27:41.067Z"
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Byte.Core.Api\\Properties\\launchSettings.json",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Byte.Core.Api\\Properties\\launchSettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-07-16T13:19:29.412Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "IDbContextCore.cs",
-              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\IDbContext\\IDbContextCore.cs",
-              "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\IDbContext\\IDbContextCore.cs",
-              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\IDbContext\\IDbContextCore.cs",
-              "RelativeToolTip": "Byte.Core.EntityFramework\\IDbContext\\IDbContextCore.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:25:45.609Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MySqlDbContext.cs",
-              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\DbContextCore\\MySqlDbContext.cs",
-              "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\DbContextCore\\MySqlDbContext.cs",
-              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\DbContextCore\\MySqlDbContext.cs",
-              "RelativeToolTip": "Byte.Core.EntityFramework\\DbContextCore\\MySqlDbContext.cs",
-              "ViewState": "AQIAACsAAAAAAAAAAAAnwDoAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:25:33.914Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "IMongoDbRepository.cs",
-              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\IMongoDbRepository.cs",
-              "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Repositories\\IMongoDbRepository.cs",
-              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\IMongoDbRepository.cs",
-              "RelativeToolTip": "Byte.Core.EntityFramework\\Repositories\\IMongoDbRepository.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T08:24:59.21Z"
+              "Title": "Byte.Core.Api",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Byte.Core.Api.csproj",
+              "RelativeDocumentMoniker": "Byte.Core.Api\\Byte.Core.Api.csproj",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Byte.Core.Api.csproj",
+              "RelativeToolTip": "Byte.Core.Api\\Byte.Core.Api.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-07-16T13:19:27.673Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Byte.Core.EntityFramework.csproj",
-              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj",
-              "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj",
-              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj",
-              "RelativeToolTip": "Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACgAAABMAAAA",
+              "Title": "JWTPayload.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Models\\JWTPayload.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Common\\Models\\JWTPayload.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Models\\JWTPayload.cs",
+              "RelativeToolTip": "Byte.Core.Common\\Models\\JWTPayload.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwA0AAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T12:48:23.352Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CurrentUser.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Web\\CurrentUser.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Common\\Web\\CurrentUser.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Web\\CurrentUser.cs",
+              "RelativeToolTip": "Byte.Core.Common\\Web\\CurrentUser.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T12:34:22.943Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Enums.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Models\\Enums.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Common\\Models\\Enums.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Models\\Enums.cs",
+              "RelativeToolTip": "Byte.Core.Common\\Models\\Enums.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAiwCQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T12:33:59.431Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Program.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Api\\Program.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Program.cs",
+              "RelativeToolTip": "Byte.Core.Api\\Program.cs",
+              "ViewState": "AQIAAPQAAAAAAAAAAAAWwCUAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T12:04:23.204Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Menu.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Menu.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Entity\\Menu.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Menu.cs",
+              "RelativeToolTip": "Byte.Core.Entity\\Menu.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwBAAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T11:59:00.734Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Byte.Core.Api",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Byte.Core.Api.csproj",
+              "RelativeDocumentMoniker": "Byte.Core.Api\\Byte.Core.Api.csproj",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Byte.Core.Api.csproj",
+              "RelativeToolTip": "Byte.Core.Api\\Byte.Core.Api.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvxoAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-03-29T08:17:59.052Z",
+              "WhenOpened": "2024-07-16T12:07:10.875Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\appsettings.json",
+              "RelativeDocumentMoniker": "Byte.Core.Api\\appsettings.json",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\appsettings.json",
+              "RelativeToolTip": "Byte.Core.Api\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-07-16T12:07:29.689Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CodeController.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\CodeController.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\CodeController.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\CodeController.cs",
+              "RelativeToolTip": "Byte.Core.Api\\Controllers\\CodeController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwBQAAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T12:16:24.725Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "log4net.config",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\log4net.config",
+              "RelativeDocumentMoniker": "Byte.Core.Api\\log4net.config",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\log4net.config",
+              "RelativeToolTip": "Byte.Core.Api\\log4net.config",
+              "ViewState": "AQIAAAYAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-07-16T12:16:01.671Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Role.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Role.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Entity\\Role.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Role.cs",
+              "RelativeToolTip": "Byte.Core.Entity\\Role.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAAwDMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T11:59:01.567Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "User.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\User.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Entity\\User.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\User.cs",
+              "RelativeToolTip": "Byte.Core.Entity\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T11:59:03.477Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Byte.Core.Entity",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Byte.Core.Entity.csproj",
+              "RelativeDocumentMoniker": "Byte.Core.Entity\\Byte.Core.Entity.csproj",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Byte.Core.Entity.csproj",
+              "RelativeToolTip": "Byte.Core.Entity\\Byte.Core.Entity.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-07-16T11:47:22.907Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "Byte.Core.Common.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Byte.Core.Common.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Common\\Byte.Core.Common.csproj",
@@ -199,7 +409,289 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 17,
+              "Title": "appsettings.Production.json",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\appsettings.Production.json",
+              "RelativeDocumentMoniker": "Byte.Core.Api\\appsettings.Production.json",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\appsettings.Production.json",
+              "RelativeToolTip": "Byte.Core.Api\\appsettings.Production.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-07-16T12:19:24.769Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "Byte.Core.Api\\appsettings.Development.json",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\appsettings.Development.json",
+              "RelativeToolTip": "Byte.Core.Api\\appsettings.Development.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADoAAABgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-07-16T12:19:25.55Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "SqlSugarSetup.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Extensions\\SqlSugarSetup.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Api\\Extensions\\SqlSugarSetup.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Extensions\\SqlSugarSetup.cs",
+              "RelativeToolTip": "Byte.Core.Api\\Extensions\\SqlSugarSetup.cs",
+              "ViewState": "AQIAAKkAAAAAAAAAAAAWwLwAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T12:14:51.729Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "BaseApiController.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Common\\BaseApiController.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Api\\Common\\BaseApiController.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Common\\BaseApiController.cs",
+              "RelativeToolTip": "Byte.Core.Api\\Common\\BaseApiController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwMAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T12:17:42.729Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "BaseController.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Common\\BaseController.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Api\\Common\\BaseController.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Common\\BaseController.cs",
+              "RelativeToolTip": "Byte.Core.Api\\Common\\BaseController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwMAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T12:18:02.173Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "DataSeederMiddleware.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Extensions\\DataSeederMiddleware.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Api\\Extensions\\DataSeederMiddleware.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Extensions\\DataSeederMiddleware.cs",
+              "RelativeToolTip": "Byte.Core.Api\\Extensions\\DataSeederMiddleware.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T12:13:42.061Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "User_Dept.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\User_Dept.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Entity\\User_Dept.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\User_Dept.cs",
+              "RelativeToolTip": "Byte.Core.Entity\\User_Dept.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T11:59:03.966Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Role_Menu.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Role_Menu.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Entity\\Role_Menu.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Role_Menu.cs",
+              "RelativeToolTip": "Byte.Core.Entity\\Role_Menu.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T11:59:02.141Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "RootKey.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.SqlSugar\\Base\\RootKey.cs",
+              "RelativeDocumentMoniker": "Byte.Core.SqlSugar\\Base\\RootKey.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.SqlSugar\\Base\\RootKey.cs",
+              "RelativeToolTip": "Byte.Core.SqlSugar\\Base\\RootKey.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwIAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T11:58:06.24Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "BaseEntity.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.SqlSugar\\Base\\BaseEntity.cs",
+              "RelativeDocumentMoniker": "Byte.Core.SqlSugar\\Base\\BaseEntity.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.SqlSugar\\Base\\BaseEntity.cs",
+              "RelativeToolTip": "Byte.Core.SqlSugar\\Base\\BaseEntity.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwMAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T11:58:00.874Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Dept.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Dept.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Entity\\Dept.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Dept.cs",
+              "RelativeToolTip": "Byte.Core.Entity\\Dept.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T11:57:19.732Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Byte.Core.Models",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Models\\Byte.Core.Models.csproj",
+              "RelativeDocumentMoniker": "Byte.Core.Models\\Byte.Core.Models.csproj",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Models\\Byte.Core.Models.csproj",
+              "RelativeToolTip": "Byte.Core.Models\\Byte.Core.Models.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-07-16T11:54:04.771Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Byte.Core.SqlSugar",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj",
+              "RelativeDocumentMoniker": "Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj",
+              "RelativeToolTip": "Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-07-16T11:56:08.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Byte.Core.Repository",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Repository\\Byte.Core.Repository.csproj",
+              "RelativeDocumentMoniker": "Byte.Core.Repository\\Byte.Core.Repository.csproj",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Repository\\Byte.Core.Repository.csproj",
+              "RelativeToolTip": "Byte.Core.Repository\\Byte.Core.Repository.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-07-16T11:51:56.849Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "AbstractInterceptorAttribute.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Attributes\\AbstractInterceptorAttribute.cs",
+              "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Attributes\\AbstractInterceptorAttribute.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Attributes\\AbstractInterceptorAttribute.cs",
+              "RelativeToolTip": "Byte.Core.EntityFramework\\Attributes\\AbstractInterceptorAttribute.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-29T08:27:41.067Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "RuntimeHelper.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
+              "RelativeToolTip": "Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAlwBoAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-29T08:31:50.411Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Byte.Core.EntityFramework.csproj",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj",
+              "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj",
+              "RelativeToolTip": "Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACgAAABMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-03-29T08:17:59.052Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "MySqlDbContext.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\DbContextCore\\MySqlDbContext.cs",
+              "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\DbContextCore\\MySqlDbContext.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\DbContextCore\\MySqlDbContext.cs",
+              "RelativeToolTip": "Byte.Core.EntityFramework\\DbContextCore\\MySqlDbContext.cs",
+              "ViewState": "AQIAACsAAAAAAAAAAAAnwDoAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-29T08:25:33.914Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "IDbContextCore.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\IDbContext\\IDbContextCore.cs",
+              "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\IDbContext\\IDbContextCore.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\IDbContext\\IDbContextCore.cs",
+              "RelativeToolTip": "Byte.Core.EntityFramework\\IDbContext\\IDbContextCore.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-29T08:25:45.609Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "IMongoDbRepository.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\IMongoDbRepository.cs",
+              "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Repositories\\IMongoDbRepository.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\IMongoDbRepository.cs",
+              "RelativeToolTip": "Byte.Core.EntityFramework\\Repositories\\IMongoDbRepository.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-29T08:24:59.21Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "LinqExt.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Pager\\LinqExt.cs",
+              "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Pager\\LinqExt.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Pager\\LinqExt.cs",
+              "RelativeToolTip": "Byte.Core.EntityFramework\\Pager\\LinqExt.cs",
+              "ViewState": "AQIAADgAAAAAAAAAAAAAAEEAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-08T05:54:43.861Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
               "Title": "HttpHelper.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Helpers\\HttpHelper.cs",
               "RelativeDocumentMoniker": "Byte.Core.Common\\Helpers\\HttpHelper.cs",
@@ -211,7 +703,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 37,
               "Title": "BaseDbContext.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\DbContextCore\\BaseDbContext.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\DbContextCore\\BaseDbContext.cs",
@@ -223,7 +715,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 39,
               "Title": "IDbFirst.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\CodeGenerator\\DbFirst\\IDbFirst.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\CodeGenerator\\DbFirst\\IDbFirst.cs",
@@ -235,7 +727,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 38,
               "Title": "ShardDbContextFactory.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\DbContextCore\\ShardDbContextFactory.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\DbContextCore\\ShardDbContextFactory.cs",
@@ -247,7 +739,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 42,
               "Title": "FromDbContextFactoryAttribute.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Attributes\\FromDbContextFactoryAttribute.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Attributes\\FromDbContextFactoryAttribute.cs",
@@ -259,7 +751,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 43,
               "Title": "MongoDbContext.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\DbContextCore\\MongoDbContext.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\DbContextCore\\MongoDbContext.cs",
@@ -271,7 +763,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 45,
               "Title": "IRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\IRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Repositories\\IRepository.cs",
@@ -282,7 +774,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 44,
               "Title": "MongoDbRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\MongoDbRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Repositories\\MongoDbRepository.cs",
@@ -293,7 +785,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 40,
               "Title": "ICodeFirst.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\CodeGenerator\\CodeFirst\\ICodeFirst.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\CodeGenerator\\CodeFirst\\ICodeFirst.cs",
@@ -305,7 +797,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 46,
               "Title": "BaseRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\BaseRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Repositories\\BaseRepository.cs",

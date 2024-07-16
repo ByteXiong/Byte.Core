@@ -1,0 +1,54 @@
+using Byte.Core.SqlSugar;
+using SqlSugar;
+
+namespace Byte.Core.Entity
+{
+    /// <summary>
+    /// 角色
+    /// </summary>
+    [SugarTable("Role")]
+    public class Role : BaseEntity<Guid>
+    {
+        /// <summary>
+        /// 账号
+        /// </summary>
+        [SugarColumn(Length = 50, IsNullable = true)]
+        public String Name { get; set; }
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public bool State { get; set; }
+
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        [SugarColumn(Length = 200, IsNullable = true)]
+        public String Remark { get; set; }
+
+
+        /// <summary>
+        /// 公司id
+        /// </summary>
+        [SugarColumn(Length = 200, IsNullable = true)]
+        public Guid DeptId { get; set; }
+
+        #region 导航
+        [SugarColumn(IsIgnore = true)]
+        [Navigate(NavigateType.ManyToOne, nameof(DeptId))]
+        public Dept Dept { get; set; }
+
+
+        [SugarColumn(IsIgnore = true)]
+        [Navigate(typeof(User_Dept_Role), nameof(User_Dept_Role.RoleId), nameof(User_Dept_Role.UserId))]
+        public List<User> Users { get; set; }
+
+        [SugarColumn(IsIgnore = true)]
+        [Navigate(typeof(Role_Menu), nameof(Role_Menu.RoleId), nameof(Role_Menu.MenuId))]
+        public List<Menu> Menus { get; set; }
+        #endregion
+    }
+
+    //[JsonIgnore]//隐藏
+}
