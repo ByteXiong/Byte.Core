@@ -89,20 +89,56 @@ type Alova2Method<
     : never;
 
 export type DeptTreeDTO = {
+  /**
+   * 主键Id!
+   */
   id?: string;
+  /**
+   * 账号
+   */
   name?: string;
+  /**
+   * 头像
+   */
   icon?: string;
+  /**
+   * 创建时间
+   */
   createTime?: string;
+  /**
+   * 状态
+   */
   state?: boolean;
+  /**
+   * 父级
+   */
   parentId?: string;
+  /**
+   * 备注
+   */
   remark?: string;
+  /**
+   * 排序
+   */
   sort?: number;
   children?: DeptTreeDTO[];
 };
 export type DeptSelectDTO = {
+  /**
+   * 主键Id!
+   */
   id?: string;
+  /**
+   * 父级
+   */
   parentId?: string;
+  /**
+   * 菜单
+   */
   name?: string;
+  /**
+   * 图标
+   */
   icon?: string;
   children?: DeptSelectDTO[];
 };
@@ -307,34 +343,85 @@ export type UpdateDeptParam = {
   children?: Dept[];
 };
 export type CaptchaDTO = {
+  /**
+   * 类型
+   */
   captchaId?: string;
+  /**
+   * 刷新token
+   */
   img?: string;
 };
 export type LoginToken = {
+  /**
+   * 授权token
+   */
   accessToken?: string;
+  /**
+   * 过期时间
+   */
   expires?: number;
+  /**
+   * 类型
+   */
   tokenType?: string;
+  /**
+   * 刷新token
+   */
   refreshToken?: string;
+  /**
+   * 允许token时间内
+   */
   refreshTokenExpires?: number;
 };
 export type LoginParam = {
+  /**
+   * 账号
+   */
   account?: string;
+  /**
+   * 密码
+   */
   password?: string;
   captchaId?: string;
   captchaCode?: string;
 };
 export type LoginInfoDTO = {
+  /**
+   * 主键Id!
+   */
   id?: string;
+  /**
+   * 名称
+   */
   name?: string;
+  /**
+   * 头像
+   */
   avatar?: string;
+  /**
+   * 账号
+   */
   account?: string;
   roles?: string[];
   perms?: string[];
 };
 export type MenuSelectDTO = {
+  /**
+   * 主键Id!
+   */
   id?: string;
+  /**
+   * 父级
+   */
   parentId?: string;
+  /**
+   * 菜单
+   */
   title?: string;
+  /**
+   * 图标
+   */
   icon?: string;
   children?: MenuSelectDTO[];
 };
@@ -419,23 +506,62 @@ export type UpdateMenuParam = {
   children?: Menu[];
 };
 export type RouteMeta = {
+  /**
+   * 标题
+   */
   title?: string;
+  /**
+   * 隐藏
+   */
   hidden?: boolean;
+  /**
+   * Icon
+   */
   icon?: string;
+  /**
+   * 是否缓存
+   */
   keepAlive?: boolean;
+  /**
+   * 根目录始终显示
+   */
   alwaysShow?: boolean;
+  /**
+   * 权限标识
+   */
   roles?: string[];
 };
 export type RouteDTO = {
   id?: string;
+  /**
+   * 路径
+   */
   path?: string;
+  /**
+   * 组件
+   */
   component?: string;
+  /**
+   * 组件名称
+   */
   name?: string;
+  /**
+   * 父级ID
+   */
   parentId?: string;
+  /**
+   * 排序
+   */
   sort?: number;
   type?: MenuTypeEnum;
+  /**
+   * 跳转路由
+   */
   redirect?: string;
   meta?: RouteMeta;
+  /**
+   * 子节点
+   */
   children?: RouteDTO[];
 };
 export type PagerInfo = {
@@ -485,6 +611,13 @@ export type RoleDTO = {
 export type RoleDTOPagedResults = {
   pagerInfo?: PagerInfo;
   data?: RoleDTO[];
+};
+export type RoleParam = {
+  startIndex?: number;
+  pageIndex?: number;
+  pageSize?: number;
+  sortList?: Record<string, string>;
+  keyWord?: string;
 };
 export type RoleInfo = {
   /**
@@ -550,21 +683,57 @@ export type UpdateRoleParam = {
   dept?: Dept;
   users?: User[];
   menus?: Menu[];
+  /**
+   * 菜单
+   */
   menuIds?: string[];
 };
 export type RoleSelectDTO = {
+  /**
+   * 主键Id!
+   */
   id?: string;
+  /**
+   * 账号
+   */
   name?: string;
 };
 export type UserDTO = {
+  /**
+   * 主键Id!
+   */
   id?: string;
+  /**
+   * 名称
+   */
   name?: string;
+  /**
+   * 头像
+   */
   avatar?: string;
+  /**
+   * 密码
+   */
   password?: string;
+  /**
+   * 创建时间
+   */
   createTime?: string;
+  /**
+   * 创建人
+   */
   createBy?: string;
+  /**
+   * 状态
+   */
   state?: boolean;
+  /**
+   * 公司
+   */
   deptId?: string;
+  /**
+   * 账号
+   */
   account?: string;
 };
 export type UserDTOPagedResults = {
@@ -636,7 +805,7 @@ declare global {
       /**
        * ---
        *
-       * [GET]
+       * [GET] 树图
        *
        * **path:** /api/Dept/GetTree
        *
@@ -649,13 +818,21 @@ declare global {
        *   code: string
        *   // [required]
        *   data: Array<{
+       *     // 主键Id!
        *     id?: string
+       *     // 账号
        *     name?: string
+       *     // 头像
        *     icon?: string
+       *     // 创建时间
        *     createTime?: string
+       *     // 状态
        *     state?: boolean
+       *     // 父级
        *     parentId?: string
+       *     // 备注
        *     remark?: string
+       *     // 排序
        *     sort?: number
        *     children?: Array<DeptTreeDTO>
        *   }>
@@ -712,7 +889,7 @@ declare global {
       /**
        * ---
        *
-       * [GET]
+       * [GET] 下拉框
        *
        * **path:** /api/Dept/GetTreeSelect
        *
@@ -734,9 +911,13 @@ declare global {
        *   code: string
        *   // [required]
        *   data: Array<{
+       *     // 主键Id!
        *     id?: string
+       *     // 父级
        *     parentId?: string
+       *     // 菜单
        *     name?: string
+       *     // 图标
        *     icon?: string
        *     children?: Array<DeptSelectDTO>
        *   }>
@@ -797,7 +978,7 @@ declare global {
       /**
        * ---
        *
-       * [GET]
+       * [GET] 查询详情
        *
        * **path:** /api/Dept/GetInfo
        *
@@ -817,6 +998,7 @@ declare global {
        * type Response = {
        *   // [required]
        *   code: string
+       *   // 部门 详情
        *   // [required]
        *   data: {
        *     // 主键
@@ -943,6 +1125,7 @@ declare global {
            */
           code: string;
           /**
+           * 部门 详情
            * [required]
            */
           data: DeptInfo;
@@ -968,6 +1151,7 @@ declare global {
            */
           code: string;
           /**
+           * 部门 详情
            * [required]
            */
           data: DeptInfo;
@@ -986,7 +1170,7 @@ declare global {
       /**
        * ---
        *
-       * [POST]
+       * [POST] 添加
        *
        * **path:** /api/Dept/Add
        *
@@ -1292,7 +1476,7 @@ declare global {
       /**
        * ---
        *
-       * [PUT]
+       * [PUT] 编辑
        *
        * **path:** /api/Dept/Update
        *
@@ -1598,7 +1782,7 @@ declare global {
       /**
        * ---
        *
-       * [DELETE]
+       * [DELETE] 删除
        *
        * **path:** /api/Dept/Delete
        *
@@ -1673,7 +1857,7 @@ declare global {
       /**
        * ---
        *
-       * [PUT]
+       * [PUT] 设置状态
        *
        * **path:** /api/Dept/SetState
        *
@@ -1756,7 +1940,7 @@ declare global {
       /**
        * ---
        *
-       * [GET]
+       * [GET] 获取验证码
        *
        * **path:** /api/Login/Captcha
        *
@@ -1769,7 +1953,9 @@ declare global {
        *   code: string
        *   // [required]
        *   data: {
+       *     // 类型
        *     captchaId?: string
+       *     // 刷新token
        *     img?: string
        *   }
        *   // [required]
@@ -1834,7 +2020,9 @@ declare global {
        * **RequestBody**
        * ```ts
        * type RequestBody = {
+       *   // 账号
        *   account?: string
+       *   // 密码
        *   password?: string
        *   captchaId?: string
        *   captchaCode?: string
@@ -1850,10 +2038,15 @@ declare global {
        *   code: string
        *   // [required]
        *   data: {
+       *     // 授权token
        *     accessToken?: string
+       *     // 过期时间
        *     expires?: number
+       *     // 类型
        *     tokenType?: string
+       *     // 刷新token
        *     refreshToken?: string
+       *     // 允许token时间内
        *     refreshTokenExpires?: number
        *   }
        *   // [required]
@@ -1911,7 +2104,7 @@ declare global {
       /**
        * ---
        *
-       * [GET]
+       * [GET] 获取登录信息
        *
        * **path:** /api/Login/Info
        *
@@ -1924,9 +2117,13 @@ declare global {
        *   code: string
        *   // [required]
        *   data: {
+       *     // 主键Id!
        *     id?: string
+       *     // 名称
        *     name?: string
+       *     // 头像
        *     avatar?: string
+       *     // 账号
        *     account?: string
        *     roles?: string[]
        *     perms?: string[]
@@ -1984,7 +2181,7 @@ declare global {
       /**
        * ---
        *
-       * [POST]
+       * [POST] 退出登录
        *
        * **path:** /api/Login/LoginOut
        *
@@ -2003,7 +2200,7 @@ declare global {
       /**
        * ---
        *
-       * [GET]
+       * [GET] 列表
        *
        * **path:** /api/Menu/GetTree
        *
@@ -2098,7 +2295,7 @@ declare global {
       /**
        * ---
        *
-       * [GET]
+       * [GET] 下拉框
        *
        * **path:** /api/Menu/GetTreeSelect
        *
@@ -2120,9 +2317,13 @@ declare global {
        *   code: string
        *   // [required]
        *   data: Array<{
+       *     // 主键Id!
        *     id?: string
+       *     // 父级
        *     parentId?: string
+       *     // 菜单
        *     title?: string
+       *     // 图标
        *     icon?: string
        *     children?: Array<MenuSelectDTO>
        *   }>
@@ -2183,7 +2384,7 @@ declare global {
       /**
        * ---
        *
-       * [GET]
+       * [GET] 查询详情
        *
        * **path:** /api/Menu/GetInfo
        *
@@ -2203,6 +2404,7 @@ declare global {
        * type Response = {
        *   // [required]
        *   code: string
+       *   // 菜单 详情
        *   // [required]
        *   data: {
        *     // 主键
@@ -2327,6 +2529,7 @@ declare global {
            */
           code: string;
           /**
+           * 菜单 详情
            * [required]
            */
           data: MenuInfo;
@@ -2352,6 +2555,7 @@ declare global {
            */
           code: string;
           /**
+           * 菜单 详情
            * [required]
            */
           data: MenuInfo;
@@ -2370,7 +2574,7 @@ declare global {
       /**
        * ---
        *
-       * [POST]
+       * [POST] 提交
        *
        * **path:** /api/Menu/Submit
        *
@@ -2553,7 +2757,7 @@ declare global {
       /**
        * ---
        *
-       * [PUT]
+       * [PUT] 设置状态
        *
        * **path:** /api/Menu/SetState
        *
@@ -2634,7 +2838,7 @@ declare global {
       /**
        * ---
        *
-       * [DELETE]
+       * [DELETE] 删除
        *
        * **path:** /api/Menu/Delete
        *
@@ -2709,7 +2913,7 @@ declare global {
       /**
        * ---
        *
-       * [GET]
+       * [GET] 获取我的路由
        *
        * **path:** /api/Menu/GetRoutes
        *
@@ -2723,21 +2927,34 @@ declare global {
        *   // [required]
        *   data: Array<{
        *     id?: string
+       *     // 路径
        *     path?: string
+       *     // 组件
        *     component?: string
+       *     // 组件名称
        *     name?: string
+       *     // 父级ID
        *     parentId?: string
+       *     // 排序
        *     sort?: number
        *     type?: 1 | 2 | 3 | 4
+       *     // 跳转路由
        *     redirect?: string
        *     meta?: {
+       *       // 标题
        *       title?: string
+       *       // 隐藏
        *       hidden?: boolean
+       *       // Icon
        *       icon?: string
+       *       // 是否缓存
        *       keepAlive?: boolean
+       *       // 根目录始终显示
        *       alwaysShow?: boolean
+       *       // 权限标识
        *       roles?: string[]
        *     }
+       *     // 子节点
        *     children?: Array<RouteDTO>
        *   }>
        *   // [required]
@@ -2795,20 +3012,20 @@ declare global {
       /**
        * ---
        *
-       * [GET]
+       * [POST] 分页
        *
        * **path:** /api/Role/GetPage
        *
        * ---
        *
-       * **Query Parameters**
+       * **RequestBody**
        * ```ts
-       * type QueryParameters = {
-       *   KeyWord?: string
-       *   StartIndex?: number
-       *   PageIndex?: number
-       *   PageSize?: number
-       *   SortList?: Record<string, string>
+       * type RequestBody = {
+       *   startIndex?: number
+       *   pageIndex?: number
+       *   pageSize?: number
+       *   sortList?: Record<string, string>
+       *   keyWord?: string
        * }
        * ```
        *
@@ -3052,7 +3269,7 @@ declare global {
        * }
        * ```
        */
-      get_api_role_getpage<
+      post_api_role_getpage<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -3071,13 +3288,7 @@ declare global {
            */
           success: boolean;
         }> & {
-          params: {
-            KeyWord?: string;
-            StartIndex?: number;
-            PageIndex?: number;
-            PageSize?: number;
-            SortList?: Record<string, string>;
-          };
+          data: RoleParam;
         }
       >(
         config: Config
@@ -3100,13 +3311,13 @@ declare global {
            */
           success: boolean;
         },
-        'Role.get_api_role_getpage',
+        'Role.post_api_role_getpage',
         Config
       >;
       /**
        * ---
        *
-       * [GET]
+       * [GET] 查询详情
        *
        * **path:** /api/Role/GetInfo
        *
@@ -3126,6 +3337,7 @@ declare global {
        * type Response = {
        *   // [required]
        *   code: string
+       *   // 角色 详情
        *   // [required]
        *   data: {
        *     // 主键
@@ -3353,6 +3565,7 @@ declare global {
            */
           code: string;
           /**
+           * 角色 详情
            * [required]
            */
           data: RoleInfo;
@@ -3378,6 +3591,7 @@ declare global {
            */
           code: string;
           /**
+           * 角色 详情
            * [required]
            */
           data: RoleInfo;
@@ -3396,7 +3610,7 @@ declare global {
       /**
        * ---
        *
-       * [POST]
+       * [POST] 新增
        *
        * **path:** /api/Role/Submit
        *
@@ -3614,6 +3828,7 @@ declare global {
        *     roles?: Array<Role>
        *     children?: Array<Menu>
        *   }>
+       *   // 菜单
        *   menuIds?: string[]
        * }
        * ```
@@ -3682,7 +3897,7 @@ declare global {
       /**
        * ---
        *
-       * [DELETE]
+       * [DELETE] 删除
        *
        * **path:** /api/Role/Delete
        *
@@ -3757,7 +3972,7 @@ declare global {
       /**
        * ---
        *
-       * [GET]
+       * [GET] 下拉框
        *
        * **path:** /api/Role/Select
        *
@@ -3770,7 +3985,9 @@ declare global {
        *   code: string
        *   // [required]
        *   data: Array<{
+       *     // 主键Id!
        *     id?: string
+       *     // 账号
        *     name?: string
        *   }>
        *   // [required]
@@ -3828,7 +4045,7 @@ declare global {
       /**
        * ---
        *
-       * [POST]
+       * [POST] 上传附件
        *
        * **path:** /api/Upload/Files
        *
@@ -3896,7 +4113,7 @@ declare global {
       /**
        * ---
        *
-       * [GET]
+       * [GET] 分页
        *
        * **path:** /api/User/GetPage
        *
@@ -3906,6 +4123,7 @@ declare global {
        * ```ts
        * type QueryParameters = {
        *   KeyWord?: string
+       *   // 公司
        *   DeptId?: string
        *   StartIndex?: number
        *   PageIndex?: number
@@ -3935,14 +4153,23 @@ declare global {
        *       totalPageCount?: number
        *     }
        *     data?: Array<{
+       *       // 主键Id!
        *       id?: string
+       *       // 名称
        *       name?: string
+       *       // 头像
        *       avatar?: string
+       *       // 密码
        *       password?: string
+       *       // 创建时间
        *       createTime?: string
+       *       // 创建人
        *       createBy?: string
+       *       // 状态
        *       state?: boolean
+       *       // 公司
        *       deptId?: string
+       *       // 账号
        *       account?: string
        *     }>
        *   }
@@ -3974,6 +4201,9 @@ declare global {
         }> & {
           params: {
             KeyWord?: string;
+            /**
+             * 公司
+             */
             DeptId?: string;
             StartIndex?: number;
             PageIndex?: number;
@@ -4008,7 +4238,7 @@ declare global {
       /**
        * ---
        *
-       * [GET]
+       * [GET] 查询详情
        *
        * **path:** /api/User/GetInfo
        *
@@ -4028,6 +4258,7 @@ declare global {
        * type Response = {
        *   // [required]
        *   code: string
+       *   // 用户 详情
        *   // [required]
        *   data: {
        *     // 主键
@@ -4183,6 +4414,7 @@ declare global {
            */
           code: string;
           /**
+           * 用户 详情
            * [required]
            */
           data: UserInfo;
@@ -4208,6 +4440,7 @@ declare global {
            */
           code: string;
           /**
+           * 用户 详情
            * [required]
            */
           data: UserInfo;
@@ -4226,7 +4459,7 @@ declare global {
       /**
        * ---
        *
-       * [POST]
+       * [POST] 添加
        *
        * **path:** /api/User/Add
        *
@@ -4441,7 +4674,7 @@ declare global {
       /**
        * ---
        *
-       * [PUT]
+       * [PUT] 编辑
        *
        * **path:** /api/User/Update
        *
@@ -4656,7 +4889,7 @@ declare global {
       /**
        * ---
        *
-       * [DELETE]
+       * [DELETE] 删除
        *
        * **path:** /api/User/Delete
        *
@@ -4731,7 +4964,7 @@ declare global {
       /**
        * ---
        *
-       * [PUT]
+       * [PUT] 设置状态
        *
        * **path:** /api/User/SetState
        *

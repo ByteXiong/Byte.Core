@@ -34,7 +34,7 @@ export default {
   'Menu.put_api_menu_setstate': ['PUT', '/api/Menu/SetState'],
   'Menu.delete_api_menu_delete': ['DELETE', '/api/Menu/Delete'],
   'Menu.get_api_menu_getroutes': ['GET', '/api/Menu/GetRoutes'],
-  'Role.get_api_role_getpage': ['GET', '/api/Role/GetPage'],
+  'Role.post_api_role_getpage': ['POST', '/api/Role/GetPage'],
   'Role.get_api_role_getinfo': ['GET', '/api/Role/GetInfo'],
   'Role.post_api_role_submit': ['POST', '/api/Role/Submit'],
   'Role.delete_api_role_delete': ['DELETE', '/api/Role/Delete'],

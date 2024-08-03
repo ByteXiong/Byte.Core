@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "E:\\MyCode\\Byte.Core\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{AAF96D8A-B603-4CF3-A835-A35D66F31FC3}|Byte.Core.Tools\\Byte.Core.Tools.csproj|e:\\mycode\\byte.core\\byte.core.tools\\byte.core.tools.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{AAF96D8A-B603-4CF3-A835-A35D66F31FC3}|Byte.Core.Tools\\Byte.Core.Tools.csproj|solutionrelative:byte.core.tools\\byte.core.tools.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
@@ -37,10 +41,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{287FFA61-3022-40D3-B91A-E020C65029B7}|Byte.Core.Models\\Byte.Core.Models.csproj|e:\\mycode\\byte.core\\byte.core.models\\roledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{287FFA61-3022-40D3-B91A-E020C65029B7}|Byte.Core.Models\\Byte.Core.Models.csproj|solutionrelative:byte.core.models\\roledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\controllers\\deptcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -330,20 +330,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Byte.Core.Business",
-              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\Byte.Core.Business.csproj",
-              "RelativeDocumentMoniker": "Byte.Core.Business\\Byte.Core.Business.csproj",
-              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\Byte.Core.Business.csproj",
-              "RelativeToolTip": "Byte.Core.Business\\Byte.Core.Business.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwYAAABFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-08-03T08:38:28.688Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Byte.Core.Models.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Models\\Byte.Core.Models.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Models\\Byte.Core.Models.csproj",
@@ -356,7 +343,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Byte.Core.Api.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Byte.Core.Api.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Byte.Core.Api.csproj",
@@ -369,7 +356,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "launchSettings.json",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Properties\\launchSettings.json",
@@ -382,7 +369,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Byte.Core.Repository.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Repository\\Byte.Core.Repository.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Repository\\Byte.Core.Repository.csproj",
@@ -395,7 +382,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Byte.Core.Entity.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Byte.Core.Entity.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Entity\\Byte.Core.Entity.csproj",
@@ -408,20 +395,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Byte.Core.Tools",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Tools\\Byte.Core.Tools.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Tools\\Byte.Core.Tools.csproj",
               "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Tools\\Byte.Core.Tools.csproj",
               "RelativeToolTip": "Byte.Core.Tools\\Byte.Core.Tools.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwYAAABCAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2024-08-03T07:10:35.224Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
+              "Title": "RoleController.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\RoleController.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\RoleController.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\RoleController.cs",
+              "RelativeToolTip": "Byte.Core.Api\\Controllers\\RoleController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAE0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-03T07:28:24.264Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Byte.Core.Business",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\Byte.Core.Business.csproj",
+              "RelativeDocumentMoniker": "Byte.Core.Business\\Byte.Core.Business.csproj",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\Byte.Core.Business.csproj",
+              "RelativeToolTip": "Byte.Core.Business\\Byte.Core.Business.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwYAAABFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-08-03T08:38:28.688Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "Byte.Core.SqlSugar.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj",
               "RelativeDocumentMoniker": "Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj",
@@ -434,7 +447,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "RoleDTO.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Models\\RoleDTO.cs",
               "RelativeDocumentMoniker": "Byte.Core.Models\\RoleDTO.cs",
@@ -443,19 +456,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAuwAgAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-03T07:21:48.859Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "RoleController.cs",
-              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\RoleController.cs",
-              "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\RoleController.cs",
-              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\RoleController.cs",
-              "RelativeToolTip": "Byte.Core.Api\\Controllers\\RoleController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAABTAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T07:28:24.264Z",
               "EditorCaption": ""
             },
             {

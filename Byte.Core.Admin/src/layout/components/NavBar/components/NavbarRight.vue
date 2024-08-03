@@ -24,7 +24,7 @@
           :src="userStore.user.avatar + '?imageView2/1/w/80/h/80'"
           class="rounded-full mr-10px w24px w24px"
         />
-        <span>{{ userStore.user.username }}</span>
+        <span>{{ userStore.user.name }}</span>
       </div>
       <template #dropdown>
         <el-dropdown-menu>
@@ -54,6 +54,7 @@ import {
   useSettingsStore,
 } from "@/store";
 import defaultSettings from "@/settings";
+import { useRoute, useRouter } from "vue-router";
 
 const appStore = useAppStore();
 const tagsViewStore = useTagsViewStore();

@@ -179,8 +179,8 @@ const {
 } = usePagination(
   // Method实例获取函数，它将接收page和pageSize，并返回一个Method实例
   (page, pageSize) =>
-    Apis.Role.get_api_role_getpage({
-      params: {
+    Apis.Role.post_api_role_getpage({
+      data: {
         KeyWord: keyWord.value,
         pageIndex: page,
         pageSize: pageSize,
@@ -190,7 +190,7 @@ const {
   {
     watchingStates: [keyWord, sortList],
     // 请求前的初始数据（接口返回的数据格式）
-    // initialData: {KeyWord
+    // initialData: {
     //   pagerInfo: {
     //     pageIndex: 1,
     //     pageSize: 10,
