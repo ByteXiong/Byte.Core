@@ -28,7 +28,7 @@ namespace Byte.Core.Api.Extensions
                     Console.WriteLine("初始化主库....");
                     if (dataContext.DbType != DbType.Oracle)
                     {
-                        dataContext.Db.DbMaintenance.CreateDatabase();
+                       dataContext.Db.DbMaintenance.CreateDatabase();
                     }
                     else
                     {

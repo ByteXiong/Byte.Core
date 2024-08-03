@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "E:\\MyCode\\Byte.Core\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0C302F42-593E-4186-AFF5-F6DC18019E74}|Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj|e:\\mycode\\byte.core\\byte.core.sqlsugar\\pager\\linqext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C302F42-593E-4186-AFF5-F6DC18019E74}|Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj|solutionrelative:byte.core.sqlsugar\\pager\\linqext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A1B36BF-6D10-48DA-81AF-C77C725D9D13}|Byte.Core.Business\\Byte.Core.Business.csproj|e:\\mycode\\byte.core\\byte.core.business\\rolelogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A1B36BF-6D10-48DA-81AF-C77C725D9D13}|Byte.Core.Business\\Byte.Core.Business.csproj|solutionrelative:byte.core.business\\rolelogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -25,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\extensions\\sqlsugarsetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\extensions\\sqlsugarsetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3A1B36BF-6D10-48DA-81AF-C77C725D9D13}|Byte.Core.Business\\Byte.Core.Business.csproj|e:\\mycode\\byte.core\\byte.core.business\\rolelogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A1B36BF-6D10-48DA-81AF-C77C725D9D13}|Byte.Core.Business\\Byte.Core.Business.csproj|solutionrelative:byte.core.business\\rolelogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4287B5E6-4E30-4397-9AD7-98BAB61F547E}|Byte.Core.Common\\Byte.Core.Common.csproj|e:\\mycode\\byte.core\\byte.core.common\\helpers\\sixlaborsimagehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -298,8 +302,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LinqExt.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.SqlSugar\\Pager\\LinqExt.cs",
+              "RelativeDocumentMoniker": "Byte.Core.SqlSugar\\Pager\\LinqExt.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.SqlSugar\\Pager\\LinqExt.cs",
+              "RelativeToolTip": "Byte.Core.SqlSugar\\Pager\\LinqExt.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-03T07:29:32.467Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -322,20 +339,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "RoleController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\RoleController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\RoleController.cs",
               "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\RoleController.cs",
               "RelativeToolTip": "Byte.Core.Api\\Controllers\\RoleController.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAUwE0AAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAB3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-03T07:28:24.264Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "RoleDTO.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Models\\RoleDTO.cs",
               "RelativeDocumentMoniker": "Byte.Core.Models\\RoleDTO.cs",
@@ -348,20 +365,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "RoleLogic.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\RoleLogic.cs",
               "RelativeDocumentMoniker": "Byte.Core.Business\\RoleLogic.cs",
               "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\RoleLogic.cs",
               "RelativeToolTip": "Byte.Core.Business\\RoleLogic.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAANAAAA",
+              "ViewState": "AQIAAAgAAAAAAAAAAADwvyAAAABiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-03T07:05:59.174Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Program.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Program.cs",
@@ -374,7 +391,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "DeptController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\DeptController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\DeptController.cs",
@@ -387,7 +404,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "SqlSugarSetup.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Extensions\\SqlSugarSetup.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Extensions\\SqlSugarSetup.cs",
@@ -400,7 +417,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "LoginController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\LoginController.cs",
@@ -413,7 +430,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "MenuController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\MenuController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\MenuController.cs",
@@ -426,7 +443,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "UploadController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\UploadController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\UploadController.cs",
@@ -439,7 +456,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "DistributedCacheManager.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Cache\\DistributedCacheManager.cs",
               "RelativeDocumentMoniker": "Byte.Core.Common\\Cache\\DistributedCacheManager.cs",
@@ -452,7 +469,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "SixLaborsImageHelper.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Helpers\\SixLaborsImageHelper.cs",
               "RelativeDocumentMoniker": "Byte.Core.Common\\Helpers\\SixLaborsImageHelper.cs",
@@ -465,7 +482,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "User_Dept_RoleLogic.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\User_Dept_RoleLogic.cs",
               "RelativeDocumentMoniker": "Byte.Core.Business\\User_Dept_RoleLogic.cs",
@@ -478,7 +495,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\appsettings.json",
               "RelativeDocumentMoniker": "Byte.Core.Api\\appsettings.json",
@@ -491,7 +508,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "MenuLogic.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\MenuLogic.cs",
               "RelativeDocumentMoniker": "Byte.Core.Business\\MenuLogic.cs",
@@ -504,7 +521,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "Byte.Core.Common.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Byte.Core.Common.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Common\\Byte.Core.Common.csproj",
@@ -517,7 +534,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "UserLogic.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\UserLogic.cs",
               "RelativeDocumentMoniker": "Byte.Core.Business\\UserLogic.cs",
@@ -530,7 +547,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "Byte.Core.Api",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Byte.Core.Api.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Byte.Core.Api.csproj",
@@ -542,7 +559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "Byte.Core.Repository.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Repository\\Byte.Core.Repository.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Repository\\Byte.Core.Repository.csproj",
@@ -555,7 +572,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "Byte.Core.Entity.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Byte.Core.Entity.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Entity\\Byte.Core.Entity.csproj",
@@ -568,7 +585,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "CheckJWTAttribute.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Attributes\\JWT\u6821\u9A8C\\CheckJWTAttribute.cs",
               "RelativeDocumentMoniker": "Byte.Core.Common\\Attributes\\JWT\u6821\u9A8C\\CheckJWTAttribute.cs",
@@ -581,7 +598,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "User_Dept_Role.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\User_Dept_Role.cs",
               "RelativeDocumentMoniker": "Byte.Core.Entity\\User_Dept_Role.cs",
@@ -594,7 +611,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "Byte.Core.Models.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Models\\Byte.Core.Models.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Models\\Byte.Core.Models.csproj",
@@ -607,7 +624,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "Role.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Role.cs",
               "RelativeDocumentMoniker": "Byte.Core.Entity\\Role.cs",
@@ -620,7 +637,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "User.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\User.cs",
               "RelativeDocumentMoniker": "Byte.Core.Entity\\User.cs",
@@ -633,7 +650,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "MenuDTO.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Models\\MenuDTO.cs",
               "RelativeDocumentMoniker": "Byte.Core.Models\\MenuDTO.cs",
@@ -646,7 +663,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "DeptLogic.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\DeptLogic.cs",
               "RelativeDocumentMoniker": "Byte.Core.Business\\DeptLogic.cs",
@@ -659,7 +676,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "Menu.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Menu.cs",
               "RelativeDocumentMoniker": "Byte.Core.Entity\\Menu.cs",
@@ -672,7 +689,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "Byte.Core.Tools",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Tools\\Byte.Core.Tools.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Tools\\Byte.Core.Tools.csproj",
@@ -685,7 +702,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "DeptDTO.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Models\\DeptDTO.cs",
               "RelativeDocumentMoniker": "Byte.Core.Models\\DeptDTO.cs",
@@ -698,7 +715,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "UserController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\UserController.cs",
@@ -711,7 +728,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "LoginLogic.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\LoginLogic.cs",
               "RelativeDocumentMoniker": "Byte.Core.Business\\LoginLogic.cs",
@@ -724,7 +741,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "CodeController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\CodeController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\CodeController.cs",
@@ -737,7 +754,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "Role_MenuLogic.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\Role_MenuLogic.cs",
               "RelativeDocumentMoniker": "Byte.Core.Business\\Role_MenuLogic.cs",
@@ -750,7 +767,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 36,
               "Title": "LoginDTO.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Models\\LoginDTO.cs",
               "RelativeDocumentMoniker": "Byte.Core.Models\\LoginDTO.cs",
@@ -763,7 +780,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 37,
               "Title": "UserDTO.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Models\\UserDTO.cs",
               "RelativeDocumentMoniker": "Byte.Core.Models\\UserDTO.cs",
@@ -776,7 +793,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 35,
               "Title": "Dept.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Dept.cs",
               "RelativeDocumentMoniker": "Byte.Core.Entity\\Dept.cs",
@@ -789,7 +806,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "Role_Menu.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Role_Menu.cs",
               "RelativeDocumentMoniker": "Byte.Core.Entity\\Role_Menu.cs",
@@ -802,7 +819,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 38,
               "Title": "User_Dept_RoleDTO.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Models\\User_Dept_RoleDTO.cs",
               "RelativeDocumentMoniker": "Byte.Core.Models\\User_Dept_RoleDTO.cs",
@@ -815,7 +832,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 39,
               "Title": "Role_MenuDTO.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Models\\Role_MenuDTO.cs",
               "RelativeDocumentMoniker": "Byte.Core.Models\\Role_MenuDTO.cs",
@@ -828,7 +845,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 42,
               "Title": "RoleRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Repository\\RoleRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.Repository\\RoleRepository.cs",
@@ -841,7 +858,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 43,
               "Title": "DeptRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Repository\\DeptRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.Repository\\DeptRepository.cs",
@@ -854,7 +871,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 41,
               "Title": "User_Dept_RoleRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Repository\\User_Dept_RoleRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.Repository\\User_Dept_RoleRepository.cs",
@@ -867,7 +884,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 44,
               "Title": "Role_MenuRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Repository\\Role_MenuRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.Repository\\Role_MenuRepository.cs",
@@ -880,7 +897,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 40,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Repository\\UserRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.Repository\\UserRepository.cs",
@@ -893,7 +910,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 45,
               "Title": "MenuRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Repository\\MenuRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.Repository\\MenuRepository.cs",
@@ -906,7 +923,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 47,
               "Title": "NoCheckJWTAttribute.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Attributes\\JWT\u6821\u9A8C\\NoCheckJWTAttribute.cs",
               "RelativeDocumentMoniker": "Byte.Core.Common\\Attributes\\JWT\u6821\u9A8C\\NoCheckJWTAttribute.cs",
@@ -919,7 +936,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 48,
               "Title": "JWTPayloadBase.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Attributes\\JWT\u6821\u9A8C\\JWTPayloadBase.cs",
               "RelativeDocumentMoniker": "Byte.Core.Common\\Attributes\\JWT\u6821\u9A8C\\JWTPayloadBase.cs",
@@ -932,7 +949,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 50,
               "Title": "CheckJWTAttribute.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Tools\\Attributes\\CheckJWTAttribute.cs",
               "RelativeDocumentMoniker": "Byte.Core.Tools\\Attributes\\CheckJWTAttribute.cs",
@@ -945,7 +962,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 51,
               "Title": "ParamConfig.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Tools\\ParamConfig.cs",
               "RelativeDocumentMoniker": "Byte.Core.Tools\\ParamConfig.cs",
@@ -958,7 +975,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 49,
               "Title": "JWTPayload.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Tools\\Attributes\\JWTPayload.cs",
               "RelativeDocumentMoniker": "Byte.Core.Tools\\Attributes\\JWTPayload.cs",
@@ -971,7 +988,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 46,
               "Title": "CurrentUser.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Web\\CurrentUser.cs",
               "RelativeDocumentMoniker": "Byte.Core.Common\\Web\\CurrentUser.cs",
@@ -984,7 +1001,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 52,
               "Title": "Enums.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Tools\\Enums.cs",
               "RelativeDocumentMoniker": "Byte.Core.Tools\\Enums.cs",
@@ -997,7 +1014,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 53,
               "Title": "CurrentUser.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Tools\\CurrentUser.cs",
               "RelativeDocumentMoniker": "Byte.Core.Tools\\CurrentUser.cs",
@@ -1010,7 +1027,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 57,
               "Title": "log4net.config",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\log4net.config",
               "RelativeDocumentMoniker": "Byte.Core.Api\\log4net.config",
@@ -1023,7 +1040,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 54,
               "Title": "Byte.Core.SqlSugar.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj",
               "RelativeDocumentMoniker": "Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj",
@@ -1036,7 +1053,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 56,
               "Title": "appsettings.Production.json",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\appsettings.Production.json",
               "RelativeDocumentMoniker": "Byte.Core.Api\\appsettings.Production.json",
@@ -1049,7 +1066,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 55,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\appsettings.Development.json",
               "RelativeDocumentMoniker": "Byte.Core.Api\\appsettings.Development.json",
@@ -1062,7 +1079,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 58,
               "Title": "launchSettings.json",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Properties\\launchSettings.json",
@@ -1075,7 +1092,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 59,
               "Title": "Byte.Core.Api.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Byte.Core.Api.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Byte.Core.Api.csproj",
@@ -1088,7 +1105,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 60,
               "Title": "BaseApiController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Common\\BaseApiController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Common\\BaseApiController.cs",
@@ -1101,7 +1118,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 61,
               "Title": "BaseController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Common\\BaseController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Common\\BaseController.cs",
@@ -1114,7 +1131,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 62,
               "Title": "DataSeederMiddleware.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Extensions\\DataSeederMiddleware.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Extensions\\DataSeederMiddleware.cs",
@@ -1127,7 +1144,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 64,
               "Title": "RootKey.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.SqlSugar\\Base\\RootKey.cs",
               "RelativeDocumentMoniker": "Byte.Core.SqlSugar\\Base\\RootKey.cs",
@@ -1140,7 +1157,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 63,
               "Title": "BaseEntity.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.SqlSugar\\Base\\BaseEntity.cs",
               "RelativeDocumentMoniker": "Byte.Core.SqlSugar\\Base\\BaseEntity.cs",
@@ -1153,7 +1170,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 65,
               "Title": "RuntimeHelper.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
               "RelativeDocumentMoniker": "Byte.Core.Common\\Helpers\\RuntimeHelper.cs",
@@ -1166,7 +1183,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 67,
               "Title": "IMongoDbRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\IMongoDbRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Repositories\\IMongoDbRepository.cs",
@@ -1177,7 +1194,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 66,
               "Title": "HttpHelper.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Helpers\\HttpHelper.cs",
               "RelativeDocumentMoniker": "Byte.Core.Common\\Helpers\\HttpHelper.cs",
@@ -1190,7 +1207,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 68,
               "Title": "FromDbContextFactoryAttribute.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Attributes\\FromDbContextFactoryAttribute.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Attributes\\FromDbContextFactoryAttribute.cs",
@@ -1203,7 +1220,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 69,
               "Title": "MongoDbContext.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\DbContextCore\\MongoDbContext.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\DbContextCore\\MongoDbContext.cs",
@@ -1216,7 +1233,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 71,
               "Title": "IRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\IRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Repositories\\IRepository.cs",
@@ -1227,7 +1244,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 70,
               "Title": "MongoDbRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\MongoDbRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Repositories\\MongoDbRepository.cs",
@@ -1238,7 +1255,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 72,
               "Title": "BaseRepository.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Repositories\\BaseRepository.cs",
               "RelativeDocumentMoniker": "Byte.Core.EntityFramework\\Repositories\\BaseRepository.cs",
