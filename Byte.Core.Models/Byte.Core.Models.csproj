@@ -3,7 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
+    <DocumentationFile>bin\Byte.Core.Models.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

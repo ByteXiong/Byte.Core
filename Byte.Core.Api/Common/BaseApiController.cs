@@ -1,4 +1,4 @@
-﻿using Byte.Core.Common.Attributes;
+﻿using Byte.Core.Tools.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Byte.Core.Api.Common
