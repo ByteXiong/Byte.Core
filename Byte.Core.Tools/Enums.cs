@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Byte.Core.Common
+namespace Byte.Core.Tools
 {
- // 写在同一文件夹内 方便前端拷贝
+    // 写在同一文件夹内 方便前端拷贝
     public enum VersionEnum
     {
 
@@ -24,18 +24,30 @@ namespace Byte.Core.Common
         [Description("移动端/微信小程序/钉钉/H5")]
         App = 2,
     }
-    public enum MenuType
+
+    public enum RoleTypeEnum
+    {
+        系统角色 = 10,
+        公司角色 = 20,
+        部门角色 = 30,
+        个人角色 = 40,
+    }
+
+    public enum MenuTypeEnum
     {
         目录 = 1,
         菜单 = 2,
         按钮 = 3,
         外链 = 4,
     }
-    public enum UserType
-    {
-        系统 = 1,
 
-        用户 = 50,
+    public enum DeptTypeEnum
+    {
+        平台 = 10,
+
+        公司 = 20,
+
+        部门 = 30,
     }
 
 }

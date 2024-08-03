@@ -1,4 +1,5 @@
 using Byte.Core.SqlSugar;
+using Byte.Core.Tools;
 using SqlSugar;
 
 namespace Byte.Core.Entity
@@ -15,6 +16,7 @@ namespace Byte.Core.Entity
         [SugarColumn(Length = 50, IsNullable = true)]
         public String Name { get; set; }
 
+        public RoleTypeEnum Type { get; set; }
         /// <summary>
         /// 状态
         /// </summary>
@@ -28,6 +30,22 @@ namespace Byte.Core.Entity
         public String Remark { get; set; }
 
 
+        ///// <summary>
+        ///// 数据权限
+        ///// </summary>
+        //[SugarColumn(Length = 50, IsNullable = false)]
+        //public string DataScope { get; set; }
+
+        /// <summary>
+        /// 角色代码
+        /// </summary>
+        [SugarColumn(Length = 20, IsNullable = false)]
+        public string Code { get; set; }
+        /// <summary>
+        /// 排序
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public int Sort { get; set; }
         /// <summary>
         /// 公司id
         /// </summary>

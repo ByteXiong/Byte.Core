@@ -1,10 +1,9 @@
 ﻿using Byte.Core.Common.Extensions;
 using Byte.Core.Common.Helpers;
-using Byte.Core.Common.Models;
 using Byte.Core.Common.Web;
 using Microsoft.AspNetCore.Mvc.Filters;
-
-namespace Byte.Core.Common.Attributes
+using Byte.Core.Common.Attributes;
+namespace Byte.Core.Tools.Attributes
 {
     /// <summary>
     /// JWT校验
@@ -35,7 +34,7 @@ namespace Byte.Core.Common.Attributes
                     return;
                 }
 
-                var payload = JWTHelper.GetPayload<JWTPayloadBase>(token);
+                var payload = JWTHelper.GetPayload<JWTPayload>(token);
                 if (payload.Expire < DateTime.Now)
                 {
                     context.Result = Error("token过期!", _errorCode);

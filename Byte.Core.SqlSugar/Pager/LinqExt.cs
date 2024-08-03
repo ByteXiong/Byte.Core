@@ -23,9 +23,9 @@ namespace Byte.Core.SqlSugar
             }
 
             var pagerInfo = new PagerInfo(queryParam);
-
-            source = source.OrderByIF(queryParam.SortList != null && queryParam.SortList.Count > 0, string.Join(",", queryParam.SortList.Select(x => $"{x.Key} {x.Value}")));
-
+            if (queryParam.SortList == null || queryParam.SortList.Count == 0) { 
+            source = source.OrderBy( string.Join(",", queryParam.SortList.Select(x => $"{x.Key} {x.Value}")));
+                }
             RefAsync<int> totalCount = 0;
             var data = await source.ToPageListAsync(queryParam.PageIndex, queryParam.PageSize, totalCount);
             pagerInfo.TotalRowCount = totalCount;

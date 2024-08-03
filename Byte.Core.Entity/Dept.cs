@@ -1,4 +1,6 @@
+using Byte.Core.Common;
 using Byte.Core.SqlSugar;
+using Byte.Core.Tools;
 using SqlSugar;
 
 namespace Byte.Core.Entity
@@ -50,6 +52,12 @@ namespace Byte.Core.Entity
 
         public Int32 Sort { get; set; }
 
+
+        /// <summary>
+        /// 类型 公司.部门
+        /// </summary>
+        public DeptTypeEnum Type { get; set; }
+
         #region 导航
         [SugarColumn(IsIgnore = true)]
         [Navigate(typeof(User_Dept_Role), nameof(User_Dept_Role.DeptId), nameof(User_Dept_Role.UserId))]
@@ -57,7 +65,7 @@ namespace Byte.Core.Entity
 
 
         [SugarColumn(IsIgnore = true)]
-        [Navigate(NavigateType.OneToMany, nameof(Id),nameof(Role.DeptId))]
+        [Navigate(NavigateType.OneToMany, nameof(Id), nameof(Role.DeptId))]
         public List<Role> Roles { get; set; }
 
         [SugarColumn(IsIgnore = true)]

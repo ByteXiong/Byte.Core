@@ -1,7 +1,8 @@
 using Byte.Core.Common;
 using Byte.Core.SqlSugar;
 using SqlSugar;
-
+using System.Drawing.Drawing2D;
+using Byte.Core.Tools;
 namespace Byte.Core.Entity
 {
     /// <summary>
@@ -10,106 +11,98 @@ namespace Byte.Core.Entity
     [SugarTable("Menu")]
     public class Menu : BaseEntity<Guid>
     {
-   
         /// <summary>
-        /// 状态
+        /// 菜单标题
         /// </summary>
-        public MenuType Type { get; set; }
+        [SugarColumn(IsNullable = false)]
+        public string Title { get; set; }
+
+        /// <summary>
+        /// 组件路径
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public string Path { get; set; }
+
+        /// <summary>
+        /// 权限标识符
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public string Perm { get; set; }
+
+        /// <summary>
+        /// 是否iframe
+        /// </summary>
+        [SugarColumn(IsNullable = false)]
+        public bool IFrame { get; set; }
+
+        /// <summary>
+        /// 组件
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public string Component { get; set; }
+
+        /// <summary>
+        /// 组件名称
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public string ComponentName { get; set; }
+
+        /// <summary>
+        /// 父级菜单ID
+        /// </summary>
+        [SugarColumn(IsNullable = false)]
+        public Guid? ParentId { get; set; }
+
+        /// <summary>
+        /// 排序
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public int Sort { get; set; }
+
+        /// <summary>
+        /// icon图标
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public string Icon { get; set; }
+
+        /// <summary>
+        /// 类型
+        /// 1.目录 2.菜单 3.按钮
+        /// </summary>
+        [SugarColumn(IsNullable = false)]
+        public MenuTypeEnum Type { get; set; }
+
+        /// <summary>
+        /// 是否缓存
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public bool KeepAlive { get; set; }
+
+        /// <summary>
+        /// 是否隐藏
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public bool Hidden { get; set; }
+        /// <summary>
+        /// 跳转路由
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public string Redirect { get; set; }
+        /// <summary>
+        /// 根目录始终显示 
+        /// </summary>
+        public bool AlwaysShow { get; set; }
+
         /// <summary>
         /// 状态
         /// </summary>
         public bool State { get; set; }
 
-
         /// <summary>
-        /// 父级
+        /// 是否已删除
         /// </summary>
-        public Guid? ParentId { get; set; }
+        public bool IsDeleted { get; set; }
 
-
-        /// <summary>
-        /// 菜单名称
-        /// </summary>
-        [SugarColumn(Length = 50, IsNullable = true)]
-        public String Name { get; set; }
-
-
-        /// <summary>
-        /// 路径
-        /// </summary>
-        [SugarColumn(Length = 50, IsNullable = true)]
-        public String Path { get; set; }
-
-
-        /// <summary>
-        /// 组件
-        /// </summary>
-        [SugarColumn(Length = 255, IsNullable = true)]
-        public String Component { get; set; }
-
-
-        /// <summary>
-        /// 是否清除缓存
-        /// </summary>
-        public Boolean NoCache { get; set; }
-
-
-        /// <summary>
-        /// 图标
-        /// </summary>
-        [SugarColumn(Length = 500, IsNullable = true)]
-        public String Icon { get; set; }
-
-
-        /// <summary>
-        /// 是否隐藏
-        /// </summary>
-        public Boolean Hidden { get; set; }
-
-
-        /// <summary>
-        /// 是否显示面包屑
-        /// </summary>
-        public Boolean Breadcrumb { get; set; }
-
-
-        /// <summary>
-        /// 高亮菜单
-        /// </summary>
-        public Boolean AlwaysShow { get; set; }
-
-
-        /// <summary>
-        /// 是否固定在标签页
-        /// </summary>
-        public Boolean Affix { get; set; }
-
-
-        /// <summary>
-        /// 是否按钮权限
-        /// </summary>
-        public Boolean IsPermission { get; set; }
-
-
-        /// <summary>
-        /// 标题
-        /// </summary>
-        [SugarColumn(Length = 50, IsNullable = true)]
-        public String Title { get; set; }
-
-
-        /// <summary>
-        /// 是否可跳转
-        /// </summary>
-        public Boolean CanTo { get; set; }
-
-
-     
-
-        /// <summary>
-        /// 排序
-        /// </summary>
-        public Int32 Sort { get; set; }
         #region 导航
         [SugarColumn(IsIgnore = true)]
         [Navigate(typeof(Role_Menu), nameof(Role_Menu.MenuId), nameof(Role_Menu.RoleId))]

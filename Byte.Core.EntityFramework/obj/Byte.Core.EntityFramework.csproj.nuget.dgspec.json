@@ -10,11 +10,11 @@
         "projectUniqueName": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Byte.Core.Common.csproj",
         "projectName": "Byte.Core",
         "projectPath": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\Byte.Core.Common.csproj",
-        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Yonatan\\.nuget\\packages\\",
         "outputPath": "E:\\MyCode\\Byte.Core\\Byte.Core.Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Yonatan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -23,6 +23,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
+          "E:\\MyCode\\nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -169,11 +170,11 @@
         "projectUniqueName": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj",
         "projectName": "Byte.Core.EntityFramework",
         "projectPath": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj",
-        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Yonatan\\.nuget\\packages\\",
         "outputPath": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Yonatan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -182,6 +183,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
+          "E:\\MyCode\\nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

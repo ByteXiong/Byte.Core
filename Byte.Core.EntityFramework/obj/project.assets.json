@@ -11436,7 +11436,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\admin\\.nuget\\packages\\": {}
+    "C:\\Users\\Yonatan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -11444,11 +11444,11 @@
       "projectUniqueName": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj",
       "projectName": "Byte.Core.EntityFramework",
       "projectPath": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\Byte.Core.EntityFramework.csproj",
-      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Yonatan\\.nuget\\packages\\",
       "outputPath": "E:\\MyCode\\Byte.Core\\Byte.Core.EntityFramework\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Yonatan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11457,6 +11457,7 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
+        "E:\\MyCode\\nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

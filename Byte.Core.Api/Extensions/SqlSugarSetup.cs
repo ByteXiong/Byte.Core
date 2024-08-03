@@ -7,8 +7,7 @@ using Byte.Core.Common.Models;
 using SqlSugar;
 using StackExchange.Profiling;
 using MiniProfiler = StackExchange.Profiling.MiniProfiler;
-using Byte.Core.Common.Web;
-
+using Byte.Core.Tools;
 namespace Byte.Core.Api.Extensions;
 
 /// <summary>

@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
+using Byte.Core.Api.Extensions;
 using Byte.Core.Common;
 using Byte.Core.Common.Attributes;
 using Byte.Core.Common.Cache;
@@ -12,8 +13,7 @@ using Byte.Core.Common.Web;
 using Byte.Core.SqlSugar;
 using Byte.Core.SqlSugar.ConfigOptions;
 using Byte.Core.SqlSugar.IDbContext;
-using Byte.Core.Api.Extensions;
-using Byte.Core.Common;
+using Byte.Core.Tools;
 using Lazy.Captcha.Core;
 using Lazy.Captcha.Core.Generator;
 using log4net;
@@ -230,8 +230,8 @@ builder.Services.AddSqlSugarSetup(configuration);
 
 #region 各种 注入
 builder.Services
- .AddAutoServices("Byte.Core.Repository")
-  .AddAutoServices("Byte.Core.Business")
+ .AddAutoServices("Byte.Core.Business")
+  .AddAutoServices("Byte.Core.Repository")
 //.AddScopedAssembly("Byte.Core.DataAccess", "Byte.Core.DataAccess")//注入仓储
 .AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 #endregion
@@ -266,50 +266,51 @@ builder.Services.AddControllers(options =>
     //全局异常过滤器
     options.Filters.Add<GlobalExceptionFilter>();
 
-}).ConfigureApiBehaviorOptions(options =>
-{  // 规定模型校验错误时返回统一的结构
-    options.InvalidModelStateResponseFactory = context =>
-    {
-
-
-        //获取验证失败的模型字段 
-        var errors = context.ModelState
-    .Where(e1 => e1.Value.Errors.Count > 0)
-    .Select(e1 => e1.Key)
-    .ToList();
-        var str = string.Join(">", errors);
-
-        // 创建项目定义的统一的返回结构ApiResult
-        var apiResult = ExcutedResult.FailedResult(str);
-        // 向apiResult记录参数校验错误
-        // ...
-        // 参数校验错误详情可在context.ModelState中获取
-        // 统一返回400的Json  
-        var result = new BadRequestObjectResult(apiResult);
-        result.ContentTypes.Add(MediaTypeNames.Application.Json);
-        return result;
-    };
-}).
-AddJsonOptions(options =>
-{
-    //你可以通过配置序列化行为来处理导航属性的循环引用
-    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
-
-    //    //格式化日期时间格式，需要自己创建指定的转换类DatetimeJsonConverter
-    //    options.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter());
-    //数据格式首字母小写
-    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-    //    //JsonNamingPolicy.CamelCase首字母小写（默认）,null则为不改变大小写
-    //   // options.JsonSerializerOptions.PropertyNamingPolicy = null;
-    //    //取消Unicode编码
-    //    options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
-    //    //忽略空值
-    //options.JsonSerializerOptions.IgnoreNullValues = true;
-    //    //允许额外符号
-    //    options.JsonSerializerOptions.AllowTrailingCommas = true;
-    //    //反序列化过程中属性名称是否使用不区分大小写的比较
-    //    options.JsonSerializerOptions.PropertyNameCaseInsensitive = false;
 })
+    .ConfigureApiBehaviorOptions(options =>
+    {  // 规定模型校验错误时返回统一的结构
+        options.InvalidModelStateResponseFactory = context =>
+        {
+
+
+            //获取验证失败的模型字段 
+            var errors = context.ModelState
+        .Where(e1 => e1.Value.Errors.Count > 0)
+        .Select(e1 => e1.Key)
+        .ToList();
+            var str = string.Join(">", errors) ?? errors.ToJson();
+
+            // 创建项目定义的统一的返回结构ApiResult
+            var apiResult = ExcutedResult.FailedResult(str);
+            // 向apiResult记录参数校验错误
+            // ...
+            // 参数校验错误详情可在context.ModelState中获取
+            // 统一返回400的Json  
+            var result = new BadRequestObjectResult(apiResult);
+            result.ContentTypes.Add(MediaTypeNames.Application.Json);
+            return result;
+        };
+    })
+    .AddJsonOptions(options =>
+    {
+        //你可以通过配置序列化行为来处理导航属性的循环引用
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+
+        //    //格式化日期时间格式，需要自己创建指定的转换类DatetimeJsonConverter
+        //    options.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter());
+        //数据格式首字母小写
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        //    //JsonNamingPolicy.CamelCase首字母小写（默认）,null则为不改变大小写
+        //   // options.JsonSerializerOptions.PropertyNamingPolicy = null;
+        //    //取消Unicode编码
+        //    options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
+        //    //忽略空值
+        //options.JsonSerializerOptions.IgnoreNullValues = true;
+        //    //允许额外符号
+        //    options.JsonSerializerOptions.AllowTrailingCommas = true;
+        //    //反序列化过程中属性名称是否使用不区分大小写的比较
+        //    options.JsonSerializerOptions.PropertyNameCaseInsensitive = false;
+    })
 .AddNewtonsoftJson(options =>
 {
     ////修改属性名称的序列化方式，首字母小写，即驼峰样式 处理null =""
