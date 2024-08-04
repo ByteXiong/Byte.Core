@@ -7,8 +7,8 @@ nuget已发布 搜索: Byte.Core
 
 
 ### 开发计划
-    1. Vue3 权限版  [element-plus-admin](https://element-plus-admin-doc.cn/)  进行中
-    2. UniApp Vue3  [unibest](https://codercup.github.io/unibest-docs/)  进行中
+    1. Vue3 权限版   进行中
+    2. UniApp Vue3   进行中
 
  
 
