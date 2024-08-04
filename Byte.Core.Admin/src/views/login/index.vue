@@ -11,105 +11,115 @@
       />
       <lang-select class="ml-2 cursor-pointer" />
     </div>
-    <!-- 登录表单 -->
-    <el-card class="!border-none !bg-transparent !rounded-4% w-100 <sm:w-85">
-      <div class="text-center relative">
-        <h2>{{ defaultSettings.title }}</h2>
-        <el-tag class="ml-2 absolute-rt">{{ defaultSettings.version }}</el-tag>
-      </div>
+    <div calss="w-100 flex justify-start">
+      <div
+        class="typing-container"
+        ref="typingContainer"
+        style="line-height: normal; height: auto"
+      ></div>
 
-      <el-form
-        ref="loginFormRef"
-        :model="loginData"
-        :rules="loginRules"
-        class="login-form"
+      <!-- 登录表单 -->
+      <el-card
+        class="absolute right-0 !border-none !bg-transparent !rounded-4% w-100 <sm:w-85"
       >
-        <!-- 用户名 -->
-        <el-form-item prop="username">
-          <div class="flex-y-center w-full">
-            <svg-icon icon-class="user" class="mx-2" />
-            <el-input
-              ref="username"
-              v-model="loginData.account"
-              :placeholder="$t('login.username')"
-              name="username"
-              size="large"
-              class="h-[48px]"
-            />
-          </div>
-        </el-form-item>
+        <div class="text-center relative">
+          <h2>{{ defaultSettings.title }}</h2>
+          <el-tag class="ml-2 absolute-rt">{{
+            defaultSettings.version
+          }}</el-tag>
+        </div>
 
-        <!-- 密码 -->
-        <el-tooltip
-          :visible="isCapslock"
-          content="Caps lock is On"
-          placement="right"
+        <el-form
+          ref="loginFormRef"
+          :model="loginData"
+          :rules="loginRules"
+          class="login-form"
         >
-          <el-form-item prop="password">
+          <!-- 用户名 -->
+          <el-form-item prop="username">
             <div class="flex-y-center w-full">
-              <el-icon class="mx-2"><Lock /></el-icon>
+              <svg-icon icon-class="user" class="mx-2" />
               <el-input
-                v-model="loginData.password"
-                :placeholder="$t('login.password')"
-                type="password"
-                name="password"
-                @keyup="checkCapslock"
-                @keyup.enter="handleLogin"
+                ref="username"
+                v-model="loginData.account"
+                :placeholder="$t('login.username')"
+                name="username"
                 size="large"
-                class="h-[48px] pr-2"
-                show-password
+                class="h-[48px]"
               />
             </div>
           </el-form-item>
-        </el-tooltip>
 
-        <!-- 验证码 -->
-        <el-form-item prop="captchaCode">
-          <div class="flex-y-center w-full">
-            <svg-icon icon-class="captcha" class="mx-2" />
-            <el-input
-              v-model="loginData.captchaCode"
-              auto-complete="off"
-              size="large"
-              class="flex-1"
-              :placeholder="$t('login.captchaCode')"
-              @keyup.enter="handleLogin"
-            />
+          <!-- 密码 -->
+          <el-tooltip
+            :visible="isCapslock"
+            content="Caps lock is On"
+            placement="right"
+          >
+            <el-form-item prop="password">
+              <div class="flex-y-center w-full">
+                <el-icon class="mx-2"><Lock /></el-icon>
+                <el-input
+                  v-model="loginData.password"
+                  :placeholder="$t('login.password')"
+                  type="password"
+                  name="password"
+                  @keyup="checkCapslock"
+                  @keyup.enter="handleLogin"
+                  size="large"
+                  class="h-[48px] pr-2"
+                  show-password
+                />
+              </div>
+            </el-form-item>
+          </el-tooltip>
 
-            <el-image
-              @click="getCaptcha"
-              :src="captchaBase64"
-              class="rounded-tr-md rounded-br-md cursor-pointer h-[48px]"
-            />
+          <!-- 验证码 -->
+          <el-form-item prop="captchaCode">
+            <div class="flex-y-center w-full">
+              <svg-icon icon-class="captcha" class="mx-2" />
+              <el-input
+                v-model="loginData.captchaCode"
+                auto-complete="off"
+                size="large"
+                class="flex-1"
+                :placeholder="$t('login.captchaCode')"
+                @keyup.enter="handleLogin"
+              />
+
+              <el-image
+                @click="getCaptcha"
+                :src="captchaBase64"
+                class="rounded-tr-md rounded-br-md cursor-pointer h-[48px]"
+              />
+            </div>
+          </el-form-item>
+
+          <!-- 登录按钮 -->
+          <el-button
+            :loading="loading"
+            type="primary"
+            size="large"
+            class="w-full"
+            @click.prevent="handleLogin"
+            >{{ $t("login.login") }}
+          </el-button>
+
+          <!-- 账号密码提示 -->
+          <div class="mt-10 text-sm">
+            <span>{{ $t("login.username") }}: admin</span>
+            <span class="ml-4"> {{ $t("login.password") }}: 123456</span>
           </div>
-        </el-form-item>
-
-        <!-- 登录按钮 -->
-        <el-button
-          :loading="loading"
-          type="primary"
-          size="large"
-          class="w-full"
-          @click.prevent="handleLogin"
-          >{{ $t("login.login") }}
-        </el-button>
-
-        <!-- 账号密码提示 -->
-        <div class="mt-10 text-sm">
-          <span>{{ $t("login.username") }}: admin</span>
-          <span class="ml-4"> {{ $t("login.password") }}: 123456</span>
-        </div>
-      </el-form>
-    </el-card>
-
+        </el-form>
+      </el-card>
+    </div>
     <!-- ICP备案 -->
     <div class="absolute bottom-1 text-[10px] text-center" v-show="icpVisible">
-      <!-- <p>
+      <p>
         Copyright © 2024 - 2025 bytexiong.fun All Rights Reserved. 个人
         版权所有
-      </p> 
+      </p>
       <p>蜀ICP备2024077653号</p>
-      -->
     </div>
   </div>
 </template>
@@ -276,6 +286,31 @@ watchEffect(() => {
 function checkCapslock(e: any) {
   isCapslock.value = e.getModifierState("CapsLock");
 }
+
+const typingContainer = ref();
+const text = ref("你好!,\n欢迎来到Byte.Core");
+const index = ref(0);
+
+function typeEffect() {
+  if (index.value < text.value.length) {
+    const char = text.value.charAt(index.value);
+    typingContainer.value.innerHTML += text.value.substring(
+      index.value,
+      index.value + 1
+    );
+    index.value++;
+    setTimeout(typeEffect, 1000); // 调整打字速度
+  } else {
+    setTimeout(() => {
+      index.value = 0;
+      typingContainer.value.innerHTML = "";
+      typeEffect();
+    }, 2000); // 调整循环延迟
+  }
+}
+onMounted(() => {
+  typeEffect();
+});
 </script>
 
 <style lang="scss" scoped>
@@ -315,6 +350,26 @@ html.dark .login-container {
       /* 通过延时渲染背景色变相去除背景颜色 */
       transition: background-color 1000s ease-in-out 0s;
     }
+  }
+}
+
+.typing-container {
+  font-family: monospace;
+  font-size: 24px; /* 字体大小 */
+  font-weight: bold; /* 字体加粗 */
+  white-space: pre-wrap;
+  overflow: hidden;
+  border-right: 3px solid; /* 光标粗细 */
+  animation: cursor-blink 0.7s steps(1, start) infinite;
+}
+
+@keyframes cursor-blink {
+  0%,
+  100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: black;
   }
 }
 </style>
