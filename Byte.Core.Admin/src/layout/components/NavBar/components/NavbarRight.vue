@@ -21,7 +21,7 @@
     <el-dropdown class="setting-item" trigger="click">
       <div class="flex-center h100% p10px">
         <img
-          :src="userStore.user.avatar + '?imageView2/1/w/80/h/80'"
+          :src="upuloadUrl + userStore.user.avatar"
           class="rounded-full mr-10px w24px w24px"
         />
         <span>{{ userStore.user.name }}</span>
@@ -55,7 +55,7 @@ import {
 } from "@/store";
 import defaultSettings from "@/settings";
 import { useRoute, useRouter } from "vue-router";
-
+const upuloadUrl = import.meta.env.VITE_UPLOAD_PROXY_PREFIX;
 const appStore = useAppStore();
 const tagsViewStore = useTagsViewStore();
 const userStore = useUserStore();

@@ -164,14 +164,6 @@
       <span class="dialog-footer">
         <el-button @click="visible = false">取消</el-button>
         <el-button
-          v-hasPerm="['menu/add']"
-          type="primary"
-          @click="handleSubmit"
-          :loading="loading"
-        >
-          新 增
-        </el-button>
-        <el-button
           v-hasPerm="['menu/update']"
           type="primary"
           @click="handleSubmit"

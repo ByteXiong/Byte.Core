@@ -36,22 +36,24 @@ namespace Byte.Core.Api.Controllers
         public async Task<UserInfo> GetInfoAsync(Guid id) => await _logic.GetInfoAsync(id);
 
         /// <summary>
-        /// 添加
+        /// 提交
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
         [HttpPost]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<Guid> AddAsync(UpdateUserParam param) => await _logic.AddAsync(param);
+        public async Task<Guid> Submit(UpdateUserParam param)
+        {
+            if (param.Id == Guid.Empty)
+            {
 
-        /// <summary>
-        /// 编辑
-        /// </summary>
-        /// <param name="param"></param>
-        /// <returns></returns>
-        [HttpPut]
-        [ApiVersion("1.0", Deprecated = false)]
-        public async Task<Guid> UpdateAsync(UpdateUserParam param) => await _logic.UpdateAsync(param);
+                return await _logic.AddAsync(param);
+            }
+            else
+            {
+                return await _logic.UpdateAsync(param);
+            }
+        }
         /// <summary>
         ///  删除
         /// </summary>
@@ -69,6 +71,6 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPut]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> SetStateAsync(Guid id, bool state) => await SetStateAsync(id, state);
+        public async Task<int> SetStateAsync(Guid id, bool state) => await _logic.SetStateAsync(id, state);
     }
 }

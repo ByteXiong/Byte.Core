@@ -70,7 +70,7 @@ namespace Byte.Core.Business
         {
             var model = await GetIQueryable(x => x.Id == param.Id).FirstAsync();
             model.Name = param.Name;
-            model.Icon = param.Icon;
+            model.Image = param.Image;
             model.ParentId = param.ParentId;
             model.State = param.State;
             model.Sort = param.Sort;

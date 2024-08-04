@@ -340,3 +340,4 @@ ASALocalRun/
 healthchecksdb
 /Byte.Core.Api/appsettings.Development.json
 /Byte.Core.Api/appsettings.Production.json
+/Byte.Core.Api/wwwroot

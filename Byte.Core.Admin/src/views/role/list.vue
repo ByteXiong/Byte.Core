@@ -9,37 +9,40 @@
           clearable
           @keyup.enter="search"
         />
-
-        <el-button :loading="loading" type="primary" @click="getData"
-          ><i-ep-search />搜索</el-button
-        >
-        <el-button :loading="loading" @click="reload"
-          ><i-ep-refresh />重置</el-button
-        >
-        <el-button
-          :loading="loading"
-          v-hasPerm="['role/add']"
-          type="success"
-          @click="openForm()"
-          ><i-ep-plus />新增</el-button
-        >
-        <el-button
-          :loading="loading"
-          v-hasPerm="['role/update']"
-          type="primary"
-          :disabled="selectIds.length === 0"
-          @click="openForm(selectIds[selectIds.length - 1])"
-          ><i-ep-edit />编辑</el-button
-        >
-        <el-button
-          :loading="loading"
-          v-hasPerm="['role/delete']"
-          type="danger"
-          :disabled="selectIds.length === 0"
-          @click="handleDelete(selectIds)"
-          ><i-ep-delete />删除</el-button
-        >
       </template>
+      <div class="flex justify-between mb-2">
+        <div class="flex justify-around w-1/8">
+          <el-tooltip effect="light" :content="'新增'" placement="top">
+            <!-- <el-button type="primary"  icon="Plus"  circle @click="openForm()" >  </el-button> -->
+            <el-icon @click="openForm()"><Plus /></el-icon>
+          </el-tooltip>
+          <el-tooltip effect="light" content="批量删除" placement="top">
+            <el-icon @click="handleDelete(selectIds)"><Delete /></el-icon>
+          </el-tooltip>
+
+          <!-- <el-button type="danger" :disabled="selectIds.length==0"  @click="handleDelete(selectIds)">批量删除</el-button> -->
+        </div>
+        <div class="flex justify-around w-1/8">
+          <el-tooltip effect="light" content="刷新" placement="top">
+            <el-icon @click="reload"><Refresh /></el-icon>
+          </el-tooltip>
+          <el-tooltip effect="light" content="导出" placement="top">
+            <el-icon><Download /></el-icon>
+          </el-tooltip>
+
+          <!-- <el-tooltip effect="light" content="设置表头" placement="top">
+            <el-icon><Setting /></el-icon>
+          </el-tooltip> -->
+        </div>
+        <!-- <el-button type="danger" icon="Delete" circle  :disabled="selectIds.length==0"  @click="handleDelete(selectIds)"/> -->
+
+        <!-- <el-col :span="1" class="text-align-right">
+            <excel tid="table_excel_WareHouse" :name="head.comment" />
+          </el-col>
+          <el-col :span="1" class="text-align-right">
+            <head-seting v-model="head" name="WareHouseDTO" />
+          </el-col> -->
+      </div>
       <el-table
         v-loading="loading"
         highlight-current-row
@@ -90,7 +93,22 @@
           sortable="custom"
         />
         <el-table-column show-overflow-tooltip prop="remark" label="备注" />
-
+        <el-table-column show-overflow-tooltip label="状态" width="90">
+          <template #default="scope">
+            <el-switch
+              v-model="scope.row.state"
+              inline-prompt
+              :loading="stateLoading"
+              active-text="启用"
+              inactive-text="禁用"
+              @change="
+                async (e: boolean) => {
+                  setState(scope.row.id, e);
+                }
+              "
+            />
+          </template>
+        </el-table-column>
         <el-table-column
           show-overflow-tooltip
           class-name="onExcel"
@@ -123,7 +141,6 @@
           <el-empty description="暂无数据" />
         </template>
       </el-table>
-      {{ page }}
       <template #footer>
         <el-pagination
           :page-sizes="[10, 20, 50, 100]"
@@ -132,21 +149,6 @@
           v-model:current-page="page"
           v-model:page-size="pageSize"
         />
-        <!-- <el-pagination
-          :page-sizes="[10, 20, 50, 100]"
-          :total="total"
-          :current-page="page"
-          :page-size="pageSize"
-          layout="total, sizes, prev, pager, next, jumper"
-          @change="
-            (currentPage: number, size: number) => {
-              page = currentPage;
-              pageSize = size;
-            }
-          "
-        /> -->
-        <!--             @size-change="sizeChenge"
-            @current-change="pageChange" -->
       </template>
       <edit-form ref="editform" @refresh="getData" />
     </el-card>
@@ -179,8 +181,8 @@ const {
 } = usePagination(
   // Method实例获取函数，它将接收page和pageSize，并返回一个Method实例
   (page, pageSize) =>
-    Apis.Role.post_api_role_getpage({
-      data: {
+    Apis.Role.get_api_role_getpage({
+      params: {
         KeyWord: keyWord.value,
         pageIndex: page,
         pageSize: pageSize,
@@ -216,9 +218,15 @@ const { send: delIds } = useRequest(
 /**
  * 设置状态
  */
-const { send: setState } = useRequest(
+const { send: setState, loading: stateLoading } = useRequest(
   (id: string, state: boolean) =>
-    Apis.Menu.put_api_menu_setstate({ params: { id, state } }),
+    Apis.Role.put_api_role_setstate({
+      params: { id, state },
+      transform: (res) => {
+        ElMessage.success("状态更新成功");
+        return res.data;
+      },
+    }),
   {
     immediate: false,
   }

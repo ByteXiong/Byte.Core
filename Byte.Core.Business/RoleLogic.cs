@@ -86,5 +86,11 @@ namespace Byte.Core.Business
             return list;
         }
 
+        /// <summary>
+        ///  设置状态
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public async Task<int> SetStateAsync(Guid id, bool state) => await UpdateAsync(x => id == x.Id, x => new Role { State = state });
     }
 }

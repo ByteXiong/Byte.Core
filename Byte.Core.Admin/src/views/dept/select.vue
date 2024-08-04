@@ -1,21 +1,26 @@
 <template>
-  <view>
-    <wd-cell-group title="我的所属公司">
-      <wd-cell
-        :title="item.name"
-        value="切换"
-        v-for="(item, key) in data"
-        :key="key"
-      />
-    </wd-cell-group>
-    <wd-button type="primary" size="small"> 创建组织 </wd-button>
-  </view>
+  <el-tree-select
+    clearable
+    placeholder="请选择组织"
+    v-bind="$attrs"
+    @change="change"
+    :data="data"
+    check-strictly
+    :render-after-expand="false"
+    :props="{ label: 'name', value: 'id' }"
+  />
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
+import { onMounted, ref } from "vue";
 import "@/api";
-const { data } = useRequest(
+
+/**
+ * 获取数据
+ */
+const { data, loading } = useRequest(
   () =>
-    Apis.Dept.get_api_dept_gettree({
+    Apis.Dept.get_api_dept_gettreeselect({
+      params: {},
       transform: (res) => {
         return res.data;
       },
@@ -24,4 +29,20 @@ const { data } = useRequest(
     immediate: true,
   }
 );
+
+const emit = defineEmits(["getVal", "change"]);
+const list = ref<any>([]);
+
+// async function getData() {
+//   let { data } = await get("/Api/menu/select");
+//   list.value = [{ title: "顶级菜单", id: "", children: data }];
+// }
+
+async function change(e: string) {
+  let model = list.value.find((item: any) => {
+    return item.dept_Id == e;
+  });
+  emit("getVal", model);
+  emit("change", e);
+}
 </script>

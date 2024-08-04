@@ -73,5 +73,14 @@ namespace Repair.Core.Api.Controllers
         [ApiVersion("1.0", Deprecated = false)]
         public async Task<List<RoleSelectDTO>> SelectAsync() => await _logic.SelectAsync();
 
+        /// <summary>
+        ///  设置状态
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [ApiVersion("1.0", Deprecated = false)]
+        public async Task<int> SetStateAsync(Guid id, bool state) => await _logic.SetStateAsync(id, state);
+
     }
 }

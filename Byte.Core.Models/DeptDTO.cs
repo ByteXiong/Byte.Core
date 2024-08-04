@@ -1,6 +1,8 @@
 ﻿using Byte.Core.SqlSugar;
 using Byte.Core.Entity;
 using System.ComponentModel.DataAnnotations;
+using Byte.Core.Tools;
+using SqlSugar;
 namespace Byte.Core.Models
 {
 
@@ -26,63 +28,71 @@ namespace Byte.Core.Models
     public class AddDeptParam : Dept
     {
 
+        /// <summary>
+        /// 验证码
+        /// </summary>
+        public int MsgCode { get; set; }
     }
     /// <summary>
     /// 部门
     /// </summary>
     public class DeptTreeDTO
     {
-        /// <summary>
-        /// 主键Id!
-        /// </summary>
         public Guid Id { get; set; }
+        /// <summary>
+        /// 图标
+        /// </summary>
+        public string Image { get; set; }
 
         /// <summary>
-        /// 账号
+        /// 单位名称
         /// </summary>
-        [MaxLength(50, ErrorMessage = "超出最大长度")]
-        public String Name { get; set; }
-
+        public string Name { get; set; }
 
         /// <summary>
-        /// 头像
+        /// 简写名称
         /// </summary>
-        [MaxLength(200, ErrorMessage = "超出最大长度")]
-        public String Icon { get; set; }
-
+        public string EasyName { get; set; }
+        /// <summary>
+        /// 父级部门ID
+        /// </summary>
+        public Guid? ParentId { get; set; }
+        /// <summary>
+        /// 地址
+        /// </summary>
+        public string Address { get; set; }
+        /// <summary>
+        /// 是否删除
+        /// </summary>
+        public bool IsDeleted { get; set; }
 
         /// <summary>
-        /// 创建时间
+        ///默认联系电话
         /// </summary>
-        public DateTime? CreateTime { get; set; }
-
-
-
-
+        public string Phone { get; set; }
+        /// <summary>
+        ///  默认联系人
+        /// </summary>
+        public string Man { get; set; }
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string Remark { get; set; }
 
         /// <summary>
         /// 状态
         /// </summary>
         public bool State { get; set; }
-
-        /// <summary>
-        /// 父级
-        /// </summary>
-        public Guid? ParentId { get; set; }
-
-
-        /// <summary>
-        /// 备注
-        /// </summary>
-        [MaxLength(200, ErrorMessage = "超出最大长度")]
-        public String Remark { get; set; }
-
-
         /// <summary>
         /// 排序
         /// </summary>
-        public Int32 Sort { get; set; }
+        public int Sort { get; set; }
 
+
+        /// <summary>
+        /// 类型 公司.部门
+        /// </summary>
+        public DeptTypeEnum Type { get; set; }
 
 
         public List<DeptTreeDTO> Children { get; set; }

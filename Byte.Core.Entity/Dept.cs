@@ -12,45 +12,64 @@ namespace Byte.Core.Entity
     public class Dept : BaseEntity<Guid>
     {
 
+        
 
         /// <summary>
-        /// 账号
+        /// 图标
         /// </summary>
         [SugarColumn(Length = 50, IsNullable = true)]
-        public String Name { get; set; }
-
+        public string Image { get; set; }
 
         /// <summary>
-        /// 头像
+        /// 单位名称
         /// </summary>
-        [SugarColumn(Length = 200, IsNullable = true)]
-        public String Icon { get; set; }
+        [SugarColumn(Length = 50, IsNullable = true)]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 简写名称
+        /// </summary>
+        [SugarColumn(Length = 50, IsNullable = true)]
+        public string EasyName { get; set; }
+        /// <summary>
+        /// 父级部门ID
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public Guid? ParentId { get; set; }
+        /// <summary>
+        /// 地址
+        /// </summary>
+        [SugarColumn(Length = 500, IsNullable = true)]
+        public string Address { get; set; }
+        /// <summary>
+        /// 是否删除
+        /// </summary>
+        public bool IsDeleted { get; set; }
+
+        /// <summary>
+        ///默认联系电话
+        /// </summary>
+        [SugarColumn(Length = 20, IsNullable = true)]
+        public string Phone { get; set; }
+        /// <summary>
+        ///  默认联系人
+        /// </summary>
+        [SugarColumn(Length = 20, IsNullable = true)]
+        public string Man { get; set; }
+        /// <summary>
+        /// 备注
+        /// </summary>
+        [SugarColumn(Length = 500, IsNullable = true)]
+        public string Remark { get; set; }
 
         /// <summary>
         /// 状态
         /// </summary>
-
         public bool State { get; set; }
-
-
-        /// <summary>
-        /// 父级
-        /// </summary>
-        public Guid? ParentId { get; set; }
-
-
-        /// <summary>
-        /// 备注
-        /// </summary>
-        [SugarColumn(Length = 200, IsNullable = true)]
-        public String Remark { get; set; }
-
-
         /// <summary>
         /// 排序
         /// </summary>
-
-        public Int32 Sort { get; set; }
+        public int Sort { get; set; }
 
 
         /// <summary>

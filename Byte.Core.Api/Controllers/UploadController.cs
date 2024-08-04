@@ -3,6 +3,12 @@ using Byte.Core.Common.Extensions;
 using Byte.Core.Common.Filters;
 using Byte.Core.Api.Common;
 using Microsoft.AspNetCore.Mvc;
+using Byte.Core.Common.SnowflakeIdHelper;
+using Byte.Core.Tools;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using Byte.Core.Common.Attributes;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
 
 namespace Byte.Core.Api.Controllers
 {
@@ -19,59 +25,103 @@ namespace Byte.Core.Api.Controllers
         }
 
         /// <summary>
-        /// 上传附件
+        /// 上传图片
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [ApiVersion("1.0", Deprecated = false)]
-        [ApiVersion("2.0", Deprecated = false)]
-        public async Task<List<string>> FilesAsync()
+        [ApiVersion((double)VersionEnum.Pc, Deprecated = false)]
+        [ApiVersion((double)VersionEnum.App, Deprecated = false)]
+        public async Task<List<string>> ImagesAsync()
         {
 
             IFormFileCollection cols = Request.Form.Files;
             if (cols == null || cols.Count == 0)
             {
-                new BusException("没有上传文件");
+                throw new BusException("没有上传文件");
             };
             List<string> list = new List<string>();
             foreach (IFormFile file in cols)
             {
                 ////定义图片数组后缀格式
-                //string[] LimitPictureType = { ".JPG", ".JPEG", ".GIF", ".PNG", ".BMP" };
+                string[] LimitPictureType = { ".jpg", ".jpeg", ".gif", ".png" };
                 ////获取图片后缀是否存在数组中
                 string currentPictureExtension = Path.GetExtension(file.FileName).ToLower();
-                //if (LimitPictureType.Contains(currentPictureExtension))
-                //{
+                if (!LimitPictureType.Contains(currentPictureExtension))
+                {
+                    throw new BusException("格式有误,仅支持jpg、jpeg、gif、png格式");
+                }
                 //为了查看图片就不在重新生成文件名称了
                 //var new_path = DateTime.Now.ToString("yyyyMMdd")+ file.FileName;
-                var new_path = Path.Combine("upload/files/" + DateTime.Now.ToString("yyyyMMdd") + "/");
+                var new_path = Path.Combine("upload/images/" + DateTime.Now.ToString("yyyyMMdd") + "/");
                 var pathUel = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", new_path);
                 if (!Directory.Exists(pathUel))
                     Directory.CreateDirectory(pathUel);
-                var ps = DateTime.Now.ToTimeStamp();
+                var ps = IdHelper.GetId();
                 var path = Path.Combine(pathUel, ps + currentPictureExtension);
 
-                using (var stream = new FileStream(path, FileMode.Create))
+                int quality = 90;
+                // 使用当前质量压缩图像  
+                byte[] imageData = await FileReadAllBytesAsync(file.OpenReadStream());
+                // 压缩图片  
+                byte[] compressedImageData = CompressImage(imageData, quality); ;
+
+
+                #region 反复压缩
+                // 假设我们有一个目标文件大小（以字节为单位）  
+                long targetSizeBytes = 100 * 1024; // 例如，100KB  
+
+                // 初始压缩质量（可以根据需要调整）  
+                long estimatedSizeBytes = imageData.Length;
+
+                // 循环以估算合适的压缩质量  
+                while (estimatedSizeBytes > targetSizeBytes && quality > 10) // 假设最小质量为10  
                 {
+                    // 压缩图片  
+                    compressedImageData = CompressImage(imageData, quality);
 
-                    //图片路径保存到数据库里面去
-                    bool flage = true;//  QcnApplyDetm.FinancialCreditQcnApplyDetmAdd(EntId, CrtUser, new_path);
-                    if (flage == true)
-                    {
-                        //再把文件保存的文件夹中
-                        file.CopyTo(stream);
-                        list.Add("/" + new_path + ps + currentPictureExtension);
-                    }
+                    // 降低压缩质量以尝试减小文件大小  
+                    quality -= 5; // 每次迭代降低5个质量点  
                 }
-                //}
-                //else
+                #endregion
 
-                //    return ExcutedResult.FailedResult(msg: "请上传指定格式的图片");
+                await SaveCompressedImageAsync(compressedImageData, path);
 
+                // 保存压缩后的图片到文件系统  
+                list.Add("/" + new_path + ps + currentPictureExtension);
             }
             return list;
-        }
 
+
+            byte[] CompressImage(byte[] imageData, int quality)
+            {
+                using (var image = Image.Load(imageData))
+                {
+                    var jpegEncoder = new JpegEncoder { Quality = quality };
+
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        image.SaveAsJpeg(memoryStream, jpegEncoder);
+                        return memoryStream.ToArray();
+                    }
+                }
+            }
+            async Task<byte[]> FileReadAllBytesAsync(Stream stream)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await stream.CopyToAsync(memoryStream);
+                    return memoryStream.ToArray();
+                }
+            }
+
+            async Task SaveCompressedImageAsync(byte[] compressedImageData, string filePath)
+            {
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await fileStream.WriteAsync(compressedImageData, 0, compressedImageData.Length);
+                }
+            }
+        }
 
     }
 }

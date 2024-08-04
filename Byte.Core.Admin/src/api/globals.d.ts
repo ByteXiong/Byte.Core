@@ -88,39 +88,54 @@ type Alova2Method<
       >
     : never;
 
+export type DeptTypeEnum = 10 | 20 | 30;
 export type DeptTreeDTO = {
-  /**
-   * 主键Id!
-   */
   id?: string;
   /**
-   * 账号
+   * 图标
+   */
+  image?: string;
+  /**
+   * 单位名称
    */
   name?: string;
   /**
-   * 头像
+   * 简写名称
    */
-  icon?: string;
+  easyName?: string;
   /**
-   * 创建时间
-   */
-  createTime?: string;
-  /**
-   * 状态
-   */
-  state?: boolean;
-  /**
-   * 父级
+   * 父级部门ID
    */
   parentId?: string;
+  /**
+   * 地址
+   */
+  address?: string;
+  /**
+   * 是否删除
+   */
+  isDeleted?: boolean;
+  /**
+   * 默认联系电话
+   */
+  phone?: string;
+  /**
+   * 默认联系人
+   */
+  man?: string;
   /**
    * 备注
    */
   remark?: string;
   /**
+   * 状态
+   */
+  state?: boolean;
+  /**
    * 排序
    */
   sort?: number;
+  type?: DeptTypeEnum;
   children?: DeptTreeDTO[];
 };
 export type DeptSelectDTO = {
@@ -142,7 +157,6 @@ export type DeptSelectDTO = {
   icon?: string;
   children?: DeptSelectDTO[];
 };
-export type DeptTypeEnum = 10 | 20 | 30;
 export type RoleTypeEnum = 10 | 20 | 30 | 40;
 export type MenuTypeEnum = 1 | 2 | 3 | 4;
 export type Menu = {
@@ -238,11 +252,16 @@ export type Dept = {
    * 最后更新时间
    */
   updateTime?: string;
+  image?: string;
   name?: string;
-  icon?: string;
-  state?: boolean;
+  easyName?: string;
   parentId?: string;
+  address?: string;
+  isDeleted?: boolean;
+  phone?: string;
+  man?: string;
   remark?: string;
+  state?: boolean;
   sort?: number;
   type?: DeptTypeEnum;
   users?: User[];
@@ -299,11 +318,16 @@ export type DeptInfo = {
    * 最后更新时间
    */
   updateTime?: string;
+  image?: string;
   name?: string;
-  icon?: string;
-  state?: boolean;
+  easyName?: string;
   parentId?: string;
+  address?: string;
+  isDeleted?: boolean;
+  phone?: string;
+  man?: string;
   remark?: string;
+  state?: boolean;
   sort?: number;
   type?: DeptTypeEnum;
   users?: User[];
@@ -331,48 +355,25 @@ export type UpdateDeptParam = {
    * 最后更新时间
    */
   updateTime?: string;
+  image?: string;
   name?: string;
-  icon?: string;
-  state?: boolean;
+  easyName?: string;
   parentId?: string;
+  address?: string;
+  isDeleted?: boolean;
+  phone?: string;
+  man?: string;
   remark?: string;
+  state?: boolean;
   sort?: number;
   type?: DeptTypeEnum;
   users?: User[];
   roles?: Role[];
   children?: Dept[];
-};
-export type CaptchaDTO = {
   /**
-   * 类型
+   * 验证码
    */
-  captchaId?: string;
-  /**
-   * 刷新token
-   */
-  img?: string;
-};
-export type LoginToken = {
-  /**
-   * 授权token
-   */
-  accessToken?: string;
-  /**
-   * 过期时间
-   */
-  expires?: number;
-  /**
-   * 类型
-   */
-  tokenType?: string;
-  /**
-   * 刷新token
-   */
-  refreshToken?: string;
-  /**
-   * 允许token时间内
-   */
-  refreshTokenExpires?: number;
+  msgCode?: number;
 };
 export type LoginParam = {
   /**
@@ -385,26 +386,6 @@ export type LoginParam = {
   password?: string;
   captchaId?: string;
   captchaCode?: string;
-};
-export type LoginInfoDTO = {
-  /**
-   * 主键Id!
-   */
-  id?: string;
-  /**
-   * 名称
-   */
-  name?: string;
-  /**
-   * 头像
-   */
-  avatar?: string;
-  /**
-   * 账号
-   */
-  account?: string;
-  roles?: string[];
-  perms?: string[];
 };
 export type MenuSelectDTO = {
   /**
@@ -612,13 +593,6 @@ export type RoleDTOPagedResults = {
   pagerInfo?: PagerInfo;
   data?: RoleDTO[];
 };
-export type RoleParam = {
-  startIndex?: number;
-  pageIndex?: number;
-  pageSize?: number;
-  sortList?: Record<string, string>;
-  keyWord?: string;
-};
 export type RoleInfo = {
   /**
    * 主键
@@ -687,58 +661,6 @@ export type UpdateRoleParam = {
    * 菜单
    */
   menuIds?: string[];
-};
-export type RoleSelectDTO = {
-  /**
-   * 主键Id!
-   */
-  id?: string;
-  /**
-   * 账号
-   */
-  name?: string;
-};
-export type UserDTO = {
-  /**
-   * 主键Id!
-   */
-  id?: string;
-  /**
-   * 名称
-   */
-  name?: string;
-  /**
-   * 头像
-   */
-  avatar?: string;
-  /**
-   * 密码
-   */
-  password?: string;
-  /**
-   * 创建时间
-   */
-  createTime?: string;
-  /**
-   * 创建人
-   */
-  createBy?: string;
-  /**
-   * 状态
-   */
-  state?: boolean;
-  /**
-   * 公司
-   */
-  deptId?: string;
-  /**
-   * 账号
-   */
-  account?: string;
-};
-export type UserDTOPagedResults = {
-  pagerInfo?: PagerInfo;
-  data?: UserDTO[];
 };
 export type UserInfo = {
   /**
@@ -818,22 +740,30 @@ declare global {
        *   code: string
        *   // [required]
        *   data: Array<{
-       *     // 主键Id!
        *     id?: string
-       *     // 账号
+       *     // 图标
+       *     image?: string
+       *     // 单位名称
        *     name?: string
-       *     // 头像
-       *     icon?: string
-       *     // 创建时间
-       *     createTime?: string
-       *     // 状态
-       *     state?: boolean
-       *     // 父级
+       *     // 简写名称
+       *     easyName?: string
+       *     // 父级部门ID
        *     parentId?: string
+       *     // 地址
+       *     address?: string
+       *     // 是否删除
+       *     isDeleted?: boolean
+       *     // 默认联系电话
+       *     phone?: string
+       *     // 默认联系人
+       *     man?: string
        *     // 备注
        *     remark?: string
+       *     // 状态
+       *     state?: boolean
        *     // 排序
        *     sort?: number
+       *     type?: 10 | 20 | 30
        *     children?: Array<DeptTreeDTO>
        *   }>
        *   // [required]
@@ -1011,11 +941,16 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
+       *     image?: string
        *     name?: string
-       *     icon?: string
-       *     state?: boolean
+       *     easyName?: string
        *     parentId?: string
+       *     address?: string
+       *     isDeleted?: boolean
+       *     phone?: string
+       *     man?: string
        *     remark?: string
+       *     state?: boolean
        *     sort?: number
        *     type?: 10 | 20 | 30
        *     users?: Array<{
@@ -1045,11 +980,16 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
+       *         image?: string
        *         name?: string
-       *         icon?: string
-       *         state?: boolean
+       *         easyName?: string
        *         parentId?: string
+       *         address?: string
+       *         isDeleted?: boolean
+       *         phone?: string
+       *         man?: string
        *         remark?: string
+       *         state?: boolean
        *         sort?: number
        *         type?: DeptTypeEnum
        *         users?: Array<User>
@@ -1170,9 +1110,9 @@ declare global {
       /**
        * ---
        *
-       * [POST] 添加
+       * [POST] 提交
        *
-       * **path:** /api/Dept/Add
+       * **path:** /api/Dept/Submit
        *
        * ---
        *
@@ -1189,11 +1129,16 @@ declare global {
        *   updateBy?: string
        *   // 最后更新时间
        *   updateTime?: string
+       *   image?: string
        *   name?: string
-       *   icon?: string
-       *   state?: boolean
+       *   easyName?: string
        *   parentId?: string
+       *   address?: string
+       *   isDeleted?: boolean
+       *   phone?: string
+       *   man?: string
        *   remark?: string
+       *   state?: boolean
        *   sort?: number
        *   type?: 10 | 20 | 30
        *   users?: Array<{
@@ -1223,11 +1168,16 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
+       *       image?: string
        *       name?: string
-       *       icon?: string
-       *       state?: boolean
+       *       easyName?: string
        *       parentId?: string
+       *       address?: string
+       *       isDeleted?: boolean
+       *       phone?: string
+       *       man?: string
        *       remark?: string
+       *       state?: boolean
        *       sort?: number
        *       type?: DeptTypeEnum
        *       users?: Array<User>
@@ -1348,11 +1298,16 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
+       *     image?: string
        *     name?: string
-       *     icon?: string
-       *     state?: boolean
+       *     easyName?: string
        *     parentId?: string
+       *     address?: string
+       *     isDeleted?: boolean
+       *     phone?: string
+       *     man?: string
        *     remark?: string
+       *     state?: boolean
        *     sort?: number
        *     type?: DeptTypeEnum
        *     users?: Array<User>
@@ -1409,6 +1364,8 @@ declare global {
        *     }>
        *     children?: Array<Dept>
        *   }>
+       *   // 验证码
+       *   msgCode?: number
        * }
        * ```
        *
@@ -1428,7 +1385,7 @@ declare global {
        * }
        * ```
        */
-      post_api_dept_add<
+      post_api_dept_submit<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -1470,313 +1427,7 @@ declare global {
            */
           success: boolean;
         },
-        'Dept.post_api_dept_add',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [PUT] 编辑
-       *
-       * **path:** /api/Dept/Update
-       *
-       * ---
-       *
-       * **RequestBody**
-       * ```ts
-       * type RequestBody = {
-       *   // 主键
-       *   id?: string
-       *   // 创建者名称
-       *   createBy?: string
-       *   // 创建时间
-       *   createTime?: string
-       *   // 更新者名称
-       *   updateBy?: string
-       *   // 最后更新时间
-       *   updateTime?: string
-       *   name?: string
-       *   icon?: string
-       *   state?: boolean
-       *   parentId?: string
-       *   remark?: string
-       *   sort?: number
-       *   type?: 10 | 20 | 30
-       *   users?: Array<{
-       *     // 主键
-       *     id?: string
-       *     // 创建者名称
-       *     createBy?: string
-       *     // 创建时间
-       *     createTime?: string
-       *     // 更新者名称
-       *     updateBy?: string
-       *     // 最后更新时间
-       *     updateTime?: string
-       *     name?: string
-       *     avatar?: string
-       *     password?: string
-       *     state?: boolean
-       *     account?: string
-       *     depts?: Array<{
-       *       // 主键
-       *       id?: string
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       name?: string
-       *       icon?: string
-       *       state?: boolean
-       *       parentId?: string
-       *       remark?: string
-       *       sort?: number
-       *       type?: DeptTypeEnum
-       *       users?: Array<User>
-       *       roles?: Array<{
-       *         // 主键
-       *         id?: string
-       *         // 创建者名称
-       *         createBy?: string
-       *         // 创建时间
-       *         createTime?: string
-       *         // 更新者名称
-       *         updateBy?: string
-       *         // 最后更新时间
-       *         updateTime?: string
-       *         name?: string
-       *         type?: 10 | 20 | 30 | 40
-       *         state?: boolean
-       *         remark?: string
-       *         code?: string
-       *         sort?: number
-       *         deptId?: string
-       *         dept?: Dept
-       *         users?: Array<User>
-       *         menus?: Array<{
-       *           // 主键
-       *           id?: string
-       *           // 创建者名称
-       *           createBy?: string
-       *           // 创建时间
-       *           createTime?: string
-       *           // 更新者名称
-       *           updateBy?: string
-       *           // 最后更新时间
-       *           updateTime?: string
-       *           title?: string
-       *           path?: string
-       *           perm?: string
-       *           iFrame?: boolean
-       *           component?: string
-       *           componentName?: string
-       *           parentId?: string
-       *           sort?: number
-       *           icon?: string
-       *           type?: 1 | 2 | 3 | 4
-       *           keepAlive?: boolean
-       *           hidden?: boolean
-       *           redirect?: string
-       *           alwaysShow?: boolean
-       *           state?: boolean
-       *           isDeleted?: boolean
-       *           roles?: Array<Role>
-       *           children?: Array<Menu>
-       *         }>
-       *       }>
-       *       children?: Array<Dept>
-       *     }>
-       *     roles?: Array<Role>
-       *   }>
-       *   roles?: Array<{
-       *     // 主键
-       *     id?: string
-       *     // 创建者名称
-       *     createBy?: string
-       *     // 创建时间
-       *     createTime?: string
-       *     // 更新者名称
-       *     updateBy?: string
-       *     // 最后更新时间
-       *     updateTime?: string
-       *     name?: string
-       *     type?: 10 | 20 | 30 | 40
-       *     state?: boolean
-       *     remark?: string
-       *     code?: string
-       *     sort?: number
-       *     deptId?: string
-       *     dept?: Dept
-       *     users?: Array<User>
-       *     menus?: Array<{
-       *       // 主键
-       *       id?: string
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       title?: string
-       *       path?: string
-       *       perm?: string
-       *       iFrame?: boolean
-       *       component?: string
-       *       componentName?: string
-       *       parentId?: string
-       *       sort?: number
-       *       icon?: string
-       *       type?: 1 | 2 | 3 | 4
-       *       keepAlive?: boolean
-       *       hidden?: boolean
-       *       redirect?: string
-       *       alwaysShow?: boolean
-       *       state?: boolean
-       *       isDeleted?: boolean
-       *       roles?: Array<Role>
-       *       children?: Array<Menu>
-       *     }>
-       *   }>
-       *   children?: Array<{
-       *     // 主键
-       *     id?: string
-       *     // 创建者名称
-       *     createBy?: string
-       *     // 创建时间
-       *     createTime?: string
-       *     // 更新者名称
-       *     updateBy?: string
-       *     // 最后更新时间
-       *     updateTime?: string
-       *     name?: string
-       *     icon?: string
-       *     state?: boolean
-       *     parentId?: string
-       *     remark?: string
-       *     sort?: number
-       *     type?: DeptTypeEnum
-       *     users?: Array<User>
-       *     roles?: Array<{
-       *       // 主键
-       *       id?: string
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       name?: string
-       *       type?: 10 | 20 | 30 | 40
-       *       state?: boolean
-       *       remark?: string
-       *       code?: string
-       *       sort?: number
-       *       deptId?: string
-       *       dept?: Dept
-       *       users?: Array<User>
-       *       menus?: Array<{
-       *         // 主键
-       *         id?: string
-       *         // 创建者名称
-       *         createBy?: string
-       *         // 创建时间
-       *         createTime?: string
-       *         // 更新者名称
-       *         updateBy?: string
-       *         // 最后更新时间
-       *         updateTime?: string
-       *         title?: string
-       *         path?: string
-       *         perm?: string
-       *         iFrame?: boolean
-       *         component?: string
-       *         componentName?: string
-       *         parentId?: string
-       *         sort?: number
-       *         icon?: string
-       *         type?: 1 | 2 | 3 | 4
-       *         keepAlive?: boolean
-       *         hidden?: boolean
-       *         redirect?: string
-       *         alwaysShow?: boolean
-       *         state?: boolean
-       *         isDeleted?: boolean
-       *         roles?: Array<Role>
-       *         children?: Array<Menu>
-       *       }>
-       *     }>
-       *     children?: Array<Dept>
-       *   }>
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: string
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      put_api_dept_update<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          data: UpdateDeptParam;
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Dept.put_api_dept_update',
+        'Dept.post_api_dept_submit',
         Config
       >;
       /**
@@ -1974,7 +1625,16 @@ declare global {
           /**
            * [required]
            */
-          data: CaptchaDTO;
+          data: {
+            /**
+             * 类型
+             */
+            captchaId?: string;
+            /**
+             * 刷新token
+             */
+            img?: string;
+          };
           /**
            * [required]
            */
@@ -1995,7 +1655,16 @@ declare global {
           /**
            * [required]
            */
-          data: CaptchaDTO;
+          data: {
+            /**
+             * 类型
+             */
+            captchaId?: string;
+            /**
+             * 刷新token
+             */
+            img?: string;
+          };
           /**
            * [required]
            */
@@ -2065,7 +1734,28 @@ declare global {
           /**
            * [required]
            */
-          data: LoginToken;
+          data: {
+            /**
+             * 授权token
+             */
+            accessToken?: string;
+            /**
+             * 过期时间
+             */
+            expires?: number;
+            /**
+             * 类型
+             */
+            tokenType?: string;
+            /**
+             * 刷新token
+             */
+            refreshToken?: string;
+            /**
+             * 允许token时间内
+             */
+            refreshTokenExpires?: number;
+          };
           /**
            * [required]
            */
@@ -2088,7 +1778,28 @@ declare global {
           /**
            * [required]
            */
-          data: LoginToken;
+          data: {
+            /**
+             * 授权token
+             */
+            accessToken?: string;
+            /**
+             * 过期时间
+             */
+            expires?: number;
+            /**
+             * 类型
+             */
+            tokenType?: string;
+            /**
+             * 刷新token
+             */
+            refreshToken?: string;
+            /**
+             * 允许token时间内
+             */
+            refreshTokenExpires?: number;
+          };
           /**
            * [required]
            */
@@ -2144,7 +1855,26 @@ declare global {
           /**
            * [required]
            */
-          data: LoginInfoDTO;
+          data: {
+            /**
+             * 主键Id!
+             */
+            id?: string;
+            /**
+             * 名称
+             */
+            name?: string;
+            /**
+             * 头像
+             */
+            avatar?: string;
+            /**
+             * 账号
+             */
+            account?: string;
+            roles?: string[];
+            perms?: string[];
+          };
           /**
            * [required]
            */
@@ -2165,7 +1895,26 @@ declare global {
           /**
            * [required]
            */
-          data: LoginInfoDTO;
+          data: {
+            /**
+             * 主键Id!
+             */
+            id?: string;
+            /**
+             * 名称
+             */
+            name?: string;
+            /**
+             * 头像
+             */
+            avatar?: string;
+            /**
+             * 账号
+             */
+            account?: string;
+            roles?: string[];
+            perms?: string[];
+          };
           /**
            * [required]
            */
@@ -3012,20 +2761,20 @@ declare global {
       /**
        * ---
        *
-       * [POST] 分页
+       * [GET] 分页
        *
        * **path:** /api/Role/GetPage
        *
        * ---
        *
-       * **RequestBody**
+       * **Query Parameters**
        * ```ts
-       * type RequestBody = {
-       *   startIndex?: number
-       *   pageIndex?: number
-       *   pageSize?: number
-       *   sortList?: Record<string, string>
-       *   keyWord?: string
+       * type QueryParameters = {
+       *   KeyWord?: string
+       *   StartIndex?: number
+       *   PageIndex?: number
+       *   PageSize?: number
+       *   SortList?: Record<string, string>
        * }
        * ```
        *
@@ -3078,11 +2827,16 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
+       *         image?: string
        *         name?: string
-       *         icon?: string
-       *         state?: boolean
+       *         easyName?: string
        *         parentId?: string
+       *         address?: string
+       *         isDeleted?: boolean
+       *         phone?: string
+       *         man?: string
        *         remark?: string
+       *         state?: boolean
        *         sort?: number
        *         type?: DeptTypeEnum
        *         users?: Array<User>
@@ -3166,11 +2920,16 @@ declare global {
        *           updateBy?: string
        *           // 最后更新时间
        *           updateTime?: string
+       *           image?: string
        *           name?: string
-       *           icon?: string
-       *           state?: boolean
+       *           easyName?: string
        *           parentId?: string
+       *           address?: string
+       *           isDeleted?: boolean
+       *           phone?: string
+       *           man?: string
        *           remark?: string
+       *           state?: boolean
        *           sort?: number
        *           type?: DeptTypeEnum
        *           users?: Array<User>
@@ -3269,7 +3028,7 @@ declare global {
        * }
        * ```
        */
-      post_api_role_getpage<
+      get_api_role_getpage<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -3288,7 +3047,13 @@ declare global {
            */
           success: boolean;
         }> & {
-          data: RoleParam;
+          params: {
+            KeyWord?: string;
+            StartIndex?: number;
+            PageIndex?: number;
+            PageSize?: number;
+            SortList?: Record<string, string>;
+          };
         }
       >(
         config: Config
@@ -3311,7 +3076,7 @@ declare global {
            */
           success: boolean;
         },
-        'Role.post_api_role_getpage',
+        'Role.get_api_role_getpage',
         Config
       >;
       /**
@@ -3368,11 +3133,16 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
+       *       image?: string
        *       name?: string
-       *       icon?: string
-       *       state?: boolean
+       *       easyName?: string
        *       parentId?: string
+       *       address?: string
+       *       isDeleted?: boolean
+       *       phone?: string
+       *       man?: string
        *       remark?: string
+       *       state?: boolean
        *       sort?: number
        *       type?: DeptTypeEnum
        *       users?: Array<User>
@@ -3456,11 +3226,16 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
+       *         image?: string
        *         name?: string
-       *         icon?: string
-       *         state?: boolean
+       *         easyName?: string
        *         parentId?: string
+       *         address?: string
+       *         isDeleted?: boolean
+       *         phone?: string
+       *         man?: string
        *         remark?: string
+       *         state?: boolean
        *         sort?: number
        *         type?: DeptTypeEnum
        *         users?: Array<User>
@@ -3647,11 +3422,16 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
+       *     image?: string
        *     name?: string
-       *     icon?: string
-       *     state?: boolean
+       *     easyName?: string
        *     parentId?: string
+       *     address?: string
+       *     isDeleted?: boolean
+       *     phone?: string
+       *     man?: string
        *     remark?: string
+       *     state?: boolean
        *     sort?: number
        *     type?: DeptTypeEnum
        *     users?: Array<User>
@@ -3735,11 +3515,16 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
+       *       image?: string
        *       name?: string
-       *       icon?: string
-       *       state?: boolean
+       *       easyName?: string
        *       parentId?: string
+       *       address?: string
+       *       isDeleted?: boolean
+       *       phone?: string
+       *       man?: string
        *       remark?: string
+       *       state?: boolean
        *       sort?: number
        *       type?: DeptTypeEnum
        *       users?: Array<User>
@@ -4006,7 +3791,16 @@ declare global {
           /**
            * [required]
            */
-          data: RoleSelectDTO[];
+          data: Array<{
+            /**
+             * 主键Id!
+             */
+            id?: string;
+            /**
+             * 账号
+             */
+            name?: string;
+          }>;
           /**
            * [required]
            */
@@ -4027,7 +3821,16 @@ declare global {
           /**
            * [required]
            */
-          data: RoleSelectDTO[];
+          data: Array<{
+            /**
+             * 主键Id!
+             */
+            id?: string;
+            /**
+             * 账号
+             */
+            name?: string;
+          }>;
           /**
            * [required]
            */
@@ -4038,6 +3841,87 @@ declare global {
           success: boolean;
         },
         'Role.get_api_role_select',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [PUT] 设置状态
+       *
+       * **path:** /api/Role/SetState
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   id?: string
+       *   state?: boolean
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: number
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      put_api_role_setstate<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            id?: string;
+            state?: boolean;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Role.put_api_role_setstate',
         Config
       >;
     };
@@ -4189,7 +4073,57 @@ declare global {
           /**
            * [required]
            */
-          data: UserDTOPagedResults;
+          data: {
+            pagerInfo?: {
+              totalRowCount?: number;
+              pageSize?: number;
+              startIndex?: number;
+              pageIndex?: number;
+              hasPrev?: boolean;
+              hasNext?: boolean;
+              isFirst?: boolean;
+              isLast?: boolean;
+              totalPageCount?: number;
+            };
+            data?: Array<{
+              /**
+               * 主键Id!
+               */
+              id?: string;
+              /**
+               * 名称
+               */
+              name?: string;
+              /**
+               * 头像
+               */
+              avatar?: string;
+              /**
+               * 密码
+               */
+              password?: string;
+              /**
+               * 创建时间
+               */
+              createTime?: string;
+              /**
+               * 创建人
+               */
+              createBy?: string;
+              /**
+               * 状态
+               */
+              state?: boolean;
+              /**
+               * 公司
+               */
+              deptId?: string;
+              /**
+               * 账号
+               */
+              account?: string;
+            }>;
+          };
           /**
            * [required]
            */
@@ -4222,7 +4156,57 @@ declare global {
           /**
            * [required]
            */
-          data: UserDTOPagedResults;
+          data: {
+            pagerInfo?: {
+              totalRowCount?: number;
+              pageSize?: number;
+              startIndex?: number;
+              pageIndex?: number;
+              hasPrev?: boolean;
+              hasNext?: boolean;
+              isFirst?: boolean;
+              isLast?: boolean;
+              totalPageCount?: number;
+            };
+            data?: Array<{
+              /**
+               * 主键Id!
+               */
+              id?: string;
+              /**
+               * 名称
+               */
+              name?: string;
+              /**
+               * 头像
+               */
+              avatar?: string;
+              /**
+               * 密码
+               */
+              password?: string;
+              /**
+               * 创建时间
+               */
+              createTime?: string;
+              /**
+               * 创建人
+               */
+              createBy?: string;
+              /**
+               * 状态
+               */
+              state?: boolean;
+              /**
+               * 公司
+               */
+              deptId?: string;
+              /**
+               * 账号
+               */
+              account?: string;
+            }>;
+          };
           /**
            * [required]
            */
@@ -4287,11 +4271,16 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
+       *       image?: string
        *       name?: string
-       *       icon?: string
-       *       state?: boolean
+       *       easyName?: string
        *       parentId?: string
+       *       address?: string
+       *       isDeleted?: boolean
+       *       phone?: string
+       *       man?: string
        *       remark?: string
+       *       state?: boolean
        *       sort?: number
        *       type?: DeptTypeEnum
        *       users?: Array<User>
@@ -4459,9 +4448,9 @@ declare global {
       /**
        * ---
        *
-       * [POST] 添加
+       * [POST] 提交
        *
-       * **path:** /api/User/Add
+       * **path:** /api/User/Submit
        *
        * ---
        *
@@ -4494,11 +4483,16 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
+       *     image?: string
        *     name?: string
-       *     icon?: string
-       *     state?: boolean
+       *     easyName?: string
        *     parentId?: string
+       *     address?: string
+       *     isDeleted?: boolean
+       *     phone?: string
+       *     man?: string
        *     remark?: string
+       *     state?: boolean
        *     sort?: number
        *     type?: DeptTypeEnum
        *     users?: Array<User>
@@ -4626,7 +4620,7 @@ declare global {
        * }
        * ```
        */
-      post_api_user_add<
+      post_api_user_submit<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -4668,222 +4662,7 @@ declare global {
            */
           success: boolean;
         },
-        'User.post_api_user_add',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [PUT] 编辑
-       *
-       * **path:** /api/User/Update
-       *
-       * ---
-       *
-       * **RequestBody**
-       * ```ts
-       * type RequestBody = {
-       *   // 主键
-       *   id?: string
-       *   // 创建者名称
-       *   createBy?: string
-       *   // 创建时间
-       *   createTime?: string
-       *   // 更新者名称
-       *   updateBy?: string
-       *   // 最后更新时间
-       *   updateTime?: string
-       *   name?: string
-       *   avatar?: string
-       *   password?: string
-       *   state?: boolean
-       *   account?: string
-       *   depts?: Array<{
-       *     // 主键
-       *     id?: string
-       *     // 创建者名称
-       *     createBy?: string
-       *     // 创建时间
-       *     createTime?: string
-       *     // 更新者名称
-       *     updateBy?: string
-       *     // 最后更新时间
-       *     updateTime?: string
-       *     name?: string
-       *     icon?: string
-       *     state?: boolean
-       *     parentId?: string
-       *     remark?: string
-       *     sort?: number
-       *     type?: DeptTypeEnum
-       *     users?: Array<User>
-       *     roles?: Array<{
-       *       // 主键
-       *       id?: string
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       name?: string
-       *       type?: 10 | 20 | 30 | 40
-       *       state?: boolean
-       *       remark?: string
-       *       code?: string
-       *       sort?: number
-       *       deptId?: string
-       *       dept?: Dept
-       *       users?: Array<User>
-       *       menus?: Array<{
-       *         // 主键
-       *         id?: string
-       *         // 创建者名称
-       *         createBy?: string
-       *         // 创建时间
-       *         createTime?: string
-       *         // 更新者名称
-       *         updateBy?: string
-       *         // 最后更新时间
-       *         updateTime?: string
-       *         title?: string
-       *         path?: string
-       *         perm?: string
-       *         iFrame?: boolean
-       *         component?: string
-       *         componentName?: string
-       *         parentId?: string
-       *         sort?: number
-       *         icon?: string
-       *         type?: 1 | 2 | 3 | 4
-       *         keepAlive?: boolean
-       *         hidden?: boolean
-       *         redirect?: string
-       *         alwaysShow?: boolean
-       *         state?: boolean
-       *         isDeleted?: boolean
-       *         roles?: Array<Role>
-       *         children?: Array<Menu>
-       *       }>
-       *     }>
-       *     children?: Array<Dept>
-       *   }>
-       *   roles?: Array<{
-       *     // 主键
-       *     id?: string
-       *     // 创建者名称
-       *     createBy?: string
-       *     // 创建时间
-       *     createTime?: string
-       *     // 更新者名称
-       *     updateBy?: string
-       *     // 最后更新时间
-       *     updateTime?: string
-       *     name?: string
-       *     type?: 10 | 20 | 30 | 40
-       *     state?: boolean
-       *     remark?: string
-       *     code?: string
-       *     sort?: number
-       *     deptId?: string
-       *     dept?: Dept
-       *     users?: Array<User>
-       *     menus?: Array<{
-       *       // 主键
-       *       id?: string
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       title?: string
-       *       path?: string
-       *       perm?: string
-       *       iFrame?: boolean
-       *       component?: string
-       *       componentName?: string
-       *       parentId?: string
-       *       sort?: number
-       *       icon?: string
-       *       type?: 1 | 2 | 3 | 4
-       *       keepAlive?: boolean
-       *       hidden?: boolean
-       *       redirect?: string
-       *       alwaysShow?: boolean
-       *       state?: boolean
-       *       isDeleted?: boolean
-       *       roles?: Array<Role>
-       *       children?: Array<Menu>
-       *     }>
-       *   }>
-       *   roleIds?: string[]
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: string
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      put_api_user_update<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          data: UpdateUserParam;
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'User.put_api_user_update',
+        'User.post_api_user_submit',
         Config
       >;
       /**

@@ -78,25 +78,15 @@
       </el-form-item>
     </el-form>
     <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="visible = false">取消</el-button>
-        <el-button
-          v-hasPerm="['role/add']"
-          type="primary"
-          @click="handleSubmit"
-          :loading="loading"
-        >
-          新 增
-        </el-button>
-        <el-button
-          v-hasPerm="['role/update']"
-          type="primary"
-          @click="handleSubmit"
-          :loading="loading"
-        >
-          保 存
-        </el-button>
-      </span>
+      <el-button @click="visible = false">取消</el-button>
+      <el-button
+        v-hasPerm="['role/update']"
+        type="primary"
+        @click="handleSubmit"
+        :loading="loading"
+      >
+        保 存
+      </el-button>
     </template>
   </el-dialog>
 </template>

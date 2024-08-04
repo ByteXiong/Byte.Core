@@ -5,6 +5,7 @@ using Byte.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Byte.Core.Common.Extensions;
 using Mapster;
+using System.Linq.Expressions;
 
 namespace Byte.Core.Business
 {
@@ -33,17 +34,17 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<PagedResults<UserDTO>> GetPageAsync([FromQuery] UserParam param)
         {
-            //Expression<Func<User, bool>> where = x => true;
-            //if (!string.IsNullOrWhiteSpace(param.KeyWord))
-            //{
-            //    param.KeyWord = param.KeyWord.Trim();
-            //    where = where.And(x => x.Name.Contains(param.KeyWord));
-            //}
+            Expression<Func<User, bool>> where = x => true;
+            if (!string.IsNullOrWhiteSpace(param.KeyWord))
+            {
+                param.KeyWord = param.KeyWord.Trim();
+                where = where.And(x => x.Name.Contains(param.KeyWord));
+            }
 
-            //if (param.DeptId != default)
-            //{
-            //    where = where.And(x => x.DeptId == param.DeptId);
-            //}
+            if (param.DeptId != default)
+            {
+                where = where.And(x => x.Depts.Any(y=>y.Id== param.DeptId) );
+            }
 
 
 
@@ -142,7 +143,7 @@ namespace Byte.Core.Business
                     });
                 });
                 await _User_Dept_RoleLogic.AddRangeAsync(User_Dept_Roles);
-
+                _unitOfWork.CommitTran();
                 return param.Id;
             }
             catch (Exception)
