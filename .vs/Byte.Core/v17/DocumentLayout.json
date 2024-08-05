@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "E:\\MyCode\\Byte.Core\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\extensions\\sqlsugarsetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\extensions\\sqlsugarsetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{287FFA61-3022-40D3-B91A-E020C65029B7}|Byte.Core.Models\\Byte.Core.Models.csproj|e:\\mycode\\byte.core\\byte.core.models\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{287FFA61-3022-40D3-B91A-E020C65029B7}|Byte.Core.Models\\Byte.Core.Models.csproj|solutionrelative:byte.core.models\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -37,10 +45,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0C302F42-593E-4186-AFF5-F6DC18019E74}|Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj|e:\\mycode\\byte.core\\byte.core.sqlsugar\\byte.core.sqlsugar.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -137,10 +141,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|e:\\mycode\\byte.core\\byte.core.api\\extensions\\sqlsugarsetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{181C6CCE-1ED1-4379-A086-E1BB133FBFAD}|Byte.Core.Api\\Byte.Core.Api.csproj|solutionrelative:byte.core.api\\extensions\\sqlsugarsetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4287B5E6-4E30-4397-9AD7-98BAB61F547E}|Byte.Core.Common\\Byte.Core.Common.csproj|e:\\mycode\\byte.core\\byte.core.common\\helpers\\sixlaborsimagehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -310,7 +310,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Bookmark",
@@ -334,20 +334,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "appsettings.Development.json",
-              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\appsettings.Development.json",
-              "RelativeDocumentMoniker": "Byte.Core.Api\\appsettings.Development.json",
-              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\appsettings.Development.json",
-              "RelativeToolTip": "Byte.Core.Api\\appsettings.Development.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-07-16T12:19:25.55Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "UserLogic.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\UserLogic.cs",
               "RelativeDocumentMoniker": "Byte.Core.Business\\UserLogic.cs",
@@ -355,12 +342,11 @@
               "RelativeToolTip": "Byte.Core.Business\\UserLogic.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAACIAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T07:07:10.064Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-03T07:07:10.064Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "UserController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\UserController.cs",
@@ -368,12 +354,11 @@
               "RelativeToolTip": "Byte.Core.Api\\Controllers\\UserController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAB3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T07:08:53.125Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-03T07:08:53.125Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "LoginController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\LoginController.cs",
@@ -381,12 +366,11 @@
               "RelativeToolTip": "Byte.Core.Api\\Controllers\\LoginController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAABZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T07:08:03.748Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-03T07:08:03.748Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "DeptController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\DeptController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\DeptController.cs",
@@ -394,12 +378,11 @@
               "RelativeToolTip": "Byte.Core.Api\\Controllers\\DeptController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACAAAABYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T07:08:18.435Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-03T07:08:18.435Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "RoleController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\RoleController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\RoleController.cs",
@@ -407,12 +390,11 @@
               "RelativeToolTip": "Byte.Core.Api\\Controllers\\RoleController.cs",
               "ViewState": "AQIAADIAAAAAAAAAAAAUwFIAAABrAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T07:28:24.264Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-03T07:28:24.264Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "UserDTO.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Models\\UserDTO.cs",
               "RelativeDocumentMoniker": "Byte.Core.Models\\UserDTO.cs",
@@ -425,7 +407,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "User.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\User.cs",
               "RelativeDocumentMoniker": "Byte.Core.Entity\\User.cs",
@@ -433,25 +415,49 @@
               "RelativeToolTip": "Byte.Core.Entity\\User.cs",
               "ViewState": "AQIAABoAAAAAAAAAAAAzwDsAAABfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-16T11:59:03.477Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-16T11:59:03.477Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 0,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\appsettings.json",
               "RelativeDocumentMoniker": "Byte.Core.Api\\appsettings.json",
               "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\appsettings.json",
               "RelativeToolTip": "Byte.Core.Api\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAD8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-07-16T12:07:29.689Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
+              "Title": "SqlSugarSetup.cs",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Extensions\\SqlSugarSetup.cs",
+              "RelativeDocumentMoniker": "Byte.Core.Api\\Extensions\\SqlSugarSetup.cs",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Extensions\\SqlSugarSetup.cs",
+              "RelativeToolTip": "Byte.Core.Api\\Extensions\\SqlSugarSetup.cs",
+              "ViewState": "AQIAAK8AAAAAAAAAAAAcwMkAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T12:14:51.729Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "Byte.Core.Api\\appsettings.Development.json",
+              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\appsettings.Development.json",
+              "RelativeToolTip": "Byte.Core.Api\\appsettings.Development.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-07-16T12:19:25.55Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "LinqExt.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.SqlSugar\\Pager\\LinqExt.cs",
               "RelativeDocumentMoniker": "Byte.Core.SqlSugar\\Pager\\LinqExt.cs",
@@ -459,12 +465,11 @@
               "RelativeToolTip": "Byte.Core.SqlSugar\\Pager\\LinqExt.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T07:29:32.467Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-03T07:29:32.467Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "Byte.Core.SqlSugar.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj",
               "RelativeDocumentMoniker": "Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj",
@@ -472,12 +477,11 @@
               "RelativeToolTip": "Byte.Core.SqlSugar\\Byte.Core.SqlSugar.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAADwvwsAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-07-16T11:56:08.708Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-16T11:56:08.708Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "UploadController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\UploadController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\UploadController.cs",
@@ -485,12 +489,11 @@
               "RelativeToolTip": "Byte.Core.Api\\Controllers\\UploadController.cs",
               "ViewState": "AQIAAA8AAAAAAAAAAAAAACAAAABBAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T07:08:30.336Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-03T07:08:30.336Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "LoginLogic.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\LoginLogic.cs",
               "RelativeDocumentMoniker": "Byte.Core.Business\\LoginLogic.cs",
@@ -498,12 +501,11 @@
               "RelativeToolTip": "Byte.Core.Business\\LoginLogic.cs",
               "ViewState": "AQIAAFAAAAAAAAAAAAAcwHUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T07:06:56.011Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-03T07:06:56.011Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "Role_MenuLogic.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\Role_MenuLogic.cs",
               "RelativeDocumentMoniker": "Byte.Core.Business\\Role_MenuLogic.cs",
@@ -511,24 +513,22 @@
               "RelativeToolTip": "Byte.Core.Business\\Role_MenuLogic.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T07:06:30.382Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-03T07:06:30.382Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "1819982168638623744.jpg",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\wwwroot\\upload\\images\\20240804\\1819982168638623744.jpg",
               "RelativeDocumentMoniker": "Byte.Core.Api\\wwwroot\\upload\\images\\20240804\\1819982168638623744.jpg",
               "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\wwwroot\\upload\\images\\20240804\\1819982168638623744.jpg",
               "RelativeToolTip": "Byte.Core.Api\\wwwroot\\upload\\images\\20240804\\1819982168638623744.jpg",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
-              "WhenOpened": "2024-08-04T06:22:57.72Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-04T06:22:57.72Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "Dept.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Dept.cs",
               "RelativeDocumentMoniker": "Byte.Core.Entity\\Dept.cs",
@@ -536,12 +536,11 @@
               "RelativeToolTip": "Byte.Core.Entity\\Dept.cs",
               "ViewState": "AQIAACQAAAAAAAAAAAAUwDQAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-16T11:57:19.732Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-16T11:57:19.732Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "DeptLogic.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\DeptLogic.cs",
               "RelativeDocumentMoniker": "Byte.Core.Business\\DeptLogic.cs",
@@ -549,12 +548,11 @@
               "RelativeToolTip": "Byte.Core.Business\\DeptLogic.cs",
               "ViewState": "AQIAAAQAAAAAAAAAAAAUwBYAAABeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T07:06:12.847Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-03T07:06:12.847Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "Byte.Core.Api.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Byte.Core.Api.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Byte.Core.Api.csproj",
@@ -562,12 +560,11 @@
               "RelativeToolTip": "Byte.Core.Api\\Byte.Core.Api.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAADwvxAAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-07-16T12:07:10.875Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-16T12:07:10.875Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "DeptDTO.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Models\\DeptDTO.cs",
               "RelativeDocumentMoniker": "Byte.Core.Models\\DeptDTO.cs",
@@ -575,12 +572,11 @@
               "RelativeToolTip": "Byte.Core.Models\\DeptDTO.cs",
               "ViewState": "AQIAABwAAAAAAAAAAAAkwCgAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T07:02:36.418Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-03T07:02:36.418Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "RoleLogic.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\RoleLogic.cs",
               "RelativeDocumentMoniker": "Byte.Core.Business\\RoleLogic.cs",
@@ -588,12 +584,11 @@
               "RelativeToolTip": "Byte.Core.Business\\RoleLogic.cs",
               "ViewState": "AQIAAA8AAAAAAAAAAAAYwCAAAABiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T07:05:59.174Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-03T07:05:59.174Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "DataSeederMiddleware.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Extensions\\DataSeederMiddleware.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Extensions\\DataSeederMiddleware.cs",
@@ -601,12 +596,11 @@
               "RelativeToolTip": "Byte.Core.Api\\Extensions\\DataSeederMiddleware.cs",
               "ViewState": "AQIAAB8AAAAAAAAAAAAgwDIAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-16T12:13:42.061Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-16T12:13:42.061Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "CodeController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\CodeController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\CodeController.cs",
@@ -614,12 +608,11 @@
               "RelativeToolTip": "Byte.Core.Api\\Controllers\\CodeController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-16T12:16:24.725Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-16T12:16:24.725Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "Byte.Core.Models.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Models\\Byte.Core.Models.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Models\\Byte.Core.Models.csproj",
@@ -627,12 +620,11 @@
               "RelativeToolTip": "Byte.Core.Models\\Byte.Core.Models.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAABDAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-07-16T11:54:04.771Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-16T11:54:04.771Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "Byte.Core.Tools.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Tools\\Byte.Core.Tools.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Tools\\Byte.Core.Tools.csproj",
@@ -640,12 +632,11 @@
               "RelativeToolTip": "Byte.Core.Tools\\Byte.Core.Tools.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-08-03T07:10:35.224Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-03T07:10:35.224Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "Byte.Core.Entity.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Entity\\Byte.Core.Entity.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Entity\\Byte.Core.Entity.csproj",
@@ -653,12 +644,11 @@
               "RelativeToolTip": "Byte.Core.Entity\\Byte.Core.Entity.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-07-16T11:47:22.907Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-16T11:47:22.907Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "Byte.Core.Repository.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Repository\\Byte.Core.Repository.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Repository\\Byte.Core.Repository.csproj",
@@ -666,12 +656,11 @@
               "RelativeToolTip": "Byte.Core.Repository\\Byte.Core.Repository.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAADwvw8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-07-16T11:51:56.849Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-16T11:51:56.849Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "MenuController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Controllers\\MenuController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Controllers\\MenuController.cs",
@@ -679,12 +668,11 @@
               "RelativeToolTip": "Byte.Core.Api\\Controllers\\MenuController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T07:09:06.477Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-03T07:09:06.477Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "launchSettings.json",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Properties\\launchSettings.json",
@@ -696,7 +684,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "Byte.Core.Business.csproj",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Business\\Byte.Core.Business.csproj",
               "RelativeDocumentMoniker": "Byte.Core.Business\\Byte.Core.Business.csproj",
@@ -704,12 +692,11 @@
               "RelativeToolTip": "Byte.Core.Business\\Byte.Core.Business.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAADwvwYAAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-08-03T08:38:28.688Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-03T08:38:28.688Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "RoleDTO.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Models\\RoleDTO.cs",
               "RelativeDocumentMoniker": "Byte.Core.Models\\RoleDTO.cs",
@@ -721,7 +708,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "BaseApiController.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Common\\BaseApiController.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Common\\BaseApiController.cs",
@@ -733,7 +720,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "log4net.config",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\log4net.config",
               "RelativeDocumentMoniker": "Byte.Core.Api\\log4net.config",
@@ -745,7 +732,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "appsettings.Production.json",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\appsettings.Production.json",
               "RelativeDocumentMoniker": "Byte.Core.Api\\appsettings.Production.json",
@@ -757,7 +744,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Program.cs",
               "RelativeDocumentMoniker": "Byte.Core.Api\\Program.cs",
@@ -766,18 +753,6 @@
               "ViewState": "AQIAAFEAAAAAAAAAAAAowGUAAABMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-16T12:04:23.204Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "SqlSugarSetup.cs",
-              "DocumentMoniker": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Extensions\\SqlSugarSetup.cs",
-              "RelativeDocumentMoniker": "Byte.Core.Api\\Extensions\\SqlSugarSetup.cs",
-              "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Extensions\\SqlSugarSetup.cs",
-              "RelativeToolTip": "Byte.Core.Api\\Extensions\\SqlSugarSetup.cs",
-              "ViewState": "AQIAAK8AAAAAAAAAAAAcwMkAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-16T12:14:51.729Z"
             },
             {
               "$type": "Document",
@@ -837,8 +812,7 @@
               "RelativeToolTip": "Byte.Core.Common\\Byte.Core.Common.csproj",
               "ViewState": "AQIAABsAAAAAAAAAAAAAwEMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-03-29T08:27:52.991Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-29T08:27:52.991Z"
             },
             {
               "$type": "Document",
@@ -849,8 +823,7 @@
               "ToolTip": "E:\\MyCode\\Byte.Core\\Byte.Core.Api\\Byte.Core.Api.csproj",
               "RelativeToolTip": "Byte.Core.Api\\Byte.Core.Api.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-07-16T13:19:27.673Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-16T13:19:27.673Z"
             },
             {
               "$type": "Document",

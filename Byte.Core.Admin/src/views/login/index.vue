@@ -11,108 +11,117 @@
       />
       <lang-select class="ml-2 cursor-pointer" />
     </div>
-    <div calss="w-100 flex justify-start">
-      <div
-        class="typing-container"
-        ref="typingContainer"
-        style="line-height: normal; height: auto"
-      ></div>
+    <div
+      class="typing-container"
+      ref="typingContainer"
+      style="line-height: normal; height: auto"
+    ></div>
 
-      <!-- 登录表单 -->
-      <el-card
-        class="absolute right-0 !border-none !bg-transparent !rounded-4% w-100 <sm:w-85"
+    <!-- 登录表单 -->
+    <el-card
+      class="absolute right-30 items-center !border-none !bg-transparent !rounded-4% w-100 <sm:w-85"
+    >
+      <div class="text-center relative">
+        <h2>{{ defaultSettings.title }}</h2>
+        <el-tag class="ml-2 absolute-rt">{{ defaultSettings.version }}</el-tag>
+      </div>
+
+      <el-form
+        ref="loginFormRef"
+        :model="loginData"
+        :rules="loginRules"
+        class="login-form"
       >
-        <div class="text-center relative">
-          <h2>{{ defaultSettings.title }}</h2>
-          <el-tag class="ml-2 absolute-rt">{{
-            defaultSettings.version
-          }}</el-tag>
-        </div>
-
-        <el-form
-          ref="loginFormRef"
-          :model="loginData"
-          :rules="loginRules"
-          class="login-form"
-        >
-          <!-- 用户名 -->
-          <el-form-item prop="username">
-            <div class="flex-y-center w-full">
-              <svg-icon icon-class="user" class="mx-2" />
-              <el-input
-                ref="username"
-                v-model="loginData.account"
-                :placeholder="$t('login.username')"
-                name="username"
-                size="large"
-                class="h-[48px]"
-              />
-            </div>
-          </el-form-item>
-
-          <!-- 密码 -->
-          <el-tooltip
-            :visible="isCapslock"
-            content="Caps lock is On"
-            placement="right"
-          >
-            <el-form-item prop="password">
-              <div class="flex-y-center w-full">
-                <el-icon class="mx-2"><Lock /></el-icon>
-                <el-input
-                  v-model="loginData.password"
-                  :placeholder="$t('login.password')"
-                  type="password"
-                  name="password"
-                  @keyup="checkCapslock"
-                  @keyup.enter="handleLogin"
-                  size="large"
-                  class="h-[48px] pr-2"
-                  show-password
-                />
-              </div>
-            </el-form-item>
-          </el-tooltip>
-
-          <!-- 验证码 -->
-          <el-form-item prop="captchaCode">
-            <div class="flex-y-center w-full">
-              <svg-icon icon-class="captcha" class="mx-2" />
-              <el-input
-                v-model="loginData.captchaCode"
-                auto-complete="off"
-                size="large"
-                class="flex-1"
-                :placeholder="$t('login.captchaCode')"
-                @keyup.enter="handleLogin"
-              />
-
-              <el-image
-                @click="getCaptcha"
-                :src="captchaBase64"
-                class="rounded-tr-md rounded-br-md cursor-pointer h-[48px]"
-              />
-            </div>
-          </el-form-item>
-
-          <!-- 登录按钮 -->
-          <el-button
-            :loading="loading"
-            type="primary"
-            size="large"
-            class="w-full"
-            @click.prevent="handleLogin"
-            >{{ $t("login.login") }}
-          </el-button>
-
-          <!-- 账号密码提示 -->
-          <div class="mt-10 text-sm">
-            <span>{{ $t("login.username") }}: admin</span>
-            <span class="ml-4"> {{ $t("login.password") }}: 123456</span>
+        <!-- 用户名 -->
+        <el-form-item prop="username">
+          <div class="flex-y-center w-full">
+            <svg-icon icon-class="user" class="mx-2" />
+            <el-input
+              ref="username"
+              v-model="loginData.account"
+              :placeholder="$t('login.username')"
+              name="username"
+              size="large"
+              class="h-[48px]"
+            />
           </div>
-        </el-form>
-      </el-card>
-    </div>
+        </el-form-item>
+
+        <!-- 密码 -->
+        <el-tooltip
+          :visible="isCapslock"
+          content="Caps lock is On"
+          placement="right"
+        >
+          <el-form-item prop="password">
+            <div class="flex-y-center w-full">
+              <el-icon class="mx-2"><Lock /></el-icon>
+              <el-input
+                v-model="loginData.password"
+                :placeholder="$t('login.password')"
+                type="password"
+                name="password"
+                @keyup="checkCapslock"
+                @keyup.enter="handleLogin"
+                size="large"
+                class="h-[48px] pr-2"
+                show-password
+              />
+            </div>
+          </el-form-item>
+        </el-tooltip>
+
+        <!-- 验证码 -->
+        <el-form-item prop="captchaCode">
+          <div class="flex-y-center w-full">
+            <svg-icon icon-class="captcha" class="mx-2" />
+            <el-input
+              v-model="loginData.captchaCode"
+              auto-complete="off"
+              size="large"
+              class="flex-1"
+              :placeholder="$t('login.captchaCode')"
+              @keyup.enter="handleLogin"
+            />
+
+            <el-image
+              @click="getCaptcha"
+              :src="captchaBase64"
+              class="rounded-tr-md rounded-br-md cursor-pointer h-[48px]"
+            />
+          </div>
+        </el-form-item>
+
+        <!-- 登录按钮 -->
+        <el-button
+          :loading="loading"
+          type="primary"
+          size="large"
+          class="w-full"
+          @click.prevent="handleLogin"
+          >{{ $t("login.login") }}
+        </el-button>
+
+        <!-- 账号密码提示 -->
+        <div class="mt-10 text-sm">
+          <span>{{ $t("login.username") }}: admin</span>
+          <span class="ml-4"> {{ $t("login.password") }}: 123456</span>
+        </div>
+        <div class="mt-10 text">
+          <a target="_blank" href="https://gitee.com/ByteXiong/Byte.Core">
+            gittee :https://gitee.com/ByteXiong/Byte.Core</a
+          >
+        </div>
+        <div class="mt-10 text">
+          <a
+            target="_blank"
+            href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=o0kj4P6WcaHOJeHIvdfqmlkZnRhGsljY&authKey=O%2Fhfpj%2B63L3OSf4Xz1aPBcSDWlVXJ%2FaicDUwHtqF3vwAKB0hCLnIU%2FKks500F3mj&noverify=0&group_code=929412850"
+          >
+            Byte.Core QQ交流群:929412850</a
+          >
+        </div>
+      </el-form>
+    </el-card>
     <!-- ICP备案 -->
     <div class="absolute bottom-1 text-[10px] text-center" v-show="icpVisible">
       <p>
@@ -288,7 +297,23 @@ function checkCapslock(e: any) {
 }
 
 const typingContainer = ref();
-const text = ref("你好!,\n欢迎来到Byte.Core");
+const text = ref(
+  `大佬您好!,\n
+   \t欢迎来到Byte.Core ,我们将重新定义敏捷开发 \n 
+   \t项目框架 采用的.net8 +vue3 ts 紧跟时代步伐\n 
+   \t技术上，Byte.Core 基于SqlSugar+Alova.js 让交互更轻松更便捷\n
+   \t在当下Gittee,Github开源框架 随处可见,AI横行的时代,我们为什么还要开源框架\n 
+   \t解决开发痛点: 1.口水话  代码质量低 代码可读性差  代码可维护性差\n
+   \t             2.接口文档没有注释, 前端一脸懵,还要苦逼对字段写注释\n
+   \t             3.前后端分离沟通成本高 (沟通不到位, 甩锅环节)\n
+   \t             4.后端改了接口 通知前端 (懂的都懂,后端改了,他自己都记不清了)\n
+   \t我们的优点是: 1.开源 \n
+   \t             2.开发痛点,\n
+   \t             3.后端框架 集中化管理(已发布至NGet), 只需要关注业务，不需要关注框架\n
+   \t有志同道合者可以加入我们， 無人扶我青云志 我自踏雪至山巅 \n
+   \t作者开源不易,点个星支持一下,\n
+   \t目前还在开发中,敬请期待...`
+);
 const index = ref(0);
 
 function typeEffect() {
@@ -299,14 +324,15 @@ function typeEffect() {
       index.value + 1
     );
     index.value++;
-    setTimeout(typeEffect, 1000); // 调整打字速度
-  } else {
-    setTimeout(() => {
-      index.value = 0;
-      typingContainer.value.innerHTML = "";
-      typeEffect();
-    }, 2000); // 调整循环延迟
+    setTimeout(typeEffect, 30); // 调整打字速度
   }
+  // else {
+  //   setTimeout(() => {
+  //     index.value = 0;
+  //     typingContainer.value.innerHTML = "";
+  //     typeEffect();
+  //   }, 2000); // 调整循环延迟
+  // }
 }
 onMounted(() => {
   typeEffect();
@@ -354,22 +380,27 @@ html.dark .login-container {
 }
 
 .typing-container {
+  height: 100%;
+  width: 60%;
+  position: absolute;
+  left: 20px;
+  top: 40px;
   font-family: monospace;
   font-size: 24px; /* 字体大小 */
   font-weight: bold; /* 字体加粗 */
   white-space: pre-wrap;
   overflow: hidden;
-  border-right: 3px solid; /* 光标粗细 */
-  animation: cursor-blink 0.7s steps(1, start) infinite;
+  // border-right: 3px solid; /* 光标粗细 */
+  // animation: cursor-blink 0.7s steps(1, start) infinite;
 }
 
-@keyframes cursor-blink {
-  0%,
-  100% {
-    border-color: transparent;
-  }
-  50% {
-    border-color: black;
-  }
-}
+// @keyframes cursor-blink {
+//   0%,
+//   100% {
+//     border-color: transparent;
+//   }
+//   50% {
+//     border-color: black;
+//   }
+// }
 </style>
