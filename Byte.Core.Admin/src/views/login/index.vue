@@ -316,7 +316,7 @@ const text = ref(
         3.后端框架实现集中化管理（已发布至 NGet），开发者只需专注于业务，无需操心框架问题。
         4.前端框架采用 Alova.js 配合 OpenAPI，能够实时关注接口动向。\n
     乾坤未定，你我皆是黑马。欢迎兄弟加入！\n
-    无人扶我青云志，我自踏雪至山巅。作者开源不易，恳请您点个星支持一下。→ \n
+    無人扶我青云志，我自踏雪至山巅。作者开源不易，恳请您点个星支持一下。\n
     目前项目仍在开发中，敬请期待......`
 );
 const index = ref(0);
@@ -329,7 +329,7 @@ function typeEffect() {
       index.value + 1
     );
     index.value++;
-    setTimeout(typeEffect, 2); // 调整打字速度
+    setTimeout(typeEffect, 50); // 调整打字速度
   }
   // else {
   //   setTimeout(() => {

@@ -1,6 +1,6 @@
 {
   "name": "Byte.Core.Admin",
-  "version": "3.2.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
