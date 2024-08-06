@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Byte.Core.Api\Byte.Core.Api.csproj" />
+    <ProjectReference Include="..\Byte.Core.Business\Byte.Core.Business.csproj" />
+    <ProjectReference Include="..\Byte.Core.Common\Byte.Core.Common.csproj" />
+    <ProjectReference Include="..\Byte.Core.Entity\Byte.Core.Entity.csproj" />
+    <ProjectReference Include="..\Byte.Core.Models\Byte.Core.Models.csproj" />
+    <ProjectReference Include="..\Byte.Core.Repository\Byte.Core.Repository.csproj" />
+    <ProjectReference Include="..\Byte.Core.SqlSugar\Byte.Core.SqlSugar.csproj" />
+    <ProjectReference Include="..\Byte.Core.Tools\Byte.Core.Tools.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+  </ItemGroup>
+
+</Project>

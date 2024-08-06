@@ -1,7 +1,5 @@
 ﻿using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
-using Byte.Core.Api.Extensions;
-using Byte.Core.Common;
 using Byte.Core.Common.Attributes;
 using Byte.Core.Common.Cache;
 using Byte.Core.Common.Extensions;
@@ -14,6 +12,7 @@ using Byte.Core.SqlSugar;
 using Byte.Core.SqlSugar.ConfigOptions;
 using Byte.Core.SqlSugar.IDbContext;
 using Byte.Core.Tools;
+using Byte.Core.Tools.Extensions;
 using Lazy.Captcha.Core;
 using Lazy.Captcha.Core.Generator;
 using log4net;

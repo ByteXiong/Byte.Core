@@ -3,12 +3,13 @@ using Byte.Core.Common.Helpers;
 using Byte.Core.SqlSugar;
 using Byte.Core.SqlSugar.ConfigOptions;
 using Byte.Core.SqlSugar.Model;
-using Byte.Core.Common.Models;
-using SqlSugar;
-using StackExchange.Profiling;
-using MiniProfiler = StackExchange.Profiling.MiniProfiler;
 using Byte.Core.Tools;
-namespace Byte.Core.Api.Extensions;
+using Microsoft.Extensions.DependencyInjection;
+using SqlSugar;
+using MiniProfiler = StackExchange.Profiling.MiniProfiler;
+using Microsoft.Extensions.Configuration;
+using StackExchange.Profiling;
+namespace Byte.Core.Tools.Extensions;
 
 /// <summary>
 /// SqlSugar 启动器

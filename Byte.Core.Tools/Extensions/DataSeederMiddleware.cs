@@ -1,9 +1,10 @@
 using Byte.Core.Common.Helpers;
 using Byte.Core.Common.IoC;
 using Byte.Core.SqlSugar.IDbContext;
+using Microsoft.AspNetCore.Builder;
 using SqlSugar;
 
-namespace Byte.Core.Api.Extensions
+namespace Byte.Core.Tools.Extensions
 {
     public static class DataSeederMiddleware
     {

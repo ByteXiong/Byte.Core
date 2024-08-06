@@ -17,7 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Byte.Core.Api", "Byte.Core.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Byte.Core.Business", "Byte.Core.Business\Byte.Core.Business.csproj", "{3A1B36BF-6D10-48DA-81AF-C77C725D9D13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Byte.Core.Tools", "Byte.Core.Tools\Byte.Core.Tools.csproj", "{AAF96D8A-B603-4CF3-A835-A35D66F31FC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Byte.Core.Tools", "Byte.Core.Tools\Byte.Core.Tools.csproj", "{AAF96D8A-B603-4CF3-A835-A35D66F31FC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Byte.Core.MSTest", "Byte.Core.MSTest\Byte.Core.MSTest.csproj", "{C35D47BE-DB98-44F6-90DF-65624933FA25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "基类库源码(Nuget)", "基类库源码(Nuget)", "{9DE9EDDD-8F21-4653-9F53-DE3EF9AF6F74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,9 +61,17 @@ Global
 		{AAF96D8A-B603-4CF3-A835-A35D66F31FC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAF96D8A-B603-4CF3-A835-A35D66F31FC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAF96D8A-B603-4CF3-A835-A35D66F31FC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C35D47BE-DB98-44F6-90DF-65624933FA25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C35D47BE-DB98-44F6-90DF-65624933FA25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C35D47BE-DB98-44F6-90DF-65624933FA25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C35D47BE-DB98-44F6-90DF-65624933FA25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4287B5E6-4E30-4397-9AD7-98BAB61F547E} = {9DE9EDDD-8F21-4653-9F53-DE3EF9AF6F74}
+		{0C302F42-593E-4186-AFF5-F6DC18019E74} = {9DE9EDDD-8F21-4653-9F53-DE3EF9AF6F74}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A9C88004-E3B9-4780-A50D-FAD72131B5FE}
