@@ -38,7 +38,7 @@
 		<PackageReference Include="Apache.Thrift" Version="1.0.2" />
 		<PackageReference Include="AspectCore.Extensions.Autofac" Version="2.4.0" />
 		<PackageReference Include="AspectCore.Extensions.DependencyInjection" Version="2.4.0" />
-		<PackageReference Include="AspectCore.Extensions.Hosting" Version="2.4.0" />
+		<PackageReference Include="AspectCore.Extensions.Hosting" Version="2.2.0" />
 		<PackageReference Include="AspectCore.Extensions.LightInject" Version="2.4.0" />
 		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
 		<PackageReference Include="CSRedisCore" Version="3.8.803" />

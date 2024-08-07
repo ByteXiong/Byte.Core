@@ -30,8 +30,8 @@ using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 //雪花Id 
-new IdHelperBootstrapper().SetWorkderId(1).Boot();
-Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+//new IdHelperBootstrapper().SetWorkderId(1).Boot();
+//Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
 #if DEBUG
 builder.WebHost.UseUrls("http://*:3000");
@@ -153,8 +153,9 @@ builder.Services.AddOptions<SwaggerGenOptions>()
             var xmls = Directory.GetFiles(basePath, "*.xml");
             Array.ForEach(xmls, aXml =>
             {
-                options.IncludeXmlComments(aXml);
+                options.IncludeXmlComments(aXml, true);
             });
+            options.OrderActionsBy(o => o.RelativePath);
         });
 #endregion
 #region 图像验证码
@@ -404,6 +405,7 @@ app.UseSwaggerUI(options =>
         //    url = "/swagger/logo.png" // 添加 logo
         //};
     }
+    options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.List);
     options.ConfigObject.AdditionalItems["logo"] = new
     {
         url = "/swagger/logo.png" // 添加 logo
@@ -479,7 +481,6 @@ app.UseStaticFiles(new StaticFileOptions
 
 
 #region 初始数据库
-var dataContext = builder.Services.BuildServiceProvider().GetRequiredService<SugarDbContext>();
 await app.UseDataSeederMiddlewareAsync("Byte.Core.Entity");
 #endregion
 
