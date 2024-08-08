@@ -11,6 +11,7 @@
               children: 'children',
               label: 'name',
             }"
+            :expand-on-click-node="false"
             @node-click="handleNodeClick"
           />
         </el-card>
@@ -261,10 +262,6 @@ const { send: setState, loading: stateLoading } = useRequest(
   }
 );
 
-async function search() {
-  await getData();
-}
-
 const selectIds = ref<string[]>([]);
 //多选
 async function handleSelectionChange(e: any) {
@@ -279,9 +276,9 @@ const handleSortChange = (data: {
   sortList.value = { [data.prop]: data.order?.replace("ending", "") };
 };
 
-function handleNodeClick(data: any) {
+async function handleNodeClick(data: any) {
   deptId.value = data?.id;
-  search();
+  await getData();
 }
 
 // 删除

@@ -114,7 +114,7 @@
           show-overflow-tooltip
           class-name="onExcel"
           label="操作"
-          width="160"
+          width="280"
           fixed="right"
         >
           <template #default="scope">
@@ -128,7 +128,14 @@
               ><i-ep-edit />编辑</el-button
             >
             <el-button
-              v-hasPerm="['menu/delete']"
+              :loading="loading"
+              type="primary"
+              link
+              size="small"
+              @click.stop="openChildForm(scope.row)"
+              ><i-ep-plus />组织架构</el-button
+            >
+            <el-button
               :loading="loading"
               type="primary"
               link
@@ -155,7 +162,7 @@ import editForm from "./editForm.vue";
 import { MenuTypeEnum } from "@/api/apiEnums";
 import { MenuTypeEl } from "@/api/apiEls";
 import "@/api";
-import { Menu } from "@/api/globals";
+import { Menu, MenuTreeDTO } from "@/api/globals";
 defineOptions({
   name: "Menu",
   inheritAttrs: false,
@@ -236,4 +243,8 @@ const editform = ref();
 async function openForm(id?: string) {
   await editform.value.openForm(id);
 }
+
+const openChildForm = async (row: MenuTreeDTO) => {
+  await editform.value.openForm(null, row);
+};
 </script>

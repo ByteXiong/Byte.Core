@@ -183,7 +183,7 @@ import { MenuTypeEnum, getEnumValue } from "@/api/apiEnums";
 import { useRoute } from "vue-router";
 import "@/api";
 import { useForm } from "alova/client";
-import { MenuInfo, UpdateMenuParam } from "@/api/globals";
+import { MenuInfo, MenuTreeDTO, UpdateMenuParam } from "@/api/globals";
 const route = useRoute();
 const emit = defineEmits(["refresh"]);
 /**
@@ -244,11 +244,12 @@ const rules = reactive({
   visible: [{ required: true, message: "请输入路由路径", trigger: "blur" }],
 });
 //打开
-const openForm = async (id?: string) => {
+const openForm = async (id?: string, parentRow?: MenuTreeDTO) => {
   visible.value = true;
   if (id) {
     await getInfo(id);
   } else {
+    form.value.parentId = parentRow?.id;
     form.value.state = true;
   }
 };

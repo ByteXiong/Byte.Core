@@ -13,9 +13,25 @@
           <el-form-item label="上级组织" prop="parentId">
             <dept-select v-model="form.parentId" />
           </el-form-item>
-          <el-form-item label="Logo" prop="image">
-            <AvatarUpLoad v-model="form.image" />
+          <el-form-item
+            label="类型"
+            prop="type"
+            :rules="{
+              required: true,
+              message: '类型不能为空',
+              trigger: ['blur', 'change'],
+            }"
+          >
+            <el-select v-model="form.type" placeholder="请选择类型">
+              <el-option
+                :key="index"
+                :label="DeptTypeEnum[item]"
+                :value="item"
+                v-for="(item, index) in getEnumValue(DeptTypeEnum)"
+              />
+            </el-select>
           </el-form-item>
+
           <el-form-item
             label="组织名称"
             prop="name"
@@ -38,15 +54,8 @@
               placeholder="请输入组织简称"
             />
           </el-form-item>
-          <el-form-item
-            label="地址"
-            prop="address"
-            :rules="{
-              required: true,
-              message: '地址不能为空',
-              trigger: ['blur', 'change'],
-            }"
-          >
+
+          <el-form-item label="地址" prop="address">
             <el-input
               v-model="form.address"
               autocomplete="off"
@@ -57,12 +66,7 @@
           <el-form-item label="状态" prop="state">
             <el-switch
               v-model="form.state"
-              class="ml-2"
               inline-prompt
-              style="
-                --el-switch-on-color: #13ce66;
-                --el-switch-off-color: #ff4949;
-              "
               active-text="启用"
               inactive-text="禁用"
             />
@@ -87,11 +91,14 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="法人" prop="man">
+          <el-form-item label="Logo" prop="image">
+            <AvatarUpLoad v-model="form.image" />
+          </el-form-item>
+          <el-form-item label="法人/负责人" prop="man">
             <el-input
               v-model="form.man"
               autocomplete="off"
-              placeholder="请输入法人"
+              placeholder="请输入法人/负责人"
             />
           </el-form-item>
           <el-form-item label="法人扫码">
@@ -139,7 +146,7 @@ import AvatarUpLoad from "@/components/Upload/AvatarUpLoad.vue";
 import { useRoute } from "vue-router";
 import "@/api";
 import { useForm } from "alova/client";
-import { UpdateDeptParam } from "@/api/globals";
+import { DeptTreeDTO, UpdateDeptParam } from "@/api/globals";
 const route = useRoute();
 const emit = defineEmits(["refresh"]);
 /**
@@ -177,6 +184,7 @@ const {
     immediate: false,
     resetAfterSubmiting: true,
     initialForm: {
+      parentId: "",
       msgCode: 123456,
     } as UpdateDeptParam,
   }
@@ -191,11 +199,12 @@ const close = () => {
   resetFrom();
 };
 //打开
-const openForm = async (id?: string) => {
+const openForm = async (id?: string, parentRow?: DeptTreeDTO) => {
   visible.value = true;
   if (id) {
     await getInfo(id);
   } else {
+    form.value.parentId = parentRow?.id;
     form.value.state = true;
   }
 };
@@ -209,5 +218,6 @@ async function handleSubmit() {
 }
 defineExpose({
   openForm,
+  form,
 });
 </script>

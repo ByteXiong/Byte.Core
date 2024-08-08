@@ -3,6 +3,7 @@ using Byte.Core.Entity;
 using Byte.Core.Tools;
 using System.Drawing.Drawing2D;
 using Byte.Core.Tools;
+using SqlSugar;
 namespace Byte.Core.Models
 {
     /// <summary>
@@ -24,9 +25,71 @@ namespace Byte.Core.Models
     /// <summary>
     /// 菜单
     /// </summary>
-    public class MenuTreeDTO : Menu
+    public class MenuTreeDTO 
     {
 
+        public Guid Id { get; set; }
+        /// <summary>
+        /// 菜单标题
+        /// </summary>
+        public string Title { get; set; }
+        /// <summary>
+        /// 组件
+        /// </summary>
+        public string Component { get; set; }
+
+        /// <summary>
+        /// 组件名称
+        /// </summary>
+        public string ComponentName { get; set; }
+
+        /// <summary>
+        /// 父级菜单ID
+        /// </summary>
+        public Guid? ParentId { get; set; }
+
+        /// <summary>
+        /// 排序
+        /// </summary>
+        public int Sort { get; set; }
+
+        /// <summary>
+        /// icon图标
+        /// </summary>
+        public string Icon { get; set; }
+
+        /// <summary>
+        /// 类型
+        /// 1.目录 2.菜单 3.按钮
+        /// </summary>
+        public MenuTypeEnum Type { get; set; }
+
+        /// <summary>
+        /// 是否缓存
+        /// </summary>
+        public bool KeepAlive { get; set; }
+
+        /// <summary>
+        /// 是否隐藏
+        /// </summary>
+        public bool Hidden { get; set; }
+        /// <summary>
+        /// 跳转路由
+        /// </summary>
+        public string Redirect { get; set; }
+        /// <summary>
+        /// 根目录始终显示 
+        /// </summary>
+        public bool AlwaysShow { get; set; }
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public bool State { get; set; }
+
+
+       
+        public  List<MenuTreeDTO> Children { get; set; }
 
     }
 

@@ -334,8 +334,8 @@ function toggleSidebar() {
       margin-left: 0;
       overflow: hidden;
     }
-    // // 顶部模式全局变量修改
-    // --el-menu-item-height: $navbar-height;
+    // 顶部模式全局变量修改
+    --el-menu-item-height: $navbar-height;
   }
 }
 </style>

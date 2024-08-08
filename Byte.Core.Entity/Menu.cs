@@ -14,7 +14,7 @@ namespace Byte.Core.Entity
         /// <summary>
         /// 菜单标题
         /// </summary>
-        [SugarColumn(IsNullable = false)]
+        [SugarColumn(IsNullable = true)]
         public string Title { get; set; }
 
         /// <summary>
@@ -22,18 +22,6 @@ namespace Byte.Core.Entity
         /// </summary>
         [SugarColumn(IsNullable = true)]
         public string Path { get; set; }
-
-        /// <summary>
-        /// 权限标识符
-        /// </summary>
-        [SugarColumn(IsNullable = true)]
-        public string Perm { get; set; }
-
-        /// <summary>
-        /// 是否iframe
-        /// </summary>
-        [SugarColumn(IsNullable = false)]
-        public bool IFrame { get; set; }
 
         /// <summary>
         /// 组件

@@ -6,6 +6,7 @@
     @change="change"
     :data="data"
     check-strictly
+    :loading="loading"
     :render-after-expand="false"
     :props="{ label: 'name', value: 'id' }"
   />
@@ -13,14 +14,14 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 import "@/api";
-
+import { DeptTypeEnum } from "@/api/apiEnums";
 /**
  * 获取数据
  */
 const { data, loading } = useRequest(
   () =>
     Apis.Dept.get_api_dept_gettreeselect({
-      params: {},
+      params: { types: props.types },
       transform: (res) => {
         return res.data;
       },
@@ -29,6 +30,13 @@ const { data, loading } = useRequest(
     immediate: true,
   }
 );
+
+const props = defineProps({
+  types: {
+    type: Array as PropType<DeptTypeEnum[]>,
+    default: () => [DeptTypeEnum.公司, DeptTypeEnum.部门],
+  },
+});
 
 const emit = defineEmits(["getVal", "change"]);
 const list = ref<any>([]);

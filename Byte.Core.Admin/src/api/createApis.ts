@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Byte.Core开发接口文档 Web端网站 - version 1.0
+ * 维保接口文档 Web端网站 - version 1.0
  *
  *
  *

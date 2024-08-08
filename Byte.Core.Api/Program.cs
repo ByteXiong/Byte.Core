@@ -33,9 +33,7 @@ var builder = WebApplication.CreateBuilder(args);
 //new IdHelperBootstrapper().SetWorkderId(1).Boot();
 //Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-#if DEBUG
 builder.WebHost.UseUrls("http://*:3000");
-#endif
 
 #region 获取Config配置
 var configuration = builder.Configuration;
@@ -345,7 +343,7 @@ builder.Services.BuildAspectCoreWithAutofacServiceProvider(); //接入AspectCore
 //#endregion
 var app = builder.Build();
 
-#region 配置项
+
 #region 跨域
 app.UseMiddleware<CorsMiddleware>();
 #endregion
@@ -406,10 +404,10 @@ app.UseSwaggerUI(options =>
         //};
     }
     options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.List);
-    options.ConfigObject.AdditionalItems["logo"] = new
-    {
-        url = "/swagger/logo.png" // 添加 logo
-    };
+    //options.ConfigObject.AdditionalItems["logo"] = new
+    //{
+    //    url = "/swagger/logo.png" // 添加 logo
+    //};
     //options.RoutePrefix = "Byte.CoreApi";
     //options.InjectStylesheet("/swagger/custom.css");
     //options.InjectJavascript("/swagger/custom.js");
@@ -421,7 +419,6 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapDefaultControllerRoute();
 });
-#endregion
 
 #region 启用微信配置（一句代码）
 
@@ -483,24 +480,6 @@ app.UseStaticFiles(new StaticFileOptions
 #region 初始数据库
 await app.UseDataSeederMiddlewareAsync("Byte.Core.Entity");
 #endregion
-
-
-//初始化数据库
-//var dataContext = builder.Services.BuildServiceProvider().GetRequiredService<SugarDbContext>();
-////dataContext.Db.DbMaintenance.CreateDatabase();
-//dataContext.Db.CodeFirst.InitTables(typeof(UserWeiXin));
-//dataContext.Db.CodeFirst.InitTables(typeof(Dept));
-//dataContext.Db.CodeFirst.InitTables(typeof(WorkOrder));
-//dataContext.Db.CodeFirst.InitTables(typeof(WorkOrderItem));
-//dataContext.Db.CodeFirst.InitTables(typeof(User));
-//dataContext.Db.CodeFirst.InitTables(typeof(Project));
-//dataContext.Db.CodeFirst.InitTables(typeof(ProjectItem));
-//dataContext.Db.CodeFirst.InitTables(typeof(RoleMenu));
-//dataContext.Db.CodeFirst.InitTables(typeof(Role));
-//dataContext.Db.CodeFirst.InitTables(typeof(Menu));
-//dataContext.Db.CodeFirst.InitTables(typeof(Invoice));
-//dataContext.Db.CodeFirst.InitTables(typeof(InvoiceItem));
-
 app.Run();
 
 

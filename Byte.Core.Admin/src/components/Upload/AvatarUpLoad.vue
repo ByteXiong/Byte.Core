@@ -25,7 +25,7 @@ import defaultSettings from "@/settings";
 const props = defineProps({
   proxyUrl: {
     type: String,
-    default: import.meta.env.VITE_UPLOAD_PROXY_PREFIX,
+    default: import.meta.env.VITE_UPLOAD_URL,
   },
   modelValue: {
     type: String,
@@ -52,10 +52,7 @@ const handleImageSuccess: UploadProps["onSuccess"] = (response, uploadFile) => {
 };
 
 const beforeAvatarUpload: UploadProps["beforeUpload"] = (rawFile) => {
-  if (rawFile.type !== "image/jpeg") {
-    ElMessage.error("Avatar picture must be JPG format!");
-    return false;
-  } else if (rawFile.size / 1024 / 1024 > 2) {
+  if (rawFile.size / 1024 / 1024 > 2) {
     ElMessage.error("Avatar picture size can not exceed 2MB!");
     return false;
   }

@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Byte.Core开发接口文档 Web端网站 - version 1.0
+ * 维保接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -89,74 +89,6 @@ type Alova2Method<
     : never;
 
 export type DeptTypeEnum = 10 | 20 | 30;
-export type DeptTreeDTO = {
-  id?: string;
-  /**
-   * 图标
-   */
-  image?: string;
-  /**
-   * 单位名称
-   */
-  name?: string;
-  /**
-   * 简写名称
-   */
-  easyName?: string;
-  /**
-   * 父级部门ID
-   */
-  parentId?: string;
-  /**
-   * 地址
-   */
-  address?: string;
-  /**
-   * 是否删除
-   */
-  isDeleted?: boolean;
-  /**
-   * 默认联系电话
-   */
-  phone?: string;
-  /**
-   * 默认联系人
-   */
-  man?: string;
-  /**
-   * 备注
-   */
-  remark?: string;
-  /**
-   * 状态
-   */
-  state?: boolean;
-  /**
-   * 排序
-   */
-  sort?: number;
-  type?: DeptTypeEnum;
-  children?: DeptTreeDTO[];
-};
-export type DeptSelectDTO = {
-  /**
-   * 主键Id!
-   */
-  id?: string;
-  /**
-   * 父级
-   */
-  parentId?: string;
-  /**
-   * 菜单
-   */
-  name?: string;
-  /**
-   * 图标
-   */
-  icon?: string;
-  children?: DeptSelectDTO[];
-};
 export type RoleTypeEnum = 10 | 20 | 30 | 40;
 export type MenuTypeEnum = 1 | 2 | 3 | 4;
 export type Menu = {
@@ -334,6 +266,74 @@ export type DeptInfo = {
   roles?: Role[];
   children?: Dept[];
 };
+export type DeptTreeDTO = {
+  id?: string;
+  /**
+   * 图标
+   */
+  image?: string;
+  /**
+   * 单位名称
+   */
+  name?: string;
+  /**
+   * 简写名称
+   */
+  easyName?: string;
+  /**
+   * 父级部门ID
+   */
+  parentId?: string;
+  /**
+   * 地址
+   */
+  address?: string;
+  /**
+   * 是否删除
+   */
+  isDeleted?: boolean;
+  /**
+   * 默认联系电话
+   */
+  phone?: string;
+  /**
+   * 默认联系人
+   */
+  man?: string;
+  /**
+   * 备注
+   */
+  remark?: string;
+  /**
+   * 状态
+   */
+  state?: boolean;
+  /**
+   * 排序
+   */
+  sort?: number;
+  type?: DeptTypeEnum;
+  children?: DeptTreeDTO[];
+};
+export type DeptSelectDTO = {
+  /**
+   * 主键Id!
+   */
+  id?: string;
+  /**
+   * 父级
+   */
+  parentId?: string;
+  /**
+   * 菜单
+   */
+  name?: string;
+  /**
+   * 图标
+   */
+  icon?: string;
+  children?: DeptSelectDTO[];
+};
 export type UpdateDeptParam = {
   /**
    * 主键
@@ -387,66 +387,7 @@ export type LoginParam = {
   captchaId?: string;
   captchaCode?: string;
 };
-export type MenuSelectDTO = {
-  /**
-   * 主键Id!
-   */
-  id?: string;
-  /**
-   * 父级
-   */
-  parentId?: string;
-  /**
-   * 菜单
-   */
-  title?: string;
-  /**
-   * 图标
-   */
-  icon?: string;
-  children?: MenuSelectDTO[];
-};
 export type MenuInfo = {
-  /**
-   * 主键
-   */
-  id?: string;
-  /**
-   * 创建者名称
-   */
-  createBy?: string;
-  /**
-   * 创建时间
-   */
-  createTime?: string;
-  /**
-   * 更新者名称
-   */
-  updateBy?: string;
-  /**
-   * 最后更新时间
-   */
-  updateTime?: string;
-  title?: string;
-  path?: string;
-  perm?: string;
-  iFrame?: boolean;
-  component?: string;
-  componentName?: string;
-  parentId?: string;
-  sort?: number;
-  icon?: string;
-  type?: MenuTypeEnum;
-  keepAlive?: boolean;
-  hidden?: boolean;
-  redirect?: string;
-  alwaysShow?: boolean;
-  state?: boolean;
-  isDeleted?: boolean;
-  roles?: Role[];
-  children?: Menu[];
-};
-export type UpdateMenuParam = {
   /**
    * 主键
    */
@@ -545,6 +486,159 @@ export type RouteDTO = {
    */
   children?: RouteDTO[];
 };
+export type MenuTreeDTO = {
+  id?: string;
+  /**
+   * 菜单标题
+   */
+  title?: string;
+  /**
+   * 组件路径
+   */
+  path?: string;
+  /**
+   * 权限标识符
+   */
+  perm?: string;
+  /**
+   * 是否iframe
+   */
+  iFrame?: boolean;
+  /**
+   * 组件
+   */
+  component?: string;
+  /**
+   * 组件名称
+   */
+  componentName?: string;
+  /**
+   * 父级菜单ID
+   */
+  parentId?: string;
+  /**
+   * 排序
+   */
+  sort?: number;
+  /**
+   * icon图标
+   */
+  icon?: string;
+  type?: MenuTypeEnum;
+  /**
+   * 是否缓存
+   */
+  keepAlive?: boolean;
+  /**
+   * 是否隐藏
+   */
+  hidden?: boolean;
+  /**
+   * 跳转路由
+   */
+  redirect?: string;
+  /**
+   * 根目录始终显示
+   */
+  alwaysShow?: boolean;
+  /**
+   * 状态
+   */
+  state?: boolean;
+  children?: Menu[];
+};
+export type MenuSelectDTO = {
+  /**
+   * 主键Id!
+   */
+  id?: string;
+  /**
+   * 父级
+   */
+  parentId?: string;
+  /**
+   * 菜单
+   */
+  title?: string;
+  /**
+   * 图标
+   */
+  icon?: string;
+  children?: MenuSelectDTO[];
+};
+export type UpdateMenuParam = {
+  /**
+   * 主键
+   */
+  id?: string;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  title?: string;
+  path?: string;
+  perm?: string;
+  iFrame?: boolean;
+  component?: string;
+  componentName?: string;
+  parentId?: string;
+  sort?: number;
+  icon?: string;
+  type?: MenuTypeEnum;
+  keepAlive?: boolean;
+  hidden?: boolean;
+  redirect?: string;
+  alwaysShow?: boolean;
+  state?: boolean;
+  isDeleted?: boolean;
+  roles?: Role[];
+  children?: Menu[];
+};
+export type RoleInfo = {
+  /**
+   * 主键
+   */
+  id?: string;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  name?: string;
+  type?: RoleTypeEnum;
+  state?: boolean;
+  remark?: string;
+  code?: string;
+  sort?: number;
+  deptId?: string;
+  dept?: Dept;
+  users?: User[];
+  menus?: Menu[];
+  menuIds?: string[];
+};
 export type PagerInfo = {
   totalRowCount?: number;
   pageSize?: number;
@@ -592,39 +686,6 @@ export type RoleDTO = {
 export type RoleDTOPagedResults = {
   pagerInfo?: PagerInfo;
   data?: RoleDTO[];
-};
-export type RoleInfo = {
-  /**
-   * 主键
-   */
-  id?: string;
-  /**
-   * 创建者名称
-   */
-  createBy?: string;
-  /**
-   * 创建时间
-   */
-  createTime?: string;
-  /**
-   * 更新者名称
-   */
-  updateBy?: string;
-  /**
-   * 最后更新时间
-   */
-  updateTime?: string;
-  name?: string;
-  type?: RoleTypeEnum;
-  state?: boolean;
-  remark?: string;
-  code?: string;
-  sort?: number;
-  deptId?: string;
-  dept?: Dept;
-  users?: User[];
-  menus?: Menu[];
-  menuIds?: string[];
 };
 export type UpdateRoleParam = {
   /**
@@ -727,109 +788,15 @@ declare global {
       /**
        * ---
        *
-       * [GET] 树图
+       * [DELETE] 删除
        *
-       * **path:** /api/Dept/GetTree
+       * **path:** /api/Dept/Delete
        *
        * ---
        *
-       * **Response**
+       * **RequestBody**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: Array<{
-       *     id?: string
-       *     // 图标
-       *     image?: string
-       *     // 单位名称
-       *     name?: string
-       *     // 简写名称
-       *     easyName?: string
-       *     // 父级部门ID
-       *     parentId?: string
-       *     // 地址
-       *     address?: string
-       *     // 是否删除
-       *     isDeleted?: boolean
-       *     // 默认联系电话
-       *     phone?: string
-       *     // 默认联系人
-       *     man?: string
-       *     // 备注
-       *     remark?: string
-       *     // 状态
-       *     state?: boolean
-       *     // 排序
-       *     sort?: number
-       *     type?: 10 | 20 | 30
-       *     children?: Array<DeptTreeDTO>
-       *   }>
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      get_api_dept_gettree<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: DeptTreeDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }>
-      >(
-        config?: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: DeptTreeDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Dept.get_api_dept_gettree',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [GET] 下拉框
-       *
-       * **path:** /api/Dept/GetTreeSelect
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   parentId?: string
-       * }
+       * type RequestBody = string[]
        * ```
        *
        * ---
@@ -840,17 +807,7 @@ declare global {
        *   // [required]
        *   code: string
        *   // [required]
-       *   data: Array<{
-       *     // 主键Id!
-       *     id?: string
-       *     // 父级
-       *     parentId?: string
-       *     // 菜单
-       *     name?: string
-       *     // 图标
-       *     icon?: string
-       *     children?: Array<DeptSelectDTO>
-       *   }>
+       *   data: number
        *   // [required]
        *   msg: string
        *   // [required]
@@ -858,7 +815,7 @@ declare global {
        * }
        * ```
        */
-      get_api_dept_gettreeselect<
+      delete_api_dept_delete<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -867,7 +824,7 @@ declare global {
           /**
            * [required]
            */
-          data: DeptSelectDTO[];
+          data: number;
           /**
            * [required]
            */
@@ -877,9 +834,7 @@ declare global {
            */
           success: boolean;
         }> & {
-          params: {
-            parentId?: string;
-          };
+          data: string[];
         }
       >(
         config: Config
@@ -892,7 +847,7 @@ declare global {
           /**
            * [required]
            */
-          data: DeptSelectDTO[];
+          data: number;
           /**
            * [required]
            */
@@ -902,7 +857,7 @@ declare global {
            */
           success: boolean;
         },
-        'Dept.get_api_dept_gettreeselect',
+        'Dept.delete_api_dept_delete',
         Config
       >;
       /**
@@ -1105,6 +1060,270 @@ declare global {
           success: boolean;
         },
         'Dept.get_api_dept_getinfo',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 树图
+       *
+       * **path:** /api/Dept/GetTree
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: Array<{
+       *     id?: string
+       *     // 图标
+       *     image?: string
+       *     // 单位名称
+       *     name?: string
+       *     // 简写名称
+       *     easyName?: string
+       *     // 父级部门ID
+       *     parentId?: string
+       *     // 地址
+       *     address?: string
+       *     // 是否删除
+       *     isDeleted?: boolean
+       *     // 默认联系电话
+       *     phone?: string
+       *     // 默认联系人
+       *     man?: string
+       *     // 备注
+       *     remark?: string
+       *     // 状态
+       *     state?: boolean
+       *     // 排序
+       *     sort?: number
+       *     type?: 10 | 20 | 30
+       *     children?: Array<DeptTreeDTO>
+       *   }>
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_dept_gettree<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: DeptTreeDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }>
+      >(
+        config?: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: DeptTreeDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Dept.get_api_dept_gettree',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 下拉框
+       *
+       * **path:** /api/Dept/GetTreeSelect
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   types?: (10 | 20 | 30)[]
+       *   parentId?: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: Array<{
+       *     // 主键Id!
+       *     id?: string
+       *     // 父级
+       *     parentId?: string
+       *     // 菜单
+       *     name?: string
+       *     // 图标
+       *     icon?: string
+       *     children?: Array<DeptSelectDTO>
+       *   }>
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_dept_gettreeselect<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: DeptSelectDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            types?: DeptTypeEnum[];
+            parentId?: string;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: DeptSelectDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Dept.get_api_dept_gettreeselect',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [PUT] 设置状态
+       *
+       * **path:** /api/Dept/SetState
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   id?: string
+       *   state?: boolean
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: number
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      put_api_dept_setstate<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            id?: string;
+            state?: boolean;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Dept.put_api_dept_setstate',
         Config
       >;
       /**
@@ -1430,170 +1649,14 @@ declare global {
         'Dept.post_api_dept_submit',
         Config
       >;
-      /**
-       * ---
-       *
-       * [DELETE] 删除
-       *
-       * **path:** /api/Dept/Delete
-       *
-       * ---
-       *
-       * **RequestBody**
-       * ```ts
-       * type RequestBody = string[]
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: number
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      delete_api_dept_delete<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          data: string[];
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Dept.delete_api_dept_delete',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [PUT] 设置状态
-       *
-       * **path:** /api/Dept/SetState
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   id?: string
-       *   state?: boolean
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: number
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      put_api_dept_setstate<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          params: {
-            id?: string;
-            state?: boolean;
-          };
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Dept.put_api_dept_setstate',
-        Config
-      >;
     };
     Login: {
       /**
        * ---
        *
-       * [GET] 获取验证码
+       * [GET] 获取登录信息
        *
-       * **path:** /api/Login/Captcha
+       * **path:** /api/Login/Info
        *
        * ---
        *
@@ -1604,10 +1667,16 @@ declare global {
        *   code: string
        *   // [required]
        *   data: {
-       *     // 类型
-       *     captchaId?: string
-       *     // 刷新token
-       *     img?: string
+       *     // 主键Id!
+       *     id?: string
+       *     // 名称
+       *     name?: string
+       *     // 头像
+       *     avatar?: string
+       *     // 账号
+       *     account?: string
+       *     roles?: string[]
+       *     perms?: string[]
        *   }
        *   // [required]
        *   msg: string
@@ -1616,7 +1685,7 @@ declare global {
        * }
        * ```
        */
-      get_api_login_captcha<
+      get_api_login_info<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -1627,13 +1696,23 @@ declare global {
            */
           data: {
             /**
-             * 类型
+             * 主键Id!
              */
-            captchaId?: string;
+            id?: string;
             /**
-             * 刷新token
+             * 名称
              */
-            img?: string;
+            name?: string;
+            /**
+             * 头像
+             */
+            avatar?: string;
+            /**
+             * 账号
+             */
+            account?: string;
+            roles?: string[];
+            perms?: string[];
           };
           /**
            * [required]
@@ -1657,13 +1736,23 @@ declare global {
            */
           data: {
             /**
-             * 类型
+             * 主键Id!
              */
-            captchaId?: string;
+            id?: string;
             /**
-             * 刷新token
+             * 名称
              */
-            img?: string;
+            name?: string;
+            /**
+             * 头像
+             */
+            avatar?: string;
+            /**
+             * 账号
+             */
+            account?: string;
+            roles?: string[];
+            perms?: string[];
           };
           /**
            * [required]
@@ -1674,7 +1763,7 @@ declare global {
            */
           success: boolean;
         },
-        'Login.get_api_login_captcha',
+        'Login.get_api_login_info',
         Config
       >;
       /**
@@ -1815,121 +1904,6 @@ declare global {
       /**
        * ---
        *
-       * [GET] 获取登录信息
-       *
-       * **path:** /api/Login/Info
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: {
-       *     // 主键Id!
-       *     id?: string
-       *     // 名称
-       *     name?: string
-       *     // 头像
-       *     avatar?: string
-       *     // 账号
-       *     account?: string
-       *     roles?: string[]
-       *     perms?: string[]
-       *   }
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      get_api_login_info<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: {
-            /**
-             * 主键Id!
-             */
-            id?: string;
-            /**
-             * 名称
-             */
-            name?: string;
-            /**
-             * 头像
-             */
-            avatar?: string;
-            /**
-             * 账号
-             */
-            account?: string;
-            roles?: string[];
-            perms?: string[];
-          };
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }>
-      >(
-        config?: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: {
-            /**
-             * 主键Id!
-             */
-            id?: string;
-            /**
-             * 名称
-             */
-            name?: string;
-            /**
-             * 头像
-             */
-            avatar?: string;
-            /**
-             * 账号
-             */
-            account?: string;
-            roles?: string[];
-            perms?: string[];
-          };
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Login.get_api_login_info',
-        Config
-      >;
-      /**
-       * ---
-       *
        * [POST] 退出登录
        *
        * **path:** /api/Login/LoginOut
@@ -1949,112 +1923,15 @@ declare global {
       /**
        * ---
        *
-       * [GET] 列表
+       * [DELETE] 删除
        *
-       * **path:** /api/Menu/GetTree
+       * **path:** /api/Menu/Delete
        *
        * ---
        *
-       * **Response**
+       * **RequestBody**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: Array<{
-       *     // 主键
-       *     id?: string
-       *     // 创建者名称
-       *     createBy?: string
-       *     // 创建时间
-       *     createTime?: string
-       *     // 更新者名称
-       *     updateBy?: string
-       *     // 最后更新时间
-       *     updateTime?: string
-       *     title?: string
-       *     path?: string
-       *     perm?: string
-       *     iFrame?: boolean
-       *     component?: string
-       *     componentName?: string
-       *     parentId?: string
-       *     sort?: number
-       *     icon?: string
-       *     type?: 1 | 2 | 3 | 4
-       *     keepAlive?: boolean
-       *     hidden?: boolean
-       *     redirect?: string
-       *     alwaysShow?: boolean
-       *     state?: boolean
-       *     isDeleted?: boolean
-       *     roles?: Array<Role>
-       *     children?: Array<Menu>
-       *   }>
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      get_api_menu_gettree<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: Menu[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }>
-      >(
-        config?: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: Menu[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Menu.get_api_menu_gettree',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [GET] 下拉框
-       *
-       * **path:** /api/Menu/GetTreeSelect
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   parentId?: string
-       * }
+       * type RequestBody = string[]
        * ```
        *
        * ---
@@ -2065,17 +1942,7 @@ declare global {
        *   // [required]
        *   code: string
        *   // [required]
-       *   data: Array<{
-       *     // 主键Id!
-       *     id?: string
-       *     // 父级
-       *     parentId?: string
-       *     // 菜单
-       *     title?: string
-       *     // 图标
-       *     icon?: string
-       *     children?: Array<MenuSelectDTO>
-       *   }>
+       *   data: number
        *   // [required]
        *   msg: string
        *   // [required]
@@ -2083,7 +1950,7 @@ declare global {
        * }
        * ```
        */
-      get_api_menu_gettreeselect<
+      delete_api_menu_delete<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -2092,7 +1959,7 @@ declare global {
           /**
            * [required]
            */
-          data: MenuSelectDTO[];
+          data: number;
           /**
            * [required]
            */
@@ -2102,9 +1969,7 @@ declare global {
            */
           success: boolean;
         }> & {
-          params: {
-            parentId?: string;
-          };
+          data: string[];
         }
       >(
         config: Config
@@ -2117,7 +1982,7 @@ declare global {
           /**
            * [required]
            */
-          data: MenuSelectDTO[];
+          data: number;
           /**
            * [required]
            */
@@ -2127,7 +1992,7 @@ declare global {
            */
           success: boolean;
         },
-        'Menu.get_api_menu_gettreeselect',
+        'Menu.delete_api_menu_delete',
         Config
       >;
       /**
@@ -2323,6 +2188,400 @@ declare global {
       /**
        * ---
        *
+       * [GET] 获取我的路由
+       *
+       * **path:** /api/Menu/GetRoutes
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: Array<{
+       *     id?: string
+       *     // 路径
+       *     path?: string
+       *     // 组件
+       *     component?: string
+       *     // 组件名称
+       *     name?: string
+       *     // 父级ID
+       *     parentId?: string
+       *     // 排序
+       *     sort?: number
+       *     type?: 1 | 2 | 3 | 4
+       *     // 跳转路由
+       *     redirect?: string
+       *     meta?: {
+       *       // 标题
+       *       title?: string
+       *       // 隐藏
+       *       hidden?: boolean
+       *       // Icon
+       *       icon?: string
+       *       // 是否缓存
+       *       keepAlive?: boolean
+       *       // 根目录始终显示
+       *       alwaysShow?: boolean
+       *       // 权限标识
+       *       roles?: string[]
+       *     }
+       *     // 子节点
+       *     children?: Array<RouteDTO>
+       *   }>
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_menu_getroutes<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: RouteDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }>
+      >(
+        config?: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: RouteDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Menu.get_api_menu_getroutes',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 列表
+       *
+       * **path:** /api/Menu/GetTree
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: Array<{
+       *     id?: string
+       *     // 菜单标题
+       *     title?: string
+       *     // 组件路径
+       *     path?: string
+       *     // 权限标识符
+       *     perm?: string
+       *     // 是否iframe
+       *     iFrame?: boolean
+       *     // 组件
+       *     component?: string
+       *     // 组件名称
+       *     componentName?: string
+       *     // 父级菜单ID
+       *     parentId?: string
+       *     // 排序
+       *     sort?: number
+       *     // icon图标
+       *     icon?: string
+       *     type?: 1 | 2 | 3 | 4
+       *     // 是否缓存
+       *     keepAlive?: boolean
+       *     // 是否隐藏
+       *     hidden?: boolean
+       *     // 跳转路由
+       *     redirect?: string
+       *     // 根目录始终显示
+       *     alwaysShow?: boolean
+       *     // 状态
+       *     state?: boolean
+       *     children?: Array<{
+       *       // 主键
+       *       id?: string
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       title?: string
+       *       path?: string
+       *       perm?: string
+       *       iFrame?: boolean
+       *       component?: string
+       *       componentName?: string
+       *       parentId?: string
+       *       sort?: number
+       *       icon?: string
+       *       type?: 1 | 2 | 3 | 4
+       *       keepAlive?: boolean
+       *       hidden?: boolean
+       *       redirect?: string
+       *       alwaysShow?: boolean
+       *       state?: boolean
+       *       isDeleted?: boolean
+       *       roles?: Array<Role>
+       *       children?: Array<Menu>
+       *     }>
+       *   }>
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_menu_gettree<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: MenuTreeDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }>
+      >(
+        config?: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: MenuTreeDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Menu.get_api_menu_gettree',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 下拉框
+       *
+       * **path:** /api/Menu/GetTreeSelect
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   parentId?: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: Array<{
+       *     // 主键Id!
+       *     id?: string
+       *     // 父级
+       *     parentId?: string
+       *     // 菜单
+       *     title?: string
+       *     // 图标
+       *     icon?: string
+       *     children?: Array<MenuSelectDTO>
+       *   }>
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_menu_gettreeselect<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: MenuSelectDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            parentId?: string;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: MenuSelectDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Menu.get_api_menu_gettreeselect',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [PUT] 设置状态
+       *
+       * **path:** /api/Menu/SetState
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   id?: string
+       *   state?: boolean
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: number
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      put_api_menu_setstate<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            id?: string;
+            state?: boolean;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Menu.put_api_menu_setstate',
+        Config
+      >;
+      /**
+       * ---
+       *
        * [POST] 提交
        *
        * **path:** /api/Menu/Submit
@@ -2503,93 +2762,14 @@ declare global {
         'Menu.post_api_menu_submit',
         Config
       >;
-      /**
-       * ---
-       *
-       * [PUT] 设置状态
-       *
-       * **path:** /api/Menu/SetState
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   id?: string
-       *   state?: boolean
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: number
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      put_api_menu_setstate<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          params: {
-            id?: string;
-            state?: boolean;
-          };
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Menu.put_api_menu_setstate',
-        Config
-      >;
+    };
+    Role: {
       /**
        * ---
        *
        * [DELETE] 删除
        *
-       * **path:** /api/Menu/Delete
+       * **path:** /api/Role/Delete
        *
        * ---
        *
@@ -2614,7 +2794,7 @@ declare global {
        * }
        * ```
        */
-      delete_api_menu_delete<
+      delete_api_role_delete<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -2656,15 +2836,24 @@ declare global {
            */
           success: boolean;
         },
-        'Menu.delete_api_menu_delete',
+        'Role.delete_api_role_delete',
         Config
       >;
       /**
        * ---
        *
-       * [GET] 获取我的路由
+       * [GET] 查询详情
        *
-       * **path:** /api/Menu/GetRoutes
+       * **path:** /api/Role/GetInfo
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   id?: string
+       * }
+       * ```
        *
        * ---
        *
@@ -2673,39 +2862,230 @@ declare global {
        * type Response = {
        *   // [required]
        *   code: string
+       *   // 角色 详情
        *   // [required]
-       *   data: Array<{
+       *   data: {
+       *     // 主键
        *     id?: string
-       *     // 路径
-       *     path?: string
-       *     // 组件
-       *     component?: string
-       *     // 组件名称
+       *     // 创建者名称
+       *     createBy?: string
+       *     // 创建时间
+       *     createTime?: string
+       *     // 更新者名称
+       *     updateBy?: string
+       *     // 最后更新时间
+       *     updateTime?: string
        *     name?: string
-       *     // 父级ID
-       *     parentId?: string
-       *     // 排序
+       *     type?: 10 | 20 | 30 | 40
+       *     state?: boolean
+       *     remark?: string
+       *     code?: string
        *     sort?: number
-       *     type?: 1 | 2 | 3 | 4
-       *     // 跳转路由
-       *     redirect?: string
-       *     meta?: {
-       *       // 标题
-       *       title?: string
-       *       // 隐藏
-       *       hidden?: boolean
-       *       // Icon
-       *       icon?: string
-       *       // 是否缓存
-       *       keepAlive?: boolean
-       *       // 根目录始终显示
-       *       alwaysShow?: boolean
-       *       // 权限标识
-       *       roles?: string[]
+       *     deptId?: string
+       *     dept?: {
+       *       // 主键
+       *       id?: string
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       image?: string
+       *       name?: string
+       *       easyName?: string
+       *       parentId?: string
+       *       address?: string
+       *       isDeleted?: boolean
+       *       phone?: string
+       *       man?: string
+       *       remark?: string
+       *       state?: boolean
+       *       sort?: number
+       *       type?: DeptTypeEnum
+       *       users?: Array<User>
+       *       roles?: Array<{
+       *         // 主键
+       *         id?: string
+       *         // 创建者名称
+       *         createBy?: string
+       *         // 创建时间
+       *         createTime?: string
+       *         // 更新者名称
+       *         updateBy?: string
+       *         // 最后更新时间
+       *         updateTime?: string
+       *         name?: string
+       *         type?: 10 | 20 | 30 | 40
+       *         state?: boolean
+       *         remark?: string
+       *         code?: string
+       *         sort?: number
+       *         deptId?: string
+       *         dept?: Dept
+       *         users?: Array<User>
+       *         menus?: Array<{
+       *           // 主键
+       *           id?: string
+       *           // 创建者名称
+       *           createBy?: string
+       *           // 创建时间
+       *           createTime?: string
+       *           // 更新者名称
+       *           updateBy?: string
+       *           // 最后更新时间
+       *           updateTime?: string
+       *           title?: string
+       *           path?: string
+       *           perm?: string
+       *           iFrame?: boolean
+       *           component?: string
+       *           componentName?: string
+       *           parentId?: string
+       *           sort?: number
+       *           icon?: string
+       *           type?: 1 | 2 | 3 | 4
+       *           keepAlive?: boolean
+       *           hidden?: boolean
+       *           redirect?: string
+       *           alwaysShow?: boolean
+       *           state?: boolean
+       *           isDeleted?: boolean
+       *           roles?: Array<Role>
+       *           children?: Array<Menu>
+       *         }>
+       *       }>
+       *       children?: Array<Dept>
        *     }
-       *     // 子节点
-       *     children?: Array<RouteDTO>
-       *   }>
+       *     users?: Array<{
+       *       // 主键
+       *       id?: string
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       name?: string
+       *       avatar?: string
+       *       password?: string
+       *       state?: boolean
+       *       account?: string
+       *       depts?: Array<{
+       *         // 主键
+       *         id?: string
+       *         // 创建者名称
+       *         createBy?: string
+       *         // 创建时间
+       *         createTime?: string
+       *         // 更新者名称
+       *         updateBy?: string
+       *         // 最后更新时间
+       *         updateTime?: string
+       *         image?: string
+       *         name?: string
+       *         easyName?: string
+       *         parentId?: string
+       *         address?: string
+       *         isDeleted?: boolean
+       *         phone?: string
+       *         man?: string
+       *         remark?: string
+       *         state?: boolean
+       *         sort?: number
+       *         type?: DeptTypeEnum
+       *         users?: Array<User>
+       *         roles?: Array<{
+       *           // 主键
+       *           id?: string
+       *           // 创建者名称
+       *           createBy?: string
+       *           // 创建时间
+       *           createTime?: string
+       *           // 更新者名称
+       *           updateBy?: string
+       *           // 最后更新时间
+       *           updateTime?: string
+       *           name?: string
+       *           type?: 10 | 20 | 30 | 40
+       *           state?: boolean
+       *           remark?: string
+       *           code?: string
+       *           sort?: number
+       *           deptId?: string
+       *           dept?: Dept
+       *           users?: Array<User>
+       *           menus?: Array<{
+       *             // 主键
+       *             id?: string
+       *             // 创建者名称
+       *             createBy?: string
+       *             // 创建时间
+       *             createTime?: string
+       *             // 更新者名称
+       *             updateBy?: string
+       *             // 最后更新时间
+       *             updateTime?: string
+       *             title?: string
+       *             path?: string
+       *             perm?: string
+       *             iFrame?: boolean
+       *             component?: string
+       *             componentName?: string
+       *             parentId?: string
+       *             sort?: number
+       *             icon?: string
+       *             type?: 1 | 2 | 3 | 4
+       *             keepAlive?: boolean
+       *             hidden?: boolean
+       *             redirect?: string
+       *             alwaysShow?: boolean
+       *             state?: boolean
+       *             isDeleted?: boolean
+       *             roles?: Array<Role>
+       *             children?: Array<Menu>
+       *           }>
+       *         }>
+       *         children?: Array<Dept>
+       *       }>
+       *       roles?: Array<Role>
+       *     }>
+       *     menus?: Array<{
+       *       // 主键
+       *       id?: string
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       title?: string
+       *       path?: string
+       *       perm?: string
+       *       iFrame?: boolean
+       *       component?: string
+       *       componentName?: string
+       *       parentId?: string
+       *       sort?: number
+       *       icon?: string
+       *       type?: 1 | 2 | 3 | 4
+       *       keepAlive?: boolean
+       *       hidden?: boolean
+       *       redirect?: string
+       *       alwaysShow?: boolean
+       *       state?: boolean
+       *       isDeleted?: boolean
+       *       roles?: Array<Role>
+       *       children?: Array<Menu>
+       *     }>
+       *     menuIds?: string[]
+       *   }
        *   // [required]
        *   msg: string
        *   // [required]
@@ -2713,16 +3093,17 @@ declare global {
        * }
        * ```
        */
-      get_api_menu_getroutes<
+      get_api_role_getinfo<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
            */
           code: string;
           /**
+           * 角色 详情
            * [required]
            */
-          data: RouteDTO[];
+          data: RoleInfo;
           /**
            * [required]
            */
@@ -2731,9 +3112,13 @@ declare global {
            * [required]
            */
           success: boolean;
-        }>
+        }> & {
+          params: {
+            id?: string;
+          };
+        }
       >(
-        config?: Config
+        config: Config
       ): Alova2Method<
         {
           /**
@@ -2741,9 +3126,10 @@ declare global {
            */
           code: string;
           /**
+           * 角色 详情
            * [required]
            */
-          data: RouteDTO[];
+          data: RoleInfo;
           /**
            * [required]
            */
@@ -2753,11 +3139,9 @@ declare global {
            */
           success: boolean;
         },
-        'Menu.get_api_menu_getroutes',
+        'Role.get_api_role_getinfo',
         Config
       >;
-    };
-    Role: {
       /**
        * ---
        *
@@ -3082,9 +3466,98 @@ declare global {
       /**
        * ---
        *
-       * [GET] 查询详情
+       * [GET] 下拉框
        *
-       * **path:** /api/Role/GetInfo
+       * **path:** /api/Role/Select
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: Array<{
+       *     // 主键Id!
+       *     id?: string
+       *     // 账号
+       *     name?: string
+       *   }>
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_role_select<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: Array<{
+            /**
+             * 主键Id!
+             */
+            id?: string;
+            /**
+             * 账号
+             */
+            name?: string;
+          }>;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }>
+      >(
+        config?: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: Array<{
+            /**
+             * 主键Id!
+             */
+            id?: string;
+            /**
+             * 账号
+             */
+            name?: string;
+          }>;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Role.get_api_role_select',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [PUT] 设置状态
+       *
+       * **path:** /api/Role/SetState
        *
        * ---
        *
@@ -3092,6 +3565,7 @@ declare global {
        * ```ts
        * type QueryParameters = {
        *   id?: string
+       *   state?: boolean
        * }
        * ```
        *
@@ -3102,230 +3576,8 @@ declare global {
        * type Response = {
        *   // [required]
        *   code: string
-       *   // 角色 详情
        *   // [required]
-       *   data: {
-       *     // 主键
-       *     id?: string
-       *     // 创建者名称
-       *     createBy?: string
-       *     // 创建时间
-       *     createTime?: string
-       *     // 更新者名称
-       *     updateBy?: string
-       *     // 最后更新时间
-       *     updateTime?: string
-       *     name?: string
-       *     type?: 10 | 20 | 30 | 40
-       *     state?: boolean
-       *     remark?: string
-       *     code?: string
-       *     sort?: number
-       *     deptId?: string
-       *     dept?: {
-       *       // 主键
-       *       id?: string
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       image?: string
-       *       name?: string
-       *       easyName?: string
-       *       parentId?: string
-       *       address?: string
-       *       isDeleted?: boolean
-       *       phone?: string
-       *       man?: string
-       *       remark?: string
-       *       state?: boolean
-       *       sort?: number
-       *       type?: DeptTypeEnum
-       *       users?: Array<User>
-       *       roles?: Array<{
-       *         // 主键
-       *         id?: string
-       *         // 创建者名称
-       *         createBy?: string
-       *         // 创建时间
-       *         createTime?: string
-       *         // 更新者名称
-       *         updateBy?: string
-       *         // 最后更新时间
-       *         updateTime?: string
-       *         name?: string
-       *         type?: 10 | 20 | 30 | 40
-       *         state?: boolean
-       *         remark?: string
-       *         code?: string
-       *         sort?: number
-       *         deptId?: string
-       *         dept?: Dept
-       *         users?: Array<User>
-       *         menus?: Array<{
-       *           // 主键
-       *           id?: string
-       *           // 创建者名称
-       *           createBy?: string
-       *           // 创建时间
-       *           createTime?: string
-       *           // 更新者名称
-       *           updateBy?: string
-       *           // 最后更新时间
-       *           updateTime?: string
-       *           title?: string
-       *           path?: string
-       *           perm?: string
-       *           iFrame?: boolean
-       *           component?: string
-       *           componentName?: string
-       *           parentId?: string
-       *           sort?: number
-       *           icon?: string
-       *           type?: 1 | 2 | 3 | 4
-       *           keepAlive?: boolean
-       *           hidden?: boolean
-       *           redirect?: string
-       *           alwaysShow?: boolean
-       *           state?: boolean
-       *           isDeleted?: boolean
-       *           roles?: Array<Role>
-       *           children?: Array<Menu>
-       *         }>
-       *       }>
-       *       children?: Array<Dept>
-       *     }
-       *     users?: Array<{
-       *       // 主键
-       *       id?: string
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       name?: string
-       *       avatar?: string
-       *       password?: string
-       *       state?: boolean
-       *       account?: string
-       *       depts?: Array<{
-       *         // 主键
-       *         id?: string
-       *         // 创建者名称
-       *         createBy?: string
-       *         // 创建时间
-       *         createTime?: string
-       *         // 更新者名称
-       *         updateBy?: string
-       *         // 最后更新时间
-       *         updateTime?: string
-       *         image?: string
-       *         name?: string
-       *         easyName?: string
-       *         parentId?: string
-       *         address?: string
-       *         isDeleted?: boolean
-       *         phone?: string
-       *         man?: string
-       *         remark?: string
-       *         state?: boolean
-       *         sort?: number
-       *         type?: DeptTypeEnum
-       *         users?: Array<User>
-       *         roles?: Array<{
-       *           // 主键
-       *           id?: string
-       *           // 创建者名称
-       *           createBy?: string
-       *           // 创建时间
-       *           createTime?: string
-       *           // 更新者名称
-       *           updateBy?: string
-       *           // 最后更新时间
-       *           updateTime?: string
-       *           name?: string
-       *           type?: 10 | 20 | 30 | 40
-       *           state?: boolean
-       *           remark?: string
-       *           code?: string
-       *           sort?: number
-       *           deptId?: string
-       *           dept?: Dept
-       *           users?: Array<User>
-       *           menus?: Array<{
-       *             // 主键
-       *             id?: string
-       *             // 创建者名称
-       *             createBy?: string
-       *             // 创建时间
-       *             createTime?: string
-       *             // 更新者名称
-       *             updateBy?: string
-       *             // 最后更新时间
-       *             updateTime?: string
-       *             title?: string
-       *             path?: string
-       *             perm?: string
-       *             iFrame?: boolean
-       *             component?: string
-       *             componentName?: string
-       *             parentId?: string
-       *             sort?: number
-       *             icon?: string
-       *             type?: 1 | 2 | 3 | 4
-       *             keepAlive?: boolean
-       *             hidden?: boolean
-       *             redirect?: string
-       *             alwaysShow?: boolean
-       *             state?: boolean
-       *             isDeleted?: boolean
-       *             roles?: Array<Role>
-       *             children?: Array<Menu>
-       *           }>
-       *         }>
-       *         children?: Array<Dept>
-       *       }>
-       *       roles?: Array<Role>
-       *     }>
-       *     menus?: Array<{
-       *       // 主键
-       *       id?: string
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       title?: string
-       *       path?: string
-       *       perm?: string
-       *       iFrame?: boolean
-       *       component?: string
-       *       componentName?: string
-       *       parentId?: string
-       *       sort?: number
-       *       icon?: string
-       *       type?: 1 | 2 | 3 | 4
-       *       keepAlive?: boolean
-       *       hidden?: boolean
-       *       redirect?: string
-       *       alwaysShow?: boolean
-       *       state?: boolean
-       *       isDeleted?: boolean
-       *       roles?: Array<Role>
-       *       children?: Array<Menu>
-       *     }>
-       *     menuIds?: string[]
-       *   }
+       *   data: number
        *   // [required]
        *   msg: string
        *   // [required]
@@ -3333,17 +3585,16 @@ declare global {
        * }
        * ```
        */
-      get_api_role_getinfo<
+      put_api_role_setstate<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
            */
           code: string;
           /**
-           * 角色 详情
            * [required]
            */
-          data: RoleInfo;
+          data: number;
           /**
            * [required]
            */
@@ -3355,6 +3606,7 @@ declare global {
         }> & {
           params: {
             id?: string;
+            state?: boolean;
           };
         }
       >(
@@ -3366,10 +3618,9 @@ declare global {
            */
           code: string;
           /**
-           * 角色 详情
            * [required]
            */
-          data: RoleInfo;
+          data: number;
           /**
            * [required]
            */
@@ -3379,7 +3630,7 @@ declare global {
            */
           success: boolean;
         },
-        'Role.get_api_role_getinfo',
+        'Role.put_api_role_setstate',
         Config
       >;
       /**
@@ -3679,12 +3930,82 @@ declare global {
         'Role.post_api_role_submit',
         Config
       >;
+    };
+    Upload: {
+      /**
+       * ---
+       *
+       * [POST] 上传图片
+       *
+       * **path:** /api/Upload/Images
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: string[]
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      post_api_upload_images<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: string[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }>
+      >(
+        config?: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: string[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Upload.post_api_upload_images',
+        Config
+      >;
+    };
+    User: {
       /**
        * ---
        *
        * [DELETE] 删除
        *
-       * **path:** /api/Role/Delete
+       * **path:** /api/User/Delete
        *
        * ---
        *
@@ -3709,7 +4030,7 @@ declare global {
        * }
        * ```
        */
-      delete_api_role_delete<
+      delete_api_user_delete<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -3751,472 +4072,7 @@ declare global {
            */
           success: boolean;
         },
-        'Role.delete_api_role_delete',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [GET] 下拉框
-       *
-       * **path:** /api/Role/Select
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: Array<{
-       *     // 主键Id!
-       *     id?: string
-       *     // 账号
-       *     name?: string
-       *   }>
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      get_api_role_select<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: Array<{
-            /**
-             * 主键Id!
-             */
-            id?: string;
-            /**
-             * 账号
-             */
-            name?: string;
-          }>;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }>
-      >(
-        config?: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: Array<{
-            /**
-             * 主键Id!
-             */
-            id?: string;
-            /**
-             * 账号
-             */
-            name?: string;
-          }>;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Role.get_api_role_select',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [PUT] 设置状态
-       *
-       * **path:** /api/Role/SetState
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   id?: string
-       *   state?: boolean
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: number
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      put_api_role_setstate<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          params: {
-            id?: string;
-            state?: boolean;
-          };
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Role.put_api_role_setstate',
-        Config
-      >;
-    };
-    Upload: {
-      /**
-       * ---
-       *
-       * [POST] 上传附件
-       *
-       * **path:** /api/Upload/Files
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: string[]
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      post_api_upload_files<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }>
-      >(
-        config?: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Upload.post_api_upload_files',
-        Config
-      >;
-    };
-    User: {
-      /**
-       * ---
-       *
-       * [GET] 分页
-       *
-       * **path:** /api/User/GetPage
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   KeyWord?: string
-       *   // 公司
-       *   DeptId?: string
-       *   StartIndex?: number
-       *   PageIndex?: number
-       *   PageSize?: number
-       *   SortList?: Record<string, string>
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: {
-       *     pagerInfo?: {
-       *       totalRowCount?: number
-       *       pageSize?: number
-       *       startIndex?: number
-       *       pageIndex?: number
-       *       hasPrev?: boolean
-       *       hasNext?: boolean
-       *       isFirst?: boolean
-       *       isLast?: boolean
-       *       totalPageCount?: number
-       *     }
-       *     data?: Array<{
-       *       // 主键Id!
-       *       id?: string
-       *       // 名称
-       *       name?: string
-       *       // 头像
-       *       avatar?: string
-       *       // 密码
-       *       password?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 创建人
-       *       createBy?: string
-       *       // 状态
-       *       state?: boolean
-       *       // 公司
-       *       deptId?: string
-       *       // 账号
-       *       account?: string
-       *     }>
-       *   }
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      get_api_user_getpage<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: {
-            pagerInfo?: {
-              totalRowCount?: number;
-              pageSize?: number;
-              startIndex?: number;
-              pageIndex?: number;
-              hasPrev?: boolean;
-              hasNext?: boolean;
-              isFirst?: boolean;
-              isLast?: boolean;
-              totalPageCount?: number;
-            };
-            data?: Array<{
-              /**
-               * 主键Id!
-               */
-              id?: string;
-              /**
-               * 名称
-               */
-              name?: string;
-              /**
-               * 头像
-               */
-              avatar?: string;
-              /**
-               * 密码
-               */
-              password?: string;
-              /**
-               * 创建时间
-               */
-              createTime?: string;
-              /**
-               * 创建人
-               */
-              createBy?: string;
-              /**
-               * 状态
-               */
-              state?: boolean;
-              /**
-               * 公司
-               */
-              deptId?: string;
-              /**
-               * 账号
-               */
-              account?: string;
-            }>;
-          };
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          params: {
-            KeyWord?: string;
-            /**
-             * 公司
-             */
-            DeptId?: string;
-            StartIndex?: number;
-            PageIndex?: number;
-            PageSize?: number;
-            SortList?: Record<string, string>;
-          };
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: {
-            pagerInfo?: {
-              totalRowCount?: number;
-              pageSize?: number;
-              startIndex?: number;
-              pageIndex?: number;
-              hasPrev?: boolean;
-              hasNext?: boolean;
-              isFirst?: boolean;
-              isLast?: boolean;
-              totalPageCount?: number;
-            };
-            data?: Array<{
-              /**
-               * 主键Id!
-               */
-              id?: string;
-              /**
-               * 名称
-               */
-              name?: string;
-              /**
-               * 头像
-               */
-              avatar?: string;
-              /**
-               * 密码
-               */
-              password?: string;
-              /**
-               * 创建时间
-               */
-              createTime?: string;
-              /**
-               * 创建人
-               */
-              createBy?: string;
-              /**
-               * 状态
-               */
-              state?: boolean;
-              /**
-               * 公司
-               */
-              deptId?: string;
-              /**
-               * 账号
-               */
-              account?: string;
-            }>;
-          };
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'User.get_api_user_getpage',
+        'User.delete_api_user_delete',
         Config
       >;
       /**
@@ -4448,6 +4304,275 @@ declare global {
       /**
        * ---
        *
+       * [GET] 分页
+       *
+       * **path:** /api/User/GetPage
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   KeyWord?: string
+       *   // 公司
+       *   DeptId?: string
+       *   StartIndex?: number
+       *   PageIndex?: number
+       *   PageSize?: number
+       *   SortList?: Record<string, string>
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: {
+       *     pagerInfo?: {
+       *       totalRowCount?: number
+       *       pageSize?: number
+       *       startIndex?: number
+       *       pageIndex?: number
+       *       hasPrev?: boolean
+       *       hasNext?: boolean
+       *       isFirst?: boolean
+       *       isLast?: boolean
+       *       totalPageCount?: number
+       *     }
+       *     data?: Array<{
+       *       id?: string
+       *       // 名称
+       *       name?: string
+       *       // 头像
+       *       avatar?: string
+       *       // 密码
+       *       password?: string
+       *       // 状态
+       *       state?: boolean
+       *       // 账号
+       *       account?: string
+       *     }>
+       *   }
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_user_getpage<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: {
+            pagerInfo?: {
+              totalRowCount?: number;
+              pageSize?: number;
+              startIndex?: number;
+              pageIndex?: number;
+              hasPrev?: boolean;
+              hasNext?: boolean;
+              isFirst?: boolean;
+              isLast?: boolean;
+              totalPageCount?: number;
+            };
+            data?: Array<{
+              id?: string;
+              /**
+               * 名称
+               */
+              name?: string;
+              /**
+               * 头像
+               */
+              avatar?: string;
+              /**
+               * 密码
+               */
+              password?: string;
+              /**
+               * 状态
+               */
+              state?: boolean;
+              /**
+               * 账号
+               */
+              account?: string;
+            }>;
+          };
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            KeyWord?: string;
+            /**
+             * 公司
+             */
+            DeptId?: string;
+            StartIndex?: number;
+            PageIndex?: number;
+            PageSize?: number;
+            SortList?: Record<string, string>;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: {
+            pagerInfo?: {
+              totalRowCount?: number;
+              pageSize?: number;
+              startIndex?: number;
+              pageIndex?: number;
+              hasPrev?: boolean;
+              hasNext?: boolean;
+              isFirst?: boolean;
+              isLast?: boolean;
+              totalPageCount?: number;
+            };
+            data?: Array<{
+              id?: string;
+              /**
+               * 名称
+               */
+              name?: string;
+              /**
+               * 头像
+               */
+              avatar?: string;
+              /**
+               * 密码
+               */
+              password?: string;
+              /**
+               * 状态
+               */
+              state?: boolean;
+              /**
+               * 账号
+               */
+              account?: string;
+            }>;
+          };
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'User.get_api_user_getpage',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [PUT] 设置状态
+       *
+       * **path:** /api/User/SetState
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   id?: string
+       *   state?: boolean
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: number
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      put_api_user_setstate<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            id?: string;
+            state?: boolean;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'User.put_api_user_setstate',
+        Config
+      >;
+      /**
+       * ---
+       *
        * [POST] 提交
        *
        * **path:** /api/User/Submit
@@ -4663,162 +4788,6 @@ declare global {
           success: boolean;
         },
         'User.post_api_user_submit',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [DELETE] 删除
-       *
-       * **path:** /api/User/Delete
-       *
-       * ---
-       *
-       * **RequestBody**
-       * ```ts
-       * type RequestBody = string[]
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: number
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      delete_api_user_delete<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          data: string[];
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'User.delete_api_user_delete',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [PUT] 设置状态
-       *
-       * **path:** /api/User/SetState
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   id?: string
-       *   state?: boolean
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: number
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      put_api_user_setstate<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          params: {
-            id?: string;
-            state?: boolean;
-          };
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'User.put_api_user_setstate',
         Config
       >;
     };

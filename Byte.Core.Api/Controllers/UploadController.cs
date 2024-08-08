@@ -6,9 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Byte.Core.Common.SnowflakeIdHelper;
 using Byte.Core.Tools;
 using SixLabors.ImageSharp.Formats.Jpeg;
-using Byte.Core.Common.Attributes;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Formats.Jpeg;
 
 namespace Byte.Core.Api.Controllers
 {
@@ -56,7 +54,7 @@ namespace Byte.Core.Api.Controllers
                 var pathUel = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", new_path);
                 if (!Directory.Exists(pathUel))
                     Directory.CreateDirectory(pathUel);
-                var ps = IdHelper.GetId();
+                var ps =  DateTime.Now.ToTimeStamp();
                 var path = Path.Combine(pathUel, ps + currentPictureExtension);
 
                 int quality = 90;

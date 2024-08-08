@@ -2,6 +2,7 @@ import defaultSettings from "@/settings";
 import { genMixColor } from "@/utils/color";
 import { setStyleProperty } from "@/utils";
 import { ThemeEnum } from "@/enums/ThemeEnum";
+import { defineStore } from "pinia";
 
 type SettingsValue = boolean | string;
 

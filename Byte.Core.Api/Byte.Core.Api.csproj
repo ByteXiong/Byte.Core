@@ -27,4 +27,8 @@
     <ProjectReference Include="..\Byte.Core.Tools\Byte.Core.Tools.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

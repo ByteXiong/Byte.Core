@@ -31,9 +31,10 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<List<Menu>> GetTreeAsync()
+        public async Task<List<MenuTreeDTO>> GetTreeAsync()
         {
-            var tree = await GetIQueryable().OrderByDescending(x => x.Sort).Select<Menu>().ToTreeAsync(it => it.Children, it => it.ParentId, null, it => it.Id);
+            var tree2 = await GetIQueryable().OrderByDescending(x => x.Sort).ToTreeAsync(it => it.Children, it => it.ParentId, null, it => it.Id);
+            var tree = await GetIQueryable().OrderByDescending(x => x.Sort).Select<MenuTreeDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, null, it => it.Id);
             return tree;
         }
 
@@ -108,7 +109,6 @@ namespace Byte.Core.Business
                 Hidden = param.Hidden,
                 KeepAlive = param.KeepAlive,
                 Title = param.Title,
-                Perm = param.Perm,
                 Redirect = param.Redirect,
                 State = param.State,
                 AlwaysShow = param.AlwaysShow,

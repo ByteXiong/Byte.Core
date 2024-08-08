@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Byte.Core开发接口文档 Web端网站 - version 1.0
+ * 维保接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -16,33 +16,32 @@
  * **Do not edit the file manually.**
  */
 export default {
+  'Dept.delete_api_dept_delete': ['DELETE', '/api/Dept/Delete'],
+  'Dept.get_api_dept_getinfo': ['GET', '/api/Dept/GetInfo'],
   'Dept.get_api_dept_gettree': ['GET', '/api/Dept/GetTree'],
   'Dept.get_api_dept_gettreeselect': ['GET', '/api/Dept/GetTreeSelect'],
-  'Dept.get_api_dept_getinfo': ['GET', '/api/Dept/GetInfo'],
-  'Dept.post_api_dept_submit': ['POST', '/api/Dept/Submit'],
-  'Dept.delete_api_dept_delete': ['DELETE', '/api/Dept/Delete'],
   'Dept.put_api_dept_setstate': ['PUT', '/api/Dept/SetState'],
-  'Login.get_api_login_captcha': ['GET', '/api/Login/Captcha'],
-  'Login.post_api_login_login': ['POST', '/api/Login/Login'],
+  'Dept.post_api_dept_submit': ['POST', '/api/Dept/Submit'],
   'Login.get_api_login_info': ['GET', '/api/Login/Info'],
+  'Login.post_api_login_login': ['POST', '/api/Login/Login'],
   'Login.post_api_login_loginout': ['POST', '/api/Login/LoginOut'],
+  'Menu.delete_api_menu_delete': ['DELETE', '/api/Menu/Delete'],
+  'Menu.get_api_menu_getinfo': ['GET', '/api/Menu/GetInfo'],
+  'Menu.get_api_menu_getroutes': ['GET', '/api/Menu/GetRoutes'],
   'Menu.get_api_menu_gettree': ['GET', '/api/Menu/GetTree'],
   'Menu.get_api_menu_gettreeselect': ['GET', '/api/Menu/GetTreeSelect'],
-  'Menu.get_api_menu_getinfo': ['GET', '/api/Menu/GetInfo'],
-  'Menu.post_api_menu_submit': ['POST', '/api/Menu/Submit'],
   'Menu.put_api_menu_setstate': ['PUT', '/api/Menu/SetState'],
-  'Menu.delete_api_menu_delete': ['DELETE', '/api/Menu/Delete'],
-  'Menu.get_api_menu_getroutes': ['GET', '/api/Menu/GetRoutes'],
-  'Role.get_api_role_getpage': ['GET', '/api/Role/GetPage'],
-  'Role.get_api_role_getinfo': ['GET', '/api/Role/GetInfo'],
-  'Role.post_api_role_submit': ['POST', '/api/Role/Submit'],
+  'Menu.post_api_menu_submit': ['POST', '/api/Menu/Submit'],
   'Role.delete_api_role_delete': ['DELETE', '/api/Role/Delete'],
+  'Role.get_api_role_getinfo': ['GET', '/api/Role/GetInfo'],
+  'Role.get_api_role_getpage': ['GET', '/api/Role/GetPage'],
   'Role.get_api_role_select': ['GET', '/api/Role/Select'],
   'Role.put_api_role_setstate': ['PUT', '/api/Role/SetState'],
-  'Upload.post_api_upload_files': ['POST', '/api/Upload/Files'],
-  'User.get_api_user_getpage': ['GET', '/api/User/GetPage'],
-  'User.get_api_user_getinfo': ['GET', '/api/User/GetInfo'],
-  'User.post_api_user_submit': ['POST', '/api/User/Submit'],
+  'Role.post_api_role_submit': ['POST', '/api/Role/Submit'],
+  'Upload.post_api_upload_images': ['POST', '/api/Upload/Images'],
   'User.delete_api_user_delete': ['DELETE', '/api/User/Delete'],
-  'User.put_api_user_setstate': ['PUT', '/api/User/SetState']
+  'User.get_api_user_getinfo': ['GET', '/api/User/GetInfo'],
+  'User.get_api_user_getpage': ['GET', '/api/User/GetPage'],
+  'User.put_api_user_setstate': ['PUT', '/api/User/SetState'],
+  'User.post_api_user_submit': ['POST', '/api/User/Submit']
 };

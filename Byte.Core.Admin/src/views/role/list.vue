@@ -125,6 +125,7 @@
               @click.stop="openForm(scope.row.id)"
               ><i-ep-edit />编辑</el-button
             >
+
             <el-button
               :loading="loading"
               v-hasPerm="['role/delete']"
