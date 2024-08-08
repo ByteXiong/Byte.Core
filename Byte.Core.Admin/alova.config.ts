@@ -59,7 +59,9 @@ module.exports = {
       //     return apiDescriptor;
       // }
       handleApi: (apiDescriptor) => {
-        console.log(apiDescriptor);
+        // if (apiDescriptor.path.startWith("/demo/SetRoleData")) {
+        //   return apiDescriptor;
+        // }
 
         apiDescriptor.responses = {
           type: "object",

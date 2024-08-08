@@ -16,6 +16,8 @@
  * **Do not edit the file manually.**
  */
 export default {
+  'Demo.get_api_demo_getpage': ['GET', '/api/Demo/GetPage'],
+  'Demo.post_api_demo_setroledata': ['POST', '/api/Demo/SetRoleData'],
   'Dept.delete_api_dept_delete': ['DELETE', '/api/Dept/Delete'],
   'Dept.get_api_dept_getinfo': ['GET', '/api/Dept/GetInfo'],
   'Dept.get_api_dept_gettree': ['GET', '/api/Dept/GetTree'],

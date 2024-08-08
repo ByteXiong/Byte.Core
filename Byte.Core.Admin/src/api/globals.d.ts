@@ -114,8 +114,6 @@ export type Menu = {
   updateTime?: string;
   title?: string;
   path?: string;
-  perm?: string;
-  iFrame?: boolean;
   component?: string;
   componentName?: string;
   parentId?: string;
@@ -410,8 +408,6 @@ export type MenuInfo = {
   updateTime?: string;
   title?: string;
   path?: string;
-  perm?: string;
-  iFrame?: boolean;
   component?: string;
   componentName?: string;
   parentId?: string;
@@ -493,18 +489,6 @@ export type MenuTreeDTO = {
    */
   title?: string;
   /**
-   * 组件路径
-   */
-  path?: string;
-  /**
-   * 权限标识符
-   */
-  perm?: string;
-  /**
-   * 是否iframe
-   */
-  iFrame?: boolean;
-  /**
    * 组件
    */
   component?: string;
@@ -545,7 +529,7 @@ export type MenuTreeDTO = {
    * 状态
    */
   state?: boolean;
-  children?: Menu[];
+  children?: MenuTreeDTO[];
 };
 export type MenuSelectDTO = {
   /**
@@ -589,8 +573,6 @@ export type UpdateMenuParam = {
   updateTime?: string;
   title?: string;
   path?: string;
-  perm?: string;
-  iFrame?: boolean;
   component?: string;
   componentName?: string;
   parentId?: string;
@@ -784,6 +766,294 @@ export type UpdateUserParam = {
 };
 declare global {
   interface Apis {
+    Demo: {
+      /**
+       * ---
+       *
+       * [GET] 分页
+       *
+       * **path:** /api/Demo/GetPage
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   StartIndex?: number
+       *   PageIndex?: number
+       *   PageSize?: number
+       *   SortList?: Record<string, string>
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: {
+       *     pagerInfo?: {
+       *       totalRowCount?: number
+       *       pageSize?: number
+       *       startIndex?: number
+       *       pageIndex?: number
+       *       hasPrev?: boolean
+       *       hasNext?: boolean
+       *       isFirst?: boolean
+       *       isLast?: boolean
+       *       totalPageCount?: number
+       *     }
+       *     data?: Array<{
+       *       // 主键
+       *       id?: string
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       name?: string
+       *       state?: boolean
+       *       remark?: string
+       *       code?: string
+       *       sort?: number
+       *     }>
+       *   }
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_demo_getpage<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: {
+            pagerInfo?: {
+              totalRowCount?: number;
+              pageSize?: number;
+              startIndex?: number;
+              pageIndex?: number;
+              hasPrev?: boolean;
+              hasNext?: boolean;
+              isFirst?: boolean;
+              isLast?: boolean;
+              totalPageCount?: number;
+            };
+            data?: Array<{
+              /**
+               * 主键
+               */
+              id?: string;
+              /**
+               * 创建者名称
+               */
+              createBy?: string;
+              /**
+               * 创建时间
+               */
+              createTime?: string;
+              /**
+               * 更新者名称
+               */
+              updateBy?: string;
+              /**
+               * 最后更新时间
+               */
+              updateTime?: string;
+              name?: string;
+              state?: boolean;
+              remark?: string;
+              code?: string;
+              sort?: number;
+            }>;
+          };
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            StartIndex?: number;
+            PageIndex?: number;
+            PageSize?: number;
+            SortList?: Record<string, string>;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: {
+            pagerInfo?: {
+              totalRowCount?: number;
+              pageSize?: number;
+              startIndex?: number;
+              pageIndex?: number;
+              hasPrev?: boolean;
+              hasNext?: boolean;
+              isFirst?: boolean;
+              isLast?: boolean;
+              totalPageCount?: number;
+            };
+            data?: Array<{
+              /**
+               * 主键
+               */
+              id?: string;
+              /**
+               * 创建者名称
+               */
+              createBy?: string;
+              /**
+               * 创建时间
+               */
+              createTime?: string;
+              /**
+               * 更新者名称
+               */
+              updateBy?: string;
+              /**
+               * 最后更新时间
+               */
+              updateTime?: string;
+              name?: string;
+              state?: boolean;
+              remark?: string;
+              code?: string;
+              sort?: number;
+            }>;
+          };
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Demo.get_api_demo_getpage',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [POST]
+       *
+       * **path:** /api/Demo/SetRoleData
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   num?: number
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: {
+       *     success?: boolean
+       *     msg?: string
+       *     data?: unknown
+       *     code?: number
+       *   }
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      post_api_demo_setroledata<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: {
+            success?: boolean;
+            msg?: string;
+            data?: unknown;
+            code?: number;
+          };
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            num?: number;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: {
+            success?: boolean;
+            msg?: string;
+            data?: unknown;
+            code?: number;
+          };
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Demo.post_api_demo_setroledata',
+        Config
+      >;
+    };
     Dept: {
       /**
        * ---
@@ -981,8 +1251,6 @@ declare global {
        *             updateTime?: string
        *             title?: string
        *             path?: string
-       *             perm?: string
-       *             iFrame?: boolean
        *             component?: string
        *             componentName?: string
        *             parentId?: string
@@ -1433,8 +1701,6 @@ declare global {
        *           updateTime?: string
        *           title?: string
        *           path?: string
-       *           perm?: string
-       *           iFrame?: boolean
        *           component?: string
        *           componentName?: string
        *           parentId?: string
@@ -1488,8 +1754,6 @@ declare global {
        *       updateTime?: string
        *       title?: string
        *       path?: string
-       *       perm?: string
-       *       iFrame?: boolean
        *       component?: string
        *       componentName?: string
        *       parentId?: string
@@ -1563,8 +1827,6 @@ declare global {
        *         updateTime?: string
        *         title?: string
        *         path?: string
-       *         perm?: string
-       *         iFrame?: boolean
        *         component?: string
        *         componentName?: string
        *         parentId?: string
@@ -2033,8 +2295,6 @@ declare global {
        *     updateTime?: string
        *     title?: string
        *     path?: string
-       *     perm?: string
-       *     iFrame?: boolean
        *     component?: string
        *     componentName?: string
        *     parentId?: string
@@ -2080,8 +2340,6 @@ declare global {
        *         updateTime?: string
        *         title?: string
        *         path?: string
-       *         perm?: string
-       *         iFrame?: boolean
        *         component?: string
        *         componentName?: string
        *         parentId?: string
@@ -2111,8 +2369,6 @@ declare global {
        *       updateTime?: string
        *       title?: string
        *       path?: string
-       *       perm?: string
-       *       iFrame?: boolean
        *       component?: string
        *       componentName?: string
        *       parentId?: string
@@ -2301,12 +2557,6 @@ declare global {
        *     id?: string
        *     // 菜单标题
        *     title?: string
-       *     // 组件路径
-       *     path?: string
-       *     // 权限标识符
-       *     perm?: string
-       *     // 是否iframe
-       *     iFrame?: boolean
        *     // 组件
        *     component?: string
        *     // 组件名称
@@ -2328,36 +2578,7 @@ declare global {
        *     alwaysShow?: boolean
        *     // 状态
        *     state?: boolean
-       *     children?: Array<{
-       *       // 主键
-       *       id?: string
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       title?: string
-       *       path?: string
-       *       perm?: string
-       *       iFrame?: boolean
-       *       component?: string
-       *       componentName?: string
-       *       parentId?: string
-       *       sort?: number
-       *       icon?: string
-       *       type?: 1 | 2 | 3 | 4
-       *       keepAlive?: boolean
-       *       hidden?: boolean
-       *       redirect?: string
-       *       alwaysShow?: boolean
-       *       state?: boolean
-       *       isDeleted?: boolean
-       *       roles?: Array<Role>
-       *       children?: Array<Menu>
-       *     }>
+       *     children?: Array<MenuTreeDTO>
        *   }>
        *   // [required]
        *   msg: string
@@ -2603,8 +2824,6 @@ declare global {
        *   updateTime?: string
        *   title?: string
        *   path?: string
-       *   perm?: string
-       *   iFrame?: boolean
        *   component?: string
        *   componentName?: string
        *   parentId?: string
@@ -2650,8 +2869,6 @@ declare global {
        *       updateTime?: string
        *       title?: string
        *       path?: string
-       *       perm?: string
-       *       iFrame?: boolean
        *       component?: string
        *       componentName?: string
        *       parentId?: string
@@ -2681,8 +2898,6 @@ declare global {
        *     updateTime?: string
        *     title?: string
        *     path?: string
-       *     perm?: string
-       *     iFrame?: boolean
        *     component?: string
        *     componentName?: string
        *     parentId?: string
@@ -2939,8 +3154,6 @@ declare global {
        *           updateTime?: string
        *           title?: string
        *           path?: string
-       *           perm?: string
-       *           iFrame?: boolean
        *           component?: string
        *           componentName?: string
        *           parentId?: string
@@ -3032,8 +3245,6 @@ declare global {
        *             updateTime?: string
        *             title?: string
        *             path?: string
-       *             perm?: string
-       *             iFrame?: boolean
        *             component?: string
        *             componentName?: string
        *             parentId?: string
@@ -3067,8 +3278,6 @@ declare global {
        *       updateTime?: string
        *       title?: string
        *       path?: string
-       *       perm?: string
-       *       iFrame?: boolean
        *       component?: string
        *       componentName?: string
        *       parentId?: string
@@ -3257,8 +3466,6 @@ declare global {
        *             updateTime?: string
        *             title?: string
        *             path?: string
-       *             perm?: string
-       *             iFrame?: boolean
        *             component?: string
        *             componentName?: string
        *             parentId?: string
@@ -3350,8 +3557,6 @@ declare global {
        *               updateTime?: string
        *               title?: string
        *               path?: string
-       *               perm?: string
-       *               iFrame?: boolean
        *               component?: string
        *               componentName?: string
        *               parentId?: string
@@ -3385,8 +3590,6 @@ declare global {
        *         updateTime?: string
        *         title?: string
        *         path?: string
-       *         perm?: string
-       *         iFrame?: boolean
        *         component?: string
        *         componentName?: string
        *         parentId?: string
@@ -3719,8 +3922,6 @@ declare global {
        *         updateTime?: string
        *         title?: string
        *         path?: string
-       *         perm?: string
-       *         iFrame?: boolean
        *         component?: string
        *         componentName?: string
        *         parentId?: string
@@ -3812,8 +4013,6 @@ declare global {
        *           updateTime?: string
        *           title?: string
        *           path?: string
-       *           perm?: string
-       *           iFrame?: boolean
        *           component?: string
        *           componentName?: string
        *           parentId?: string
@@ -3847,8 +4046,6 @@ declare global {
        *     updateTime?: string
        *     title?: string
        *     path?: string
-       *     perm?: string
-       *     iFrame?: boolean
        *     component?: string
        *     componentName?: string
        *     parentId?: string
@@ -4173,8 +4370,6 @@ declare global {
        *           updateTime?: string
        *           title?: string
        *           path?: string
-       *           perm?: string
-       *           iFrame?: boolean
        *           component?: string
        *           componentName?: string
        *           parentId?: string
@@ -4226,8 +4421,6 @@ declare global {
        *         updateTime?: string
        *         title?: string
        *         path?: string
-       *         perm?: string
-       *         iFrame?: boolean
        *         component?: string
        *         componentName?: string
        *         parentId?: string
@@ -4654,8 +4847,6 @@ declare global {
        *         updateTime?: string
        *         title?: string
        *         path?: string
-       *         perm?: string
-       *         iFrame?: boolean
        *         component?: string
        *         componentName?: string
        *         parentId?: string
@@ -4707,8 +4898,6 @@ declare global {
        *       updateTime?: string
        *       title?: string
        *       path?: string
-       *       perm?: string
-       *       iFrame?: boolean
        *       component?: string
        *       componentName?: string
        *       parentId?: string

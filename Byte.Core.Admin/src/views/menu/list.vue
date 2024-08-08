@@ -133,7 +133,7 @@
               link
               size="small"
               @click.stop="openChildForm(scope.row)"
-              ><i-ep-plus />组织架构</el-button
+              ><i-ep-plus />子项</el-button
             >
             <el-button
               :loading="loading"
