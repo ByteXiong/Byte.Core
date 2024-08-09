@@ -72,7 +72,7 @@
         </el-tooltip>
 
         <!-- 验证码 -->
-        <el-form-item prop="captchaCode">
+        <!--  <el-form-item prop="captchaCode">
           <div class="flex-y-center w-full">
             <svg-icon icon-class="captcha" class="mx-2" />
             <el-input
@@ -90,7 +90,7 @@
               class="rounded-tr-md rounded-br-md cursor-pointer h-[48px]"
             />
           </div>
-        </el-form-item>
+        </el-form-item> -->
 
         <!-- 登录按钮 -->
         <el-button
@@ -172,7 +172,7 @@ const { send: getCaptcha } = useRequest(
       },
     }),
   {
-    immediate: true,
+    immediate: false,
   }
 );
 
@@ -214,7 +214,7 @@ const {
 );
 
 nologin(() => {
-  getCaptcha();
+  // getCaptcha();
 });
 const loginData = ref<LoginParam>({
   account: "admin",
@@ -314,7 +314,7 @@ const text = ref(
         1.保持开源。
         2.切实解决开发过程中的痛点。
         3.后端框架实现集中化管理（已发布至 NGet），开发者只需专注于业务，无需操心框架问题。
-        4.前端框架采用 Alova.js 配合 OpenAPI，能够实时关注接口动向。\n
+        4.前端框架采用 Alova.js(插件版) 配合 OpenAPI，能够实时关注接口动向。\n
     乾坤未定，你我皆是黑马。欢迎兄弟加入！\n
     無人扶我青云志，我自踏雪至山巅。作者开源不易，恳请您点个星支持一下。\n
     目前项目仍在开发中，敬请期待......`
