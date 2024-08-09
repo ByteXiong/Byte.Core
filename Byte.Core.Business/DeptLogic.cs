@@ -3,6 +3,7 @@ using Byte.Core.Entity;
 using Byte.Core.Repository;
 using Byte.Core.Models;
 using Mapster;
+using Byte.Core.Tools;
 namespace Byte.Core.Business
 {
     /// <summary>
@@ -27,11 +28,14 @@ namespace Byte.Core.Business
         /// <summary>
         /// 下拉框
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="types"></param>
+        /// <param name="parentId"></param>
         /// <returns></returns>
-        public async Task<List<DeptSelectDTO>> GetTreeSelectAsync(Guid? parentId = null)
+        public async Task<List<DeptSelectDTO>> GetTreeSelectAsync(DeptTypeEnum[] types = null, Guid? parentId = null)
         {
-            var tree = await GetIQueryable().OrderByDescending(x => x.Sort).Select<DeptSelectDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, parentId, it => it.Id);
+            var tree = await GetIQueryable()
+                .WhereIF(types != null, x => types.Contains(x.Type))
+                .OrderByDescending(x => x.Sort).Select<DeptSelectDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, parentId, it => it.Id);
             return tree;
         }
 
@@ -70,6 +74,8 @@ namespace Byte.Core.Business
         {
             var model = await GetIQueryable(x => x.Id == param.Id).FirstAsync();
             model.Name = param.Name;
+            model.Type = param.Type;
+            model.EasyName = param.EasyName;
             model.Image = param.Image;
             model.ParentId = param.ParentId;
             model.State = param.State;

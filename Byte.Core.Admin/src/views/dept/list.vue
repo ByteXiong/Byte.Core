@@ -75,7 +75,7 @@
         <el-table-column
           show-overflow-tooltip
           prop="man"
-          label="法人"
+          label="法人/负责人"
           width="100"
         />
         <el-table-column
@@ -114,7 +114,7 @@
           show-overflow-tooltip
           class-name="onExcel"
           label="操作"
-          width="300"
+          width="280"
           fixed="right"
         >
           <template #default="scope">
@@ -133,8 +133,8 @@
               type="primary"
               link
               size="small"
-              @click.stop="openForm(scope.row.id)"
-              ><i-ep-edit />组织架构</el-button
+              @click.stop="openChildForm(scope.row)"
+              ><i-ep-plus />组织架构</el-button
             >
 
             <el-button
@@ -251,7 +251,11 @@ async function handleDelete(ids: string[]) {
 }
 //打开子页面
 const editform = ref();
-async function openForm(id?: string) {
+const openForm = async (id?: string) => {
   await editform.value.openForm(id);
-}
+};
+
+const openChildForm = async (row: DeptTreeDTO) => {
+  await editform.value.openForm(null, row);
+};
 </script>

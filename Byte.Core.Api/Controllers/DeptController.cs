@@ -7,6 +7,7 @@ using Byte.Core.Models;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Byte.Core.Business;
+using Byte.Core.Tools;
 
 
 namespace Byte.Core.Api.Controllers
@@ -31,15 +32,15 @@ namespace Byte.Core.Api.Controllers
         [ApiVersion("1.0", Deprecated = false)]
         [ApiVersion("2.0", Deprecated = false)]
         public async Task<List<DeptTreeDTO>> GetTreeAsync() => await _logic.GetTreeAsync();
-
         /// <summary>
         /// 下拉框
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="types"></param>
+        /// <param name="parentId"></param>
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<List<DeptSelectDTO>> GetTreeSelectAsync(Guid? parentId = null) => await _logic.GetTreeSelectAsync(parentId);
+        public async Task<List<DeptSelectDTO>> GetTreeSelectAsync([ FromQuery]DeptTypeEnum[] types=null, [FromQuery]Guid? parentId = null) => await _logic.GetTreeSelectAsync(types, parentId);
 
         /// <summary>
         /// 查询详情

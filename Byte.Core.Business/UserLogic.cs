@@ -46,9 +46,7 @@ namespace Byte.Core.Business
                 where = where.And(x => x.Depts.Any(y=>y.Id== param.DeptId) );
             }
 
-
-
-            var page = await GetIQueryable().Select<UserDTO>().ToPagedResultsAsync(param);
+            var page = await GetIQueryable(where).Select<UserDTO>().ToPagedResultsAsync(param);
 
             return page;
         }

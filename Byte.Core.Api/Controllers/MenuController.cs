@@ -26,7 +26,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<List<Menu>> GetTreeAsync() => await _logic.GetTreeAsync();
+        public async Task<List<MenuTreeDTO>> GetTreeAsync() => await _logic.GetTreeAsync();
 
 
         /// <summary>
