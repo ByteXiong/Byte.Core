@@ -25,7 +25,7 @@ import defaultSettings from "@/settings";
 const props = defineProps({
   proxyUrl: {
     type: String,
-    default: import.meta.env.VITE_UPLOAD_URL,
+    default: import.meta.env.VITE_UPLOAD_PROXY_PREFIX,
   },
   modelValue: {
     type: String,
