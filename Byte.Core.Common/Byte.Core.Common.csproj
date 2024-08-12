@@ -41,6 +41,8 @@
 		<PackageReference Include="AspectCore.Extensions.Hosting" Version="2.4.0" />
 		<PackageReference Include="AspectCore.Extensions.LightInject" Version="2.4.0" />
 		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+		<PackageReference Include="Autofac.Extras.DynamicProxy" Version="7.1.0" />
+		<PackageReference Include="Castle.Core" Version="5.1.1" />
 		<PackageReference Include="CSRedisCore" Version="3.8.803" />
 		<PackageReference Include="Exceptionless" Version="6.0.4" />
 		<PackageReference Include="Jaeger.Thrift.VendoredThrift" Version="0.3.7" />
@@ -52,6 +54,7 @@
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
 		<!--<PackageReference Include="Microsoft.Data.SqlClient" Version="2.1.7" />-->
 		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 
 		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="8.0.1" />
 		<!--<PackageReference Include="NPOI" Version="2.6.2" />-->

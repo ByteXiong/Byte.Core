@@ -6,6 +6,9 @@ using Byte.Core.Tools;
 using System.Linq.Expressions;
 using Mapster;
 using Byte.Core.Common.Extensions;
+using Byte.Core.Common.Attributes.RedisAttribute;
+using Microsoft.AspNetCore.Mvc;
+using AspectCore.DynamicProxy;
 
 namespace Byte.Core.Business
 {
@@ -82,6 +85,26 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<List<RoleSelectDTO>> SelectAsync()
         {
+            var list = await GetIQueryable(x => x.Code != ParamConfig.Admin).OrderByDescending(x => x.Sort).Select<RoleSelectDTO>().ToListAsync();
+            return list;
+        }
+
+
+
+        /// <summary>
+        /// 下拉框
+        /// </summary>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
+        //[HasRedis("RoleSelect", "" , 30, true)]
+        //[UserInformationFilter]
+        //[Interceptor(typeof(MyBllInterceptor))]
+        [CustomInterceptor("admin")]
+
+        //[ServiceInterceptor(typeof(CustomInterceptorAttribute))]
+        public virtual async Task<List<RoleSelectDTO>> SelectAsync(string name)
+        {
+            var aa = name;
             var list = await GetIQueryable(x => x.Code != ParamConfig.Admin).OrderByDescending(x => x.Sort).Select<RoleSelectDTO>().ToListAsync();
             return list;
         }
