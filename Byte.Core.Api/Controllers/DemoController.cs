@@ -38,7 +38,8 @@ namespace Byte.Core.Api.Controllers
             
 
            var date = DateTime.Now;
-           int count =  await _unitOfWork.GetDbClient().Insertable(list).PageSize(100).ExecuteCommandAsync();
+            int count = await _unitOfWork.GetDbClient().Fastest<RedisDemo>().BulkCopyAsync(list);
+            //int count =  await _unitOfWork.GetDbClient().Insertable(list).PageSize(100).ExecuteCommandAsync();
             var tep = DateTime.Now - date;
             return ExcutedResult.SuccessResult(data: count, msg:$"插入成功{tep}秒");
         }
