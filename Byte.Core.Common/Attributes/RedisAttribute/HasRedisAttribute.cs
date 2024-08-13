@@ -38,100 +38,57 @@ namespace Byte.Core.Common.Attributes.RedisAttribute
         }
         public override async Task Invoke(AspectContext context, AspectDelegate next)
         {
-            //先获取params 参数
-            var parameters = context.Parameters;
-            if (parameters == null) { 
-               throw new Exception("参数为空");
-            }
-            //获取到Keys 组合
-            List<string> fields = new List<string>();
-            foreach (var parameter in parameters)
-            {
+            Type returnType = context.ServiceMethod.ReturnType;
 
-               //获取参数类型
-                var type = parameter.GetType();
-                //判断是否为数组
-                if (type.IsArray)
+            if (returnType.IsGenericType && returnType.GetGenericTypeDefinition() == typeof(Task<>))
+            {
+                Type genericArgument = returnType.GetGenericArguments()[0];
+
+                if (genericArgument.IsGenericType && genericArgument.GetGenericTypeDefinition() == typeof(List<>))
                 {
+                    Type listGenericArgument = genericArgument.GetGenericArguments()[0];
 
-                }
-                else{
-                    //获取值
+                    MethodInfo method = this.GetType().GetMethod("HMGetAsync", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
 
-                    fields.Add(parameter.ToString());
-                }
-            }
-           var  list =  await  RedisHelper.HMGetAsync<>(_cacheKey, fields.ToArray());
-            if (list != null)
-            {
-                context.ReturnValue = list;
-                return;
-            }
+                    MethodInfo genericMethod = method.MakeGenericMethod(listGenericArgument);
 
 
+                    // 获取 Role 类中带有 FindKey 特性的属性名
+                    var fields = listGenericArgument.GetProperties()
+                        .Where(prop => Attribute.IsDefined(prop, typeof(FindKeyAttribute)))
+                        .Select(prop => prop.Name)
+                        .ToArray();
 
+                    var task = (Task)genericMethod.Invoke(this, new object[] { _cacheKey, fields });
+                    await task.ConfigureAwait(true);
 
+                    var resultProperty = task.GetType().GetProperty("Result");
+                    var dictResult = resultProperty.GetValue(task) as Dictionary<string, object>;
 
-               // 调用被拦截的方法并获取结果
-               await context.Invoke(next);
-
-            // 处理返回结果
-            var returnValue = context.ReturnValue;
-
-            if (returnValue is Task taskResult)
-            {
-                await taskResult;
-
-                if (taskResult.GetType().IsGenericType)
-                {
-                    var resultProperty = taskResult.GetType().GetProperty("Result");
-                    if (resultProperty != null)
+                    var listResult = new List<object>();
+                    foreach (var item in dictResult.Values)
                     {
-                        var resultValue = resultProperty.GetValue(taskResult);
-
-                        // 修改返回结果
-                        var newResultValue = $"修改后的结果: {resultValue}";
-
-                        // 创建一个新的 Task 包装修改后的结果
-                        var newTask = Task.FromResult(newResultValue);
-
-                        context.ReturnValue = resultValue;
+                        listResult.Add(item);
                     }
-             
-                // 处理返回模型上的 FindKey
-                if (resultProperty != null)
-                {
-                    HandleFindKey(resultProperty, _cacheKey);
+
+                    context.ReturnValue = Task.FromResult(listResult);
                 }
-                //RedisHelper.HSetAsync(_cacheKey, result, expirationMinutes);
+                else
+                {
+                    await next(context);
                 }
             }
             else
             {
-                // 修改返回结果
-                context.ReturnValue = $"修改后的结果: {returnValue}";
+                await next(context);
             }
-         
-
         }
 
-     void HandleFindKey(object result, string cacheKey)
-    {
-        var findKeyProperties = result.GetType().GetProperties()
-            .Where(prop => Attribute.IsDefined(prop, typeof(FindKeyAttribute)))
-            .ToList();
-
-        foreach (var property in findKeyProperties)
+      async Task<T[]> HMGetAsync<T>(string key, string[] fields)
         {
-            var findKeyAttribute = property.GetCustomAttribute<FindKeyAttribute>();
-            var findKeyValue = property.GetValue(result)?.ToString();
-            if (!string.IsNullOrEmpty(findKeyValue))
-            {
-                // 处理 FindKey 逻辑，如更新缓存索引等
-                //Console.WriteLine($"FindKey '{findKeyAttribute.Key}' has value '{findKeyValue}' for cache key '{cacheKey}'");
-            }
+           var result =await  RedisHelper.HMGetAsync<T>(key, fields);
+            return result;
         }
-    }
     }
 
 
