@@ -180,10 +180,10 @@ public static class SqlSugarSetup
             {
                 case DataFilterType.InsertByObject:
                     {
-                        if (baseEntity.CreateTime == DateTime.MinValue)
-                        {
-                            baseEntity.CreateTime = DateTime.Now;
-                        }
+                        //if (baseEntity.CreateTime == DateTime.MinValue)
+                        //{
+                        //    baseEntity.CreateTime = DateTime.Now;
+                        //}
                         if (!baseEntity.CreateBy.IsNullOrEmpty())
                         {
                             baseEntity.CreateBy = CurrentUser.Name;
@@ -192,10 +192,10 @@ public static class SqlSugarSetup
                     }
                 case DataFilterType.UpdateByObject:
 
-                    if (baseEntity.UpdateTime == DateTime.MinValue)
-                    {
-                        baseEntity.UpdateTime = DateTime.Now;
-                    }
+                    //if (baseEntity.UpdateTime == DateTime.MinValue)
+                    //{
+                    //    baseEntity.UpdateTime = DateTime.Now;
+                    //}
                     if (!baseEntity.UpdateBy.IsNullOrEmpty())
                     {
                         baseEntity.UpdateBy = CurrentUser.Name;
