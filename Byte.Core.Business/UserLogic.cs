@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Byte.Core.Common.Extensions;
 using Mapster;
 using System.Linq.Expressions;
+using Byte.Core.Tools;
 
 namespace Byte.Core.Business
 {
@@ -34,7 +35,7 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<PagedResults<UserDTO>> GetPageAsync([FromQuery] UserParam param)
         {
-            Expression<Func<User, bool>> where = x => true;
+            Expression<Func<User, bool>> where = x => x.Account!= ParamConfig.Admin;
             if (!string.IsNullOrWhiteSpace(param.KeyWord))
             {
                 param.KeyWord = param.KeyWord.Trim();

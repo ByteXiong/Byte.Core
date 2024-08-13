@@ -1,13 +1,10 @@
 ﻿
 using Asp.Versioning;
-using Byte.Core.SqlSugar;
 using Byte.Core.Api.Common;
-using Byte.Core.Entity;
-using Byte.Core.Models;
-using Mapster;
-using Microsoft.AspNetCore.Mvc;
 using Byte.Core.Business;
+using Byte.Core.Models;
 using Byte.Core.Tools;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace Byte.Core.Api.Controllers
@@ -77,7 +74,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpDelete]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> DeleteAsync(Guid[] ids) => await _logic.DeleteAsync(x => ids.Contains(x.Id));
+        public async Task<int> DeleteAsync(Guid[] ids) => await _logic.DeleteAsync(ids);
 
         /// <summary>
         ///  设置状态

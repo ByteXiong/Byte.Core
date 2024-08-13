@@ -8,11 +8,16 @@ namespace Byte.Core.Tools
 {
     public static class ParamConfig
     {
-        public static string Admin => "ROOT";
+        public const string Admin = "ROOT";
 
         /// <summary>
         /// 用户缓存Key
         /// </summary>
-        public static string RoleCaChe => "Role:";
+        public const string RoleCaChe = "Role:";
+
+        /// <summary>
+        /// 哈希主键
+        /// </summary>
+        public const string  HRedisDemoKey = "HRedisDemo";
     }
 }

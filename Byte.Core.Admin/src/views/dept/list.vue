@@ -205,7 +205,14 @@ const {
  * 删除
  */
 const { send: delIds } = useRequest(
-  (ids: string[]) => Apis.Dept.delete_api_dept_delete({ data: ids }),
+  (ids: string[]) =>
+    Apis.Dept.delete_api_dept_delete({
+      data: ids,
+      transform: () => {
+        ElMessage.success("删除成功");
+        getTree();
+      },
+    }),
   { immediate: false }
 );
 /**

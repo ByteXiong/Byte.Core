@@ -1,5 +1,7 @@
 ﻿using AspectCore.DynamicProxy;
 using Autofac;
+using Byte.Core.Common.Extensions;
+using Byte.Core.Common.Helpers;
 using Castle.DynamicProxy;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
@@ -10,109 +12,68 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static NPOI.HSSF.UserModel.HeaderFooter;
 
 namespace Byte.Core.Common.Attributes.RedisAttribute
 {
-    //public class HasRedisAttribute : BaseActionFilter
-    //{
-    //    readonly bool _isAll;
-    //    readonly string _key;
-    //    readonly string _findKey;
-
-    //    public HasRedisAttribute(string key, string findKey = "", int expireSeconds = -1, bool isAll = false)
-    //    {
-    //        _isAll = isAll;
-    //        _key = key;
-    //        _findKey = findKey;
-    //    }
-    //    /// <summary>
-    //    /// 方法执行前
-    //    /// </summary>
-    //    /// <param name="context"></param>
-    //    /// <returns></returns>
-    //    public override async Task OnActionExecuting(ActionExecutingContext context)
-    //    {
-    //        RedisHelper.SetAsync(_key, _findKey, _isAll);
-    //          // 获取方法参数并进行修改
-    //    if (context.ActionArguments.ContainsKey("param1"))
-    //    {
-    //        context.ActionArguments["param1"] = "ModifiedValue";
-    //    }
-
-    //    if (context.ActionArguments.ContainsKey("param2"))
-    //    {
-    //        context.ActionArguments["param2"] = 999;
-    //    }
-    //        await Task.CompletedTask;
-    //    }
-    //}
-
-    //public enum HasRedisRange { 
-    //    /// <summary>
-    //    /// 全查询
-    //    /// </summary>
-    //    All = 1,
-    //    /// <summary>
-    //    /// 指定查询
-    //    /// </summary>
-    //    Specific = 2,
-
-
-
-
-    //}
-
-
-    
-//public class MyInterceptor : IInterceptor
-//    {
-//        public void OnBeforeInvoke(MethodInfo method, object[] args, object target)
-//        {
-//            // 在方法调用之前执行一些操作
-//            Console.WriteLine("Before: {0}", method.Name);
-//        }
-
-//        public void OnAfterInvoke(MethodInfo method, object[] args, object target, object result)
-//        {
-//            // 在方法调用之后执行一些操作
-//            Console.WriteLine("After: {0}", method.Name);
-//        }
-
-//        public void OnException(MethodInfo method, object[] args, object target, Exception exception)
-//        {
-//            // 如果方法调用抛出异常，则执行一些操作
-//            Console.WriteLine("Exception: {0}", exception);
-//        }
-
-//        public void Intercept(IInvocation invocation)
-//        {
-//            throw new NotImplementedException();
-//        }
-//    }
-
-    public class CustomInterceptorAttribute : AbstractInterceptorAttribute
+    public class HasRedisInterceptorAttribute : AbstractInterceptorAttribute
     {
-        private readonly string _name;
+        readonly HasRedisRange _range;
+        readonly string _cacheKey;
+        readonly string _findKey;
+        bool isDb = false; //是否走缓存
+        /// <summary>
+        /// 拦截
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="findKey"></param>
+        /// <param name="expireSeconds"></param>
+        /// <param name="range"></param>
 
-        public CustomInterceptorAttribute(string name)
+        public HasRedisInterceptorAttribute(string cacheKey, string findKey = "", int expireSeconds = -1, HasRedisRange range = HasRedisRange.All)
         {
-            _name = name;
+            _range = range;
+            _cacheKey = cacheKey;
+            _findKey = findKey;
         }
-
-
         public override async Task Invoke(AspectContext context, AspectDelegate next)
         {
-            //var impType = context.Implementation.GetType();
-            //var properties = impType.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
-            //    .Where(p => p.IsDefined(typeof(CustomInterceptorAttribute))).ToList();
-            //if (properties.Any())
-            //{
-            //    context
-            //    Console.WriteLine("进");
-            //}
-            context.Parameters[0] = "修改后的参数";
-            // 调用被拦截的方法并获取结果
-            await context.Invoke(next);
+            //先获取params 参数
+            var parameters = context.Parameters;
+            if (parameters == null) { 
+               throw new Exception("参数为空");
+            }
+            //获取到Keys 组合
+            List<string> fields = new List<string>();
+            foreach (var parameter in parameters)
+            {
+
+               //获取参数类型
+                var type = parameter.GetType();
+                //判断是否为数组
+                if (type.IsArray)
+                {
+
+                }
+                else{
+                    //获取值
+
+                    fields.Add(parameter.ToString());
+                }
+            }
+           var  list =  await  RedisHelper.HMGetAsync<>(_cacheKey, fields.ToArray());
+            if (list != null)
+            {
+                context.ReturnValue = list;
+                return;
+            }
+
+
+
+
+
+               // 调用被拦截的方法并获取结果
+               await context.Invoke(next);
 
             // 处理返回结果
             var returnValue = context.ReturnValue;
@@ -136,6 +97,13 @@ namespace Byte.Core.Common.Attributes.RedisAttribute
 
                         context.ReturnValue = resultValue;
                     }
+             
+                // 处理返回模型上的 FindKey
+                if (resultProperty != null)
+                {
+                    HandleFindKey(resultProperty, _cacheKey);
+                }
+                //RedisHelper.HSetAsync(_cacheKey, result, expirationMinutes);
                 }
             }
             else
@@ -143,25 +111,64 @@ namespace Byte.Core.Common.Attributes.RedisAttribute
                 // 修改返回结果
                 context.ReturnValue = $"修改后的结果: {returnValue}";
             }
+         
+
         }
 
-        private void BeforeMethodExecution(AspectContext context)
-        {
-            // 这里添加进入方法前的逻辑
-            Console.WriteLine("Before service call");
-        }
+     void HandleFindKey(object result, string cacheKey)
+    {
+        var findKeyProperties = result.GetType().GetProperties()
+            .Where(prop => Attribute.IsDefined(prop, typeof(FindKeyAttribute)))
+            .ToList();
 
-        private void AfterMethodExecution(AspectContext context)
+        foreach (var property in findKeyProperties)
         {
-            // 这里添加方法调用后的逻辑
-            Console.WriteLine("After service call");
-        }
-
-        private void OnException(AspectContext context, Exception ex)
-        {
-            // 这里添加异常处理逻辑
-            Console.WriteLine("Service threw an exception: " + ex.Message);
+            var findKeyAttribute = property.GetCustomAttribute<FindKeyAttribute>();
+            var findKeyValue = property.GetValue(result)?.ToString();
+            if (!string.IsNullOrEmpty(findKeyValue))
+            {
+                // 处理 FindKey 逻辑，如更新缓存索引等
+                //Console.WriteLine($"FindKey '{findKeyAttribute.Key}' has value '{findKeyValue}' for cache key '{cacheKey}'");
+            }
         }
     }
+    }
+
+
+    public enum HasRedisRange
+    {
+
+        /// <summary>
+        /// 全查询
+        /// </summary>
+        All = 1,
+        /// <summary>
+        /// 指定查询
+        /// </summary>
+        Params = 2,
+
+        /// <summary>
+        /// 指定查询
+        /// </summary>
+        Find = 3
+    }
+
+    /// <summary>
+    /// 哈希键
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property| AttributeTargets.Parameter)]
+    public class FindKeyAttribute : Attribute
+    {
+
+    }
+    /// <summary>
+    /// 数组键
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Parameter)]
+    public class FindsKeyAttribute : Attribute
+    {
+    }
+
+
 
 }

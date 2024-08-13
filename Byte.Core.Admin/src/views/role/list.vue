@@ -213,7 +213,14 @@ const {
  * 删除
  */
 const { send: delIds } = useRequest(
-  (ids: string[]) => Apis.Menu.delete_api_menu_delete({ data: ids }),
+  (ids: string[]) =>
+    Apis.Menu.delete_api_menu_delete({
+      data: ids,
+      transform: () => {
+        ElMessage.success("删除成功");
+        reload();
+      },
+    }),
   { immediate: false }
 );
 /**

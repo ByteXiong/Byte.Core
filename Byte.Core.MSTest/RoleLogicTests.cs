@@ -1,13 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Byte.Core.Business;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Byte.Core.SqlSugar;
-using Byte.Core.Common.IoC;
-using Byte.Core.Common.Attributes.RedisAttribute;
+﻿using Byte.Core.Common.IoC;
 
 namespace Byte.Core.Business.Tests
 {

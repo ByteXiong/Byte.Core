@@ -61,7 +61,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpDelete]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> DeleteAsync(Guid[] ids) => await _logic.DeleteAsync(x => ids.Contains(x.Id));
+        public async Task<int> DeleteAsync(Guid[] ids) => await _logic.DeleteAsync(ids);
 
 
         /// <summary>

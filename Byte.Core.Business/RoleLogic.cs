@@ -99,7 +99,7 @@ namespace Byte.Core.Business
         //[HasRedis("RoleSelect", "" , 30, true)]
         //[UserInformationFilter]
         //[Interceptor(typeof(MyBllInterceptor))]
-        [CustomInterceptor("admin")]
+    
 
         //[ServiceInterceptor(typeof(CustomInterceptorAttribute))]
         public virtual async Task<List<RoleSelectDTO>> SelectAsync(string name)
