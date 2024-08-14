@@ -2,14 +2,13 @@
   "typescript.tsdk": "./node_modules/typescript/lib",
   "npm.packageManager": "pnpm",
   "editor.tabSize": 2,
-	"editor.formatOnSave": true,
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
   "editor.quickSuggestions": {
     "other": true,
     "comments": true,
     "strings": true
   },
-	"editor.codeActionsOnSave": {
+  "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
     "source.fixAll.eslint": "explicit",
     "source.fixAll.stylelint": "explicit"
@@ -67,7 +66,9 @@
   "i18n-ally.sortKeys": true,
   "i18n-ally.namespace": false,
   "i18n-ally.pathMatcher": "{locale}/{namespaces}.{ext}",
-  "i18n-ally.enabledParsers": ["ts"],
+  "i18n-ally.enabledParsers": [
+    "ts"
+  ],
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.displayLanguage": "zh-CN",
   "i18n-ally.enabledFrameworks": [

@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * 维保接口文档 Web端网站 - version 1.0
+ * Byte.Core开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -27,18 +27,23 @@ const createFunctionalProxy = (array: (string | symbol)[], alovaInstance: Alova<
       return createFunctionalProxy(array, alovaInstance, configMap);
     },
     apply(_, __, [config]) {
-      const apiItem = apiDefinitions[array.join('.')] as string[] | undefined;
+      const apiPathKey = array.join('.') as keyof typeof apiDefinitions;
+      const apiItem = apiDefinitions[apiPathKey];
       if (!apiItem) {
         throw new Error(`the api path of \`${apiItem}\` is not found`);
       }
+      const mergedConfig = {
+        ...configMap[apiPathKey],
+        ...config
+      };
       const [method, url] = apiItem;
-      const { pathParams, data } = config;
+      const { pathParams, data } = mergedConfig;
       const urlReplaced = url.replace(/\{([^}]+)\}/g, (_, key) => {
         const pathParam = pathParams[key];
         return pathParam;
       });
-      delete config.pathParams;
-      return new Method(method.toUpperCase() as MethodType, alovaInstance, urlReplaced, config, data);
+      delete mergedConfig.pathParams;
+      return new Method(method.toUpperCase() as MethodType, alovaInstance, urlReplaced, mergedConfig, data);
     }
   });
 };
@@ -49,7 +54,7 @@ export const createApis = (alovaInstance: Alova<AlovaGenerics>, configMap: any) 
       return createFunctionalProxy([property], alovaInstance, configMap);
     }
   });
-  // 如果是全局定义
+  // define global variable `Apis`
   (globalThis as any).Apis = Apis;
   return Apis;
 };

@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * 维保接口文档 Web端网站 - version 1.0
+ * Byte.Core开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -704,6 +704,79 @@ export type UpdateRoleParam = {
    * 菜单
    */
   menuIds?: string[];
+};
+export type TableColumn = {
+  /**
+   * 主键
+   */
+  id?: string;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  label?: string;
+  prop?: string;
+  model?: string;
+  sort?: number;
+  width?: number;
+  sortable?: boolean;
+  router?: string;
+  headTemplate?: string;
+  template?: string;
+  isHidden?: boolean;
+  condition?: number;
+};
+export type TableModel = {
+  model?: string;
+  comment?: string;
+  router?: string;
+  data?: TableColumn[];
+};
+export type UpdateTableColumnParam = {
+  /**
+   * 主键
+   */
+  id?: string;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  label?: string;
+  prop?: string;
+  model?: string;
+  sort?: number;
+  width?: number;
+  sortable?: boolean;
+  router?: string;
+  headTemplate?: string;
+  template?: string;
+  isHidden?: boolean;
+  condition?: number;
+  roleIds?: string[];
 };
 export type UserInfo = {
   /**
@@ -4125,6 +4198,771 @@ declare global {
           success: boolean;
         },
         'Role.post_api_role_submit',
+        Config
+      >;
+    };
+    TableColumn: {
+      /**
+       * ---
+       *
+       * [DELETE] 删除
+       *
+       * **path:** /api/TableColumn/Delete
+       *
+       * ---
+       *
+       * **RequestBody**
+       * ```ts
+       * type RequestBody = string[]
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: number
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      delete_api_tablecolumn_delete<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          data: string[];
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'TableColumn.delete_api_tablecolumn_delete',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 获取头获取列表
+       *
+       * **path:** /api/TableColumn/GetColumns
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   Table?: string
+       *   Router?: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // 头部醒醒
+       *   // [required]
+       *   data: {
+       *     model?: string
+       *     comment?: string
+       *     router?: string
+       *     data?: Array<{
+       *       // 主键
+       *       id?: string
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       label?: string
+       *       prop?: string
+       *       model?: string
+       *       sort?: number
+       *       width?: number
+       *       sortable?: boolean
+       *       router?: string
+       *       headTemplate?: string
+       *       template?: string
+       *       isHidden?: boolean
+       *       condition?: number
+       *     }>
+       *   }
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_tablecolumn_getcolumns<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * 头部醒醒
+           * [required]
+           */
+          data: {
+            model?: string;
+            comment?: string;
+            router?: string;
+            data?: Array<{
+              /**
+               * 主键
+               */
+              id?: string;
+              /**
+               * 创建者名称
+               */
+              createBy?: string;
+              /**
+               * 创建时间
+               */
+              createTime?: string;
+              /**
+               * 更新者名称
+               */
+              updateBy?: string;
+              /**
+               * 最后更新时间
+               */
+              updateTime?: string;
+              label?: string;
+              prop?: string;
+              model?: string;
+              sort?: number;
+              width?: number;
+              sortable?: boolean;
+              router?: string;
+              headTemplate?: string;
+              template?: string;
+              isHidden?: boolean;
+              condition?: number;
+            }>;
+          };
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            Table?: string;
+            Router?: string;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * 头部醒醒
+           * [required]
+           */
+          data: {
+            model?: string;
+            comment?: string;
+            router?: string;
+            data?: Array<{
+              /**
+               * 主键
+               */
+              id?: string;
+              /**
+               * 创建者名称
+               */
+              createBy?: string;
+              /**
+               * 创建时间
+               */
+              createTime?: string;
+              /**
+               * 更新者名称
+               */
+              updateBy?: string;
+              /**
+               * 最后更新时间
+               */
+              updateTime?: string;
+              label?: string;
+              prop?: string;
+              model?: string;
+              sort?: number;
+              width?: number;
+              sortable?: boolean;
+              router?: string;
+              headTemplate?: string;
+              template?: string;
+              isHidden?: boolean;
+              condition?: number;
+            }>;
+          };
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'TableColumn.get_api_tablecolumn_getcolumns',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 查询详情
+       *
+       * **path:** /api/TableColumn/GetInfo
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   id?: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // 用户 详情
+       *   // [required]
+       *   data: {
+       *     // 主键
+       *     id?: string
+       *     // 创建者名称
+       *     createBy?: string
+       *     // 创建时间
+       *     createTime?: string
+       *     // 更新者名称
+       *     updateBy?: string
+       *     // 最后更新时间
+       *     updateTime?: string
+       *     label?: string
+       *     prop?: string
+       *     model?: string
+       *     sort?: number
+       *     width?: number
+       *     sortable?: boolean
+       *     router?: string
+       *     headTemplate?: string
+       *     template?: string
+       *     isHidden?: boolean
+       *     condition?: number
+       *   }
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_tablecolumn_getinfo<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * 用户 详情
+           * [required]
+           */
+          data: {
+            /**
+             * 主键
+             */
+            id?: string;
+            /**
+             * 创建者名称
+             */
+            createBy?: string;
+            /**
+             * 创建时间
+             */
+            createTime?: string;
+            /**
+             * 更新者名称
+             */
+            updateBy?: string;
+            /**
+             * 最后更新时间
+             */
+            updateTime?: string;
+            label?: string;
+            prop?: string;
+            model?: string;
+            sort?: number;
+            width?: number;
+            sortable?: boolean;
+            router?: string;
+            headTemplate?: string;
+            template?: string;
+            isHidden?: boolean;
+            condition?: number;
+          };
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            id?: string;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * 用户 详情
+           * [required]
+           */
+          data: {
+            /**
+             * 主键
+             */
+            id?: string;
+            /**
+             * 创建者名称
+             */
+            createBy?: string;
+            /**
+             * 创建时间
+             */
+            createTime?: string;
+            /**
+             * 更新者名称
+             */
+            updateBy?: string;
+            /**
+             * 最后更新时间
+             */
+            updateTime?: string;
+            label?: string;
+            prop?: string;
+            model?: string;
+            sort?: number;
+            width?: number;
+            sortable?: boolean;
+            router?: string;
+            headTemplate?: string;
+            template?: string;
+            isHidden?: boolean;
+            condition?: number;
+          };
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'TableColumn.get_api_tablecolumn_getinfo',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 分页
+       *
+       * **path:** /api/TableColumn/GetPage
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   KeyWord?: string
+       *   StartIndex?: number
+       *   PageIndex?: number
+       *   PageSize?: number
+       *   SortList?: Record<string, string>
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: {
+       *     pagerInfo?: {
+       *       totalRowCount?: number
+       *       pageSize?: number
+       *       startIndex?: number
+       *       pageIndex?: number
+       *       hasPrev?: boolean
+       *       hasNext?: boolean
+       *       isFirst?: boolean
+       *       isLast?: boolean
+       *       totalPageCount?: number
+       *     }
+       *     data?: Array<{
+       *       id?: string
+       *       // 名称
+       *       name?: string
+       *       // 头像
+       *       avatar?: string
+       *       // 密码
+       *       password?: string
+       *       // 状态
+       *       state?: boolean
+       *       // 账号
+       *       account?: string
+       *     }>
+       *   }
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_tablecolumn_getpage<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: {
+            pagerInfo?: {
+              totalRowCount?: number;
+              pageSize?: number;
+              startIndex?: number;
+              pageIndex?: number;
+              hasPrev?: boolean;
+              hasNext?: boolean;
+              isFirst?: boolean;
+              isLast?: boolean;
+              totalPageCount?: number;
+            };
+            data?: Array<{
+              id?: string;
+              /**
+               * 名称
+               */
+              name?: string;
+              /**
+               * 头像
+               */
+              avatar?: string;
+              /**
+               * 密码
+               */
+              password?: string;
+              /**
+               * 状态
+               */
+              state?: boolean;
+              /**
+               * 账号
+               */
+              account?: string;
+            }>;
+          };
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            KeyWord?: string;
+            StartIndex?: number;
+            PageIndex?: number;
+            PageSize?: number;
+            SortList?: Record<string, string>;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: {
+            pagerInfo?: {
+              totalRowCount?: number;
+              pageSize?: number;
+              startIndex?: number;
+              pageIndex?: number;
+              hasPrev?: boolean;
+              hasNext?: boolean;
+              isFirst?: boolean;
+              isLast?: boolean;
+              totalPageCount?: number;
+            };
+            data?: Array<{
+              id?: string;
+              /**
+               * 名称
+               */
+              name?: string;
+              /**
+               * 头像
+               */
+              avatar?: string;
+              /**
+               * 密码
+               */
+              password?: string;
+              /**
+               * 状态
+               */
+              state?: boolean;
+              /**
+               * 账号
+               */
+              account?: string;
+            }>;
+          };
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'TableColumn.get_api_tablecolumn_getpage',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [POST] 设置列表
+       *
+       * **path:** /api/TableColumn/SetColumns
+       *
+       * ---
+       *
+       * **RequestBody**
+       * ```ts
+       * type RequestBody = {
+       *   model?: string
+       *   comment?: string
+       *   router?: string
+       *   data?: Array<{
+       *     // 主键
+       *     id?: string
+       *     // 创建者名称
+       *     createBy?: string
+       *     // 创建时间
+       *     createTime?: string
+       *     // 更新者名称
+       *     updateBy?: string
+       *     // 最后更新时间
+       *     updateTime?: string
+       *     label?: string
+       *     prop?: string
+       *     model?: string
+       *     sort?: number
+       *     width?: number
+       *     sortable?: boolean
+       *     router?: string
+       *     headTemplate?: string
+       *     template?: string
+       *     isHidden?: boolean
+       *     condition?: number
+       *   }>
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = unknown
+       * ```
+       */
+      post_api_tablecolumn_setcolumns<
+        Config extends Alova2MethodConfig<unknown> & {
+          data: TableModel;
+        }
+      >(
+        config: Config
+      ): Alova2Method<unknown, 'TableColumn.post_api_tablecolumn_setcolumns', Config>;
+      /**
+       * ---
+       *
+       * [POST] 提交
+       *
+       * **path:** /api/TableColumn/Submit
+       *
+       * ---
+       *
+       * **RequestBody**
+       * ```ts
+       * type RequestBody = {
+       *   // 主键
+       *   id?: string
+       *   // 创建者名称
+       *   createBy?: string
+       *   // 创建时间
+       *   createTime?: string
+       *   // 更新者名称
+       *   updateBy?: string
+       *   // 最后更新时间
+       *   updateTime?: string
+       *   label?: string
+       *   prop?: string
+       *   model?: string
+       *   sort?: number
+       *   width?: number
+       *   sortable?: boolean
+       *   router?: string
+       *   headTemplate?: string
+       *   template?: string
+       *   isHidden?: boolean
+       *   condition?: number
+       *   roleIds?: string[]
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: string
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      post_api_tablecolumn_submit<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: string;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          data: UpdateTableColumnParam;
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: string;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'TableColumn.post_api_tablecolumn_submit',
         Config
       >;
     };

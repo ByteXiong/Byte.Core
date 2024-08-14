@@ -153,14 +153,6 @@ namespace Byte.Core.Business
             }
         }
         /// <summary>
-        ///  删除
-        /// </summary>
-        /// <param name="ids"></param>
-        /// <returns></returns>
-        public async Task<int> DeleteAsync(Guid[] ids) => await DeleteAsync(x => ids.Contains(x.Id));
-
-
-        /// <summary>
         ///  设置状态
         /// </summary>
         /// <param name="ids"></param>

@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * 维保接口文档 Web端网站 - version 1.0
+ * Byte.Core开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -40,6 +40,12 @@ export default {
   'Role.get_api_role_select': ['GET', '/api/Role/Select'],
   'Role.put_api_role_setstate': ['PUT', '/api/Role/SetState'],
   'Role.post_api_role_submit': ['POST', '/api/Role/Submit'],
+  'TableColumn.delete_api_tablecolumn_delete': ['DELETE', '/api/TableColumn/Delete'],
+  'TableColumn.get_api_tablecolumn_getcolumns': ['GET', '/api/TableColumn/GetColumns'],
+  'TableColumn.get_api_tablecolumn_getinfo': ['GET', '/api/TableColumn/GetInfo'],
+  'TableColumn.get_api_tablecolumn_getpage': ['GET', '/api/TableColumn/GetPage'],
+  'TableColumn.post_api_tablecolumn_setcolumns': ['POST', '/api/TableColumn/SetColumns'],
+  'TableColumn.post_api_tablecolumn_submit': ['POST', '/api/TableColumn/Submit'],
   'Upload.post_api_upload_images': ['POST', '/api/Upload/Images'],
   'User.delete_api_user_delete': ['DELETE', '/api/User/Delete'],
   'User.get_api_user_getinfo': ['GET', '/api/User/GetInfo'],

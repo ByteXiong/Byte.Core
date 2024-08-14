@@ -30,6 +30,6 @@
     "src/types/**/*.d.ts",
     "mock/**/*.ts",
     "vite.config.ts"
-  ],
+, "src/components/TableColumn/index.tsx", "src/components/TableColumn/setting.tsx"  ],
   "exclude": ["node_modules", "dist", "**/*.js"]
 }
