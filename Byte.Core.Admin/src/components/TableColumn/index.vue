@@ -35,29 +35,39 @@
 import { TableColumn } from "@/api/globals";
 import setting from "./setting.vue";
 import { ElTable, ElTableColumn } from "element-plus";
+import { render } from "nprogress";
 
 const data = ref<TableColumn[]>();
 
-const TableWithDynamicColumns = defineComponent({
-  name: "TableWithDynamicColumns",
-  props: {
-    data: {
-      type: TableColumn[],
-      required: true,
+// const TableWithDynamicColumns = defineComponent({
+//   name: "TableWithDynamicColumns",
+//   props: {
+//     data: {
+//       type: TableColumn[],
+//       required: true,
+//     },
+//   },
+//   render() {
+//     return (
+//       <ElTable data={this.data}>
+//         {this.data.map((column, index) => (
+//           <ElTableColumn key={index} label={column.label} prop={column.prop}>
+//             {/* <template #default="scope"> </template> */}
+//           </ElTableColumn>
+//         ))}
+//       </ElTable>
+//     );
+//   },
+// });
+
+const columns = () => {
+  return [
+    {
+      title: "Action",
+      key: "actions",
     },
-  },
-  render() {
-    return (
-      <ElTable data={this.data}>
-        {this.data.map((column, index) => (
-          <ElTableColumn key={index} label={column.label} prop={column.prop}>
-            {/* <template #default="scope"> </template> */}
-          </ElTableColumn>
-        ))}
-      </ElTable>
-    );
-  },
-});
+  ];
+};
 
 // export default defineComponent({
 //   name: "App",

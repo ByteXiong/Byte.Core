@@ -25,7 +25,7 @@
           <el-col :span="1" class="text-align-right">
             <head-seting v-model="head" name="WareHouseDTO" />
           </el-col> -->
-
+      <tableColumn tableof="TableColumnDTO" />
       <el-table
         v-loading="loading"
         highlight-current-row
@@ -93,6 +93,7 @@ import { ref } from "vue";
 import { ElMessageBox, ElMessage } from "element-plus";
 import { RoleTypeEnum } from "@/api/apiEnums";
 import "@/api";
+import TableColumn from "@/components/TableColumn/index";
 import { RoleDTO } from "@/api/globals";
 defineOptions({
   name: "Role",

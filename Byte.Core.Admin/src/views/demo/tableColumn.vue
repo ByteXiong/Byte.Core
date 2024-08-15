@@ -1,7 +1,6 @@
 <template>
   <div class="list_main_content">
     <el-card shadow="never" class="table-container">
-      <tableColumn />
       <div class="flex justify-between mb-2">
         <div class="flex justify-around w-1/8">
           <el-tooltip effect="light" :content="'新增'" placement="top">
@@ -34,20 +33,17 @@
             <head-seting v-model="head" name="WareHouseDTO" />
           </el-col> -->
       </div>
-      <el-table
+      <tableColumn
+        :data="data"
+        tableof="TableColumnDTO"
         v-loading="loading"
         highlight-current-row
         row-key="id"
-        :data="data"
         :border="true"
         @selection-change="handleSelectionChange"
         @sort-change="handleSortChange"
         ref="tableRef"
-      >
-        <template #empty>
-          <el-empty description="暂无数据" />
-        </template>
-      </el-table>
+      />
       <template #footer>
         <el-pagination
           :page-sizes="[10, 20, 50, 100]"
@@ -60,12 +56,15 @@
     </el-card>
   </div>
 </template>
-<script lang="ts" setup>
+<script lang="tsx" setup>
 import { ref } from "vue";
 import { ElMessageBox, ElMessage } from "element-plus";
-import TableColumn from "@/components/TableColumn/index.vue";
+import TableColumn from "@/components/TableColumn/index";
 import "@/api";
-
+defineOptions({
+  name: "DemoTableColumn",
+  inheritAttrs: true,
+});
 const sortList = ref<Record<string, string>>({ id: "asc" });
 /**
  * 获取数据

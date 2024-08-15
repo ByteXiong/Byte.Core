@@ -1,24 +1,37 @@
 import { defineComponent } from "vue";
-import { ElTable, ElTableColumn } from "element-plus";
+import { ElButton, ElTable, ElTableColumn } from "element-plus";
 import Setting from "./setting";
-import { TableColumn } from "@/api/globals";
-
-const data = ref<TableColumn[]>();
-
+import { TableModel } from "@/api/globals";
 export default defineComponent({
-  name: "YourComponent",
+  defineOptions: {
+    inheritAttrs: true,
+  },
+  name: "TableColumn",
   props: {
-    data: {
-      type: Array,
+    tableof: {
+      type: String,
       required: true,
     },
   },
-  render() {
-    return (
+  setup(props, { emit, attrs }) {
+    const tableData = ref<TableModel>({});
+    watch(
+      () => attrs,
+      () => {
+        console.log(attrs);
+      }
+    );
+    // debugger;
+    // 从 attrs 中解构 class 和 style，默认值为空字符串或对象
+    // const { class: className = "", style = {}, ...restAttrs } = attrs;
+    return () => (
       <>
-        <Setting table="123" tableData={this.data}></Setting>
-        <ElTable data={this.data}>
-          {this.data.map((column, index) => (
+        <Setting
+          tableof={props.tableof}
+          onTableData={(data: TableModel) => (tableData.value = data)}
+        ></Setting>
+        <ElTable {...attrs}>
+          {tableData.value.data?.map((column, index) => (
             <ElTableColumn key={index} label={column.label} prop={column.prop}>
               {/* <template #default="scope"> </template> */}
             </ElTableColumn>
