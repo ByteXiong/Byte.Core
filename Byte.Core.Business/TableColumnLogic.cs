@@ -120,7 +120,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="table"></param>
         /// <returns></returns>
-        private TableModel GetXml(string table)
+        private TableModel GetXml(string 00)
         {
 
             var typeName = "Byte.Core.Models";
@@ -177,9 +177,10 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task SetColumnsAsync(TableModel param)
         {
-
             var num = await DeleteAsync(x => x.Table == param.Table && x.Router == param.Router);
-
+            param.Data.ForEach(x =>
+            {   x.Router = param.Router;
+                x.Table = param.Table;});
             num += await AddRangeAsync(param.Data);
         }
 

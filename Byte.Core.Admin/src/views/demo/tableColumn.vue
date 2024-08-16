@@ -35,7 +35,7 @@
       </div>
       <tableColumn
         :data="data"
-        tableof="TableColumnDTO"
+        :tableof="tableof"
         v-loading="loading"
         highlight-current-row
         row-key="id"
@@ -69,6 +69,7 @@ const sortList = ref<Record<string, string>>({ id: "asc" });
 /**
  * 获取数据
  */
+const tableof = ref<string>("RoleDTO");
 const {
   data,
   page,
@@ -80,7 +81,7 @@ const {
 } = usePagination(
   // Method实例获取函数，它将接收page和pageSize，并返回一个Method实例
   (page, pageSize) =>
-    Apis.TableColumn.get_api_tablecolumn_getpage({
+    Apis.Role.get_api_role_getpage({
       params: {
         PageIndex: page,
         pageSize: pageSize,
@@ -97,6 +98,7 @@ const {
     data: ({ data }) => data?.data,
   }
 );
+
 /**
  * 删除
  */

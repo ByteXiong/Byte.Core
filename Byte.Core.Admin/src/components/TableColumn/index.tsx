@@ -15,28 +15,27 @@ export default defineComponent({
   },
   setup(props, { emit, attrs }) {
     const tableData = ref<TableModel>({});
-    watch(
-      () => attrs,
-      () => {
-        console.log(attrs);
-      }
-    );
-    // debugger;
     // 从 attrs 中解构 class 和 style，默认值为空字符串或对象
     // const { class: className = "", style = {}, ...restAttrs } = attrs;
     return () => (
       <>
-        <Setting
-          tableof={props.tableof}
-          onTableData={(data: TableModel) => (tableData.value = data)}
-        ></Setting>
-        <ElTable {...attrs}>
-          {tableData.value.data?.map((column, index) => (
-            <ElTableColumn key={index} label={column.label} prop={column.prop}>
-              {/* <template #default="scope"> </template> */}
-            </ElTableColumn>
-          ))}
-        </ElTable>
+        <div>
+          <Setting
+            tableof={props.tableof}
+            onTableData={(data: TableModel) => (tableData.value = data)}
+          ></Setting>
+          <ElTable {...attrs}>
+            {tableData.value.data?.map((column, index) => (
+              <ElTableColumn
+                key={index}
+                label={column.label}
+                prop={column.prop}
+              >
+                {/* <template #default="scope"> </template> */}
+              </ElTableColumn>
+            ))}
+          </ElTable>
+        </div>
       </>
     );
   },
