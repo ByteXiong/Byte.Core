@@ -120,7 +120,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="table"></param>
         /// <returns></returns>
-        private TableModel GetXml(string 00)
+        private TableModel GetXml(string table)
         {
 
             var typeName = "Byte.Core.Models";
