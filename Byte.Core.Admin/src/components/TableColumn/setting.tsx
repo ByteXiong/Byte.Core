@@ -42,6 +42,7 @@ export default defineComponent({
         }),
       [props],
       {
+        debounce: 500,
         immediate: true,
         async middleware(_, next) {
           if (props.tableof) {

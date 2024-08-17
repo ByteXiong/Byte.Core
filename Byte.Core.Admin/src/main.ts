@@ -4,6 +4,9 @@ import router from "@/router";
 import { setupStore } from "@/store";
 import { setupDirective } from "@/directive";
 import { setupElIcons, setupI18n, setupPermission } from "@/plugins";
+// 引入element-plus
+import { setupElementPlus } from "@/plugins/elementPlus";
+
 import "vue/jsx";
 // 本地SVG图标
 import "virtual:svg-icons-register";
@@ -17,6 +20,9 @@ import "animate.css";
 const app = createApp(App);
 // 全局注册 自定义指令(directive)
 setupDirective(app);
+// 全局注册Element-plus
+setupElementPlus(app);
+
 // 全局注册 状态管理(store)
 setupStore(app);
 // 全局注册Element-plus图标

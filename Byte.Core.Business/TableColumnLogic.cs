@@ -178,7 +178,7 @@ namespace Byte.Core.Business
         public async Task SetColumnsAsync(TableModel param)
         {
             var num = await DeleteAsync(x => x.Table == param.Table && x.Router == param.Router);
-            param.Data.ForEach(x =>
+            param.Data?.ForEach(x =>
             {   x.Router = param.Router;
                 x.Table = param.Table;});
             num += await AddRangeAsync(param.Data);
