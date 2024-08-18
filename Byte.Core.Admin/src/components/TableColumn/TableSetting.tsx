@@ -6,12 +6,18 @@ import {
   ElRadioButton,
   ElRadioGroup,
   CheckboxValueType,
+  ElButton,
 } from "element-plus";
 import ColumnSetting from "./ColumnSetting";
 import { TableModel } from "@/api/globals";
 import { VueDraggable } from "vue-draggable-plus";
-import { ArrowLeft, ArrowRight, Close, DCaret } from "@element-plus/icons-vue";
-
+import {
+  ArrowLeft,
+  ArrowRight,
+  Close,
+  DCaret,
+  Refresh,
+} from "@element-plus/icons-vue";
 export default defineComponent({
   name: "TableActions",
   defineOptions: {
@@ -58,70 +64,86 @@ export default defineComponent({
       }
     );
 
+    const confirm = () => {
+      modelValue.value = false;
+    };
+
+    const restore = () => {};
+
     return () => (
       <>
         <ElDrawer v-model={modelValue.value} title="列设置" size="350px">
           设置
-          <div>
-            <div class="flex items-center justify-between">
-              <div class="flex items-center justify-between">
-                {/* <ElCheckbox
-                  v-model="checkAll"
-                  indeterminate={isIndeterminate.value}
-                  onChange={handleCheckAllChange}
-                />
-     */}
-              </div>
-              <ElText>固定 / 排序</ElText>
-            </div>
-          </div>
-          {/* <ElText class="ml-8px!">{{ tableModel.value.data.length }} / {{ settingColumns?.length }}</ElText>   */}
           <ColumnSetting
             tableof={props.tableof}
             modelValue={tableModel.value}
             onUpdate:modelValue={(model) => (tableModel.value = model)}
           ></ColumnSetting>
-          1111
-          <VueDraggable
-            modelValue={tableModel.value?.data || []}
-            target=".el-checkbox-group"
-            handle=".handle"
-            animation={150}
-          >
-            {tableModel.value?.data}
-            <ElCheckboxGroup
-              ref="draggableWrap"
-              v-model={checkColumns.value}
-              onChange={handleCheckedColumnsChange}
-            >
-              <ElCheckbox label="11"></ElCheckbox>
-              {tableModel.value?.data}
-              {tableModel.value?.data?.forEach((item) => (
-                <>
-                  <div class="flex items-center justify-between mt-12px">
-                    <ElCheckbox label={item.id}>{item.label}</ElCheckbox>
-                    <div class="flex items-center">
-                      <ElRadioGroup size="small" v-model={item.id}>
-                        <ElRadioButton label="left">
-                          <ArrowLeft />
-                        </ElRadioButton>
-                        <ElRadioButton label={undefined}>
-                          <Close />
-                        </ElRadioButton>
-                        <ElRadioButton label="right">
-                          <ArrowRight />
-                        </ElRadioButton>
-                      </ElRadioGroup>
+          <div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center justify-between">
+                <ElCheckbox
+                  v-model={checkAll}
+                  indeterminate={isIndeterminate.value}
+                  onChange={handleCheckAllChange}
+                />
+                <ElText class="ml-8px!">
+                  {checkColumns.value.length} / {tableModel.value?.data?.length}
+                </ElText>
+              </div>
+              <ElText>固定 / 排序</ElText>
+            </div>
 
-                      <div class="ml-12px cursor-move handle">
-                        <DCaret />
+            <VueDraggable
+              modelValue={tableModel.value?.data || []}
+              target=".el-checkbox-group"
+              handle=".handle"
+              animation={150}
+            >
+              {tableModel.value?.data}
+              <ElCheckboxGroup
+                ref="draggableWrap"
+                v-model={checkColumns.value}
+                onChange={handleCheckedColumnsChange}
+              >
+                {tableModel.value?.data?.map((item) => (
+                  <>
+                    <div class="flex items-center justify-between mt-12px">
+                      <ElCheckbox label={item.id}>{item.label}</ElCheckbox>
+                      <div class="flex items-center">
+                        <ElRadioGroup size="small" v-model={item.id}>
+                          <ElRadioButton label="left">
+                            <ArrowLeft style="width: 1.5em; height: 1.5em" />
+                          </ElRadioButton>
+                          <ElRadioButton label={undefined}>
+                            <Close style="width: 1.5em; height: 1.5em" />
+                          </ElRadioButton>
+                          <ElRadioButton label="right">
+                            <ArrowRight style="width: 1.5em; height: 1.5em" />
+                          </ElRadioButton>
+                        </ElRadioGroup>
+                        <div class="ml-12px cursor-move handle  font-size-3">
+                          <DCaret style="width: 1.5em; height: 1.5em" />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </>
-              ))}
-            </ElCheckboxGroup>
-          </VueDraggable>
+                  </>
+                ))}
+              </ElCheckboxGroup>
+            </VueDraggable>
+          </div>
+          {{
+            footer: ({ row }: any) => (
+              <>
+                <div>
+                  <ElButton onClick={restore}>还原</ElButton>
+                  <ElButton type="primary" onClick={confirm}>
+                    确定
+                  </ElButton>
+                </div>
+              </>
+            ),
+          }}
         </ElDrawer>
       </>
     );
