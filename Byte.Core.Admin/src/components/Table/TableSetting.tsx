@@ -36,7 +36,7 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: ["refresh", "changSize", "confirm", "onTableData", "modelValue"],
+  emits: ["tableData", "update:modelValue"],
   setup(props, { emit }) {
     // const modelValue = defineModel<boolean>();
     const modelValue = useVModel(props, "modelValue", emit);
@@ -57,12 +57,13 @@ export default defineComponent({
       // isIndeterminate.value =
       //   checkedCount > 0 && checkedCount < unref(defaultCheckColumns)?.length;
     };
-    watch(
-      () => tableModel,
-      (val) => {
-        console.error(tableModel.value);
-      }
-    );
+    // watch(
+    //   () => tableModel.value,
+    //   (val) => {
+    //     emit("tableData", val);
+    //     console.error(tableModel.value);
+    //   }
+    // );
 
     const confirm = () => {
       modelValue.value = false;
@@ -77,7 +78,9 @@ export default defineComponent({
           <ColumnSetting
             tableof={props.tableof}
             modelValue={tableModel.value}
-            onUpdate:modelValue={(model) => (tableModel.value = model)}
+            onUpdate:modelValue={(model) => (
+              (tableModel.value = model), emit("tableData", model)
+            )}
           ></ColumnSetting>
           <div>
             <div class="flex items-center justify-between">

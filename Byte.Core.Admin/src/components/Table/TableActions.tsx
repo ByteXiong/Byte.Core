@@ -8,6 +8,8 @@ import {
 } from "element-plus";
 import TableSetting from "./TableSetting";
 import { Refresh, Setting } from "@element-plus/icons-vue";
+import { column } from "element-plus/es/components/table-v2/src/common";
+import { TableColumn } from "@/api/globals";
 
 export default defineComponent({
   name: "TableActions",
@@ -23,7 +25,7 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: ["refresh", "changSize", "confirm", "onTableData"],
+  emits: ["refresh", "changSize", "confirm", "tableData"],
   setup(props, { emit }) {
     // const appStore = useAppStore();
     // const { t } = useI18n();
@@ -64,7 +66,11 @@ export default defineComponent({
             <Setting style="width: 2em; height: 2em; margin-right: 8px" />
           </div>
         </div>
-        <TableSetting v-model={showSetting.value} tableof={props.tableof} />
+        <TableSetting
+          v-model={showSetting.value}
+          tableof={props.tableof}
+          onTableData={(data: TableColumn[]) => emit("tableData", data)}
+        />
       </>
     );
   },

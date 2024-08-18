@@ -28,7 +28,7 @@
 <script lang="tsx" setup>
 import { ref } from "vue";
 import { ElMessageBox, ElMessage } from "element-plus";
-import TableColumn from "@/components/TableColumn/index";
+import TableColumn from "@/components/Table/Index";
 import "@/api";
 defineOptions({
   name: "DemoTableColumn",
