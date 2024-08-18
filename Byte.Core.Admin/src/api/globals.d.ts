@@ -14,9 +14,9 @@
  *
  * **Do not edit the file manually.**
  */
-import { Alova, AlovaMethodCreateConfig, AlovaGenerics, Method } from "alova";
-import type { $$userConfigMap, alovaInstance } from ".";
-import type apiDefinitions from "./apiDefinitions";
+import { Alova, AlovaMethodCreateConfig, AlovaGenerics, Method } from 'alova';
+import type { $$userConfigMap, alovaInstance } from '.';
+import type apiDefinitions from './apiDefinitions';
 
 type CollapsedAlova = typeof alovaInstance;
 type UserMethodConfigMap = typeof $$userConfigMap;
@@ -36,38 +36,27 @@ type Alova2MethodConfig<Responded> =
   >
     ? Omit<
         AlovaMethodCreateConfig<
-          AlovaGenerics<
-            Responded,
-            any,
-            RequestConfig,
-            Response,
-            ResponseHeader,
-            L1Cache,
-            L2Cache,
-            SE
-          >,
+          AlovaGenerics<Responded, any, RequestConfig, Response, ResponseHeader, L1Cache, L2Cache, SE>,
           any,
           Responded
         >,
-        "params"
+        'params'
       >
     : never;
 
 // Extract the return type of transform function that define in $$userConfigMap, if it not exists, use the default type.
 type ExtractUserDefinedTransformed<
   DefinitionKey extends keyof typeof apiDefinitions,
-  Default,
+  Default
 > = DefinitionKey extends keyof UserMethodConfigMap
-  ? UserMethodConfigMap[DefinitionKey]["transform"] extends (
-      ...args: any[]
-    ) => any
-    ? Awaited<ReturnType<UserMethodConfigMap[DefinitionKey]["transform"]>>
+  ? UserMethodConfigMap[DefinitionKey]['transform'] extends (...args: any[]) => any
+    ? Awaited<ReturnType<UserMethodConfigMap[DefinitionKey]['transform']>>
     : Default
   : Default;
 type Alova2Method<
   Responded,
   DefinitionKey extends keyof typeof apiDefinitions,
-  CurrentConfig extends Alova2MethodConfig<any>,
+  CurrentConfig extends Alova2MethodConfig<any>
 > =
   CollapsedAlova extends Alova<
     AlovaGenerics<
@@ -85,8 +74,8 @@ type Alova2Method<
         AlovaGenerics<
           CurrentConfig extends undefined
             ? ExtractUserDefinedTransformed<DefinitionKey, Responded>
-            : CurrentConfig["transform"] extends (...args: any[]) => any
-              ? Awaited<ReturnType<CurrentConfig["transform"]>>
+            : CurrentConfig['transform'] extends (...args: any[]) => any
+              ? Awaited<ReturnType<CurrentConfig['transform']>>
               : ExtractUserDefinedTransformed<DefinitionKey, Responded>,
           any,
           RequestConfig,
@@ -739,7 +728,7 @@ export type TableColumn = {
   updateTime?: string;
   label?: string;
   prop?: string;
-  model?: string;
+  table?: string;
   sort?: number;
   width?: number;
   sortable?: boolean;
@@ -750,7 +739,7 @@ export type TableColumn = {
   condition?: number;
 };
 export type TableModel = {
-  model?: string;
+  table?: string;
   comment?: string;
   router?: string;
   data?: TableColumn[];
@@ -778,7 +767,7 @@ export type UpdateTableColumnParam = {
   updateTime?: string;
   label?: string;
   prop?: string;
-  model?: string;
+  table?: string;
   sort?: number;
   width?: number;
   sortable?: boolean;
@@ -979,7 +968,7 @@ declare global {
             PageSize?: number;
             SortList?: Record<string, string>;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -1040,7 +1029,7 @@ declare global {
            */
           success: boolean;
         },
-        "Demo.get_api_demo_getpage",
+        'Demo.get_api_demo_getpage',
         Config
       >;
       /**
@@ -1107,7 +1096,7 @@ declare global {
           params: {
             num?: number;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -1134,7 +1123,7 @@ declare global {
            */
           success: boolean;
         },
-        "Demo.post_api_demo_setroledata",
+        'Demo.post_api_demo_setroledata',
         Config
       >;
     };
@@ -1189,7 +1178,7 @@ declare global {
           success: boolean;
         }> & {
           data: string[];
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -1211,7 +1200,7 @@ declare global {
            */
           success: boolean;
         },
-        "Dept.delete_api_dept_delete",
+        'Dept.delete_api_dept_delete',
         Config
       >;
       /**
@@ -1388,7 +1377,7 @@ declare global {
           params: {
             id?: string;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -1411,7 +1400,7 @@ declare global {
            */
           success: boolean;
         },
-        "Dept.get_api_dept_getinfo",
+        'Dept.get_api_dept_getinfo',
         Config
       >;
       /**
@@ -1481,7 +1470,7 @@ declare global {
            * [required]
            */
           success: boolean;
-        }>,
+        }>
       >(
         config?: Config
       ): Alova2Method<
@@ -1503,7 +1492,7 @@ declare global {
            */
           success: boolean;
         },
-        "Dept.get_api_dept_gettree",
+        'Dept.get_api_dept_gettree',
         Config
       >;
       /**
@@ -1572,7 +1561,7 @@ declare global {
             types?: DeptTypeEnum[];
             parentId?: string;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -1594,7 +1583,7 @@ declare global {
            */
           success: boolean;
         },
-        "Dept.get_api_dept_gettreeselect",
+        'Dept.get_api_dept_gettreeselect',
         Config
       >;
       /**
@@ -1653,7 +1642,7 @@ declare global {
             id?: string;
             state?: boolean;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -1675,7 +1664,7 @@ declare global {
            */
           success: boolean;
         },
-        "Dept.put_api_dept_setstate",
+        'Dept.put_api_dept_setstate',
         Config
       >;
       /**
@@ -1970,7 +1959,7 @@ declare global {
           success: boolean;
         }> & {
           data: UpdateDeptParam;
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -1992,7 +1981,7 @@ declare global {
            */
           success: boolean;
         },
-        "Dept.post_api_dept_submit",
+        'Dept.post_api_dept_submit',
         Config
       >;
     };
@@ -2068,7 +2057,7 @@ declare global {
            * [required]
            */
           success: boolean;
-        }>,
+        }>
       >(
         config?: Config
       ): Alova2Method<
@@ -2109,7 +2098,7 @@ declare global {
            */
           success: boolean;
         },
-        "Login.get_api_login_info",
+        'Login.get_api_login_info',
         Config
       >;
       /**
@@ -2201,7 +2190,7 @@ declare global {
           success: boolean;
         }> & {
           data: LoginParam;
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -2244,7 +2233,7 @@ declare global {
            */
           success: boolean;
         },
-        "Login.post_api_login_login",
+        'Login.post_api_login_login',
         Config
       >;
       /**
@@ -2263,7 +2252,7 @@ declare global {
        */
       post_api_login_loginout<Config extends Alova2MethodConfig<unknown>>(
         config?: Config
-      ): Alova2Method<unknown, "Login.post_api_login_loginout", Config>;
+      ): Alova2Method<unknown, 'Login.post_api_login_loginout', Config>;
     };
     Menu: {
       /**
@@ -2316,7 +2305,7 @@ declare global {
           success: boolean;
         }> & {
           data: string[];
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -2338,7 +2327,7 @@ declare global {
            */
           success: boolean;
         },
-        "Menu.delete_api_menu_delete",
+        'Menu.delete_api_menu_delete',
         Config
       >;
       /**
@@ -2499,7 +2488,7 @@ declare global {
           params: {
             id?: string;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -2522,7 +2511,7 @@ declare global {
            */
           success: boolean;
         },
-        "Menu.get_api_menu_getinfo",
+        'Menu.get_api_menu_getinfo',
         Config
       >;
       /**
@@ -2597,7 +2586,7 @@ declare global {
            * [required]
            */
           success: boolean;
-        }>,
+        }>
       >(
         config?: Config
       ): Alova2Method<
@@ -2619,7 +2608,7 @@ declare global {
            */
           success: boolean;
         },
-        "Menu.get_api_menu_getroutes",
+        'Menu.get_api_menu_getroutes',
         Config
       >;
       /**
@@ -2689,7 +2678,7 @@ declare global {
            * [required]
            */
           success: boolean;
-        }>,
+        }>
       >(
         config?: Config
       ): Alova2Method<
@@ -2711,7 +2700,7 @@ declare global {
            */
           success: boolean;
         },
-        "Menu.get_api_menu_gettree",
+        'Menu.get_api_menu_gettree',
         Config
       >;
       /**
@@ -2778,7 +2767,7 @@ declare global {
           params: {
             parentId?: string;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -2800,7 +2789,7 @@ declare global {
            */
           success: boolean;
         },
-        "Menu.get_api_menu_gettreeselect",
+        'Menu.get_api_menu_gettreeselect',
         Config
       >;
       /**
@@ -2859,7 +2848,7 @@ declare global {
             id?: string;
             state?: boolean;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -2881,7 +2870,7 @@ declare global {
            */
           success: boolean;
         },
-        "Menu.put_api_menu_setstate",
+        'Menu.put_api_menu_setstate',
         Config
       >;
       /**
@@ -3036,7 +3025,7 @@ declare global {
           success: boolean;
         }> & {
           data: UpdateMenuParam;
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -3058,7 +3047,7 @@ declare global {
            */
           success: boolean;
         },
-        "Menu.post_api_menu_submit",
+        'Menu.post_api_menu_submit',
         Config
       >;
     };
@@ -3113,7 +3102,7 @@ declare global {
           success: boolean;
         }> & {
           data: string[];
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -3135,7 +3124,7 @@ declare global {
            */
           success: boolean;
         },
-        "Role.delete_api_role_delete",
+        'Role.delete_api_role_delete',
         Config
       >;
       /**
@@ -3409,7 +3398,7 @@ declare global {
           params: {
             id?: string;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -3432,7 +3421,7 @@ declare global {
            */
           success: boolean;
         },
-        "Role.get_api_role_getinfo",
+        'Role.get_api_role_getinfo',
         Config
       >;
       /**
@@ -3725,7 +3714,7 @@ declare global {
             PageSize?: number;
             SortList?: Record<string, string>;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -3747,7 +3736,7 @@ declare global {
            */
           success: boolean;
         },
-        "Role.get_api_role_getpage",
+        'Role.get_api_role_getpage',
         Config
       >;
       /**
@@ -3805,7 +3794,7 @@ declare global {
            * [required]
            */
           success: boolean;
-        }>,
+        }>
       >(
         config?: Config
       ): Alova2Method<
@@ -3836,7 +3825,7 @@ declare global {
            */
           success: boolean;
         },
-        "Role.get_api_role_select",
+        'Role.get_api_role_select',
         Config
       >;
       /**
@@ -3895,7 +3884,7 @@ declare global {
             id?: string;
             state?: boolean;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -3917,7 +3906,7 @@ declare global {
            */
           success: boolean;
         },
-        "Role.put_api_role_setstate",
+        'Role.put_api_role_setstate',
         Config
       >;
       /**
@@ -4186,7 +4175,7 @@ declare global {
           success: boolean;
         }> & {
           data: UpdateRoleParam;
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -4208,7 +4197,7 @@ declare global {
            */
           success: boolean;
         },
-        "Role.post_api_role_submit",
+        'Role.post_api_role_submit',
         Config
       >;
     };
@@ -4263,7 +4252,7 @@ declare global {
           success: boolean;
         }> & {
           data: string[];
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -4285,7 +4274,7 @@ declare global {
            */
           success: boolean;
         },
-        "TableColumn.delete_api_tablecolumn_delete",
+        'TableColumn.delete_api_tablecolumn_delete',
         Config
       >;
       /**
@@ -4315,7 +4304,7 @@ declare global {
        *   // 头部醒醒
        *   // [required]
        *   data: {
-       *     model?: string
+       *     table?: string
        *     comment?: string
        *     router?: string
        *     data?: Array<{
@@ -4331,7 +4320,7 @@ declare global {
        *       updateTime?: string
        *       label?: string
        *       prop?: string
-       *       model?: string
+       *       table?: string
        *       sort?: number
        *       width?: number
        *       sortable?: boolean
@@ -4360,7 +4349,7 @@ declare global {
            * [required]
            */
           data: {
-            model?: string;
+            table?: string;
             comment?: string;
             router?: string;
             data?: Array<{
@@ -4386,7 +4375,7 @@ declare global {
               updateTime?: string;
               label?: string;
               prop?: string;
-              model?: string;
+              table?: string;
               sort?: number;
               width?: number;
               sortable?: boolean;
@@ -4410,7 +4399,7 @@ declare global {
             Table?: string;
             Router?: string;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -4424,7 +4413,7 @@ declare global {
            * [required]
            */
           data: {
-            model?: string;
+            table?: string;
             comment?: string;
             router?: string;
             data?: Array<{
@@ -4450,7 +4439,7 @@ declare global {
               updateTime?: string;
               label?: string;
               prop?: string;
-              model?: string;
+              table?: string;
               sort?: number;
               width?: number;
               sortable?: boolean;
@@ -4470,7 +4459,7 @@ declare global {
            */
           success: boolean;
         },
-        "TableColumn.get_api_tablecolumn_getcolumns",
+        'TableColumn.get_api_tablecolumn_getcolumns',
         Config
       >;
       /**
@@ -4511,7 +4500,7 @@ declare global {
        *     updateTime?: string
        *     label?: string
        *     prop?: string
-       *     model?: string
+       *     table?: string
        *     sort?: number
        *     width?: number
        *     sortable?: boolean
@@ -4561,7 +4550,7 @@ declare global {
             updateTime?: string;
             label?: string;
             prop?: string;
-            model?: string;
+            table?: string;
             sort?: number;
             width?: number;
             sortable?: boolean;
@@ -4583,7 +4572,7 @@ declare global {
           params: {
             id?: string;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -4619,7 +4608,7 @@ declare global {
             updateTime?: string;
             label?: string;
             prop?: string;
-            model?: string;
+            table?: string;
             sort?: number;
             width?: number;
             sortable?: boolean;
@@ -4638,7 +4627,7 @@ declare global {
            */
           success: boolean;
         },
-        "TableColumn.get_api_tablecolumn_getinfo",
+        'TableColumn.get_api_tablecolumn_getinfo',
         Config
       >;
       /**
@@ -4763,7 +4752,7 @@ declare global {
             PageSize?: number;
             SortList?: Record<string, string>;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -4820,7 +4809,7 @@ declare global {
            */
           success: boolean;
         },
-        "TableColumn.get_api_tablecolumn_getpage",
+        'TableColumn.get_api_tablecolumn_getpage',
         Config
       >;
       /**
@@ -4835,7 +4824,7 @@ declare global {
        * **RequestBody**
        * ```ts
        * type RequestBody = {
-       *   model?: string
+       *   table?: string
        *   comment?: string
        *   router?: string
        *   data?: Array<{
@@ -4851,7 +4840,7 @@ declare global {
        *     updateTime?: string
        *     label?: string
        *     prop?: string
-       *     model?: string
+       *     table?: string
        *     sort?: number
        *     width?: number
        *     sortable?: boolean
@@ -4874,14 +4863,10 @@ declare global {
       post_api_tablecolumn_setcolumns<
         Config extends Alova2MethodConfig<unknown> & {
           data: TableModel;
-        },
+        }
       >(
         config: Config
-      ): Alova2Method<
-        unknown,
-        "TableColumn.post_api_tablecolumn_setcolumns",
-        Config
-      >;
+      ): Alova2Method<unknown, 'TableColumn.post_api_tablecolumn_setcolumns', Config>;
       /**
        * ---
        *
@@ -4906,7 +4891,7 @@ declare global {
        *   updateTime?: string
        *   label?: string
        *   prop?: string
-       *   model?: string
+       *   table?: string
        *   sort?: number
        *   width?: number
        *   sortable?: boolean
@@ -4955,7 +4940,7 @@ declare global {
           success: boolean;
         }> & {
           data: UpdateTableColumnParam;
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -4977,7 +4962,7 @@ declare global {
            */
           success: boolean;
         },
-        "TableColumn.post_api_tablecolumn_submit",
+        'TableColumn.post_api_tablecolumn_submit',
         Config
       >;
     };
@@ -5023,7 +5008,7 @@ declare global {
            * [required]
            */
           success: boolean;
-        }>,
+        }>
       >(
         config?: Config
       ): Alova2Method<
@@ -5045,7 +5030,7 @@ declare global {
            */
           success: boolean;
         },
-        "Upload.post_api_upload_images",
+        'Upload.post_api_upload_images',
         Config
       >;
     };
@@ -5100,7 +5085,7 @@ declare global {
           success: boolean;
         }> & {
           data: string[];
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -5122,7 +5107,7 @@ declare global {
            */
           success: boolean;
         },
-        "User.delete_api_user_delete",
+        'User.delete_api_user_delete',
         Config
       >;
       /**
@@ -5321,7 +5306,7 @@ declare global {
           params: {
             id?: string;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -5344,7 +5329,7 @@ declare global {
            */
           success: boolean;
         },
-        "User.get_api_user_getinfo",
+        'User.get_api_user_getinfo',
         Config
       >;
       /**
@@ -5475,7 +5460,7 @@ declare global {
             PageSize?: number;
             SortList?: Record<string, string>;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -5532,7 +5517,7 @@ declare global {
            */
           success: boolean;
         },
-        "User.get_api_user_getpage",
+        'User.get_api_user_getpage',
         Config
       >;
       /**
@@ -5591,7 +5576,7 @@ declare global {
             id?: string;
             state?: boolean;
           };
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -5613,7 +5598,7 @@ declare global {
            */
           success: boolean;
         },
-        "User.put_api_user_setstate",
+        'User.put_api_user_setstate',
         Config
       >;
       /**
@@ -5807,7 +5792,7 @@ declare global {
           success: boolean;
         }> & {
           data: UpdateUserParam;
-        },
+        }
       >(
         config: Config
       ): Alova2Method<
@@ -5829,7 +5814,7 @@ declare global {
            */
           success: boolean;
         },
-        "User.post_api_user_submit",
+        'User.post_api_user_submit',
         Config
       >;
     };

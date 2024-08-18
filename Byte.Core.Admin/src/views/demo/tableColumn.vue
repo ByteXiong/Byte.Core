@@ -1,38 +1,7 @@
 <template>
   <div class="list_main_content">
     <el-card shadow="never" class="table-container">
-      <div class="flex justify-between mb-2">
-        <div class="flex justify-around w-1/8">
-          <el-tooltip effect="light" :content="'新增'" placement="top">
-            <!-- <el-button type="primary"  icon="Plus"  circle @click="openForm()" >  </el-button> -->
-          </el-tooltip>
-          <el-tooltip effect="light" content="批量删除" placement="top">
-            <el-icon @click="handleDelete(selectIds)"><Delete /></el-icon>
-          </el-tooltip>
-
-          <!-- <el-button type="danger" :disabled="selectIds.length==0"  @click="handleDelete(selectIds)">批量删除</el-button> -->
-        </div>
-        <div class="flex justify-around w-1/8">
-          <el-tooltip effect="light" content="刷新" placement="top">
-            <el-icon @click="reload"><Refresh /></el-icon>
-          </el-tooltip>
-          <el-tooltip effect="light" content="导出" placement="top">
-            <el-icon><Download /></el-icon>
-          </el-tooltip>
-
-          <!-- <el-tooltip effect="light" content="设置表头" placement="top">
-            <el-icon><Setting /></el-icon>
-          </el-tooltip> -->
-        </div>
-        <!-- <el-button type="danger" icon="Delete" circle  :disabled="selectIds.length==0"  @click="handleDelete(selectIds)"/> -->
-
-        <!-- <el-col :span="1" class="text-align-right">
-            <excel tid="table_excel_WareHouse" :name="head.comment" />
-          </el-col>
-          <el-col :span="1" class="text-align-right">
-            <head-seting v-model="head" name="WareHouseDTO" />
-          </el-col> -->
-      </div>
+      获取 接口模型 反射动态生成头部
       <tableColumn
         :data="data"
         :tableof="tableof"
@@ -69,7 +38,7 @@ const sortList = ref<Record<string, string>>({ id: "asc" });
 /**
  * 获取数据
  */
-const tableof = ref<string>("RoleDTO");
+const tableof = ref<string>("TableColumnDTO");
 const {
   data,
   page,

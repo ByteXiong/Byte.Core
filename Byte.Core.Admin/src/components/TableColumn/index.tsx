@@ -1,6 +1,6 @@
 import { defineComponent } from "vue";
 import { ElButton, ElTable, ElTableColumn } from "element-plus";
-import Setting from "./setting";
+import Actions from "./actions";
 import { TableModel } from "@/api/globals";
 export default defineComponent({
   defineOptions: {
@@ -20,10 +20,10 @@ export default defineComponent({
     return () => (
       <>
         <div>
-          <Setting
+          <Actions
             tableof={props.tableof}
-            onTableData={(data: TableModel) => (tableData.value = data)}
-          ></Setting>
+            // onTableData={(data: TableModel) => (tableData.value = data)}
+          ></Actions>
           <ElTable {...attrs}>
             {tableData.value.data?.map((column, index) => (
               <ElTableColumn

@@ -20,7 +20,7 @@ import "animate.css";
 const app = createApp(App);
 // 全局注册 自定义指令(directive)
 setupDirective(app);
-// 全局注册Element-plus
+// 全局注册tsx Element-plus
 setupElementPlus(app);
 
 // 全局注册 状态管理(store)

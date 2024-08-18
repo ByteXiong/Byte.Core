@@ -9,17 +9,25 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "baseUrl": ".",
     "allowJs": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     },
-    "types": ["vite/client", "unplugin-icons/types/vue", "element-plus/global"],
+    "types": [
+      "vite/client",
+      "unplugin-icons/types/vue",
+      "element-plus/global"
+    ],
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "allowSyntheticDefaultImports": true /* 允许默认导入 */,
     "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
-
     "jsx": "preserve",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment"
@@ -29,7 +37,14 @@
     "src/**/*.vue",
     "src/types/**/*.d.ts",
     "mock/**/*.ts",
-    "vite.config.ts"
-, "src/components/TableColumn/index.tsx", "src/components/TableColumn/setting.tsx"  ],
-  "exclude": ["node_modules", "dist", "**/*.js"]
+    "vite.config.ts",
+    "src/components/TableColumn/index.tsx",
+    "src/components/TableColumn/ColumnSetting.tsx",
+    "src/components/TableColumn/TableSetting.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.js"
+  ]
 }

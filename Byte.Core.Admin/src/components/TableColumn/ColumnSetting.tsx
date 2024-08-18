@@ -24,11 +24,16 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    modelValue: {
+      type: Object as PropType<TableModel>,
+      required: true,
+    },
   },
-  emits: ["tableData"],
+  emits: ["update:modelValue"],
   setup(props, { emit }) {
+    const modelValue = useVModel(props, "modelValue", emit);
     // 获取数据
-    const { data: tableMdoel, loading } = useWatcher(
+    const { loading } = useRequest(
       () =>
         Apis.TableColumn.get_api_tablecolumn_getcolumns({
           params: {
@@ -36,11 +41,9 @@ export default defineComponent({
             Router: "/demo",
           },
           transform: (res) => {
-            emit("tableData", res.data);
-            return res.data;
+            modelValue.value = res.data;
           },
         }),
-      [props],
       {
         debounce: 500,
         immediate: true,
@@ -64,22 +67,22 @@ export default defineComponent({
       }
     );
 
-    const selectData = ref<TableModel[]>();
+    const selectData = ref<TableColumn[]>();
     // 保存配置
     const setcolumns = () => {
-      const data = {
-        Table: props.tableof,
-        Router: "/demo",
+      const data: TableModel = {
+        table: props.tableof,
+        router: "/demo",
         data: selectData.value,
       };
-      emit("tableData", data);
+      modelValue.value = data;
       send(data);
     };
 
     return () => (
       <>
         <ElTable
-          data={tableMdoel.value?.data}
+          data={modelValue.value?.data}
           v-loading={loading.value}
           highlightCurrentRow={true}
           rowKey="id"
