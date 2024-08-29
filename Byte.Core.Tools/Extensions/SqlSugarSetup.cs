@@ -9,6 +9,7 @@ using SqlSugar;
 using MiniProfiler = StackExchange.Profiling.MiniProfiler;
 using Microsoft.Extensions.Configuration;
 using StackExchange.Profiling;
+using Byte.Core.SqlSugar.Cache;
 namespace Byte.Core.Tools.Extensions;
 
 /// <summary>
@@ -72,7 +73,7 @@ public static class SqlSugarSetup
                     });
                 });
             }
-
+            ICacheService myCache = new SqlSugarCsRedisCache();//这个类如何建看标题5
             masterDb = new ConnectionConfig
             {
                 ConfigId = connectionItem.ConnId,
@@ -88,6 +89,7 @@ public static class SqlSugarSetup
                 },
                 ConfigureExternalServices = new ConfigureExternalServices
                 {
+                    DataInfoCacheService = myCache, 
                     EntityService = (c, p) =>
                     {
                         //p.DbColumnName = UtilMethods.ToUnderLine(p.DbColumnName); //字段使用驼峰转下划线，不需要请注释

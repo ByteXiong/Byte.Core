@@ -149,6 +149,18 @@ public interface IRepository<TKey,T > where T : class
     Task<int> DeleteAsync(TKey[] ids, bool isLock = true);
     #endregion
 
+    #region 删除缓存
+    /// <summary>
+    /// 删除缓存
+    /// </summary>
+    /// <param name="likeString"></param>
+    /// <param name="where"></param>
+    /// <param name="isLock"></param>
+    /// <returns></returns>
+    Task<int> RemoveDataCacheAsync(string likeString = null, Expression<Func<T, bool>> where = null, bool isLock = true);
+
+    #endregion
+
     //#region 新增操作
 
     ///// <summary>

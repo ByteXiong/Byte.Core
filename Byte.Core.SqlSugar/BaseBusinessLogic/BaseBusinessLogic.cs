@@ -1,4 +1,5 @@
-﻿using SqlSugar;
+﻿using Org.BouncyCastle.Crypto;
+using SqlSugar;
 using System.Linq.Expressions;
 
 namespace Byte.Core.SqlSugar
@@ -176,6 +177,18 @@ namespace Byte.Core.SqlSugar
         /// <param name="isLock">是否加锁</param>
         /// <returns>受影响行数</returns>
         public Task<int> DeleteAsync(TKey[] ids, bool isLock = true) => Repository.DeleteAsync(ids, isLock);
+
+        #endregion
+
+        #region 删除缓存
+        /// <summary>
+        /// 删除缓存
+        /// </summary>
+        /// <param name="likeString"></param>
+        /// <param name="where"></param>
+        /// <param name="isLock"></param>
+        /// <returns></returns>
+        public  Task<int> RemoveDataCacheAsync(string likeString = null, Expression<Func<T, bool>> where = null, bool isLock = true) => Repository.RemoveDataCacheAsync( likeString, where, isLock);
 
         #endregion
     }

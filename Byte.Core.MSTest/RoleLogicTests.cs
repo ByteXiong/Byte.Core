@@ -1,4 +1,9 @@
 ﻿using Byte.Core.Common.IoC;
+using Byte.Core.Entity;
+using Byte.Core.Models;
+using Byte.Core.SqlSugar;
+using NPOI.SS.Formula.Functions;
+using Quartz.Util;
 
 namespace Byte.Core.Business.Tests
 {
@@ -6,11 +11,15 @@ namespace Byte.Core.Business.Tests
     public class RoleLogicTests
     {
         public RoleLogic _roleLogic;
+        public IUnitOfWork _unitOfWork;
         [TestInitialize]
         public void Setup()
         {
             Byte.Core.MSTest.Program.Setup();
             _roleLogic = ServiceLocator.Resolve<RoleLogic>();
+            _unitOfWork = ServiceLocator.Resolve<IUnitOfWork>();
+
+
         }
 
         [TestMethod()]
@@ -20,10 +29,18 @@ namespace Byte.Core.Business.Tests
             //_roleLogic.AddInterceptor("DoSomething", new MyInterceptor());
 
             // 调用DoSomething方法
-
-            var result=    await _roleLogic.SelectAsync("张三");
+           var aa=  await RedisHelper.GetAsync<List<RoleSelectDTO>>("list");
+            var result=    await _roleLogic.SelectAsync(Guid.NewGuid());
             
             Assert.IsTrue(result != null);
+        }
+
+        [TestMethod()]
+        public async Task DeleteRedisAsyncTest()
+        {
+            //_unitOfWork.GetDbClient().DataCache.RemoveDataCache("RoleSelect");
+            _unitOfWork.GetDbClient().Deleteable<Role>().RemoveDataCache("MyCackey").Where(it => true).ExecuteCommand();
+            Assert.IsTrue(true);
         }
     }
 }

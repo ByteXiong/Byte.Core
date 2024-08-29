@@ -99,13 +99,14 @@ namespace Byte.Core.Business
         //[HasRedis("RoleSelect", "" , 30, true)]
         //[UserInformationFilter]
         //[Interceptor(typeof(MyBllInterceptor))]
-    
 
+        //List xx
         //[ServiceInterceptor(typeof(CustomInterceptorAttribute))]
-        public virtual async Task<List<RoleSelectDTO>> SelectAsync(string name)
+        [RedisInterceptor("list")]
+        public virtual async Task<List<RoleSelectDTO>> SelectAsync(Guid schoolId)
         {
-            var aa = name;
             var list = await GetIQueryable(x => x.Code != ParamConfig.Admin).OrderByDescending(x => x.Sort).Select<RoleSelectDTO>().ToListAsync();
+       
             return list;
         }
 

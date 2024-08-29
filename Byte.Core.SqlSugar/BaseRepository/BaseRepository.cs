@@ -1,3 +1,4 @@
+using Org.BouncyCastle.Crypto;
 using SqlSugar;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -255,6 +256,26 @@ public abstract class BaseRepository<TKey,T>: IRepository<TKey,T > where T : cla
             del = del.With(SqlWith.RowLock);
         }
 
+        return await del.ExecuteCommandAsync();
+    }
+
+    #endregion
+
+    #region 删除缓存
+    /// <summary>
+    /// 删除缓存
+    /// </summary>
+    /// <param name="likeString"></param>
+    /// <param name="where"></param>
+    /// <param name="isLock"></param>
+    /// <returns></returns>
+    public virtual async Task<int> RemoveDataCacheAsync(string likeString = null, Expression<Func<T, bool>> where =null, bool isLock = true)
+    {
+        var del = SugarClient.Deleteable<T>().RemoveDataCache(likeString).Where(where);
+        if (isLock)
+        {
+            del = del.With(SqlWith.RowLock);
+        }
         return await del.ExecuteCommandAsync();
     }
 
