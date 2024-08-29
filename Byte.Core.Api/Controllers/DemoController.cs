@@ -14,9 +14,10 @@ namespace Byte.Core.Api.Controllers
     /// 代码生成器
     /// </summary>
     [Route("api/[controller]/[action]")]
-    public class DemoController (IUnitOfWork unitOfWork) : BaseApiController
+    public class DemoController (IUnitOfWork unitOfWork, RedisDemoLogic logic) : BaseApiController
     {
         readonly IUnitOfWork _unitOfWork = unitOfWork;
+        readonly RedisDemoLogic _logic = logic;
 
 
         [HttpPost]
@@ -52,11 +53,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<PagedResults<RedisDemo>> GetPageAsync([FromQuery] PageParam param)
-        {
-            var page = await _unitOfWork.GetDbClient().Queryable<RedisDemo>().ToPagedResultsAsync(param);
-            return page;
-        }
+        public async Task<PagedResults<RedisDemoDTO>> GetPageAsync([FromQuery] RedisDemoParam param) => await _logic.GetPageAsync(param);
 
     }
 }

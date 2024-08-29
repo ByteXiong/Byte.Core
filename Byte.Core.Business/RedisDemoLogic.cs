@@ -1,10 +1,8 @@
-﻿using Byte.Core.SqlSugar;
+﻿using Byte.Core.Common.Attributes.RedisAttribute;
 using Byte.Core.Entity;
-using Byte.Core.Repository;
 using Byte.Core.Models;
-using Mapster;
+using Byte.Core.SqlSugar;
 using Byte.Core.Tools;
-using Byte.Core.Common.Attributes.RedisAttribute;
 namespace Byte.Core.Business
 {
     /// <summary>
@@ -14,6 +12,25 @@ namespace Byte.Core.Business
     {
         public RedisDemoLogic(RedisDemoRepository repository) : base(repository)
         {
+        }
+
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [RedisInterceptor(ParamConfig.AopRedisKey, 5000)]
+        //[ServiceInterceptor(typeof(RedisInterceptorAttribute))]
+        public virtual  async Task<PagedResults<RedisDemoDTO>> GetPageAsync(RedisDemoParam param)
+        {
+            //Expression<Func<RedisDemo, bool>> where = x => x.Code != ParamConfig.Admin;
+            //if (!string.IsNullOrWhiteSpace(param.KeyWord))
+            //{
+            //    param.KeyWord = param.KeyWord.Trim();
+            //    where = where.And(x => x.Name.Contains(param.KeyWord));
+            //}
+            var page = await Repository.GetIQueryable().Select<RedisDemoDTO>().ToPagedResultsAsync(param);
+            return page;
         }
 
         /// <summary>
@@ -55,12 +72,12 @@ namespace Byte.Core.Business
             return list;
         }
 
+
         /// <summary>
         /// 获取所有的数据
         /// </summary>
         /// <returns></returns>
         /// 
-
         public List<RedisDemo> GetAll()
         {
 
@@ -68,9 +85,6 @@ namespace Byte.Core.Business
             return GetIQueryable().ToList();
         }
 
-       
-
-       
 
 
     }

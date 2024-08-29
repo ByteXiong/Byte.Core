@@ -25,13 +25,7 @@ namespace Byte.Core.Business.Tests
         [TestMethod()]
         public async Task  SelectAsyncTest()
         {
-
-            //_roleLogic.AddInterceptor("DoSomething", new MyInterceptor());
-
-            // 调用DoSomething方法
-           var aa=  await RedisHelper.GetAsync<List<RoleSelectDTO>>("list");
-            var result=    await _roleLogic.SelectAsync(Guid.NewGuid());
-            
+            var result=    await _roleLogic.SelectAsync(new Guid[] { Guid.NewGuid(), Guid.NewGuid() });
             Assert.IsTrue(result != null);
         }
 

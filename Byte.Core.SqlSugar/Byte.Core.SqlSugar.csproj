@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
-    <PackageReference Include="SqlSugarCore" Version="5.1.4.166" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.167" />
   </ItemGroup>
 
   <ItemGroup>

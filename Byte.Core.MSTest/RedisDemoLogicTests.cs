@@ -1,10 +1,13 @@
-﻿using Byte.Core.Common.Extensions;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Byte.Core.Business;
+using Byte.Core.Common.Extensions;
 using Byte.Core.Common.IoC;
 using Byte.Core.Entity;
 using Byte.Core.SqlSugar;
 using Byte.Core.Tools;
 using Mapster;
 using SqlSugar;
+using Byte.Core.Models;
 
 namespace Byte.Core.Business.Tests
 {
@@ -71,8 +74,16 @@ namespace Byte.Core.Business.Tests
             Assert.IsTrue(true);
         }
 
-
-
-
+        [TestMethod()]
+        public async Task GetPageAsyncTest()
+        {
+            var param = new RedisDemoParam {
+             PageIndex = 1,
+             PageSize = 10,
+             SortList =new Dictionary<string, string>() {  {"Id","desc"} }
+            };
+            var page= await _logic.GetPageAsync(param);
+            Assert.IsTrue(true);
+        }
     }
 }

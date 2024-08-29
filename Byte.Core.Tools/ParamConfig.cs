@@ -19,5 +19,8 @@ namespace Byte.Core.Tools
         /// 哈希主键
         /// </summary>
         public const string  HRedisDemoKey = "HRedisDemo";
+
+
+        public const string AopRedisKey = "AopRedisKey";
     }
 }

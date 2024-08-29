@@ -1,6 +1,10 @@
 ﻿using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
+using AspectCore.Configuration;
+using AspectCore.DynamicProxy;
+using AspectCore.Extensions.DependencyInjection;
 using Byte.Core.Common.Attributes;
+using Byte.Core.Common.Attributes.RedisAttribute;
 using Byte.Core.Common.Cache;
 using Byte.Core.Common.Extensions;
 using Byte.Core.Common.Filters;
@@ -19,6 +23,7 @@ using log4net;
 using log4net.Repository;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using SkiaSharp;
@@ -43,7 +48,6 @@ var configuration = builder.Configuration;
 ILoggerRepository repository = LogManager.CreateRepository("NETCoreRepository");
 Log4NetHelper.SetConfig(repository, "log4net.config");
 #endregion
-
 #region 配置版本管理
 builder.Services.AddApiVersioning(option =>
 {
@@ -192,14 +196,12 @@ builder.Services.Configure<FormOptions>(options =>
     options.MultipartBodyLengthLimit = long.MaxValue; // In case of multipart
 });
 #region Redis
-
-//var redisConnectionString = configuration["Redis"];
-////启用Redis
-//services.UseCsRedisClient(redisConnectionString);
-//////全局设置Redis缓存有效时间为5分钟。
-//services.Configure<DistributedCacheEntryOptions>(option =>
-//option.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5));
-
+var redisConnectionString = configuration["Redis"];
+//启用Redis
+builder.Services.UseCsRedisClient(redisConnectionString);
+////全局设置Redis缓存有效时间为5分钟。
+builder.Services.Configure<DistributedCacheEntryOptions>(option =>
+option.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5));
 #endregion 
 #region Session
 builder.Services.AddSession(options =>
@@ -219,10 +221,11 @@ builder.Services.AddMemoryCache()
 
 #region 配置数据库
 builder.Services.Configure<Configs>(configuration)
-.AddScoped<SugarDbContext>()
-.AddScoped<IUnitOfWork, UnitOfWork>();
+.AddScoped<IUnitOfWork, UnitOfWork>()
+.AddScoped<SugarDbContext>();
 builder.Services.AddSqlSugarSetup(configuration);
 #endregion
+
 
 
 
@@ -257,6 +260,9 @@ builder.Services.AddControllersWithViews();
 //    option.Filters.Add<ValidFilterAttribute>();
 //    //  option.Filters.Add(new GlobalExceptionFilter());
 //});
+
+//builder.Services.AddTransient<RedisInterceptorAttribute>(provider =>
+//    new RedisInterceptorAttribute("YourStringValue"));
 #region 过滤器
 builder.Services.AddControllers(options =>
 {
@@ -334,8 +340,21 @@ builder.Services.AddControllers(options =>
 });
 
 #endregion
-builder.Services.BuildAspectCoreWithAutofacServiceProvider(); //接入AspectCore.Injector 属性注入
 
+//builder.Register(c => new CallLogger(Console.Out))
+//       .Named<IInterceptor>("log-calls");
+builder.Services.ConfigureDynamicProxy();
+builder.Services.BuildAspectCoreWithAutofacServiceProvider(config =>
+{
+    //config.Interceptors.AddTyped<RedisInterceptorAttribute>();
+    //config.Interceptors.AddServiced<RedisInterceptorAttribute>();
+    //config.Interceptors.AddDelegate(async (content, next) =>
+    //{
+    //    Console.WriteLine("delegate interceptor"); await content.Invoke(next);
+    //});
+    //config.Interceptors.AddTyped<RedisInterceptorAttribute>(method => method.DeclaringType.Name.EndsWith("GetPageAsync"));
+    //config.Interceptors.AddTyped<RedisInterceptorAttribute>();
+}); //接入AspectCore.Injector 属性注入
 
 //#region 添加微信配置（一行代码）
 ////Senparc.Weixin 注册（必须）

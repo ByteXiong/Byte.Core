@@ -103,7 +103,7 @@ namespace Byte.Core.Business
         //List xx
         //[ServiceInterceptor(typeof(CustomInterceptorAttribute))]
         [RedisInterceptor("list")]
-        public virtual async Task<List<RoleSelectDTO>> SelectAsync(Guid schoolId)
+        public virtual async Task<List<RoleSelectDTO>> SelectAsync(Guid[] schoolId)
         {
             var list = await GetIQueryable(x => x.Code != ParamConfig.Admin).OrderByDescending(x => x.Sort).Select<RoleSelectDTO>().ToListAsync();
        
