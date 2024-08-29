@@ -42,9 +42,9 @@ namespace Byte.Core.Common.Attributes.RedisAttribute
                 {
                    
                     context.ReturnValue = Task.FromResult(dictResult);
-                    //跳出拦截
-                    return;
-                   
+                    // 调用被拦截的方法并获取结果
+                    await context.Invoke(next);
+
                 }
                 else
                 {
