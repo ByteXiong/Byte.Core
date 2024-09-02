@@ -1,4 +1,6 @@
-﻿using Byte.Core.Common.Attributes.RedisAttribute;
+﻿using Autofac.Extras.DynamicProxy;
+using Byte.Core.Common.Attributes.InterceptorAttribute;
+using Byte.Core.Common.Attributes.RedisAttribute;
 using Byte.Core.Entity;
 using Byte.Core.Models;
 using Byte.Core.SqlSugar;
