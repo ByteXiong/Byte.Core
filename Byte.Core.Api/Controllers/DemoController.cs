@@ -6,6 +6,7 @@ using Byte.Core.Entity;
 using Byte.Core.Models;
 using Byte.Core.SqlSugar;
 using Microsoft.AspNetCore.Mvc;
+using NPOI.SS.Formula.Functions;
 using System.Linq.Expressions;
 
 namespace Byte.Core.Api.Controllers
@@ -22,7 +23,7 @@ namespace Byte.Core.Api.Controllers
 
         [HttpPost]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<ExcutedResult>  SetRoleDataAsync(int num =50000)
+        public async Task<ExcutedResult<int>>  SetRoleDataAsync(int num =50000)
         {
             List<RedisDemo> list = new List<RedisDemo>();
 
@@ -42,7 +43,7 @@ namespace Byte.Core.Api.Controllers
             int count = await _unitOfWork.GetDbClient().Fastest<RedisDemo>().BulkCopyAsync(list);
             //int count =  await _unitOfWork.GetDbClient().Insertable(list).PageSize(100).ExecuteCommandAsync();
             var tep = DateTime.Now - date;
-            return ExcutedResult.SuccessResult(data: count, msg:$"插入成功{tep}秒");
+            return ExcutedResult<int>.SuccessResult(data: count, msg:$"插入成功{tep}秒");
         }
 
 
@@ -53,7 +54,16 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<PagedResults<RedisDemoDTO>> GetPageAsync([FromQuery] RedisDemoParam param) => await _logic.GetPageAsync(param);
+        public async Task<ExcutedResult<PagedResults<RedisDemoDTO>>> GetPageAsync([FromQuery] RedisDemoParam param)
+        {
+            var date = DateTime.Now;
+            var list = await _logic.GetPageAsync(param);
+            var tep = DateTime.Now - date;
+            return ExcutedResult<PagedResults<RedisDemoDTO>>.SuccessResult(data: list, msg: $"插入成功{tep}秒");
+
+
+        }
+       
 
     }
 }
