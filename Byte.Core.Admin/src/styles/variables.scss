@@ -1,14 +1,15 @@
 /** 全局SCSS变量 */
 
 :root {
-  --menu-background: #304156;
-  --menu-text: #bfcbd9;
+  --menu-background: #ffffff;
+  --menu-text: #2b343f;
   --menu-active-text: #409eff;
-  --menu-hover: #263445;
-  --sub-menu-background: #1f2d3d;
+  --menu-hover: #95c0f5;
+  --sub-menu-background: #9fcafa;
   --sub-menu-active-text: #f4f4f5;
-  --sub-menu-hover: #001528;
-  --sidebar-logo-background: #2d3748;
+  --sub-menu-hover: #b7d8f7;
+  --sidebar-logo-background: #ffffff;
+  --sidebar-logo-text: #202020;
   // --el-menu-hover-bg-color: #f4f4f5 !important;
 }
 
@@ -22,6 +23,7 @@ html.dark {
   --sub-menu-active-text: var(--el-menu-active-color);
   --sub-menu-hover: rgb(0 0 0 / 20%);
   --sidebar-logo-background: rgb(0 0 0 / 20%);
+  --sidebar-logo-text:  #dadbdb;;
 }
 
 $menu-background: var(--menu-background); // 菜单背景色
@@ -32,7 +34,7 @@ $sub-menu-background: var(--sub-menu-background); // 子菜单背景色
 $sub-menu-active-text: var(--sub-menu-active-text); // 子菜单激活文字颜色
 $sub-menu-hover: var(--sub-menu-hover); // 子菜单悬停背景色
 $sidebar-logo-background: var(--sidebar-logo-background); // 侧边栏 Logo 背景色
-
+$sidebar-logo-text: var(--sidebar-logo-text); // 侧边栏 Logo  文字颜色
 $sidebar-width: 210px; // 侧边栏宽度
 $sidebar-width-collapsed: 54px; // 侧边栏收缩宽度
 $navbar-height: 50px; // 导航栏高度

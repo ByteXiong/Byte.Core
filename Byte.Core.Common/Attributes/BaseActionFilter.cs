@@ -115,7 +115,7 @@ namespace Byte.Core.Common.Attributes
         protected ContentResult Success<T>(T data)
         {
 
-            var res = ExcutedResult.SuccessResult(data);
+            var res = ExcutedResult<T>.SuccessResult(data);
             return JsonContent(res.ToJson());
         }
 

@@ -88,6 +88,38 @@ type Alova2Method<
       >
     : never;
 
+export type PagerInfo = {
+  totalRowCount?: number;
+  pageSize?: number;
+  startIndex?: number;
+  pageIndex?: number;
+  hasPrev?: boolean;
+  hasNext?: boolean;
+  isFirst?: boolean;
+  isLast?: boolean;
+  totalPageCount?: number;
+};
+export type RedisDemoDTO = {
+  id?: string;
+  code?: string;
+  srot?: string;
+};
+export type RedisDemoDTOPagedResults = {
+  pagerInfo?: PagerInfo;
+  data?: RedisDemoDTO[];
+};
+export type RedisDemoDTOPagedResultsExcutedResult = {
+  success?: boolean;
+  msg?: string;
+  code?: number;
+  data?: RedisDemoDTOPagedResults;
+};
+export type Int32ExcutedResult = {
+  success?: boolean;
+  msg?: string;
+  code?: number;
+  data?: number;
+};
 export type DeptTypeEnum = 10 | 20 | 30;
 export type RoleTypeEnum = 10 | 20 | 30 | 40;
 export type MenuTypeEnum = 1 | 2 | 3 | 4;
@@ -621,17 +653,6 @@ export type RoleInfo = {
   menus?: Menu[];
   menuIds?: string[];
 };
-export type PagerInfo = {
-  totalRowCount?: number;
-  pageSize?: number;
-  startIndex?: number;
-  pageIndex?: number;
-  hasPrev?: boolean;
-  hasNext?: boolean;
-  isFirst?: boolean;
-  isLast?: boolean;
-  totalPageCount?: number;
-};
 export type RoleDTO = {
   /**
    * 主键
@@ -668,6 +689,16 @@ export type RoleDTO = {
 export type RoleDTOPagedResults = {
   pagerInfo?: PagerInfo;
   data?: RoleDTO[];
+};
+export type RoleSelectDTO = {
+  /**
+   * 主键Id!
+   */
+  id?: string;
+  /**
+   * 账号
+   */
+  name?: string;
 };
 export type UpdateRoleParam = {
   /**
@@ -864,10 +895,10 @@ declare global {
        * **Response**
        * ```ts
        * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: {
+       *   success?: boolean
+       *   msg?: string
+       *   code?: number
+       *   data?: {
        *     pagerInfo?: {
        *       totalRowCount?: number
        *       pageSize?: number
@@ -880,88 +911,16 @@ declare global {
        *       totalPageCount?: number
        *     }
        *     data?: Array<{
-       *       // 主键
        *       id?: string
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       name?: string
-       *       state?: boolean
-       *       remark?: string
        *       code?: string
-       *       sort?: number
+       *       srot?: string
        *     }>
        *   }
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
        * }
        * ```
        */
       get_api_demo_getpage<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: {
-            pagerInfo?: {
-              totalRowCount?: number;
-              pageSize?: number;
-              startIndex?: number;
-              pageIndex?: number;
-              hasPrev?: boolean;
-              hasNext?: boolean;
-              isFirst?: boolean;
-              isLast?: boolean;
-              totalPageCount?: number;
-            };
-            data?: Array<{
-              /**
-               * 主键
-               */
-              id?: string;
-              /**
-               * 创建者名称
-               */
-              createBy?: string;
-              /**
-               * 创建时间
-               */
-              createTime?: string;
-              /**
-               * 更新者名称
-               */
-              updateBy?: string;
-              /**
-               * 最后更新时间
-               */
-              updateTime?: string;
-              name?: string;
-              state?: boolean;
-              remark?: string;
-              code?: string;
-              sort?: number;
-            }>;
-          };
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<RedisDemoDTOPagedResultsExcutedResult> & {
           params: {
             StartIndex?: number;
             PageIndex?: number;
@@ -971,67 +930,7 @@ declare global {
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: {
-            pagerInfo?: {
-              totalRowCount?: number;
-              pageSize?: number;
-              startIndex?: number;
-              pageIndex?: number;
-              hasPrev?: boolean;
-              hasNext?: boolean;
-              isFirst?: boolean;
-              isLast?: boolean;
-              totalPageCount?: number;
-            };
-            data?: Array<{
-              /**
-               * 主键
-               */
-              id?: string;
-              /**
-               * 创建者名称
-               */
-              createBy?: string;
-              /**
-               * 创建时间
-               */
-              createTime?: string;
-              /**
-               * 更新者名称
-               */
-              updateBy?: string;
-              /**
-               * 最后更新时间
-               */
-              updateTime?: string;
-              name?: string;
-              state?: boolean;
-              remark?: string;
-              code?: string;
-              sort?: number;
-            }>;
-          };
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Demo.get_api_demo_getpage',
-        Config
-      >;
+      ): Alova2Method<RedisDemoDTOPagedResultsExcutedResult, 'Demo.get_api_demo_getpage', Config>;
       /**
        * ---
        *
@@ -1053,79 +952,22 @@ declare global {
        * **Response**
        * ```ts
        * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: {
-       *     success?: boolean
-       *     msg?: string
-       *     data?: unknown
-       *     code?: number
-       *   }
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
+       *   success?: boolean
+       *   msg?: string
+       *   code?: number
+       *   data?: number
        * }
        * ```
        */
       post_api_demo_setroledata<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: {
-            success?: boolean;
-            msg?: string;
-            data?: unknown;
-            code?: number;
-          };
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<Int32ExcutedResult> & {
           params: {
             num?: number;
           };
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: {
-            success?: boolean;
-            msg?: string;
-            data?: unknown;
-            code?: number;
-          };
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Demo.post_api_demo_setroledata',
-        Config
-      >;
+      ): Alova2Method<Int32ExcutedResult, 'Demo.post_api_demo_setroledata', Config>;
     };
     Dept: {
       /**
@@ -1146,63 +988,16 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: number
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = number
        * ```
        */
       delete_api_dept_delete<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<number> & {
           data: string[];
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Dept.delete_api_dept_delete',
-        Config
-      >;
+      ): Alova2Method<number, 'Dept.delete_api_dept_delete', Config>;
       /**
        * ---
        *
@@ -1414,87 +1209,38 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: Array<{
-       *     id?: string
-       *     // 图标
-       *     image?: string
-       *     // 单位名称
-       *     name?: string
-       *     // 简写名称
-       *     easyName?: string
-       *     // 父级部门ID
-       *     parentId?: string
-       *     // 地址
-       *     address?: string
-       *     // 是否删除
-       *     isDeleted?: boolean
-       *     // 默认联系电话
-       *     phone?: string
-       *     // 默认联系人
-       *     man?: string
-       *     // 备注
-       *     remark?: string
-       *     // 状态
-       *     state?: boolean
-       *     // 排序
-       *     sort?: number
-       *     type?: 10 | 20 | 30
-       *     children?: Array<DeptTreeDTO>
-       *   }>
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = Array<{
+       *   id?: string
+       *   // 图标
+       *   image?: string
+       *   // 单位名称
+       *   name?: string
+       *   // 简写名称
+       *   easyName?: string
+       *   // 父级部门ID
+       *   parentId?: string
+       *   // 地址
+       *   address?: string
+       *   // 是否删除
+       *   isDeleted?: boolean
+       *   // 默认联系电话
+       *   phone?: string
+       *   // 默认联系人
+       *   man?: string
+       *   // 备注
+       *   remark?: string
+       *   // 状态
+       *   state?: boolean
+       *   // 排序
+       *   sort?: number
+       *   type?: 10 | 20 | 30
+       *   children?: Array<DeptTreeDTO>
+       * }>
        * ```
        */
-      get_api_dept_gettree<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: DeptTreeDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }>
-      >(
+      get_api_dept_gettree<Config extends Alova2MethodConfig<DeptTreeDTO[]>>(
         config?: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: DeptTreeDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Dept.get_api_dept_gettree',
-        Config
-      >;
+      ): Alova2Method<DeptTreeDTO[], 'Dept.get_api_dept_gettree', Config>;
       /**
        * ---
        *
@@ -1516,47 +1262,21 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: Array<{
-       *     // 主键Id!
-       *     id?: string
-       *     // 父级
-       *     parentId?: string
-       *     // 菜单
-       *     name?: string
-       *     // 图标
-       *     icon?: string
-       *     children?: Array<DeptSelectDTO>
-       *   }>
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = Array<{
+       *   // 主键Id!
+       *   id?: string
+       *   // 父级
+       *   parentId?: string
+       *   // 菜单
+       *   name?: string
+       *   // 图标
+       *   icon?: string
+       *   children?: Array<DeptSelectDTO>
+       * }>
        * ```
        */
       get_api_dept_gettreeselect<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: DeptSelectDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<DeptSelectDTO[]> & {
           params: {
             types?: DeptTypeEnum[];
             parentId?: string;
@@ -1564,28 +1284,7 @@ declare global {
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: DeptSelectDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Dept.get_api_dept_gettreeselect',
-        Config
-      >;
+      ): Alova2Method<DeptSelectDTO[], 'Dept.get_api_dept_gettreeselect', Config>;
       /**
        * ---
        *
@@ -1607,37 +1306,11 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: number
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = number
        * ```
        */
       put_api_dept_setstate<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<number> & {
           params: {
             id?: string;
             state?: boolean;
@@ -1645,28 +1318,7 @@ declare global {
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Dept.put_api_dept_setstate',
-        Config
-      >;
+      ): Alova2Method<number, 'Dept.put_api_dept_setstate', Config>;
       /**
        * ---
        *
@@ -1927,63 +1579,16 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: string
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = string
        * ```
        */
       post_api_dept_submit<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<string> & {
           data: UpdateDeptParam;
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Dept.post_api_dept_submit',
-        Config
-      >;
+      ): Alova2Method<string, 'Dept.post_api_dept_submit', Config>;
     };
     Login: {
       /**
@@ -2273,63 +1878,16 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: number
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = number
        * ```
        */
       delete_api_menu_delete<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<number> & {
           data: string[];
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Menu.delete_api_menu_delete',
-        Config
-      >;
+      ): Alova2Method<number, 'Menu.delete_api_menu_delete', Config>;
       /**
        * ---
        *
@@ -2525,92 +2083,43 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: Array<{
-       *     id?: string
-       *     // 路径
-       *     path?: string
-       *     // 组件
-       *     component?: string
-       *     // 组件名称
-       *     name?: string
-       *     // 父级ID
-       *     parentId?: string
-       *     // 排序
-       *     sort?: number
-       *     type?: 1 | 2 | 3 | 4
-       *     // 跳转路由
-       *     redirect?: string
-       *     meta?: {
-       *       // 标题
-       *       title?: string
-       *       // 隐藏
-       *       hidden?: boolean
-       *       // Icon
-       *       icon?: string
-       *       // 是否缓存
-       *       keepAlive?: boolean
-       *       // 根目录始终显示
-       *       alwaysShow?: boolean
-       *       // 权限标识
-       *       roles?: string[]
-       *     }
-       *     // 子节点
-       *     children?: Array<RouteDTO>
-       *   }>
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = Array<{
+       *   id?: string
+       *   // 路径
+       *   path?: string
+       *   // 组件
+       *   component?: string
+       *   // 组件名称
+       *   name?: string
+       *   // 父级ID
+       *   parentId?: string
+       *   // 排序
+       *   sort?: number
+       *   type?: 1 | 2 | 3 | 4
+       *   // 跳转路由
+       *   redirect?: string
+       *   meta?: {
+       *     // 标题
+       *     title?: string
+       *     // 隐藏
+       *     hidden?: boolean
+       *     // Icon
+       *     icon?: string
+       *     // 是否缓存
+       *     keepAlive?: boolean
+       *     // 根目录始终显示
+       *     alwaysShow?: boolean
+       *     // 权限标识
+       *     roles?: string[]
+       *   }
+       *   // 子节点
+       *   children?: Array<RouteDTO>
+       * }>
        * ```
        */
-      get_api_menu_getroutes<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: RouteDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }>
-      >(
+      get_api_menu_getroutes<Config extends Alova2MethodConfig<RouteDTO[]>>(
         config?: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: RouteDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Menu.get_api_menu_getroutes',
-        Config
-      >;
+      ): Alova2Method<RouteDTO[], 'Menu.get_api_menu_getroutes', Config>;
       /**
        * ---
        *
@@ -2622,87 +2131,38 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: Array<{
-       *     id?: string
-       *     // 菜单标题
-       *     title?: string
-       *     // 组件
-       *     component?: string
-       *     // 组件名称
-       *     componentName?: string
-       *     // 父级菜单ID
-       *     parentId?: string
-       *     // 排序
-       *     sort?: number
-       *     // icon图标
-       *     icon?: string
-       *     type?: 1 | 2 | 3 | 4
-       *     // 是否缓存
-       *     keepAlive?: boolean
-       *     // 是否隐藏
-       *     hidden?: boolean
-       *     // 跳转路由
-       *     redirect?: string
-       *     // 根目录始终显示
-       *     alwaysShow?: boolean
-       *     // 状态
-       *     state?: boolean
-       *     children?: Array<MenuTreeDTO>
-       *   }>
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = Array<{
+       *   id?: string
+       *   // 菜单标题
+       *   title?: string
+       *   // 组件
+       *   component?: string
+       *   // 组件名称
+       *   componentName?: string
+       *   // 父级菜单ID
+       *   parentId?: string
+       *   // 排序
+       *   sort?: number
+       *   // icon图标
+       *   icon?: string
+       *   type?: 1 | 2 | 3 | 4
+       *   // 是否缓存
+       *   keepAlive?: boolean
+       *   // 是否隐藏
+       *   hidden?: boolean
+       *   // 跳转路由
+       *   redirect?: string
+       *   // 根目录始终显示
+       *   alwaysShow?: boolean
+       *   // 状态
+       *   state?: boolean
+       *   children?: Array<MenuTreeDTO>
+       * }>
        * ```
        */
-      get_api_menu_gettree<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: MenuTreeDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }>
-      >(
+      get_api_menu_gettree<Config extends Alova2MethodConfig<MenuTreeDTO[]>>(
         config?: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: MenuTreeDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Menu.get_api_menu_gettree',
-        Config
-      >;
+      ): Alova2Method<MenuTreeDTO[], 'Menu.get_api_menu_gettree', Config>;
       /**
        * ---
        *
@@ -2723,75 +2183,28 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: Array<{
-       *     // 主键Id!
-       *     id?: string
-       *     // 父级
-       *     parentId?: string
-       *     // 菜单
-       *     title?: string
-       *     // 图标
-       *     icon?: string
-       *     children?: Array<MenuSelectDTO>
-       *   }>
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = Array<{
+       *   // 主键Id!
+       *   id?: string
+       *   // 父级
+       *   parentId?: string
+       *   // 菜单
+       *   title?: string
+       *   // 图标
+       *   icon?: string
+       *   children?: Array<MenuSelectDTO>
+       * }>
        * ```
        */
       get_api_menu_gettreeselect<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: MenuSelectDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<MenuSelectDTO[]> & {
           params: {
             parentId?: string;
           };
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: MenuSelectDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Menu.get_api_menu_gettreeselect',
-        Config
-      >;
+      ): Alova2Method<MenuSelectDTO[], 'Menu.get_api_menu_gettreeselect', Config>;
       /**
        * ---
        *
@@ -2813,37 +2226,11 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: number
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = number
        * ```
        */
       put_api_menu_setstate<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<number> & {
           params: {
             id?: string;
             state?: boolean;
@@ -2851,28 +2238,7 @@ declare global {
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Menu.put_api_menu_setstate',
-        Config
-      >;
+      ): Alova2Method<number, 'Menu.put_api_menu_setstate', Config>;
       /**
        * ---
        *
@@ -2993,63 +2359,16 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: string
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = string
        * ```
        */
       post_api_menu_submit<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<string> & {
           data: UpdateMenuParam;
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Menu.post_api_menu_submit',
-        Config
-      >;
+      ): Alova2Method<string, 'Menu.post_api_menu_submit', Config>;
     };
     Role: {
       /**
@@ -3070,63 +2389,16 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: number
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = number
        * ```
        */
       delete_api_role_delete<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<number> & {
           data: string[];
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Role.delete_api_role_delete',
-        Config
-      >;
+      ): Alova2Method<number, 'Role.delete_api_role_delete', Config>;
       /**
        * ---
        *
@@ -3750,84 +3022,17 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: Array<{
-       *     // 主键Id!
-       *     id?: string
-       *     // 账号
-       *     name?: string
-       *   }>
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = Array<{
+       *   // 主键Id!
+       *   id?: string
+       *   // 账号
+       *   name?: string
+       * }>
        * ```
        */
-      get_api_role_select<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: Array<{
-            /**
-             * 主键Id!
-             */
-            id?: string;
-            /**
-             * 账号
-             */
-            name?: string;
-          }>;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }>
-      >(
+      get_api_role_select<Config extends Alova2MethodConfig<RoleSelectDTO[]>>(
         config?: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: Array<{
-            /**
-             * 主键Id!
-             */
-            id?: string;
-            /**
-             * 账号
-             */
-            name?: string;
-          }>;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Role.get_api_role_select',
-        Config
-      >;
+      ): Alova2Method<RoleSelectDTO[], 'Role.get_api_role_select', Config>;
       /**
        * ---
        *
@@ -3849,37 +3054,11 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: number
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = number
        * ```
        */
       put_api_role_setstate<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<number> & {
           params: {
             id?: string;
             state?: boolean;
@@ -3887,28 +3066,7 @@ declare global {
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Role.put_api_role_setstate',
-        Config
-      >;
+      ): Alova2Method<number, 'Role.put_api_role_setstate', Config>;
       /**
        * ---
        *
@@ -4143,63 +3301,16 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: string
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = string
        * ```
        */
       post_api_role_submit<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<string> & {
           data: UpdateRoleParam;
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Role.post_api_role_submit',
-        Config
-      >;
+      ): Alova2Method<string, 'Role.post_api_role_submit', Config>;
     };
     TableColumn: {
       /**
@@ -4220,63 +3331,16 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: number
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = number
        * ```
        */
       delete_api_tablecolumn_delete<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<number> & {
           data: string[];
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'TableColumn.delete_api_tablecolumn_delete',
-        Config
-      >;
+      ): Alova2Method<number, 'TableColumn.delete_api_tablecolumn_delete', Config>;
       /**
        * ---
        *
@@ -4908,63 +3972,16 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: string
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = string
        * ```
        */
       post_api_tablecolumn_submit<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<string> & {
           data: UpdateTableColumnParam;
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'TableColumn.post_api_tablecolumn_submit',
-        Config
-      >;
+      ): Alova2Method<string, 'TableColumn.post_api_tablecolumn_submit', Config>;
     };
     Upload: {
       /**
@@ -4978,61 +3995,12 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: string[]
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = string[]
        * ```
        */
-      post_api_upload_images<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }>
-      >(
+      post_api_upload_images<Config extends Alova2MethodConfig<string[]>>(
         config?: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Upload.post_api_upload_images',
-        Config
-      >;
+      ): Alova2Method<string[], 'Upload.post_api_upload_images', Config>;
     };
     User: {
       /**
@@ -5053,63 +4021,16 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: number
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = number
        * ```
        */
       delete_api_user_delete<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<number> & {
           data: string[];
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'User.delete_api_user_delete',
-        Config
-      >;
+      ): Alova2Method<number, 'User.delete_api_user_delete', Config>;
       /**
        * ---
        *
@@ -5541,37 +4462,11 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: number
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = number
        * ```
        */
       put_api_user_setstate<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<number> & {
           params: {
             id?: string;
             state?: boolean;
@@ -5579,28 +4474,7 @@ declare global {
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'User.put_api_user_setstate',
-        Config
-      >;
+      ): Alova2Method<number, 'User.put_api_user_setstate', Config>;
       /**
        * ---
        *
@@ -5760,63 +4634,16 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: string
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
+       * type Response = string
        * ```
        */
       post_api_user_submit<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
+        Config extends Alova2MethodConfig<string> & {
           data: UpdateUserParam;
         }
       >(
         config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'User.post_api_user_submit',
-        Config
-      >;
+      ): Alova2Method<string, 'User.post_api_user_submit', Config>;
     };
   }
 

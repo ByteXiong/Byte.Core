@@ -77,14 +77,14 @@
         //
         // 摘要:
         //     根据查询参数初始化分页信息
-        //
+        //  反序列化有问题
         // 参数:
         //   queryParam:
-        public PagerInfo(PageParam queryParam)
-        {
-            PageSize = queryParam.PageSize;
-            StartIndex = queryParam.StartIndex;
-        }
+        //public PagerInfo(PageParam queryParam)
+        //{
+        //    PageSize = queryParam.PageSize;
+        //    StartIndex = queryParam.StartIndex;
+        //}
 
         //
         // 摘要:

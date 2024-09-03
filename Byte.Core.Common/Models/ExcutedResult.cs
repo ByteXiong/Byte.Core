@@ -1,4 +1,6 @@
-﻿namespace Byte.Core.Common.Models
+﻿using NPOI.SS.Formula.Functions;
+
+namespace Byte.Core.Common.Models
 {
     public class ExcutedResult
     {
@@ -6,79 +8,88 @@
 
         public string msg { get; set; }
 
-        public object data { get; set; }
-
         public int? code { get; set; }
 
-        public ExcutedResult(bool success, string msg, object data, int? code = 0)
+
+
+        public ExcutedResult()
         {
             this.success = success;
             this.msg = msg;
-            this.data = data;
             this.code = code;
         }
         public static ExcutedResult SuccessResult()
         {
-            return new ExcutedResult(true, null, null);
-        }
-        public static ExcutedResult SuccessResult(string msg = null)
-        {
-            return new ExcutedResult(true, msg, null);
-        }
-        public static ExcutedResult SuccessResult(object data)
-        {
-            return new ExcutedResult(true, null, data);
-        }
+            return new ExcutedResult() { 
+                success = true,
+                msg = null,
+                code = 0
 
-        public static ExcutedResult SuccessResult(object data = null, string msg = null)
-        {
-            return new ExcutedResult(true, msg, data);
+            };
         }
-
-        public static ExcutedResult FailedResult(string msg, int? code = 400)
+        public static ExcutedResult SuccessResult(string msg)
         {
-            return new ExcutedResult(false, msg, null, code);
-        }
-        public static ExcutedResult FailedResult(bool success=false, object data = null, string msg = null, int? code = 400)
-        {
-            return new ExcutedResult(false, msg, data, code);
-        }
-    }
-
-    public class PaginationResult : ExcutedResult
-    {
-        /// <summary>
-        /// 总条数
-        /// </summary>
-        public int total { get; set; }
-        /// <summary>
-        /// 每页条数
-        /// </summary>
-        public int pageSize { get; set; }
-        /// <summary>
-        /// 当前页码
-        /// </summary>
-        public int pageIndex { get; set; }
-
-        /// <summary>
-        /// 总页数
-        /// </summary>
-        public int pageCount => total % pageSize == 0 ? total / pageSize : total / pageSize + 1;
-
-        public PaginationResult(bool success, string msg, object data) : base(success, msg, data)
-        {
-        }
-
-        public static PaginationResult PagedResult(object data, int total, int size, int index)
-        {
-            return new PaginationResult(true, null, data)
+            return new ExcutedResult()
             {
-                total = total,
-                pageSize = size,
-                pageIndex = index
+                success = true,
+                msg = msg,
+                code = 0
+
             };
         }
 
 
+        //public static ExcutedResult SuccessResult(object data, string msg = null)
+        //{
+        //    return new ExcutedResult()
+        //    {
+        //        success = true,
+        //        msg = null,
+        //        code = 0,
+        //        data = data
+        //    };
+        //}
+
+        public static ExcutedResult FailedResult(string msg, int? code = 400)
+        {
+             return new ExcutedResult() { 
+              code = code,
+              msg = msg,
+              success = false
+
+             };
+        }
+    
+
     }
+
+    /// <summary>
+    /// 配合swagger 输出
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+      public class ExcutedResult<T> : ExcutedResult
+        {
+
+        public T data { get; set; }
+        public static ExcutedResult<T> SuccessResult(T data, string msg = null)
+        {
+            return new ExcutedResult<T>() { 
+             code = 0,
+             msg = msg,
+             success = true,
+             data = data
+            };
+        }
+        public static ExcutedResult<T> FailedResultt(T data,bool success=false,  string msg = null, int? code = 400)
+        {
+            return new ExcutedResult<T>()
+            {
+                code = code,
+                msg = msg,
+                success = true,
+                data = data
+            };
+        }
+    }
+
 }

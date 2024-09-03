@@ -45,7 +45,7 @@ namespace Byte.Core.Common.Attributes
 
         public IActionResult Result1(object obj)//实例化对象
         {
-            ObjectResult result = new ObjectResult(ExcutedResult.SuccessResult(obj));
+            ObjectResult result = new ObjectResult(ExcutedResult<object>.SuccessResult(obj));
             return result;
         }
     }

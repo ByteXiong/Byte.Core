@@ -3,9 +3,7 @@
   <el-menu
     :default-active="currentRoute.path"
     :collapse="!appStore.sidebar.opened"
-    :background-color="variables['menu-background']"
-    :text-color="variables['menu-text']"
-    :active-text-color="variables['menu-active-text']"
+    class="layout-menu"
     :unique-opened="false"
     :collapse-transition="false"
     :mode="layout === 'top' ? 'horizontal' : 'vertical'"
@@ -25,6 +23,8 @@ import { useSettingsStore, useAppStore } from "@/store";
 import { isExternal } from "@/utils/index";
 import path from "path-browserify";
 import variables from "@/styles/variables.module.scss";
+import { useRoute } from "vue-router";
+console.error(variables["menu-background"]);
 
 const settingsStore = useSettingsStore();
 const appStore = useAppStore();
@@ -62,3 +62,10 @@ function resolvePath(routePath: string) {
   return fullPath;
 }
 </script>
+<style lang="scss" scoped>
+.layout-menu {
+  background-color: $menu-background;
+  // text-color: $menu-text;
+  // active-text-color: $menu-active-text;
+}
+</style>

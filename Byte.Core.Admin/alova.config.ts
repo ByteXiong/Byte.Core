@@ -63,6 +63,9 @@ module.exports = {
         //   return apiDescriptor;
         // }
 
+        if (apiDescriptor.responses.properties.success !== undefined) {
+          return apiDescriptor;
+        }
         apiDescriptor.responses = {
           type: "object",
           properties: {

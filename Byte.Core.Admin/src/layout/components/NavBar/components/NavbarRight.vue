@@ -109,7 +109,7 @@ function logout() {
 .layout-mix {
   .setting-item,
   .el-icon {
-    color: var(--el-color-white);
+    color: $sidebar-logo-text;
   }
 }
 

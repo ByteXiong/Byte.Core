@@ -26,7 +26,7 @@ namespace Byte.Core.Common.Mvc
         }
         protected IActionResult SucceedJson(object data)
         {
-            return Json2(ExcutedResult.SuccessResult(data: data));
+            return Json2(ExcutedResult<object>.SuccessResult(data: data));
         }
 
         protected IActionResult FailedJson(string msg, int? code = null)
