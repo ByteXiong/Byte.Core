@@ -3,7 +3,12 @@ using Asp.Versioning.ApiExplorer;
 using AspectCore.Configuration;
 using AspectCore.DynamicProxy;
 using AspectCore.Extensions.DependencyInjection;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Autofac.Extras.DynamicProxy;
+using Byte.Core.Business;
 using Byte.Core.Common.Attributes;
+using Byte.Core.Common.Attributes.InterceptorAttribute;
 using Byte.Core.Common.Attributes.RedisAttribute;
 using Byte.Core.Common.Cache;
 using Byte.Core.Common.Extensions;
@@ -343,7 +348,7 @@ builder.Services.AddControllers(options =>
 
 //builder.Register(c => new CallLogger(Console.Out))
 //       .Named<IInterceptor>("log-calls");
-builder.Services.ConfigureDynamicProxy();
+//builder.Services.ConfigureDynamicProxy();
 builder.Services.BuildAspectCoreWithAutofacServiceProvider(config =>
 {
     //config.Interceptors.AddTyped<RedisInterceptorAttribute>();
@@ -355,6 +360,18 @@ builder.Services.BuildAspectCoreWithAutofacServiceProvider(config =>
     //config.Interceptors.AddTyped<RedisInterceptorAttribute>(method => method.DeclaringType.Name.EndsWith("GetPageAsync"));
     //config.Interceptors.AddTyped<RedisInterceptorAttribute>();
 }); //接入AspectCore.Injector 属性注入
+
+
+builder.Host.UseServiceProviderFactory(new DynamicProxyServiceProviderFactory());
+
+//builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+//builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => { 
+//                containerBuilder.RegisterType<RedisInterceptorAttribute>();
+//                containerBuilder.RegisterType<RedisDemoLogic>()
+//               .EnableClassInterceptors()
+//               .InterceptedBy(typeof(RedisInterceptorAttribute));
+
+//});
 
 //#region 添加微信配置（一行代码）
 ////Senparc.Weixin 注册（必须）

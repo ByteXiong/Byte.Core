@@ -9,14 +9,11 @@ namespace Byte.Core.Common.Attributes.RedisAttribute
     /// Json Redis缓存
     /// </summary>
     public class RedisInterceptorAttribute : AbstractInterceptorAttribute, IEquatable<RedisInterceptorAttribute>
-    {
-        readonly string _baseKey;
+    { 
         readonly string _cacheKey;
         bool _isDb = false; //是否走缓存
         int _expireSeconds = -1;
-        public RedisInterceptorAttribute(string baseKey) {
-            _baseKey=baseKey;
-        }
+     
 
         public RedisInterceptorAttribute(string cacheKey, int expireSeconds = -1,bool isDb=false)
         {
@@ -74,7 +71,7 @@ namespace Byte.Core.Common.Attributes.RedisAttribute
         }
         private string GenerateCacheKey(AspectContext context)
         {
-            var keyBuilder = new System.Text.StringBuilder(_baseKey).Append(":").Append(_cacheKey);
+            var keyBuilder = new System.Text.StringBuilder(_cacheKey);
 
             foreach (var parameter in context.Parameters)
             {
@@ -86,7 +83,7 @@ namespace Byte.Core.Common.Attributes.RedisAttribute
 
         private string FormatParameter(object parameter)
         {
-            return JsonConvert.SerializeObject(parameter).Replace(":", "=");
+            return JsonConvert.SerializeObject(parameter).Replace(":", "=").Replace("{", "").Replace("}", "").Replace("\"", "").Replace(",", "&");
         }
 
         private object ConvertToReturnType(object result, Type returnType)
