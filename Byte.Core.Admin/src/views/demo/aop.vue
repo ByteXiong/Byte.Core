@@ -1,6 +1,8 @@
 <template>
   <div>
-    <el-card header="Josn Redis拦截器 AOP , 建议大家合理使用,  建议数据库访问层(DAL)使用,确保数据源没被污染">
+    <el-card
+      header="Josn Redis拦截器 AOP , 建议大家合理使用,  建议数据库访问层(DAL)使用,确保数据源没被污染"
+    >
       <el-pagination
         :page-sizes="[100, 200, 500, 1000]"
         layout="total, sizes, prev, pager, next, jumper"
@@ -48,7 +50,7 @@ const {
     force: true,
     watchingStates: [sortList],
     initialPage: 1, // 初始页码，默认为1
-    initialPageSize: 10, // 初始每页数据条数，默认为10
+    initialPageSize: 1000, // 初始每页数据条数，默认为1000
     preloadPreviousPage: false, // 是否预加载下一页
     preloadNextPage: false, // 是否预加载上一页
     total: ({ data }) => data?.pagerInfo?.totalRowCount,

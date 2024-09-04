@@ -114,13 +114,14 @@
               <template #default="scope">
                 <el-switch
                   v-model="scope.row.state"
-                  inline-prompt
                   :loading="stateLoading"
+                  inline-prompt
                   active-text="启用"
                   inactive-text="禁用"
                   @change="
                     async (e: boolean) => {
                       setState(scope.row.id, e);
+                      // getData();
                     }
                   "
                 />
