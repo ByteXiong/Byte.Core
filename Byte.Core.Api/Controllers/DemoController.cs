@@ -59,7 +59,7 @@ namespace Byte.Core.Api.Controllers
             var date = DateTime.Now;
             var list = await _logic.GetPageAsync(param);
             var tep = DateTime.Now - date;
-            return ExcutedResult<PagedResults<RedisDemoDTO>>.SuccessResult(data: list, msg: $"插入成功{tep}秒");
+            return ExcutedResult<PagedResults<RedisDemoDTO>>.SuccessResult(data: list, msg: $"查询成功:{tep}");
 
         }
        

@@ -1,6 +1,4 @@
-﻿using Autofac.Extras.DynamicProxy;
-using Byte.Core.Common.Attributes.InterceptorAttribute;
-using Byte.Core.Common.Attributes.RedisAttribute;
+﻿using Byte.Core.Common.Attributes.RedisAttribute;
 using Byte.Core.Entity;
 using Byte.Core.Models;
 using Byte.Core.SqlSugar;
@@ -21,7 +19,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        [RedisInterceptor(ParamConfig.AopRedisKey, 5000)]
+        [RedisInterceptor(ParamConfig.AopRedisKey, 30)]
         //[ServiceInterceptor(typeof(RedisInterceptorAttribute))]
         public virtual  async Task<PagedResults<RedisDemoDTO>> GetPageAsync(RedisDemoParam param)
         {

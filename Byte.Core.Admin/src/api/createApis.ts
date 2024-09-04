@@ -14,7 +14,8 @@
  *
  * **Do not edit the file manually.**
  */
-import { Alova, Method, MethodType, AlovaMethodCreateConfig, AlovaGenerics } from 'alova';
+import type { Alova, MethodType, AlovaGenerics, AlovaMethodCreateConfig } from 'alova';
+import { Method } from 'alova';
 import apiDefinitions from './apiDefinitions';
 
 const createFunctionalProxy = (array: (string | symbol)[], alovaInstance: Alova<AlovaGenerics>, configMap: any) => {

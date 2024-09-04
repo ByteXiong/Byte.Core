@@ -8,7 +8,7 @@ namespace Byte.Core.Common.Attributes.RedisAttribute
     /// <summary>
     /// Json Redis缓存
     /// </summary>
-    public class RedisInterceptorAttribute : AbstractInterceptorAttribute, IEquatable<RedisInterceptorAttribute>
+    public class RedisInterceptorAttribute : AbstractInterceptorAttribute
     { 
         readonly string _cacheKey;
         bool _isDb = false; //是否走缓存
@@ -32,6 +32,7 @@ namespace Byte.Core.Common.Attributes.RedisAttribute
 
             if (returnType.IsGenericType && returnType.GetGenericTypeDefinition() == typeof(Task<>))
             {
+                //通过类型获取缓存方法,并且调用 GetAsync 方法 
                 MethodInfo method = this.GetType().GetMethod("GetAsync", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
                 MethodInfo genericMethod = method.MakeGenericMethod(genericArgument);
 
@@ -81,11 +82,22 @@ namespace Byte.Core.Common.Attributes.RedisAttribute
             return keyBuilder.ToString();
         }
 
+        /// <summary>
+        /// 格式化参数(类似url过滤一下数据,: 会影响阅读)
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <returns></returns>
         private string FormatParameter(object parameter)
         {
+            
             return JsonConvert.SerializeObject(parameter).Replace(":", "=").Replace("{", "").Replace("}", "").Replace("\"", "").Replace(",", "&");
         }
-
+        /// <summary>
+        /// 将返回值转换为原有类型
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="returnType"></param>
+        /// <returns></returns>
         private object ConvertToReturnType(object result, Type returnType)
         {
             Type taskResultType = returnType.GetGenericArguments()[0];
@@ -93,7 +105,6 @@ namespace Byte.Core.Common.Attributes.RedisAttribute
                                .MakeGenericMethod(taskResultType)
                                .Invoke(null, new[] { result });
         }
-
 
         async Task<T> GetAsync<T>(string key)
         {
@@ -109,9 +120,5 @@ namespace Byte.Core.Common.Attributes.RedisAttribute
             }
         }
 
-        public bool Equals(RedisInterceptorAttribute other)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
