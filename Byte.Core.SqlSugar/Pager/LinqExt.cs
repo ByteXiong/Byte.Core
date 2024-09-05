@@ -22,8 +22,8 @@ namespace Byte.Core.SqlSugar
                 throw new InvalidOperationException("每页记录数不能小于0");
             }
 
-            var pagerInfo = new PagerInfo() {  PageSize = queryParam.PageSize, StartIndex = queryParam.PageIndex };
-            if (queryParam.SortList == null || queryParam.SortList.Count == 0) { 
+            var pagerInfo = new PagerInfo(queryParam) ;
+            if (queryParam.SortList != null || queryParam.SortList.Count >0) { 
             source = source.OrderBy( string.Join(",", queryParam.SortList.Select(x => $"{x.Key} {x.Value}")));
                 }
             RefAsync<int> totalCount = 0;
