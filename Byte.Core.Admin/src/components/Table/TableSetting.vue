@@ -1,8 +1,16 @@
 <template>
   <el-drawer title="列设置" v-model="visible" size="90%">
     <el-form>
-      <el-form-item label="表名称" prop="title">
-        <el-input v-model="form.title" placeholder="请输入表名称" />
+      <el-form-item
+        label="表格描述"
+        prop="title"
+        :rules="{
+          required: true,
+          message: '表格不能为空',
+          trigger: ['blur', 'change'],
+        }"
+      >
+        <el-input v-model="form.title" placeholder="请输入表格" />
       </el-form-item>
 
       <el-form-item label="表字段" prop="title">
