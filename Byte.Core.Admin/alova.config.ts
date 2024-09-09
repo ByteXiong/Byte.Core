@@ -61,6 +61,7 @@ module.exports = {
       handleApi: (apiDescriptor) => {
 
         if (apiDescriptor.responses._$ref?.endsWith('ExcutedResult')) {
+          console.log(apiDescriptor.responses._$ref);
           return apiDescriptor;
         }
 

@@ -6,7 +6,7 @@ import {
   ComponentSize,
   ElIcon,
 } from "element-plus";
-import TableSetting from "./TableSetting";
+import TableSetting from "./TableSetting.vue";
 import { Refresh, Setting } from "@element-plus/icons-vue";
 import { column } from "element-plus/es/components/table-v2/src/common";
 import { TableColumn } from "@/api/globals";

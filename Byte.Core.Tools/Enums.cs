@@ -49,5 +49,23 @@ namespace Byte.Core.Tools
 
         部门 = 30,
     }
+    /// <summary>
+    /// 对齐方式
+    /// </summary>
+    public enum TableAlignEnum
+    {
+        left=1,
+        center,
+        right,
+    
+    }
+    /// <summary>
+    /// 固定方式
+    /// </summary>
+    public enum TableFixedEnum
+    {
+        left = 1,
+        right =3,
 
+    }
 }

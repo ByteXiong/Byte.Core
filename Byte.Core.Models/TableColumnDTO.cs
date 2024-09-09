@@ -86,17 +86,5 @@ namespace Byte.Core.Models
         public string Router { get; set; }
     }
 
-    /// <summary>
-    /// 头部醒醒
-    /// </summary>
-    public class TableModel
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        public String Table { get; set; }
-        public String Comment { get; set; }
-        public string Router { get; set; }
-        public List<TableColumn> Data { get; set; }
-    }
+
 }

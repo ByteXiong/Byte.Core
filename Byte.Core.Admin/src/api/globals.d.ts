@@ -34,15 +34,15 @@ type Alova2MethodConfig<Responded> =
       infer SE
     >
   >
-    ? Omit<
-        AlovaMethodCreateConfig<
-          AlovaGenerics<Responded, any, RequestConfig, Response, ResponseHeader, L1Cache, L2Cache, SE>,
-          any,
-          Responded
-        >,
-        'params'
-      >
-    : never;
+  ? Omit<
+    AlovaMethodCreateConfig<
+      AlovaGenerics<Responded, any, RequestConfig, Response, ResponseHeader, L1Cache, L2Cache, SE>,
+      any,
+      Responded
+    >,
+    'params'
+  >
+  : never;
 
 // Extract the return type of transform function that define in $$userConfigMap, if it not exists, use the default type.
 type ExtractUserDefinedTransformed<
@@ -50,8 +50,8 @@ type ExtractUserDefinedTransformed<
   Default
 > = DefinitionKey extends keyof UserMethodConfigMap
   ? UserMethodConfigMap[DefinitionKey]['transform'] extends (...args: any[]) => any
-    ? Awaited<ReturnType<UserMethodConfigMap[DefinitionKey]['transform']>>
-    : Default
+  ? Awaited<ReturnType<UserMethodConfigMap[DefinitionKey]['transform']>>
+  : Default
   : Default;
 type Alova2Method<
   Responded,
@@ -70,23 +70,23 @@ type Alova2Method<
       infer SE
     >
   >
-    ? Method<
-        AlovaGenerics<
-          CurrentConfig extends undefined
-            ? ExtractUserDefinedTransformed<DefinitionKey, Responded>
-            : CurrentConfig['transform'] extends (...args: any[]) => any
-              ? Awaited<ReturnType<CurrentConfig['transform']>>
-              : ExtractUserDefinedTransformed<DefinitionKey, Responded>,
-          any,
-          RequestConfig,
-          Response,
-          ResponseHeader,
-          L1Cache,
-          L2Cache,
-          SE
-        >
-      >
-    : never;
+  ? Method<
+    AlovaGenerics<
+      CurrentConfig extends undefined
+      ? ExtractUserDefinedTransformed<DefinitionKey, Responded>
+      : CurrentConfig['transform'] extends (...args: any[]) => any
+      ? Awaited<ReturnType<CurrentConfig['transform']>>
+      : ExtractUserDefinedTransformed<DefinitionKey, Responded>,
+      any,
+      RequestConfig,
+      Response,
+      ResponseHeader,
+      L1Cache,
+      L2Cache,
+      SE
+    >
+  >
+  : never;
 
 export type PagerInfo = {
   totalRowCount?: number;
@@ -405,6 +405,48 @@ export type UpdateDeptParam = {
    */
   msgCode?: number;
 };
+export type LoginInfoDTO = {
+  /**
+   * 主键Id!
+   */
+  id?: string;
+  /**
+   * 名称
+   */
+  name?: string;
+  /**
+   * 头像
+   */
+  avatar?: string;
+  /**
+   * 账号
+   */
+  account?: string;
+  roles?: string[];
+  perms?: string[];
+};
+export type LoginToken = {
+  /**
+   * 授权token
+   */
+  accessToken?: string;
+  /**
+   * 过期时间
+   */
+  expires?: number;
+  /**
+   * 类型
+   */
+  tokenType?: string;
+  /**
+   * 刷新token
+   */
+  refreshToken?: string;
+  /**
+   * 允许token时间内
+   */
+  refreshTokenExpires?: number;
+};
 export type LoginParam = {
   /**
    * 账号
@@ -690,6 +732,16 @@ export type RoleDTOPagedResults = {
   pagerInfo?: PagerInfo;
   data?: RoleDTO[];
 };
+export type RoleSelectDTO = {
+  /**
+   * 主键Id!
+   */
+  id?: string;
+  /**
+   * 账号
+   */
+  name?: string;
+};
 export type UpdateRoleParam = {
   /**
    * 主键
@@ -726,7 +778,9 @@ export type UpdateRoleParam = {
    */
   menuIds?: string[];
 };
-export type TableColumn = {
+export type TableAlignEnum = 1 | 2 | 3;
+export type TableFixedEnum = 1 | 3;
+export type TableColumnInfo = {
   /**
    * 主键
    */
@@ -747,23 +801,52 @@ export type TableColumn = {
    * 最后更新时间
    */
   updateTime?: string;
+  tableModelId?: string;
+  type?: string;
   label?: string;
   prop?: string;
-  table?: string;
   sort?: number;
+  /**
+   * 对齐方式
+   */
+  align?: TableAlignEnum;
+  /**
+   * 固定方式
+   */
+  fixed?: TableFixedEnum;
   width?: number;
   sortable?: boolean;
-  router?: string;
   headTemplate?: string;
   template?: string;
-  isHidden?: boolean;
+  isShow?: boolean;
   condition?: number;
 };
-export type TableModel = {
-  table?: string;
-  comment?: string;
-  router?: string;
-  data?: TableColumn[];
+export type TableColumnDTO = {
+  id?: string;
+  /**
+   * 名称
+   */
+  name?: string;
+  /**
+   * 头像
+   */
+  avatar?: string;
+  /**
+   * 密码
+   */
+  password?: string;
+  /**
+   * 状态
+   */
+  state?: boolean;
+  /**
+   * 账号
+   */
+  account?: string;
+};
+export type TableColumnDTOPagedResults = {
+  pagerInfo?: PagerInfo;
+  data?: TableColumnDTO[];
 };
 export type UpdateTableColumnParam = {
   /**
@@ -786,18 +869,152 @@ export type UpdateTableColumnParam = {
    * 最后更新时间
    */
   updateTime?: string;
+  tableModelId?: string;
+  type?: string;
   label?: string;
   prop?: string;
-  table?: string;
   sort?: number;
+  /**
+   * 对齐方式
+   */
+  align?: TableAlignEnum;
+  /**
+   * 固定方式
+   */
+  fixed?: TableFixedEnum;
   width?: number;
   sortable?: boolean;
-  router?: string;
   headTemplate?: string;
   template?: string;
-  isHidden?: boolean;
+  isShow?: boolean;
   condition?: number;
   roleIds?: string[];
+};
+export type TableColumn = {
+  /**
+   * 主键
+   */
+  id?: string;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  tableModelId?: string;
+  type?: string;
+  label?: string;
+  prop?: string;
+  sort?: number;
+  /**
+   * 对齐方式
+   */
+  align?: TableAlignEnum;
+  /**
+   * 固定方式
+   */
+  fixed?: TableFixedEnum;
+  width?: number;
+  sortable?: boolean;
+  headTemplate?: string;
+  template?: string;
+  isShow?: boolean;
+  condition?: number;
+};
+export type TableModelInfo = {
+  /**
+   * 主键
+   */
+  id?: string;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  title?: string;
+  router?: string;
+  table?: string;
+  comment?: string;
+  tableColumns?: TableColumn[];
+};
+export type TableModelDTO = {
+  /**
+   * 主键
+   */
+  id?: string;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  title?: string;
+  router?: string;
+  table?: string;
+  comment?: string;
+  tableColumns?: TableColumn[];
+};
+export type TableModelDTOPagedResults = {
+  pagerInfo?: PagerInfo;
+  data?: TableModelDTO[];
+};
+export type UpdateTableModelParam = {
+  /**
+   * 主键
+   */
+  id?: string;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  title?: string;
+  router?: string;
+  table?: string;
+  comment?: string;
+  tableColumns?: TableColumn[];
 };
 export type UserInfo = {
   /**
@@ -827,6 +1044,33 @@ export type UserInfo = {
   account?: string;
   depts?: Dept[];
   roles?: Role[];
+};
+export type UserDTO = {
+  id?: string;
+  /**
+   * 名称
+   */
+  name?: string;
+  /**
+   * 头像
+   */
+  avatar?: string;
+  /**
+   * 密码
+   */
+  password?: string;
+  /**
+   * 状态
+   */
+  state?: boolean;
+  /**
+   * 账号
+   */
+  account?: string;
+};
+export type UserDTOPagedResults = {
+  pagerInfo?: PagerInfo;
+  data?: UserDTO[];
 };
 export type UpdateUserParam = {
   /**
@@ -1861,26 +2105,7 @@ declare global {
           /**
            * [required]
            */
-          data: {
-            /**
-             * 主键Id!
-             */
-            id?: string;
-            /**
-             * 名称
-             */
-            name?: string;
-            /**
-             * 头像
-             */
-            avatar?: string;
-            /**
-             * 账号
-             */
-            account?: string;
-            roles?: string[];
-            perms?: string[];
-          };
+          data: LoginInfoDTO;
           /**
            * [required]
            */
@@ -1901,26 +2126,7 @@ declare global {
           /**
            * [required]
            */
-          data: {
-            /**
-             * 主键Id!
-             */
-            id?: string;
-            /**
-             * 名称
-             */
-            name?: string;
-            /**
-             * 头像
-             */
-            avatar?: string;
-            /**
-             * 账号
-             */
-            account?: string;
-            roles?: string[];
-            perms?: string[];
-          };
+          data: LoginInfoDTO;
           /**
            * [required]
            */
@@ -1990,28 +2196,7 @@ declare global {
           /**
            * [required]
            */
-          data: {
-            /**
-             * 授权token
-             */
-            accessToken?: string;
-            /**
-             * 过期时间
-             */
-            expires?: number;
-            /**
-             * 类型
-             */
-            tokenType?: string;
-            /**
-             * 刷新token
-             */
-            refreshToken?: string;
-            /**
-             * 允许token时间内
-             */
-            refreshTokenExpires?: number;
-          };
+          data: LoginToken;
           /**
            * [required]
            */
@@ -2034,28 +2219,7 @@ declare global {
           /**
            * [required]
            */
-          data: {
-            /**
-             * 授权token
-             */
-            accessToken?: string;
-            /**
-             * 过期时间
-             */
-            expires?: number;
-            /**
-             * 类型
-             */
-            tokenType?: string;
-            /**
-             * 刷新token
-             */
-            refreshToken?: string;
-            /**
-             * 允许token时间内
-             */
-            refreshTokenExpires?: number;
-          };
+          data: LoginToken;
           /**
            * [required]
            */
@@ -2079,12 +2243,61 @@ declare global {
        *
        * **Response**
        * ```ts
-       * type Response = unknown
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: unknown
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
        * ```
        */
-      post_api_login_loginout<Config extends Alova2MethodConfig<unknown>>(
+      post_api_login_loginout<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }>
+      >(
         config?: Config
-      ): Alova2Method<unknown, 'Login.post_api_login_loginout', Config>;
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Login.post_api_login_loginout',
+        Config
+      >;
     };
     Menu: {
       /**
@@ -3608,16 +3821,7 @@ declare global {
           /**
            * [required]
            */
-          data: Array<{
-            /**
-             * 主键Id!
-             */
-            id?: string;
-            /**
-             * 账号
-             */
-            name?: string;
-          }>;
+          data: RoleSelectDTO[];
           /**
            * [required]
            */
@@ -3638,16 +3842,7 @@ declare global {
           /**
            * [required]
            */
-          data: Array<{
-            /**
-             * 主键Id!
-             */
-            id?: string;
-            /**
-             * 账号
-             */
-            name?: string;
-          }>;
+          data: RoleSelectDTO[];
           /**
            * [required]
            */
@@ -4112,191 +4307,6 @@ declare global {
       /**
        * ---
        *
-       * [GET] 获取头获取列表
-       *
-       * **path:** /api/TableColumn/GetColumns
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   Table?: string
-       *   Router?: string
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // 头部醒醒
-       *   // [required]
-       *   data: {
-       *     table?: string
-       *     comment?: string
-       *     router?: string
-       *     data?: Array<{
-       *       // 主键
-       *       id?: string
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       label?: string
-       *       prop?: string
-       *       table?: string
-       *       sort?: number
-       *       width?: number
-       *       sortable?: boolean
-       *       router?: string
-       *       headTemplate?: string
-       *       template?: string
-       *       isHidden?: boolean
-       *       condition?: number
-       *     }>
-       *   }
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      get_api_tablecolumn_getcolumns<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * 头部醒醒
-           * [required]
-           */
-          data: {
-            table?: string;
-            comment?: string;
-            router?: string;
-            data?: Array<{
-              /**
-               * 主键
-               */
-              id?: string;
-              /**
-               * 创建者名称
-               */
-              createBy?: string;
-              /**
-               * 创建时间
-               */
-              createTime?: string;
-              /**
-               * 更新者名称
-               */
-              updateBy?: string;
-              /**
-               * 最后更新时间
-               */
-              updateTime?: string;
-              label?: string;
-              prop?: string;
-              table?: string;
-              sort?: number;
-              width?: number;
-              sortable?: boolean;
-              router?: string;
-              headTemplate?: string;
-              template?: string;
-              isHidden?: boolean;
-              condition?: number;
-            }>;
-          };
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          params: {
-            Table?: string;
-            Router?: string;
-          };
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * 头部醒醒
-           * [required]
-           */
-          data: {
-            table?: string;
-            comment?: string;
-            router?: string;
-            data?: Array<{
-              /**
-               * 主键
-               */
-              id?: string;
-              /**
-               * 创建者名称
-               */
-              createBy?: string;
-              /**
-               * 创建时间
-               */
-              createTime?: string;
-              /**
-               * 更新者名称
-               */
-              updateBy?: string;
-              /**
-               * 最后更新时间
-               */
-              updateTime?: string;
-              label?: string;
-              prop?: string;
-              table?: string;
-              sort?: number;
-              width?: number;
-              sortable?: boolean;
-              router?: string;
-              headTemplate?: string;
-              template?: string;
-              isHidden?: boolean;
-              condition?: number;
-            }>;
-          };
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'TableColumn.get_api_tablecolumn_getcolumns',
-        Config
-      >;
-      /**
-       * ---
-       *
        * [GET] 查询详情
        *
        * **path:** /api/TableColumn/GetInfo
@@ -4330,16 +4340,20 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
+       *     tableModelId?: string
+       *     type?: string
        *     label?: string
        *     prop?: string
-       *     table?: string
        *     sort?: number
+       *     // 对齐方式
+       *     align?: 1 | 2 | 3
+       *     // 固定方式
+       *     fixed?: 1 | 3
        *     width?: number
        *     sortable?: boolean
-       *     router?: string
        *     headTemplate?: string
        *     template?: string
-       *     isHidden?: boolean
+       *     isShow?: boolean
        *     condition?: number
        *   }
        *   // [required]
@@ -4359,39 +4373,7 @@ declare global {
            * 用户 详情
            * [required]
            */
-          data: {
-            /**
-             * 主键
-             */
-            id?: string;
-            /**
-             * 创建者名称
-             */
-            createBy?: string;
-            /**
-             * 创建时间
-             */
-            createTime?: string;
-            /**
-             * 更新者名称
-             */
-            updateBy?: string;
-            /**
-             * 最后更新时间
-             */
-            updateTime?: string;
-            label?: string;
-            prop?: string;
-            table?: string;
-            sort?: number;
-            width?: number;
-            sortable?: boolean;
-            router?: string;
-            headTemplate?: string;
-            template?: string;
-            isHidden?: boolean;
-            condition?: number;
-          };
+          data: TableColumnInfo;
           /**
            * [required]
            */
@@ -4417,39 +4399,7 @@ declare global {
            * 用户 详情
            * [required]
            */
-          data: {
-            /**
-             * 主键
-             */
-            id?: string;
-            /**
-             * 创建者名称
-             */
-            createBy?: string;
-            /**
-             * 创建时间
-             */
-            createTime?: string;
-            /**
-             * 更新者名称
-             */
-            updateBy?: string;
-            /**
-             * 最后更新时间
-             */
-            updateTime?: string;
-            label?: string;
-            prop?: string;
-            table?: string;
-            sort?: number;
-            width?: number;
-            sortable?: boolean;
-            router?: string;
-            headTemplate?: string;
-            template?: string;
-            isHidden?: boolean;
-            condition?: number;
-          };
+          data: TableColumnInfo;
           /**
            * [required]
            */
@@ -4532,42 +4482,7 @@ declare global {
           /**
            * [required]
            */
-          data: {
-            pagerInfo?: {
-              totalRowCount?: number;
-              pageSize?: number;
-              startIndex?: number;
-              pageIndex?: number;
-              hasPrev?: boolean;
-              hasNext?: boolean;
-              isFirst?: boolean;
-              isLast?: boolean;
-              totalPageCount?: number;
-            };
-            data?: Array<{
-              id?: string;
-              /**
-               * 名称
-               */
-              name?: string;
-              /**
-               * 头像
-               */
-              avatar?: string;
-              /**
-               * 密码
-               */
-              password?: string;
-              /**
-               * 状态
-               */
-              state?: boolean;
-              /**
-               * 账号
-               */
-              account?: string;
-            }>;
-          };
+          data: TableColumnDTOPagedResults;
           /**
            * [required]
            */
@@ -4596,42 +4511,7 @@ declare global {
           /**
            * [required]
            */
-          data: {
-            pagerInfo?: {
-              totalRowCount?: number;
-              pageSize?: number;
-              startIndex?: number;
-              pageIndex?: number;
-              hasPrev?: boolean;
-              hasNext?: boolean;
-              isFirst?: boolean;
-              isLast?: boolean;
-              totalPageCount?: number;
-            };
-            data?: Array<{
-              id?: string;
-              /**
-               * 名称
-               */
-              name?: string;
-              /**
-               * 头像
-               */
-              avatar?: string;
-              /**
-               * 密码
-               */
-              password?: string;
-              /**
-               * 状态
-               */
-              state?: boolean;
-              /**
-               * 账号
-               */
-              account?: string;
-            }>;
-          };
+          data: TableColumnDTOPagedResults;
           /**
            * [required]
            */
@@ -4644,61 +4524,6 @@ declare global {
         'TableColumn.get_api_tablecolumn_getpage',
         Config
       >;
-      /**
-       * ---
-       *
-       * [POST] 设置列表
-       *
-       * **path:** /api/TableColumn/SetColumns
-       *
-       * ---
-       *
-       * **RequestBody**
-       * ```ts
-       * type RequestBody = {
-       *   table?: string
-       *   comment?: string
-       *   router?: string
-       *   data?: Array<{
-       *     // 主键
-       *     id?: string
-       *     // 创建者名称
-       *     createBy?: string
-       *     // 创建时间
-       *     createTime?: string
-       *     // 更新者名称
-       *     updateBy?: string
-       *     // 最后更新时间
-       *     updateTime?: string
-       *     label?: string
-       *     prop?: string
-       *     table?: string
-       *     sort?: number
-       *     width?: number
-       *     sortable?: boolean
-       *     router?: string
-       *     headTemplate?: string
-       *     template?: string
-       *     isHidden?: boolean
-       *     condition?: number
-       *   }>
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = unknown
-       * ```
-       */
-      post_api_tablecolumn_setcolumns<
-        Config extends Alova2MethodConfig<unknown> & {
-          data: TableModel;
-        }
-      >(
-        config: Config
-      ): Alova2Method<unknown, 'TableColumn.post_api_tablecolumn_setcolumns', Config>;
       /**
        * ---
        *
@@ -4721,16 +4546,20 @@ declare global {
        *   updateBy?: string
        *   // 最后更新时间
        *   updateTime?: string
+       *   tableModelId?: string
+       *   type?: string
        *   label?: string
        *   prop?: string
-       *   table?: string
        *   sort?: number
+       *   // 对齐方式
+       *   align?: 1 | 2 | 3
+       *   // 固定方式
+       *   fixed?: 1 | 3
        *   width?: number
        *   sortable?: boolean
-       *   router?: string
        *   headTemplate?: string
        *   template?: string
-       *   isHidden?: boolean
+       *   isShow?: boolean
        *   condition?: number
        *   roleIds?: string[]
        * }
@@ -4795,6 +4624,471 @@ declare global {
           success: boolean;
         },
         'TableColumn.post_api_tablecolumn_submit',
+        Config
+      >;
+    };
+    TableModel: {
+      /**
+       * ---
+       *
+       * [DELETE] 删除
+       *
+       * **path:** /api/TableModel/Delete
+       *
+       * ---
+       *
+       * **RequestBody**
+       * ```ts
+       * type RequestBody = string[]
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: number
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      delete_api_tablemodel_delete<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          data: string[];
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'TableModel.delete_api_tablemodel_delete',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 查询详情
+       *
+       * **path:** /api/TableModel/GetInfo
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   Id?: string
+       *   // 路由
+       *   Router?: string
+       *   Table?: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: {
+       *     // 主键
+       *     id?: string
+       *     // 创建者名称
+       *     createBy?: string
+       *     // 创建时间
+       *     createTime?: string
+       *     // 更新者名称
+       *     updateBy?: string
+       *     // 最后更新时间
+       *     updateTime?: string
+       *     title?: string
+       *     router?: string
+       *     table?: string
+       *     comment?: string
+       *     tableColumns?: Array<{
+       *       // 主键
+       *       id?: string
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       tableModelId?: string
+       *       type?: string
+       *       label?: string
+       *       prop?: string
+       *       sort?: number
+       *       // 对齐方式
+       *       align?: 1 | 2 | 3
+       *       // 固定方式
+       *       fixed?: 1 | 3
+       *       width?: number
+       *       sortable?: boolean
+       *       headTemplate?: string
+       *       template?: string
+       *       isShow?: boolean
+       *       condition?: number
+       *     }>
+       *   }
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_tablemodel_getinfo<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: TableModelInfo;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            Id?: string;
+            /**
+             * 路由
+             */
+            Router?: string;
+            Table?: string;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: TableModelInfo;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'TableModel.get_api_tablemodel_getinfo',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 分页
+       *
+       * **path:** /api/TableModel/GetPage
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   KeyWord?: string
+       *   StartIndex?: number
+       *   PageIndex?: number
+       *   PageSize?: number
+       *   SortList?: Record<string, string>
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: {
+       *     pagerInfo?: {
+       *       totalRowCount?: number
+       *       pageSize?: number
+       *       startIndex?: number
+       *       pageIndex?: number
+       *       hasPrev?: boolean
+       *       hasNext?: boolean
+       *       isFirst?: boolean
+       *       isLast?: boolean
+       *       totalPageCount?: number
+       *     }
+       *     data?: Array<{
+       *       // 主键
+       *       id?: string
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       title?: string
+       *       router?: string
+       *       table?: string
+       *       comment?: string
+       *       tableColumns?: Array<{
+       *         // 主键
+       *         id?: string
+       *         // 创建者名称
+       *         createBy?: string
+       *         // 创建时间
+       *         createTime?: string
+       *         // 更新者名称
+       *         updateBy?: string
+       *         // 最后更新时间
+       *         updateTime?: string
+       *         tableModelId?: string
+       *         type?: string
+       *         label?: string
+       *         prop?: string
+       *         sort?: number
+       *         // 对齐方式
+       *         align?: 1 | 2 | 3
+       *         // 固定方式
+       *         fixed?: 1 | 3
+       *         width?: number
+       *         sortable?: boolean
+       *         headTemplate?: string
+       *         template?: string
+       *         isShow?: boolean
+       *         condition?: number
+       *       }>
+       *     }>
+       *   }
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_tablemodel_getpage<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: TableModelDTOPagedResults;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            KeyWord?: string;
+            StartIndex?: number;
+            PageIndex?: number;
+            PageSize?: number;
+            SortList?: Record<string, string>;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: TableModelDTOPagedResults;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'TableModel.get_api_tablemodel_getpage',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [POST] 提交
+       *
+       * **path:** /api/TableModel/Submit
+       *
+       * ---
+       *
+       * **RequestBody**
+       * ```ts
+       * type RequestBody = {
+       *   // 主键
+       *   id?: string
+       *   // 创建者名称
+       *   createBy?: string
+       *   // 创建时间
+       *   createTime?: string
+       *   // 更新者名称
+       *   updateBy?: string
+       *   // 最后更新时间
+       *   updateTime?: string
+       *   title?: string
+       *   router?: string
+       *   table?: string
+       *   comment?: string
+       *   tableColumns?: Array<{
+       *     // 主键
+       *     id?: string
+       *     // 创建者名称
+       *     createBy?: string
+       *     // 创建时间
+       *     createTime?: string
+       *     // 更新者名称
+       *     updateBy?: string
+       *     // 最后更新时间
+       *     updateTime?: string
+       *     tableModelId?: string
+       *     type?: string
+       *     label?: string
+       *     prop?: string
+       *     sort?: number
+       *     // 对齐方式
+       *     align?: 1 | 2 | 3
+       *     // 固定方式
+       *     fixed?: 1 | 3
+       *     width?: number
+       *     sortable?: boolean
+       *     headTemplate?: string
+       *     template?: string
+       *     isShow?: boolean
+       *     condition?: number
+       *   }>
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: string
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      post_api_tablemodel_submit<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: string;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          data: UpdateTableModelParam;
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: string;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'TableModel.post_api_tablemodel_submit',
         Config
       >;
     };
@@ -5236,42 +5530,7 @@ declare global {
           /**
            * [required]
            */
-          data: {
-            pagerInfo?: {
-              totalRowCount?: number;
-              pageSize?: number;
-              startIndex?: number;
-              pageIndex?: number;
-              hasPrev?: boolean;
-              hasNext?: boolean;
-              isFirst?: boolean;
-              isLast?: boolean;
-              totalPageCount?: number;
-            };
-            data?: Array<{
-              id?: string;
-              /**
-               * 名称
-               */
-              name?: string;
-              /**
-               * 头像
-               */
-              avatar?: string;
-              /**
-               * 密码
-               */
-              password?: string;
-              /**
-               * 状态
-               */
-              state?: boolean;
-              /**
-               * 账号
-               */
-              account?: string;
-            }>;
-          };
+          data: UserDTOPagedResults;
           /**
            * [required]
            */
@@ -5304,42 +5563,7 @@ declare global {
           /**
            * [required]
            */
-          data: {
-            pagerInfo?: {
-              totalRowCount?: number;
-              pageSize?: number;
-              startIndex?: number;
-              pageIndex?: number;
-              hasPrev?: boolean;
-              hasNext?: boolean;
-              isFirst?: boolean;
-              isLast?: boolean;
-              totalPageCount?: number;
-            };
-            data?: Array<{
-              id?: string;
-              /**
-               * 名称
-               */
-              name?: string;
-              /**
-               * 头像
-               */
-              avatar?: string;
-              /**
-               * 密码
-               */
-              password?: string;
-              /**
-               * 状态
-               */
-              state?: boolean;
-              /**
-               * 账号
-               */
-              account?: string;
-            }>;
-          };
+          data: UserDTOPagedResults;
           /**
            * [required]
            */

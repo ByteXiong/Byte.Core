@@ -32,3 +32,21 @@ export enum DeptTypeEnum {
 
   部门 = 30,
 }
+/// <summary>
+/// 对齐方式
+/// </summary>
+export enum TableAlignEnum {
+  left = 1,
+  center,
+  right,
+
+}
+/// <summary>
+/// 固定方式
+/// </summary>
+export enum TableFixedEnum {
+  left = 1,
+  '' = 2,
+  right = 3,
+
+}
