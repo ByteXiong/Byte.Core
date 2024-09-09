@@ -2,6 +2,7 @@
 using Asp.Versioning.ApiExplorer;
 using AspectCore.Extensions.DependencyInjection;
 using Autofac;
+using Byte.Core.Api.Common;
 using Byte.Core.Common.Attributes;
 using Byte.Core.Common.Cache;
 using Byte.Core.Common.Extensions;
@@ -20,6 +21,7 @@ using log4net;
 using log4net.Repository;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebSockets;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
@@ -183,7 +185,7 @@ builder.Services.AddDistributedMemoryCache().AddCaptcha(
     );
 #endregion
 
-//builder.Services.AddSingleton<WebSocketManager>();
+builder.Services.AddSingleton<Byte.Core.Api.Common.WebSocketManager>();
 
 
 builder.Services.AddOptions();
@@ -385,11 +387,14 @@ app.UseHttpsRedirection();
 #region 性能监控 /profiler/results-index
 app.UseMiniProfiler();
 #endregion
-//WebSockets
 
-//app.UseWebSockets();
-//app.UseMiddleware<WebSocketMiddleware>();
-
+#region WebSocket
+app.UseWebSockets(new WebSocketOptions
+{
+    KeepAliveInterval = TimeSpan.FromMinutes(2)
+});
+//app.UseMiddleware<WebsocketHandlerMiddleware>();
+#endregion
 
 app.UseRouting();
 app.UseSession();
@@ -501,7 +506,6 @@ app.UseStaticFiles(new StaticFileOptions
 //    RequestPath = "/UploadFiles"
 //});
 #endregion
-
 
 
 #region 初始数据库
