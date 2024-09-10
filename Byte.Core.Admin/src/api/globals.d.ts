@@ -34,15 +34,15 @@ type Alova2MethodConfig<Responded> =
       infer SE
     >
   >
-  ? Omit<
-    AlovaMethodCreateConfig<
-      AlovaGenerics<Responded, any, RequestConfig, Response, ResponseHeader, L1Cache, L2Cache, SE>,
-      any,
-      Responded
-    >,
-    'params'
-  >
-  : never;
+    ? Omit<
+        AlovaMethodCreateConfig<
+          AlovaGenerics<Responded, any, RequestConfig, Response, ResponseHeader, L1Cache, L2Cache, SE>,
+          any,
+          Responded
+        >,
+        'params'
+      >
+    : never;
 
 // Extract the return type of transform function that define in $$userConfigMap, if it not exists, use the default type.
 type ExtractUserDefinedTransformed<
@@ -50,8 +50,8 @@ type ExtractUserDefinedTransformed<
   Default
 > = DefinitionKey extends keyof UserMethodConfigMap
   ? UserMethodConfigMap[DefinitionKey]['transform'] extends (...args: any[]) => any
-  ? Awaited<ReturnType<UserMethodConfigMap[DefinitionKey]['transform']>>
-  : Default
+    ? Awaited<ReturnType<UserMethodConfigMap[DefinitionKey]['transform']>>
+    : Default
   : Default;
 type Alova2Method<
   Responded,
@@ -70,23 +70,23 @@ type Alova2Method<
       infer SE
     >
   >
-  ? Method<
-    AlovaGenerics<
-      CurrentConfig extends undefined
-      ? ExtractUserDefinedTransformed<DefinitionKey, Responded>
-      : CurrentConfig['transform'] extends (...args: any[]) => any
-      ? Awaited<ReturnType<CurrentConfig['transform']>>
-      : ExtractUserDefinedTransformed<DefinitionKey, Responded>,
-      any,
-      RequestConfig,
-      Response,
-      ResponseHeader,
-      L1Cache,
-      L2Cache,
-      SE
-    >
-  >
-  : never;
+    ? Method<
+        AlovaGenerics<
+          CurrentConfig extends undefined
+            ? ExtractUserDefinedTransformed<DefinitionKey, Responded>
+            : CurrentConfig['transform'] extends (...args: any[]) => any
+              ? Awaited<ReturnType<CurrentConfig['transform']>>
+              : ExtractUserDefinedTransformed<DefinitionKey, Responded>,
+          any,
+          RequestConfig,
+          Response,
+          ResponseHeader,
+          L1Cache,
+          L2Cache,
+          SE
+        >
+      >
+    : never;
 
 export type PagerInfo = {
   totalRowCount?: number;
@@ -956,7 +956,10 @@ export type TableModelInfo = {
   router?: string;
   table?: string;
   comment?: string;
-  tableColumns?: TableColumn[];
+  /**
+   * [required]
+   */
+  tableColumns: TableColumn[];
 };
 export type TableModelDTO = {
   /**
@@ -983,7 +986,10 @@ export type TableModelDTO = {
   router?: string;
   table?: string;
   comment?: string;
-  tableColumns?: TableColumn[];
+  /**
+   * [required]
+   */
+  tableColumns: TableColumn[];
 };
 export type TableModelDTOPagedResults = {
   pagerInfo?: PagerInfo;
@@ -1014,7 +1020,10 @@ export type UpdateTableModelParam = {
   router?: string;
   table?: string;
   comment?: string;
-  tableColumns?: TableColumn[];
+  /**
+   * [required]
+   */
+  tableColumns: TableColumn[];
 };
 export type UserInfo = {
   /**
@@ -4745,7 +4754,8 @@ declare global {
        *     router?: string
        *     table?: string
        *     comment?: string
-       *     tableColumns?: Array<{
+       *     // [required]
+       *     tableColumns: Array<{
        *       // 主键
        *       id?: string
        *       // 创建者名称
@@ -4887,7 +4897,8 @@ declare global {
        *       router?: string
        *       table?: string
        *       comment?: string
-       *       tableColumns?: Array<{
+       *       // [required]
+       *       tableColumns: Array<{
        *         // 主键
        *         id?: string
        *         // 创建者名称
@@ -5000,7 +5011,8 @@ declare global {
        *   router?: string
        *   table?: string
        *   comment?: string
-       *   tableColumns?: Array<{
+       *   // [required]
+       *   tableColumns: Array<{
        *     // 主键
        *     id?: string
        *     // 创建者名称
