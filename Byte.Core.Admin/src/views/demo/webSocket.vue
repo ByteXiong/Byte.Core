@@ -33,7 +33,7 @@
 import { ref } from "vue";
 import moment from "moment";
 const wsurl = ref(
-  "ws://127.0.0.1:3000/api/Websocket/Connect?socketId=" + moment().unix()
+  "ws://bytexiong.fun/api/Websocket/Connect?socketId=" + moment().unix()
 );
 const user = ref<string[]>([]);
 
