@@ -13,7 +13,7 @@ namespace Byte.Core.Common.Attributes
         public override async Task OnActionExecuted(ActionExecutedContext context)
         {
             if (context.ContainsFilter<NoFormatResponseAttribute>())
-                return;
+                     return;
 
             if (context.Result is EmptyResult)
                 context.Result = Success();

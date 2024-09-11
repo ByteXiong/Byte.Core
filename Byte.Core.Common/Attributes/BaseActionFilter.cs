@@ -64,8 +64,9 @@ namespace Byte.Core.Common.Attributes
         /// <param name="context"></param>
         /// <param name="next"></param>
         /// <returns></returns>
-        public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+        public async  Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
+            //await Task.CompletedTask;
             await OnActionExecuting(context);
             if (context.Result == null)
             {

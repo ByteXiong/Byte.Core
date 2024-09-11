@@ -956,10 +956,7 @@ export type TableModelInfo = {
   router?: string;
   table?: string;
   comment?: string;
-  /**
-   * [required]
-   */
-  tableColumns: TableColumn[];
+  tableColumns?: TableColumn[];
 };
 export type TableModelDTO = {
   /**
@@ -986,10 +983,7 @@ export type TableModelDTO = {
   router?: string;
   table?: string;
   comment?: string;
-  /**
-   * [required]
-   */
-  tableColumns: TableColumn[];
+  tableColumns?: TableColumn[];
 };
 export type TableModelDTOPagedResults = {
   pagerInfo?: PagerInfo;
@@ -1020,10 +1014,7 @@ export type UpdateTableModelParam = {
   router?: string;
   table?: string;
   comment?: string;
-  /**
-   * [required]
-   */
-  tableColumns: TableColumn[];
+  tableColumns?: TableColumn[];
 };
 export type UserInfo = {
   /**
@@ -4754,8 +4745,7 @@ declare global {
        *     router?: string
        *     table?: string
        *     comment?: string
-       *     // [required]
-       *     tableColumns: Array<{
+       *     tableColumns?: Array<{
        *       // 主键
        *       id?: string
        *       // 创建者名称
@@ -4897,8 +4887,7 @@ declare global {
        *       router?: string
        *       table?: string
        *       comment?: string
-       *       // [required]
-       *       tableColumns: Array<{
+       *       tableColumns?: Array<{
        *         // 主键
        *         id?: string
        *         // 创建者名称
@@ -5011,8 +5000,7 @@ declare global {
        *   router?: string
        *   table?: string
        *   comment?: string
-       *   // [required]
-       *   tableColumns: Array<{
+       *   tableColumns?: Array<{
        *     // 主键
        *     id?: string
        *     // 创建者名称

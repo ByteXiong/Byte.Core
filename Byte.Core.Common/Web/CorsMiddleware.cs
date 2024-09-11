@@ -25,12 +25,16 @@ namespace Byte.Core.Common.Web
         /// <returns></returns>
         public async Task Invoke(HttpContext context)
         {
-            context.Response.Headers.Add("Access-Control-Allow-Credentials", "true");
+            if (!context.Response.HasStarted)
+            {
+             context.Response.Headers.Add("Access-Control-Allow-Credentials", "true");
             context.Response.Headers.Add("Access-Control-Allow-Origin", context.Request.Headers["origin"]);
             //context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
             context.Response.Headers.Add("Access-Control-Allow-Headers", "Origin,X-Requested-With,Content-Type,Accept,WG-App-Version,WG-Device-Id,WG-Network-Type,WG-Vendor,WG-OS-Type,WG-OS-Version,WG-Device-Model,WG-CPU,WG-Sid,WG-App-Id,WG-Token,Authorization,api-version");
             context.Response.Headers.Add("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-
+            }
+            Console.WriteLine("++++++++++++++++++++++++++++++"+context.Request.Method.ToUpper());
+       
             //若为OPTIONS跨域请求则直接返回,不进入后续管道
             if (context.Request.Method.ToUpper() != "OPTIONS")
                 await _next(context);//把context传进去执行下一个中间件
