@@ -4,9 +4,11 @@ using Byte.Core.Api.Common;
 using Byte.Core.Common.Attributes;
 using Byte.Core.Common.Extensions;
 using Byte.Core.Models;
+using Byte.Core.Tools;
 using Microsoft.AspNetCore.Mvc;
 using NPOI.SS.Formula.Functions;
 using System.Collections.Concurrent;
+using System.Linq;
 using System.Net.Sockets;
 using System.Net.WebSockets;
 using System.Text;
@@ -19,9 +21,9 @@ namespace Byte.Core.Api.Controllers
     [Route("api/[controller]/[action]")]
     [NoFormatResponse]
     [NoCheckJWT]
-    public class WebSocketController : BaseApiController
+    public class WebSocketController (WebSocketServer webSocketServer )  : BaseApiController
     {
-        private static ConcurrentDictionary<string, System.Net.WebSockets.WebSocket> _sockets = new ConcurrentDictionary<string, System.Net.WebSockets.WebSocket>();
+        WebSocketServer _webSocketServer = webSocketServer;
         [HttpGet]
         public async Task ConnectAsync(string socketId)
 
@@ -40,11 +42,11 @@ namespace Byte.Core.Api.Controllers
                     ////识别用户
                     //string receiveId = HttpContext.Request.Query["rid"].ToString();
                     //判断用户识别(不存在就添加)
-                    if (!_sockets.ContainsKey(socketId))
+                    if (! _webSocketServer.UserContainsKey(socketId))
                     {
                         Console.WriteLine($"有人已连接:{socketId}");
-                        _sockets.TryAdd(socketId, webSocket);
-                    }
+                             _webSocketServer.UserSet(socketId, webSocket);
+                }
                 //var buffer = new byte[1024 * 4];
                 //WebSocketReceiveResult result    = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), ct);
                 //是否关闭
@@ -56,7 +58,7 @@ namespace Byte.Core.Api.Controllers
                             break;
                     }
                     //数据缓冲
-                    WebSocketMsg response = await ReceiveStringAsync(webSocket, ct);
+                    WebSocketModel response = await ReceiveStringAsync(webSocket, ct);
                         //转对象
                         //  MsgTemplate msg = JsonConvert.DeserializeObject<MsgTemplate>(response);
                         //判断数据状态
@@ -66,23 +68,23 @@ namespace Byte.Core.Api.Controllers
 
                         }
 
-                        Console.WriteLine($"接收消息{response}在线人数:{_sockets.Count} ");
+                        Console.WriteLine($"接收消息{response}在线人数:{_webSocketServer.UserSockets.Count} ");
                   
                         switch (response.Type)
                         {
-                            case Tools.WebSocketMsgTypeEnum.发送心跳:
-                            case Tools.WebSocketMsgTypeEnum.在线用户:
-                                var msgData = new WebSocketMsg()
+                            case Tools.WebSocketModelTypeEnum.发送心跳:
+                            case Tools.WebSocketModelTypeEnum.在线用户:
+                                var msgData = new WebSocketModel()
                                 {
-                                    Type = Tools.WebSocketMsgTypeEnum.在线用户,
-                                    Data = _sockets.Select(x => x.Key).ToList()
+                                    Type = Tools.WebSocketModelTypeEnum.在线用户,
+                                    Data = _webSocketServer.UserSockets.Select(x => x.Key).ToList()
                                 };
                                 await SendStringAsync(webSocket, msgData, ct);
                                 break;
-                            case Tools.WebSocketMsgTypeEnum.单聊:
+                            case Tools.WebSocketModelTypeEnum.单聊:
                                 await SendStringAsync(webSocket, response, ct);
                                 break;
-                            case Tools.WebSocketMsgTypeEnum.群聊:
+                            case Tools.WebSocketModelTypeEnum.群聊:
                                 break;
                             default:
                                 break;
@@ -92,8 +94,8 @@ namespace Byte.Core.Api.Controllers
                 //}
                 //finally {
                
-                var any=  _sockets.TryRemove(socketId, out _);
-                Console.WriteLine($"在线人数:{_sockets.Count}{any}");
+                var any= _webSocketServer.UserRomeve(socketId);
+                Console.WriteLine($"在线人数:{_webSocketServer.UserSockets.Count}{any}");
                 //服务端关闭
                 if (webSocket.State != WebSocketState.Closed)
                 {
@@ -116,7 +118,7 @@ namespace Byte.Core.Api.Controllers
         /// <param name="data"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        private static Task SendStringAsync(System.Net.WebSockets.WebSocket socket, WebSocketMsg msg, CancellationToken ct = default(CancellationToken))
+        private static Task SendStringAsync(System.Net.WebSockets.WebSocket socket, WebSocketModel msg, CancellationToken ct = default(CancellationToken))
         {
             var str = msg.ToJson();
             Console.WriteLine(str);
@@ -131,7 +133,7 @@ namespace Byte.Core.Api.Controllers
         /// <param name="result"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        private static async Task<WebSocketMsg> ReceiveStringAsync(System.Net.WebSockets.WebSocket webSocket, CancellationToken ct = default(CancellationToken))
+        private static async Task<WebSocketModel> ReceiveStringAsync(System.Net.WebSockets.WebSocket webSocket, CancellationToken ct = default(CancellationToken))
         {
             var buffer = new ArraySegment<byte>(new byte[1024 * 4]);
             using (var ms = new MemoryStream())
@@ -168,7 +170,7 @@ namespace Byte.Core.Api.Controllers
 
                         var read = await reader.ReadToEndAsync();
                         Console.WriteLine("打印"+ read);
-                        return read.ToObject<WebSocketMsg>();
+                        return read.ToObject<WebSocketModel>();
                     }
                 }
                 catch (Exception)

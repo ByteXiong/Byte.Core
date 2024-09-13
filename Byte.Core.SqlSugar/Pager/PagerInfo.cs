@@ -82,8 +82,8 @@
         //   queryParam:
         public PagerInfo(PageParam queryParam)
         {
-            PageSize = queryParam.PageSize;
-            StartIndex = queryParam.StartIndex;
+            PageSize = queryParam?.PageSize??10;
+            StartIndex = queryParam?.StartIndex??0;
         }
 
         //

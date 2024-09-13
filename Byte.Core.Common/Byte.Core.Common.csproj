@@ -65,4 +65,7 @@
 		<PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
 		<PackageReference Include="Quartz" Version="3.13.0" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="WebSocket\" />
+	</ItemGroup>
 </Project>

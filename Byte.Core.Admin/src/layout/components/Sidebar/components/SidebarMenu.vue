@@ -3,7 +3,8 @@
   <el-menu
     :default-active="currentRoute.path"
     :collapse="!appStore.sidebar.opened"
-    class="layout-menu"
+    :text-color="variables['menu-text']"
+    :active-text-color="variables['menu-active-text']"
     :unique-opened="false"
     :collapse-transition="false"
     :mode="layout === 'top' ? 'horizontal' : 'vertical'"
@@ -24,7 +25,6 @@ import { isExternal } from "@/utils/index";
 import path from "path-browserify";
 import variables from "@/styles/variables.module.scss";
 import { useRoute } from "vue-router";
-console.error(variables["menu-background"]);
 
 const settingsStore = useSettingsStore();
 const appStore = useAppStore();
@@ -63,9 +63,28 @@ function resolvePath(routePath: string) {
 }
 </script>
 <style lang="scss" scoped>
-.layout-menu {
-  background-color: $menu-background;
-  // text-color: $menu-text;
-  // active-text-color: $menu-active-text;
+// .layout-menu {
+//   // background-color: $menu-background;
+//   // --el-menu-active-color: $menu-active-text;
+//   // --el-menu-text-color: $menu-text;
+//   // text-color: $menu-text;
+//   // active-text-color: $menu-active-text;
+// }
+:deep(.el-menu-item.is-active) {
+  background-color: #c6beb1 !important;
+  // color: #fff;
+  border-radius: 10px;
+  // span {
+  //   color: #fff !important;
+  // }
+}
+// --el-menu-hover-bg-color
+:deep(.el-menu-item),
+:deep(.el-sub-menu__title) {
+  margin: 5px 0;
+  border-radius: 10px;
+  // background-color: red;
+  height: 30px;
+  // margin: 5px 0 5px 0;
 }
 </style>

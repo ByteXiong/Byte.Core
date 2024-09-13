@@ -232,7 +232,8 @@ builder.Services
  .AddAutoServices("Byte.Core.Business")
   .AddAutoServices("Byte.Core.Repository")
 //.AddScopedAssembly("Byte.Core.DataAccess", "Byte.Core.DataAccess")//注入仓储
-.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+.AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
+.AddSingleton<WebSocketServer>();
 #endregion
 
 #region MiniProfiler性能分析

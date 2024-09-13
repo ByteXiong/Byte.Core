@@ -68,7 +68,7 @@ namespace Byte.Core.Tools
         right =3,
 
     }
-    public enum WebSocketMsgTypeEnum
+    public enum WebSocketModelTypeEnum
     { 
      发送心跳=0,
      在线用户=1,
