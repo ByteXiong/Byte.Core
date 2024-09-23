@@ -102,7 +102,7 @@
               active-text="启用"
               inactive-text="禁用"
               @change="
-                async (e: boolean) => {
+                async (e) => {
                   setState(scope.row.id, e);
                   // getData();
                 }

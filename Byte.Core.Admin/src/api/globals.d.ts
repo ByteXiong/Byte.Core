@@ -1109,6 +1109,72 @@ declare global {
       /**
        * ---
        *
+       * [GET] 取消请求测试
+       *
+       * **path:** /api/Demo/CancelRequest
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: number
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_demo_cancelrequest<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }>
+      >(
+        config?: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Demo.get_api_demo_cancelrequest',
+        Config
+      >;
+      /**
+       * ---
+       *
        * [GET] 分页
        *
        * **path:** /api/Demo/GetPage

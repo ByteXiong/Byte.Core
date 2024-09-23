@@ -45,7 +45,7 @@ const createFunctionalProxy = (array: (string | symbol)[], alovaInstance: Alova<
       });
       delete mergedConfig.pathParams;
       let data = mergedConfig.data;
-      if (Object.prototype.toString.call(data) === '[object Object]') {
+      if (Object.prototype.toString.call(data) === '[object Object]' && typeof FormData !== 'undefined') {
         let hasBlobData = false;
         const formData = new FormData();
         for (const key in data) {

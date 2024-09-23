@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning;
 using Byte.Core.Api.Common;
 using Byte.Core.Business;
+using Byte.Core.Common.Attributes;
 using Byte.Core.Common.Models;
 using Byte.Core.Entity;
 using Byte.Core.Models;
@@ -62,7 +63,38 @@ namespace Byte.Core.Api.Controllers
             return ExcutedResult<PagedResults<RedisDemoDTO>>.SuccessResult(data: list, msg: $"查询成功:{tep}");
 
         }
-       
+
+
+        /// <summary>
+        /// 取消请求测试
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [NoCheckJWT]
+        [ApiVersion("0.0", Deprecated = false)]
+        public async Task<List<User>> CancelRequestAsync(CancellationToken cancellationToken)
+        {
+            try
+            {
+                await Task.Delay(5000, cancellationToken); // 10 seconds delay
+                var list = await _unitOfWork.GetDbClient().Queryable<User>().ToListAsync(cancellationToken);
+
+                // Simulate a long-running operation
+                //await Task.Delay(10000, cancellationToken); // 10 seconds delay
+                Console.WriteLine($"{HttpContext.Request.Host}-请求成功");
+                return list;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine($"{HttpContext.Request.Host}-已经取消请求");
+                //请求取消抛异常
+                throw;
+            }
+           
+          
+        }
+
 
     }
 }
