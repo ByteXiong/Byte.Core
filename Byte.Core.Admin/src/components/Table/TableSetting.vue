@@ -28,16 +28,13 @@
             <el-tableColumn label="拖拽" width="80">
               <template #default>
                 <div class="drag-table">
-                  <Setting style="width: 2em; height: 2em; margin-right: 8px" />
+                  <Rank style="width: 2em; height: 2em; margin-right: 8px" />
                 </div>
               </template>
             </el-tableColumn>
             <el-tableColumn label="列名" prop="label" width="120">
               <template #default="{ row }">
-                <el-input
-                  v-model="row.label"
-                  placeholder="请输入列名"
-                ></el-input>
+                <el-input v-model="row.label" placeholder="请输入列名" />
               </template>
             </el-tableColumn>
 
@@ -52,59 +49,77 @@
 
             <el-tableColumn label="是否显示" prop="isShow" width="80">
               <template #default="{ row }">
-                <el-switch v-model="row.isShow"></el-switch>
+                <el-switch v-model="row.isShow" />
               </template>
             </el-tableColumn>
-            <el-tableColumn label="排序" prop="sortable" width="80">
+            <el-tableColumn label="是否排序" prop="sortable" width="80">
               <template #default="{ row }">
-                <el-switch v-model="row.sortable"></el-switch>
+                <el-switch v-model="row.sortable" />
               </template>
             </el-tableColumn>
 
-            <el-tableColumn label="宽度" prop="width">
+            <el-tableColumn label="宽度" prop="width" width="180">
               <template #default="{ row }">
                 <el-inputNumber
                   controls
                   v-model="row.width"
                   placeholder="请输入宽度"
-                ></el-inputNumber>
+                />
               </template>
             </el-tableColumn>
-            <el-tableColumn label="是否排序" prop="sort">
+            <!-- <el-tableColumn label="是否排序" prop="sort">
               <template #default="{ row }">
                 <el-inputNumber
                   controls
                   v-model="row.sort"
                   placeholder="请输入排序"
-                ></el-inputNumber>
+                />
               </template>
-            </el-tableColumn>
+            </el-tableColumn> -->
 
             <el-tableColumn label="搜索条件" prop="condition">
               <template #default="{ row }">
                 <el-select v-model="row.condition">
-                  <el-option label="自定义" value="-1"></el-option>
-                  <el-option label="无" value="0"></el-option>
-                  <el-option label="等于" value="1"></el-option>
-                  <el-option label="不等于" value="2"></el-option>
-                  <el-option label="大于" value="3"></el-option>
+                  <el-option label="自定义" value="-1" />
+                  <el-option label="无" value="0" />
+                  <el-option label="等于" value="1" />
+                  <el-option label="不等于" value="2" />
+                  <el-option label="大于" value="3" />
                 </el-select>
               </template>
             </el-tableColumn>
 
-            <el-tableColumn label="插槽重写" prop="condition">
+            <el-tableColumn label="插槽重写" prop="condition" width="250">
               <template #default="{ row }">
-                <el-tag>head</el-tag>
-                <el-tag>default</el-tag>
+                <dialogCode ref="dialogHeadRef" v-model="row.headTemplate">
+                  <template #default="{ open }">
+                    <el-tag
+                      :type="row.headTemplate ? 'primary' : 'info'"
+                      @click="open"
+                      >head</el-tag
+                    >
+                  </template>
+                </dialogCode>
+
+                <dialogCode ref="dialogDefaultRef" v-model="row.template">
+                  <template #default="{ open }">
+                    <el-tag
+                      :type="row.template ? 'primary' : 'info'"
+                      @click="open"
+                      >default</el-tag
+                    >
+                  </template>
+                </dialogCode>
               </template>
             </el-tableColumn>
           </el-table>
         </VueDraggable>
       </el-form-item>
     </el-form>
+    <dialogCode ref="dialogCodeRef" />
     <template #footer>
       <div>
-        <el-button @click="restore">还原</el-button>
+        <el-button @click="restore">关闭</el-button>
         <el-button type="primary" @click="submit"> 确定 </el-button>
       </div>
     </template>
@@ -114,6 +129,7 @@
 import { TableModelInfo, UpdateTableModelParam } from "@/api/globals";
 import { CheckboxValueType, ElTable } from "element-plus";
 import { VueDraggable } from "vue-draggable-plus";
+import dialogCode from "./dialogCode.vue";
 const { tableof } = defineProps<{
   tableof: string;
 }>();
@@ -180,6 +196,9 @@ const onStart = () => {
 const onEnd = () => {
   console.log("end");
 };
-const restore = () => {};
+
+const restore = () => {
+  visible.value = false;
+};
 defineExpose({ visible });
 </script>

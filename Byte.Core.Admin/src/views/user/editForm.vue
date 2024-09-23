@@ -149,7 +149,7 @@ const {
 
 const ruleFormRef = ref<FormInstance>();
 const visible = ref(false);
-const title = ref(route.meta.title);
+const title = ref<string>(route.meta.title as string);
 const loading = ref(false);
 const close = () => {
   ruleFormRef.value?.resetFields();

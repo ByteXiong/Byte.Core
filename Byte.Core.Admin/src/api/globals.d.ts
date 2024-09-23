@@ -17,6 +17,7 @@
 import type { Alova, AlovaMethodCreateConfig, AlovaGenerics, Method } from 'alova';
 import type { $$userConfigMap, alovaInstance } from '.';
 import type apiDefinitions from './apiDefinitions';
+import { Fn } from '@vueuse/core';
 
 type CollapsedAlova = typeof alovaInstance;
 type UserMethodConfigMap = typeof $$userConfigMap;
@@ -34,15 +35,15 @@ type Alova2MethodConfig<Responded> =
       infer SE
     >
   >
-    ? Omit<
-        AlovaMethodCreateConfig<
-          AlovaGenerics<Responded, any, RequestConfig, Response, ResponseHeader, L1Cache, L2Cache, SE>,
-          any,
-          Responded
-        >,
-        'params'
-      >
-    : never;
+  ? Omit<
+    AlovaMethodCreateConfig<
+      AlovaGenerics<Responded, any, RequestConfig, Response, ResponseHeader, L1Cache, L2Cache, SE>,
+      any,
+      Responded
+    >,
+    'params'
+  >
+  : never;
 
 // Extract the return type of transform function that define in $$userConfigMap, if it not exists, use the default type.
 type ExtractUserDefinedTransformed<
@@ -50,8 +51,8 @@ type ExtractUserDefinedTransformed<
   Default
 > = DefinitionKey extends keyof UserMethodConfigMap
   ? UserMethodConfigMap[DefinitionKey]['transform'] extends (...args: any[]) => any
-    ? Awaited<ReturnType<UserMethodConfigMap[DefinitionKey]['transform']>>
-    : Default
+  ? Awaited<ReturnType<UserMethodConfigMap[DefinitionKey]['transform']>>
+  : Default
   : Default;
 type Alova2Method<
   Responded,
@@ -70,23 +71,23 @@ type Alova2Method<
       infer SE
     >
   >
-    ? Method<
-        AlovaGenerics<
-          CurrentConfig extends undefined
-            ? ExtractUserDefinedTransformed<DefinitionKey, Responded>
-            : CurrentConfig['transform'] extends (...args: any[]) => any
-              ? Awaited<ReturnType<CurrentConfig['transform']>>
-              : ExtractUserDefinedTransformed<DefinitionKey, Responded>,
-          any,
-          RequestConfig,
-          Response,
-          ResponseHeader,
-          L1Cache,
-          L2Cache,
-          SE
-        >
-      >
-    : never;
+  ? Method<
+    AlovaGenerics<
+      CurrentConfig extends undefined
+      ? ExtractUserDefinedTransformed<DefinitionKey, Responded>
+      : CurrentConfig['transform'] extends (...args: any[]) => any
+      ? Awaited<ReturnType<CurrentConfig['transform']>>
+      : ExtractUserDefinedTransformed<DefinitionKey, Responded>,
+      any,
+      RequestConfig,
+      Response,
+      ResponseHeader,
+      L1Cache,
+      L2Cache,
+      SE
+    >
+  >
+  : never;
 
 export type PagerInfo = {
   totalRowCount?: number;

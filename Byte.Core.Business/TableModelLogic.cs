@@ -97,9 +97,8 @@ namespace Byte.Core.Business
         public async Task<Guid> AddAsync(AddTableModelParam param)
         {
             TableModel model = param.Adapt<TableModel>();
-            model.TableColumns = null;
-            var aa = model.TableColumns.FirstOrDefault().Id;
-            await AddAsync(model);
+            //var aa = model.TableColumns.FirstOrDefault().Id;
+            //await AddAsync(model);
            await _unitOfWork.GetDbClient().InsertNav(model).Include(x=>x.TableColumns).ExecuteCommandAsync();
             return model.Id;
         }
