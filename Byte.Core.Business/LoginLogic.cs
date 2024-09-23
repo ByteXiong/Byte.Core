@@ -14,7 +14,7 @@ namespace Byte.Core.Business
         /// <summary>
         /// 
         /// </summary>
-        public readonly UserRepository _userRepository;
+         readonly UserRepository _userRepository= userRepository;
 
         /// <summary>
         /// 账号登录
