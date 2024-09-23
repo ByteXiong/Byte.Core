@@ -17,7 +17,6 @@
 import type { Alova, AlovaMethodCreateConfig, AlovaGenerics, Method } from 'alova';
 import type { $$userConfigMap, alovaInstance } from '.';
 import type apiDefinitions from './apiDefinitions';
-import { Fn } from '@vueuse/core';
 
 type CollapsedAlova = typeof alovaInstance;
 type UserMethodConfigMap = typeof $$userConfigMap;
@@ -35,15 +34,15 @@ type Alova2MethodConfig<Responded> =
       infer SE
     >
   >
-  ? Omit<
-    AlovaMethodCreateConfig<
-      AlovaGenerics<Responded, any, RequestConfig, Response, ResponseHeader, L1Cache, L2Cache, SE>,
-      any,
-      Responded
-    >,
-    'params'
-  >
-  : never;
+    ? Omit<
+        AlovaMethodCreateConfig<
+          AlovaGenerics<Responded, any, RequestConfig, Response, ResponseHeader, L1Cache, L2Cache, SE>,
+          any,
+          Responded
+        >,
+        'params'
+      >
+    : never;
 
 // Extract the return type of transform function that define in $$userConfigMap, if it not exists, use the default type.
 type ExtractUserDefinedTransformed<
@@ -51,8 +50,8 @@ type ExtractUserDefinedTransformed<
   Default
 > = DefinitionKey extends keyof UserMethodConfigMap
   ? UserMethodConfigMap[DefinitionKey]['transform'] extends (...args: any[]) => any
-  ? Awaited<ReturnType<UserMethodConfigMap[DefinitionKey]['transform']>>
-  : Default
+    ? Awaited<ReturnType<UserMethodConfigMap[DefinitionKey]['transform']>>
+    : Default
   : Default;
 type Alova2Method<
   Responded,
@@ -71,23 +70,23 @@ type Alova2Method<
       infer SE
     >
   >
-  ? Method<
-    AlovaGenerics<
-      CurrentConfig extends undefined
-      ? ExtractUserDefinedTransformed<DefinitionKey, Responded>
-      : CurrentConfig['transform'] extends (...args: any[]) => any
-      ? Awaited<ReturnType<CurrentConfig['transform']>>
-      : ExtractUserDefinedTransformed<DefinitionKey, Responded>,
-      any,
-      RequestConfig,
-      Response,
-      ResponseHeader,
-      L1Cache,
-      L2Cache,
-      SE
-    >
-  >
-  : never;
+    ? Method<
+        AlovaGenerics<
+          CurrentConfig extends undefined
+            ? ExtractUserDefinedTransformed<DefinitionKey, Responded>
+            : CurrentConfig['transform'] extends (...args: any[]) => any
+              ? Awaited<ReturnType<CurrentConfig['transform']>>
+              : ExtractUserDefinedTransformed<DefinitionKey, Responded>,
+          any,
+          RequestConfig,
+          Response,
+          ResponseHeader,
+          L1Cache,
+          L2Cache,
+          SE
+        >
+      >
+    : never;
 
 export type PagerInfo = {
   totalRowCount?: number;
@@ -1106,72 +1105,6 @@ export type UpdateUserParam = {
 declare global {
   interface Apis {
     Demo: {
-      /**
-       * ---
-       *
-       * [GET] 取消请求测试
-       *
-       * **path:** /api/Demo/CancelRequest
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: number
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      get_api_demo_cancelrequest<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }>
-      >(
-        config?: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: number;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Demo.get_api_demo_cancelrequest',
-        Config
-      >;
       /**
        * ---
        *

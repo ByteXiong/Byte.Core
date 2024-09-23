@@ -77,9 +77,10 @@ namespace Byte.Core.Api.Controllers
         public async Task<int> DeleteAsync(Guid[] ids) => await _logic.DeleteAsync(ids);
 
         /// <summary>
-        ///  设置状态
+        /// 设置状态
         /// </summary>
-        /// <param name="ids"></param>
+        /// <param name="id"></param>
+        /// <param name="state"></param>
         /// <returns></returns>
         [HttpPut]
         [ApiVersion("1.0", Deprecated = false)]

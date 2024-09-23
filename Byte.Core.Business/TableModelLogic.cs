@@ -1,22 +1,27 @@
-﻿using Byte.Core.Repository;
-using Byte.Core.Repository;
-using Byte.Core.Entity;
-using Byte.Core.SqlSugar;
-using Byte.Core.Models;
-using Microsoft.AspNetCore.Mvc;
-using Byte.Core.Common.Extensions;
-using Mapster;
-using System.Linq.Expressions;
-using Byte.Core.Tools;
+﻿using Byte.Core.Common.Extensions;
 using Byte.Core.Common.Helpers;
+using Byte.Core.Entity;
+using Byte.Core.Models;
+using Byte.Core.Repository;
+using Byte.Core.SqlSugar;
+using Mapster;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Byte.Core.Business
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class TableModelLogic : BaseBusinessLogic<Guid, TableModel, TableModelRepository>
     {
         readonly IUnitOfWork _unitOfWork;
-        public TableModelLogic( TableModelRepository repository, IUnitOfWork unitOfWork) : base(repository)
+
+        /// <summary></summary>
+        /// <param name="repository"></param>
+        /// <param name="unitOfWork"></param>
+        public TableModelLogic(TableModelRepository repository, IUnitOfWork unitOfWork) : base(repository)
         {
             _unitOfWork = unitOfWork;
         }
@@ -35,6 +40,7 @@ namespace Byte.Core.Business
                 param.KeyWord = param.KeyWord.Trim();
                 where = where.And(x => x.Table.Contains(param.KeyWord));
             }
+
             var page = await GetIQueryable(where).Select<TableModelDTO>().ToPagedResultsAsync(param);
 
             return page;
@@ -45,7 +51,7 @@ namespace Byte.Core.Business
         /// <summary>
         /// 查询详情
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="param"></param>
         /// <returns></returns>
         public async Task<TableModelInfo> GetInfoAsync(TableModelInfoParam param)
         {
@@ -56,34 +62,31 @@ namespace Byte.Core.Business
             //else{
             //    where = where.And(x => x.Table == param.Table && x.Router == param.Router);
             //}
-            var entity1 = await Repository.GetIQueryable(where)
-           .Includes(x => x.TableColumns)
-           .Select<TableModelInfo>(x => new TableModelInfo()
-           {
-               TableColumns = x.TableColumns,
-           }, true).ToListAsync();
+     
             var entity = await Repository.GetIQueryable(where)
-                .Includes(x => x.TableColumns.OrderBy(x=>x.Sort).ToList())
-                .Select<TableModelInfo>(x=>new TableModelInfo() { 
-                 TableColumns = x.TableColumns,
-                },true).FirstAsync();
-          
+                .Includes(x => x.TableColumns.OrderBy(column => column.Sort).ToList())
+                .Select(x => new TableModelInfo()
+                {
+                    TableColumns = x.TableColumns,
+                }, true).FirstAsync();
+
             var sysList = GetXml(param.Table);
-            if (entity == null) {
+            if (entity == null)
+            {
                 return sysList;
             }
-               var props1 = entity.TableColumns.Select(x => x.Prop).ToList();
-               var props2 = sysList.TableColumns.Select(x => x.Prop).ToList();
-               var props = props1.Union(props2).Distinct().ToList();
+
+            var props1 = entity.TableColumns.Select(x => x.Prop).ToList();
+            var props2 = sysList.TableColumns.Select(x => x.Prop).ToList();
+            var props = props1.Union(props2).Distinct().ToList();
             var list = new List<TableColumn>();
             foreach (var item in props)
             {
-                 var model=   entity.TableColumns.FirstOrDefault(x => x.Prop == item);
-                  if(model==null){
-                    model = sysList.TableColumns.FirstOrDefault(x => x.Prop == item);
-                  }
+                var model = entity.TableColumns.FirstOrDefault(x => x.Prop == item);
+                model ??= sysList.TableColumns.FirstOrDefault(x => x.Prop == item);
                 list.Add(model);
             }
+
             entity.TableColumns = list;
             return entity;
         }
@@ -99,7 +102,7 @@ namespace Byte.Core.Business
             TableModel model = param.Adapt<TableModel>();
             //var aa = model.TableColumns.FirstOrDefault().Id;
             //await AddAsync(model);
-           await _unitOfWork.GetDbClient().InsertNav(model).Include(x=>x.TableColumns).ExecuteCommandAsync();
+            await _unitOfWork.GetDbClient().InsertNav(model).Include(x => x.TableColumns).ExecuteCommandAsync();
             return model.Id;
         }
 
@@ -140,36 +143,41 @@ namespace Byte.Core.Business
 
             Assembly assIBll = Assembly.LoadFrom(AppDomain.CurrentDomain.BaseDirectory + "/" + typeName + ".dll");
             //加载dll后,需要使用dll中某类.
-            Type type = assIBll.GetType($"{typeName}.{table}");//获取类名，必须 命名空间+类名 
+            Type type = assIBll.GetType($"{typeName}.{table}"); //获取类名，必须 命名空间+类名 
 
 
-            var props = type.GetProperties();
-
-            var entity = new TableModelInfo();
-            entity.Table = table;
-            entity.Comment = xmlCommentHelper.GetComment($"T:{type.FullName}", "summary");
-            var list = new List<TableColumn>();
-            for (int i = 0; i < props.Length; i++)
+            if (type != null)
             {
-                MemberInfo prop = props[i];
-                var label = xmlCommentHelper.GetFieldOrPropertyComment(prop);
-                var model = new TableColumn()
+                var props = type.GetProperties();
+
+                var entity = new TableModelInfo();
+                entity.Table = table;
+                entity.Comment = xmlCommentHelper.GetComment($"T:{type.FullName}", "summary");
+                var list = new List<TableColumn>();
+                for (int i = 0; i < props.Length; i++)
                 {
-                    Label = label.Trim(),
-                    Prop = prop.Name.ToFirstLowerStr(),//转小写,
-                    Width = 0,
-                    Sort = i + 99,
-                };
-                list.Add(model);
+                    MemberInfo prop = props[i];
+                    var label = xmlCommentHelper.GetFieldOrPropertyComment(prop);
+                    var model = new TableColumn()
+                    {
+                        Label = label.Trim(),
+                        Prop = prop.Name.ToFirstLowerStr(), //转小写,
+                        Width = 0,
+                        Sort = i + 99,
+                    };
+                    list.Add(model);
+                }
+
+                entity.TableColumns = list;
+
+                return entity;
             }
-            entity.TableColumns = list;
 
-            return entity;
+            return new();
         }
-
-
-
-
-       
     }
+
+
+
+
 }

@@ -7,6 +7,7 @@ using Byte.Core.Common.Extensions;
 using Mapster;
 using System.Linq.Expressions;
 using Byte.Core.Tools;
+using LogicExtensions;
 
 namespace Byte.Core.Business
 {
@@ -158,5 +159,19 @@ namespace Byte.Core.Business
         /// <param name="ids"></param>
         /// <returns></returns>
         public async Task<int> SetStateAsync(Guid id, bool state) => await UpdateAsync(x => id == x.Id, x => new User { State = state });
+
+
+
+
+        public async Task<int> SetPassword(Guid Id, string password)
+        {
+            var
+           await UpdateAsync(x => id == x.Id, x => new User { x.Password = password.Md5()));
+
+        }
+
+
+
+
     }
 }

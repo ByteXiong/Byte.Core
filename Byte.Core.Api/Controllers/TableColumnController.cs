@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace Byte.Core.Api.Controllers
 {
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="logic"></param>
     [Route("api/[controller]/[action]")]
     public class TableColumnController(TableColumnLogic logic) : BaseApiController
     {

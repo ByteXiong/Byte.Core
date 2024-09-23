@@ -25,7 +25,6 @@ namespace Byte.Core.Models
     public class UpdateUserParam : AddUserParam
     {
 
-
     }
 
     /// <summary>
@@ -85,6 +84,11 @@ namespace Byte.Core.Models
     /// </summary>
     public class UserInfo : User
     {
+
+    }
+
+    public class SetPasswordParam { 
+    public  Guid Id { get; set; }
 
     }
 }

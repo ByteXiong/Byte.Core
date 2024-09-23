@@ -12,9 +12,14 @@ using Byte.Core.Common.Helpers;
 using System.Reflection;
 
 namespace Byte.Core.Business
-{
+{/// <summary>
+/// 
+/// </summary>
     public class TableColumnLogic : BaseBusinessLogic<Guid, TableColumn, TableColumnRepository>
-    {
+    {/// <summary>
+    /// 
+    /// </summary>
+    /// <param name="repository"></param>
         public TableColumnLogic( TableColumnRepository repository) : base(repository)
         {
         }

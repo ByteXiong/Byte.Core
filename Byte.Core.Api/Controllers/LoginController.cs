@@ -2,13 +2,9 @@
 using Asp.Versioning;
 using Byte.Core.Api.Common;
 using Byte.Core.Business;
-using Byte.Core.Common;
 using Byte.Core.Common.Attributes;
-using Byte.Core.Common.SnowflakeIdHelper;
 using Byte.Core.Models;
-using Lazy.Captcha.Core;
 using Microsoft.AspNetCore.Mvc;
-using Byte.Core.Common.Filters;
 
 namespace Byte.Core.Api.Controllers
 {
@@ -17,10 +13,10 @@ namespace Byte.Core.Api.Controllers
     /// </summary>
     [Route("api/[controller]/[action]")]
     //public class LoginController(LoginLogic _logic, ICaptcha captcha) : BaseApiController
-    public class LoginController(LoginLogic _logic) : BaseApiController
+    public class LoginController(LoginLogic logic) : BaseApiController
     {
         //private readonly ICaptcha _captcha = captcha ?? throw new ArgumentNullException(nameof(ICaptcha));
-        private readonly LoginLogic _userLogic = _logic ?? throw new ArgumentNullException(nameof(LoginLogic));
+        private readonly LoginLogic _logic = logic ?? throw new ArgumentNullException(nameof(logic));
 
 
 
@@ -48,6 +44,11 @@ namespace Byte.Core.Api.Controllers
         //}
 
 
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         [HttpPost]
         [NoCheckJWT]
         [ApiVersion("1.0", Deprecated = false)]
@@ -67,7 +68,6 @@ namespace Byte.Core.Api.Controllers
         /// <summary>
         /// 微信登录
         /// </summary>
-        /// <param name="param"></param>
         /// <returns></returns>
         [HttpPost]
 
@@ -79,7 +79,6 @@ namespace Byte.Core.Api.Controllers
         /// <summary>
         /// 获取登录信息
         /// </summary>
-        /// <param name="param"></param>
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
@@ -89,7 +88,6 @@ namespace Byte.Core.Api.Controllers
         /// <summary>
         /// 退出登录
         /// </summary>
-        /// <param name="param"></param>
         /// <returns></returns>
         [HttpPost]
         [NoCheckJWT]

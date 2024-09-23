@@ -11,6 +11,10 @@ namespace Byte.Core.Business
     /// </summary>
     public class DeptLogic : BaseBusinessLogic<Guid, Dept, DeptRepository>
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="repository"></param>
         public DeptLogic(DeptRepository repository) : base(repository)
         {
         }
@@ -91,9 +95,10 @@ namespace Byte.Core.Business
         public async Task<int> DeleteAsync(Guid[] ids) => await DeleteAsync(x => ids.Contains(x.Id));
 
         /// <summary>
-        ///  设置状态
+        /// 设置状态
         /// </summary>
-        /// <param name="ids"></param>
+        /// <param name="id"></param>
+        /// <param name="state"></param>
         /// <returns></returns>
         public async Task<int> SetStateAsync(Guid id, bool state) => await UpdateAsync(x => id == x.Id, x => new Dept { State = state });
     }

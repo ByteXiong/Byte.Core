@@ -10,6 +10,8 @@ namespace Byte.Core.Business
     /// </summary>
     public class RedisDemoLogic : BaseBusinessLogic<Guid, RedisDemo, RedisDemoRepository>
     {
+        /// <summary />
+        /// <param name="repository"></param>
         public RedisDemoLogic(RedisDemoRepository repository) : base(repository)
         {
         }
@@ -45,11 +47,11 @@ namespace Byte.Core.Business
               return list;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ids"></param>
-        /// <returns></returns>
+/// <summary>
+/// 
+/// </summary>
+/// <param name="id"></param>
+/// <returns></returns>
         [HasRedisInterceptor(ParamConfig.HRedisDemoKey, "", 30, HasRedisRange.Params)]
         public virtual async Task<List<RedisDemo>> GetByIdAsync( Guid id)
         {
@@ -58,11 +60,12 @@ namespace Byte.Core.Business
             return list;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ids"></param>
-        /// <returns></returns>
+/// <summary>
+/// 
+/// </summary>
+/// <param name="ids"></param>
+/// <param name="code"></param>
+/// <returns></returns>
         [HasRedisInterceptor(ParamConfig.HRedisDemoKey, "", 30, HasRedisRange.Params)]
         public virtual async Task<List<RedisDemo>> GetByIdAsync(Guid[] ids,  string code)
         {
