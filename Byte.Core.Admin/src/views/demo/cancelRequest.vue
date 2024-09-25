@@ -6,6 +6,16 @@
       {{ data }}
       {{ error }}
     </el-card>
+    <el-card shadow="never" class="table-container">
+      <el-button type="primary" @click="getSync1()" :loading="loading1"
+        >同步请求测试1</el-button
+      >
+      {{ getSync1Data }}
+      <el-button type="primary" @click="getSync2()" :loading="loading2"
+        >同步请求测试2</el-button
+      >
+      {{ getSync2Data }}
+    </el-card>
   </div>
 </template>
 <script setup lang="ts">
@@ -69,4 +79,38 @@ const abort = () => {
 //   data.value = "";
 //   controller.abort();
 // };
+
+const {
+  data: getSync1Data,
+  loading: loading1,
+  send: getSync1,
+} = useRequest(
+  () =>
+    Apis.Demo.get_api_demo_getsync({
+      transform: (res) => {
+        return res.data;
+      },
+      cacheFor: 0,
+    }),
+  {
+    immediate: false,
+  }
+);
+
+const {
+  data: getSync2Data,
+  loading: loading2,
+  send: getSync2,
+} = useRequest(
+  () =>
+    Apis.Demo.get_api_demo_getsync({
+      transform: (res) => {
+        return res.data;
+      },
+      cacheFor: 0,
+    }),
+  {
+    immediate: false,
+  }
+);
 </script>

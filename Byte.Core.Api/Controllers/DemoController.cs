@@ -96,5 +96,30 @@ namespace Byte.Core.Api.Controllers
         }
 
 
+        /// <summary>
+        /// 同步请求
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [NoCheckJWT]
+        [ApiVersion("1.0", Deprecated = false)]
+        public string GetSync()
+        {
+             var str = DateTime.Now.ToString();
+            var i = 0;
+            while (i <=10)
+            {
+                Thread.Sleep(1000);
+                i++;
+            }
+            ////线程暂停
+            //// 挂起当前线程1秒钟
+          
+            var a = $"{str}-{DateTime.Now.ToString()}";
+            Console.WriteLine(a);
+            return a;
+        }
+
     }
 }
