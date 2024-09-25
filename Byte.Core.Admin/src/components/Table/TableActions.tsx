@@ -30,7 +30,7 @@ export default defineComponent({
     // const appStore = useAppStore();
     // const { t } = useI18n();
     // const sizeMap = computed(() => appStore.sizeMap);
-    const showSetting = ref(true);
+    const showSetting = ref(false);
 
     const refresh = () => {
       emit("refresh");

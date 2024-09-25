@@ -7,8 +7,6 @@ using Byte.Core.Entity;
 using Byte.Core.Models;
 using Byte.Core.SqlSugar;
 using Microsoft.AspNetCore.Mvc;
-using NPOI.SS.Formula.Functions;
-using System.Linq.Expressions;
 
 namespace Byte.Core.Api.Controllers
 {
@@ -22,6 +20,11 @@ namespace Byte.Core.Api.Controllers
         readonly RedisDemoLogic _logic = logic;
 
 
+        /// <summary>
+        /// 插入
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
         [HttpPost]
         [ApiVersion("1.0", Deprecated = false)]
         public async Task<ExcutedResult<int>>  SetRoleDataAsync(int num =50000)
@@ -33,14 +36,13 @@ namespace Byte.Core.Api.Controllers
                 list.Add(new RedisDemo
                 {
                     Id = Guid.NewGuid(),
-                    Name = $"name{DateTime.Now.ToString("yyyyMMddHHmmssfff")}",
+                    Name = $"name{DateTime.Now:yyyyMMddHHmmssfff}",
                     Sort = i,
                     Code = $"Code{i/3}"
                 });
             }
-            
 
-           var date = DateTime.Now;
+            var date = DateTime.Now;
             int count = await _unitOfWork.GetDbClient().Fastest<RedisDemo>().BulkCopyAsync(list);
             //int count =  await _unitOfWork.GetDbClient().Insertable(list).PageSize(100).ExecuteCommandAsync();
             var tep = DateTime.Now - date;
@@ -68,7 +70,7 @@ namespace Byte.Core.Api.Controllers
         /// <summary>
         /// 取消请求测试
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [HttpGet]
         [NoCheckJWT]

@@ -1,14 +1,12 @@
-﻿using Byte.Core.SqlSugar;
-using Byte.Core.Entity;
-using Byte.Core.Repository;
-using Byte.Core.Models;
-using Byte.Core.Tools;
-using System.Linq.Expressions;
-using Mapster;
+﻿using Byte.Core.Common.Attributes.RedisAttribute;
 using Byte.Core.Common.Extensions;
-using Byte.Core.Common.Attributes.RedisAttribute;
-using Microsoft.AspNetCore.Mvc;
-using AspectCore.DynamicProxy;
+using Byte.Core.Entity;
+using Byte.Core.Models;
+using Byte.Core.Repository;
+using Byte.Core.SqlSugar;
+using Byte.Core.Tools;
+using Mapster;
+using System.Linq.Expressions;
 
 namespace Byte.Core.Business
 {
@@ -17,6 +15,8 @@ namespace Byte.Core.Business
     /// </summary>
     public class RoleLogic : BaseBusinessLogic<Guid, Role, RoleRepository>
     {
+        /// <summary />
+        /// <param name="repository"></param>
         public RoleLogic(RoleRepository repository) : base(repository) { }
 
 
@@ -81,7 +81,6 @@ namespace Byte.Core.Business
         /// <summary>
         /// 下拉框
         /// </summary>
-        /// <param name="parentId"></param>
         /// <returns></returns>
         public async Task<List<RoleSelectDTO>> SelectAsync()
         {
@@ -90,11 +89,9 @@ namespace Byte.Core.Business
         }
 
 
-
         /// <summary>
         /// 下拉框
         /// </summary>
-        /// <param name="parentId"></param>
         /// <returns></returns>
         //[HasRedis("RoleSelect", "" , 30, true)]
         //[UserInformationFilter]
@@ -113,7 +110,6 @@ namespace Byte.Core.Business
         /// <summary>
         ///  设置状态
         /// </summary>
-        /// <param name="ids"></param>
         /// <returns></returns>
         public async Task<int> SetStateAsync(Guid id, bool state) => await UpdateAsync(x => id == x.Id, x => new Role { State = state });
     }

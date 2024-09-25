@@ -119,9 +119,8 @@
                   active-text="启用"
                   inactive-text="禁用"
                   @change="
-                    async (e: boolean) => {
+                    (e: string | number | boolean) => {
                       setState(scope.row.id, e);
-                      // getData();
                     }
                   "
                 />
@@ -152,6 +151,15 @@
                   size="small"
                   @click.stop="handleDelete([scope.row.id])"
                   ><i-ep-delete />删除</el-button
+                >
+                <el-button
+                  :loading="loading"
+                  v-hasPerm="['user/update']"
+                  type="primary"
+                  link
+                  size="small"
+                  @click.stop="openPwd(scope.row.id)"
+                  ><i-ep-edit />设置密码</el-button
                 >
               </template>
             </el-table-column>

@@ -5,7 +5,7 @@ using Byte.Core.Models;
 using Byte.Core.SqlSugar;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Repair.Core.Api.Controllers
+namespace Byte.Core.Api.Controllers
 {
     /// <summary>
     /// 角色
@@ -67,16 +67,16 @@ namespace Repair.Core.Api.Controllers
         /// <summary>
         /// 下拉框
         /// </summary>
-        /// <param name="parentId"></param>
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
         public async Task<List<RoleSelectDTO>> SelectAsync() => await _logic.SelectAsync();
 
         /// <summary>
-        ///  设置状态
+        /// 设置状态
         /// </summary>
-        /// <param name="ids"></param>
+        /// <param name="id"></param>
+        /// <param name="state"></param>
         /// <returns></returns>
         [HttpPut]
         [ApiVersion("1.0", Deprecated = false)]

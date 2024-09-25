@@ -7,9 +7,7 @@ using Byte.Core.Repository;
 using Byte.Core.SqlSugar;
 using Byte.Core.Tools;
 using Mapster;
-using SqlSugar;
 using System.Linq.Expressions;
-using Byte.Core.Tools;
 namespace Byte.Core.Business
 {
     /// <summary>
@@ -17,7 +15,10 @@ namespace Byte.Core.Business
     /// </summary>
     public class MenuLogic : BaseBusinessLogic<Guid, Menu, MenuRepository>
     {
-
+        /// <summary>
+        /// 构造
+        /// </summary>
+        /// <param name="repository"></param>
         public MenuLogic(MenuRepository repository) : base(repository)
         {
 
@@ -29,20 +30,18 @@ namespace Byte.Core.Business
         /// <summary>
         /// 列表
         /// </summary>
-        /// <param name="param"></param>
         /// <returns></returns>
         public async Task<List<MenuTreeDTO>> GetTreeAsync()
         {
-            var tree2 = await GetIQueryable().OrderByDescending(x => x.Sort).ToTreeAsync(it => it.Children, it => it.ParentId, null, it => it.Id);
+
             var tree = await GetIQueryable().OrderByDescending(x => x.Sort).Select<MenuTreeDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, null, it => it.Id);
             return tree;
         }
 
-
         /// <summary>
         /// 下拉框
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="parentId"></param>
         /// <returns></returns>
         public async Task<List<MenuSelectDTO>> GetTreeSelectAsync(Guid? parentId = null)
         {
@@ -59,7 +58,27 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<MenuInfo> GetInfoAsync(Guid id)
         {
-            var entity = await GetIQueryable(x => x.Id == id).Select<MenuInfo>(x => new MenuInfo { }, true).FirstAsync();
+            var entity = await GetIQueryable(x => x.Id == id).Select(x => new MenuInfo
+                {
+
+                //Title = x.Title,
+                //Path = null,
+                //Component = null,
+                //ComponentName = null,
+                //ParentId = null,
+                //Sort = 0,
+                //Icon = null,
+                //Type = (MenuTypeEnum)0,
+                //KeepAlive = false,
+                //Hidden = false,
+                //Redirect = null,
+                //AlwaysShow = false,
+                //State = false,
+                //IsDeleted = false,
+                //Roles = null,
+                //Children = null
+
+                },true).FirstAsync();
 
             return entity;
         }
@@ -120,9 +139,10 @@ namespace Byte.Core.Business
 
 
         /// <summary>
-        ///  设置状态
+        /// 设置状态
         /// </summary>
-        /// <param name="ids"></param>
+        /// <param name="id"></param>
+        /// <param name="state"></param>
         /// <returns></returns>
         public async Task<int> SetStateAsync(Guid id, bool state) => await UpdateAsync(x => id == x.Id, x => new Menu { State = state });
 

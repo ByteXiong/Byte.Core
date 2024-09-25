@@ -7,10 +7,11 @@ namespace Byte.Core.Business
     /// <summary>
     /// 角色-菜单
     /// </summary>
-    public class Role_MenuLogic : BaseBusinessLogic<Guid, Role_Menu, Role_MenuRepository>
+    public class RoleMenuLogic : BaseBusinessLogic<Guid, Role_Menu, Role_MenuRepository>
     {
-
-        public Role_MenuLogic(Role_MenuRepository repository) : base(repository)
+        /// <summary />
+        /// <param name="repository"></param>
+        public RoleMenuLogic(Role_MenuRepository repository) : base(repository)
         {
 
         }

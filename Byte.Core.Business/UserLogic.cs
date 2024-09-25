@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Byte.Core.Common.Extensions;
 using Mapster;
 using System.Linq.Expressions;
+using Byte.Core.Common.Filters;
 using Byte.Core.Tools;
+using LogicExtensions;
+using NPOI.OpenXmlFormats.Dml;
 
 namespace Byte.Core.Business
 {
@@ -158,5 +161,19 @@ namespace Byte.Core.Business
         /// <param name="ids"></param>
         /// <returns></returns>
         public async Task<int> SetStateAsync(Guid id, bool state) => await UpdateAsync(x => id == x.Id, x => new User { State = state });
+
+
+
+
+        public async Task<int> SetPassword(SetPasswordParam param)
+        {
+            var oldPwd = param.OldPassword.Md5();
+            var newPwd = param.NewPassword.Md5();
+            var any = await GetIQueryable(x => x.Id != param.Id && x.Password == oldPwd).AnyAsync();
+            if (!any)
+                throw new BusException("旧密码不正确");
+            return await UpdateAsync(x => param.Id == x.Id, x => new User { Password = newPwd });
+
+        }
     }
 }

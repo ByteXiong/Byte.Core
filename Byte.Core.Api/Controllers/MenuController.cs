@@ -4,9 +4,7 @@ using Byte.Core.Api.Common;
 using Byte.Core.Business;
 using Byte.Core.Entity;
 using Byte.Core.Models;
-using Mapster;
 using Microsoft.AspNetCore.Mvc;
-using SqlSugar;
 
 namespace Byte.Core.Api.Controllers
 {
@@ -22,7 +20,6 @@ namespace Byte.Core.Api.Controllers
         /// <summary>
         /// 列表
         /// </summary>
-        /// <param name="param"></param>
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
@@ -32,7 +29,6 @@ namespace Byte.Core.Api.Controllers
         /// <summary>
         /// 下拉框
         /// </summary>
-        /// <param name="param"></param>
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
@@ -67,9 +63,10 @@ namespace Byte.Core.Api.Controllers
         }
 
         /// <summary>
-        ///  设置状态
+        /// 设置状态
         /// </summary>
-        /// <param name="ids"></param>
+        /// <param name="id"></param>
+        /// <param name="state"></param>
         /// <returns></returns>
         [HttpPut]
         [ApiVersion("1.0", Deprecated = false)]

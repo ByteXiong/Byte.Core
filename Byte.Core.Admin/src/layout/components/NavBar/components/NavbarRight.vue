@@ -28,6 +28,9 @@
       </div>
       <template #dropdown>
         <el-dropdown-menu>
+          <el-dropdown-item divided @click="openUserInfo">
+            个人信息
+          </el-dropdown-item>
           <a target="_blank" href="https://gitee.com/ByteXiong/Byte.Core">
             <el-dropdown-item>项目地址</el-dropdown-item>
           </a>
@@ -38,6 +41,7 @@
       </template>
     </el-dropdown>
 
+    <userInfo ref="userInfoRef" />
     <!-- 设置 -->
     <template v-if="defaultSettings.showSettings">
       <div class="setting-item" @click="settingStore.settingsVisible = true">
@@ -55,6 +59,7 @@ import {
 } from "@/store";
 import defaultSettings from "@/settings";
 import { useRoute, useRouter } from "vue-router";
+import userInfo from "@/views/user/info.vue";
 const upuloadUrl = import.meta.env.VITE_UPLOAD_PROXY_PREFIX;
 const appStore = useAppStore();
 const tagsViewStore = useTagsViewStore();
@@ -89,6 +94,10 @@ function logout() {
       });
   });
 }
+const userInfoRef = ref();
+const openUserInfo = () => {
+  userInfoRef.value.visible = true;
+};
 </script>
 <style lang="scss" scoped>
 .setting-item {

@@ -2,8 +2,6 @@
 using Asp.Versioning;
 using Byte.Core.Api.Common;
 using Byte.Core.Business;
-using Byte.Core.Common.Extensions;
-using Byte.Core.Entity;
 using Byte.Core.Models;
 using Byte.Core.SqlSugar;
 using Microsoft.AspNetCore.Mvc;
@@ -65,9 +63,10 @@ namespace Byte.Core.Api.Controllers
 
 
         /// <summary>
-        ///  设置状态
+        /// 设置状态
         /// </summary>
-        /// <param name="ids"></param>
+        /// <param name="id"></param>
+        /// <param name="state"></param>
         /// <returns></returns>
         [HttpPut]
         [ApiVersion("1.0", Deprecated = false)]

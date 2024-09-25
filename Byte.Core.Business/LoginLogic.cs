@@ -9,13 +9,12 @@ using System.Linq.Expressions;
 using Byte.Core.Tools;
 namespace Byte.Core.Business
 {
-    public class LoginLogic
+    public class LoginLogic(UserRepository userRepository)
     {
-        public readonly UserRepository _userRepository;
-        public LoginLogic(UserRepository userRepository)
-        {
-            _userRepository = userRepository;
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+         readonly UserRepository _userRepository= userRepository;
 
         /// <summary>
         /// 账号登录
@@ -51,8 +50,8 @@ namespace Byte.Core.Business
         /// <summary>
         /// 微信登录
         /// </summary>
-        /// <param name="param"></param>
         /// <returns></returns>
+        /// <exception cref="BusException"></exception>
         public async Task<LoginToken> WeChatAsync()
         {
             Expression<Func<User, bool>> where = x => x.Account == "admin";
@@ -89,20 +88,24 @@ namespace Byte.Core.Business
         /// <summary>
         /// 退出登录
         /// </summary>
-        /// <param name="param"></param>
         /// <returns></returns>
         public async Task LoginOutAsync()
         {
 
         }
 
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="jwtPayload"></param>
+        /// <returns></returns>
         private async Task<LoginToken> LoginTokenAsync(JWTPayload jwtPayload)
         {
             jwtPayload.RoleCode = "ROOT";
             jwtPayload.Expire = DateTime.Now.AddDays(30);
             //jwtPayload.Expire = DateTime.Now.AddSeconds(60);
             //entity.Roles = await _user_RoleLogic.GetIQueryable(x => x.UserId == entity.Id).Select(x => x.RoleId).ToArrayAsync();
-            var str = ObjectExtension.ToJson(jwtPayload);
+            var str = jwtPayload.ToJson();
             string token = JWTHelper.SetToken(str, JWTHelper.JWTSecret);
             var loginToken = new LoginToken()
             {

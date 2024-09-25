@@ -1,12 +1,11 @@
 ﻿using Asp.Versioning;
+using Byte.Core.Api.Common;
 using Byte.Core.Common.Extensions;
 using Byte.Core.Common.Filters;
-using Byte.Core.Api.Common;
-using Microsoft.AspNetCore.Mvc;
-using Byte.Core.Common.SnowflakeIdHelper;
 using Byte.Core.Tools;
-using SixLabors.ImageSharp.Formats.Jpeg;
+using Microsoft.AspNetCore.Mvc;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
 
 namespace Byte.Core.Api.Controllers
 {
@@ -17,10 +16,6 @@ namespace Byte.Core.Api.Controllers
     public class UploadController : BaseApiController
     {
 
-
-        public UploadController()
-        {
-        }
 
         /// <summary>
         /// 上传图片
@@ -36,22 +31,23 @@ namespace Byte.Core.Api.Controllers
             if (cols == null || cols.Count == 0)
             {
                 throw new BusException("没有上传文件");
-            };
+            }
+
             List<string> list = new List<string>();
             foreach (IFormFile file in cols)
             {
                 ////定义图片数组后缀格式
-                string[] LimitPictureType = { ".jpg", ".jpeg", ".gif", ".png" };
+                string[] limitPictureType = [".jpg", ".jpeg", ".gif", ".png"];
                 ////获取图片后缀是否存在数组中
                 string currentPictureExtension = Path.GetExtension(file.FileName).ToLower();
-                if (!LimitPictureType.Contains(currentPictureExtension))
+                if (!limitPictureType.Contains(currentPictureExtension))
                 {
                     throw new BusException("格式有误,仅支持jpg、jpeg、gif、png格式");
                 }
                 //为了查看图片就不在重新生成文件名称了
                 //var new_path = DateTime.Now.ToString("yyyyMMdd")+ file.FileName;
-                var new_path = Path.Combine("upload/images/" + DateTime.Now.ToString("yyyyMMdd") + "/");
-                var pathUel = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", new_path);
+                var newPath = Path.Combine("upload/images/" + DateTime.Now.ToString("yyyyMMdd") + "/");
+                var pathUel = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", newPath);
                 if (!Directory.Exists(pathUel))
                     Directory.CreateDirectory(pathUel);
                 var ps =  DateTime.Now.ToTimeStamp();
@@ -61,7 +57,7 @@ namespace Byte.Core.Api.Controllers
                 // 使用当前质量压缩图像  
                 byte[] imageData = await FileReadAllBytesAsync(file.OpenReadStream());
                 // 压缩图片  
-                byte[] compressedImageData = CompressImage(imageData, quality); ;
+                byte[] compressedImageData = CompressImage(imageData, quality);
 
 
                 #region 反复压缩
@@ -85,39 +81,31 @@ namespace Byte.Core.Api.Controllers
                 await SaveCompressedImageAsync(compressedImageData, path);
 
                 // 保存压缩后的图片到文件系统  
-                list.Add("/" + new_path + ps + currentPictureExtension);
+                list.Add("/" + newPath + ps + currentPictureExtension);
             }
             return list;
 
 
             byte[] CompressImage(byte[] imageData, int quality)
             {
-                using (var image = Image.Load(imageData))
-                {
-                    var jpegEncoder = new JpegEncoder { Quality = quality };
+                using var image = Image.Load(imageData);
+                var jpegEncoder = new JpegEncoder { Quality = quality };
 
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        image.SaveAsJpeg(memoryStream, jpegEncoder);
-                        return memoryStream.ToArray();
-                    }
-                }
+                using var memoryStream = new MemoryStream();
+                image.SaveAsJpeg(memoryStream, jpegEncoder);
+                return memoryStream.ToArray();
             }
             async Task<byte[]> FileReadAllBytesAsync(Stream stream)
             {
-                using (var memoryStream = new MemoryStream())
-                {
-                    await stream.CopyToAsync(memoryStream);
-                    return memoryStream.ToArray();
-                }
+                using var memoryStream = new MemoryStream();
+                await stream.CopyToAsync(memoryStream);
+                return memoryStream.ToArray();
             }
 
             async Task SaveCompressedImageAsync(byte[] compressedImageData, string filePath)
             {
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    await fileStream.WriteAsync(compressedImageData, 0, compressedImageData.Length);
-                }
+                await using var fileStream = new FileStream(filePath, FileMode.Create);
+                await fileStream.WriteAsync(compressedImageData, 0, compressedImageData.Length);
             }
         }
 

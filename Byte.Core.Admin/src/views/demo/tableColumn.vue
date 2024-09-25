@@ -28,7 +28,7 @@
 <script lang="tsx" setup>
 import { ref } from "vue";
 import { ElMessageBox, ElMessage } from "element-plus";
-import TableColumn from "@/components/Table/Index";
+import TableColumn from "@/components/Table/Index.vue";
 import "@/api";
 defineOptions({
   name: "DemoTableColumn",
@@ -58,6 +58,7 @@ const {
       },
     }),
   {
+    immediate: false,
     watchingStates: [sortList],
     initialPage: 1, // 初始页码，默认为1
     initialPageSize: 10, // 初始每页数据条数，默认为10
@@ -75,7 +76,9 @@ const { send: delIds } = useRequest(
   (ids: string[]) => Apis.Menu.delete_api_menu_delete({ data: ids }),
   { immediate: false }
 );
-
+setInterval(async () => {
+  await getData();
+}, 1000);
 async function search() {
   await getData();
 }
