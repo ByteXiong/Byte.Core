@@ -80,7 +80,7 @@ namespace Byte.Core.Common.Attributes
         /// </summary>
         /// <param name="json">json字符串</param>
         /// <returns></returns>
-        protected ContentResult JsonContent(string json)
+        protected ContentResult JsonContent(string json = "")
         {
             return new ContentResult { Content = json, StatusCode = 200, ContentType = "application/json; charset=utf-8" };
         }

@@ -34,7 +34,7 @@ namespace Byte.Core.Business
         public async Task<List<MenuTreeDTO>> GetTreeAsync()
         {
 
-            var tree = await GetIQueryable().OrderByDescending(x => x.Sort).Select<MenuTreeDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, null, it => it.Id);
+            var tree = await GetIQueryable().OrderByDescending(x => x.Order).Select<MenuTreeDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, null, it => it.Id);
             return tree;
         }
 
@@ -45,7 +45,7 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<List<MenuSelectDTO>> GetTreeSelectAsync(Guid? parentId = null)
         {
-            var tree = await GetIQueryable().OrderByDescending(x => x.Sort).Select<MenuSelectDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, parentId, it => it.Id);
+            var tree = await GetIQueryable().OrderByDescending(x => x.Order).Select<MenuSelectDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, parentId, it => it.Id);
             return tree;
         }
 
@@ -118,19 +118,27 @@ namespace Byte.Core.Business
 
             await UpdateAsync(x => x.Id == param.Id, x => new Menu
             {
-                Component = param.Type == MenuTypeEnum.目录 ? "Layout" : param.Component,
+                Name = param.Name,
+                Component = param.Component,
                 Path = param.Path,
                 Icon = param.Icon,
-                ComponentName = param.ComponentName,
+                LocalIcon = param.LocalIcon,
+                IconFontSize = param.IconFontSize,
+                Order =  param.Order,
+                Href = param.Href,
+                HideInMenu = param.HideInMenu,
+                ActiveMenu = param.ActiveMenu,
+                MultiTab = param.MultiTab,
+                FixedIndexInTab = param.FixedIndexInTab,
+                Query = param.Query,
                 ParentId = param.ParentId,
-                Sort = param.Sort,
                 Type = param.Type,
-                Hidden = param.Hidden,
                 KeepAlive = param.KeepAlive,
+                Constant = param.Constant,
                 Title = param.Title,
+                I18nKey = param.I18nKey,
                 Redirect = param.Redirect,
                 State = param.State,
-                AlwaysShow = param.AlwaysShow,
             });
             //清除缓存
             MemoryCacheManager.RemoveCacheRegex(ParamConfig.RoleCaChe);
@@ -158,34 +166,42 @@ namespace Byte.Core.Business
         {
 
             var code = CurrentUser.RoleCode;
-            Expression<Func<Menu, bool>> where = x => x.Type != MenuTypeEnum.按钮;
+            Expression<Func<Menu, bool>> where = x => x.State==true && x.Type != MenuTypeEnum.按钮;
             if (code != ParamConfig.Admin)
             {
                 where = where.And(x => x.Roles.Any(y => y.Code == code));
             }
 
             var db = await GetIQueryable(where)
-                         .Includes(x => x.Roles).OrderByDescending(x => x.Sort).Select(x =>
+                         .Includes(x => x.Roles).OrderByDescending(x => x.Order).Select(x =>
                           new RouteDTO()
                           {
                               Id = x.Id,
 
-                              Meta = new RouteMeta()
+                              Meta = new RouteMeta
                               {
                                   Icon = x.Icon,
+                                  //LocalIcon = x.LocalIcon,
+                                  //IconFontSize = x.IconFontSize,
+                                  //Order = x.Order,
+                                  //Href = x.Href,
+                                  //HideInMenu = x.HideInMenu,
+                                  //ActiveMenu = x.ActiveMenu,
+                                  //MultiTab = x.MultiTab,
+                                  //FixedIndexInTab = x.FixedIndexInTab,
+                                  //Query = x.Query,
+                                  //KeepAlive = x.KeepAlive,
+                                  Constant = x.Constant,
                                   Title = x.Title,
-                                  Hidden = x.Hidden,
-                                  KeepAlive = x.KeepAlive,
-                                  AlwaysShow = x.AlwaysShow,
+                                  I18nKey = x.I18nKey,
                               },
+                              Name = x.Name,
                               Component = x.Component,
-                              Name = x.ComponentName,
                               Path = x.Path,
                               ParentId = x.ParentId,
-                              Sort = x.Sort,
-                              Type = x.Type,
-
-                              Redirect = x.Redirect
+                              //Type = x.Type,
+                              Redirect = x.Redirect,
+                              //State = x.State,
                           }).ToListAsync();
             List<RouteDTO> list = new List<RouteDTO>();
 

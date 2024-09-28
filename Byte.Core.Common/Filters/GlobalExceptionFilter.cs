@@ -9,9 +9,14 @@ using Microsoft.Data.SqlClient;
 
 namespace Byte.Core.Common.Filters
 {
-
+    /// <summary>
+    /// 异常过滤器
+    /// </summary>
     public class GlobalExceptionFilter : BaseActionFilter, IAsyncExceptionFilter
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public GlobalExceptionFilter()
         {
 
@@ -33,7 +38,10 @@ namespace Byte.Core.Common.Filters
             else if (context.Exception is SqlException sqlEx)
             {
                 Log4NetHelper.WriteError(type, sqlEx);
-                context.Result = Error(sqlEx.Message, sqlEx.Number);
+                var result = Error(sqlEx.Message, sqlEx.Number);
+                result.StatusCode = 500;
+                context.Result = result;
+                
             }
             //else
 
@@ -45,7 +53,9 @@ namespace Byte.Core.Common.Filters
             else
             {
                 Log4NetHelper.WriteError(type, context.Exception);
-                context.Result = Error(context.Exception.Message,500);
+                var result = Error(context.Exception.Message, 500);
+                result.StatusCode = 500;
+                context.Result = result;
             }
 
             await Task.CompletedTask;

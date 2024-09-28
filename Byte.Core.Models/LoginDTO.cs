@@ -99,7 +99,7 @@ namespace Byte.Core.Models
         public String Account { get; set; }
 
         public string[] Roles => new string[] { CurrentUser.RoleCode };
-        public string[] Perms { get; set; }
+        public string[] Buttons { get; set; }
 
     }
 }

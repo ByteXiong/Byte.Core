@@ -36,7 +36,7 @@ namespace Byte.Core.Business
             if (!string.IsNullOrWhiteSpace(param.KeyWord))
             {
                 param.KeyWord = param.KeyWord.Trim();
-                where = where.And(x => x.Label.Contains(param.KeyWord));
+                where = where.And(x => x.Title.Contains(param.KeyWord));
             }
             var page = await GetIQueryable(where).Select< TableColumnDTO>().ToPagedResultsAsync(param);
 

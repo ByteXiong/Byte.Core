@@ -76,14 +76,14 @@ namespace Byte.Core.Business
                 return sysList;
             }
 
-            var props1 = entity.TableColumns.Select(x => x.Prop).ToList();
-            var props2 = sysList.TableColumns.Select(x => x.Prop).ToList();
-            var props = props1.Union(props2).Distinct().ToList();
+            var keys1 = entity.TableColumns.Select(x => x.Key).ToList();
+            var keys2 = sysList.TableColumns.Select(x => x.Key).ToList();
+            var keys = keys1.Union(keys2).Distinct().ToList();
             var list = new List<TableColumn>();
-            foreach (var item in props)
+            foreach (var item in keys)
             {
-                var model = entity.TableColumns.FirstOrDefault(x => x.Prop == item);
-                model ??= sysList.TableColumns.FirstOrDefault(x => x.Prop == item);
+                var model = entity.TableColumns.FirstOrDefault(x => x.Key == item);
+                model ??= sysList.TableColumns.FirstOrDefault(x => x.Key == item);
                 list.Add(model);
             }
 
@@ -148,21 +148,20 @@ namespace Byte.Core.Business
 
             if (type != null)
             {
-                var props = type.GetProperties();
+                var keys = type.GetProperties();
 
                 var entity = new TableModelInfo();
                 entity.Table = table;
                 entity.Comment = xmlCommentHelper.GetComment($"T:{type.FullName}", "summary");
                 var list = new List<TableColumn>();
-                for (int i = 0; i < props.Length; i++)
+                for (int i = 0; i < keys.Length; i++)
                 {
-                    MemberInfo prop = props[i];
-                    var label = xmlCommentHelper.GetFieldOrPropertyComment(prop);
+                    MemberInfo key = keys[i];
+                    var title = xmlCommentHelper.GetFieldOrPropertyComment(key);
                     var model = new TableColumn()
                     {
-                        Label = label.Trim(),
-                        Prop = prop.Name.ToFirstLowerStr(), //转小写,
-                        Width = 0,
+                        Title = title.Trim(),
+                        Key = key.Name.ToFirstLowerStr(), //转小写,
                         Sort = i + 99,
                     };
                     list.Add(model);
