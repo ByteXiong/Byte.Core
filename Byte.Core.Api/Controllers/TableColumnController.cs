@@ -4,14 +4,11 @@ using Byte.Core.Business;
 using Byte.Core.Models;
 using Byte.Core.SqlSugar;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Crypto;
 
 namespace Byte.Core.Api.Controllers
 {
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="logic"></param>
+
     [Route("api/[controller]/[action]")]
     public class TableColumnController(TableColumnLogic logic) : BaseApiController
     {
@@ -63,6 +60,24 @@ namespace Byte.Core.Api.Controllers
         public async Task<int> DeleteAsync(Guid[] ids) => await _logic.DeleteAsync(ids);
 
 
+        /// <summary>
+        /// 获取头部列表
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [ApiVersion("1.0", Deprecated = false)]
+        public async Task<TableModel> GetColumnsAsync([FromQuery] TableGetColumnParam param) => await _logic.GetColumnsAsync(param);
 
+
+
+        /// <summary>
+        /// 设置列表
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ApiVersion("1.0", Deprecated = false)]
+        public async Task SetColumnsAsync(TableModel param) => await _logic.SetColumnsAsync(param);
     }
 }

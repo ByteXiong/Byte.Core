@@ -18,8 +18,14 @@ namespace Byte.Core.Entity
     [SugarTable("TableColumn")]
     public class TableColumn : BaseEntity<Guid>
     {
-
-        public Guid TableModelId { get; set; }
+        /// <summary>
+        /// 表名
+        /// </summary>
+        public string Table { get; set; }
+        /// <summary>
+        /// 路由
+        /// </summary>
+        public string Router { get; set; }
 
         /// <summary>
         /// 字段名称
@@ -127,5 +133,10 @@ namespace Byte.Core.Entity
         ///// 搜索条件
         ///// </summary>
         //public int Condition { get; set; }
+        /// <summary>
+        /// 多余参数 
+        /// </summary>
+        [SugarColumn( ColumnDataType = "text", IsNullable = true)]
+        public string Props { get; set; }
     }
 }

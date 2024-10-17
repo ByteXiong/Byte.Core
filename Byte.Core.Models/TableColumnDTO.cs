@@ -30,41 +30,8 @@ namespace Byte.Core.Models
     /// <summary>
     /// 分页
     /// </summary>
-    public class TableColumnDTO
+    public class TableColumnDTO : TableColumn
     {
-       
-        public Guid? Id { get; set; }
-        /// <summary>
-        /// 名称
-        /// </summary>
-        public String Name { get; set; }
-
-
-        /// <summary>
-        /// 头像
-        /// </summary>
-        public String Avatar { get; set; }
-
-
-        /// <summary>
-        /// 密码
-        /// </summary>
-        public String Password { get; set; }
-
-
-
-
-        /// <summary>
-        /// 状态
-        /// </summary>
-
-        public bool State { get; set; }
-
-
-        /// <summary>
-        /// 账号
-        /// </summary>
-        public String Account { get; set; }
 
 
 
@@ -86,5 +53,22 @@ namespace Byte.Core.Models
         public string Router { get; set; }
     }
 
-
+    /// <summary>
+    /// 头部醒醒
+    /// </summary>
+    public class TableModel
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public String Table { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Router { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<TableColumn> Columns { get; set; }
+    }
 }
