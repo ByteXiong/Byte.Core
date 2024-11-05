@@ -202,11 +202,13 @@ namespace Byte.Core.Business
                               //Type = x.Type,
                               Redirect = x.Redirect,
                               //State = x.State,
+                            
                           }).ToListAsync();
             List<RouteDTO> list = new List<RouteDTO>();
 
             db.ForEach(x =>
             {
+                x.Params = new Dictionary<string, dynamic>() { { "TableName", "User" } };
                 x.Children = db.Where(y => y.ParentId == x.Id).ToList();
                 if (x.ParentId == null)
                 {

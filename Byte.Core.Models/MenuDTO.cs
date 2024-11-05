@@ -180,7 +180,12 @@ namespace Byte.Core.Models
         /// 子节点
         /// </summary>
         public List<RouteDTO> Children { get; set; }
+
+        public Dictionary<string, dynamic> Params { get; set; } = new Dictionary<string, dynamic>();
+
     }
+
+
     public class RouteMeta
     {
 

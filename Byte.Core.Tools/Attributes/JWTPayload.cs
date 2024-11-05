@@ -15,7 +15,7 @@ namespace Byte.Core.Tools.Attributes
         /// <summary>
         /// 用户的账户
         /// </summary>
-        public string Account { get; set; }
+        public string UserName { get; set; }
 
         /// <summary>
         /// 用户的姓名

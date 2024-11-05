@@ -38,7 +38,7 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<PagedResults<UserDTO>> GetPageAsync([FromQuery] UserParam param)
         {
-            Expression<Func<User, bool>> where = x => x.Account!= ParamConfig.Admin;
+            Expression<Func<User, bool>> where = x => x.UserName!= ParamConfig.Admin;
             if (!string.IsNullOrWhiteSpace(param.KeyWord))
             {
                 param.KeyWord = param.KeyWord.Trim();
@@ -130,7 +130,7 @@ namespace Byte.Core.Business
                     CreateBy = param.CreateBy, //创建人
                     State = param.State, //状态
 
-                    Account = param.Account, //账号
+                    UserName = param.UserName, //账号
 
                 });
 

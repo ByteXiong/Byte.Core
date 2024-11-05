@@ -9,7 +9,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 账号
         /// </summary>
-        public string Account { get; set; }
+        public string UserName { get; set; }
         /// <summary>
         /// 密码
         /// </summary>
@@ -96,7 +96,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 账号
         /// </summary>
-        public String Account { get; set; }
+        public String UserName { get; set; }
 
         public string[] Roles => new string[] { CurrentUser.RoleCode };
         public string[] Buttons { get; set; }

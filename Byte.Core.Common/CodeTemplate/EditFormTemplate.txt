@@ -20,7 +20,7 @@
 import { ref,nextTick,defineEmits   } from "vue";
 import {  Post,Get } from "@/utils/request";
 const ruleFormRef = ref()
- const form =ref<any>({})//reactive<any>({})// reactive({account:"",name:"",phone:''});
+ const form =ref<any>({})//reactive<any>({})// reactive({UserName:"",name:"",phone:''});
  const visible= ref(false);
  const title = ref('用户');
 

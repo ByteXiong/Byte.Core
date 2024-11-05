@@ -48,6 +48,9 @@ export const generatedRoutes: GeneratedRoute[] = [
       i18nKey: 'route.about',
       icon: 'fluent:book-information-24-regular',
       order: 10
+    },
+    query: {
+      name: 'about'
     }
   },
   {
@@ -92,6 +95,74 @@ export const generatedRoutes: GeneratedRoute[] = [
           icon: 'carbon:user-multiple',
           order: 2
         }
+      }
+    ]
+  },
+  {
+    name: 'demo',
+    path: '/demo',
+    component: 'layout.base',
+    meta: {
+      title: 'demo',
+      i18nKey: 'route.demo'
+    },
+    children: [
+      {
+        name: 'demo_data',
+        path: '/demo/data',
+        meta: {
+          title: 'demo_data',
+          i18nKey: 'route.demo_data'
+        },
+        children: [
+          {
+            name: 'demo_data_table',
+            path: '/demo/data/table',
+            component: 'view.demo_data_table',
+            meta: {
+              title: 'demo_data_table',
+              i18nKey: 'route.demo_data_table'
+            }
+          }
+        ]
+      },
+      {
+        name: 'demo_redis',
+        path: '/demo/redis',
+        meta: {
+          title: 'demo_redis',
+          i18nKey: 'route.demo_redis'
+        },
+        children: [
+          {
+            name: 'demo_redis_data',
+            path: '/demo/redis/data',
+            component: 'view.demo_redis_data',
+            meta: {
+              title: 'demo_redis_data',
+              i18nKey: 'route.demo_redis_data'
+            }
+          }
+        ]
+      },
+      {
+        name: 'demo_table',
+        path: '/demo/table',
+        meta: {
+          title: 'demo_table',
+          i18nKey: 'route.demo_table'
+        },
+        children: [
+          {
+            name: 'demo_table_column',
+            path: '/demo/table/column',
+            component: 'view.demo_table_column',
+            meta: {
+              title: 'demo_table_column',
+              i18nKey: 'route.demo_table_column'
+            }
+          }
+        ]
       }
     ]
   },

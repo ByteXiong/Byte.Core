@@ -24,9 +24,9 @@ namespace Byte.Core.Business
         public async Task<LoginToken> LoginAsync(LoginParam param)
         {
             param.Password = param.Password.ToMD5String();
-            Expression<Func<User, bool>> where = x => x.Account == param.Account && x.Password == param.Password;
+            Expression<Func<User, bool>> where = x => x.UserName == param.UserName && x.Password == param.Password;
 #if DEBUG
-            where = x => x.Account == param.Account;
+            where = x => x.UserName == param.UserName;
 #endif
 
             var user = await _userRepository.GetIQueryable(where).FirstAsync();
@@ -36,12 +36,11 @@ namespace Byte.Core.Business
             var jwt = new JWTPayload
             {
                 Id = user.Id,
-                Account = user.Account,
+                UserName = user.UserName,
                 //RoleCode = user.Role.Code,
                 //Type = user.Role.Type,
                 Name = user.Name,
             };
-
             return await LoginTokenAsync(jwt);
         }
 
@@ -54,7 +53,7 @@ namespace Byte.Core.Business
         /// <exception cref="BusException"></exception>
         public async Task<LoginToken> WeChatAsync()
         {
-            Expression<Func<User, bool>> where = x => x.Account == "admin";
+            Expression<Func<User, bool>> where = x => x.UserName == "admin";
 
             var entity = await _userRepository.GetIQueryable(where)
                             .Select(x => new JWTPayload

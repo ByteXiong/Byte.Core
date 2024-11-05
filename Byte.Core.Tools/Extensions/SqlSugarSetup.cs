@@ -226,7 +226,7 @@ public static class SqlSugarSetup
                 MiniProfiler.Current.CustomTiming("SQL",
                     "【SQL参数】:\n" + GetParams(pars) + "【SQL语句】：\n" + sql);
             }
-            var sqlstr = $"执行 SQL--> User:[{CurrentUser.Account}] Operate:[{operate}] ConnId:[{connection.ConfigId}] {UtilMethods.GetNativeSql(sql, pars)}";
+            var sqlstr = $"执行 SQL--> User:[{CurrentUser.UserName}] Operate:[{operate}] ConnId:[{connection.ConfigId}] {UtilMethods.GetNativeSql(sql, pars)}";
             if (configs.SqlLog.ToDb.Enabled) //数据库
             {
 

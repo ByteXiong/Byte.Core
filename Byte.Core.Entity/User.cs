@@ -48,7 +48,7 @@ namespace Byte.Core.Entity
         /// 账号
         /// </summary>
         [SugarColumn(Length = 50, IsNullable = true)]
-        public String Account { get; set; }
+        public String UserName { get; set; }
 
         #region 导航
         [SugarColumn(IsIgnore = true)]

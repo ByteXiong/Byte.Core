@@ -106,7 +106,7 @@ namespace Byte.Core.MSTest
             http.HttpContext.Session.SetString("CurrentUser_OpenId", "ofw2d6JqR7ssytSNX0a4pvV0IBOc");
             //new HttpContext() { Session =default(HttpSession) };
 
-            //http.HttpContext?.Session.SetString("CurrentUser_Account", "admin");
+            //http.HttpContext?.Session.SetString("CurrentUser_UserName", "admin");
             //http.HttpContext?.Session.SetString("CurrentUser_Phone", "188XXXXXXXX");
             //http.HttpContext?.Session.SetString("CurrentUser_Name", "系统");
 

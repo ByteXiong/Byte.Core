@@ -17,7 +17,7 @@ namespace Byte.Core.Tools
         public static void Configure(JWTPayload param)
         {
             Id = param.Id;
-            Account = param.Account;
+            UserName = param.UserName;
             RoleType = param.RoleType;
             Name = param.Name;
             DeptId = param.DeptId;
@@ -38,10 +38,10 @@ namespace Byte.Core.Tools
             set => _session.SetString("CurrentUser_Id", value.ToString());
         }
 
-        public static string Account
+        public static string UserName
         {
-            get => _session == null ? "" : _session.GetString("CurrentUser_Account");
-            set => _session.SetString("CurrentUser_Account", !string.IsNullOrEmpty(value) ? value : "");
+            get => _session == null ? "" : _session.GetString("CurrentUser_UserName");
+            set => _session.SetString("CurrentUser_UserName", !string.IsNullOrEmpty(value) ? value : "");
         }
 
         public static string Phone

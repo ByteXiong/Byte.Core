@@ -5,6 +5,7 @@ import { loginModuleRecord } from '@/constants/app';
 import { useRouterPush } from '@/hooks/common/router';
 import { useFormRules, useNaiveForm } from '@/hooks/common/form';
 import { useAuthStore } from '@/store/modules/auth';
+import type { LoginParam } from '@/api/globals';
 
 defineOptions({
   name: 'PwdLogin'
@@ -14,41 +15,38 @@ const authStore = useAuthStore();
 const { toggleLoginModule } = useRouterPush();
 const { formRef, validate } = useNaiveForm();
 
-interface FormModel {
-  userName: string;
-  password: string;
-}
-
-const model: FormModel = reactive({
-  userName: 'Soybean',
-  password: '123456'
+const model: LoginParam = reactive({
+  userName: 'admin',
+  password: 'qwer123456'
 });
 
-const rules = computed<Record<keyof FormModel, App.Global.FormRule[]>>(() => {
+const rules = computed<Record<keyof LoginParam, App.Global.FormRule[]>>(() => {
   // inside computed to make locale reactive, if not apply i18n, you can define it without computed
   const { formRules } = useFormRules();
 
   return {
     userName: formRules.userName,
-    password: formRules.pwd
+    password: formRules.pwd,
+    captchaId: [], // add this line
+    captchaCode: [] // add this line
   };
 });
 
 async function handleSubmit() {
   await validate();
-  await authStore.login(model.userName, model.password);
+  await authStore.login(model);
 }
 
-type AccountKey = 'super' | 'admin' | 'user';
+type userNameKey = 'super' | 'admin' | 'user';
 
-interface Account {
-  key: AccountKey;
+interface userName {
+  key: userNameKey;
   label: string;
   userName: string;
   password: string;
 }
 
-const accounts = computed<Account[]>(() => [
+const userNames = computed<userName[]>(() => [
   {
     key: 'super',
     label: $t('page.login.pwdLogin.superAdmin'),
@@ -69,13 +67,15 @@ const accounts = computed<Account[]>(() => [
   }
 ]);
 
-async function handleAccountLogin(account: Account) {
-  await authStore.login(account.userName, account.password);
+async function handleuserNameLogin(userName: userName) {
+  await authStore.login({
+    ...userName
+  } as LoginParam);
 }
 </script>
 
 <template>
-  <NForm ref="formRef" :model="model" :rules="rules" size="large" :show-label="false" @keyup.enter="handleSubmit">
+  <NForm ref="formRef" :model="model" :rules="rules" size="large" :show-label="false">
     <NFormItem path="userName">
       <NInput v-model:value="model.userName" :placeholder="$t('page.login.common.userNamePlaceholder')" />
     </NFormItem>
@@ -105,9 +105,9 @@ async function handleAccountLogin(account: Account) {
           {{ $t(loginModuleRecord.register) }}
         </NButton>
       </div>
-      <NDivider class="text-14px text-#666 !m-0">{{ $t('page.login.pwdLogin.otherAccountLogin') }}</NDivider>
+      <NDivider class="text-14px text-#666 !m-0">{{ $t('page.login.pwdLogin.otheruserNameLogin') }}</NDivider>
       <div class="flex-center gap-12px">
-        <NButton v-for="item in accounts" :key="item.key" type="primary" @click="handleAccountLogin(item)">
+        <NButton v-for="item in userNames" :key="item.key" type="primary" @click="handleuserNameLogin(item)">
           {{ item.label }}
         </NButton>
       </div>

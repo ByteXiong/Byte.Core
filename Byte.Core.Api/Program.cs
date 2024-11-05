@@ -466,7 +466,7 @@ app.UseEndpoints(endpoints =>
 //    (register, weixinSetting) =>
 //    {
 //        //注册公众号信息（可以执行多次，注册多个公众号）
-//        register.RegisterMpAccount(weixinSetting, "【盛派网络小助手】公众号");
+//        register.RegisterMpUserName(weixinSetting, "【盛派网络小助手】公众号");
 //    });
 #endregion
 #region 使用 MessageHadler 中间件，用于取代创建独立的 Controller
@@ -479,7 +479,7 @@ app.UseEndpoints(endpoints =>
 //    var weixinSetting = Senparc.Weixin.Config.SenparcWeixinSetting;
 
 //    //[必须] 设置微信配置
-//    options.AccountSettingFunc = context => weixinSetting;
+//    options.UserNameSettingFunc = context => weixinSetting;
 
 //    //[可选] 设置最大文本长度回复限制（超长后会调用客服接口分批次回复）
 //    options.TextResponseLimitOptions = new TextResponseLimitOptions(2048, weixinSetting.WeixinAppId);

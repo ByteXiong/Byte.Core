@@ -72,7 +72,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 账号
         /// </summary>
-        public String Account { get; set; }
+        public String UserName { get; set; }
 
 
 
