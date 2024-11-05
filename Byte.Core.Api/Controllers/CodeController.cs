@@ -1,4 +1,5 @@
 ﻿using Byte.Core.Api.Common;
+using Byte.Core.SqlSugar;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Byte.Core.Api.Controllers
@@ -19,5 +20,6 @@ namespace Byte.Core.Api.Controllers
         //    return entity;
 
         //}
+ 
     }
 }

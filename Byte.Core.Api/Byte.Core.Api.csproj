@@ -6,6 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <DocumentationFile>bin\Byte.Core.Api.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="wwwroot\**" />
+  </ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Lazy.Captcha.Core" Version="2.0.8" />
 		<PackageReference Include="Asp.Versioning.Mvc" Version="8.1.0" />
@@ -26,10 +33,6 @@
     <ProjectReference Include="..\Byte.Core.Repository\Byte.Core.Repository.csproj" />
     <ProjectReference Include="..\Byte.Core.SqlSugar\Byte.Core.SqlSugar.csproj" />
     <ProjectReference Include="..\Byte.Core.Tools\Byte.Core.Tools.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

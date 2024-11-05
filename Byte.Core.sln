@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Byte.Core.Business", "Byte.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Byte.Core.Tools", "Byte.Core.Tools\Byte.Core.Tools.csproj", "{AAF96D8A-B603-4CF3-A835-A35D66F31FC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Byte.Core.MSTest", "Byte.Core.MSTest\Byte.Core.MSTest.csproj", "{C35D47BE-DB98-44F6-90DF-65624933FA25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Byte.Core.MSTest", "Byte.Core.MSTest\Byte.Core.MSTest.csproj", "{C35D47BE-DB98-44F6-90DF-65624933FA25}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.基类库源码(Nuget)", "0.基类库源码(Nuget)", "{9DE9EDDD-8F21-4653-9F53-DE3EF9AF6F74}"
 EndProject
