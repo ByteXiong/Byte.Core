@@ -19,7 +19,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 菜单
         /// </summary>
-        public Guid[]? MenuIds { get; set; }
+        public int[]? MenuIds { get; set; }
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 主键Id!
         /// </summary>
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// 账号
@@ -62,7 +62,7 @@ namespace Byte.Core.Models
     public class RoleInfo : Role
     {
 
-        public Guid[] MenuIds { get; set; }
+        public int[] MenuIds { get; set; }
 
     }
 }

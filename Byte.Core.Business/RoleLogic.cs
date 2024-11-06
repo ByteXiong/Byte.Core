@@ -13,7 +13,7 @@ namespace Byte.Core.Business
     /// <summary>
     /// 角色
     /// </summary>
-    public class RoleLogic : BaseBusinessLogic<Guid, Role, RoleRepository>
+    public class RoleLogic : BaseBusinessLogic<int, Role, RoleRepository>
     {
         /// <summary />
         /// <param name="repository"></param>
@@ -42,7 +42,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<RoleInfo> GetInfoAsync(Guid id)
+        public async Task<RoleInfo> GetInfoAsync(int id)
         {
             var entity = await Repository.GetIQueryable(x => x.Id == id).Select<RoleInfo>().FirstOrDefaultAsync();
             return entity;
@@ -54,7 +54,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<Guid> AddAsync(UpdateRoleParam param)
+        public async Task<int> AddAsync(UpdateRoleParam param)
         {
             Role model = param.Adapt<Role>();
             await AddAsync(model);
@@ -66,7 +66,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<Guid> UpdateAsync(UpdateRoleParam param)
+        public async Task<int> UpdateAsync(UpdateRoleParam param)
         {
             var role = await GetIQueryable(x => x.Id == param.Id).FirstOrDefaultAsync();
             role.Name = param.Name; //角色名称
@@ -100,7 +100,7 @@ namespace Byte.Core.Business
         //List xx
         //[ServiceInterceptor(typeof(CustomInterceptorAttribute))]
         [RedisInterceptor("list")]
-        public virtual async Task<List<RoleSelectDTO>> SelectAsync(Guid[] schoolId)
+        public virtual async Task<List<RoleSelectDTO>> SelectAsync(int[] schoolId)
         {
             var list = await GetIQueryable(x => x.Code != ParamConfig.Admin).OrderByDescending(x => x.Sort).Select<RoleSelectDTO>().ToListAsync();
        
@@ -111,6 +111,6 @@ namespace Byte.Core.Business
         ///  设置状态
         /// </summary>
         /// <returns></returns>
-        public async Task<int> SetStateAsync(Guid id, bool state) => await UpdateAsync(x => id == x.Id, x => new Role { State = state });
+        public async Task<int> SetStateAsync(int id, bool state) => await UpdateAsync(x => id == x.Id, x => new Role { State = state });
     }
 }

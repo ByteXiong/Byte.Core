@@ -31,7 +31,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<UserInfo> GetInfoAsync(Guid id) => await _logic.GetInfoAsync(id);
+        public async Task<UserInfo> GetInfoAsync(int id) => await _logic.GetInfoAsync(id);
 
         /// <summary>
         /// 提交
@@ -40,9 +40,9 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<Guid> Submit(UpdateUserParam param)
+        public async Task<int> Submit(UpdateUserParam param)
         {
-            if (param.Id == Guid.Empty)
+            if (param.Id == default)
             {
 
                 return await _logic.AddAsync(param);
@@ -59,7 +59,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpDelete]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> DeleteAsync(Guid[] ids) => await _logic.DeleteAsync(ids);
+        public async Task<int> DeleteAsync(int[] ids) => await _logic.DeleteAsync(ids);
 
 
         /// <summary>
@@ -70,6 +70,6 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPut]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> SetStateAsync(Guid id, bool state) => await _logic.SetStateAsync(id, state);
+        public async Task<int> SetStateAsync(int id, bool state) => await _logic.SetStateAsync(id, state);
     }
 }

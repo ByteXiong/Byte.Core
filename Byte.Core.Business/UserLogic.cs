@@ -16,7 +16,7 @@ namespace Byte.Core.Business
     /// <summary>
     /// 用户
     /// </summary>
-    public class UserLogic : BaseBusinessLogic<Guid, User, UserRepository>
+    public class UserLogic : BaseBusinessLogic<int, User, UserRepository>
     {
         private readonly User_Dept_RoleLogic _User_Dept_RoleLogic;
         private readonly IUnitOfWork _unitOfWork;
@@ -62,7 +62,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<UserInfo> GetInfoAsync(Guid id)
+        public async Task<UserInfo> GetInfoAsync(int id)
         {
             var entity = await GetIQueryable(x => x.Id == id).Select<UserInfo>().FirstAsync();
             return entity;
@@ -74,7 +74,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<Guid> AddAsync(UpdateUserParam param)
+        public async Task<int> AddAsync(UpdateUserParam param)
         {
             try
             {
@@ -113,7 +113,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<Guid> UpdateAsync(UpdateUserParam param)
+        public async Task<int> UpdateAsync(UpdateUserParam param)
         {
 
             try
@@ -160,7 +160,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public async Task<int> SetStateAsync(Guid id, bool state) => await UpdateAsync(x => id == x.Id, x => new User { State = state });
+        public async Task<int> SetStateAsync(int id, bool state) => await UpdateAsync(x => id == x.Id, x => new User { State = state });
 
 
 

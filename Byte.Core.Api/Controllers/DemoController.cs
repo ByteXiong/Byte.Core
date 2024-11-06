@@ -35,7 +35,6 @@ namespace Byte.Core.Api.Controllers
             {
                 list.Add(new RedisDemo
                 {
-                    Id = Guid.NewGuid(),
                     Name = $"name{DateTime.Now:yyyyMMddHHmmssfff}",
                     Sort = i,
                     Code = $"Code{i/3}"

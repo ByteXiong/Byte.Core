@@ -9,7 +9,7 @@ namespace Byte.Core.Entity
     /// 部门
     /// </summary>
     [SugarTable("Dept")]
-    public class Dept : BaseEntity<Guid>
+    public class Dept : BaseEntity<int>
     {
 
         
@@ -35,7 +35,7 @@ namespace Byte.Core.Entity
         /// 父级部门ID
         /// </summary>
         [SugarColumn(IsNullable = true)]
-        public Guid? ParentId { get; set; }
+        public int? ParentId { get; set; }
         /// <summary>
         /// 地址
         /// </summary>

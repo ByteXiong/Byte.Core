@@ -32,7 +32,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<List<MenuSelectDTO>> GetTreeSelectAsync(Guid? parentId = null) => await _logic.GetTreeSelectAsync(parentId);
+        public async Task<List<MenuSelectDTO>> GetTreeSelectAsync(int? parentId = null) => await _logic.GetTreeSelectAsync(parentId);
 
         /// <summary>
         /// 查询详情
@@ -41,7 +41,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<MenuInfo> GetInfoAsync(Guid id) => await _logic.GetInfoAsync(id);
+        public async Task<MenuInfo> GetInfoAsync(int id) => await _logic.GetInfoAsync(id);
         /// <summary>
         /// 提交
         /// </summary>
@@ -49,9 +49,9 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<Guid> Submit(UpdateMenuParam param)
+        public async Task<int> Submit(UpdateMenuParam param)
         {
-            if (param.Id == Guid.Empty)
+            if (param.Id ==default)
             {
 
                 return await _logic.AddAsync(param);
@@ -70,7 +70,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPut]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> SetStateAsync(Guid id, bool state) => await _logic.UpdateAsync(x => id == x.Id, x => new Menu { State = state });
+        public async Task<int> SetStateAsync(int id, bool state) => await _logic.UpdateAsync(x => id == x.Id, x => new Menu { State = state });
 
         /// <summary>
         ///  删除
@@ -79,7 +79,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpDelete]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> DeleteAsync(Guid[] ids) => await _logic.DeleteAsync(ids);
+        public async Task<int> DeleteAsync(int[] ids) => await _logic.DeleteAsync(ids);
 
 
 

@@ -24,7 +24,7 @@ namespace Byte.Core.Models
     /// </summary>
     public class AddTableColumnParam : TableColumn
     {
-        public Guid[]? RoleIds { get; set; }
+        public int[]? RoleIds { get; set; }
     }
 
     /// <summary>

@@ -8,7 +8,7 @@ namespace Byte.Core.Entity
     /// 角色
     /// </summary>
     [SugarTable("Role")]
-    public class Role : BaseEntity<Guid>
+    public class Role : BaseEntity<int>
     {
         /// <summary>
         /// 账号
@@ -50,7 +50,7 @@ namespace Byte.Core.Entity
         /// 公司id
         /// </summary>
         [SugarColumn(Length = 200, IsNullable = true)]
-        public Guid DeptId { get; set; }
+        public int DeptId { get; set; }
 
         #region 导航
         [SugarColumn(IsIgnore = true)]

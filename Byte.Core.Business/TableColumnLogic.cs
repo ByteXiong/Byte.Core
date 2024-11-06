@@ -15,7 +15,7 @@ namespace Byte.Core.Business
     /// <summary>
     /// 
     /// </summary>
-    public class TableColumnLogic : BaseBusinessLogic<Guid, TableColumn, TableColumnRepository>
+    public class TableColumnLogic : BaseBusinessLogic<int, TableColumn, TableColumnRepository>
     {
         /// <summary>
         /// 
@@ -51,7 +51,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<TableColumnInfo> GetInfoAsync(Guid id)
+        public async Task<TableColumnInfo> GetInfoAsync(int id)
         {
             var entity = await GetIQueryable(x => x.Id == id).Select<TableColumnInfo>().FirstAsync();
             return entity;
@@ -61,7 +61,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<Guid> AddAsync(UpdateTableColumnParam param)
+        public async Task<int> AddAsync(UpdateTableColumnParam param)
         {
 
 
@@ -81,7 +81,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<Guid> UpdateAsync(UpdateTableColumnParam param)
+        public async Task<int> UpdateAsync(UpdateTableColumnParam param)
         {
 
 
@@ -174,7 +174,6 @@ namespace Byte.Core.Business
 
                 var model = new TableColumn()
                 {
-                    Id = Guid.NewGuid(),
                     Title = title.Trim(),
                     Key = prop.Name.ToFirstLowerStr(),//转小写,
                     Table = table,

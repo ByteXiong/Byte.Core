@@ -13,7 +13,7 @@ namespace Byte.Core.Business
     /// <summary>
     /// 角色-菜单
     /// </summary>
-    public class MenuLogic : BaseBusinessLogic<Guid, Menu, MenuRepository>
+    public class MenuLogic : BaseBusinessLogic<int, Menu, MenuRepository>
     {
         /// <summary>
         /// 构造
@@ -43,7 +43,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="parentId"></param>
         /// <returns></returns>
-        public async Task<List<MenuSelectDTO>> GetTreeSelectAsync(Guid? parentId = null)
+        public async Task<List<MenuSelectDTO>> GetTreeSelectAsync(int? parentId = null)
         {
             var tree = await GetIQueryable().OrderByDescending(x => x.Order).Select<MenuSelectDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, parentId, it => it.Id);
             return tree;
@@ -56,7 +56,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<MenuInfo> GetInfoAsync(Guid id)
+        public async Task<MenuInfo> GetInfoAsync(int id)
         {
             var entity = await GetIQueryable(x => x.Id == id).Select(x => new MenuInfo
                 {
@@ -88,7 +88,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<Guid> AddAsync(UpdateMenuParam param)
+        public async Task<int> AddAsync(UpdateMenuParam param)
         {
 
             if (param.ParentId == null && param.Type != MenuTypeEnum.目录)
@@ -109,7 +109,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<Guid> UpdateAsync(UpdateMenuParam param)
+        public async Task<int> UpdateAsync(UpdateMenuParam param)
         {
             if (param.ParentId == null && param.Type != MenuTypeEnum.目录)
             {
@@ -152,7 +152,7 @@ namespace Byte.Core.Business
         /// <param name="id"></param>
         /// <param name="state"></param>
         /// <returns></returns>
-        public async Task<int> SetStateAsync(Guid id, bool state) => await UpdateAsync(x => id == x.Id, x => new Menu { State = state });
+        public async Task<int> SetStateAsync(int id, bool state) => await UpdateAsync(x => id == x.Id, x => new Menu { State = state });
 
 
 

@@ -17,7 +17,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 公司
         /// </summary>
-        public Guid? DeptId { get; set; }
+        public int? DeptId { get; set; }
     }
     /// <summary>
     ///  用户 修改
@@ -32,7 +32,7 @@ namespace Byte.Core.Models
     /// </summary>
     public class AddUserParam : User
     {
-        public Guid[]? RoleIds { get; set; }
+        public int[]? RoleIds { get; set; }
     }
 
     /// <summary>
@@ -41,7 +41,7 @@ namespace Byte.Core.Models
     public class UserDTO
     {
        
-        public Guid? Id { get; set; }
+        public int? Id { get; set; }
         /// <summary>
         /// 名称
         /// </summary>
@@ -93,7 +93,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// Id
         /// </summary>
-    public  Guid Id { get; set; }
+    public  int Id { get; set; }
         /// <summary>
         /// 旧密码
         /// </summary>

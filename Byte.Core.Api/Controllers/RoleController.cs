@@ -33,7 +33,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<RoleInfo> GetInfoAsync(Guid id) => await _logic.GetInfoAsync(id);
+        public async Task<RoleInfo> GetInfoAsync(int id) => await _logic.GetInfoAsync(id);
         /// <summary>
         /// 新增
         /// </summary>
@@ -41,9 +41,9 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<Guid> Submit(UpdateRoleParam param)
+        public async Task<int> Submit(UpdateRoleParam param)
         {
-            if (param.Id == Guid.Empty)
+            if (param.Id == default)
             {
 
                 return await _logic.AddAsync(param);
@@ -60,7 +60,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpDelete]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> DeleteAsync(Guid[] ids) => await _logic.DeleteAsync(ids);
+        public async Task<int> DeleteAsync(int[] ids) => await _logic.DeleteAsync(ids);
 
 
 
@@ -80,7 +80,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPut]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> SetStateAsync(Guid id, bool state) => await _logic.SetStateAsync(id, state);
+        public async Task<int> SetStateAsync(int id, bool state) => await _logic.SetStateAsync(id, state);
 
     }
 }

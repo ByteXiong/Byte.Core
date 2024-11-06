@@ -77,6 +77,18 @@ namespace Byte.Core.Business
             var sql = "select * from user";
             var aa = await _unitOfWork.GetDbClient().SqlQueryable<dynamic>(sql ).ToListAsync();
         }
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <returns></returns>
+        public async Task<TableColumn> InfoAsync()
+        {
+            var sql = "select * from user";
+            var aa = await _unitOfWork.GetDbClient().SqlQueryable<dynamic>(sql).FirstAsync();
+            return aa.FirstOrDefault();
+        }
+
         /// <summary>
         /// 更新
         /// </summary>

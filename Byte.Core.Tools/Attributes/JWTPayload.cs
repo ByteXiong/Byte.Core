@@ -10,7 +10,7 @@ namespace Byte.Core.Tools.Attributes
         /// <summary>
         /// 用户的唯一标识符
         /// </summary>
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// 用户的账户

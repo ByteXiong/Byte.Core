@@ -37,7 +37,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<List<DeptSelectDTO>> GetTreeSelectAsync([ FromQuery]DeptTypeEnum[] types=null, [FromQuery]Guid? parentId = null) => await _logic.GetTreeSelectAsync(types, parentId);
+        public async Task<List<DeptSelectDTO>> GetTreeSelectAsync([ FromQuery]DeptTypeEnum[] types=null, [FromQuery]int? parentId = null) => await _logic.GetTreeSelectAsync(types, parentId);
 
         /// <summary>
         /// 查询详情
@@ -46,7 +46,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<DeptInfo> GetInfoAsync(Guid id) => await _logic.GetInfoAsync(id);
+        public async Task<DeptInfo> GetInfoAsync(int id) => await _logic.GetInfoAsync(id);
 
         /// <summary>
         /// 提交
@@ -55,9 +55,9 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<Guid> Submit(UpdateDeptParam param)
+        public async Task<int> Submit(UpdateDeptParam param)
         {
-            if (param.Id == Guid.Empty)
+            if (param.Id == default)
             {
 
                 return await _logic.AddAsync(param);
@@ -74,7 +74,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpDelete]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> DeleteAsync(Guid[] ids) => await _logic.DeleteAsync(ids);
+        public async Task<int> DeleteAsync(int[] ids) => await _logic.DeleteAsync(ids);
 
         /// <summary>
         /// 设置状态
@@ -84,7 +84,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPut]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> SetStateAsync(Guid id, bool state) => await _logic.SetStateAsync(id, state);
+        public async Task<int> SetStateAsync(int id, bool state) => await _logic.SetStateAsync(id, state);
 
 
     }

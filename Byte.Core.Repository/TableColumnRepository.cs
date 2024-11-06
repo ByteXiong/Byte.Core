@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Byte.Core.Repository
 {
  
-    public class TableColumnRepository : BaseRepository<Guid, TableColumn>
+    public class TableColumnRepository : BaseRepository<int, TableColumn>
     {
         public TableColumnRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

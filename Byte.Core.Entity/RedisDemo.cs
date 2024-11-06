@@ -9,7 +9,7 @@ namespace Byte.Core.Entity
     /// 测试表
     /// </summary>
     [SugarTable("RedisDemo")]
-    public class RedisDemo : BaseEntity<Guid>
+    public class RedisDemo : BaseEntity<int>
     {
         /// <summary>
         /// 账号

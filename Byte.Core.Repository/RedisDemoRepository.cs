@@ -8,7 +8,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 测试表
     /// </summary>
-    public class RedisDemoRepository : BaseRepository<Guid, RedisDemo>
+    public class RedisDemoRepository : BaseRepository<int, RedisDemo>
     {
         public RedisDemoRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

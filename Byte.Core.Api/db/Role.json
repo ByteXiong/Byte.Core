@@ -1,0 +1,30 @@
+ [
+    {
+      "Id": "1",
+      "Name": "系统管理员",
+      "State": "1",
+      "Remark": null,
+      "Code": "ROOT",
+      "Sort": null,
+      "DeptId": "1",
+      "CreateBy": null,
+      "CreateTime": null,
+      "UpdateBy": null,
+      "UpdateTime": null,
+      "Type": 1
+    },
+    {
+      "Id": "2",
+      "Name": "管理员",
+      "State": "1",
+      "Remark": null,
+      "Code": "ADMIN",
+      "Sort": null,
+      "DeptId": "1",
+      "CreateBy": null,
+      "CreateTime": null,
+      "UpdateBy": null,
+      "UpdateTime": null,
+      "Type": 1
+    }
+  ]

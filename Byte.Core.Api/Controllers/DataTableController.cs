@@ -26,20 +26,28 @@ namespace Byte.Core.Api.Controllers
         public async Task<List<TableColumn>> GetTableColumnsAsync() =>await _logic.GetTableColumnsAsync(); // await
 
 
+
+        ///// <summary>
+        ///// 获取表字段
+        ///// </summary>
+        ///// <param name="tableName"></param>
+        ///// <returns></returns>
+        //public async Task<List<TableColumn>> GetTableColumnsAsync() => await _logic.GetTableColumnsAsync(); // await
+
+
+
         /// <summary>
         /// 获取表字段
         /// </summary>
         /// <param name="tableName"></param>
         /// <returns></returns>
-        public async Task<List<TableColumn>> GetTableColumnsAsync() => await _logic.GetTableColumnsAsync(); // await
-
-
+        public async Task<TableColumn> InfoAsync() => await _logic.InfoAsync(); // await
 
         /// <summary>
         /// 查询
         /// </summary>
         /// <returns></returns>
-        public async Task PageAsync()=> await _logic.QueryAsync();
+        public async Task PageAsync()=> await _logic.PageAsync();
         /// <summary>
         /// 更新
         /// </summary>
@@ -57,7 +65,7 @@ namespace Byte.Core.Api.Controllers
         ///// <returns></returns>
         //[HttpDelete]
         //[ApiVersion("1.0", Deprecated = false)]
-        //public async Task<int> DeleteAsync(Guid[] ids) => await _logic.DeleteAsync(ids);
+        //public async Task<int> DeleteAsync(int[] ids) => await _logic.DeleteAsync(ids);
 
         ///// <summary>
         ///// 设置状态
@@ -67,7 +75,7 @@ namespace Byte.Core.Api.Controllers
         ///// <returns></returns>
         //[HttpPut]
         //[ApiVersion("1.0", Deprecated = false)]
-        //public async Task<int> SetStateAsync(Guid id, bool state) => await _logic.SetStateAsync(id, state);
+        //public async Task<int> SetStateAsync(int id, bool state) => await _logic.SetStateAsync(id, state);
 
 
 

@@ -13,19 +13,19 @@ namespace Byte.Core.Entity
         /// 用户Id
         /// </summary>
         [SugarColumn(IsPrimaryKey = true)]
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
 
         /// <summary>
         /// 角色Id
         /// </summary>
         [SugarColumn(IsPrimaryKey = true)]
-        public Guid DeptId { get; set; }
+        public int DeptId { get; set; }
 
         /// <summary>
         /// 角色Id
         /// </summary>
         [SugarColumn(IsPrimaryKey = true)]
-        public Guid RoleId { get; set; }
+        public int RoleId { get; set; }
     }
 
     //[JsonIgnore]//隐藏

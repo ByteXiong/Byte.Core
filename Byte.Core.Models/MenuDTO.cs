@@ -28,7 +28,7 @@ namespace Byte.Core.Models
     public class MenuTreeDTO 
     {
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         /// <summary>
         /// 菜单标题
         /// </summary>
@@ -46,7 +46,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 父级菜单ID
         /// </summary>
-        public Guid? ParentId { get; set; }
+        public int? ParentId { get; set; }
 
         /// <summary>
         /// 排序
@@ -102,12 +102,12 @@ namespace Byte.Core.Models
         /// <summary>
         /// 主键Id!
         /// </summary>
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// 父级
         /// </summary>
-        public Guid? ParentId { get; set; }
+        public int? ParentId { get; set; }
         /// <summary>
         /// 菜单
         /// </summary>
@@ -135,7 +135,7 @@ namespace Byte.Core.Models
 
     public class RouteDTO
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         /// <summary>
         /// 菜单名
         /// </summary>
@@ -163,7 +163,7 @@ namespace Byte.Core.Models
         /// 父级
         /// </summary>
         [SugarColumn(IsNullable = true)]
-        public Guid? ParentId { get; set; }
+        public int? ParentId { get; set; }
         /// <summary>
         /// 类型
         /// </summary>

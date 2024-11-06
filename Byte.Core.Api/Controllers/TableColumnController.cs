@@ -29,7 +29,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<TableColumnInfo> GetInfoAsync(Guid id) => await _logic.GetInfoAsync(id);
+        public async Task<TableColumnInfo> GetInfoAsync(int id) => await _logic.GetInfoAsync(id);
 
         /// <summary>
         /// 提交
@@ -38,9 +38,9 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<Guid> Submit(UpdateTableColumnParam param)
+        public async Task<int> Submit(UpdateTableColumnParam param)
         {
-            if (param.Id == Guid.Empty)
+            if (param.Id == default)
             {
 
                 return await _logic.AddAsync(param);
@@ -57,7 +57,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpDelete]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> DeleteAsync(Guid[] ids) => await _logic.DeleteAsync(ids);
+        public async Task<int> DeleteAsync(int[] ids) => await _logic.DeleteAsync(ids);
 
 
         /// <summary>

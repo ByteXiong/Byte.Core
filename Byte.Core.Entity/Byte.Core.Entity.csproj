@@ -6,6 +6,7 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
+
   <ItemGroup>
     <ProjectReference Include="..\Byte.Core.Common\Byte.Core.Common.csproj" />
     <ProjectReference Include="..\Byte.Core.SqlSugar\Byte.Core.SqlSugar.csproj" />

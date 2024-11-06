@@ -8,7 +8,7 @@ namespace Byte.Core.Business
     /// <summary>
     /// 测试表
     /// </summary>
-    public class RedisDemoLogic : BaseBusinessLogic<Guid, RedisDemo, RedisDemoRepository>
+    public class RedisDemoLogic : BaseBusinessLogic<int, RedisDemo, RedisDemoRepository>
     {
         /// <summary />
         /// <param name="repository"></param>
@@ -41,7 +41,7 @@ namespace Byte.Core.Business
         /// <param name="ids"></param>
         /// <returns></returns>
         [HasRedisInterceptor(ParamConfig.HRedisDemoKey, "", 30,HasRedisRange.Params)]
-        public virtual async  Task<List<RedisDemo>> GetByIdsAsync( Guid[] ids ) {
+        public virtual async  Task<List<RedisDemo>> GetByIdsAsync( int[] ids ) {
 
               var  list = await GetIQueryable(x => ids.Contains(x.Id)).ToListAsync();
               return list;
@@ -53,7 +53,7 @@ namespace Byte.Core.Business
 /// <param name="id"></param>
 /// <returns></returns>
         [HasRedisInterceptor(ParamConfig.HRedisDemoKey, "", 30, HasRedisRange.Params)]
-        public virtual async Task<List<RedisDemo>> GetByIdAsync( Guid id)
+        public virtual async Task<List<RedisDemo>> GetByIdAsync( int id)
         {
 
             var list = await GetIQueryable(x => id == x.Id).ToListAsync();
@@ -67,7 +67,7 @@ namespace Byte.Core.Business
 /// <param name="code"></param>
 /// <returns></returns>
         [HasRedisInterceptor(ParamConfig.HRedisDemoKey, "", 30, HasRedisRange.Params)]
-        public virtual async Task<List<RedisDemo>> GetByIdAsync(Guid[] ids,  string code)
+        public virtual async Task<List<RedisDemo>> GetByIdAsync(int[] ids,  string code)
         {
 
 

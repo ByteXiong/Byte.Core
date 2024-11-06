@@ -5,7 +5,7 @@ using Byte.Core.Common.Filters;
 
 namespace Byte.Core.Repository
 {
-    public class MenuRepository : BaseRepository<Guid, Menu>
+    public class MenuRepository : BaseRepository<int, Menu>
     {
         public MenuRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
@@ -26,7 +26,7 @@ namespace Byte.Core.Repository
 
             return base.UpdateAsync(entity, lstIgnoreColumns, isLock);
         }
-        public override Task<int> DeleteAsync(Guid[] ids, bool isLock = true)
+        public override Task<int> DeleteAsync(int[] ids, bool isLock = true)
         {
 #if !DEBUG
             throw new BusException("线上环境不允许删除菜单");

@@ -9,7 +9,7 @@ namespace Byte.Core.Business
     /// <summary>
     /// 部门
     /// </summary>
-    public class DeptLogic : BaseBusinessLogic<Guid, Dept, DeptRepository>
+    public class DeptLogic : BaseBusinessLogic<int, Dept, DeptRepository>
     {
         /// <summary>
         /// 
@@ -35,7 +35,7 @@ namespace Byte.Core.Business
         /// <param name="types"></param>
         /// <param name="parentId"></param>
         /// <returns></returns>
-        public async Task<List<DeptSelectDTO>> GetTreeSelectAsync(DeptTypeEnum[] types = null, Guid? parentId = null)
+        public async Task<List<DeptSelectDTO>> GetTreeSelectAsync(DeptTypeEnum[] types = null, int? parentId = null)
         {
             var tree = await GetIQueryable()
                 .WhereIF(types != null, x => types.Contains(x.Type))
@@ -50,7 +50,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<DeptInfo> GetInfoAsync(Guid id)
+        public async Task<DeptInfo> GetInfoAsync(int id)
         {
             var entity = await GetIQueryable(x => x.Id == id).Select<DeptInfo>().FirstAsync();
             return entity;
@@ -61,7 +61,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<Guid> AddAsync(UpdateDeptParam param)
+        public async Task<int> AddAsync(UpdateDeptParam param)
         {
             Dept model = param.Adapt<Dept>();
             await AddAsync(model);
@@ -74,7 +74,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<Guid> UpdateAsync(UpdateDeptParam param)
+        public async Task<int> UpdateAsync(UpdateDeptParam param)
         {
             var model = await GetIQueryable(x => x.Id == param.Id).FirstAsync();
             model.Name = param.Name;
@@ -92,7 +92,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public async Task<int> DeleteAsync(Guid[] ids) => await DeleteAsync(x => ids.Contains(x.Id));
+        public async Task<int> DeleteAsync(int[] ids) => await DeleteAsync(x => ids.Contains(x.Id));
 
         /// <summary>
         /// 设置状态
@@ -100,6 +100,6 @@ namespace Byte.Core.Business
         /// <param name="id"></param>
         /// <param name="state"></param>
         /// <returns></returns>
-        public async Task<int> SetStateAsync(Guid id, bool state) => await UpdateAsync(x => id == x.Id, x => new Dept { State = state });
+        public async Task<int> SetStateAsync(int id, bool state) => await UpdateAsync(x => id == x.Id, x => new Dept { State = state });
     }
 }

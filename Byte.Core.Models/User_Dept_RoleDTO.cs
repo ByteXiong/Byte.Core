@@ -35,20 +35,20 @@ namespace Byte.Core.Models
         /// <summary>
         /// 主键Id!
         /// </summary>
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// 用户Id
         /// </summary>
         [Required]
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
 
 
         /// <summary>
         /// 角色Id
         /// </summary>
         [Required]
-        public Guid RoleId { get; set; }
+        public int RoleId { get; set; }
 
 
 

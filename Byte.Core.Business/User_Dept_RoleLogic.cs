@@ -8,7 +8,7 @@ namespace Byte.Core.Business
     /// 用户-角色
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public class User_Dept_RoleLogic : BaseBusinessLogic<Guid, User_Dept_Role, User_Dept_RoleRepository>
+    public class User_Dept_RoleLogic : BaseBusinessLogic<int, User_Dept_Role, User_Dept_RoleRepository>
     {
         /// <summary />
         /// <param name="repository"></param>

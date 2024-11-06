@@ -31,10 +31,10 @@ namespace Byte.Core.Tools
 
         #region Attribute
 
-        public static Guid Id
+        public static int Id
 
         {
-            get => _session == null ? default : Guid.Parse(_session.GetString("CurrentUser_Id"));
+            get => _session == null ? default : int.Parse(_session.GetString("CurrentUser_Id"));
             set => _session.SetString("CurrentUser_Id", value.ToString());
         }
 

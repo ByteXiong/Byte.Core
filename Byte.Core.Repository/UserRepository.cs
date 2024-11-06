@@ -6,7 +6,7 @@ namespace Byte.Core.Repository
     /// <summary>
     /// 用户
     /// </summary>
-    public class UserRepository : BaseRepository<Guid, User>
+    public class UserRepository : BaseRepository<int, User>
     {
         public UserRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="RedisDemoDTO.cs~RF3a3464.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Byte.Core.Entity\Byte.Core.Entity.csproj" />
   </ItemGroup>
 

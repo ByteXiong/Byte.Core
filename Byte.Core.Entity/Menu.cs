@@ -9,7 +9,7 @@ namespace Byte.Core.Entity
     /// 菜单
     /// </summary>
     [SugarTable("Menu")]
-    public class Menu : BaseEntity<Guid>
+    public class Menu : BaseEntity<int>
     {
         /// <summary>
         /// 菜单名
@@ -38,7 +38,7 @@ namespace Byte.Core.Entity
         /// 父级
         /// </summary>
         [SugarColumn(IsNullable = true)]
-        public Guid? ParentId { get; set; }
+        public int? ParentId { get; set; }
         /// <summary>
         /// 类型
         /// </summary>
