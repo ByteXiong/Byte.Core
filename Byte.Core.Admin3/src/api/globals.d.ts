@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Byte.Core开发接口文档 Web端网站 - version 1.0
+ * runtest开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -88,6 +88,91 @@ type Alova2Method<
       >
     : never;
 
+export type SearchTypeEnum = 1 | 2 | 3 | 4 | 5;
+export type ColumnTypeEnum = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+export type TableAlignEnum = 1 | 2 | 3;
+export type TableColumn = {
+  /**
+   * 主键
+   */
+  id?: number;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  table?: string;
+  router?: string;
+  title?: string;
+  key?: string;
+  searchType?: SearchTypeEnum;
+  columnType?: ColumnTypeEnum;
+  /**
+   * 对齐方式
+   */
+  align?: TableAlignEnum;
+  sort?: number;
+  isShow?: boolean;
+  props?: string;
+};
+export type DataTableColumnDTO = {
+  /**
+   * 表名
+   */
+  tableName?: string;
+  /**
+   * 注释
+   */
+  common?: string;
+  /**
+   * 字段
+   */
+  columnKey?: string;
+  /**
+   * 描述
+   */
+  type?: string;
+  /**
+   * 是否主键
+   */
+  isPrimaryKey?: boolean;
+  /**
+   * 是否自增
+   */
+  isIdentity?: boolean;
+  /**
+   * 是否可空
+   */
+  isNull?: boolean;
+  /**
+   * 长度
+   */
+  length?: number;
+  /**
+   * 精度
+   */
+  accuracy?: number;
+  /**
+   * 描述
+   */
+  description?: string;
+};
+export type TableHeaderDTO = {
+  table?: string;
+  router?: string;
+  columns?: TableColumn[];
+};
 export type PagerInfo = {
   totalRowCount?: number;
   pageSize?: number;
@@ -99,8 +184,12 @@ export type PagerInfo = {
   isLast?: boolean;
   totalPageCount?: number;
 };
+export type ObjectPagedResults = {
+  pagerInfo?: PagerInfo;
+  data?: unknown[];
+};
 export type RedisDemoDTO = {
-  id?: string;
+  id?: number;
   code?: string;
   srot?: string;
 };
@@ -127,7 +216,7 @@ export type Menu = {
   /**
    * 主键
    */
-  id?: string;
+  id?: number;
   /**
    * 创建者名称
    */
@@ -148,7 +237,7 @@ export type Menu = {
   path?: string;
   redirect?: string;
   component?: string;
-  parentId?: string;
+  parentId?: number;
   type?: MenuTypeEnum;
   state?: boolean;
   title?: string;
@@ -173,7 +262,7 @@ export type Role = {
   /**
    * 主键
    */
-  id?: string;
+  id?: number;
   /**
    * 创建者名称
    */
@@ -196,7 +285,7 @@ export type Role = {
   remark?: string;
   code?: string;
   sort?: number;
-  deptId?: string;
+  deptId?: number;
   dept?: Dept;
   users?: User[];
   menus?: Menu[];
@@ -205,7 +294,7 @@ export type Dept = {
   /**
    * 主键
    */
-  id?: string;
+  id?: number;
   /**
    * 创建者名称
    */
@@ -225,7 +314,7 @@ export type Dept = {
   image?: string;
   name?: string;
   easyName?: string;
-  parentId?: string;
+  parentId?: number;
   address?: string;
   isDeleted?: boolean;
   phone?: string;
@@ -242,7 +331,7 @@ export type User = {
   /**
    * 主键
    */
-  id?: string;
+  id?: number;
   /**
    * 创建者名称
    */
@@ -271,7 +360,7 @@ export type DeptInfo = {
   /**
    * 主键
    */
-  id?: string;
+  id?: number;
   /**
    * 创建者名称
    */
@@ -291,7 +380,7 @@ export type DeptInfo = {
   image?: string;
   name?: string;
   easyName?: string;
-  parentId?: string;
+  parentId?: number;
   address?: string;
   isDeleted?: boolean;
   phone?: string;
@@ -305,7 +394,7 @@ export type DeptInfo = {
   children?: Dept[];
 };
 export type DeptTreeDTO = {
-  id?: string;
+  id?: number;
   /**
    * 图标
    */
@@ -321,7 +410,7 @@ export type DeptTreeDTO = {
   /**
    * 父级部门ID
    */
-  parentId?: string;
+  parentId?: number;
   /**
    * 地址
    */
@@ -357,11 +446,11 @@ export type DeptSelectDTO = {
   /**
    * 主键Id!
    */
-  id?: string;
+  id?: number;
   /**
    * 父级
    */
-  parentId?: string;
+  parentId?: number;
   /**
    * 菜单
    */
@@ -376,7 +465,7 @@ export type UpdateDeptParam = {
   /**
    * 主键
    */
-  id?: string;
+  id?: number;
   /**
    * 创建者名称
    */
@@ -396,7 +485,7 @@ export type UpdateDeptParam = {
   image?: string;
   name?: string;
   easyName?: string;
-  parentId?: string;
+  parentId?: number;
   address?: string;
   isDeleted?: boolean;
   phone?: string;
@@ -417,7 +506,7 @@ export type LoginInfoDTO = {
   /**
    * 主键Id!
    */
-  id?: string;
+  id?: number;
   /**
    * 名称
    */
@@ -471,7 +560,7 @@ export type MenuInfo = {
   /**
    * 主键
    */
-  id?: string;
+  id?: number;
   /**
    * 创建者名称
    */
@@ -492,7 +581,7 @@ export type MenuInfo = {
   path?: string;
   redirect?: string;
   component?: string;
-  parentId?: string;
+  parentId?: number;
   type?: MenuTypeEnum;
   state?: boolean;
   title?: string;
@@ -540,7 +629,7 @@ export type RouteMeta = {
   icon?: string;
 };
 export type RouteDTO = {
-  id?: string;
+  id?: number;
   /**
    * 菜单名
    */
@@ -560,7 +649,7 @@ export type RouteDTO = {
   /**
    * 父级
    */
-  parentId?: string;
+  parentId?: number;
   type?: MenuTypeEnum;
   /**
    * 状态
@@ -571,9 +660,10 @@ export type RouteDTO = {
    * 子节点
    */
   children?: RouteDTO[];
+  params?: Record<string, unknown>;
 };
 export type MenuTreeDTO = {
-  id?: string;
+  id?: number;
   /**
    * 菜单标题
    */
@@ -589,7 +679,7 @@ export type MenuTreeDTO = {
   /**
    * 父级菜单ID
    */
-  parentId?: string;
+  parentId?: number;
   /**
    * 排序
    */
@@ -625,11 +715,11 @@ export type MenuSelectDTO = {
   /**
    * 主键Id!
    */
-  id?: string;
+  id?: number;
   /**
    * 父级
    */
-  parentId?: string;
+  parentId?: number;
   /**
    * 菜单
    */
@@ -644,7 +734,7 @@ export type UpdateMenuParam = {
   /**
    * 主键
    */
-  id?: string;
+  id?: number;
   /**
    * 创建者名称
    */
@@ -665,7 +755,7 @@ export type UpdateMenuParam = {
   path?: string;
   redirect?: string;
   component?: string;
-  parentId?: string;
+  parentId?: number;
   type?: MenuTypeEnum;
   state?: boolean;
   title?: string;
@@ -690,7 +780,7 @@ export type RoleInfo = {
   /**
    * 主键
    */
-  id?: string;
+  id?: number;
   /**
    * 创建者名称
    */
@@ -713,17 +803,17 @@ export type RoleInfo = {
   remark?: string;
   code?: string;
   sort?: number;
-  deptId?: string;
+  deptId?: number;
   dept?: Dept;
   users?: User[];
   menus?: Menu[];
-  menuIds?: string[];
+  menuIds?: number[];
 };
 export type RoleDTO = {
   /**
    * 主键
    */
-  id?: string;
+  id?: number;
   /**
    * 创建者名称
    */
@@ -746,7 +836,7 @@ export type RoleDTO = {
   remark?: string;
   code?: string;
   sort?: number;
-  deptId?: string;
+  deptId?: number;
   dept?: Dept;
   users?: User[];
   menus?: Menu[];
@@ -760,7 +850,7 @@ export type RoleSelectDTO = {
   /**
    * 主键Id!
    */
-  id?: string;
+  id?: number;
   /**
    * 账号
    */
@@ -770,7 +860,7 @@ export type UpdateRoleParam = {
   /**
    * 主键
    */
-  id?: string;
+  id?: number;
   /**
    * 创建者名称
    */
@@ -793,48 +883,14 @@ export type UpdateRoleParam = {
   remark?: string;
   code?: string;
   sort?: number;
-  deptId?: string;
+  deptId?: number;
   dept?: Dept;
   users?: User[];
   menus?: Menu[];
   /**
    * 菜单
    */
-  menuIds?: string[];
-};
-export type TableAlignEnum = 1 | 2 | 3;
-export type TableColumn = {
-  /**
-   * 主键
-   */
-  id?: string;
-  /**
-   * 创建者名称
-   */
-  createBy?: string;
-  /**
-   * 创建时间
-   */
-  createTime?: string;
-  /**
-   * 更新者名称
-   */
-  updateBy?: string;
-  /**
-   * 最后更新时间
-   */
-  updateTime?: string;
-  table?: string;
-  router?: string;
-  title?: string;
-  key?: string;
-  /**
-   * 对齐方式
-   */
-  align?: TableAlignEnum;
-  sort?: number;
-  isShow?: boolean;
-  props?: string;
+  menuIds?: number[];
 };
 export type TableModel = {
   table?: string;
@@ -845,7 +901,7 @@ export type TableColumnInfo = {
   /**
    * 主键
    */
-  id?: string;
+  id?: number;
   /**
    * 创建者名称
    */
@@ -866,6 +922,8 @@ export type TableColumnInfo = {
   router?: string;
   title?: string;
   key?: string;
+  searchType?: SearchTypeEnum;
+  columnType?: ColumnTypeEnum;
   /**
    * 对齐方式
    */
@@ -878,7 +936,7 @@ export type TableColumnDTO = {
   /**
    * 主键
    */
-  id?: string;
+  id?: number;
   /**
    * 创建者名称
    */
@@ -899,6 +957,8 @@ export type TableColumnDTO = {
   router?: string;
   title?: string;
   key?: string;
+  searchType?: SearchTypeEnum;
+  columnType?: ColumnTypeEnum;
   /**
    * 对齐方式
    */
@@ -915,7 +975,7 @@ export type UpdateTableColumnParam = {
   /**
    * 主键
    */
-  id?: string;
+  id?: number;
   /**
    * 创建者名称
    */
@@ -936,6 +996,8 @@ export type UpdateTableColumnParam = {
   router?: string;
   title?: string;
   key?: string;
+  searchType?: SearchTypeEnum;
+  columnType?: ColumnTypeEnum;
   /**
    * 对齐方式
    */
@@ -943,13 +1005,13 @@ export type UpdateTableColumnParam = {
   sort?: number;
   isShow?: boolean;
   props?: string;
-  roleIds?: string[];
+  roleIds?: number[];
 };
 export type UserInfo = {
   /**
    * 主键
    */
-  id?: string;
+  id?: number;
   /**
    * 创建者名称
    */
@@ -975,7 +1037,7 @@ export type UserInfo = {
   roles?: Role[];
 };
 export type UserDTO = {
-  id?: string;
+  id?: number;
   /**
    * 名称
    */
@@ -1005,7 +1067,7 @@ export type UpdateUserParam = {
   /**
    * 主键
    */
-  id?: string;
+  id?: number;
   /**
    * 创建者名称
    */
@@ -1029,10 +1091,618 @@ export type UpdateUserParam = {
   userName?: string;
   depts?: Dept[];
   roles?: Role[];
-  roleIds?: string[];
+  roleIds?: number[];
 };
 declare global {
   interface Apis {
+    DataTable: {
+      /**
+       * ---
+       *
+       * [DELETE] 删除表头
+       *
+       * **path:** /api/DataTable/DeleteTableHeader
+       *
+       * ---
+       *
+       * **RequestBody**
+       * ```ts
+       * type RequestBody = number[]
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: unknown
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      delete_api_datatable_deletetableheader<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          data: number[];
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'DataTable.delete_api_datatable_deletetableheader',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 表头信息获取
+       *
+       * **path:** /api/DataTable/GetHeader
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   Table?: string
+       *   Router?: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: Array<{
+       *     // 主键
+       *     id?: number
+       *     // 创建者名称
+       *     createBy?: string
+       *     // 创建时间
+       *     createTime?: string
+       *     // 更新者名称
+       *     updateBy?: string
+       *     // 最后更新时间
+       *     updateTime?: string
+       *     table?: string
+       *     router?: string
+       *     title?: string
+       *     key?: string
+       *     searchType?: 1 | 2 | 3 | 4 | 5
+       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *     // 对齐方式
+       *     align?: 1 | 2 | 3
+       *     sort?: number
+       *     isShow?: boolean
+       *     props?: string
+       *   }>
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_datatable_getheader<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: TableColumn[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            Table?: string;
+            Router?: string;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: TableColumn[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'DataTable.get_api_datatable_getheader',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 获取表字段
+       *
+       * **path:** /api/DataTable/GetTableColumns
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   tableName?: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: Array<{
+       *     // 表名
+       *     tableName?: string
+       *     // 注释
+       *     common?: string
+       *     // 字段
+       *     columnKey?: string
+       *     // 描述
+       *     type?: string
+       *     // 是否主键
+       *     isPrimaryKey?: boolean
+       *     // 是否自增
+       *     isIdentity?: boolean
+       *     // 是否可空
+       *     isNull?: boolean
+       *     // 长度
+       *     length?: number
+       *     // 精度
+       *     accuracy?: number
+       *     // 描述
+       *     description?: string
+       *   }>
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_datatable_gettablecolumns<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: DataTableColumnDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            tableName?: string;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: DataTableColumnDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'DataTable.get_api_datatable_gettablecolumns',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 获取表字段
+       *
+       * **path:** /api/DataTable/GetTableHeader
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   Table?: string
+       *   Router?: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: {
+       *     table?: string
+       *     router?: string
+       *     columns?: Array<{
+       *       // 主键
+       *       id?: number
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       table?: string
+       *       router?: string
+       *       title?: string
+       *       key?: string
+       *       searchType?: 1 | 2 | 3 | 4 | 5
+       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *       // 对齐方式
+       *       align?: 1 | 2 | 3
+       *       sort?: number
+       *       isShow?: boolean
+       *       props?: string
+       *     }>
+       *   }
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_datatable_gettableheader<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: TableHeaderDTO;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            Table?: string;
+            Router?: string;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: TableHeaderDTO;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'DataTable.get_api_datatable_gettableheader',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 分页
+       *
+       * **path:** /api/DataTable/Page
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   Table?: string
+       *   Router?: string
+       *   StartIndex?: number
+       *   PageIndex?: number
+       *   PageSize?: number
+       *   SortList?: Record<string, string>
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: {
+       *     pagerInfo?: {
+       *       totalRowCount?: number
+       *       pageSize?: number
+       *       startIndex?: number
+       *       pageIndex?: number
+       *       hasPrev?: boolean
+       *       hasNext?: boolean
+       *       isFirst?: boolean
+       *       isLast?: boolean
+       *       totalPageCount?: number
+       *     }
+       *     data?: unknown[]
+       *   }
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_datatable_page<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: ObjectPagedResults;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            Table?: string;
+            Router?: string;
+            StartIndex?: number;
+            PageIndex?: number;
+            PageSize?: number;
+            SortList?: Record<string, string>;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: ObjectPagedResults;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'DataTable.get_api_datatable_page',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [PUT] 设置表头
+       *
+       * **path:** /api/DataTable/SetTableHeader
+       *
+       * ---
+       *
+       * **RequestBody**
+       * ```ts
+       * type RequestBody = {
+       *   // 主键
+       *   id?: number
+       *   // 创建者名称
+       *   createBy?: string
+       *   // 创建时间
+       *   createTime?: string
+       *   // 更新者名称
+       *   updateBy?: string
+       *   // 最后更新时间
+       *   updateTime?: string
+       *   table?: string
+       *   router?: string
+       *   title?: string
+       *   key?: string
+       *   searchType?: 1 | 2 | 3 | 4 | 5
+       *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *   // 对齐方式
+       *   align?: 1 | 2 | 3
+       *   sort?: number
+       *   isShow?: boolean
+       *   props?: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: {
+       *     // 主键
+       *     id?: number
+       *     // 创建者名称
+       *     createBy?: string
+       *     // 创建时间
+       *     createTime?: string
+       *     // 更新者名称
+       *     updateBy?: string
+       *     // 最后更新时间
+       *     updateTime?: string
+       *     table?: string
+       *     router?: string
+       *     title?: string
+       *     key?: string
+       *     searchType?: 1 | 2 | 3 | 4 | 5
+       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *     // 对齐方式
+       *     align?: 1 | 2 | 3
+       *     sort?: number
+       *     isShow?: boolean
+       *     props?: string
+       *   }
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      put_api_datatable_settableheader<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: TableColumn;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          data: TableColumn;
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: TableColumn;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'DataTable.put_api_datatable_settableheader',
+        Config
+      >;
+    };
     Demo: {
       /**
        * ---
@@ -1074,7 +1744,7 @@ declare global {
        *       totalPageCount?: number
        *     }
        *     data?: Array<{
-       *       id?: string
+       *       id?: number
        *       code?: string
        *       srot?: string
        *     }>
@@ -1210,7 +1880,7 @@ declare global {
        *
        * **RequestBody**
        * ```ts
-       * type RequestBody = string[]
+       * type RequestBody = number[]
        * ```
        *
        * ---
@@ -1248,7 +1918,7 @@ declare global {
            */
           success: boolean;
         }> & {
-          data: string[];
+          data: number[];
         }
       >(
         config: Config
@@ -1286,7 +1956,7 @@ declare global {
        * **Query Parameters**
        * ```ts
        * type QueryParameters = {
-       *   id?: string
+       *   id?: number
        * }
        * ```
        *
@@ -1301,7 +1971,7 @@ declare global {
        *   // [required]
        *   data: {
        *     // 主键
-       *     id?: string
+       *     id?: number
        *     // 创建者名称
        *     createBy?: string
        *     // 创建时间
@@ -1313,7 +1983,7 @@ declare global {
        *     image?: string
        *     name?: string
        *     easyName?: string
-       *     parentId?: string
+       *     parentId?: number
        *     address?: string
        *     isDeleted?: boolean
        *     phone?: string
@@ -1324,7 +1994,7 @@ declare global {
        *     type?: 10 | 20 | 30
        *     users?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -1340,7 +2010,7 @@ declare global {
        *       userName?: string
        *       depts?: Array<{
        *         // 主键
-       *         id?: string
+       *         id?: number
        *         // 创建者名称
        *         createBy?: string
        *         // 创建时间
@@ -1352,7 +2022,7 @@ declare global {
        *         image?: string
        *         name?: string
        *         easyName?: string
-       *         parentId?: string
+       *         parentId?: number
        *         address?: string
        *         isDeleted?: boolean
        *         phone?: string
@@ -1364,7 +2034,7 @@ declare global {
        *         users?: Array<User>
        *         roles?: Array<{
        *           // 主键
-       *           id?: string
+       *           id?: number
        *           // 创建者名称
        *           createBy?: string
        *           // 创建时间
@@ -1379,12 +2049,12 @@ declare global {
        *           remark?: string
        *           code?: string
        *           sort?: number
-       *           deptId?: string
+       *           deptId?: number
        *           dept?: Dept
        *           users?: Array<User>
        *           menus?: Array<{
        *             // 主键
-       *             id?: string
+       *             id?: number
        *             // 创建者名称
        *             createBy?: string
        *             // 创建时间
@@ -1397,7 +2067,7 @@ declare global {
        *             path?: string
        *             redirect?: string
        *             component?: string
-       *             parentId?: string
+       *             parentId?: number
        *             type?: 1 | 2 | 3 | 4
        *             state?: boolean
        *             title?: string
@@ -1454,7 +2124,7 @@ declare global {
           success: boolean;
         }> & {
           params: {
-            id?: string;
+            id?: number;
           };
         }
       >(
@@ -1498,7 +2168,7 @@ declare global {
        *   code: string
        *   // [required]
        *   data: Array<{
-       *     id?: string
+       *     id?: number
        *     // 图标
        *     image?: string
        *     // 单位名称
@@ -1506,7 +2176,7 @@ declare global {
        *     // 简写名称
        *     easyName?: string
        *     // 父级部门ID
-       *     parentId?: string
+       *     parentId?: number
        *     // 地址
        *     address?: string
        *     // 是否删除
@@ -1587,7 +2257,7 @@ declare global {
        * ```ts
        * type QueryParameters = {
        *   types?: (10 | 20 | 30)[]
-       *   parentId?: string
+       *   parentId?: number
        * }
        * ```
        *
@@ -1601,9 +2271,9 @@ declare global {
        *   // [required]
        *   data: Array<{
        *     // 主键Id!
-       *     id?: string
+       *     id?: number
        *     // 父级
-       *     parentId?: string
+       *     parentId?: number
        *     // 菜单
        *     name?: string
        *     // 图标
@@ -1638,7 +2308,7 @@ declare global {
         }> & {
           params: {
             types?: DeptTypeEnum[];
-            parentId?: string;
+            parentId?: number;
           };
         }
       >(
@@ -1677,7 +2347,7 @@ declare global {
        * **Query Parameters**
        * ```ts
        * type QueryParameters = {
-       *   id?: string
+       *   id?: number
        *   state?: boolean
        * }
        * ```
@@ -1718,7 +2388,7 @@ declare global {
           success: boolean;
         }> & {
           params: {
-            id?: string;
+            id?: number;
             state?: boolean;
           };
         }
@@ -1759,7 +2429,7 @@ declare global {
        * ```ts
        * type RequestBody = {
        *   // 主键
-       *   id?: string
+       *   id?: number
        *   // 创建者名称
        *   createBy?: string
        *   // 创建时间
@@ -1771,7 +2441,7 @@ declare global {
        *   image?: string
        *   name?: string
        *   easyName?: string
-       *   parentId?: string
+       *   parentId?: number
        *   address?: string
        *   isDeleted?: boolean
        *   phone?: string
@@ -1782,7 +2452,7 @@ declare global {
        *   type?: 10 | 20 | 30
        *   users?: Array<{
        *     // 主键
-       *     id?: string
+       *     id?: number
        *     // 创建者名称
        *     createBy?: string
        *     // 创建时间
@@ -1798,7 +2468,7 @@ declare global {
        *     userName?: string
        *     depts?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -1810,7 +2480,7 @@ declare global {
        *       image?: string
        *       name?: string
        *       easyName?: string
-       *       parentId?: string
+       *       parentId?: number
        *       address?: string
        *       isDeleted?: boolean
        *       phone?: string
@@ -1822,7 +2492,7 @@ declare global {
        *       users?: Array<User>
        *       roles?: Array<{
        *         // 主键
-       *         id?: string
+       *         id?: number
        *         // 创建者名称
        *         createBy?: string
        *         // 创建时间
@@ -1837,12 +2507,12 @@ declare global {
        *         remark?: string
        *         code?: string
        *         sort?: number
-       *         deptId?: string
+       *         deptId?: number
        *         dept?: Dept
        *         users?: Array<User>
        *         menus?: Array<{
        *           // 主键
-       *           id?: string
+       *           id?: number
        *           // 创建者名称
        *           createBy?: string
        *           // 创建时间
@@ -1855,7 +2525,7 @@ declare global {
        *           path?: string
        *           redirect?: string
        *           component?: string
-       *           parentId?: string
+       *           parentId?: number
        *           type?: 1 | 2 | 3 | 4
        *           state?: boolean
        *           title?: string
@@ -1883,7 +2553,7 @@ declare global {
        *   }>
        *   roles?: Array<{
        *     // 主键
-       *     id?: string
+       *     id?: number
        *     // 创建者名称
        *     createBy?: string
        *     // 创建时间
@@ -1898,12 +2568,12 @@ declare global {
        *     remark?: string
        *     code?: string
        *     sort?: number
-       *     deptId?: string
+       *     deptId?: number
        *     dept?: Dept
        *     users?: Array<User>
        *     menus?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -1916,7 +2586,7 @@ declare global {
        *       path?: string
        *       redirect?: string
        *       component?: string
-       *       parentId?: string
+       *       parentId?: number
        *       type?: 1 | 2 | 3 | 4
        *       state?: boolean
        *       title?: string
@@ -1940,7 +2610,7 @@ declare global {
        *   }>
        *   children?: Array<{
        *     // 主键
-       *     id?: string
+       *     id?: number
        *     // 创建者名称
        *     createBy?: string
        *     // 创建时间
@@ -1952,7 +2622,7 @@ declare global {
        *     image?: string
        *     name?: string
        *     easyName?: string
-       *     parentId?: string
+       *     parentId?: number
        *     address?: string
        *     isDeleted?: boolean
        *     phone?: string
@@ -1964,7 +2634,7 @@ declare global {
        *     users?: Array<User>
        *     roles?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -1979,12 +2649,12 @@ declare global {
        *       remark?: string
        *       code?: string
        *       sort?: number
-       *       deptId?: string
+       *       deptId?: number
        *       dept?: Dept
        *       users?: Array<User>
        *       menus?: Array<{
        *         // 主键
-       *         id?: string
+       *         id?: number
        *         // 创建者名称
        *         createBy?: string
        *         // 创建时间
@@ -1997,7 +2667,7 @@ declare global {
        *         path?: string
        *         redirect?: string
        *         component?: string
-       *         parentId?: string
+       *         parentId?: number
        *         type?: 1 | 2 | 3 | 4
        *         state?: boolean
        *         title?: string
@@ -2034,7 +2704,7 @@ declare global {
        *   // [required]
        *   code: string
        *   // [required]
-       *   data: string
+       *   data: number
        *   // [required]
        *   msg: string
        *   // [required]
@@ -2051,7 +2721,7 @@ declare global {
           /**
            * [required]
            */
-          data: string;
+          data: number;
           /**
            * [required]
            */
@@ -2074,7 +2744,7 @@ declare global {
           /**
            * [required]
            */
-          data: string;
+          data: number;
           /**
            * [required]
            */
@@ -2106,7 +2776,7 @@ declare global {
        *   // [required]
        *   data: {
        *     // 主键Id!
-       *     id?: string
+       *     id?: number
        *     // 名称
        *     name?: string
        *     // 头像
@@ -2338,7 +3008,7 @@ declare global {
        *
        * **RequestBody**
        * ```ts
-       * type RequestBody = string[]
+       * type RequestBody = number[]
        * ```
        *
        * ---
@@ -2376,7 +3046,7 @@ declare global {
            */
           success: boolean;
         }> & {
-          data: string[];
+          data: number[];
         }
       >(
         config: Config
@@ -2414,7 +3084,7 @@ declare global {
        * **Query Parameters**
        * ```ts
        * type QueryParameters = {
-       *   id?: string
+       *   id?: number
        * }
        * ```
        *
@@ -2429,7 +3099,7 @@ declare global {
        *   // [required]
        *   data: {
        *     // 主键
-       *     id?: string
+       *     id?: number
        *     // 创建者名称
        *     createBy?: string
        *     // 创建时间
@@ -2442,7 +3112,7 @@ declare global {
        *     path?: string
        *     redirect?: string
        *     component?: string
-       *     parentId?: string
+       *     parentId?: number
        *     type?: 1 | 2 | 3 | 4
        *     state?: boolean
        *     title?: string
@@ -2462,7 +3132,7 @@ declare global {
        *     isDeleted?: boolean
        *     roles?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -2477,12 +3147,12 @@ declare global {
        *       remark?: string
        *       code?: string
        *       sort?: number
-       *       deptId?: string
+       *       deptId?: number
        *       dept?: Dept
        *       users?: Array<User>
        *       menus?: Array<{
        *         // 主键
-       *         id?: string
+       *         id?: number
        *         // 创建者名称
        *         createBy?: string
        *         // 创建时间
@@ -2495,7 +3165,7 @@ declare global {
        *         path?: string
        *         redirect?: string
        *         component?: string
-       *         parentId?: string
+       *         parentId?: number
        *         type?: 1 | 2 | 3 | 4
        *         state?: boolean
        *         title?: string
@@ -2519,7 +3189,7 @@ declare global {
        *     }>
        *     children?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -2532,7 +3202,7 @@ declare global {
        *       path?: string
        *       redirect?: string
        *       component?: string
-       *       parentId?: string
+       *       parentId?: number
        *       type?: 1 | 2 | 3 | 4
        *       state?: boolean
        *       title?: string
@@ -2582,7 +3252,7 @@ declare global {
           success: boolean;
         }> & {
           params: {
-            id?: string;
+            id?: number;
           };
         }
       >(
@@ -2626,7 +3296,7 @@ declare global {
        *   code: string
        *   // [required]
        *   data: Array<{
-       *     id?: string
+       *     id?: number
        *     // 菜单名
        *     name?: string
        *     // 路径
@@ -2636,7 +3306,7 @@ declare global {
        *     // 组件
        *     component?: string
        *     // 父级
-       *     parentId?: string
+       *     parentId?: number
        *     type?: 1 | 2 | 3 | 4
        *     // 状态
        *     state?: boolean
@@ -2656,6 +3326,7 @@ declare global {
        *     }
        *     // 子节点
        *     children?: Array<RouteDTO>
+       *     params?: Record<string, unknown>
        *   }>
        *   // [required]
        *   msg: string
@@ -2723,7 +3394,7 @@ declare global {
        *   code: string
        *   // [required]
        *   data: Array<{
-       *     id?: string
+       *     id?: number
        *     // 菜单标题
        *     title?: string
        *     // 组件
@@ -2731,7 +3402,7 @@ declare global {
        *     // 组件名称
        *     componentName?: string
        *     // 父级菜单ID
-       *     parentId?: string
+       *     parentId?: number
        *     // 排序
        *     sort?: number
        *     // icon图标
@@ -2811,7 +3482,7 @@ declare global {
        * **Query Parameters**
        * ```ts
        * type QueryParameters = {
-       *   parentId?: string
+       *   parentId?: number
        * }
        * ```
        *
@@ -2825,9 +3496,9 @@ declare global {
        *   // [required]
        *   data: Array<{
        *     // 主键Id!
-       *     id?: string
+       *     id?: number
        *     // 父级
-       *     parentId?: string
+       *     parentId?: number
        *     // 菜单
        *     title?: string
        *     // 图标
@@ -2861,7 +3532,7 @@ declare global {
           success: boolean;
         }> & {
           params: {
-            parentId?: string;
+            parentId?: number;
           };
         }
       >(
@@ -2900,7 +3571,7 @@ declare global {
        * **Query Parameters**
        * ```ts
        * type QueryParameters = {
-       *   id?: string
+       *   id?: number
        *   state?: boolean
        * }
        * ```
@@ -2941,7 +3612,7 @@ declare global {
           success: boolean;
         }> & {
           params: {
-            id?: string;
+            id?: number;
             state?: boolean;
           };
         }
@@ -2982,7 +3653,7 @@ declare global {
        * ```ts
        * type RequestBody = {
        *   // 主键
-       *   id?: string
+       *   id?: number
        *   // 创建者名称
        *   createBy?: string
        *   // 创建时间
@@ -2995,7 +3666,7 @@ declare global {
        *   path?: string
        *   redirect?: string
        *   component?: string
-       *   parentId?: string
+       *   parentId?: number
        *   type?: 1 | 2 | 3 | 4
        *   state?: boolean
        *   title?: string
@@ -3015,7 +3686,7 @@ declare global {
        *   isDeleted?: boolean
        *   roles?: Array<{
        *     // 主键
-       *     id?: string
+       *     id?: number
        *     // 创建者名称
        *     createBy?: string
        *     // 创建时间
@@ -3030,12 +3701,12 @@ declare global {
        *     remark?: string
        *     code?: string
        *     sort?: number
-       *     deptId?: string
+       *     deptId?: number
        *     dept?: Dept
        *     users?: Array<User>
        *     menus?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -3048,7 +3719,7 @@ declare global {
        *       path?: string
        *       redirect?: string
        *       component?: string
-       *       parentId?: string
+       *       parentId?: number
        *       type?: 1 | 2 | 3 | 4
        *       state?: boolean
        *       title?: string
@@ -3072,7 +3743,7 @@ declare global {
        *   }>
        *   children?: Array<{
        *     // 主键
-       *     id?: string
+       *     id?: number
        *     // 创建者名称
        *     createBy?: string
        *     // 创建时间
@@ -3085,7 +3756,7 @@ declare global {
        *     path?: string
        *     redirect?: string
        *     component?: string
-       *     parentId?: string
+       *     parentId?: number
        *     type?: 1 | 2 | 3 | 4
        *     state?: boolean
        *     title?: string
@@ -3117,7 +3788,7 @@ declare global {
        *   // [required]
        *   code: string
        *   // [required]
-       *   data: string
+       *   data: number
        *   // [required]
        *   msg: string
        *   // [required]
@@ -3134,7 +3805,7 @@ declare global {
           /**
            * [required]
            */
-          data: string;
+          data: number;
           /**
            * [required]
            */
@@ -3157,7 +3828,7 @@ declare global {
           /**
            * [required]
            */
-          data: string;
+          data: number;
           /**
            * [required]
            */
@@ -3183,7 +3854,7 @@ declare global {
        *
        * **RequestBody**
        * ```ts
-       * type RequestBody = string[]
+       * type RequestBody = number[]
        * ```
        *
        * ---
@@ -3221,7 +3892,7 @@ declare global {
            */
           success: boolean;
         }> & {
-          data: string[];
+          data: number[];
         }
       >(
         config: Config
@@ -3259,7 +3930,7 @@ declare global {
        * **Query Parameters**
        * ```ts
        * type QueryParameters = {
-       *   id?: string
+       *   id?: number
        * }
        * ```
        *
@@ -3274,7 +3945,7 @@ declare global {
        *   // [required]
        *   data: {
        *     // 主键
-       *     id?: string
+       *     id?: number
        *     // 创建者名称
        *     createBy?: string
        *     // 创建时间
@@ -3289,10 +3960,10 @@ declare global {
        *     remark?: string
        *     code?: string
        *     sort?: number
-       *     deptId?: string
+       *     deptId?: number
        *     dept?: {
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -3304,7 +3975,7 @@ declare global {
        *       image?: string
        *       name?: string
        *       easyName?: string
-       *       parentId?: string
+       *       parentId?: number
        *       address?: string
        *       isDeleted?: boolean
        *       phone?: string
@@ -3316,7 +3987,7 @@ declare global {
        *       users?: Array<User>
        *       roles?: Array<{
        *         // 主键
-       *         id?: string
+       *         id?: number
        *         // 创建者名称
        *         createBy?: string
        *         // 创建时间
@@ -3331,12 +4002,12 @@ declare global {
        *         remark?: string
        *         code?: string
        *         sort?: number
-       *         deptId?: string
+       *         deptId?: number
        *         dept?: Dept
        *         users?: Array<User>
        *         menus?: Array<{
        *           // 主键
-       *           id?: string
+       *           id?: number
        *           // 创建者名称
        *           createBy?: string
        *           // 创建时间
@@ -3349,7 +4020,7 @@ declare global {
        *           path?: string
        *           redirect?: string
        *           component?: string
-       *           parentId?: string
+       *           parentId?: number
        *           type?: 1 | 2 | 3 | 4
        *           state?: boolean
        *           title?: string
@@ -3375,7 +4046,7 @@ declare global {
        *     }
        *     users?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -3391,7 +4062,7 @@ declare global {
        *       userName?: string
        *       depts?: Array<{
        *         // 主键
-       *         id?: string
+       *         id?: number
        *         // 创建者名称
        *         createBy?: string
        *         // 创建时间
@@ -3403,7 +4074,7 @@ declare global {
        *         image?: string
        *         name?: string
        *         easyName?: string
-       *         parentId?: string
+       *         parentId?: number
        *         address?: string
        *         isDeleted?: boolean
        *         phone?: string
@@ -3415,7 +4086,7 @@ declare global {
        *         users?: Array<User>
        *         roles?: Array<{
        *           // 主键
-       *           id?: string
+       *           id?: number
        *           // 创建者名称
        *           createBy?: string
        *           // 创建时间
@@ -3430,12 +4101,12 @@ declare global {
        *           remark?: string
        *           code?: string
        *           sort?: number
-       *           deptId?: string
+       *           deptId?: number
        *           dept?: Dept
        *           users?: Array<User>
        *           menus?: Array<{
        *             // 主键
-       *             id?: string
+       *             id?: number
        *             // 创建者名称
        *             createBy?: string
        *             // 创建时间
@@ -3448,7 +4119,7 @@ declare global {
        *             path?: string
        *             redirect?: string
        *             component?: string
-       *             parentId?: string
+       *             parentId?: number
        *             type?: 1 | 2 | 3 | 4
        *             state?: boolean
        *             title?: string
@@ -3476,7 +4147,7 @@ declare global {
        *     }>
        *     menus?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -3489,7 +4160,7 @@ declare global {
        *       path?: string
        *       redirect?: string
        *       component?: string
-       *       parentId?: string
+       *       parentId?: number
        *       type?: 1 | 2 | 3 | 4
        *       state?: boolean
        *       title?: string
@@ -3510,7 +4181,7 @@ declare global {
        *       roles?: Array<Role>
        *       children?: Array<Menu>
        *     }>
-       *     menuIds?: string[]
+       *     menuIds?: number[]
        *   }
        *   // [required]
        *   msg: string
@@ -3540,7 +4211,7 @@ declare global {
           success: boolean;
         }> & {
           params: {
-            id?: string;
+            id?: number;
           };
         }
       >(
@@ -3610,7 +4281,7 @@ declare global {
        *     }
        *     data?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -3625,10 +4296,10 @@ declare global {
        *       remark?: string
        *       code?: string
        *       sort?: number
-       *       deptId?: string
+       *       deptId?: number
        *       dept?: {
        *         // 主键
-       *         id?: string
+       *         id?: number
        *         // 创建者名称
        *         createBy?: string
        *         // 创建时间
@@ -3640,7 +4311,7 @@ declare global {
        *         image?: string
        *         name?: string
        *         easyName?: string
-       *         parentId?: string
+       *         parentId?: number
        *         address?: string
        *         isDeleted?: boolean
        *         phone?: string
@@ -3652,7 +4323,7 @@ declare global {
        *         users?: Array<User>
        *         roles?: Array<{
        *           // 主键
-       *           id?: string
+       *           id?: number
        *           // 创建者名称
        *           createBy?: string
        *           // 创建时间
@@ -3667,12 +4338,12 @@ declare global {
        *           remark?: string
        *           code?: string
        *           sort?: number
-       *           deptId?: string
+       *           deptId?: number
        *           dept?: Dept
        *           users?: Array<User>
        *           menus?: Array<{
        *             // 主键
-       *             id?: string
+       *             id?: number
        *             // 创建者名称
        *             createBy?: string
        *             // 创建时间
@@ -3685,7 +4356,7 @@ declare global {
        *             path?: string
        *             redirect?: string
        *             component?: string
-       *             parentId?: string
+       *             parentId?: number
        *             type?: 1 | 2 | 3 | 4
        *             state?: boolean
        *             title?: string
@@ -3711,7 +4382,7 @@ declare global {
        *       }
        *       users?: Array<{
        *         // 主键
-       *         id?: string
+       *         id?: number
        *         // 创建者名称
        *         createBy?: string
        *         // 创建时间
@@ -3727,7 +4398,7 @@ declare global {
        *         userName?: string
        *         depts?: Array<{
        *           // 主键
-       *           id?: string
+       *           id?: number
        *           // 创建者名称
        *           createBy?: string
        *           // 创建时间
@@ -3739,7 +4410,7 @@ declare global {
        *           image?: string
        *           name?: string
        *           easyName?: string
-       *           parentId?: string
+       *           parentId?: number
        *           address?: string
        *           isDeleted?: boolean
        *           phone?: string
@@ -3751,7 +4422,7 @@ declare global {
        *           users?: Array<User>
        *           roles?: Array<{
        *             // 主键
-       *             id?: string
+       *             id?: number
        *             // 创建者名称
        *             createBy?: string
        *             // 创建时间
@@ -3766,12 +4437,12 @@ declare global {
        *             remark?: string
        *             code?: string
        *             sort?: number
-       *             deptId?: string
+       *             deptId?: number
        *             dept?: Dept
        *             users?: Array<User>
        *             menus?: Array<{
        *               // 主键
-       *               id?: string
+       *               id?: number
        *               // 创建者名称
        *               createBy?: string
        *               // 创建时间
@@ -3784,7 +4455,7 @@ declare global {
        *               path?: string
        *               redirect?: string
        *               component?: string
-       *               parentId?: string
+       *               parentId?: number
        *               type?: 1 | 2 | 3 | 4
        *               state?: boolean
        *               title?: string
@@ -3812,7 +4483,7 @@ declare global {
        *       }>
        *       menus?: Array<{
        *         // 主键
-       *         id?: string
+       *         id?: number
        *         // 创建者名称
        *         createBy?: string
        *         // 创建时间
@@ -3825,7 +4496,7 @@ declare global {
        *         path?: string
        *         redirect?: string
        *         component?: string
-       *         parentId?: string
+       *         parentId?: number
        *         type?: 1 | 2 | 3 | 4
        *         state?: boolean
        *         title?: string
@@ -3924,7 +4595,7 @@ declare global {
        *   // [required]
        *   data: Array<{
        *     // 主键Id!
-       *     id?: string
+       *     id?: number
        *     // 账号
        *     name?: string
        *   }>
@@ -3990,7 +4661,7 @@ declare global {
        * **Query Parameters**
        * ```ts
        * type QueryParameters = {
-       *   id?: string
+       *   id?: number
        *   state?: boolean
        * }
        * ```
@@ -4031,7 +4702,7 @@ declare global {
           success: boolean;
         }> & {
           params: {
-            id?: string;
+            id?: number;
             state?: boolean;
           };
         }
@@ -4072,7 +4743,7 @@ declare global {
        * ```ts
        * type RequestBody = {
        *   // 主键
-       *   id?: string
+       *   id?: number
        *   // 创建者名称
        *   createBy?: string
        *   // 创建时间
@@ -4087,10 +4758,10 @@ declare global {
        *   remark?: string
        *   code?: string
        *   sort?: number
-       *   deptId?: string
+       *   deptId?: number
        *   dept?: {
        *     // 主键
-       *     id?: string
+       *     id?: number
        *     // 创建者名称
        *     createBy?: string
        *     // 创建时间
@@ -4102,7 +4773,7 @@ declare global {
        *     image?: string
        *     name?: string
        *     easyName?: string
-       *     parentId?: string
+       *     parentId?: number
        *     address?: string
        *     isDeleted?: boolean
        *     phone?: string
@@ -4114,7 +4785,7 @@ declare global {
        *     users?: Array<User>
        *     roles?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -4129,12 +4800,12 @@ declare global {
        *       remark?: string
        *       code?: string
        *       sort?: number
-       *       deptId?: string
+       *       deptId?: number
        *       dept?: Dept
        *       users?: Array<User>
        *       menus?: Array<{
        *         // 主键
-       *         id?: string
+       *         id?: number
        *         // 创建者名称
        *         createBy?: string
        *         // 创建时间
@@ -4147,7 +4818,7 @@ declare global {
        *         path?: string
        *         redirect?: string
        *         component?: string
-       *         parentId?: string
+       *         parentId?: number
        *         type?: 1 | 2 | 3 | 4
        *         state?: boolean
        *         title?: string
@@ -4173,7 +4844,7 @@ declare global {
        *   }
        *   users?: Array<{
        *     // 主键
-       *     id?: string
+       *     id?: number
        *     // 创建者名称
        *     createBy?: string
        *     // 创建时间
@@ -4189,7 +4860,7 @@ declare global {
        *     userName?: string
        *     depts?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -4201,7 +4872,7 @@ declare global {
        *       image?: string
        *       name?: string
        *       easyName?: string
-       *       parentId?: string
+       *       parentId?: number
        *       address?: string
        *       isDeleted?: boolean
        *       phone?: string
@@ -4213,7 +4884,7 @@ declare global {
        *       users?: Array<User>
        *       roles?: Array<{
        *         // 主键
-       *         id?: string
+       *         id?: number
        *         // 创建者名称
        *         createBy?: string
        *         // 创建时间
@@ -4228,12 +4899,12 @@ declare global {
        *         remark?: string
        *         code?: string
        *         sort?: number
-       *         deptId?: string
+       *         deptId?: number
        *         dept?: Dept
        *         users?: Array<User>
        *         menus?: Array<{
        *           // 主键
-       *           id?: string
+       *           id?: number
        *           // 创建者名称
        *           createBy?: string
        *           // 创建时间
@@ -4246,7 +4917,7 @@ declare global {
        *           path?: string
        *           redirect?: string
        *           component?: string
-       *           parentId?: string
+       *           parentId?: number
        *           type?: 1 | 2 | 3 | 4
        *           state?: boolean
        *           title?: string
@@ -4274,7 +4945,7 @@ declare global {
        *   }>
        *   menus?: Array<{
        *     // 主键
-       *     id?: string
+       *     id?: number
        *     // 创建者名称
        *     createBy?: string
        *     // 创建时间
@@ -4287,7 +4958,7 @@ declare global {
        *     path?: string
        *     redirect?: string
        *     component?: string
-       *     parentId?: string
+       *     parentId?: number
        *     type?: 1 | 2 | 3 | 4
        *     state?: boolean
        *     title?: string
@@ -4309,7 +4980,7 @@ declare global {
        *     children?: Array<Menu>
        *   }>
        *   // 菜单
-       *   menuIds?: string[]
+       *   menuIds?: number[]
        * }
        * ```
        *
@@ -4321,7 +4992,7 @@ declare global {
        *   // [required]
        *   code: string
        *   // [required]
-       *   data: string
+       *   data: number
        *   // [required]
        *   msg: string
        *   // [required]
@@ -4338,7 +5009,7 @@ declare global {
           /**
            * [required]
            */
-          data: string;
+          data: number;
           /**
            * [required]
            */
@@ -4361,7 +5032,7 @@ declare global {
           /**
            * [required]
            */
-          data: string;
+          data: number;
           /**
            * [required]
            */
@@ -4387,7 +5058,7 @@ declare global {
        *
        * **RequestBody**
        * ```ts
-       * type RequestBody = string[]
+       * type RequestBody = number[]
        * ```
        *
        * ---
@@ -4425,7 +5096,7 @@ declare global {
            */
           success: boolean;
         }> & {
-          data: string[];
+          data: number[];
         }
       >(
         config: Config
@@ -4482,7 +5153,7 @@ declare global {
        *     router?: string
        *     columns?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -4495,6 +5166,8 @@ declare global {
        *       router?: string
        *       title?: string
        *       key?: string
+       *       searchType?: 1 | 2 | 3 | 4 | 5
+       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *       // 对齐方式
        *       align?: 1 | 2 | 3
        *       sort?: number
@@ -4571,7 +5244,7 @@ declare global {
        * **Query Parameters**
        * ```ts
        * type QueryParameters = {
-       *   id?: string
+       *   id?: number
        * }
        * ```
        *
@@ -4586,7 +5259,7 @@ declare global {
        *   // [required]
        *   data: {
        *     // 主键
-       *     id?: string
+       *     id?: number
        *     // 创建者名称
        *     createBy?: string
        *     // 创建时间
@@ -4599,6 +5272,8 @@ declare global {
        *     router?: string
        *     title?: string
        *     key?: string
+       *     searchType?: 1 | 2 | 3 | 4 | 5
+       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *     // 对齐方式
        *     align?: 1 | 2 | 3
        *     sort?: number
@@ -4633,7 +5308,7 @@ declare global {
           success: boolean;
         }> & {
           params: {
-            id?: string;
+            id?: number;
           };
         }
       >(
@@ -4703,7 +5378,7 @@ declare global {
        *     }
        *     data?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -4716,6 +5391,8 @@ declare global {
        *       router?: string
        *       title?: string
        *       key?: string
+       *       searchType?: 1 | 2 | 3 | 4 | 5
+       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *       // 对齐方式
        *       align?: 1 | 2 | 3
        *       sort?: number
@@ -4797,7 +5474,7 @@ declare global {
        *   router?: string
        *   columns?: Array<{
        *     // 主键
-       *     id?: string
+       *     id?: number
        *     // 创建者名称
        *     createBy?: string
        *     // 创建时间
@@ -4810,6 +5487,8 @@ declare global {
        *     router?: string
        *     title?: string
        *     key?: string
+       *     searchType?: 1 | 2 | 3 | 4 | 5
+       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *     // 对齐方式
        *     align?: 1 | 2 | 3
        *     sort?: number
@@ -4893,7 +5572,7 @@ declare global {
        * ```ts
        * type RequestBody = {
        *   // 主键
-       *   id?: string
+       *   id?: number
        *   // 创建者名称
        *   createBy?: string
        *   // 创建时间
@@ -4906,12 +5585,14 @@ declare global {
        *   router?: string
        *   title?: string
        *   key?: string
+       *   searchType?: 1 | 2 | 3 | 4 | 5
+       *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *   // 对齐方式
        *   align?: 1 | 2 | 3
        *   sort?: number
        *   isShow?: boolean
        *   props?: string
-       *   roleIds?: string[]
+       *   roleIds?: number[]
        * }
        * ```
        *
@@ -4923,7 +5604,7 @@ declare global {
        *   // [required]
        *   code: string
        *   // [required]
-       *   data: string
+       *   data: number
        *   // [required]
        *   msg: string
        *   // [required]
@@ -4940,7 +5621,7 @@ declare global {
           /**
            * [required]
            */
-          data: string;
+          data: number;
           /**
            * [required]
            */
@@ -4963,7 +5644,7 @@ declare global {
           /**
            * [required]
            */
-          data: string;
+          data: number;
           /**
            * [required]
            */
@@ -5057,7 +5738,7 @@ declare global {
        *
        * **RequestBody**
        * ```ts
-       * type RequestBody = string[]
+       * type RequestBody = number[]
        * ```
        *
        * ---
@@ -5095,7 +5776,7 @@ declare global {
            */
           success: boolean;
         }> & {
-          data: string[];
+          data: number[];
         }
       >(
         config: Config
@@ -5133,7 +5814,7 @@ declare global {
        * **Query Parameters**
        * ```ts
        * type QueryParameters = {
-       *   id?: string
+       *   id?: number
        * }
        * ```
        *
@@ -5148,7 +5829,7 @@ declare global {
        *   // [required]
        *   data: {
        *     // 主键
-       *     id?: string
+       *     id?: number
        *     // 创建者名称
        *     createBy?: string
        *     // 创建时间
@@ -5164,7 +5845,7 @@ declare global {
        *     userName?: string
        *     depts?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -5176,7 +5857,7 @@ declare global {
        *       image?: string
        *       name?: string
        *       easyName?: string
-       *       parentId?: string
+       *       parentId?: number
        *       address?: string
        *       isDeleted?: boolean
        *       phone?: string
@@ -5188,7 +5869,7 @@ declare global {
        *       users?: Array<User>
        *       roles?: Array<{
        *         // 主键
-       *         id?: string
+       *         id?: number
        *         // 创建者名称
        *         createBy?: string
        *         // 创建时间
@@ -5203,12 +5884,12 @@ declare global {
        *         remark?: string
        *         code?: string
        *         sort?: number
-       *         deptId?: string
+       *         deptId?: number
        *         dept?: Dept
        *         users?: Array<User>
        *         menus?: Array<{
        *           // 主键
-       *           id?: string
+       *           id?: number
        *           // 创建者名称
        *           createBy?: string
        *           // 创建时间
@@ -5221,7 +5902,7 @@ declare global {
        *           path?: string
        *           redirect?: string
        *           component?: string
-       *           parentId?: string
+       *           parentId?: number
        *           type?: 1 | 2 | 3 | 4
        *           state?: boolean
        *           title?: string
@@ -5247,7 +5928,7 @@ declare global {
        *     }>
        *     roles?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -5262,12 +5943,12 @@ declare global {
        *       remark?: string
        *       code?: string
        *       sort?: number
-       *       deptId?: string
+       *       deptId?: number
        *       dept?: Dept
        *       users?: Array<User>
        *       menus?: Array<{
        *         // 主键
-       *         id?: string
+       *         id?: number
        *         // 创建者名称
        *         createBy?: string
        *         // 创建时间
@@ -5280,7 +5961,7 @@ declare global {
        *         path?: string
        *         redirect?: string
        *         component?: string
-       *         parentId?: string
+       *         parentId?: number
        *         type?: 1 | 2 | 3 | 4
        *         state?: boolean
        *         title?: string
@@ -5331,7 +6012,7 @@ declare global {
           success: boolean;
         }> & {
           params: {
-            id?: string;
+            id?: number;
           };
         }
       >(
@@ -5373,7 +6054,7 @@ declare global {
        * type QueryParameters = {
        *   KeyWord?: string
        *   // 公司
-       *   DeptId?: string
+       *   DeptId?: number
        *   StartIndex?: number
        *   PageIndex?: number
        *   PageSize?: number
@@ -5402,7 +6083,7 @@ declare global {
        *       totalPageCount?: number
        *     }
        *     data?: Array<{
-       *       id?: string
+       *       id?: number
        *       // 名称
        *       name?: string
        *       // 头像
@@ -5446,7 +6127,7 @@ declare global {
             /**
              * 公司
              */
-            DeptId?: string;
+            DeptId?: number;
             StartIndex?: number;
             PageIndex?: number;
             PageSize?: number;
@@ -5489,7 +6170,7 @@ declare global {
        * **Query Parameters**
        * ```ts
        * type QueryParameters = {
-       *   id?: string
+       *   id?: number
        *   state?: boolean
        * }
        * ```
@@ -5530,7 +6211,7 @@ declare global {
           success: boolean;
         }> & {
           params: {
-            id?: string;
+            id?: number;
             state?: boolean;
           };
         }
@@ -5571,7 +6252,7 @@ declare global {
        * ```ts
        * type RequestBody = {
        *   // 主键
-       *   id?: string
+       *   id?: number
        *   // 创建者名称
        *   createBy?: string
        *   // 创建时间
@@ -5587,7 +6268,7 @@ declare global {
        *   userName?: string
        *   depts?: Array<{
        *     // 主键
-       *     id?: string
+       *     id?: number
        *     // 创建者名称
        *     createBy?: string
        *     // 创建时间
@@ -5599,7 +6280,7 @@ declare global {
        *     image?: string
        *     name?: string
        *     easyName?: string
-       *     parentId?: string
+       *     parentId?: number
        *     address?: string
        *     isDeleted?: boolean
        *     phone?: string
@@ -5611,7 +6292,7 @@ declare global {
        *     users?: Array<User>
        *     roles?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -5626,12 +6307,12 @@ declare global {
        *       remark?: string
        *       code?: string
        *       sort?: number
-       *       deptId?: string
+       *       deptId?: number
        *       dept?: Dept
        *       users?: Array<User>
        *       menus?: Array<{
        *         // 主键
-       *         id?: string
+       *         id?: number
        *         // 创建者名称
        *         createBy?: string
        *         // 创建时间
@@ -5644,7 +6325,7 @@ declare global {
        *         path?: string
        *         redirect?: string
        *         component?: string
-       *         parentId?: string
+       *         parentId?: number
        *         type?: 1 | 2 | 3 | 4
        *         state?: boolean
        *         title?: string
@@ -5670,7 +6351,7 @@ declare global {
        *   }>
        *   roles?: Array<{
        *     // 主键
-       *     id?: string
+       *     id?: number
        *     // 创建者名称
        *     createBy?: string
        *     // 创建时间
@@ -5685,12 +6366,12 @@ declare global {
        *     remark?: string
        *     code?: string
        *     sort?: number
-       *     deptId?: string
+       *     deptId?: number
        *     dept?: Dept
        *     users?: Array<User>
        *     menus?: Array<{
        *       // 主键
-       *       id?: string
+       *       id?: number
        *       // 创建者名称
        *       createBy?: string
        *       // 创建时间
@@ -5703,7 +6384,7 @@ declare global {
        *       path?: string
        *       redirect?: string
        *       component?: string
-       *       parentId?: string
+       *       parentId?: number
        *       type?: 1 | 2 | 3 | 4
        *       state?: boolean
        *       title?: string
@@ -5725,7 +6406,7 @@ declare global {
        *       children?: Array<Menu>
        *     }>
        *   }>
-       *   roleIds?: string[]
+       *   roleIds?: number[]
        * }
        * ```
        *
@@ -5737,7 +6418,7 @@ declare global {
        *   // [required]
        *   code: string
        *   // [required]
-       *   data: string
+       *   data: number
        *   // [required]
        *   msg: string
        *   // [required]
@@ -5754,7 +6435,7 @@ declare global {
           /**
            * [required]
            */
-          data: string;
+          data: number;
           /**
            * [required]
            */
@@ -5777,7 +6458,7 @@ declare global {
           /**
            * [required]
            */
-          data: string;
+          data: number;
           /**
            * [required]
            */

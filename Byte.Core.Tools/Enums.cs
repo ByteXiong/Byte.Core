@@ -54,10 +54,10 @@ namespace Byte.Core.Tools
     /// </summary>
     public enum TableAlignEnum
     {
-        left=1,
+        left = 1,
         center,
         right,
-    
+
     }
     /// <summary>
     /// 固定方式
@@ -65,14 +65,36 @@ namespace Byte.Core.Tools
     public enum TableFixedEnum
     {
         left = 1,
-        right =3,
+        right = 3,
 
     }
     public enum WebSocketModelTypeEnum
-    { 
-     发送心跳=0,
-     在线用户=1,
-     单聊=100,
-     群聊 = 110,
+    {
+        发送心跳 = 0,
+        在线用户 = 1,
+        单聊 = 100,
+        群聊 = 110,
     }
+
+    public enum SearchTypeEnum
+    {    
+        等于=1,
+        模糊=2,
+        大于=3,
+        小于=4,
+        区间=5,
+     }
+
+    public enum ColumnTypeEnum
+    {
+        整数=1,
+        文本 =2,
+        枚举=3,
+        字典=4,
+        小数=5,
+        时间=6,
+        图片=7
+    }
+
+
 }

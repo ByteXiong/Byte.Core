@@ -48,3 +48,21 @@ export enum TableFixedEnum {
   '' = 2,
   right = 3
 }
+
+export enum SearchTypeEnum {
+  等于 = 1,
+  模糊 = 2,
+  大于 = 3,
+  小于 = 4,
+  区间 = 5
+}
+
+export enum ColumnTypeEnum {
+  整数 = 1,
+  文本 = 2,
+  枚举 = 3,
+  字典 = 4,
+  小数 = 5,
+  时间 = 6,
+  图片 = 7
+}

@@ -7,6 +7,7 @@ const local: App.I18n.Schema = {
     updateCancel: '稍后再说'
   },
   common: {
+    headerSetting: '数据设置',
     action: '操作',
     add: '新增',
     addSuccess: '添加成功',

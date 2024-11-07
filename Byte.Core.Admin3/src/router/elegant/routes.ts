@@ -161,6 +161,25 @@ export const generatedRoutes: GeneratedRoute[] = [
               title: 'demo_table_column',
               i18nKey: 'route.demo_table_column'
             }
+          },
+          {
+            name: 'demo_table_header',
+            path: '/demo/table/header',
+            meta: {
+              title: 'demo_table_header',
+              i18nKey: 'route.demo_table_header'
+            },
+            children: [
+              {
+                name: 'demo_table_header_setting',
+                path: '/demo/table/header/setting',
+                component: 'view.demo_table_header_setting',
+                meta: {
+                  title: 'demo_table_header_setting',
+                  i18nKey: 'route.demo_table_header_setting'
+                }
+              }
+            ]
           }
         ]
       }
@@ -689,6 +708,35 @@ export const generatedRoutes: GeneratedRoute[] = [
           title: 'plugin_video',
           i18nKey: 'route.plugin_video',
           icon: 'mdi:video'
+        }
+      }
+    ]
+  },
+  {
+    name: 'table',
+    path: '/table',
+    component: 'layout.base',
+    meta: {
+      title: 'table',
+      i18nKey: 'route.table'
+    },
+    children: [
+      {
+        name: 'table_column',
+        path: '/table/column',
+        component: 'view.table_column',
+        meta: {
+          title: 'table_column',
+          i18nKey: 'route.table_column'
+        }
+      },
+      {
+        name: 'table_list',
+        path: '/table/list',
+        component: 'view.table_list',
+        meta: {
+          title: 'table_list',
+          i18nKey: 'route.table_list'
         }
       }
     ]

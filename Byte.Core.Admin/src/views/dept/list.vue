@@ -5,20 +5,28 @@
         <div class="flex justify-around w-1/8">
           <el-tooltip effect="light" :content="'新增'" placement="top">
             <!-- <el-button type="primary"  icon="Plus"  circle @click="openForm()" >  </el-button> -->
-            <el-icon @click="openForm()"><Plus /></el-icon>
+            <el-icon @click="openForm()">
+              <Plus />
+            </el-icon>
           </el-tooltip>
           <el-tooltip effect="light" content="批量删除" placement="top">
-            <el-icon @click="handleDelete(selectIds)"><Delete /></el-icon>
+            <el-icon @click="handleDelete(selectIds)">
+              <Delete />
+            </el-icon>
           </el-tooltip>
 
           <!-- <el-button type="danger" :disabled="selectIds.length==0"  @click="handleDelete(selectIds)">批量删除</el-button> -->
         </div>
         <div class="flex justify-around w-1/8">
           <el-tooltip effect="light" content="刷新" placement="top">
-            <el-icon @click="getTree"><Refresh /></el-icon>
+            <el-icon @click="getTree">
+              <Refresh />
+            </el-icon>
           </el-tooltip>
           <el-tooltip effect="light" content="导出" placement="top">
-            <el-icon><Download /></el-icon>
+            <el-icon>
+              <Download />
+            </el-icon>
           </el-tooltip>
 
           <!-- <el-tooltip effect="light" content="设置表头" placement="top">
@@ -26,37 +34,17 @@
           </el-tooltip> -->
         </div>
       </div>
-      <el-table
-        v-loading="loading"
-        highlight-current-row
-        row-key="id"
-        :data="data"
-        :border="true"
-        default-expand-all
-        :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
-        @selection-change="handleSelectionChange"
-        @row-dblclick="
-          (row: DeptTreeDTO) => {
+      <el-table v-loading="loading" highlight-current-row row-key="id" :data="data" :border="true" default-expand-all
+        :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" @selection-change="handleSelectionChange"
+        @row-dblclick="(row: DeptTreeDTO) => {
             openForm(row.id);
           }
-        "
-        ref="tableRef"
-      >
-        <el-table-column
-          show-overflow-tooltip
-          type="selection"
-          width="55"
-          class-name="onExcel"
-        />
+          " ref="tableRef">
+        <el-table-column show-overflow-tooltip type="selection" width="55" class-name="onExcel" />
 
         <el-table-column show-overflow-tooltip prop="name" label="组织名称" />
 
-        <el-table-column
-          show-overflow-tooltip
-          prop="easyName"
-          label="组织简称"
-          width="100"
-        />
+        <el-table-column show-overflow-tooltip prop="easyName" label="组织简称" width="100" />
 
         <el-table-column show-overflow-tooltip label="Logo" width="80">
           <template #default="scope">
@@ -67,85 +55,35 @@
         <el-table-column show-overflow-tooltip label="类型" width="80">
           <template #default="scope">
             <el-tag :type="DeptTypeEl[scope.row.type]">
-              {{ DeptTypeEnum[scope.row.type] }}</el-tag
-            >
+              {{ DeptTypeEnum[scope.row.type] }}</el-tag>
           </template>
         </el-table-column>
 
-        <el-table-column
-          show-overflow-tooltip
-          prop="man"
-          label="法人/负责人"
-          width="100"
-        />
-        <el-table-column
-          show-overflow-tooltip
-          prop="phone"
-          label="联系电话"
-          width="130"
-        />
+        <el-table-column show-overflow-tooltip prop="man" label="法人/负责人" width="100" />
+        <el-table-column show-overflow-tooltip prop="phone" label="联系电话" width="130" />
         <el-table-column show-overflow-tooltip prop="address" label="地址" />
         <el-table-column show-overflow-tooltip prop="remark" label="备注" />
-        <el-table-column
-          show-overflow-tooltip
-          prop="sort"
-          label="排序"
-          width="80"
-        />
+        <el-table-column show-overflow-tooltip prop="sort" label="排序" width="80" />
 
         <el-table-column show-overflow-tooltip label="状态" width="90">
           <template #default="scope">
-            <el-switch
-              v-model="scope.row.state"
-              :loading="stateLoading"
-              inline-prompt
-              active-text="启用"
-              inactive-text="禁用"
-              @change="
-                async (e) => {
+            <el-switch v-model="scope.row.state" :loading="stateLoading" inline-prompt active-text="启用"
+              inactive-text="禁用" @change="async (e) => {
                   setState(scope.row.id, e);
                   // getData();
                 }
-              "
-            />
+                " />
           </template>
         </el-table-column>
-        <el-table-column
-          show-overflow-tooltip
-          class-name="onExcel"
-          label="操作"
-          width="280"
-          fixed="right"
-        >
+        <el-table-column show-overflow-tooltip class-name="onExcel" label="操作" width="280" fixed="right">
           <template #default="scope">
-            <el-button
-              :loading="loading"
-              v-hasPerm="['dept/update']"
-              type="primary"
-              link
-              size="small"
-              @click.stop="openForm(scope.row.id)"
-              ><i-ep-edit />编辑</el-button
-            >
-            <el-button
-              :loading="loading"
-              v-hasPerm="['dept/update']"
-              type="primary"
-              link
-              size="small"
-              @click.stop="openChildForm(scope.row)"
-              ><i-ep-plus />组织架构</el-button
-            >
+            <el-button :loading="loading" v-hasPerm="['dept/update']" type="primary" link size="small"
+              @click.stop="openForm(scope.row.id)"><i-ep-edit />编辑</el-button>
+            <el-button :loading="loading" v-hasPerm="['dept/update']" type="primary" link size="small"
+              @click.stop="openChildForm(scope.row)"><i-ep-plus />组织架构</el-button>
 
-            <el-button
-              :loading="loading"
-              v-hasPerm="['dept/delete']"
-              type="primary"
-              link
-              size="small"
-              @click.stop="handleDelete([scope.row.id])"
-              ><i-ep-delete />删除</el-button
-            >
+            <el-button :loading="loading" v-hasPerm="['dept/delete']" type="primary" link size="small"
+              @click.stop="handleDelete([scope.row.id])"><i-ep-delete />删除</el-button>
           </template>
         </el-table-column>
 

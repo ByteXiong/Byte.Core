@@ -25,13 +25,26 @@ namespace Byte.Core.Entity
         /// <summary>
         /// 路由
         /// </summary>
+        [SugarColumn(IsNullable = true)]
         public string Router { get; set; }
-
         /// <summary>
         /// 字段名称
         /// </summary>
         public string Title { get; set; }
+        /// <summary>
+        /// 字段
+        /// </summary>
         public string Key { get; set; }
+        /// <summary>
+        /// 显示
+        /// </summary>
+        [SugarColumn( IsNullable = true)]
+        public SearchTypeEnum? SearchType { get; set; }
+        /// <summary>
+        /// 字段类型
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public ColumnTypeEnum? ColumnType { get; set; }
         /// <summary>
         /// 对齐方式
         /// </summary>

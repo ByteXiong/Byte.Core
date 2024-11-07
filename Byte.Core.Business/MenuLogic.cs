@@ -208,7 +208,7 @@ namespace Byte.Core.Business
 
             db.ForEach(x =>
             {
-                x.Params = new Dictionary<string, dynamic>() { { "TableName", "User" } };
+                //x.Params = new Dictionary<string, dynamic>() { { "TableName", "User" } };
                 x.Children = db.Where(y => y.ParentId == x.Id).ToList();
                 if (x.ParentId == null)
                 {

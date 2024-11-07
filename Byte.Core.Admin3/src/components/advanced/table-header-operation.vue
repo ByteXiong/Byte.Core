@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import type { DataTableColumns } from 'naive-ui/es/data-table';
 import { $t } from '@/locales';
+import type { NaiveUI } from '@/typings/naive-ui';
+
 defineOptions({
   name: 'TableHeaderOperation'
 });
@@ -9,7 +10,6 @@ interface Props {
   itemAlign?: NaiveUI.Align;
   disabledDelete?: boolean;
   loading?: boolean;
-  tableof?: string;
 }
 
 defineProps<Props>();
@@ -22,7 +22,7 @@ interface Emits {
 
 const emit = defineEmits<Emits>();
 
-const columns = defineModel<DataTableColumns>('columns', {
+const columns = defineModel<NaiveUI.TableColumnCheck[]>('columns', {
   default: () => []
 });
 
@@ -67,7 +67,7 @@ function refresh() {
       </template>
       {{ $t('common.refresh') }}
     </NButton>
-    <TableColumnSetting v-model:columns="columns" :tableof="tableof" />
+    <TableColumnSetting v-model:columns="columns" />
     <slot name="suffix"></slot>
   </NSpace>
 </template>

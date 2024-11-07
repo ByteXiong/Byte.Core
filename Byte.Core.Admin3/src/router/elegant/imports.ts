@@ -27,6 +27,7 @@ export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<Ro
   demo_data_table: () => import("@/views/demo/data_table/index.vue"),
   demo_redis_data: () => import("@/views/demo/redis_data/index.vue"),
   demo_table_column: () => import("@/views/demo/table_column/index.vue"),
+  demo_table_header_setting: () => import("@/views/demo/table_header_setting/index.vue"),
   "function_hide-child_one": () => import("@/views/function/hide-child/one/index.vue"),
   "function_hide-child_three": () => import("@/views/function/hide-child/three/index.vue"),
   "function_hide-child_two": () => import("@/views/function/hide-child/two/index.vue"),
@@ -61,5 +62,7 @@ export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<Ro
   plugin_tables_vtable: () => import("@/views/plugin/tables/vtable/index.vue"),
   plugin_typeit: () => import("@/views/plugin/typeit/index.vue"),
   plugin_video: () => import("@/views/plugin/video/index.vue"),
+  table_column: () => import("@/views/table/column/index.vue"),
+  table_list: () => import("@/views/table/list/index.vue"),
   "user-center": () => import("@/views/user-center/index.vue"),
 };

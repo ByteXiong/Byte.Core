@@ -191,6 +191,8 @@ const routeMap: RouteMap = {
   "demo_redis_data": "/demo/redis/data",
   "demo_table": "/demo/table",
   "demo_table_column": "/demo/table/column",
+  "demo_table_header": "/demo/table/header",
+  "demo_table_header_setting": "/demo/table/header/setting",
   "function": "/function",
   "function_hide-child": "/function/hide-child",
   "function_hide-child_one": "/function/hide-child/one",
@@ -239,6 +241,9 @@ const routeMap: RouteMap = {
   "plugin_tables_vtable": "/plugin/tables/vtable",
   "plugin_typeit": "/plugin/typeit",
   "plugin_video": "/plugin/video",
+  "table": "/table",
+  "table_column": "/table/column",
+  "table_list": "/table/list",
   "user-center": "/user-center"
 };
 

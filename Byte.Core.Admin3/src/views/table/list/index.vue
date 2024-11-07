@@ -1,14 +1,14 @@
 <script setup lang="tsx">
 import { ref } from 'vue';
-import type { DataTableColumn } from 'naive-ui/es/data-table';
 import { usePagination } from 'alova/client';
 import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
+import type { NaiveUI } from '@/typings/naive-ui';
 import { useRoute } from 'vue-router';
 // 获取当前页面路由参数
 const route = useRoute();
-
+const tableof = ref(route.path.split('/').pop());
 const keyWord = ref('');
 const sortList = ref<Record<string, string>>({ id: 'asc' });
 /** 获取数据 */
@@ -22,12 +22,12 @@ const {
   reload
 } = usePagination(
   // Method实例获取函数，它将接收page和pageSize，并返回一个Method实例
-  (page, pageSize) =>
-    Apis.TableColumn.get_api_tablecolumn_getpage({
+  (upPageIndex, upPageSize) =>
+    Apis.DataTable.get_api_datatable_page({
       params: {
-        KeyWord: keyWord.value,
-        pageIndex: page,
-        pageSize,
+        Table: tableof.value,
+        pageIndex: upPageIndex,
+        pageSize: upPageSize,
         sortList: sortList.value
       }
     }),
@@ -46,8 +46,8 @@ const {
     initialPageSize: 10, // 初始每页数据条数，默认为10
     preloadPreviousPage: false, // 是否预加载下一页
     preloadNextPage: false, // 是否预加载上一页
-    total: ({ data }) => data?.pagerInfo?.totalRowCount,
-    data: ({ data }) => data?.data
+    total: res => res.data?.pagerInfo?.totalRowCount,
+    data: res => res.data?.data
   }
 );
 
@@ -57,7 +57,7 @@ const appStore = useAppStore();
 
 const wrapperRef = ref<HTMLElement | null>(null);
 
-const columns = ref<Array<DataTableColumn>>([]);
+const columns = ref<Array<NaiveUI.TableColumnCheck>>([]);
 
 const checkedRowKeys = ref<string[]>([]);
 // const { checkedRowKeys, onBatchDeleted, onDeleted } = useTableOperate(data, getData);
@@ -69,51 +69,10 @@ function handleAdd() {
   // openModal();
 }
 
-async function handleBatchDelete() {
-  // request
-  // console.log(checkedRowKeys.value);
-  // onBatchDeleted();
-}
-
-// function handleDelete(id: number) {
-//   // request
-//   // console.log(id);
-//   // onDeleted();
-// }
-
-// /** the edit menu data or the parent menu data when adding a child menu */
-// const editingData: Ref<Api.SystemManage.Menu | null> = ref(null);
-
-// function handleEdit(item: Api.SystemManage.Menu) {
-//   operateType.value = 'edit';
-//   editingData.value = { ...item };
-
-//   openModal();
-// }
-
-// function handleAddChildMenu(item: Api.SystemManage.Menu) {
-//   operateType.value = 'addChild';
-
-//   editingData.value = { ...item };
-
-//   openModal();
-// }
-
-// const allPages = ref<string[]>([]);
-// const columnChecks = ref<NaiveUI.TableColumnCheck[]>([
-//   {
-//     key: 'name',
-//     title: $t('page.manage.menu.menuName'),
-//     checked: true
-//   }
-// ]);
-// async function getAllPages() {
-//   const { data: pages } = await fetchGetAllPages();
-//   allPages.value = pages || [];
-// }
+async function handleBatchDelete() {}
 
 function init() {
-  getData();
+  getData(1, 10);
   // getAllPages();
 }
 
@@ -137,12 +96,17 @@ init();
           :loading="loading"
           @add="handleAdd"
           @delete="handleBatchDelete"
-          @refresh="getData"
-        />
+          @refresh="reload"
+        >
+          <template #prefix>
+            <TableHeaderSetting v-model:columns="columns" :tableof="tableof"></TableHeaderSetting>
+          </template>
+        </TableHeaderOperation>
       </template>
+
       <NDataTable
         v-model:checked-row-keys="checkedRowKeys"
-        :columns="columns"
+        :columns="columns.filter(item => item.checked)"
         :data="data"
         size="small"
         :flex-height="!appStore.isMobile"

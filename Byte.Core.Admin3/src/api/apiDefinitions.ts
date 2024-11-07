@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Byte.Core开发接口文档 Web端网站 - version 1.0
+ * runtest开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -16,6 +16,12 @@
  * **Do not edit the file manually.**
  */
 export default {
+  'DataTable.delete_api_datatable_deletetableheader': ['DELETE', '/api/DataTable/DeleteTableHeader'],
+  'DataTable.get_api_datatable_getheader': ['GET', '/api/DataTable/GetHeader'],
+  'DataTable.get_api_datatable_gettablecolumns': ['GET', '/api/DataTable/GetTableColumns'],
+  'DataTable.get_api_datatable_gettableheader': ['GET', '/api/DataTable/GetTableHeader'],
+  'DataTable.get_api_datatable_page': ['GET', '/api/DataTable/Page'],
+  'DataTable.put_api_datatable_settableheader': ['PUT', '/api/DataTable/SetTableHeader'],
   'Demo.get_api_demo_getpage': ['GET', '/api/Demo/GetPage'],
   'Demo.get_api_demo_getsync': ['GET', '/api/Demo/GetSync'],
   'Demo.post_api_demo_setroledata': ['POST', '/api/Demo/SetRoleData'],
