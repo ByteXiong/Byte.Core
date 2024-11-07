@@ -1,11 +1,11 @@
 <script setup lang="tsx">
 import { ref } from 'vue';
 import { usePagination } from 'alova/client';
+import { useRoute } from 'vue-router';
 import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
 
-import { useRoute } from 'vue-router';
 // 获取当前页面路由参数
 const route = useRoute();
 const tableof = ref(route.path.split('/').pop());

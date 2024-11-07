@@ -290,6 +290,7 @@ declare namespace App {
         updateCancel: string;
       };
       common: {
+        headerSetting: string;
         action: string;
         add: string;
         addSuccess: string;

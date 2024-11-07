@@ -1,14 +1,14 @@
 <script setup lang="tsx">
+import { NButton, NCheckbox, NInput, NPopconfirm, NSelect } from 'naive-ui';
 import { ref } from 'vue';
 import { useForm, useRequest } from 'alova/client';
+import { useRoute } from 'vue-router';
 import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
 import { ColumnTypeEnum, SearchTypeEnum, getEnumValue } from '@/api/apiEnums';
-
-import { useRoute } from 'vue-router';
 import SoltModal from './modules/solt-modal.vue';
-import { NButton, NCheckbox, NPopconfirm, NSelect } from 'naive-ui';
+
 const route = useRoute();
 const SoltModalRef = ref();
 
@@ -96,7 +96,7 @@ const columns = ref<Array<NaiveUI.TableColumnCheck>>([
     align: 'center',
     checked: true,
     render: row => {
-      return <n-input type="text" v-model:value={row.title} placeholder="请输入备注" onChange={() => submit(row)} />;
+      return <NInput type="text" v-model:value={row.title} placeholder="请输入备注" onChange={() => submit(row)} />;
     }
   },
   {
@@ -107,11 +107,10 @@ const columns = ref<Array<NaiveUI.TableColumnCheck>>([
     render: row => {
       return (
         <NCheckbox
-          checked={row.isShow}
+          checked={row.isShow as boolean}
           checked-value={true}
           v-model:checked={row.isShow}
           onUpdate:checked={() => {
-            console.log('点击row :>> ', row);
             submit(row);
           }}
         >

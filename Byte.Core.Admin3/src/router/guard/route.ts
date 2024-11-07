@@ -63,7 +63,7 @@ export function createRouteGuard(router: Router) {
       },
       // if the user is logged in and has authorization, then it is allowed to access
       {
-        condition: isLogin && needLogin && hasAuth,
+        condition: (isLogin && needLogin && hasAuth) as boolean,
         callback: () => {
           handleRouteSwitch(to, from, next);
         }

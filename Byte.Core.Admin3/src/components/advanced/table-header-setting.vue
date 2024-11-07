@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { json } from 'node:stream/consumers';
 import { useRouter } from 'vue-router';
 import { useRequest } from 'alova/client';
 import { $t } from '@/locales';

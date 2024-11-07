@@ -21,7 +21,7 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
   const token = ref(getToken());
 
   const userInfo: LoginInfoDTO = reactive<LoginInfoDTO>({
-    id: '',
+    id: 0,
     userName: '',
     roles: [],
     buttons: []
