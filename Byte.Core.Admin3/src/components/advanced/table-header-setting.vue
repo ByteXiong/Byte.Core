@@ -3,7 +3,6 @@ import { json } from 'node:stream/consumers';
 import { useRouter } from 'vue-router';
 import { useRequest } from 'alova/client';
 import { $t } from '@/locales';
-import type { NaiveUI } from '@/typings/naive-ui';
 
 const router = useRouter();
 defineOptions({

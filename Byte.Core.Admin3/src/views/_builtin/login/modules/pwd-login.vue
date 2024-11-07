@@ -37,16 +37,16 @@ async function handleSubmit() {
   await authStore.login(model);
 }
 
-type userNameKey = 'super' | 'admin' | 'user';
+type AccountKey = 'super' | 'admin' | 'user';
 
-interface userName {
-  key: userNameKey;
+interface Account {
+  key: AccountKey;
   label: string;
   userName: string;
   password: string;
 }
 
-const userNames = computed<userName[]>(() => [
+const accounts = computed<Account[]>(() => [
   {
     key: 'super',
     label: $t('page.login.pwdLogin.superAdmin'),
@@ -67,15 +67,15 @@ const userNames = computed<userName[]>(() => [
   }
 ]);
 
-async function handleuserNameLogin(userName: userName) {
+async function handleAccountLogin(account: Account) {
   await authStore.login({
-    ...userName
+    ...account
   } as LoginParam);
 }
 </script>
 
 <template>
-  <NForm ref="formRef" :model="model" :rules="rules" size="large" :show-label="false">
+  <NForm ref="formRef" :model="model" :rules="rules" size="large" :show-label="false" @keyup.enter="handleSubmit">
     <NFormItem path="userName">
       <NInput v-model:value="model.userName" :placeholder="$t('page.login.common.userNamePlaceholder')" />
     </NFormItem>
@@ -105,9 +105,9 @@ async function handleuserNameLogin(userName: userName) {
           {{ $t(loginModuleRecord.register) }}
         </NButton>
       </div>
-      <NDivider class="text-14px text-#666 !m-0">{{ $t('page.login.pwdLogin.otheruserNameLogin') }}</NDivider>
+      <NDivider class="text-14px text-#666 !m-0">{{ $t('page.login.pwdLogin.otherAccountLogin') }}</NDivider>
       <div class="flex-center gap-12px">
-        <NButton v-for="item in userNames" :key="item.key" type="primary" @click="handleuserNameLogin(item)">
+        <NButton v-for="item in accounts" :key="item.key" type="primary" @click="handleAccountLogin(item)">
           {{ item.label }}
         </NButton>
       </div>

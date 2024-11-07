@@ -48,9 +48,6 @@ export const generatedRoutes: GeneratedRoute[] = [
       i18nKey: 'route.about',
       icon: 'fluent:book-information-24-regular',
       order: 10
-    },
-    query: {
-      name: 'about'
     }
   },
   {

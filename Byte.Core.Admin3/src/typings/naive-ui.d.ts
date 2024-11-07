@@ -1,5 +1,3 @@
-import type { DataTableColumn } from 'naive-ui';
-
 declare namespace NaiveUI {
   type ThemeColor = 'default' | 'error' | 'primary' | 'info' | 'success' | 'warning';
   type Align = 'stretch' | 'baseline' | 'start' | 'end' | 'center' | 'flex-end' | 'flex-start';
@@ -9,7 +7,7 @@ declare namespace NaiveUI {
   type DataTableSelectionColumn<T> = import('naive-ui').DataTableSelectionColumn<T>;
   type TableColumnGroup<T> = import('naive-ui/es/data-table/src/interface').TableColumnGroup<T>;
   type PaginationProps = import('naive-ui').PaginationProps;
-  type TableColumnCheck = DataTableColumn & { checked?: boolean };
+  type TableColumnCheck = import('naive-ui').DataTableColumn & { checked?: boolean };
   type TableDataWithIndex<T> = import('@sa/hooks').TableDataWithIndex<T>;
   type FlatResponseData<T> = import('@sa/axios').FlatResponseData<T>;
 

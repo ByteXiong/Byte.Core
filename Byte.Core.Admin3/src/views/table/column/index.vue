@@ -5,7 +5,7 @@ import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
 import { ColumnTypeEnum, SearchTypeEnum, getEnumValue } from '@/api/apiEnums';
-import type { NaiveUI } from '@/typings/naive-ui';
+
 import { useRoute } from 'vue-router';
 import SoltModal from './modules/solt-modal.vue';
 import { NButton, NCheckbox, NPopconfirm, NSelect } from 'naive-ui';

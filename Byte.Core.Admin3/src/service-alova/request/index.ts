@@ -1,6 +1,6 @@
 import { createAlovaRequest } from '@sa/alova';
 import { createAlovaMockAdapter } from '@sa/alova/mock';
-import adapterFetch from '@sa/alova/fetch';
+import { axiosRequestAdapter } from '@sa/alova/adapter-axios';
 import { useAuthStore } from '@/store/modules/auth';
 import { $t } from '@/locales';
 import { getServiceBaseURL } from '@/utils/service';
@@ -16,7 +16,7 @@ const state: RequestInstanceState = {
 };
 const mockAdapter = createAlovaMockAdapter([featureUsers20241014], {
   // using requestAdapter if not match mock request
-  httpAdapter: adapterFetch(),
+  httpAdapter: axiosRequestAdapter(),
 
   // response delay time
   delay: 1000,
@@ -28,7 +28,7 @@ const mockAdapter = createAlovaMockAdapter([featureUsers20241014], {
 export const alova = createAlovaRequest(
   {
     baseURL,
-    requestAdapter: import.meta.env.DEV ? mockAdapter : adapterFetch()
+    requestAdapter: import.meta.env.DEV ? mockAdapter : axiosRequestAdapter()
   },
   {
     onRequest({ config }) {

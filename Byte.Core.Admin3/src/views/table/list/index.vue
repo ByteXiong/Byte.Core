@@ -4,7 +4,7 @@ import { usePagination } from 'alova/client';
 import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
-import type { NaiveUI } from '@/typings/naive-ui';
+
 import { useRoute } from 'vue-router';
 // 获取当前页面路由参数
 const route = useRoute();

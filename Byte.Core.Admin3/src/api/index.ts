@@ -1,7 +1,6 @@
 import { createAlova } from 'alova';
-import { axiosRequestAdapter } from '@alova/adapter-axios';
+import { axiosRequestAdapter } from '@sa/alova/adapter-axios';
 import vueHook from 'alova/vue';
-import { NButton, useMessage, useModal } from 'naive-ui';
 // import defaultSettings from '@/settings';
 // import { useUserStoreHook } from '@/store/modules/user';
 import { localStg } from '@/utils/storage';
@@ -25,7 +24,6 @@ const serverCodeMessage: ICodeMessage = {
   504: '网关超时(Gateway Timeout)',
   547: '数据关联,删除失败'
 };
-const message = useMessage();
 // const modal = useModal();
 export const alovaInstance = createAlova({
   baseURL: 'http://127.0.0.1:3000',
@@ -67,7 +65,7 @@ export const alovaInstance = createAlova({
       return Promise.reject(rawData);
     },
     onError: err => {
-      message.error(err || '系统出错');
+      window.$message?.error(err.response?.data?.msg || '系统出错');
       // return Promise.reject({ err, method });
     },
     onComplete: () => {

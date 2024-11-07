@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Byte.Core.Common.Extensions;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Byte.Core.Common.Converters
         {
             if (reader.TokenType == JsonToken.Integer)
             {
-                int value = (int)reader.Value;
+                int value = reader.Value.ToInt();
                 return value == 1;
             } else if (reader.TokenType == JsonToken.String) {
                 var str = reader.Value.ToString().ToLower();
