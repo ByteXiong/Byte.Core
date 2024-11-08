@@ -11,6 +11,8 @@ declare namespace NaiveUI {
   type TableDataWithIndex<T> = import('@sa/hooks').TableDataWithIndex<T>;
   type FlatResponseData<T> = import('@sa/axios').FlatResponseData<T>;
 
+  // 搜索
+  type SearchParams = any;
   /**
    * the custom column key
    *

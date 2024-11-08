@@ -1,5 +1,6 @@
 ﻿using Byte.Core.Entity;
 using Byte.Core.SqlSugar;
+using Byte.Core.Tools;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
@@ -122,10 +123,18 @@ namespace Byte.Core.Models
 
     #endregion
 
-    public class TableDataParam:PageParam
+    public class TableDataParam : PageParam
     {
+
         public string Table { get; set; }
         public string Router { get; set; }
-    }
 
+        public Dictionary<string, Dictionary< string,string>> Search { get; set; }
+}
+
+   public class SearchField  {
+
+     public string Value { get; set; }
+     public SearchTypeEnum SearchType { get; set; }
+    }
 }

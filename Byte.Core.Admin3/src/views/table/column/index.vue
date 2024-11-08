@@ -1,16 +1,18 @@
 <script setup lang="tsx">
 import { NButton, NCheckbox, NInput, NPopconfirm, NSelect } from 'naive-ui';
 import { ref } from 'vue';
-import { useForm, useRequest } from 'alova/client';
+import { useForm, useRequest } from '@sa/alova/client';
 import { useRoute } from 'vue-router';
 import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
+import type { TableColumn } from '@/api/globals';
 import { ColumnTypeEnum, SearchTypeEnum, getEnumValue } from '@/api/apiEnums';
-import SoltModal from './modules/solt-modal.vue';
+import AllGroupSelect from '@/components/select/all-group-select.vue';
+
+// import SoltModal from './modules/solt-modal.vue';
 
 const route = useRoute();
-const SoltModalRef = ref();
 
 const {
   data: tableData,
@@ -45,7 +47,7 @@ const { send: submit } = useForm(
   {
     immediate: false,
     resetAfterSubmiting: true,
-    initialForm: {} as TableColumnHeaderDTO
+    initialForm: {} as TableColumn
   }
 );
 
@@ -61,9 +63,38 @@ const { send: delIds } = useRequest(
     }),
   {
     force: true,
-    immediate: true
+    immediate: false
   }
 );
+
+function renderColumnType(row: TableColumn) {
+  switch (row.columnType) {
+    case ColumnTypeEnum.字典:
+      return (
+        <AllGroupSelect v-model:value={row.columnTypeDetail}  placeholder="请输入字典" onChange={() => submit(row)} />
+      );
+    case ColumnTypeEnum.时间:
+      return (
+        <NInput
+          type="text"
+          v-model:value={row.columnTypeDetail}
+          placeholder="请输入yyyy-MM-dd HH:mm:ss格式"
+          onChange={() => submit(row)}
+        />
+      );
+    case ColumnTypeEnum.图片:
+      return (
+        <NInput
+          type="text"
+          v-model:value={row.columnTypeDetail}
+          placeholder="请输入图片前缀URL"
+          onChange={() => submit(row)}
+        />
+      );
+    default:
+      return null;
+  }
+}
 
 const appStore = useAppStore();
 // const { bool: visible, setTrue: openModal } = useBoolean();
@@ -96,7 +127,7 @@ const columns = ref<Array<NaiveUI.TableColumnCheck>>([
     align: 'center',
     checked: true,
     render: row => {
-      return <NInput type="text" v-model:value={row.title} placeholder="请输入备注" onChange={() => submit(row)} />;
+      return <NInput type="text" v-model:value={row.title} placeholder="请输入注释" onChange={() => submit(row)} />;
     }
   },
   {
@@ -144,14 +175,17 @@ const columns = ref<Array<NaiveUI.TableColumnCheck>>([
     checked: true,
     render: row => {
       return (
-        <NSelect
-          v-model:value={row.columnType}
-          options={getEnumValue(ColumnTypeEnum).map(item => ({ label: ColumnTypeEnum[item], value: item }))}
-          placeholder="请选择"
-          onUpdate:value={() => {
-            submit(row);
-          }}
-        />
+        <div>
+          <NSelect
+            v-model:value={row.columnType}
+            options={getEnumValue(ColumnTypeEnum).map(item => ({ label: ColumnTypeEnum[item], value: item }))}
+            placeholder="请选择"
+            onUpdate:value={() => {
+              submit(row);
+            }}
+          />
+          {renderColumnType(row)}
+        </div>
       );
     }
   },
@@ -170,7 +204,7 @@ const columns = ref<Array<NaiveUI.TableColumnCheck>>([
     checked: true,
     render: row => (
       <div class="flex-center gap-8px">
-        <SoltModal row={row}> </SoltModal>
+        {/* <SoltModal row={row}> </SoltModal> */}
         {row.id !== 0 ? (
           <NPopconfirm onPositiveClick={() => delIds([row.id])}>
             {{

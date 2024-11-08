@@ -53,8 +53,10 @@ export enum SearchTypeEnum {
   等于 = 1,
   模糊 = 2,
   大于 = 3,
-  小于 = 4,
-  区间 = 5
+  大于或等于 = 4,
+  小于 = 5,
+  小于或等于 = 6,
+  区间 = 7
 }
 
 export enum ColumnTypeEnum {

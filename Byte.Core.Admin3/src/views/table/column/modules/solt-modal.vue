@@ -2,6 +2,7 @@
 import { nextTick, ref } from 'vue';
 import * as monaco from 'monaco-editor';
 import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
+import type { TableColumn } from '@/api/globals';
 
 const monacoEditorRef = ref();
 const visible = ref(false);
@@ -14,7 +15,7 @@ self.MonacoEnvironment = {
     return new editorWorker();
   }
 };
-const row = defineModel<TableColumnHeaderDTO>('row', {
+const row = defineModel<TableColumn>('row', {
   required: true
 });
 

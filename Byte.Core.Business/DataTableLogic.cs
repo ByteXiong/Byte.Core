@@ -2,6 +2,8 @@
 using Byte.Core.Entity;
 using Byte.Core.Models;
 using Byte.Core.SqlSugar;
+using Byte.Core.Tools;
+using Jil;
 using Mapster;
 using NPOI.HSSF.Record;
 using NPOI.SS.Formula.Functions;
@@ -185,8 +187,57 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<PagedResults<dynamic>> PageAsync(TableDataParam param)
         {
+
+            var conModels = new List<IConditionalModel>();
+
+            param.Search?.ForEach(x =>
+            {
+                var model= new ConditionalModel();
+                x.Value.ForEach(y =>
+                {
+                    switch (y.Key)
+                    {
+                        case "key":
+                            model.FieldName = y.Value;
+                            
+                            break;
+                        case "searchType":
+                            switch ((SearchTypeEnum)y.Value.ToInt()) {
+                                case SearchTypeEnum.模糊:
+                                    model.ConditionalType = ConditionalType.Like;
+                                    break;
+                                case SearchTypeEnum.大于:
+                                    model.ConditionalType = ConditionalType.GreaterThan;
+                                    break;
+                                case SearchTypeEnum.大于或等于:
+                                    model.ConditionalType = ConditionalType.GreaterThanOrEqual;
+                                    break;
+                                case SearchTypeEnum.小于:
+                                    model.ConditionalType = ConditionalType.LessThan;
+                                    break;
+                                case SearchTypeEnum.小于或等于:
+                                    model.ConditionalType = ConditionalType.GreaterThanOrEqual;
+                                    break;
+                                default:
+                                    model.ConditionalType = ConditionalType.Equal;
+                                    break;
+                            }
+
+                            break;
+                        case "value":
+                            model.FieldValue = y.Value;
+                            break;
+                        default:
+                            break;
+                    }
+
+                });
+                conModels.Add(model);
+            });
+            
             var sql = $"select * from {param.Table}".ToSqlFilter();
-            var list = await _unitOfWork.GetDbClient().SqlQueryable<dynamic>(sql).ToPagedResultsAsync(param);
+
+            var list = await _unitOfWork.GetDbClient().SqlQueryable<dynamic>(sql).Where(conModels).ToPagedResultsAsync(param);
             return list;
         }
 

@@ -7,15 +7,17 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AllGroupSelect: typeof import('./../components/select/all-group-select.vue')['default']
     AppProvider: typeof import('./../components/common/app-provider.vue')['default']
     BetterScroll: typeof import('./../components/custom/better-scroll.vue')['default']
     ButtonIcon: typeof import('./../components/custom/button-icon.vue')['default']
     Card_hearder: typeof import('./../components/hearder/card_hearder.vue')['default']
-    copy: typeof import('./../components/table-header/table-header-operation copy.vue')['default']
+    copy: typeof import('./../components/advanced/table-header-setting copy.vue')['default']
     CountTo: typeof import('./../components/custom/count-to.vue')['default']
     CustomIconSelect: typeof import('./../components/custom/custom-icon-select.vue')['default']
     DarkModeContainer: typeof import('./../components/common/dark-mode-container.vue')['default']
     DataTable: typeof import('./../components/table-header/data-table.vue')['default']
+    DicSelect: typeof import('./../components/select/dic-select.vue')['default']
     ExceptionBase: typeof import('./../components/common/exception-base.vue')['default']
     FullScreen: typeof import('./../components/common/full-screen.vue')['default']
     GithubLink: typeof import('./../components/custom/github-link.vue')['default']
@@ -126,6 +128,7 @@ declare module 'vue' {
     TableColumnFrom: typeof import('./../components/advanced/table-column-from.vue')['default']
     TableColumnSetting: typeof import('./../components/advanced/table-column-setting.vue')['default']
     TableHeaderOperation: typeof import('./../components/advanced/table-header-operation.vue')['default']
+    TableHeaderSearch: typeof import('./../components/advanced/table-header-search.vue')['default']
     TableHeaderSetting: typeof import('./../components/advanced/table-header-setting.vue')['default']
     TableSetting_data: typeof import('./../components/advanced/table-setting_data.vue')['default']
     ThemeSchemaSwitch: typeof import('./../components/common/theme-schema-switch.vue')['default']

@@ -291,6 +291,7 @@ declare namespace App {
       };
       common: {
         headerSetting: string;
+        placeholder: string;
         action: string;
         add: string;
         addSuccess: string;

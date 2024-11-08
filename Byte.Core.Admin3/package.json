@@ -72,6 +72,7 @@
     "echarts": "5.5.1",
     "jsbarcode": "3.11.6",
     "json5": "2.2.3",
+    "monaco-editor": "^0.52.0",
     "naive-ui": "2.40.1",
     "nprogress": "0.2.0",
     "pinia": "2.2.4",
@@ -91,6 +92,7 @@
     "xlsx": "0.18.5"
   },
   "devDependencies": {
+    "@alova/wormhole": "^1.0.1",
     "@amap/amap-jsapi-types": "0.0.15",
     "@elegant-router/vue": "0.3.8",
     "@iconify/json": "2.2.263",

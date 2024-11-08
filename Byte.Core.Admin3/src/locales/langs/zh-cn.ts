@@ -8,6 +8,7 @@ const local: App.I18n.Schema = {
   },
   common: {
     headerSetting: '数据设置',
+    placeholder: '请输入',
     action: '操作',
     add: '新增',
     addSuccess: '添加成功',

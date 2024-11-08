@@ -2,6 +2,7 @@
 import { useRouter } from 'vue-router';
 import { useRequest } from 'alova/client';
 import { $t } from '@/locales';
+import type { TableColumn } from '@/api/globals';
 
 const router = useRouter();
 defineOptions({
@@ -19,6 +20,15 @@ const columns = defineModel<NaiveUI.TableColumnCheck[]>('columns', {
   default: () => []
 });
 
+const searchData = defineModel<TableColumn[]>('searchData', {
+  default: () => []
+});
+
+// const jsonString =
+//   '{"name": "example", "renderFunction": "function render(row, submit) { return `<div>${row.isShow ? \'显示\' : \'隐藏\'}</div>`; }"}';
+// const parsedObject = JSON.parse(jsonString);
+// const renderFunction = new Function(`return ${parsedObject.renderFunction}`)();
+
 const { loading } = useRequest(
   // Method实例获取函数，它将接收page和pageSize，并返回一个Method实例
   () =>
@@ -33,8 +43,13 @@ const { loading } = useRequest(
             key: item.key,
             title: item.title,
             checked: true
+            // render: renderFunction as VNodeChild
+            // render: (row: any, index: number) => {
+            //   return eval(retrievedRenderFunctionString || '');
+            // }
           } as NaiveUI.TableColumnCheck;
         });
+        searchData.value = res.data?.filter(item => item.searchType);
       }
     }),
   {

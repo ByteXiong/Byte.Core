@@ -31,6 +31,8 @@ export default {
   'Dept.get_api_dept_gettreeselect': ['GET', '/api/Dept/GetTreeSelect'],
   'Dept.put_api_dept_setstate': ['PUT', '/api/Dept/SetState'],
   'Dept.post_api_dept_submit': ['POST', '/api/Dept/Submit'],
+  'DicData.get_api_dicdata_getallgroupby': ['GET', '/api/DicData/GetAllGroupBy'],
+  'DicData.get_api_dicdata_getselect': ['GET', '/api/DicData/GetSelect'],
   'Login.get_api_login_info': ['GET', '/api/Login/Info'],
   'Login.post_api_login_login': ['POST', '/api/Login/Login'],
   'Login.post_api_login_loginout': ['POST', '/api/Login/LoginOut'],

@@ -9,6 +9,7 @@ import '@/api';
 // 获取当前页面路由参数
 const route = useRoute();
 const tableof = ref(route.path.split('/').pop());
+const searchParams = ref<NaiveUI.SearchParams>({});
 const keyWord = ref('');
 const sortList = ref<Record<string, string>>({ id: 'asc' });
 /** 获取数据 */
@@ -28,7 +29,8 @@ const {
         Table: tableof.value,
         pageIndex: upPageIndex,
         pageSize: upPageSize,
-        sortList: sortList.value
+        sortList: sortList.value,
+        search: searchParams.value
       }
     }),
   {
@@ -42,6 +44,7 @@ const {
     //   },
     //   data: [],
     // },
+    force: true,
     initialPage: 1, // 初始页码，默认为1
     initialPageSize: 10, // 初始每页数据条数，默认为10
     preloadPreviousPage: false, // 是否预加载下一页
@@ -56,6 +59,7 @@ const appStore = useAppStore();
 // const { bool: visible, setTrue: openModal } = useBoolean();
 
 const wrapperRef = ref<HTMLElement | null>(null);
+const searchData = ref<Array<any>>([]);
 
 const columns = ref<Array<NaiveUI.TableColumnCheck>>([]);
 
@@ -82,6 +86,13 @@ init();
 
 <template>
   <div ref="wrapperRef" class="flex-col-stretch gap-16px overflow-hidden lt-sm:overflow-auto">
+    <TableHeaderSearch
+      v-model:search-params="searchParams"
+      :search-data="searchData"
+      @reset="reload"
+      @search="getData"
+    />
+
     <NCard
       :title="$t(route.meta.i18nKey || route.meta.title || '')"
       :bordered="false"
@@ -99,11 +110,14 @@ init();
           @refresh="reload"
         >
           <template #prefix>
-            <TableHeaderSetting v-model:columns="columns" :tableof="tableof"></TableHeaderSetting>
+            <TableHeaderSetting
+              v-model:columns="columns"
+              v-model:search-data="searchData"
+              :tableof="tableof"
+            ></TableHeaderSetting>
           </template>
         </TableHeaderOperation>
       </template>
-
       <NDataTable
         v-model:checked-row-keys="checkedRowKeys"
         :columns="columns.filter(item => item.checked)"

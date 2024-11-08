@@ -118,6 +118,7 @@ export type TableColumn = {
   key?: string;
   searchType?: SearchTypeEnum;
   columnType?: ColumnTypeEnum;
+  columnTypeDetail?: string;
   /**
    * 对齐方式
    */
@@ -172,6 +173,10 @@ export type TableHeaderDTO = {
   table?: string;
   router?: string;
   columns?: TableColumn[];
+};
+export type SearchField = {
+  value?: string;
+  searchType?: SearchTypeEnum;
 };
 export type PagerInfo = {
   totalRowCount?: number;
@@ -501,6 +506,10 @@ export type UpdateDeptParam = {
    * 验证码
    */
   msgCode?: number;
+};
+export type DicDataSelectDTO = {
+  label?: string;
+  value?: string;
 };
 export type LoginInfoDTO = {
   /**
@@ -924,6 +933,7 @@ export type TableColumnInfo = {
   key?: string;
   searchType?: SearchTypeEnum;
   columnType?: ColumnTypeEnum;
+  columnTypeDetail?: string;
   /**
    * 对齐方式
    */
@@ -959,6 +969,7 @@ export type TableColumnDTO = {
   key?: string;
   searchType?: SearchTypeEnum;
   columnType?: ColumnTypeEnum;
+  columnTypeDetail?: string;
   /**
    * 对齐方式
    */
@@ -998,6 +1009,7 @@ export type UpdateTableColumnParam = {
   key?: string;
   searchType?: SearchTypeEnum;
   columnType?: ColumnTypeEnum;
+  columnTypeDetail?: string;
   /**
    * 对齐方式
    */
@@ -1213,6 +1225,7 @@ declare global {
        *     key?: string
        *     searchType?: 1 | 2 | 3 | 4 | 5
        *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *     columnTypeDetail?: string
        *     // 对齐方式
        *     align?: 1 | 2 | 3
        *     sort?: number
@@ -1419,6 +1432,7 @@ declare global {
        *       key?: string
        *       searchType?: 1 | 2 | 3 | 4 | 5
        *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *       columnTypeDetail?: string
        *       // 对齐方式
        *       align?: 1 | 2 | 3
        *       sort?: number
@@ -1495,6 +1509,13 @@ declare global {
        * type QueryParameters = {
        *   Table?: string
        *   Router?: string
+       *   Search?: Record<
+       *     string,
+       *     {
+       *       value?: string
+       *       searchType?: 1 | 2 | 3 | 4 | 5
+       *     }
+       *   >
        *   StartIndex?: number
        *   PageIndex?: number
        *   PageSize?: number
@@ -1553,6 +1574,7 @@ declare global {
           params: {
             Table?: string;
             Router?: string;
+            Search?: Record<string, SearchField>;
             StartIndex?: number;
             PageIndex?: number;
             PageSize?: number;
@@ -1611,6 +1633,7 @@ declare global {
        *   key?: string
        *   searchType?: 1 | 2 | 3 | 4 | 5
        *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *   columnTypeDetail?: string
        *   // 对齐方式
        *   align?: 1 | 2 | 3
        *   sort?: number
@@ -1644,6 +1667,7 @@ declare global {
        *     key?: string
        *     searchType?: 1 | 2 | 3 | 4 | 5
        *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *     columnTypeDetail?: string
        *     // 对齐方式
        *     align?: 1 | 2 | 3
        *     sort?: number
@@ -2755,6 +2779,156 @@ declare global {
           success: boolean;
         },
         'Dept.post_api_dept_submit',
+        Config
+      >;
+    };
+    DicData: {
+      /**
+       * ---
+       *
+       * [GET] 获取所有分组
+       *
+       * **path:** /api/DicData/GetAllGroupBy
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: string[]
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_dicdata_getallgroupby<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: string[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }>
+      >(
+        config?: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: string[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'DicData.get_api_dicdata_getallgroupby',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 获取下拉
+       *
+       * **path:** /api/DicData/GetSelect
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   groupBy?: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: Array<{
+       *     label?: string
+       *     value?: string
+       *   }>
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_dicdata_getselect<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: DicDataSelectDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            groupBy?: string;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: DicDataSelectDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'DicData.get_api_dicdata_getselect',
         Config
       >;
     };
@@ -5168,6 +5342,7 @@ declare global {
        *       key?: string
        *       searchType?: 1 | 2 | 3 | 4 | 5
        *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *       columnTypeDetail?: string
        *       // 对齐方式
        *       align?: 1 | 2 | 3
        *       sort?: number
@@ -5274,6 +5449,7 @@ declare global {
        *     key?: string
        *     searchType?: 1 | 2 | 3 | 4 | 5
        *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *     columnTypeDetail?: string
        *     // 对齐方式
        *     align?: 1 | 2 | 3
        *     sort?: number
@@ -5393,6 +5569,7 @@ declare global {
        *       key?: string
        *       searchType?: 1 | 2 | 3 | 4 | 5
        *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *       columnTypeDetail?: string
        *       // 对齐方式
        *       align?: 1 | 2 | 3
        *       sort?: number
@@ -5489,6 +5666,7 @@ declare global {
        *     key?: string
        *     searchType?: 1 | 2 | 3 | 4 | 5
        *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *     columnTypeDetail?: string
        *     // 对齐方式
        *     align?: 1 | 2 | 3
        *     sort?: number
@@ -5587,6 +5765,7 @@ declare global {
        *   key?: string
        *   searchType?: 1 | 2 | 3 | 4 | 5
        *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *   columnTypeDetail?: string
        *   // 对齐方式
        *   align?: 1 | 2 | 3
        *   sort?: number

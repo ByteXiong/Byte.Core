@@ -45,6 +45,14 @@ namespace Byte.Core.Entity
         /// </summary>
         [SugarColumn(IsNullable = true)]
         public ColumnTypeEnum? ColumnType { get; set; }
+
+
+        /// <summary>
+        /// 字段描述
+        /// </summary>
+        [SugarColumn(IsNullable = true , Length = 50)]
+        public string ColumnTypeDetail { get; set; }
+
         /// <summary>
         /// 对齐方式
         /// </summary>
