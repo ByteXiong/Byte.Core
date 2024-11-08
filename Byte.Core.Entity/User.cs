@@ -1,4 +1,5 @@
 using Byte.Core.SqlSugar;
+using Newtonsoft.Json;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -31,6 +32,7 @@ namespace Byte.Core.Entity
         /// 密码
         /// </summary>
         [Column("Password")]
+        [JsonIgnore]
         [SugarColumn(Length = 100, IsNullable = true)]
         public String Password { get; set; }
 

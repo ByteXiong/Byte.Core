@@ -12,7 +12,13 @@ declare namespace NaiveUI {
   type FlatResponseData<T> = import('@sa/axios').FlatResponseData<T>;
 
   // 搜索
-  type SearchParams = any;
+  type SearchParams = {
+    [key: string]: {
+      key: string;
+      value: string;
+      searchType: import('@/api/globals').SearchTypeEnum;
+    };
+  };
   /**
    * the custom column key
    *

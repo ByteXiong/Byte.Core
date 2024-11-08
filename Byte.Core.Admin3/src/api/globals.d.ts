@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * runtest开发接口文档 Web端网站 - version 1.0
+ * Byte.Core开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -88,7 +88,7 @@ type Alova2Method<
       >
     : never;
 
-export type SearchTypeEnum = 1 | 2 | 3 | 4 | 5;
+export type SearchTypeEnum = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 export type ColumnTypeEnum = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 export type TableAlignEnum = 1 | 2 | 3;
 export type TableColumn = {
@@ -173,10 +173,6 @@ export type TableHeaderDTO = {
   table?: string;
   router?: string;
   columns?: TableColumn[];
-};
-export type SearchField = {
-  value?: string;
-  searchType?: SearchTypeEnum;
 };
 export type PagerInfo = {
   totalRowCount?: number;
@@ -1223,7 +1219,7 @@ declare global {
        *     router?: string
        *     title?: string
        *     key?: string
-       *     searchType?: 1 | 2 | 3 | 4 | 5
+       *     searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *     columnTypeDetail?: string
        *     // 对齐方式
@@ -1430,7 +1426,7 @@ declare global {
        *       router?: string
        *       title?: string
        *       key?: string
-       *       searchType?: 1 | 2 | 3 | 4 | 5
+       *       searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *       columnTypeDetail?: string
        *       // 对齐方式
@@ -1509,13 +1505,7 @@ declare global {
        * type QueryParameters = {
        *   Table?: string
        *   Router?: string
-       *   Search?: Record<
-       *     string,
-       *     {
-       *       value?: string
-       *       searchType?: 1 | 2 | 3 | 4 | 5
-       *     }
-       *   >
+       *   Search?: Record<string, Record<string, string>>
        *   StartIndex?: number
        *   PageIndex?: number
        *   PageSize?: number
@@ -1574,7 +1564,7 @@ declare global {
           params: {
             Table?: string;
             Router?: string;
-            Search?: Record<string, SearchField>;
+            Search?: Record<string, Record<string, string>>;
             StartIndex?: number;
             PageIndex?: number;
             PageSize?: number;
@@ -1631,7 +1621,7 @@ declare global {
        *   router?: string
        *   title?: string
        *   key?: string
-       *   searchType?: 1 | 2 | 3 | 4 | 5
+       *   searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *   columnTypeDetail?: string
        *   // 对齐方式
@@ -1665,7 +1655,7 @@ declare global {
        *     router?: string
        *     title?: string
        *     key?: string
-       *     searchType?: 1 | 2 | 3 | 4 | 5
+       *     searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *     columnTypeDetail?: string
        *     // 对齐方式
@@ -5340,7 +5330,7 @@ declare global {
        *       router?: string
        *       title?: string
        *       key?: string
-       *       searchType?: 1 | 2 | 3 | 4 | 5
+       *       searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *       columnTypeDetail?: string
        *       // 对齐方式
@@ -5447,7 +5437,7 @@ declare global {
        *     router?: string
        *     title?: string
        *     key?: string
-       *     searchType?: 1 | 2 | 3 | 4 | 5
+       *     searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *     columnTypeDetail?: string
        *     // 对齐方式
@@ -5567,7 +5557,7 @@ declare global {
        *       router?: string
        *       title?: string
        *       key?: string
-       *       searchType?: 1 | 2 | 3 | 4 | 5
+       *       searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *       columnTypeDetail?: string
        *       // 对齐方式
@@ -5664,7 +5654,7 @@ declare global {
        *     router?: string
        *     title?: string
        *     key?: string
-       *     searchType?: 1 | 2 | 3 | 4 | 5
+       *     searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *     columnTypeDetail?: string
        *     // 对齐方式
@@ -5763,7 +5753,7 @@ declare global {
        *   router?: string
        *   title?: string
        *   key?: string
-       *   searchType?: 1 | 2 | 3 | 4 | 5
+       *   searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
        *   columnTypeDetail?: string
        *   // 对齐方式

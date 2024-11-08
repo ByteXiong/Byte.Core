@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * runtest开发接口文档 Web端网站 - version 1.0
+ * Byte.Core开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -31,7 +31,7 @@ const createFunctionalProxy = (array: (string | symbol)[], alovaInstance: Alova<
       const apiPathKey = array.join('.') as keyof typeof apiDefinitions;
       const apiItem = apiDefinitions[apiPathKey];
       if (!apiItem) {
-        throw new Error(`the api path of \`${apiPathKey}\` is not found`);
+        throw new Error(`the api path of \`${apiItem}\` is not found`);
       }
       const mergedConfig = {
         ...configMap[apiPathKey],

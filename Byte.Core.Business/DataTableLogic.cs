@@ -1,18 +1,24 @@
 ﻿using Byte.Core.Common.Extensions;
+using Byte.Core.Common.Filters;
+using Byte.Core.Common.Helpers;
 using Byte.Core.Entity;
 using Byte.Core.Models;
 using Byte.Core.SqlSugar;
 using Byte.Core.Tools;
 using Jil;
 using Mapster;
+using Newtonsoft.Json;
 using NPOI.HSSF.Record;
 using NPOI.SS.Formula.Functions;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using DbType = SqlSugar.DbType;
 
 namespace Byte.Core.Business
 {
@@ -90,35 +96,28 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<TableHeaderDTO> GetTableHeaderAsync(TableHeaderParam param)
         {
-            #region  获取数据库字段
-            var sql = "";
-            if (_unitOfWork.GetDbClient().CurrentConnectionConfig.DbType == DbType.MySql)
+            var columns = new List<DataTableColumnDTO>();
+            if (param.Table.IsNullOrEmpty()) throw new BusException("表名不能为空");
+            else if (param.Table.Substring(param.Table.Length - 3) == "DTO")
             {
-                sql =
-                 @"SELECT
-                    table_name AS   TableName,
-	                column_name AS  ColumnKey,
-	                column_default AS DefaultValue,
-	            COLUMN_COMMENT AS Common,
-		        table_schema
-                FROM
-                information_schema.COLUMNS";
+               columns = GetXml(param.Table);
             }
-            var dataTable = await _unitOfWork.GetDbClient().SqlQueryable<DataTableColumnDTO>(sql).
-                Where("table_schema = @schema And TableName =@tableName ", new {
-                    schema=_unitOfWork.GetDbClient().CurrentConnectionConfig.ConfigId,
-                    tableName = param.Table
-                })
-                .ToListAsync();
+            else {
 
-            var  sysList = dataTable.Select(x => new TableColumn
-            {  
-              
-              Table = x.TableName,
-              Key=x.ColumnKey,
-              Title=x.Common,
+                columns = await GetTableColumnsAsync(param.Table);
+                }
+
+            #region  获取字段
+            var sysList = columns.Select(x => new TableColumn
+            {
+                Table = x.TableName,
+                Key = x.ColumnKey,
+                Title = x.Common,
             }).ToList();
             #endregion
+
+
+
 
 
             //获取自定义字段
@@ -136,7 +135,7 @@ namespace Byte.Core.Business
 
             var header = new TableHeaderDTO();
             header.Table = param.Table;
-            header.Columns= list;
+            header.Columns = list;
             return header;
             // var aa = await _unitOfWork.GetDbClient().SqlQueryable<DataTableColumnDTO>(sql).ToListAsync();
             //return aa;
@@ -174,12 +173,12 @@ namespace Byte.Core.Business
         /// <summary>
         /// 表头信息获取
         /// </summary>
-        /// <returns></returns>
+        /// <returns></returns>5
         public async Task<List<TableColumn>> GetHeaderAsync(TableHeaderParam param)
         {
-         var entity = await _unitOfWork.GetDbClient().Queryable<TableColumn>().Where(x => x.Table == param.Table&&x.IsShow).ToListAsync();
-            entity.ForEach(x => x.Key= x.Key.ToFirstLowerStr());
-         return entity;
+            var entity = await _unitOfWork.GetDbClient().Queryable<TableColumn>().Where(x => x.Table == param.Table && x.IsShow).ToListAsync();
+            entity.ForEach(x => x.Key = x.Key.ToFirstLowerStr());
+            return entity;
         }
         /// <summary>
         /// 分页
@@ -192,14 +191,14 @@ namespace Byte.Core.Business
 
             param.Search?.ForEach(x =>
             {
-                var model= new ConditionalModel();
+                var model = new ConditionalModel();
                 x.Value.ForEach(y =>
                 {
                     switch (y.Key)
                     {
                         case "key":
                             model.FieldName = y.Value;
-                            
+
                             break;
                         case "searchType":
                             switch ((SearchTypeEnum)y.Value.ToInt()) {
@@ -234,7 +233,7 @@ namespace Byte.Core.Business
                 });
                 conModels.Add(model);
             });
-            
+
             var sql = $"select * from {param.Table}".ToSqlFilter();
 
             var list = await _unitOfWork.GetDbClient().SqlQueryable<dynamic>(sql).Where(conModels).ToPagedResultsAsync(param);
@@ -276,6 +275,84 @@ namespace Byte.Core.Business
             var sql = "select * from user";
             var aa = await _unitOfWork.GetDbClient().SqlQueryable<dynamic>(sql).ToListAsync();
         }
+
+        #region 私有方法
+
+        /// <summary>
+        /// 反射中找到XML
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        private List<DataTableColumnDTO> GetXml(string tableName)
+        {
+
+            var typeName = "Byte.Core.Models";
+            var xmlCommentHelper = new XmlCommentHelper();
+            //var xmlFile = AppDomain.CurrentDomain.BaseDirectory + typeName + ".xml";
+            //"E:\\MyCode\\LY_WMSCloud\\LY_WMSCloud.Business\\bin\\Debug\\net6.0\\LY_WMSCloud.Models.xml"
+            //xmlCommentHelper.Load(new string[] { xmlFile });
+            xmlCommentHelper.LoadAll();
+            //type
+            //var path = $"LY_WMSCloud.Models.{model}";
+            //Type type= Type.GetType(path);
+
+            Assembly assIBll = Assembly.LoadFrom(AppDomain.CurrentDomain.BaseDirectory + "/" + typeName + ".dll");
+            //加载dll后,需要使用dll中某类.
+            Type type = assIBll.GetType($"{typeName}.{tableName}");//获取类名，必须 命名空间+类名 
+
+
+            var props = type.GetProperties().Where(p => p .GetCustomAttribute<JsonIgnoreAttribute>()  == null).ToArray();
+
+            
+            //entity.Comment = xmlCommentHelper.GetComment($"T:{type.FullName}", "summary");
+            var list = new List<DataTableColumnDTO>();
+            for (int i = 0; i < props.Length; i++)
+            {
+                MemberInfo prop = props[i];
+                var common = xmlCommentHelper.GetFieldOrPropertyComment(prop);
+                var model = new DataTableColumnDTO()
+                {
+                     TableName = tableName.Trim(),
+                     Common = common.Trim(),
+                     ColumnKey = prop.Name.ToFirstLowerStr(),//转小写,
+                    //Sortable = sortable,
+                };
+                list.Add(model);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        ///  获取表结构
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
+        private async Task<List<DataTableColumnDTO>>  GetDataTableAsync(string tableName){
+
+            var sql = "";
+            if (_unitOfWork.GetDbClient().CurrentConnectionConfig.DbType == DbType.MySql)
+            {
+                sql =
+                 @"SELECT
+                    table_name AS   TableName,
+	                column_name AS  ColumnKey,
+	                column_default AS DefaultValue,
+	            COLUMN_COMMENT AS Common,
+		        table_schema
+                FROM
+                information_schema.COLUMNS";
+            }
+    var dataTable = await _unitOfWork.GetDbClient().SqlQueryable<DataTableColumnDTO>(sql).
+        Where("table_schema = @schema And TableName =@tableName ", new
+        {
+            schema = _unitOfWork.GetDbClient().CurrentConnectionConfig.ConfigId,
+            tableName = tableName
+        })
+    .ToListAsync();
+            return dataTable;
+    #endregion
+}
 
     }
 }

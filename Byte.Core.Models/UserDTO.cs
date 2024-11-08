@@ -2,6 +2,7 @@
 using Byte.Core.Entity;
 using System.ComponentModel.DataAnnotations;
 using SqlSugar;
+using Newtonsoft.Json;
 namespace Byte.Core.Models
 {
     /// <summary>
@@ -57,6 +58,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 密码
         /// </summary>
+        [JsonIgnore]
         public String Password { get; set; }
 
 
