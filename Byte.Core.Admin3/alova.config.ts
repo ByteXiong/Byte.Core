@@ -27,7 +27,7 @@ module.exports = {
       // bodyMediaType: 'application/json',
 
       // （可选）指定生成的api版本，默认为auto，会通过当前项目安装的alova版本判断当前项目的版本，如果生成不正确你也可以自定义指定版本
-      version: 'auto',
+      version: '3',
 
       // /**
       //  * （可选）生成代码的类型，可选值为auto/ts/typescript/module/commonjs，默认为auto，会通过一定规则判断当前项目的类型，如果生成不正确你也可以自定义指定类型：
