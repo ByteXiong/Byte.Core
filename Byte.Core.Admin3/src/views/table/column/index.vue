@@ -1,6 +1,6 @@
 <script setup lang="tsx">
 import { NButton, NCheckbox, NInput, NPopconfirm, NSelect } from 'naive-ui';
-import { ref } from 'vue';
+import { h, ref } from 'vue';
 import { useForm, useRequest } from '@sa/alova/client';
 import { useRoute } from 'vue-router';
 import { useAppStore } from '@/store/modules/app';
@@ -9,11 +9,9 @@ import '@/api';
 import type { TableColumn } from '@/api/globals';
 import { ColumnTypeEnum, SearchTypeEnum, getEnumValue } from '@/api/apiEnums';
 import AllGroupSelect from '@/components/select/all-group-select.vue';
-
-// import SoltModal from './modules/solt-modal.vue';
-
+import MonacoCode from './modules/monaco-code.vue';
 const route = useRoute();
-
+const tableof = ref(route.path.split('/').pop());
 const {
   data: tableData,
   loading,
@@ -23,7 +21,7 @@ const {
   () =>
     Apis.DataTable.get_api_datatable_gettableheader({
       params: {
-        Table: route.path.split('/').pop()
+        Table: tableof.value
       },
       transform: res => {
         return res.data;
@@ -71,7 +69,7 @@ function renderColumnType(row: TableColumn) {
   switch (row.columnType) {
     case ColumnTypeEnum.字典:
       return (
-        <AllGroupSelect v-model:value={row.columnTypeDetail}  placeholder="请输入字典" onChange={() => submit(row)} />
+        <AllGroupSelect v-model:value={row.columnTypeDetail} placeholder="请输入字典" onChange={() => submit(row)} />
       );
     case ColumnTypeEnum.时间:
       return (
@@ -113,7 +111,10 @@ const columns = ref<Array<NaiveUI.TableColumnCheck>>([
     title: $t('common.add'),
     align: 'center',
     width: 80,
-    checked: true
+    checked: true,
+    render: () => {
+      return h(NInput, { class: 'custom-div' });
+    }
   },
   {
     key: 'key',
@@ -204,7 +205,7 @@ const columns = ref<Array<NaiveUI.TableColumnCheck>>([
     checked: true,
     render: row => (
       <div class="flex-center gap-8px">
-        {/* <SoltModal row={row}> </SoltModal> */}
+        <MonacoCode code={row.props}> </MonacoCode>
         {row.id !== 0 ? (
           <NPopconfirm onPositiveClick={() => delIds([row.id])}>
             {{
@@ -227,16 +228,12 @@ const checkedRowKeys = ref<string[]>([]);
 // const operateType = ref<OperateType>('add');
 
 function handleAdd() {
+  tableData.value.columns?.push({
+    table: tableof.value
+  });
   // operateType.value = 'add';
   // openModal();
 }
-
-async function handleBatchDelete() {
-  // request
-  // console.log(checkedRowKeys.value);
-  // onBatchDeleted();
-}
-
 // function handleDelete(id: number) {
 //   // request
 //   // console.log(id);
@@ -285,7 +282,7 @@ async function handleBatchDelete() {
           :disabled-delete="checkedRowKeys.length === 0"
           :loading="loading"
           @add="handleAdd"
-          @delete="handleBatchDelete"
+          @delete="delIds(checkedRowKeys)"
           @refresh="getData"
         />
       </template>

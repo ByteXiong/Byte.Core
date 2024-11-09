@@ -25,15 +25,17 @@ namespace Byte.Core.Entity
         /// <summary>
         /// 路由
         /// </summary>
-        [SugarColumn(IsNullable = true)]
+        [SugarColumn(Length = 50, IsNullable = true)]
         public string Router { get; set; }
         /// <summary>
         /// 字段名称
         /// </summary>
+        [SugarColumn(Length = 50, IsNullable = true)]
         public string Title { get; set; }
         /// <summary>
         /// 字段
         /// </summary>
+        [SugarColumn( Length = 50,IsNullable = true)]
         public string Key { get; set; }
         /// <summary>
         /// 显示
