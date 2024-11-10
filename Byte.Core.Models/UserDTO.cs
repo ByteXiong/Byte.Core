@@ -20,7 +20,7 @@ namespace Byte.Core.Models
         /// </summary>
         public int? DeptId { get; set; }
     }
-    /// <summary>
+    /// <summary>!
     ///  用户 修改
     /// </summary>
     public class UpdateUserParam : AddUserParam
@@ -68,7 +68,7 @@ namespace Byte.Core.Models
         /// 状态
         /// </summary>
 
-        public bool State { get; set; }
+        public bool Status { get; set; }
 
 
         /// <summary>

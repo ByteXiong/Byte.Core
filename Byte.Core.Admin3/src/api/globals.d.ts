@@ -88,8 +88,8 @@ type Alova2Method<
       >
     : never;
 
-export type SearchTypeEnum = 1 | 2 | 3 | 4 | 5 | 6 | 7;
-export type ColumnTypeEnum = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+export type ConditionalType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16;
+export type ColumnTypeEnum = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 export type TableAlignEnum = 1 | 2 | 3;
 export type TableColumn = {
   /**
@@ -116,7 +116,7 @@ export type TableColumn = {
   router?: string;
   title?: string;
   key?: string;
-  searchType?: SearchTypeEnum;
+  searchType?: ConditionalType;
   columnType?: ColumnTypeEnum;
   columnTypeDetail?: string;
   /**
@@ -126,48 +126,6 @@ export type TableColumn = {
   sort?: number;
   isShow?: boolean;
   props?: string;
-};
-export type DataTableColumnDTO = {
-  /**
-   * 表名
-   */
-  tableName?: string;
-  /**
-   * 注释
-   */
-  common?: string;
-  /**
-   * 字段
-   */
-  columnKey?: string;
-  /**
-   * 描述
-   */
-  type?: string;
-  /**
-   * 是否主键
-   */
-  isPrimaryKey?: boolean;
-  /**
-   * 是否自增
-   */
-  isIdentity?: boolean;
-  /**
-   * 是否可空
-   */
-  isNull?: boolean;
-  /**
-   * 长度
-   */
-  length?: number;
-  /**
-   * 精度
-   */
-  accuracy?: number;
-  /**
-   * 描述
-   */
-  description?: string;
 };
 export type TableHeaderDTO = {
   table?: string;
@@ -212,7 +170,8 @@ export type Int32ExcutedResult = {
 };
 export type DeptTypeEnum = 10 | 20 | 30;
 export type RoleTypeEnum = 10 | 20 | 30 | 40;
-export type MenuTypeEnum = 1 | 2 | 3 | 4;
+export type MenuTypeEnum = 1 | 2 | 3;
+export type IconTypeEnum = 1 | 2;
 export type Menu = {
   /**
    * 主键
@@ -236,11 +195,14 @@ export type Menu = {
   updateTime?: string;
   name?: string;
   path?: string;
+  pathParam?: string;
+  layout?: string;
   redirect?: string;
   component?: string;
   parentId?: number;
-  type?: MenuTypeEnum;
-  state?: boolean;
+  menuType?: MenuTypeEnum;
+  iconType?: IconTypeEnum;
+  status?: boolean;
   title?: string;
   i18nKey?: string;
   keepAlive?: boolean;
@@ -254,7 +216,6 @@ export type Menu = {
   activeMenu?: string;
   multiTab?: boolean;
   fixedIndexInTab?: number;
-  query?: string;
   isDeleted?: boolean;
   roles?: Role[];
   children?: Menu[];
@@ -282,7 +243,7 @@ export type Role = {
   updateTime?: string;
   name?: string;
   type?: RoleTypeEnum;
-  state?: boolean;
+  status?: boolean;
   remark?: string;
   code?: string;
   sort?: number;
@@ -321,7 +282,7 @@ export type Dept = {
   phone?: string;
   man?: string;
   remark?: string;
-  state?: boolean;
+  status?: boolean;
   sort?: number;
   type?: DeptTypeEnum;
   users?: User[];
@@ -352,7 +313,7 @@ export type User = {
   name?: string;
   avatar?: string;
   password?: string;
-  state?: boolean;
+  status?: boolean;
   userName?: string;
   depts?: Dept[];
   roles?: Role[];
@@ -387,7 +348,7 @@ export type DeptInfo = {
   phone?: string;
   man?: string;
   remark?: string;
-  state?: boolean;
+  status?: boolean;
   sort?: number;
   type?: DeptTypeEnum;
   users?: User[];
@@ -435,7 +396,7 @@ export type DeptTreeDTO = {
   /**
    * 状态
    */
-  state?: boolean;
+  status?: boolean;
   /**
    * 排序
    */
@@ -492,7 +453,7 @@ export type UpdateDeptParam = {
   phone?: string;
   man?: string;
   remark?: string;
-  state?: boolean;
+  status?: boolean;
   sort?: number;
   type?: DeptTypeEnum;
   users?: User[];
@@ -584,11 +545,14 @@ export type MenuInfo = {
   updateTime?: string;
   name?: string;
   path?: string;
+  pathParam?: string;
+  layout?: string;
   redirect?: string;
   component?: string;
   parentId?: number;
-  type?: MenuTypeEnum;
-  state?: boolean;
+  menuType?: MenuTypeEnum;
+  iconType?: IconTypeEnum;
+  status?: boolean;
   title?: string;
   i18nKey?: string;
   keepAlive?: boolean;
@@ -602,7 +566,6 @@ export type MenuInfo = {
   activeMenu?: string;
   multiTab?: boolean;
   fixedIndexInTab?: number;
-  query?: string;
   isDeleted?: boolean;
   roles?: Role[];
   children?: Menu[];
@@ -659,7 +622,7 @@ export type RouteDTO = {
   /**
    * 状态
    */
-  state?: boolean;
+  status?: boolean;
   meta?: RouteMeta;
   /**
    * 子节点
@@ -669,6 +632,10 @@ export type RouteDTO = {
 };
 export type MenuTreeDTO = {
   id?: number;
+  /**
+   * 路由名称
+   */
+  name?: string;
   /**
    * 菜单标题
    */
@@ -713,7 +680,7 @@ export type MenuTreeDTO = {
   /**
    * 状态
    */
-  state?: boolean;
+  status?: boolean;
   children?: MenuTreeDTO[];
 };
 export type MenuSelectDTO = {
@@ -758,11 +725,14 @@ export type UpdateMenuParam = {
   updateTime?: string;
   name?: string;
   path?: string;
+  pathParam?: string;
+  layout?: string;
   redirect?: string;
   component?: string;
   parentId?: number;
-  type?: MenuTypeEnum;
-  state?: boolean;
+  menuType?: MenuTypeEnum;
+  iconType?: IconTypeEnum;
+  status?: boolean;
   title?: string;
   i18nKey?: string;
   keepAlive?: boolean;
@@ -776,7 +746,6 @@ export type UpdateMenuParam = {
   activeMenu?: string;
   multiTab?: boolean;
   fixedIndexInTab?: number;
-  query?: string;
   isDeleted?: boolean;
   roles?: Role[];
   children?: Menu[];
@@ -804,7 +773,7 @@ export type RoleInfo = {
   updateTime?: string;
   name?: string;
   type?: RoleTypeEnum;
-  state?: boolean;
+  status?: boolean;
   remark?: string;
   code?: string;
   sort?: number;
@@ -837,7 +806,7 @@ export type RoleDTO = {
   updateTime?: string;
   name?: string;
   type?: RoleTypeEnum;
-  state?: boolean;
+  status?: boolean;
   remark?: string;
   code?: string;
   sort?: number;
@@ -884,7 +853,7 @@ export type UpdateRoleParam = {
   updateTime?: string;
   name?: string;
   type?: RoleTypeEnum;
-  state?: boolean;
+  status?: boolean;
   remark?: string;
   code?: string;
   sort?: number;
@@ -927,7 +896,7 @@ export type TableColumnInfo = {
   router?: string;
   title?: string;
   key?: string;
-  searchType?: SearchTypeEnum;
+  searchType?: ConditionalType;
   columnType?: ColumnTypeEnum;
   columnTypeDetail?: string;
   /**
@@ -963,7 +932,7 @@ export type TableColumnDTO = {
   router?: string;
   title?: string;
   key?: string;
-  searchType?: SearchTypeEnum;
+  searchType?: ConditionalType;
   columnType?: ColumnTypeEnum;
   columnTypeDetail?: string;
   /**
@@ -1003,7 +972,7 @@ export type UpdateTableColumnParam = {
   router?: string;
   title?: string;
   key?: string;
-  searchType?: SearchTypeEnum;
+  searchType?: ConditionalType;
   columnType?: ColumnTypeEnum;
   columnTypeDetail?: string;
   /**
@@ -1039,7 +1008,7 @@ export type UserInfo = {
   name?: string;
   avatar?: string;
   password?: string;
-  state?: boolean;
+  status?: boolean;
   userName?: string;
   depts?: Dept[];
   roles?: Role[];
@@ -1061,7 +1030,7 @@ export type UserDTO = {
   /**
    * 状态
    */
-  state?: boolean;
+  status?: boolean;
   /**
    * 账号
    */
@@ -1095,7 +1064,7 @@ export type UpdateUserParam = {
   name?: string;
   avatar?: string;
   password?: string;
-  state?: boolean;
+  status?: boolean;
   userName?: string;
   depts?: Dept[];
   roles?: Role[];
@@ -1219,8 +1188,8 @@ declare global {
        *     router?: string
        *     title?: string
        *     key?: string
-       *     searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
-       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *     searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
        *     columnTypeDetail?: string
        *     // 对齐方式
        *     align?: 1 | 2 | 3
@@ -1288,106 +1257,6 @@ declare global {
        *
        * [GET] 获取表字段
        *
-       * **path:** /api/DataTable/GetTableColumns
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   tableName?: string
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: Array<{
-       *     // 表名
-       *     tableName?: string
-       *     // 注释
-       *     common?: string
-       *     // 字段
-       *     columnKey?: string
-       *     // 描述
-       *     type?: string
-       *     // 是否主键
-       *     isPrimaryKey?: boolean
-       *     // 是否自增
-       *     isIdentity?: boolean
-       *     // 是否可空
-       *     isNull?: boolean
-       *     // 长度
-       *     length?: number
-       *     // 精度
-       *     accuracy?: number
-       *     // 描述
-       *     description?: string
-       *   }>
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      get_api_datatable_gettablecolumns<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: DataTableColumnDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          params: {
-            tableName?: string;
-          };
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: DataTableColumnDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'DataTable.get_api_datatable_gettablecolumns',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [GET] 获取表字段
-       *
        * **path:** /api/DataTable/GetTableHeader
        *
        * ---
@@ -1426,8 +1295,8 @@ declare global {
        *       router?: string
        *       title?: string
        *       key?: string
-       *       searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
-       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *       searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
        *       columnTypeDetail?: string
        *       // 对齐方式
        *       align?: 1 | 2 | 3
@@ -1621,8 +1490,8 @@ declare global {
        *   router?: string
        *   title?: string
        *   key?: string
-       *   searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
-       *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *   searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+       *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
        *   columnTypeDetail?: string
        *   // 对齐方式
        *   align?: 1 | 2 | 3
@@ -1655,8 +1524,8 @@ declare global {
        *     router?: string
        *     title?: string
        *     key?: string
-       *     searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
-       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *     searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
        *     columnTypeDetail?: string
        *     // 对齐方式
        *     align?: 1 | 2 | 3
@@ -1731,6 +1600,7 @@ declare global {
        * ```ts
        * type QueryParameters = {
        *   StartIndex?: number
+       *   Search?: Record<string, Record<string, string>>
        *   PageIndex?: number
        *   PageSize?: number
        *   SortList?: Record<string, string>
@@ -1770,6 +1640,7 @@ declare global {
         Config extends Alova2MethodConfig<RedisDemoDTOPagedResultsExcutedResult> & {
           params: {
             StartIndex?: number;
+            Search?: Record<string, Record<string, string>>;
             PageIndex?: number;
             PageSize?: number;
             SortList?: Record<string, string>;
@@ -2003,7 +1874,7 @@ declare global {
        *     phone?: string
        *     man?: string
        *     remark?: string
-       *     state?: boolean
+       *     status?: boolean
        *     sort?: number
        *     type?: 10 | 20 | 30
        *     users?: Array<{
@@ -2020,7 +1891,7 @@ declare global {
        *       name?: string
        *       avatar?: string
        *       password?: string
-       *       state?: boolean
+       *       status?: boolean
        *       userName?: string
        *       depts?: Array<{
        *         // 主键
@@ -2042,7 +1913,7 @@ declare global {
        *         phone?: string
        *         man?: string
        *         remark?: string
-       *         state?: boolean
+       *         status?: boolean
        *         sort?: number
        *         type?: DeptTypeEnum
        *         users?: Array<User>
@@ -2059,7 +1930,7 @@ declare global {
        *           updateTime?: string
        *           name?: string
        *           type?: 10 | 20 | 30 | 40
-       *           state?: boolean
+       *           status?: boolean
        *           remark?: string
        *           code?: string
        *           sort?: number
@@ -2079,11 +1950,14 @@ declare global {
        *             updateTime?: string
        *             name?: string
        *             path?: string
+       *             pathParam?: string
+       *             layout?: string
        *             redirect?: string
        *             component?: string
        *             parentId?: number
-       *             type?: 1 | 2 | 3 | 4
-       *             state?: boolean
+       *             menuType?: 1 | 2 | 3
+       *             iconType?: 1 | 2
+       *             status?: boolean
        *             title?: string
        *             i18nKey?: string
        *             keepAlive?: boolean
@@ -2097,7 +1971,6 @@ declare global {
        *             activeMenu?: string
        *             multiTab?: boolean
        *             fixedIndexInTab?: number
-       *             query?: string
        *             isDeleted?: boolean
        *             roles?: Array<Role>
        *             children?: Array<Menu>
@@ -2202,7 +2075,7 @@ declare global {
        *     // 备注
        *     remark?: string
        *     // 状态
-       *     state?: boolean
+       *     status?: boolean
        *     // 排序
        *     sort?: number
        *     type?: 10 | 20 | 30
@@ -2354,7 +2227,7 @@ declare global {
        *
        * [PUT] 设置状态
        *
-       * **path:** /api/Dept/SetState
+       * **path:** /api/Dept/SetStatus
        *
        * ---
        *
@@ -2362,7 +2235,7 @@ declare global {
        * ```ts
        * type QueryParameters = {
        *   id?: number
-       *   state?: boolean
+       *   status?: boolean
        * }
        * ```
        *
@@ -2382,7 +2255,7 @@ declare global {
        * }
        * ```
        */
-      put_api_dept_setstate<
+      put_api_dept_setstatus<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -2403,7 +2276,7 @@ declare global {
         }> & {
           params: {
             id?: number;
-            state?: boolean;
+            status?: boolean;
           };
         }
       >(
@@ -2427,7 +2300,7 @@ declare global {
            */
           success: boolean;
         },
-        'Dept.put_api_dept_setstate',
+        'Dept.put_api_dept_setstatus',
         Config
       >;
       /**
@@ -2461,7 +2334,7 @@ declare global {
        *   phone?: string
        *   man?: string
        *   remark?: string
-       *   state?: boolean
+       *   status?: boolean
        *   sort?: number
        *   type?: 10 | 20 | 30
        *   users?: Array<{
@@ -2478,7 +2351,7 @@ declare global {
        *     name?: string
        *     avatar?: string
        *     password?: string
-       *     state?: boolean
+       *     status?: boolean
        *     userName?: string
        *     depts?: Array<{
        *       // 主键
@@ -2500,7 +2373,7 @@ declare global {
        *       phone?: string
        *       man?: string
        *       remark?: string
-       *       state?: boolean
+       *       status?: boolean
        *       sort?: number
        *       type?: DeptTypeEnum
        *       users?: Array<User>
@@ -2517,7 +2390,7 @@ declare global {
        *         updateTime?: string
        *         name?: string
        *         type?: 10 | 20 | 30 | 40
-       *         state?: boolean
+       *         status?: boolean
        *         remark?: string
        *         code?: string
        *         sort?: number
@@ -2537,11 +2410,14 @@ declare global {
        *           updateTime?: string
        *           name?: string
        *           path?: string
+       *           pathParam?: string
+       *           layout?: string
        *           redirect?: string
        *           component?: string
        *           parentId?: number
-       *           type?: 1 | 2 | 3 | 4
-       *           state?: boolean
+       *           menuType?: 1 | 2 | 3
+       *           iconType?: 1 | 2
+       *           status?: boolean
        *           title?: string
        *           i18nKey?: string
        *           keepAlive?: boolean
@@ -2555,7 +2431,6 @@ declare global {
        *           activeMenu?: string
        *           multiTab?: boolean
        *           fixedIndexInTab?: number
-       *           query?: string
        *           isDeleted?: boolean
        *           roles?: Array<Role>
        *           children?: Array<Menu>
@@ -2578,7 +2453,7 @@ declare global {
        *     updateTime?: string
        *     name?: string
        *     type?: 10 | 20 | 30 | 40
-       *     state?: boolean
+       *     status?: boolean
        *     remark?: string
        *     code?: string
        *     sort?: number
@@ -2598,11 +2473,14 @@ declare global {
        *       updateTime?: string
        *       name?: string
        *       path?: string
+       *       pathParam?: string
+       *       layout?: string
        *       redirect?: string
        *       component?: string
        *       parentId?: number
-       *       type?: 1 | 2 | 3 | 4
-       *       state?: boolean
+       *       menuType?: 1 | 2 | 3
+       *       iconType?: 1 | 2
+       *       status?: boolean
        *       title?: string
        *       i18nKey?: string
        *       keepAlive?: boolean
@@ -2616,7 +2494,6 @@ declare global {
        *       activeMenu?: string
        *       multiTab?: boolean
        *       fixedIndexInTab?: number
-       *       query?: string
        *       isDeleted?: boolean
        *       roles?: Array<Role>
        *       children?: Array<Menu>
@@ -2642,7 +2519,7 @@ declare global {
        *     phone?: string
        *     man?: string
        *     remark?: string
-       *     state?: boolean
+       *     status?: boolean
        *     sort?: number
        *     type?: DeptTypeEnum
        *     users?: Array<User>
@@ -2659,7 +2536,7 @@ declare global {
        *       updateTime?: string
        *       name?: string
        *       type?: 10 | 20 | 30 | 40
-       *       state?: boolean
+       *       status?: boolean
        *       remark?: string
        *       code?: string
        *       sort?: number
@@ -2679,11 +2556,14 @@ declare global {
        *         updateTime?: string
        *         name?: string
        *         path?: string
+       *         pathParam?: string
+       *         layout?: string
        *         redirect?: string
        *         component?: string
        *         parentId?: number
-       *         type?: 1 | 2 | 3 | 4
-       *         state?: boolean
+       *         menuType?: 1 | 2 | 3
+       *         iconType?: 1 | 2
+       *         status?: boolean
        *         title?: string
        *         i18nKey?: string
        *         keepAlive?: boolean
@@ -2697,7 +2577,6 @@ declare global {
        *         activeMenu?: string
        *         multiTab?: boolean
        *         fixedIndexInTab?: number
-       *         query?: string
        *         isDeleted?: boolean
        *         roles?: Array<Role>
        *         children?: Array<Menu>
@@ -3274,11 +3153,14 @@ declare global {
        *     updateTime?: string
        *     name?: string
        *     path?: string
+       *     pathParam?: string
+       *     layout?: string
        *     redirect?: string
        *     component?: string
        *     parentId?: number
-       *     type?: 1 | 2 | 3 | 4
-       *     state?: boolean
+       *     menuType?: 1 | 2 | 3
+       *     iconType?: 1 | 2
+       *     status?: boolean
        *     title?: string
        *     i18nKey?: string
        *     keepAlive?: boolean
@@ -3292,7 +3174,6 @@ declare global {
        *     activeMenu?: string
        *     multiTab?: boolean
        *     fixedIndexInTab?: number
-       *     query?: string
        *     isDeleted?: boolean
        *     roles?: Array<{
        *       // 主键
@@ -3307,7 +3188,7 @@ declare global {
        *       updateTime?: string
        *       name?: string
        *       type?: 10 | 20 | 30 | 40
-       *       state?: boolean
+       *       status?: boolean
        *       remark?: string
        *       code?: string
        *       sort?: number
@@ -3327,11 +3208,14 @@ declare global {
        *         updateTime?: string
        *         name?: string
        *         path?: string
+       *         pathParam?: string
+       *         layout?: string
        *         redirect?: string
        *         component?: string
        *         parentId?: number
-       *         type?: 1 | 2 | 3 | 4
-       *         state?: boolean
+       *         menuType?: 1 | 2 | 3
+       *         iconType?: 1 | 2
+       *         status?: boolean
        *         title?: string
        *         i18nKey?: string
        *         keepAlive?: boolean
@@ -3345,7 +3229,6 @@ declare global {
        *         activeMenu?: string
        *         multiTab?: boolean
        *         fixedIndexInTab?: number
-       *         query?: string
        *         isDeleted?: boolean
        *         roles?: Array<Role>
        *         children?: Array<Menu>
@@ -3364,11 +3247,14 @@ declare global {
        *       updateTime?: string
        *       name?: string
        *       path?: string
+       *       pathParam?: string
+       *       layout?: string
        *       redirect?: string
        *       component?: string
        *       parentId?: number
-       *       type?: 1 | 2 | 3 | 4
-       *       state?: boolean
+       *       menuType?: 1 | 2 | 3
+       *       iconType?: 1 | 2
+       *       status?: boolean
        *       title?: string
        *       i18nKey?: string
        *       keepAlive?: boolean
@@ -3382,7 +3268,6 @@ declare global {
        *       activeMenu?: string
        *       multiTab?: boolean
        *       fixedIndexInTab?: number
-       *       query?: string
        *       isDeleted?: boolean
        *       roles?: Array<Role>
        *       children?: Array<Menu>
@@ -3471,9 +3356,9 @@ declare global {
        *     component?: string
        *     // 父级
        *     parentId?: number
-       *     type?: 1 | 2 | 3 | 4
+       *     type?: 1 | 2 | 3
        *     // 状态
-       *     state?: boolean
+       *     status?: boolean
        *     meta?: {
        *       // 路由标题(可用来作document.title或者菜单的名称)
        *       title?: string
@@ -3559,6 +3444,8 @@ declare global {
        *   // [required]
        *   data: Array<{
        *     id?: number
+       *     // 路由名称
+       *     name?: string
        *     // 菜单标题
        *     title?: string
        *     // 组件
@@ -3571,7 +3458,7 @@ declare global {
        *     sort?: number
        *     // icon图标
        *     icon?: string
-       *     type?: 1 | 2 | 3 | 4
+       *     type?: 1 | 2 | 3
        *     // 是否缓存
        *     keepAlive?: boolean
        *     // 是否隐藏
@@ -3581,7 +3468,7 @@ declare global {
        *     // 根目录始终显示
        *     alwaysShow?: boolean
        *     // 状态
-       *     state?: boolean
+       *     status?: boolean
        *     children?: Array<MenuTreeDTO>
        *   }>
        *   // [required]
@@ -3728,7 +3615,7 @@ declare global {
        *
        * [PUT] 设置状态
        *
-       * **path:** /api/Menu/SetState
+       * **path:** /api/Menu/SetStatus
        *
        * ---
        *
@@ -3736,7 +3623,7 @@ declare global {
        * ```ts
        * type QueryParameters = {
        *   id?: number
-       *   state?: boolean
+       *   status?: boolean
        * }
        * ```
        *
@@ -3756,7 +3643,7 @@ declare global {
        * }
        * ```
        */
-      put_api_menu_setstate<
+      put_api_menu_setstatus<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -3777,7 +3664,7 @@ declare global {
         }> & {
           params: {
             id?: number;
-            state?: boolean;
+            status?: boolean;
           };
         }
       >(
@@ -3801,7 +3688,7 @@ declare global {
            */
           success: boolean;
         },
-        'Menu.put_api_menu_setstate',
+        'Menu.put_api_menu_setstatus',
         Config
       >;
       /**
@@ -3828,11 +3715,14 @@ declare global {
        *   updateTime?: string
        *   name?: string
        *   path?: string
+       *   pathParam?: string
+       *   layout?: string
        *   redirect?: string
        *   component?: string
        *   parentId?: number
-       *   type?: 1 | 2 | 3 | 4
-       *   state?: boolean
+       *   menuType?: 1 | 2 | 3
+       *   iconType?: 1 | 2
+       *   status?: boolean
        *   title?: string
        *   i18nKey?: string
        *   keepAlive?: boolean
@@ -3846,7 +3736,6 @@ declare global {
        *   activeMenu?: string
        *   multiTab?: boolean
        *   fixedIndexInTab?: number
-       *   query?: string
        *   isDeleted?: boolean
        *   roles?: Array<{
        *     // 主键
@@ -3861,7 +3750,7 @@ declare global {
        *     updateTime?: string
        *     name?: string
        *     type?: 10 | 20 | 30 | 40
-       *     state?: boolean
+       *     status?: boolean
        *     remark?: string
        *     code?: string
        *     sort?: number
@@ -3881,11 +3770,14 @@ declare global {
        *       updateTime?: string
        *       name?: string
        *       path?: string
+       *       pathParam?: string
+       *       layout?: string
        *       redirect?: string
        *       component?: string
        *       parentId?: number
-       *       type?: 1 | 2 | 3 | 4
-       *       state?: boolean
+       *       menuType?: 1 | 2 | 3
+       *       iconType?: 1 | 2
+       *       status?: boolean
        *       title?: string
        *       i18nKey?: string
        *       keepAlive?: boolean
@@ -3899,7 +3791,6 @@ declare global {
        *       activeMenu?: string
        *       multiTab?: boolean
        *       fixedIndexInTab?: number
-       *       query?: string
        *       isDeleted?: boolean
        *       roles?: Array<Role>
        *       children?: Array<Menu>
@@ -3918,11 +3809,14 @@ declare global {
        *     updateTime?: string
        *     name?: string
        *     path?: string
+       *     pathParam?: string
+       *     layout?: string
        *     redirect?: string
        *     component?: string
        *     parentId?: number
-       *     type?: 1 | 2 | 3 | 4
-       *     state?: boolean
+       *     menuType?: 1 | 2 | 3
+       *     iconType?: 1 | 2
+       *     status?: boolean
        *     title?: string
        *     i18nKey?: string
        *     keepAlive?: boolean
@@ -3936,7 +3830,6 @@ declare global {
        *     activeMenu?: string
        *     multiTab?: boolean
        *     fixedIndexInTab?: number
-       *     query?: string
        *     isDeleted?: boolean
        *     roles?: Array<Role>
        *     children?: Array<Menu>
@@ -4120,7 +4013,7 @@ declare global {
        *     updateTime?: string
        *     name?: string
        *     type?: 10 | 20 | 30 | 40
-       *     state?: boolean
+       *     status?: boolean
        *     remark?: string
        *     code?: string
        *     sort?: number
@@ -4145,7 +4038,7 @@ declare global {
        *       phone?: string
        *       man?: string
        *       remark?: string
-       *       state?: boolean
+       *       status?: boolean
        *       sort?: number
        *       type?: DeptTypeEnum
        *       users?: Array<User>
@@ -4162,7 +4055,7 @@ declare global {
        *         updateTime?: string
        *         name?: string
        *         type?: 10 | 20 | 30 | 40
-       *         state?: boolean
+       *         status?: boolean
        *         remark?: string
        *         code?: string
        *         sort?: number
@@ -4182,11 +4075,14 @@ declare global {
        *           updateTime?: string
        *           name?: string
        *           path?: string
+       *           pathParam?: string
+       *           layout?: string
        *           redirect?: string
        *           component?: string
        *           parentId?: number
-       *           type?: 1 | 2 | 3 | 4
-       *           state?: boolean
+       *           menuType?: 1 | 2 | 3
+       *           iconType?: 1 | 2
+       *           status?: boolean
        *           title?: string
        *           i18nKey?: string
        *           keepAlive?: boolean
@@ -4200,7 +4096,6 @@ declare global {
        *           activeMenu?: string
        *           multiTab?: boolean
        *           fixedIndexInTab?: number
-       *           query?: string
        *           isDeleted?: boolean
        *           roles?: Array<Role>
        *           children?: Array<Menu>
@@ -4222,7 +4117,7 @@ declare global {
        *       name?: string
        *       avatar?: string
        *       password?: string
-       *       state?: boolean
+       *       status?: boolean
        *       userName?: string
        *       depts?: Array<{
        *         // 主键
@@ -4244,7 +4139,7 @@ declare global {
        *         phone?: string
        *         man?: string
        *         remark?: string
-       *         state?: boolean
+       *         status?: boolean
        *         sort?: number
        *         type?: DeptTypeEnum
        *         users?: Array<User>
@@ -4261,7 +4156,7 @@ declare global {
        *           updateTime?: string
        *           name?: string
        *           type?: 10 | 20 | 30 | 40
-       *           state?: boolean
+       *           status?: boolean
        *           remark?: string
        *           code?: string
        *           sort?: number
@@ -4281,11 +4176,14 @@ declare global {
        *             updateTime?: string
        *             name?: string
        *             path?: string
+       *             pathParam?: string
+       *             layout?: string
        *             redirect?: string
        *             component?: string
        *             parentId?: number
-       *             type?: 1 | 2 | 3 | 4
-       *             state?: boolean
+       *             menuType?: 1 | 2 | 3
+       *             iconType?: 1 | 2
+       *             status?: boolean
        *             title?: string
        *             i18nKey?: string
        *             keepAlive?: boolean
@@ -4299,7 +4197,6 @@ declare global {
        *             activeMenu?: string
        *             multiTab?: boolean
        *             fixedIndexInTab?: number
-       *             query?: string
        *             isDeleted?: boolean
        *             roles?: Array<Role>
        *             children?: Array<Menu>
@@ -4322,11 +4219,14 @@ declare global {
        *       updateTime?: string
        *       name?: string
        *       path?: string
+       *       pathParam?: string
+       *       layout?: string
        *       redirect?: string
        *       component?: string
        *       parentId?: number
-       *       type?: 1 | 2 | 3 | 4
-       *       state?: boolean
+       *       menuType?: 1 | 2 | 3
+       *       iconType?: 1 | 2
+       *       status?: boolean
        *       title?: string
        *       i18nKey?: string
        *       keepAlive?: boolean
@@ -4340,7 +4240,6 @@ declare global {
        *       activeMenu?: string
        *       multiTab?: boolean
        *       fixedIndexInTab?: number
-       *       query?: string
        *       isDeleted?: boolean
        *       roles?: Array<Role>
        *       children?: Array<Menu>
@@ -4417,6 +4316,7 @@ declare global {
        * type QueryParameters = {
        *   KeyWord?: string
        *   StartIndex?: number
+       *   Search?: Record<string, Record<string, string>>
        *   PageIndex?: number
        *   PageSize?: number
        *   SortList?: Record<string, string>
@@ -4456,7 +4356,7 @@ declare global {
        *       updateTime?: string
        *       name?: string
        *       type?: 10 | 20 | 30 | 40
-       *       state?: boolean
+       *       status?: boolean
        *       remark?: string
        *       code?: string
        *       sort?: number
@@ -4481,7 +4381,7 @@ declare global {
        *         phone?: string
        *         man?: string
        *         remark?: string
-       *         state?: boolean
+       *         status?: boolean
        *         sort?: number
        *         type?: DeptTypeEnum
        *         users?: Array<User>
@@ -4498,7 +4398,7 @@ declare global {
        *           updateTime?: string
        *           name?: string
        *           type?: 10 | 20 | 30 | 40
-       *           state?: boolean
+       *           status?: boolean
        *           remark?: string
        *           code?: string
        *           sort?: number
@@ -4518,11 +4418,14 @@ declare global {
        *             updateTime?: string
        *             name?: string
        *             path?: string
+       *             pathParam?: string
+       *             layout?: string
        *             redirect?: string
        *             component?: string
        *             parentId?: number
-       *             type?: 1 | 2 | 3 | 4
-       *             state?: boolean
+       *             menuType?: 1 | 2 | 3
+       *             iconType?: 1 | 2
+       *             status?: boolean
        *             title?: string
        *             i18nKey?: string
        *             keepAlive?: boolean
@@ -4536,7 +4439,6 @@ declare global {
        *             activeMenu?: string
        *             multiTab?: boolean
        *             fixedIndexInTab?: number
-       *             query?: string
        *             isDeleted?: boolean
        *             roles?: Array<Role>
        *             children?: Array<Menu>
@@ -4558,7 +4460,7 @@ declare global {
        *         name?: string
        *         avatar?: string
        *         password?: string
-       *         state?: boolean
+       *         status?: boolean
        *         userName?: string
        *         depts?: Array<{
        *           // 主键
@@ -4580,7 +4482,7 @@ declare global {
        *           phone?: string
        *           man?: string
        *           remark?: string
-       *           state?: boolean
+       *           status?: boolean
        *           sort?: number
        *           type?: DeptTypeEnum
        *           users?: Array<User>
@@ -4597,7 +4499,7 @@ declare global {
        *             updateTime?: string
        *             name?: string
        *             type?: 10 | 20 | 30 | 40
-       *             state?: boolean
+       *             status?: boolean
        *             remark?: string
        *             code?: string
        *             sort?: number
@@ -4617,11 +4519,14 @@ declare global {
        *               updateTime?: string
        *               name?: string
        *               path?: string
+       *               pathParam?: string
+       *               layout?: string
        *               redirect?: string
        *               component?: string
        *               parentId?: number
-       *               type?: 1 | 2 | 3 | 4
-       *               state?: boolean
+       *               menuType?: 1 | 2 | 3
+       *               iconType?: 1 | 2
+       *               status?: boolean
        *               title?: string
        *               i18nKey?: string
        *               keepAlive?: boolean
@@ -4635,7 +4540,6 @@ declare global {
        *               activeMenu?: string
        *               multiTab?: boolean
        *               fixedIndexInTab?: number
-       *               query?: string
        *               isDeleted?: boolean
        *               roles?: Array<Role>
        *               children?: Array<Menu>
@@ -4658,11 +4562,14 @@ declare global {
        *         updateTime?: string
        *         name?: string
        *         path?: string
+       *         pathParam?: string
+       *         layout?: string
        *         redirect?: string
        *         component?: string
        *         parentId?: number
-       *         type?: 1 | 2 | 3 | 4
-       *         state?: boolean
+       *         menuType?: 1 | 2 | 3
+       *         iconType?: 1 | 2
+       *         status?: boolean
        *         title?: string
        *         i18nKey?: string
        *         keepAlive?: boolean
@@ -4676,7 +4583,6 @@ declare global {
        *         activeMenu?: string
        *         multiTab?: boolean
        *         fixedIndexInTab?: number
-       *         query?: string
        *         isDeleted?: boolean
        *         roles?: Array<Role>
        *         children?: Array<Menu>
@@ -4713,6 +4619,7 @@ declare global {
           params: {
             KeyWord?: string;
             StartIndex?: number;
+            Search?: Record<string, Record<string, string>>;
             PageIndex?: number;
             PageSize?: number;
             SortList?: Record<string, string>;
@@ -4818,7 +4725,7 @@ declare global {
        *
        * [PUT] 设置状态
        *
-       * **path:** /api/Role/SetState
+       * **path:** /api/Role/SetStatus
        *
        * ---
        *
@@ -4826,7 +4733,7 @@ declare global {
        * ```ts
        * type QueryParameters = {
        *   id?: number
-       *   state?: boolean
+       *   status?: boolean
        * }
        * ```
        *
@@ -4846,7 +4753,7 @@ declare global {
        * }
        * ```
        */
-      put_api_role_setstate<
+      put_api_role_setstatus<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -4867,7 +4774,7 @@ declare global {
         }> & {
           params: {
             id?: number;
-            state?: boolean;
+            status?: boolean;
           };
         }
       >(
@@ -4891,7 +4798,7 @@ declare global {
            */
           success: boolean;
         },
-        'Role.put_api_role_setstate',
+        'Role.put_api_role_setstatus',
         Config
       >;
       /**
@@ -4918,7 +4825,7 @@ declare global {
        *   updateTime?: string
        *   name?: string
        *   type?: 10 | 20 | 30 | 40
-       *   state?: boolean
+       *   status?: boolean
        *   remark?: string
        *   code?: string
        *   sort?: number
@@ -4943,7 +4850,7 @@ declare global {
        *     phone?: string
        *     man?: string
        *     remark?: string
-       *     state?: boolean
+       *     status?: boolean
        *     sort?: number
        *     type?: DeptTypeEnum
        *     users?: Array<User>
@@ -4960,7 +4867,7 @@ declare global {
        *       updateTime?: string
        *       name?: string
        *       type?: 10 | 20 | 30 | 40
-       *       state?: boolean
+       *       status?: boolean
        *       remark?: string
        *       code?: string
        *       sort?: number
@@ -4980,11 +4887,14 @@ declare global {
        *         updateTime?: string
        *         name?: string
        *         path?: string
+       *         pathParam?: string
+       *         layout?: string
        *         redirect?: string
        *         component?: string
        *         parentId?: number
-       *         type?: 1 | 2 | 3 | 4
-       *         state?: boolean
+       *         menuType?: 1 | 2 | 3
+       *         iconType?: 1 | 2
+       *         status?: boolean
        *         title?: string
        *         i18nKey?: string
        *         keepAlive?: boolean
@@ -4998,7 +4908,6 @@ declare global {
        *         activeMenu?: string
        *         multiTab?: boolean
        *         fixedIndexInTab?: number
-       *         query?: string
        *         isDeleted?: boolean
        *         roles?: Array<Role>
        *         children?: Array<Menu>
@@ -5020,7 +4929,7 @@ declare global {
        *     name?: string
        *     avatar?: string
        *     password?: string
-       *     state?: boolean
+       *     status?: boolean
        *     userName?: string
        *     depts?: Array<{
        *       // 主键
@@ -5042,7 +4951,7 @@ declare global {
        *       phone?: string
        *       man?: string
        *       remark?: string
-       *       state?: boolean
+       *       status?: boolean
        *       sort?: number
        *       type?: DeptTypeEnum
        *       users?: Array<User>
@@ -5059,7 +4968,7 @@ declare global {
        *         updateTime?: string
        *         name?: string
        *         type?: 10 | 20 | 30 | 40
-       *         state?: boolean
+       *         status?: boolean
        *         remark?: string
        *         code?: string
        *         sort?: number
@@ -5079,11 +4988,14 @@ declare global {
        *           updateTime?: string
        *           name?: string
        *           path?: string
+       *           pathParam?: string
+       *           layout?: string
        *           redirect?: string
        *           component?: string
        *           parentId?: number
-       *           type?: 1 | 2 | 3 | 4
-       *           state?: boolean
+       *           menuType?: 1 | 2 | 3
+       *           iconType?: 1 | 2
+       *           status?: boolean
        *           title?: string
        *           i18nKey?: string
        *           keepAlive?: boolean
@@ -5097,7 +5009,6 @@ declare global {
        *           activeMenu?: string
        *           multiTab?: boolean
        *           fixedIndexInTab?: number
-       *           query?: string
        *           isDeleted?: boolean
        *           roles?: Array<Role>
        *           children?: Array<Menu>
@@ -5120,11 +5031,14 @@ declare global {
        *     updateTime?: string
        *     name?: string
        *     path?: string
+       *     pathParam?: string
+       *     layout?: string
        *     redirect?: string
        *     component?: string
        *     parentId?: number
-       *     type?: 1 | 2 | 3 | 4
-       *     state?: boolean
+       *     menuType?: 1 | 2 | 3
+       *     iconType?: 1 | 2
+       *     status?: boolean
        *     title?: string
        *     i18nKey?: string
        *     keepAlive?: boolean
@@ -5138,7 +5052,6 @@ declare global {
        *     activeMenu?: string
        *     multiTab?: boolean
        *     fixedIndexInTab?: number
-       *     query?: string
        *     isDeleted?: boolean
        *     roles?: Array<Role>
        *     children?: Array<Menu>
@@ -5330,8 +5243,8 @@ declare global {
        *       router?: string
        *       title?: string
        *       key?: string
-       *       searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
-       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *       searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
        *       columnTypeDetail?: string
        *       // 对齐方式
        *       align?: 1 | 2 | 3
@@ -5437,8 +5350,8 @@ declare global {
        *     router?: string
        *     title?: string
        *     key?: string
-       *     searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
-       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *     searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
        *     columnTypeDetail?: string
        *     // 对齐方式
        *     align?: 1 | 2 | 3
@@ -5516,6 +5429,7 @@ declare global {
        * type QueryParameters = {
        *   KeyWord?: string
        *   StartIndex?: number
+       *   Search?: Record<string, Record<string, string>>
        *   PageIndex?: number
        *   PageSize?: number
        *   SortList?: Record<string, string>
@@ -5557,8 +5471,8 @@ declare global {
        *       router?: string
        *       title?: string
        *       key?: string
-       *       searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
-       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *       searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
        *       columnTypeDetail?: string
        *       // 对齐方式
        *       align?: 1 | 2 | 3
@@ -5596,6 +5510,7 @@ declare global {
           params: {
             KeyWord?: string;
             StartIndex?: number;
+            Search?: Record<string, Record<string, string>>;
             PageIndex?: number;
             PageSize?: number;
             SortList?: Record<string, string>;
@@ -5654,8 +5569,8 @@ declare global {
        *     router?: string
        *     title?: string
        *     key?: string
-       *     searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
-       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *     searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
        *     columnTypeDetail?: string
        *     // 对齐方式
        *     align?: 1 | 2 | 3
@@ -5753,8 +5668,8 @@ declare global {
        *   router?: string
        *   title?: string
        *   key?: string
-       *   searchType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
-       *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7
+       *   searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+       *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
        *   columnTypeDetail?: string
        *   // 对齐方式
        *   align?: 1 | 2 | 3
@@ -6010,7 +5925,7 @@ declare global {
        *     name?: string
        *     avatar?: string
        *     password?: string
-       *     state?: boolean
+       *     status?: boolean
        *     userName?: string
        *     depts?: Array<{
        *       // 主键
@@ -6032,7 +5947,7 @@ declare global {
        *       phone?: string
        *       man?: string
        *       remark?: string
-       *       state?: boolean
+       *       status?: boolean
        *       sort?: number
        *       type?: DeptTypeEnum
        *       users?: Array<User>
@@ -6049,7 +5964,7 @@ declare global {
        *         updateTime?: string
        *         name?: string
        *         type?: 10 | 20 | 30 | 40
-       *         state?: boolean
+       *         status?: boolean
        *         remark?: string
        *         code?: string
        *         sort?: number
@@ -6069,11 +5984,14 @@ declare global {
        *           updateTime?: string
        *           name?: string
        *           path?: string
+       *           pathParam?: string
+       *           layout?: string
        *           redirect?: string
        *           component?: string
        *           parentId?: number
-       *           type?: 1 | 2 | 3 | 4
-       *           state?: boolean
+       *           menuType?: 1 | 2 | 3
+       *           iconType?: 1 | 2
+       *           status?: boolean
        *           title?: string
        *           i18nKey?: string
        *           keepAlive?: boolean
@@ -6087,7 +6005,6 @@ declare global {
        *           activeMenu?: string
        *           multiTab?: boolean
        *           fixedIndexInTab?: number
-       *           query?: string
        *           isDeleted?: boolean
        *           roles?: Array<Role>
        *           children?: Array<Menu>
@@ -6108,7 +6025,7 @@ declare global {
        *       updateTime?: string
        *       name?: string
        *       type?: 10 | 20 | 30 | 40
-       *       state?: boolean
+       *       status?: boolean
        *       remark?: string
        *       code?: string
        *       sort?: number
@@ -6128,11 +6045,14 @@ declare global {
        *         updateTime?: string
        *         name?: string
        *         path?: string
+       *         pathParam?: string
+       *         layout?: string
        *         redirect?: string
        *         component?: string
        *         parentId?: number
-       *         type?: 1 | 2 | 3 | 4
-       *         state?: boolean
+       *         menuType?: 1 | 2 | 3
+       *         iconType?: 1 | 2
+       *         status?: boolean
        *         title?: string
        *         i18nKey?: string
        *         keepAlive?: boolean
@@ -6146,7 +6066,6 @@ declare global {
        *         activeMenu?: string
        *         multiTab?: boolean
        *         fixedIndexInTab?: number
-       *         query?: string
        *         isDeleted?: boolean
        *         roles?: Array<Role>
        *         children?: Array<Menu>
@@ -6225,6 +6144,7 @@ declare global {
        *   // 公司
        *   DeptId?: number
        *   StartIndex?: number
+       *   Search?: Record<string, Record<string, string>>
        *   PageIndex?: number
        *   PageSize?: number
        *   SortList?: Record<string, string>
@@ -6260,7 +6180,7 @@ declare global {
        *       // 密码
        *       password?: string
        *       // 状态
-       *       state?: boolean
+       *       status?: boolean
        *       // 账号
        *       userName?: string
        *     }>
@@ -6298,6 +6218,7 @@ declare global {
              */
             DeptId?: number;
             StartIndex?: number;
+            Search?: Record<string, Record<string, string>>;
             PageIndex?: number;
             PageSize?: number;
             SortList?: Record<string, string>;
@@ -6332,7 +6253,7 @@ declare global {
        *
        * [PUT] 设置状态
        *
-       * **path:** /api/User/SetState
+       * **path:** /api/User/SetStatus
        *
        * ---
        *
@@ -6340,7 +6261,7 @@ declare global {
        * ```ts
        * type QueryParameters = {
        *   id?: number
-       *   state?: boolean
+       *   status?: boolean
        * }
        * ```
        *
@@ -6360,7 +6281,7 @@ declare global {
        * }
        * ```
        */
-      put_api_user_setstate<
+      put_api_user_setstatus<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -6381,7 +6302,7 @@ declare global {
         }> & {
           params: {
             id?: number;
-            state?: boolean;
+            status?: boolean;
           };
         }
       >(
@@ -6405,7 +6326,7 @@ declare global {
            */
           success: boolean;
         },
-        'User.put_api_user_setstate',
+        'User.put_api_user_setstatus',
         Config
       >;
       /**
@@ -6433,7 +6354,7 @@ declare global {
        *   name?: string
        *   avatar?: string
        *   password?: string
-       *   state?: boolean
+       *   status?: boolean
        *   userName?: string
        *   depts?: Array<{
        *     // 主键
@@ -6455,7 +6376,7 @@ declare global {
        *     phone?: string
        *     man?: string
        *     remark?: string
-       *     state?: boolean
+       *     status?: boolean
        *     sort?: number
        *     type?: DeptTypeEnum
        *     users?: Array<User>
@@ -6472,7 +6393,7 @@ declare global {
        *       updateTime?: string
        *       name?: string
        *       type?: 10 | 20 | 30 | 40
-       *       state?: boolean
+       *       status?: boolean
        *       remark?: string
        *       code?: string
        *       sort?: number
@@ -6492,11 +6413,14 @@ declare global {
        *         updateTime?: string
        *         name?: string
        *         path?: string
+       *         pathParam?: string
+       *         layout?: string
        *         redirect?: string
        *         component?: string
        *         parentId?: number
-       *         type?: 1 | 2 | 3 | 4
-       *         state?: boolean
+       *         menuType?: 1 | 2 | 3
+       *         iconType?: 1 | 2
+       *         status?: boolean
        *         title?: string
        *         i18nKey?: string
        *         keepAlive?: boolean
@@ -6510,7 +6434,6 @@ declare global {
        *         activeMenu?: string
        *         multiTab?: boolean
        *         fixedIndexInTab?: number
-       *         query?: string
        *         isDeleted?: boolean
        *         roles?: Array<Role>
        *         children?: Array<Menu>
@@ -6531,7 +6454,7 @@ declare global {
        *     updateTime?: string
        *     name?: string
        *     type?: 10 | 20 | 30 | 40
-       *     state?: boolean
+       *     status?: boolean
        *     remark?: string
        *     code?: string
        *     sort?: number
@@ -6551,11 +6474,14 @@ declare global {
        *       updateTime?: string
        *       name?: string
        *       path?: string
+       *       pathParam?: string
+       *       layout?: string
        *       redirect?: string
        *       component?: string
        *       parentId?: number
-       *       type?: 1 | 2 | 3 | 4
-       *       state?: boolean
+       *       menuType?: 1 | 2 | 3
+       *       iconType?: 1 | 2
+       *       status?: boolean
        *       title?: string
        *       i18nKey?: string
        *       keepAlive?: boolean
@@ -6569,7 +6495,6 @@ declare global {
        *       activeMenu?: string
        *       multiTab?: boolean
        *       fixedIndexInTab?: number
-       *       query?: string
        *       isDeleted?: boolean
        *       roles?: Array<Role>
        *       children?: Array<Menu>

@@ -1,13 +1,17 @@
 <script setup lang="tsx">
 import type * as monaco from 'monaco-editor';
-import type { VNodeChild } from 'vue';
-import { compile, h, ref, render } from 'vue';
-import  from 'naive-ui';
+import { h, ref } from 'vue';
+import * as naive from 'naive-ui';
 import { $t } from '@/locales';
 const language = ref('javascript');
 const code = defineModel<string>('code', {
   required: true
 });
+interface Emits {
+  (e: 'Change'): void;
+}
+const value = ref<string>('');
+const emit = defineEmits<Emits>();
 const columns = ref<Array<NaiveUI.TableColumnCheck>>([
   {
     type: 'selection',
@@ -18,33 +22,21 @@ const columns = ref<Array<NaiveUI.TableColumnCheck>>([
     key: 'name',
     title: 'name',
     align: 'center',
-    checked: true,
-    render: row => {}
+    checked: true
+    // render: row => {
+    //   return h(NTag, { type: 'success' }, { default: () => '启动' });
+    // }
   }
 ]);
 
-const customRenderHeader = (str: VNodeChild, column: NaiveUI.TableColumnCheck, h: any) => {
-  // return eval(str || '');
-  return new Function(column, h)(`return ${str}`)();
+const customRender = (str: string, h: any, Naive: any) => {
+  return eval(`(${str || '{}'})`);
 };
 const editorMounted = (editor: monaco.editor.IStandaloneCodeEditor) => {
+  console.log('加载完成');
   editor.onDidChangeModelContent(() => {
-    const value = editor.getValue();
-         
-    columns.value[1].render = row => customRenderHeader(value, row, h);
-    console.log(value, columns.value);
-    // columns.value[1].render = row =>
-    //   h(
-    //     'button',
-    //     {
-    //       onClick: () => {
-    //         const value = editor.getValue();
-    //         console.log(value);
-    //       }
-    //     },
-    //     '123'
-    //   );
-    // const templateCode1 = `<h1>{{ msg }}</h1>`;
+    // const value = editor.getValue();
+    // columns.value[2] = customRender(value || '', h, naive)[0];
   });
 };
 const visible = ref(false);
@@ -52,12 +44,21 @@ const title = ref('插槽编辑');
 
 const handleSubmit = () => {
   visible.value = false;
+  emit('Change', value.value);
 };
 
-const closeDrawer = () => {};
+const closeModal = () => {
+  visible.value = false;
+};
 const handClick = () => {
-  console.log(columns.value);
   visible.value = true;
+  value.value = code.value;
+};
+const loading = ref(false);
+const handlTest = () => {
+  loading.value = true;
+  columns.value[2] = customRender(value.value, h, naive);
+  loading.value = false;
 };
 
 const tableData = ref([
@@ -73,7 +74,7 @@ const tableData = ref([
 </script>
 
 <template>
-  <NButton type="primary" ghost size="small" @click="handClick">重写插槽</NButton>
+  <NButton type="primary" :ghost="!code || code.length == 0" size="small" @click="handClick">重写插槽</NButton>
   <NModal v-model:show="visible" :title="title" preset="card" class="w-1000px">
     <NGrid :x-gap="12" :y-gap="12" :cols="4">
       <NGi>
@@ -82,17 +83,15 @@ const tableData = ref([
           :columns="columns"
           :data="tableData"
           size="small"
-          :flex-height="true"
           remote
           :row-key="row => row.id"
-          class="sm:h-full"
+          :loading="loading"
         />
       </NGi>
       <NGi :span="3">
-        {{ code }}
         <NScrollbar class="h-480px pr-20px">
           <MonacoEditor
-            v-model:value="code"
+            v-model:value="value"
             :language="language"
             width="800px"
             height="480px"
@@ -103,9 +102,12 @@ const tableData = ref([
     </NGrid>
 
     <template #footer>
-      <NSpace justify="end" :size="16">
-        <NButton @click="closeDrawer">{{ $t('common.cancel') }}</NButton>
-        <NButton type="primary" @click="handleSubmit">{{ $t('common.confirm') }}</NButton>
+      <NSpace justify="space-between" :size="16">
+        <NButton type="primary" @click="handlTest">{{ $t('测试代码') }}</NButton>
+        <NSpace justify="end" :size="16">
+          <NButton type="primary" @click="closeModal">{{ $t('common.cancel') }}</NButton>
+          <NButton type="primary" @click="handleSubmit">{{ $t('common.confirm') }}</NButton>
+        </NSpace>
       </NSpace>
     </template>
   </NModal>

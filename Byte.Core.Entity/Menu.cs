@@ -3,6 +3,7 @@ using Byte.Core.SqlSugar;
 using SqlSugar;
 using System.Drawing.Drawing2D;
 using Byte.Core.Tools;
+using log4net.Layout;
 namespace Byte.Core.Entity
 {
     /// <summary>
@@ -19,6 +20,18 @@ namespace Byte.Core.Entity
         /// 路径
         /// </summary>
         public string Path { get; set; }
+
+        /// <summary>
+        /// 路径
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public string PathParam { get; set; }
+
+        /// <summary>
+        /// 布局
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public string Layout { get; set; }
 
         /// <summary>
         /// 重定向
@@ -42,12 +55,14 @@ namespace Byte.Core.Entity
         /// <summary>
         /// 类型
         /// </summary>
-        public MenuTypeEnum Type { get; set; }
+        public MenuTypeEnum MenuType { get; set; }
 
+        public IconTypeEnum iconType { get; set; }
+        
         /// <summary>
         /// 状态
         /// </summary>
-        public bool State { get; set; }
+        public bool Status { get; set; }
         #region RouteMeta
 
 
@@ -112,6 +127,7 @@ namespace Byte.Core.Entity
         /// <summary>
         /// 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
         /// </summary>
+        [SugarColumn(IsNullable = true)]
         public string ActiveMenu { get; set; }
 
 
@@ -125,12 +141,7 @@ namespace Byte.Core.Entity
         [SugarColumn(IsNullable = true)]
         public int? FixedIndexInTab { get; set; }
 
-        /// <summary>
-        /// 跳转参数
-        /// </summary>
-        [SugarColumn(IsNullable = true)]
-        public string Query { get; set; }
-
+       
         #endregion
       
 

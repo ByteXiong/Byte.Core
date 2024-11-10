@@ -3,7 +3,7 @@ import { computed, ref, watch } from 'vue';
 import { $t } from '@/locales';
 import { useFormRules, useNaiveForm } from '@/hooks/common/form';
 import type { TableColumn } from '@/api/globals';
-import { ColumnTypeEnum } from '@/api/apiEnums';
+import { ColumnTypeEnum, SearchTypeEnum } from '@/api/apiEnums';
 defineOptions({
   name: 'TableHeaderSearch'
 });
@@ -51,7 +51,7 @@ watch(
     Object.keys(newVal).forEach(key => {
       searchParams.value[key] = {
         key,
-        searchType: props.searchData.find(item => item.key === key)?.searchType,
+        searchType: props.searchData.find(item => item.key === key)?.searchType || SearchTypeEnum.等于,
         value: newVal[key]
       };
     });
@@ -68,57 +68,50 @@ async function search() {
 </script>
 
 <template>
-  <NCard :bordered="false" size="small" class="card-wrapper">
-    {{ searchParams }}
-    ===================================
-    {{ formDada }}
-    <!--
- <NCollapse>
+  <NCard v-if="searchData.length > 0" :bordered="false" size="small" class="card-wrapper">
+    <NCollapse>
       <NCollapseItem :title="$t('common.search')" name="user-search">
--->
-    <NForm ref="formRef" :model="formDada" :rules="rules" label-placement="left" :label-width="80">
-      <NGrid responsive="screen" item-responsive>
-        <NFormItemGi
-          v-for="(item, index) in searchData"
-          :key="index"
-          span="24 s:12 m:6"
-          :label="$t(item.title)"
-          :path="item.key"
-          class="pr-24px"
-        >
-          <DicSelect
-            v-if="item.columnType === ColumnTypeEnum.字典"
-            v-model:value="formDada[item.key || '']"
-            :group-by="item.columnTypeDetail"
-          ></DicSelect>
-          <NInput
-            v-else
-            v-model:value="formDada[item.key || '']"
-            :placeholder="$t('common.placeholder') + $t(item.title)"
-          />
-        </NFormItemGi>
-        <NFormItemGi span="24 m:12" class="pr-24px">
-          <NSpace class="w-full" justify="end">
-            <NButton @click="reset">
-              <template #icon>
-                <icon-ic-round-refresh class="text-icon" />
-              </template>
-              {{ $t('common.reset') }}
-            </NButton>
-            <NButton type="primary" ghost @click="search">
-              <template #icon>
-                <icon-ic-round-search class="text-icon" />
-              </template>
-              {{ $t('common.search') }}
-            </NButton>
-          </NSpace>
-        </NFormItemGi>
-      </NGrid>
-    </NForm>
-    <!--
- </NCollapseItem>
+        <NForm ref="formRef" :model="formDada" :rules="rules" label-placement="left" :label-width="80">
+          <NGrid responsive="screen" item-responsive>
+            <NFormItemGi
+              v-for="(item, index) in searchData"
+              :key="index"
+              span="24 s:12 m:6"
+              :label="$t(item.title)"
+              :path="item.key"
+              class="pr-24px"
+            >
+              <DicSelect
+                v-if="item.columnType === ColumnTypeEnum.字典"
+                v-model:value="formDada[item.key || '']"
+                :group-by="item.columnTypeDetail"
+              ></DicSelect>
+              <NInput
+                v-else
+                v-model:value="formDada[item.key || '']"
+                :placeholder="$t('common.placeholder') + $t(item.title)"
+              />
+            </NFormItemGi>
+            <NFormItemGi span="24 m:12" class="pr-24px">
+              <NSpace class="w-full" justify="end">
+                <NButton @click="reset">
+                  <template #icon>
+                    <icon-ic-round-refresh class="text-icon" />
+                  </template>
+                  {{ $t('common.reset') }}
+                </NButton>
+                <NButton type="primary" ghost @click="search">
+                  <template #icon>
+                    <icon-ic-round-search class="text-icon" />
+                  </template>
+                  {{ $t('common.search') }}
+                </NButton>
+              </NSpace>
+            </NFormItemGi>
+          </NGrid>
+        </NForm>
+      </NCollapseItem>
     </NCollapse>
--->
   </NCard>
 </template>
 

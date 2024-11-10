@@ -62,7 +62,7 @@ namespace {ControllersNamespace}
         {
             return Task.Factory.StartNew<IActionResult>(() =>
             {
-                if(!ModelState.IsValid)
+                if(!ModelStatus.IsValid)
                     return Json(ExcutedResult.FailedResult("数据验证失败"));
                 {TableName}Service.AddAsync(model, false);
                 return Json(ExcutedResult.SuccessResult());
@@ -78,7 +78,7 @@ namespace {ControllersNamespace}
         {
             return Task.Factory.StartNew<IActionResult>(() =>
             {
-                if (!ModelState.IsValid)
+                if (!ModelStatus.IsValid)
                     return Json(ExcutedResult.FailedResult("数据验证失败"));
                 {TableName}Service.Edit(model, false);
                 return Json(ExcutedResult.SuccessResult());

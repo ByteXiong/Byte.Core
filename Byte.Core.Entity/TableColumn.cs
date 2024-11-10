@@ -41,7 +41,7 @@ namespace Byte.Core.Entity
         /// 显示
         /// </summary>
         [SugarColumn( IsNullable = true)]
-        public SearchTypeEnum? SearchType { get; set; }
+        public ConditionalType? SearchType { get; set; }
         /// <summary>
         /// 字段类型
         /// </summary>

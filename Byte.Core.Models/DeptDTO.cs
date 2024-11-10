@@ -82,7 +82,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 状态
         /// </summary>
-        public bool State { get; set; }
+        public bool Status { get; set; }
         /// <summary>
         /// 排序
         /// </summary>

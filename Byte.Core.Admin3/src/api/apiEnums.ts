@@ -15,8 +15,7 @@ export enum VersionEnum {
 export enum MenuTypeEnum {
   目录 = 1,
   菜单 = 2,
-  按钮 = 3,
-  外链 = 4
+  外链 = 3
 }
 export enum RoleTypeEnum {
   系统角色 = 10,
@@ -50,13 +49,13 @@ export enum TableFixedEnum {
 }
 
 export enum SearchTypeEnum {
-  等于 = 1,
-  模糊 = 2,
-  大于 = 3,
-  大于或等于 = 4,
-  小于 = 5,
-  小于或等于 = 6,
-  区间 = 7
+  等于,
+  模糊,
+  大于,
+  大于或等于,
+  小于,
+  小于或等于,
+  区间
 }
 
 export enum ColumnTypeEnum {
@@ -67,4 +66,13 @@ export enum ColumnTypeEnum {
   小数 = 5,
   时间 = 6,
   图片 = 7
+}
+
+export enum LayoutTypeEnum {
+  Base = 1,
+  Blank = 2
+}
+export enum IconTypeEnum {
+  iconify图标 = 1,
+  本地图标 = 2
 }

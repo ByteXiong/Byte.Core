@@ -2,6 +2,7 @@
 using Byte.Core.SqlSugar;
 using Byte.Core.Tools;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SqlSugar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -131,10 +132,4 @@ namespace Byte.Core.Models
 
         public Dictionary<string, Dictionary< string,string>> Search { get; set; }
 }
-
-   public class SearchField  {
-
-     public string Value { get; set; }
-     public SearchTypeEnum SearchType { get; set; }
-    }
 }

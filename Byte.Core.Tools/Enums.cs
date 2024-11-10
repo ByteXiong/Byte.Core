@@ -37,8 +37,7 @@ namespace Byte.Core.Tools
     {
         目录 = 1,
         菜单 = 2,
-        按钮 = 3,
-        外链 = 4,
+        外链 = 3,
     }
 
     public enum DeptTypeEnum
@@ -77,14 +76,15 @@ namespace Byte.Core.Tools
     }
 
     public enum SearchTypeEnum
-    {    
-        等于=1,
-        模糊=2,
-        大于=3,
-        大于或等于=4,
-        小于=5,
-        小于或等于 = 6,
-        区间=7,
+    {
+        // 后端使用 SqlSuger.ConditionalType
+        等于,
+        模糊,
+        大于,
+        大于或等于,
+        小于,
+        小于或等于,
+        区间,
      }
 
     public enum ColumnTypeEnum
@@ -95,8 +95,19 @@ namespace Byte.Core.Tools
         字典=4,
         小数=5,
         时间=6,
-        图片=7
+        图片=7,
+        布尔=8
+    }
+    public enum LayoutTypeEnum
+    {
+        Base = 1,
+        Blank=2,
     }
 
+    public enum IconTypeEnum { 
+       iconify图标=1,
+       本地图标=2,
+    
+    }
 
 }

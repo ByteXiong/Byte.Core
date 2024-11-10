@@ -49,8 +49,7 @@ namespace Byte.Core.Business
             {
                 where = where.And(x => x.Depts.Any(y=>y.Id== param.DeptId) );
             }
-
-            var page = await GetIQueryable(where).Select<UserDTO>().ToPagedResultsAsync(param);
+            var page = await GetIQueryable(where).Select<UserDTO>().SearchWhere(param).ToPagedResultsAsync(param);
 
             return page;
         }
@@ -128,8 +127,7 @@ namespace Byte.Core.Business
                     Password = param.Password, //密码
                     CreateTime = param.CreateTime, //创建时间
                     CreateBy = param.CreateBy, //创建人
-                    State = param.State, //状态
-
+                    Status = param.Status, //状态
                     UserName = param.UserName, //账号
 
                 });
@@ -160,7 +158,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public async Task<int> SetStateAsync(int id, bool state) => await UpdateAsync(x => id == x.Id, x => new User { State = state });
+        public async Task<int> SetStatusAsync(int id, bool status) => await UpdateAsync(x => id == x.Id, x => new User { Status = status });
 
 
 

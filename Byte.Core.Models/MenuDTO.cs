@@ -30,6 +30,10 @@ namespace Byte.Core.Models
 
         public int Id { get; set; }
         /// <summary>
+        /// 路由名称
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
         /// 菜单标题
         /// </summary>
         public string Title { get; set; }
@@ -85,7 +89,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 状态
         /// </summary>
-        public bool State { get; set; }
+        public bool Status { get; set; }
 
 
        
@@ -172,7 +176,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 状态
         /// </summary>
-        public bool State { get; set; }
+        public bool Status { get; set; }
 
         public RouteMeta Meta { get; set; }
 

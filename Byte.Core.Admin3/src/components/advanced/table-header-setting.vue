@@ -3,7 +3,6 @@ import { useRouter } from 'vue-router';
 import { useRequest } from 'alova/client';
 import { $t } from '@/locales';
 import type { TableColumn } from '@/api/globals';
-
 const router = useRouter();
 defineOptions({
   name: 'TableHeaderSetting'
@@ -16,11 +15,11 @@ interface Props {
 
 const { tableof } = defineProps<Props>();
 
-const columns = defineModel<NaiveUI.TableColumnCheck[]>('columns', {
+const columns = defineModel<Array<NaiveUI.TableColumnCheck>>('columns', {
   default: () => []
 });
 
-const searchData = defineModel<TableColumn[]>('searchData', {
+const searchData = defineModel<Array<TableColumn>>('searchData', {
   default: () => []
 });
 
@@ -37,19 +36,11 @@ const { loading } = useRequest(
         Table: tableof
       },
       transform: res => {
-        columns.value = res.data?.map(item => {
-          // console.log(JSON.parse(item.props || '{}'));
-          return {
-            key: item.key,
-            title: item.title,
-            checked: true
-            // render: renderFunction as VNodeChild
-            // render: (row: any, index: number) => {
-            //   return eval(retrievedRenderFunctionString || '');
-            // }
-          } as NaiveUI.TableColumnCheck;
+        // 为什么这里不处理 返回结果, 父级页面的方法拿不到
+        columns.value = res.data.map(item => {
+          return { ...item, checked: true };
         });
-        searchData.value = res.data?.filter(item => item.searchType);
+        searchData.value = res.data?.filter(item => item.searchType !== null);
       }
     }),
   {

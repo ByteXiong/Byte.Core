@@ -60,9 +60,9 @@ export const alovaInstance = createAlova({
           authStore.resetStore();
         }
         window.$message?.error(rawData.msg || serverCodeMessage[rawData.code] || '系统出错');
-        return Promise.reject(rawData);
+        Promise.reject(rawData);
       }
-      return Promise.reject(rawData);
+      Promise.reject(rawData);
     },
     onError: err => {
       window.$message?.error(err.response?.data?.msg || '系统出错');

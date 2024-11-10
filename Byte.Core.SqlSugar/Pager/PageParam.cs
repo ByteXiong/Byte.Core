@@ -4,6 +4,8 @@
     {
         public int StartIndex => (PageIndex - 1) * PageSize;
 
+        public Dictionary<string, Dictionary<string, string>> Search { get; set; }
+
         public int PageIndex
         {
             get;

@@ -31,7 +31,7 @@ namespace Byte.Core.Business
 
             var user = await _userRepository.GetIQueryable(where).FirstAsync();
             if (user == null) throw new BusException("账号或密码错误");
-            if (!user.State) throw new BusException("账号已禁用");
+            if (!user.Status) throw new BusException("账号已禁用");
 
             var jwt = new JWTPayload
             {

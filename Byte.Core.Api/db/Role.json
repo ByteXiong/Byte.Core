@@ -2,7 +2,7 @@
     {
       "Id": "1",
       "Name": "系统管理员",
-      "State": "1",
+      "Status": "1",
       "Remark": null,
       "Code": "ROOT",
       "Sort": null,
@@ -16,7 +16,7 @@
     {
       "Id": "2",
       "Name": "管理员",
-      "State": "1",
+      "Status": "1",
       "Remark": null,
       "Code": "ADMIN",
       "Sort": null,

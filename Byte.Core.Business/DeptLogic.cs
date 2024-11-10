@@ -82,7 +82,7 @@ namespace Byte.Core.Business
             model.EasyName = param.EasyName;
             model.Image = param.Image;
             model.ParentId = param.ParentId;
-            model.State = param.State;
+            model.Status = param.Status;
             model.Sort = param.Sort;
             await UpdateAsync(model);
             return model.Id;
@@ -98,8 +98,8 @@ namespace Byte.Core.Business
         /// 设置状态
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="state"></param>
+        /// <param name="status"></param>
         /// <returns></returns>
-        public async Task<int> SetStateAsync(int id, bool state) => await UpdateAsync(x => id == x.Id, x => new Dept { State = state });
+        public async Task<int> SetStatusAsync(int id, bool status) => await UpdateAsync(x => id == x.Id, x => new Dept { Status = status });
     }
 }

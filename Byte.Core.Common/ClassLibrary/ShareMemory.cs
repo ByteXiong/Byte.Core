@@ -439,7 +439,7 @@ namespace Byte.Core.Common.ClassLibrary
         /// </summary>
         /// <param name="index">索引序号</param>
         /// <returns></returns>
-        public string GetState(int index)
+        public string GetStatus(int index)
         {
             int offset = 1 + index * (entityLength + 1) + entityLength - 2;
             return StringExtensions.ToString(Read(1, offset));
@@ -450,7 +450,7 @@ namespace Byte.Core.Common.ClassLibrary
         /// </summary>
         /// <param name="index">索引序号</param>
         /// <param name="state">状态（0为未爬取，1为已经爬取）</param>
-        public void SetState(int index, int state)
+        public void SetStatus(int index, int state)
         {
             int offset = 1 + index * (entityLength + 1) + entityLength - 2;
             Write(state.ToString().ToBytes(), offset);

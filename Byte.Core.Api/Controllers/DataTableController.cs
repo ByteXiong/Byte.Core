@@ -19,17 +19,6 @@ namespace Byte.Core.Api.Controllers
     {
         private readonly DataTableLogic _logic = logic ?? throw new ArgumentNullException(nameof(logic));
 
-        /// <summary>
-        /// 获取表字段
-        /// </summary>
-        /// <param name="tableName"></param>
-        /// <returns></returns>
-        [HttpGet]
-        [ApiVersion("1.0", Deprecated = false)]
-        public async Task<List<DataTableColumnDTO>> GetTableColumnsAsync(string  tableName) =>await _logic.GetTableColumnsAsync(tableName); // await
-
-
-
         #region 表头信息
         /// <summary>
         /// 获取表字段
@@ -127,11 +116,11 @@ namespace Byte.Core.Api.Controllers
         ///// 设置状态
         ///// </summary>
         ///// <param name="id"></param>
-        ///// <param name="state"></param>
+        ///// <param name="status"></param>
         ///// <returns></returns>
         //[HttpPut]
         //[ApiVersion("1.0", Deprecated = false)]
-        //public async Task<int> SetStateAsync(int id, bool state) => await _logic.SetStateAsync(id, state);
+        //public async Task<int> SetStatusAsync(int id, bool status) => await _logic.SetStatusAsync(id, status);
 
 
 

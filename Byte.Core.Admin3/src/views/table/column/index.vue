@@ -8,8 +8,8 @@ import { $t } from '@/locales';
 import '@/api';
 import type { TableColumn } from '@/api/globals';
 import { ColumnTypeEnum, SearchTypeEnum, getEnumValue } from '@/api/apiEnums';
-import AllGroupSelect from '@/components/select/all-group-select.vue';
 import MonacoCode from './modules/monaco-code.vue';
+import { spec } from 'node:test/reporters';
 const route = useRoute();
 const tableof = ref(route.path.split('/').pop());
 const {
@@ -49,7 +49,7 @@ const { send: submit } = useForm(
   }
 );
 
-const { send: delIds } = useRequest(
+const { send: handleDelete } = useRequest(
   // Method实例获取函数，它将接收page和pageSize，并返回一个Method实例
   ids =>
     Apis.DataTable.delete_api_datatable_deletetableheader({
@@ -104,17 +104,15 @@ const columns = ref<Array<NaiveUI.TableColumnCheck>>([
     type: 'selection',
     align: 'center',
     width: 48,
-    checked: true
+    checked: true,
+    disabled: row => row.id === 0
   },
   {
     key: 'table',
-    title: $t('common.add'),
+    title: $t('模型'),
     align: 'center',
     width: 80,
-    checked: true,
-    render: () => {
-      return h(NInput, { class: 'custom-div' });
-    }
+    checked: true
   },
   {
     key: 'key',
@@ -205,9 +203,17 @@ const columns = ref<Array<NaiveUI.TableColumnCheck>>([
     checked: true,
     render: row => (
       <div class="flex-center gap-8px">
-        <MonacoCode code={row.props}> </MonacoCode>
+        <MonacoCode
+          v-model:code={row.props}
+          onChange={code => {
+            row.props = code;
+            submit(row);
+          }}
+        >
+          {' '}
+        </MonacoCode>
         {row.id !== 0 ? (
-          <NPopconfirm onPositiveClick={() => delIds([row.id])}>
+          <NPopconfirm onPositiveClick={() => handleDelete([row.id])}>
             {{
               default: () => $t('common.confirmDelete'),
               trigger: () => (
@@ -282,7 +288,7 @@ function handleAdd() {
           :disabled-delete="checkedRowKeys.length === 0"
           :loading="loading"
           @add="handleAdd"
-          @delete="delIds(checkedRowKeys)"
+          @delete="handleDelete(checkedRowKeys)"
           @refresh="getData"
         />
       </template>

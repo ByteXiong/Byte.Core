@@ -73,7 +73,7 @@ namespace Byte.Core.Business
                 //Hidden = false,
                 //Redirect = null,
                 //AlwaysShow = false,
-                //State = false,
+                //Status = false,
                 //IsDeleted = false,
                 //Roles = null,
                 //Children = null
@@ -91,13 +91,14 @@ namespace Byte.Core.Business
         public async Task<int> AddAsync(UpdateMenuParam param)
         {
 
-            if (param.ParentId == null && param.Type != MenuTypeEnum.目录)
+            if (param.ParentId == null && param.MenuType != MenuTypeEnum.目录)
             {
                 throw new BusException("一级必须是目录");
             }
+            param.Path =$"/{param.Name}" ;
 
-            Menu model = param.Adapt<Menu>();
-            model.Component = param.Type == MenuTypeEnum.目录 ? "Layout" : param.Component;
+           Menu model = param.Adapt<Menu>();
+            model.Component = param.MenuType == MenuTypeEnum.目录 ? "Layout" : param.Component;
             await AddAsync(model);
             //清除缓存
             MemoryCacheManager.RemoveCacheRegex(ParamConfig.RoleCaChe);
@@ -111,7 +112,7 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<int> UpdateAsync(UpdateMenuParam param)
         {
-            if (param.ParentId == null && param.Type != MenuTypeEnum.目录)
+            if (param.ParentId == null && param.MenuType != MenuTypeEnum.目录)
             {
                 throw new BusException("一级必须是目录");
             }
@@ -130,15 +131,15 @@ namespace Byte.Core.Business
                 ActiveMenu = param.ActiveMenu,
                 MultiTab = param.MultiTab,
                 FixedIndexInTab = param.FixedIndexInTab,
-                Query = param.Query,
+                PathParam = param.PathParam,
                 ParentId = param.ParentId,
-                Type = param.Type,
+                MenuType = param.MenuType,
                 KeepAlive = param.KeepAlive,
                 Constant = param.Constant,
                 Title = param.Title,
                 I18nKey = param.I18nKey,
                 Redirect = param.Redirect,
-                State = param.State,
+                Status = param.Status,
             });
             //清除缓存
             MemoryCacheManager.RemoveCacheRegex(ParamConfig.RoleCaChe);
@@ -150,9 +151,9 @@ namespace Byte.Core.Business
         /// 设置状态
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="state"></param>
+        /// <param name="status"></param>
         /// <returns></returns>
-        public async Task<int> SetStateAsync(int id, bool state) => await UpdateAsync(x => id == x.Id, x => new Menu { State = state });
+        public async Task<int> SetStatusAsync(int id, bool status) => await UpdateAsync(x => id == x.Id, x => new Menu { Status = status });
 
 
 
@@ -166,7 +167,7 @@ namespace Byte.Core.Business
         {
 
             var code = CurrentUser.RoleCode;
-            Expression<Func<Menu, bool>> where = x => x.State==true && x.Type != MenuTypeEnum.按钮;
+            Expression<Func<Menu, bool>> where = x => x.Status;
             if (code != ParamConfig.Admin)
             {
                 where = where.And(x => x.Roles.Any(y => y.Code == code));
@@ -201,7 +202,7 @@ namespace Byte.Core.Business
                               ParentId = x.ParentId,
                               //Type = x.Type,
                               Redirect = x.Redirect,
-                              //State = x.State,
+                              //Status = x.Status,
                             
                           }).ToListAsync();
             List<RouteDTO> list = new List<RouteDTO>();

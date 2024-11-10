@@ -1,4 +1,5 @@
-﻿using SqlSugar;
+﻿using Byte.Core.Common.Extensions;
+using SqlSugar;
 using System.Linq.Expressions;
 
 namespace Byte.Core.SqlSugar
@@ -6,6 +7,36 @@ namespace Byte.Core.SqlSugar
 
     public static class LinqExt
     {
+
+            public static ISugarQueryable<T> SearchWhere<T>(this ISugarQueryable<T> source ,PageParam queryParam)
+            {
+            var conModels = new List<IConditionalModel>();
+            queryParam.Search?.ForEach(x =>
+            {
+                var model = new ConditionalModel();
+                x.Value.ForEach(y =>
+                {
+                    switch (y.Key)
+                    {
+                        case "key":
+                            model.FieldName = y.Value;
+
+                            break;
+                        case "searchType":
+                            model.ConditionalType = (ConditionalType)y.Value.ToInt();
+                            break;
+                        case "value":
+                            model.FieldValue = y.Value;
+                            break;
+                        default:
+                            break;
+                    }
+
+                });
+                conModels.Add(model);
+            });
+        return  source.Where(conModels);
+        }
 
 
 

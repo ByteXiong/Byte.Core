@@ -43,7 +43,7 @@ namespace Byte.Core.Entity
         /// 状态
         /// </summary>
 
-        public bool State { get; set; }
+        public bool Status { get; set; }
 
 
         /// <summary>

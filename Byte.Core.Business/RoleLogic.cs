@@ -111,6 +111,6 @@ namespace Byte.Core.Business
         ///  设置状态
         /// </summary>
         /// <returns></returns>
-        public async Task<int> SetStateAsync(int id, bool state) => await UpdateAsync(x => id == x.Id, x => new Role { State = state });
+        public async Task<int> SetStatusAsync(int id, bool status) => await UpdateAsync(x => id == x.Id, x => new Role { Status = status });
     }
 }

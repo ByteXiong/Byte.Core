@@ -37,7 +37,7 @@ namespace Byte.Core.Business.Tests
 
             var aa = await RedisHelper.HMGetAsync(ParamConfig.HRedisDemoKey, "DF6CA8BA-F204-4622-BD3F-000061E4E567");
 
-            var result = await _logic.GetByIdAsync("DF6CA8BA-F204-4622-BD3F-000061E4E567".ToGuid().Value);
+            var result = await _logic.GetByIdAsync(1);
             //var result = await _logic.GetByIdsAsync(new Guid[] { Guid.NewGuid(), Guid.NewGuid() });
 
             Assert.IsTrue(result != null);
