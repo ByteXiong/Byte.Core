@@ -6,8 +6,12 @@ import * as Naive from 'naive-ui';
 import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
+import type { MenuTreeDTO } from '@/api/globals';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import * as Enum from '@/api/apiEnums';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import * as El from '@/api/apiEls';
 import EditForm from './modules/editForm.vue';
-
 // 获取当前页面路由参数
 const route = useRoute();
 const tableof = ref('MenuTreeDTO');
@@ -32,7 +36,7 @@ const {
 // 删除
 const { send: handleDelete } = useRequest(
   ids =>
-    Apis.User.delete_api_user_delete({
+    Apis.Menu.delete_api_menu_delete({
       data: ids,
       transform: res => {
         window.$message?.success('删除成功！');
@@ -55,12 +59,17 @@ const openForm = (id?: string) => {
   editFormRef.value?.openForm(id);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const handleAddChildMenu = (row: MenuTreeDTO) => {
+  editFormRef.value?.openForm(0, row.id);
+};
+
 // ====================开始处理动态生成=====================
 const searchData = ref<Array<any>>([]);
 const columns = ref<Array<NaiveUI.TableColumnCheck>>([]);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-shadow
-const customRender = (str?: string, h?: unknown, Naive?: any) => {
+const customRender = ({ str, h, Naive, Enum, El }: any) => {
   // eslint-disable-next-line no-eval
   return eval(`(${str || '{}'})`);
 };
@@ -68,7 +77,7 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
   return columns.value
     ?.filter(item => item.checked)
     .map(item => {
-      const column = customRender(item.props, h, Naive);
+      const column = customRender({ str: item.props, h, Naive, Enum, El });
       return {
         ...column,
         key: item.key,

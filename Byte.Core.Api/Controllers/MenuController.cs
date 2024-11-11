@@ -84,6 +84,33 @@ namespace Byte.Core.Api.Controllers
 
 
         /// <summary>
+        /// 菜单下拉
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ApiVersion("1.0", Deprecated = false)]
+        public async Task<List<RouteSelectDTO>> SelectAsync() => await _logic.SelectAsync();
+
+        /// <summary>
+        /// 通过角色Id获取菜单数组
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [ApiVersion("1.0", Deprecated = false)]
+        public async Task<int[]> GetByRoleIdAsync(int roleId) => await _logic.GetByRoleIdAsync(roleId);
+
+
+        /// <summary>
+        /// 通过角色Id添加菜单数组
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ApiVersion("1.0", Deprecated = false)]
+        public async Task SetByRoleIdAsync(SetByRoleIdDTO param) => await _logic.SetByRoleIdAsync(param);
+
+        /// <summary>
         ///  获取我的路由
         /// </summary>
         /// <returns></returns>

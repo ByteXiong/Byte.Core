@@ -6,7 +6,7 @@ import { useForm, useRequest } from 'alova/client';
 import { useFormRules, useNaiveForm } from '@/hooks/common/form';
 import { $t } from '@/locales';
 import { enableStatusOptions } from '@/constants/business';
-import type { UpdateMenuParam } from '@/api/globals';
+import type { MenuButton, UpdateMenuParam } from '@/api/globals';
 import { getLocalIcons } from '@/utils/icon';
 import SvgIcon from '@/components/custom/svg-icon.vue';
 import { IconTypeEnum, LayoutTypeEnum, MenuTypeEnum, getEnumValue } from '@/api/apiEnums';
@@ -70,10 +70,12 @@ const title = computed(() => {
   return formData.value.id ? $t('common.add') : $t('common.edit');
 });
 // 打开
-const openForm = async (id?: string) => {
+const openForm = async (id?: string, parentId?: number) => {
   visible.value = true;
   if (id) {
     await getInfo(id);
+  } else {
+    formData.value.parentId = parentId;
   }
 };
 
@@ -91,6 +93,18 @@ const localIconOptions = localIcons.map<SelectOption>(item => ({
   ),
   value: item
 }));
+
+function handleCreateButton() {
+  const buttonItem: MenuButton = {
+    id: 0,
+    code: '',
+    desc: '',
+    state: 0,
+    i18nKey: ''
+  };
+
+  return buttonItem;
+}
 
 defineExpose({
   openForm
@@ -112,28 +126,41 @@ defineExpose({
               />
             </NRadioGroup>
           </NFormItemGi>
-          <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.tilte')" path="tilte">
-            <NInput v-model:value="formData.title" :placeholder="$t('page.manage.menu.form.menuName')" />
+          <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.title')" path="tilte">
+            <NInput
+              v-model:value="formData.title"
+              :placeholder="$t('common.placeholder') + $t('page.manage.menu.title')"
+            />
           </NFormItemGi>
           <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.name')" path="name">
-            <NInput v-model:value="formData.name" :placeholder="$t('page.manage.menu.form.name')" />
+            <NInput
+              v-model:value="formData.name"
+              :placeholder="$t('common.placeholder') + $t('page.manage.menu.name')"
+            />
           </NFormItemGi>
-          <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.path')" path="routePath">
-            <NInput v-model:value="formData.path" disabled :placeholder="$t('page.manage.menu.form.routePath')" />
+          <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.path')" path="path">
+            <NInput
+              v-model:value="formData.path"
+              disabled
+              :placeholder="$t('common.placeholder') + $t('page.manage.menu.path')"
+            />
           </NFormItemGi>
           <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.pathParam')" path="pathParam">
-            <NInput v-model:value="formData.pathParam" :placeholder="$t('page.manage.menu.form.pathParam')" />
+            <NInput
+              v-model:value="formData.pathParam"
+              :placeholder="$t('common.placeholder') + $t('page.manage.menu.pathParam')"
+            />
           </NFormItemGi>
-          <!--
- <NFormItemGi v-if="showLayout" span="24 m:12" :label="$t('page.manage.menu.layout')" path="layout">
+
+          <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.layout')" path="layout">
             <NSelect
               v-model:value="formData.layout"
               :options="getEnumValue(LayoutTypeEnum).map(item => ({ label: LayoutTypeEnum[item], value: item }))"
               :placeholder="$t('page.manage.menu.form.layout')"
             />
           </NFormItemGi>
--->
-          <NFormItemGi v-if="formData" span="24 m:12" :label="$t('page.manage.menu.page')" path="page">
+
+          <NFormItemGi v-if="formData" span="24 m:12" :label="$t('page.manage.menu.component')" path="page">
             <!--
  <NSelect
               v-model:value="formData.page"
@@ -141,25 +168,41 @@ defineExpose({
               :placeholder="$t('page.manage.menu.form.page')"
             />
 -->
+            <NInput
+              v-model:value="formData.component"
+              :placeholder="$t('common.placeholder') + $t('page.manage.menu.component')"
+            />
           </NFormItemGi>
           <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.i18nKey')" path="i18nKey">
-            <NInput v-model:value="formData.i18nKey" :placeholder="$t('page.manage.menu.form.i18nKey')" />
+            <NInput
+              v-model:value="formData.i18nKey"
+              :placeholder="$t('common.placeholder') + $t('page.manage.menu.i18nKey')"
+            />
           </NFormItemGi>
           <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.order')" path="order">
             <NInputNumber
               v-model:value="formData.order"
               class="w-full"
-              :placeholder="$t('page.manage.menu.form.order')"
+              :placeholder="$t('common.placeholder') + $t('page.manage.menu.order')"
             />
           </NFormItemGi>
           <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.iconTypeTitle')" path="iconType">
             <NRadioGroup v-model:value="formData.iconType">
-              <NRadio v-for="item in IconTypeEnum" :key="item" :value="item" :label="$t(IconTypeEnum[item])" />
+              <NRadio
+                v-for="item in getEnumValue(IconTypeEnum)"
+                :key="item"
+                :value="item"
+                :label="$t(IconTypeEnum[item])"
+              />
             </NRadioGroup>
           </NFormItemGi>
           <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.icon')" path="icon">
             <template v-if="formData.iconType === IconTypeEnum.iconify图标">
-              <NInput v-model:value="formData.icon" :placeholder="$t('page.manage.menu.form.icon')" class="flex-1">
+              <NInput
+                v-model:value="formData.icon"
+                :placeholder="$t('common.placeholder') + $t('page.manage.menu.form.icon')"
+                class="flex-1"
+              >
                 <template #suffix>
                   <SvgIcon v-if="formData.icon" :icon="formData.icon" class="text-icon" />
                 </template>
@@ -196,7 +239,10 @@ defineExpose({
             </NRadioGroup>
           </NFormItemGi>
           <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.href')" path="href">
-            <NInput v-model:value="formData.href" :placeholder="$t('page.manage.menu.form.href')" />
+            <NInput
+              v-model:value="formData.href"
+              :placeholder="$t('common.placeholder') + $t('page.manage.menu.form.href')"
+            />
           </NFormItemGi>
           <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.hideInMenu')" path="hideInMenu">
             <NRadioGroup v-model:value="formData.hideInMenu">
@@ -230,15 +276,15 @@ defineExpose({
               v-model:value="formData.fixedIndexInTab"
               class="w-full"
               clearable
-              :placeholder="$t('page.manage.menu.form.fixedIndexInTab')"
+              :placeholder="$t('common.placeholder') + $t('page.manage.menu.form.fixedIndexInTab')"
             />
           </NFormItemGi>
           <NFormItemGi span="24" :label="$t('page.manage.menu.query')">
             <NDynamicInput
               v-model:value="formData.query"
               preset="pair"
-              :key-placeholder="$t('page.manage.menu.form.queryKey')"
-              :value-placeholder="$t('page.manage.menu.form.queryValue')"
+              :key-placeholder="$t('common.placeholder') + $t('page.manage.menu.form.queryKey')"
+              :value-placeholder="$t('common.placeholder') + $t('page.manage.menu.form.queryValue')"
             >
               <template #action="{ index, create, remove }">
                 <NSpace class="ml-12px">
@@ -258,12 +304,17 @@ defineExpose({
                 <div class="ml-8px flex-y-center flex-1 gap-12px">
                   <NInput
                     v-model:value="value.code"
-                    :placeholder="$t('page.manage.menu.form.buttonCode')"
+                    :placeholder="$t('common.placeholder') + $t('page.manage.menu.form.buttonCode')"
                     class="flex-1"
                   />
                   <NInput
                     v-model:value="value.desc"
-                    :placeholder="$t('page.manage.menu.form.buttonDesc')"
+                    :placeholder="$t('common.placeholder') + $t('page.manage.menu.form.buttonDesc')"
+                    class="flex-1"
+                  />
+                  <NInput
+                    v-model:value="value.i18nKey"
+                    :placeholder="$t('common.placeholder') + $t('page.manage.menu.form.buttonDesc')"
                     class="flex-1"
                   />
                 </div>

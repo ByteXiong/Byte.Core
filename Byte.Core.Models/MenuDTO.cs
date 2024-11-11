@@ -1,7 +1,4 @@
-﻿using Byte.Core.Common;
-using Byte.Core.Entity;
-using Byte.Core.Tools;
-using System.Drawing.Drawing2D;
+﻿using Byte.Core.Entity;
 using Byte.Core.Tools;
 using SqlSugar;
 namespace Byte.Core.Models
@@ -21,6 +18,38 @@ namespace Byte.Core.Models
     public class AddMenuParam : Menu
     {
 
+        public List<MenuButton> Buttons { get; set; }
+
+    }
+    public class MenuButton {
+        public int Id { get; set; }
+        /// <summary>
+        /// 按钮编码
+        /// </summary>
+        public string Code { get; set; }
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public string Desc { get; set; }
+        /// <summary>
+        /// 父级Id
+        /// </summary>
+        public int? ParentId { get; set; }
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public bool Status { get; set; }
+        //parent
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public StateEnum State { get; set; }
+
+        /// <summary>
+        ///  多语言
+        /// </summary>
+        public string I18nKey { get; set; }
+
     }
     /// <summary>
     /// 菜单
@@ -30,13 +59,14 @@ namespace Byte.Core.Models
 
         public int Id { get; set; }
         /// <summary>
-        /// 路由名称
-        /// </summary>
-        public string Name { get; set; }
-        /// <summary>
         /// 菜单标题
         /// </summary>
         public string Title { get; set; }
+        /// <summary>
+        /// 路由名称
+        /// </summary>
+        public string Name { get; set; }
+     
         /// <summary>
         /// 组件
         /// </summary>
@@ -66,7 +96,7 @@ namespace Byte.Core.Models
         /// 类型
         /// 1.目录 2.菜单 3.按钮
         /// </summary>
-        public MenuTypeEnum Type { get; set; }
+        public MenuTypeEnum MenuType { get; set; }
 
         /// <summary>
         /// 是否缓存
@@ -129,6 +159,7 @@ namespace Byte.Core.Models
     /// </summary>
     public class MenuInfo : Menu
     {
+        public List<MenuButton> Buttons { get; set; }
 
         //public List<Permission> PermissionList { get; set; }
     }
@@ -270,6 +301,27 @@ namespace Byte.Core.Models
         ///// </summary>
         //public string Query { get; set; }
       
+    }
+
+    public class RouteSelectDTO
+    {
+        public long Id { get; set; }
+        /// <summary>
+        /// 父级ID
+        /// </summary>
+        public long? ParentId { get; set; }
+        /// <summary>
+        /// 标题
+        /// </summary>
+        public string Title { get; set; }
+        public List<RouteSelectDTO> Children { get; set; }
+
+    }
+    public class SetByRoleIdDTO
+    {
+        public int RoleId { get; set; }
+        public int[] MenuIds { get; set; }
+
     }
 
 }

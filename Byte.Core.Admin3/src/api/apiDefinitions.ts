@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Byte.Core开发接口文档 Web端网站 - version 1.0
+ * Byte.Core_DB开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -36,10 +36,13 @@ export default {
   'Login.post_api_login_login': ['POST', '/api/Login/Login'],
   'Login.post_api_login_loginout': ['POST', '/api/Login/LoginOut'],
   'Menu.delete_api_menu_delete': ['DELETE', '/api/Menu/Delete'],
+  'Menu.get_api_menu_getbyroleid': ['GET', '/api/Menu/GetByRoleId'],
   'Menu.get_api_menu_getinfo': ['GET', '/api/Menu/GetInfo'],
   'Menu.get_api_menu_getroutes': ['GET', '/api/Menu/GetRoutes'],
   'Menu.get_api_menu_gettree': ['GET', '/api/Menu/GetTree'],
   'Menu.get_api_menu_gettreeselect': ['GET', '/api/Menu/GetTreeSelect'],
+  'Menu.get_api_menu_select': ['GET', '/api/Menu/Select'],
+  'Menu.post_api_menu_setbyroleid': ['POST', '/api/Menu/SetByRoleId'],
   'Menu.put_api_menu_setstatus': ['PUT', '/api/Menu/SetStatus'],
   'Menu.post_api_menu_submit': ['POST', '/api/Menu/Submit'],
   'Role.delete_api_role_delete': ['DELETE', '/api/Role/Delete'],

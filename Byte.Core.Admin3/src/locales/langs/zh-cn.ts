@@ -419,15 +419,19 @@ const local: App.I18n.Schema = {
         }
       },
       menu: {
-        home: '首页',
-        title: '菜单列表',
-        id: 'ID',
-        parentId: '父级菜单ID',
         menuType: '菜单类型',
+        title: '菜单名称',
+        name: '路由名称',
+        path: '路由路径',
+        pathParam: '路径参数',
+
+        component: '组件',
+
+        parentId: '父级菜单ID',
         menuName: '菜单名称',
         routeName: '路由名称',
         routePath: '路由路径',
-        pathParam: '路径参数',
+
         layout: '布局',
         page: '页面组件',
         i18nKey: '国际化key',

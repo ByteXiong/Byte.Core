@@ -24,7 +24,25 @@ namespace Byte.Core.Tools
         [Description("移动端/微信小程序/钉钉/H5")]
         App = 2,
     }
-
+    public enum StateEnum { 
+        /// <summary>
+        /// 删除
+        /// </summary>
+        del = -1,
+        /// <summary>
+        /// 正常
+        /// </summary>
+        normal = 0,
+        /// <summary>
+        /// 新增
+        /// </summary>
+        add = 1,
+        /// <summary>
+        /// 更新
+        /// </summary>
+        update=2,
+    
+    }
     public enum RoleTypeEnum
     {
         系统角色 = 10,
@@ -37,7 +55,7 @@ namespace Byte.Core.Tools
     {
         目录 = 1,
         菜单 = 2,
-        外链 = 3,
+        按钮 = 3,
     }
 
     public enum DeptTypeEnum

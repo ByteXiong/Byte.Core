@@ -77,15 +77,6 @@ namespace Byte.Core.Api.Controllers
         ///// <param name="tableName"></param>
         ///// <returns></returns>
         //public async Task<List<TableColumn>> GetTableColumnsAsync() => await _logic.GetTableColumnsAsync(); // await
-
-
-
-
-
-
-
-
-
         /// <summary>
         /// 获取表字段
         /// </summary>

@@ -1,5 +1,7 @@
-﻿using Byte.Core.Common.IoC;
+﻿using Byte.Core.Common.Helpers;
+using Byte.Core.Common.IoC;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.IdentityModel.Logging;
 using System.Collections;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -182,17 +184,24 @@ namespace Byte.Core.Common.Cache
         /// <returns></returns>
         public static List<string> GetCacheKeys()
         {
-            const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
-            var coherentState = _memoryCache.GetType().GetField("_coherentState", flags).GetValue(_memoryCache);
-            var entries = coherentState.GetType().GetField("_entries", flags).GetValue(coherentState);
-            var cacheItems = entries as IDictionary;
-            var keys = new List<string>();
-            if (cacheItems == null) return keys;
-            foreach (DictionaryEntry cacheItem in cacheItems)
+            try
             {
-                keys.Add(cacheItem.Key.ToString());
+                const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+                var coherentState = _memoryCache.GetType().GetField("_coherentState", flags).GetValue(_memoryCache);
+                var entries = coherentState.GetType().GetField("_entries", flags).GetValue(coherentState);
+                var cacheItems = entries as IDictionary;
+                var keys = new List<string>();
+                if (cacheItems == null) return keys;
+                foreach (DictionaryEntry cacheItem in cacheItems)
+                {
+                    keys.Add(cacheItem.Key.ToString());
+                }
+                return keys;
+            } catch (Exception ex) 
+            {
+                Log4NetHelper.WriteError(typeof(MemoryCacheManager), "读取本地缓存失败--"+ ex.Message);
+                return new List<string>();
             }
-            return keys;
         }
     }
 }

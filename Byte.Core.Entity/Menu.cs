@@ -15,6 +15,7 @@ namespace Byte.Core.Entity
         /// <summary>
         /// 菜单名
         /// </summary>
+        [SugarColumn(IsNullable = true)]
         public string Name { get; set; }
         /// <summary>
         /// 路径
@@ -57,8 +58,8 @@ namespace Byte.Core.Entity
         /// </summary>
         public MenuTypeEnum MenuType { get; set; }
 
-        public IconTypeEnum iconType { get; set; }
-        
+        public IconTypeEnum IconType { get; set; }
+
         /// <summary>
         /// 状态
         /// </summary>

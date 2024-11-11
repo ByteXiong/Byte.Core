@@ -122,7 +122,7 @@ namespace Byte.Core.Business
         /// <returns></returns>5
         public async Task<List<TableColumn>> GetHeaderAsync(TableHeaderParam param)
         {
-            var entity = await _unitOfWork.GetDbClient().Queryable<TableColumn>().Where(x => x.Table == param.Table && x.IsShow).ToListAsync();
+            var entity = await _unitOfWork.GetDbClient().Queryable<TableColumn>().Where(x => x.Table == param.Table && x.IsShow).OrderBy(x => x.Sort).ToListAsync();
             entity.ForEach(x => x.Key.ToFirstLowerStr());
             return entity;
         }
@@ -132,10 +132,7 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<PagedResults<dynamic>> PageAsync(TableDataParam param)
         {
-
-
             var sql = $"select * from {param.Table}".ToSqlFilter();
-
             var list = await _unitOfWork.GetDbClient().SqlQueryable<dynamic>(sql).SearchWhere(param).ToPagedResultsAsync(param);
             return list;
         }

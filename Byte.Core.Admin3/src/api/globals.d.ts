@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Byte.Core开发接口文档 Web端网站 - version 1.0
+ * Byte.Core_DB开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -522,6 +522,31 @@ export type LoginParam = {
   captchaId?: string;
   captchaCode?: string;
 };
+export type StateEnum = 0 | 1 | 2 | -1;
+export type MenuButton = {
+  id?: number;
+  /**
+   * 按钮编码
+   */
+  code?: string;
+  /**
+   * 描述
+   */
+  desc?: string;
+  /**
+   * 父级Id
+   */
+  parentId?: number;
+  /**
+   * 状态
+   */
+  status?: boolean;
+  state?: StateEnum;
+  /**
+   * 多语言
+   */
+  i18nKey?: string;
+};
 export type MenuInfo = {
   /**
    * 主键
@@ -569,6 +594,7 @@ export type MenuInfo = {
   isDeleted?: boolean;
   roles?: Role[];
   children?: Menu[];
+  buttons?: MenuButton[];
 };
 export type RouteMeta = {
   /**
@@ -633,13 +659,13 @@ export type RouteDTO = {
 export type MenuTreeDTO = {
   id?: number;
   /**
-   * 路由名称
-   */
-  name?: string;
-  /**
    * 菜单标题
    */
   title?: string;
+  /**
+   * 路由名称
+   */
+  name?: string;
   /**
    * 组件
    */
@@ -660,7 +686,7 @@ export type MenuTreeDTO = {
    * icon图标
    */
   icon?: string;
-  type?: MenuTypeEnum;
+  menuType?: MenuTypeEnum;
   /**
    * 是否缓存
    */
@@ -701,6 +727,22 @@ export type MenuSelectDTO = {
    */
   icon?: string;
   children?: MenuSelectDTO[];
+};
+export type RouteSelectDTO = {
+  id?: number;
+  /**
+   * 父级ID
+   */
+  parentId?: number;
+  /**
+   * 标题
+   */
+  title?: string;
+  children?: RouteSelectDTO[];
+};
+export type SetByRoleIdDTO = {
+  roleId?: number;
+  menuIds?: number[];
 };
 export type UpdateMenuParam = {
   /**
@@ -749,6 +791,7 @@ export type UpdateMenuParam = {
   isDeleted?: boolean;
   roles?: Role[];
   children?: Menu[];
+  buttons?: MenuButton[];
 };
 export type RoleInfo = {
   /**
@@ -3118,6 +3161,85 @@ declare global {
       /**
        * ---
        *
+       * [GET] 通过角色Id获取菜单数组
+       *
+       * **path:** /api/Menu/GetByRoleId
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   roleId?: number
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: number[]
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_menu_getbyroleid<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            roleId?: number;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Menu.get_api_menu_getbyroleid',
+        Config
+      >;
+      /**
+       * ---
+       *
        * [GET] 查询详情
        *
        * **path:** /api/Menu/GetInfo
@@ -3271,6 +3393,20 @@ declare global {
        *       isDeleted?: boolean
        *       roles?: Array<Role>
        *       children?: Array<Menu>
+       *     }>
+       *     buttons?: Array<{
+       *       id?: number
+       *       // 按钮编码
+       *       code?: string
+       *       // 描述
+       *       desc?: string
+       *       // 父级Id
+       *       parentId?: number
+       *       // 状态
+       *       status?: boolean
+       *       state?: 0 | 1 | 2 | -1
+       *       // 多语言
+       *       i18nKey?: string
        *     }>
        *   }
        *   // [required]
@@ -3444,10 +3580,10 @@ declare global {
        *   // [required]
        *   data: Array<{
        *     id?: number
-       *     // 路由名称
-       *     name?: string
        *     // 菜单标题
        *     title?: string
+       *     // 路由名称
+       *     name?: string
        *     // 组件
        *     component?: string
        *     // 组件名称
@@ -3458,7 +3594,7 @@ declare global {
        *     sort?: number
        *     // icon图标
        *     icon?: string
-       *     type?: 1 | 2 | 3
+       *     menuType?: 1 | 2 | 3
        *     // 是否缓存
        *     keepAlive?: boolean
        *     // 是否隐藏
@@ -3608,6 +3744,157 @@ declare global {
           success: boolean;
         },
         'Menu.get_api_menu_gettreeselect',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 菜单下拉
+       *
+       * **path:** /api/Menu/Select
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: Array<{
+       *     id?: number
+       *     // 父级ID
+       *     parentId?: number
+       *     // 标题
+       *     title?: string
+       *     children?: Array<RouteSelectDTO>
+       *   }>
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_menu_select<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: RouteSelectDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }>
+      >(
+        config?: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: RouteSelectDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Menu.get_api_menu_select',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [POST] 通过角色Id添加菜单数组
+       *
+       * **path:** /api/Menu/SetByRoleId
+       *
+       * ---
+       *
+       * **RequestBody**
+       * ```ts
+       * type RequestBody = {
+       *   roleId?: number
+       *   menuIds?: number[]
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: unknown
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      post_api_menu_setbyroleid<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          data: SetByRoleIdDTO;
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Menu.post_api_menu_setbyroleid',
         Config
       >;
       /**
@@ -3833,6 +4120,20 @@ declare global {
        *     isDeleted?: boolean
        *     roles?: Array<Role>
        *     children?: Array<Menu>
+       *   }>
+       *   buttons?: Array<{
+       *     id?: number
+       *     // 按钮编码
+       *     code?: string
+       *     // 描述
+       *     desc?: string
+       *     // 父级Id
+       *     parentId?: number
+       *     // 状态
+       *     status?: boolean
+       *     state?: 0 | 1 | 2 | -1
+       *     // 多语言
+       *     i18nKey?: string
        *   }>
        * }
        * ```

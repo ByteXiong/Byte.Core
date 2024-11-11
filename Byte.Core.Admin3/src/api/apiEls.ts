@@ -2,9 +2,7 @@ import { DeptTypeEnum, MenuTypeEnum } from './apiEnums';
 
 export const MenuTypeEl: Record<number, NaiveUI.ThemeColor> = {
   [MenuTypeEnum.菜单]: 'warning',
-  [MenuTypeEnum.目录]: 'success',
-  [MenuTypeEnum.按钮]: 'error',
-  [MenuTypeEnum.外链]: 'info'
+  [MenuTypeEnum.目录]: 'success'
 };
 
 export const DeptTypeEl: Record<number, 'success' | 'warning' | 'info' | 'danger'> = {
