@@ -305,15 +305,19 @@ namespace Byte.Core.Models
 
     public class RouteSelectDTO
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         /// <summary>
         /// 父级ID
         /// </summary>
-        public long? ParentId { get; set; }
+        public int? ParentId { get; set; }
         /// <summary>
         /// 标题
         /// </summary>
         public string Title { get; set; }
+        public MenuTypeEnum MenuType { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public List<RouteSelectDTO> Children { get; set; }
 
     }

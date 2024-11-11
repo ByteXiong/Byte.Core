@@ -1,20 +1,24 @@
-<script setup lang="ts">
-import { computed, ref, shallowRef } from 'vue';
+<script setup lang="tsx">
+import { computed, h, ref, shallowRef } from 'vue';
 import { useForm, useRequest } from 'alova/client';
+import type { TreeOption } from 'naive-ui';
+import { NButton, NTag } from 'naive-ui';
 import { $t } from '@/locales';
 import type { SetByRoleIdDTO } from '@/api/globals';
+import { MenuTypeEnum } from '@/api/apiEnums';
+import { MenuTypeEl } from '@/api/apiEls';
 defineOptions({
   name: 'MenuTree'
 });
 const visible = ref<boolean>(false);
 
 interface Emits {
-  (e: 'refresh', row: any): any;
+  (e: 'refresh'): void;
 }
 const emit = defineEmits<Emits>();
 
 /** 获取数据Tree */
-const { data, loading } = useRequest(
+const { data } = useRequest(
   () =>
     Apis.Menu.get_api_menu_select({
       transform: res => {
@@ -38,8 +42,9 @@ const {
       data: form,
       transform: () => {
         visible.value = false;
+        resetFrom();
         window.$message?.success($t('common.updateSuccess'));
-        emit('refresh', form);
+        emit('refresh');
       }
     }),
   {
@@ -49,15 +54,17 @@ const {
   }
 );
 /** 获取数据getbyroleid */
-const { send: getData, loading: dataLoading } = useRequest(
+const { send: getData, data: treeIds } = useRequest(
   roleId =>
     Apis.Menu.get_api_menu_getbyroleid({
       params: { roleId },
       transform: res => {
         updateForm({ roleId, menuIds: res.data });
+        return res.data;
       }
     }),
   {
+    force: true,
     immediate: true
   }
 );
@@ -66,15 +73,16 @@ const title = computed(() => {
 });
 // 打开
 const openForm = async (id?: string) => {
+  resetFrom();
   visible.value = true;
-  if (id) {
-    await getData(id);
-  }
+  await getData(id);
 };
 
 const closeForm = () => {
-  restoreValidation();
   resetFrom();
+};
+const renderSuffix = ({ option }: { option: TreeOption }) => {
+  return h(NTag, { type: MenuTypeEl[option.menuType as number] }, MenuTypeEnum[option.menuType as number]);
 };
 
 defineExpose({
@@ -84,9 +92,10 @@ defineExpose({
 
 <template>
   <NModal v-model:show="visible" :title="title" preset="card" class="w-480px">
+    <!--     :loading="loading && dataLoading" -->
     <NTree
       v-model:checked-keys="formData.menuIds"
-      :loading="loading && dataLoading"
+      :default-expanded-keys="treeIds"
       :data="data"
       label-field="title"
       key-field="id"
@@ -94,7 +103,8 @@ defineExpose({
       expand-on-click
       virtual-scroll
       block-line
-      class="h-280px"
+      class="h-680px"
+      :render-suffix="renderSuffix"
     />
     <template #footer>
       <NSpace justify="end">

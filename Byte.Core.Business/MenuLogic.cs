@@ -7,6 +7,7 @@ using Byte.Core.Repository;
 using Byte.Core.SqlSugar;
 using Byte.Core.Tools;
 using Mapster;
+using System.Drawing.Drawing2D;
 using System.Linq.Expressions;
 namespace Byte.Core.Business
 {
@@ -235,12 +236,14 @@ namespace Byte.Core.Business
                 Id = x.Id,
                 ParentId = x.ParentId,
                 Title = x.Title,
+                MenuType=x.MenuType,
             }).ToListAsync();
             var list = new List<RouteSelectDTO>();
             //递归
             db.ForEach(x =>
             {
-                x.Children = db.Where(y => y.ParentId == x.Id).ToList();
+                x.Children = db.Where(y => y.ParentId == x.Id)?.ToList();
+                x.Children= x.Children.Count()==0?null:x.Children;
                 if (x.ParentId == default)
                 {
                     list.Add(x);

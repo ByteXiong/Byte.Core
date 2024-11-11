@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Byte.Core_DB开发接口文档 Web端网站 - version 1.0
+ * Byte.Core开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -738,6 +738,7 @@ export type RouteSelectDTO = {
    * 标题
    */
   title?: string;
+  menuType?: MenuTypeEnum;
   children?: RouteSelectDTO[];
 };
 export type SetByRoleIdDTO = {
@@ -3767,6 +3768,7 @@ declare global {
        *     parentId?: number
        *     // 标题
        *     title?: string
+       *     menuType?: 1 | 2 | 3
        *     children?: Array<RouteSelectDTO>
        *   }>
        *   // [required]
