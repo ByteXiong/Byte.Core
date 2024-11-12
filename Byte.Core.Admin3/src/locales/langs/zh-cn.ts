@@ -425,7 +425,7 @@ const local: App.I18n.Schema = {
         path: '路由路径',
         pathParam: '路径参数',
 
-        component: '组件',
+        component: '页面组件',
 
         parentId: '父级菜单ID',
         menuName: '菜单名称',

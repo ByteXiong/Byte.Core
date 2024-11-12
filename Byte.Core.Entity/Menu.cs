@@ -122,7 +122,7 @@ namespace Byte.Core.Entity
         /// 是否在菜单中隐藏路线
         /// </summary>
         [SugarColumn(IsNullable = true)]
-        public string HideInMenu { get; set; }
+        public bool HideInMenu { get; set; }
 
 
         /// <summary>

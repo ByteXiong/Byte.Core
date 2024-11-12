@@ -4,7 +4,7 @@ import { useForm, useRequest } from 'alova/client';
 import { useFormRules, useNaiveForm } from '@/hooks/common/form';
 import { $t } from '@/locales';
 import type { UpdateUserParam } from '@/api/globals';
-// import RoleSelect from './role-select.vue';
+import RoleSelect from './role-select.vue';
 defineOptions({
   name: 'UserEditForm'
 });
@@ -85,16 +85,14 @@ defineExpose({
 </script>
 
 <template>
-  <NDrawer v-model:show="visible" display-directive="show" :width="360" @after-leave="closeForm">
-    <NDrawerContent :title="title" :native-scrollbar="false" closable>
-      {{ formData }}
-      <NForm ref="formRef" :model="formData" :rules="rules">
+  <NModal v-model:show="visible" :title="title" preset="card" class="w-800px" @after-leave="closeForm">
+    <NScrollbar class="h-480px pr-20px">
+      <NForm ref="formRef" :model="formData" :rules="rules" label-placement="left" :label-width="100">
         <NFormItem label="账号名" path="userName">
           <NInput v-model:value="formData.userName" :placeholder="$t('common.placeholder')" />
         </NFormItem>
 
-        <!--
- <NFormItem :label="$t('page.manage.user.nickName')" path="nickName">
+        <NFormItem :label="$t('page.manage.user.nickName')" path="nickName">
           <NInput v-model:value="formData.nickName" :placeholder="$t('common.placeholder')" />
         </NFormItem>
         <NFormItem :label="$t('page.manage.user.userPhone')" path="phone">
@@ -104,25 +102,22 @@ defineExpose({
           <NInput v-model:value="formData.email" :placeholder="$t('common.placeholder')" />
         </NFormItem>
         <NFormItem :label="$t('page.manage.user.userStatus')" path="status">
-          <NSwitch v-model:value="formData.status">
-            <template #checked>启用</template>
-<template #unchecked>禁用</template>
-</NSwitch>
-</NFormItem>
--->
+          <NRadioGroup v-model:value="formData.status">
+            <NRadio :value="true" label="启用" />
+            <NRadio :value="false" label="禁用" />
+          </NRadioGroup>
+        </NFormItem>
 
-        <!--
- <NFormItem label="用户角色" path="roleIds">
+        <NFormItem label="用户角色" path="roleIds">
           <RoleSelect v-model:value="formData.roleIds" multiple></RoleSelect>
         </NFormItem>
--->
       </NForm>
-      <template #footer>
-        <NSpace :size="16">
-          <NButton @click="closeForm">{{ $t('common.cancel') }}</NButton>
-          <NButton type="primary" @click="handleSubmit">{{ $t('common.confirm') }}</NButton>
-        </NSpace>
-      </template>
-    </NDrawerContent>
-  </NDrawer>
+    </NScrollbar>
+    <template #footer>
+      <NSpace :size="16">
+        <NButton @click="closeForm">{{ $t('common.cancel') }}</NButton>
+        <NButton type="primary" @click="handleSubmit">{{ $t('common.confirm') }}</NButton>
+      </NSpace>
+    </template>
+  </NModal>
 </template>

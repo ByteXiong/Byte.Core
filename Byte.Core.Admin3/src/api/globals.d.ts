@@ -216,7 +216,7 @@ export type Menu = {
   iconFontSize?: number;
   order?: number;
   href?: string;
-  hideInMenu?: string;
+  hideInMenu?: boolean;
   activeMenu?: string;
   multiTab?: boolean;
   fixedIndexInTab?: number;
@@ -593,7 +593,7 @@ export type MenuInfo = {
   iconFontSize?: number;
   order?: number;
   href?: string;
-  hideInMenu?: string;
+  hideInMenu?: boolean;
   activeMenu?: string;
   multiTab?: boolean;
   fixedIndexInTab?: number;
@@ -791,7 +791,7 @@ export type UpdateMenuParam = {
   iconFontSize?: number;
   order?: number;
   href?: string;
-  hideInMenu?: string;
+  hideInMenu?: boolean;
   activeMenu?: string;
   multiTab?: boolean;
   fixedIndexInTab?: number;
@@ -2106,7 +2106,7 @@ declare global {
        *             iconFontSize?: number
        *             order?: number
        *             href?: string
-       *             hideInMenu?: string
+       *             hideInMenu?: boolean
        *             activeMenu?: string
        *             multiTab?: boolean
        *             fixedIndexInTab?: number
@@ -2568,7 +2568,7 @@ declare global {
        *           iconFontSize?: number
        *           order?: number
        *           href?: string
-       *           hideInMenu?: string
+       *           hideInMenu?: boolean
        *           activeMenu?: string
        *           multiTab?: boolean
        *           fixedIndexInTab?: number
@@ -2631,7 +2631,7 @@ declare global {
        *       iconFontSize?: number
        *       order?: number
        *       href?: string
-       *       hideInMenu?: string
+       *       hideInMenu?: boolean
        *       activeMenu?: string
        *       multiTab?: boolean
        *       fixedIndexInTab?: number
@@ -2714,7 +2714,7 @@ declare global {
        *         iconFontSize?: number
        *         order?: number
        *         href?: string
-       *         hideInMenu?: string
+       *         hideInMenu?: boolean
        *         activeMenu?: string
        *         multiTab?: boolean
        *         fixedIndexInTab?: number
@@ -3390,7 +3390,7 @@ declare global {
        *     iconFontSize?: number
        *     order?: number
        *     href?: string
-       *     hideInMenu?: string
+       *     hideInMenu?: boolean
        *     activeMenu?: string
        *     multiTab?: boolean
        *     fixedIndexInTab?: number
@@ -3445,7 +3445,7 @@ declare global {
        *         iconFontSize?: number
        *         order?: number
        *         href?: string
-       *         hideInMenu?: string
+       *         hideInMenu?: boolean
        *         activeMenu?: string
        *         multiTab?: boolean
        *         fixedIndexInTab?: number
@@ -3484,7 +3484,7 @@ declare global {
        *       iconFontSize?: number
        *       order?: number
        *       href?: string
-       *       hideInMenu?: string
+       *       hideInMenu?: boolean
        *       activeMenu?: string
        *       multiTab?: boolean
        *       fixedIndexInTab?: number
@@ -4118,7 +4118,7 @@ declare global {
        *   iconFontSize?: number
        *   order?: number
        *   href?: string
-       *   hideInMenu?: string
+       *   hideInMenu?: boolean
        *   activeMenu?: string
        *   multiTab?: boolean
        *   fixedIndexInTab?: number
@@ -4173,7 +4173,7 @@ declare global {
        *       iconFontSize?: number
        *       order?: number
        *       href?: string
-       *       hideInMenu?: string
+       *       hideInMenu?: boolean
        *       activeMenu?: string
        *       multiTab?: boolean
        *       fixedIndexInTab?: number
@@ -4212,7 +4212,7 @@ declare global {
        *     iconFontSize?: number
        *     order?: number
        *     href?: string
-       *     hideInMenu?: string
+       *     hideInMenu?: boolean
        *     activeMenu?: string
        *     multiTab?: boolean
        *     fixedIndexInTab?: number
@@ -4492,7 +4492,7 @@ declare global {
        *           iconFontSize?: number
        *           order?: number
        *           href?: string
-       *           hideInMenu?: string
+       *           hideInMenu?: boolean
        *           activeMenu?: string
        *           multiTab?: boolean
        *           fixedIndexInTab?: number
@@ -4595,7 +4595,7 @@ declare global {
        *             iconFontSize?: number
        *             order?: number
        *             href?: string
-       *             hideInMenu?: string
+       *             hideInMenu?: boolean
        *             activeMenu?: string
        *             multiTab?: boolean
        *             fixedIndexInTab?: number
@@ -4638,7 +4638,7 @@ declare global {
        *       iconFontSize?: number
        *       order?: number
        *       href?: string
-       *       hideInMenu?: string
+       *       hideInMenu?: boolean
        *       activeMenu?: string
        *       multiTab?: boolean
        *       fixedIndexInTab?: number
@@ -4837,7 +4837,7 @@ declare global {
        *             iconFontSize?: number
        *             order?: number
        *             href?: string
-       *             hideInMenu?: string
+       *             hideInMenu?: boolean
        *             activeMenu?: string
        *             multiTab?: boolean
        *             fixedIndexInTab?: number
@@ -4940,7 +4940,7 @@ declare global {
        *               iconFontSize?: number
        *               order?: number
        *               href?: string
-       *               hideInMenu?: string
+       *               hideInMenu?: boolean
        *               activeMenu?: string
        *               multiTab?: boolean
        *               fixedIndexInTab?: number
@@ -4983,7 +4983,7 @@ declare global {
        *         iconFontSize?: number
        *         order?: number
        *         href?: string
-       *         hideInMenu?: string
+       *         hideInMenu?: boolean
        *         activeMenu?: string
        *         multiTab?: boolean
        *         fixedIndexInTab?: number
@@ -5308,7 +5308,7 @@ declare global {
        *         iconFontSize?: number
        *         order?: number
        *         href?: string
-       *         hideInMenu?: string
+       *         hideInMenu?: boolean
        *         activeMenu?: string
        *         multiTab?: boolean
        *         fixedIndexInTab?: number
@@ -5411,7 +5411,7 @@ declare global {
        *           iconFontSize?: number
        *           order?: number
        *           href?: string
-       *           hideInMenu?: string
+       *           hideInMenu?: boolean
        *           activeMenu?: string
        *           multiTab?: boolean
        *           fixedIndexInTab?: number
@@ -5454,7 +5454,7 @@ declare global {
        *     iconFontSize?: number
        *     order?: number
        *     href?: string
-       *     hideInMenu?: string
+       *     hideInMenu?: boolean
        *     activeMenu?: string
        *     multiTab?: boolean
        *     fixedIndexInTab?: number
@@ -6409,7 +6409,7 @@ declare global {
        *           iconFontSize?: number
        *           order?: number
        *           href?: string
-       *           hideInMenu?: string
+       *           hideInMenu?: boolean
        *           activeMenu?: string
        *           multiTab?: boolean
        *           fixedIndexInTab?: number
@@ -6470,7 +6470,7 @@ declare global {
        *         iconFontSize?: number
        *         order?: number
        *         href?: string
-       *         hideInMenu?: string
+       *         hideInMenu?: boolean
        *         activeMenu?: string
        *         multiTab?: boolean
        *         fixedIndexInTab?: number
@@ -6843,7 +6843,7 @@ declare global {
        *         iconFontSize?: number
        *         order?: number
        *         href?: string
-       *         hideInMenu?: string
+       *         hideInMenu?: boolean
        *         activeMenu?: string
        *         multiTab?: boolean
        *         fixedIndexInTab?: number
@@ -6904,7 +6904,7 @@ declare global {
        *       iconFontSize?: number
        *       order?: number
        *       href?: string
-       *       hideInMenu?: string
+       *       hideInMenu?: boolean
        *       activeMenu?: string
        *       multiTab?: boolean
        *       fixedIndexInTab?: number

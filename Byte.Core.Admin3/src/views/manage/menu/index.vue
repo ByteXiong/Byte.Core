@@ -55,8 +55,8 @@ const checkedRowKeys = ref<string[]>([]);
 
 // 打开编辑/新增
 const editFormRef = ref();
-const openForm = (id?: string) => {
-  editFormRef.value?.openForm(id);
+const openForm = (id?: number | null) => {
+  editFormRef.value?.openForm(id, null);
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -112,7 +112,7 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
           v-model:columns="columns"
           :disabled-delete="checkedRowKeys.length === 0"
           :loading="loading"
-          @add="openForm"
+          @add="openForm()"
           @delete="handleDelete(checkedRowKeys)"
           @refresh="getData"
         >

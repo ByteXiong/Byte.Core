@@ -84,7 +84,7 @@ namespace Byte.Core.Business
 
                 },true).FirstAsync();
 
-            entity.Buttons = await GetIQueryable(x => x.ParentId == id).Select(x => new MenuButton {
+            entity.Buttons = await GetIQueryable(x => x.ParentId == id&&x.MenuType== MenuTypeEnum.按钮).Select(x => new MenuButton {
               Id = x.Id,
               Code = x.Path,
               Desc = x.Title,
