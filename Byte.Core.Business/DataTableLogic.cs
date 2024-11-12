@@ -80,7 +80,7 @@ namespace Byte.Core.Business
 
             var header = new TableHeaderDTO();
             header.Table = param.Table;
-            header.Columns = list;
+            header.Columns = list.OrderBy(x=>x.Sort!=0).ToList();
             return header;
             // var aa = await _unitOfWork.GetDbClient().SqlQueryable<DataTableColumnDTO>(sql).ToListAsync();
             //return aa;
@@ -97,6 +97,20 @@ namespace Byte.Core.Business
 
             return param;
         }
+        /// <summary>
+        /// 排序
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public async Task SetTableSortAsync(List<TableSortParam> param)
+        {
+            var tableColumns = param.Select(x => new TableColumn { Id = x.Id, Sort = x.Sort }).ToList();
+            await _unitOfWork.GetDbClient().Updateable(tableColumns ).UpdateColumns(s => new { s.Sort}).ExecuteCommandAsync();
+        }
+
+
+
+
 
         /// <summary>
         /// 删除
@@ -123,7 +137,7 @@ namespace Byte.Core.Business
         public async Task<List<TableColumn>> GetHeaderAsync(TableHeaderParam param)
         {
             var entity = await _unitOfWork.GetDbClient().Queryable<TableColumn>().Where(x => x.Table == param.Table && x.IsShow).OrderBy(x => x.Sort).ToListAsync();
-            entity.ForEach(x => x.Key.ToFirstLowerStr());
+            entity.ForEach(x => x.Key= x.Key.ToFirstLowerStr());
             return entity;
         }
         /// <summary>
@@ -133,8 +147,8 @@ namespace Byte.Core.Business
         public async Task<PagedResults<dynamic>> PageAsync(TableDataParam param)
         {
             var sql = $"select * from {param.Table}".ToSqlFilter();
-            var list = await _unitOfWork.GetDbClient().SqlQueryable<dynamic>(sql).SearchWhere(param).ToPagedResultsAsync(param);
-            return list;
+            var page = await _unitOfWork.GetDbClient().SqlQueryable<dynamic>(sql).SearchWhere(param).ToPagedResultsAsync(param);
+            return page;
         }
 
 

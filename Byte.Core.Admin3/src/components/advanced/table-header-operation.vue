@@ -21,7 +21,7 @@ interface Emits {
 
 const emit = defineEmits<Emits>();
 
-const columns = defineModel<NaiveUI.TableColumnCheck[]>('columns', {
+const columns = defineModel<Array<NaiveUI.TableColumnCheck>>('columns', {
   default: () => []
 });
 

@@ -769,7 +769,7 @@ namespace Byte.Core.Common.Extensions
         /// <returns></returns>
         public static string ToFirstUpperStr(this string str)
         {
-            if (str.IsNullOrWhiteSpace()) return str;
+            if (string.IsNullOrEmpty(str)) return str;
             return str.Substring(0, 1).ToUpper() + str.Substring(1);
         }
 
@@ -780,7 +780,7 @@ namespace Byte.Core.Common.Extensions
         /// <returns></returns>
         public static string ToFirstLowerStr(this string str)
         {
-            if (str.IsNullOrWhiteSpace()) return str;
+            if (string.IsNullOrEmpty(str)) return str;
             return str.Substring(0, 1).ToLower() + str.Substring(1);
         }
 

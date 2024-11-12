@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Byte.Core开发接口文档 Web端网站 - version 1.0
+ * Byte.Core_DB开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -146,6 +146,10 @@ export type PagerInfo = {
 export type ObjectPagedResults = {
   pagerInfo?: PagerInfo;
   data?: unknown[];
+};
+export type TableSortParam = {
+  id?: number;
+  sort?: number;
 };
 export type RedisDemoDTO = {
   id?: number;
@@ -310,8 +314,10 @@ export type User = {
    * 最后更新时间
    */
   updateTime?: string;
-  name?: string;
+  nickName?: string;
   avatar?: string;
+  phone?: string;
+  email?: string;
   password?: string;
   status?: boolean;
   userName?: string;
@@ -1049,8 +1055,10 @@ export type UserInfo = {
    * 最后更新时间
    */
   updateTime?: string;
-  name?: string;
+  nickName?: string;
   avatar?: string;
+  phone?: string;
+  email?: string;
   password?: string;
   status?: boolean;
   userName?: string;
@@ -1105,8 +1113,10 @@ export type UpdateUserParam = {
    * 最后更新时间
    */
   updateTime?: string;
-  name?: string;
+  nickName?: string;
   avatar?: string;
+  phone?: string;
+  email?: string;
   password?: string;
   status?: boolean;
   userName?: string;
@@ -1629,6 +1639,84 @@ declare global {
         'DataTable.put_api_datatable_settableheader',
         Config
       >;
+      /**
+       * ---
+       *
+       * [PUT] 排序
+       *
+       * **path:** /api/DataTable/SetTableSort
+       *
+       * ---
+       *
+       * **RequestBody**
+       * ```ts
+       * type RequestBody = Array<{
+       *   id?: number
+       *   sort?: number
+       * }>
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: unknown
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      put_api_datatable_settablesort<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          data: TableSortParam[];
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'DataTable.put_api_datatable_settablesort',
+        Config
+      >;
     };
     Demo: {
       /**
@@ -1932,8 +2020,10 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       name?: string
+       *       nickName?: string
        *       avatar?: string
+       *       phone?: string
+       *       email?: string
        *       password?: string
        *       status?: boolean
        *       userName?: string
@@ -2392,8 +2482,10 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     name?: string
+       *     nickName?: string
        *     avatar?: string
+       *     phone?: string
+       *     email?: string
        *     password?: string
        *     status?: boolean
        *     userName?: string
@@ -4417,8 +4509,10 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       name?: string
+       *       nickName?: string
        *       avatar?: string
+       *       phone?: string
+       *       email?: string
        *       password?: string
        *       status?: boolean
        *       userName?: string
@@ -4760,8 +4854,10 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         name?: string
+       *         nickName?: string
        *         avatar?: string
+       *         phone?: string
+       *         email?: string
        *         password?: string
        *         status?: boolean
        *         userName?: string
@@ -4957,7 +5053,7 @@ declare global {
        *
        * [GET] 下拉框
        *
-       * **path:** /api/Role/Select
+       * **path:** /api/Role/GetSelect
        *
        * ---
        *
@@ -4980,7 +5076,7 @@ declare global {
        * }
        * ```
        */
-      get_api_role_select<
+      get_api_role_getselect<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -5020,7 +5116,7 @@ declare global {
            */
           success: boolean;
         },
-        'Role.get_api_role_select',
+        'Role.get_api_role_getselect',
         Config
       >;
       /**
@@ -5229,8 +5325,10 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     name?: string
+       *     nickName?: string
        *     avatar?: string
+       *     phone?: string
+       *     email?: string
        *     password?: string
        *     status?: boolean
        *     userName?: string
@@ -6225,8 +6323,10 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     name?: string
+       *     nickName?: string
        *     avatar?: string
+       *     phone?: string
+       *     email?: string
        *     password?: string
        *     status?: boolean
        *     userName?: string
@@ -6654,8 +6754,10 @@ declare global {
        *   updateBy?: string
        *   // 最后更新时间
        *   updateTime?: string
-       *   name?: string
+       *   nickName?: string
        *   avatar?: string
+       *   phone?: string
+       *   email?: string
        *   password?: string
        *   status?: boolean
        *   userName?: string

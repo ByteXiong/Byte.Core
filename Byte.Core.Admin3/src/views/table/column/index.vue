@@ -1,8 +1,11 @@
 <script setup lang="tsx">
+import type { DataTableColumn } from 'naive-ui';
 import { NButton, NCheckbox, NInput, NPopconfirm, NSelect } from 'naive-ui';
 import { ref } from 'vue';
 import { useForm, useRequest } from '@sa/alova/client';
 import { useRoute } from 'vue-router';
+import type { DraggableEvent } from 'vue-draggable-plus';
+import { useDraggable } from 'vue-draggable-plus';
 import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
@@ -12,6 +15,24 @@ import AllGroupSelect from '@/components/select/all-group-select.vue';
 import MonacoCode from './modules/monaco-code.vue';
 const route = useRoute();
 const tableof = ref(route.path.split('/').pop());
+const isDraggable = ref(true);
+
+const { send: submitSort } = useForm(
+  (_, row) =>
+    Apis.DataTable.put_api_datatable_settablesort({
+      data: row,
+      transform: ({ data }) => {
+        window.$message?.success('保存成功！');
+        Object.assign(row, data);
+      }
+    }),
+  {
+    immediate: false,
+    resetAfterSubmiting: true,
+    initialForm: []
+  }
+);
+
 const {
   data: tableData,
   loading,
@@ -24,6 +45,45 @@ const {
         Table: tableof.value
       },
       transform: res => {
+        if (isDraggable.value) {
+          // 定时器10s后运行
+          setTimeout(() => {
+            const el = document.getElementsByTagName('tbody')[0];
+            const { start } = useDraggable(el, tableData, {
+              animation: 150,
+              ghostClass: 'ghost',
+              filter: '.no-drag',
+              onStart(event: DraggableEvent) {
+                console.log('start', event);
+              },
+              onUpdate() {
+                tableData.value.forEach((item, index) => {
+                  item.sort = index + 1;
+                });
+                console.log(
+                  'tableData.value',
+                  tableData.value
+                    ?.filter(x => x.id)
+                    ?.map(item => {
+                      return { sort: item.sort, id: item.id };
+                    })
+                );
+
+                submitSort(
+                  tableData.value
+                    ?.filter(x => x.id)
+                    ?.map(item => {
+                      return { sort: item.sort, id: item.id };
+                    })
+                );
+              }
+            });
+            start();
+          }, 1000);
+          isDraggable.value = false;
+        }
+
+        // start();
         return res.data.columns || [];
       }
     }),
@@ -64,12 +124,29 @@ const { send: handleDelete } = useRequest(
     immediate: false
   }
 );
+// 获取 class 属性
+
+// const el = document.getElementsByTagName('tbody')[0];
+// const { start } = useDraggable(el, tableData, {
+//   animation: 150,
+//   ghostClass: 'ghost',
+//   onStart() {
+//     console.log('start');
+//   },
+//   onUpdate() {
+//     console.log('update');
+//   }
+// });
 
 function renderColumnType(row: TableColumn) {
   switch (row.columnType) {
     case ColumnTypeEnum.字典:
       return (
-        <AllGroupSelect v-model:value={row.columnTypeDetail} placeholder="请输入字典" onChange={() => submit(row)} />
+        <AllGroupSelect
+          v-model:value={row.columnTypeDetail}
+          placeholder="请输入字典"
+          on-update:value={() => submit(row)}
+        />
       );
     case ColumnTypeEnum.时间:
       return (
@@ -99,7 +176,7 @@ const appStore = useAppStore();
 
 const wrapperRef = ref<HTMLElement | null>(null);
 
-const columns = ref<Array<NaiveUI.TableColumnCheck>>([
+const columns = ref<Array<DataTableColumn & { checked: boolean }>>([
   {
     type: 'selection',
     align: 'center',
@@ -118,7 +195,8 @@ const columns = ref<Array<NaiveUI.TableColumnCheck>>([
     key: 'key',
     title: $t('字段'),
     align: 'center',
-    checked: true
+    checked: true,
+    className: 'draggable'
   },
   {
     key: 'title',
@@ -150,24 +228,6 @@ const columns = ref<Array<NaiveUI.TableColumnCheck>>([
     }
   },
   {
-    key: 'searchType',
-    title: $t('搜索类型'),
-    align: 'center',
-    checked: true,
-    render: row => {
-      return (
-        <NSelect
-          v-model:value={row.searchType}
-          options={getEnumValue(SearchTypeEnum).map(item => ({ label: SearchTypeEnum[item], value: item }))}
-          placeholder="请选择"
-          onUpdate:value={() => {
-            submit(row);
-          }}
-        />
-      );
-    }
-  },
-  {
     key: 'columnType',
     title: $t('数据类型'),
     align: 'center',
@@ -179,7 +239,7 @@ const columns = ref<Array<NaiveUI.TableColumnCheck>>([
             v-model:value={row.columnType}
             options={getEnumValue(ColumnTypeEnum).map(item => ({ label: ColumnTypeEnum[item], value: item }))}
             placeholder="请选择"
-            onUpdate:value={() => {
+            on-update:value={() => {
               submit(row);
             }}
           />
@@ -189,22 +249,41 @@ const columns = ref<Array<NaiveUI.TableColumnCheck>>([
     }
   },
   {
-    key: 'sort',
-    title: $t('排序'),
+    key: 'searchType',
+    title: $t('搜索类型'),
     align: 'center',
     checked: true,
     render: row => {
       return (
-        <NInput
-          v-model:value={row.sort}
+        <NSelect
+          v-model:value={row.searchType}
+          options={getEnumValue(SearchTypeEnum).map(item => ({ label: SearchTypeEnum[item], value: item }))}
           placeholder="请选择"
-          onChange={() => {
+          on-update:value={() => {
             submit(row);
           }}
         />
       );
     }
   },
+
+  // {
+  //   key: 'sort',
+  //   title: $t('排序'),
+  //   align: 'center',
+  //   checked: true,
+  //   render: row => {
+  //     return (
+  //       <NInput
+  //         v-model:value={row.sort}
+  //         placeholder="请选择"
+  //         onChange={() => {
+  //           submit(row);
+  //         }}
+  //       />
+  //     );
+  //   }
+  // },
   {
     key: 'type',
     title: $t('操作'),
@@ -292,7 +371,7 @@ function handleAdd() {
     <NCard :title="$t('设置表头')" :bordered="false" size="small" class="sm:flex-1-hidden card-wrapper">
       <template #header-extra>
         <TableHeaderOperation
-          v-model:columns="columns"
+          v-model:columns="columns as Array<NaiveUI.TableColumnCheck>"
           tableof="TableHeaderDTO"
           :disabled-delete="checkedRowKeys.length === 0"
           :loading="loading"
@@ -304,7 +383,7 @@ function handleAdd() {
       <NDataTable
         v-model:checked-row-keys="checkedRowKeys"
         :columns="columns.filter(item => item.checked)"
-        :data="tableData?.sort((a, b) => (a?.sort || 99) - (b?.sort || 99))"
+        :data="tableData"
         size="small"
         :flex-height="!appStore.isMobile"
         :scroll-x="702"

@@ -10,7 +10,7 @@ defineOptions({
 
 interface Props {
   // search?: boolean;
-  tableof: string;
+  tableof: string | undefined;
 }
 
 const { tableof } = defineProps<Props>();

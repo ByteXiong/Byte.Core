@@ -119,6 +119,14 @@ namespace Byte.Core.Models
         public List<TableColumn> Columns { get; set; }
     }
 
+    /// <summary>
+    /// 排序
+    /// </summary>
+    public class TableSortParam
+    {
+        public int Id { get; set; }
+         public int Sort { get; set; }
+    }
 
 
 

@@ -13,11 +13,11 @@ namespace Byte.Core.Entity
     {
 
         /// <summary>
-        /// 名称
+        /// 昵称
         /// </summary>
         [Column("Name")]
         [SugarColumn(Length = 50, IsNullable = true)]
-        public String Name { get; set; }
+        public String NickName { get; set; }
 
 
         /// <summary>
@@ -28,6 +28,23 @@ namespace Byte.Core.Entity
         public String Avatar { get; set; }
 
 
+
+        /// <summary>
+        /// 手机号
+        /// </summary>
+        [Column("Phone")]
+        [SugarColumn(Length = 20, IsNullable = true)]
+        public String Phone { get; set; }
+
+
+
+        /// <summary>
+        /// 邮箱
+        /// </summary>
+        [Column("Email")]
+        [SugarColumn(Length = 30, IsNullable = true)]
+        public String Email { get; set; }
+        
         /// <summary>
         /// 密码
         /// </summary>

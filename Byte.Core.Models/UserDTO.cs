@@ -44,9 +44,9 @@ namespace Byte.Core.Models
        
         public int? Id { get; set; }
         /// <summary>
-        /// 名称
+        /// 昵称
         /// </summary>
-        public String Name { get; set; }
+        public String NickName { get; set; }
 
 
         /// <summary>
@@ -56,13 +56,15 @@ namespace Byte.Core.Models
 
 
         /// <summary>
-        /// 密码
+        /// 手机号
         /// </summary>
-        [JsonIgnore]
-        public String Password { get; set; }
+        public String Phone { get; set; }
 
-
-
+        /// <summary>
+        /// 电子邮箱
+        /// </summary>
+        public String Email { get; set; }
+        
 
         /// <summary>
         /// 状态
@@ -75,8 +77,6 @@ namespace Byte.Core.Models
         /// 账号
         /// </summary>
         public String UserName { get; set; }
-
-
 
     }
 

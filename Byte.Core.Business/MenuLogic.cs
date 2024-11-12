@@ -309,7 +309,7 @@ namespace Byte.Core.Business
         {
 
             var code = CurrentUser.RoleCode;
-            Expression<Func<Menu, bool>> where = x => x.Status;
+            Expression<Func<Menu, bool>> where = x => x.Status&& x.MenuType != MenuTypeEnum.按钮;
             if (code != ParamConfig.Admin)
             {
                 where = where.And(x => x.Roles.Any(y => y.Code == code));

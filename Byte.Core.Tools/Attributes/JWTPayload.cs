@@ -20,7 +20,7 @@ namespace Byte.Core.Tools.Attributes
         /// <summary>
         /// 用户的姓名
         /// </summary>
-        public string Name { get; set; }
+        public string NickName { get; set; }
 
         /// <summary>
         /// 用户的角色类型，可为空

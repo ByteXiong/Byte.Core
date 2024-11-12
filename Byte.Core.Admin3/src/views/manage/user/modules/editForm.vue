@@ -3,8 +3,8 @@ import { computed, ref } from 'vue';
 import { useForm, useRequest } from 'alova/client';
 import { useFormRules, useNaiveForm } from '@/hooks/common/form';
 import { $t } from '@/locales';
-import { enableStatusOptions, userGenderOptions } from '@/constants/business';
 import type { UpdateUserParam } from '@/api/globals';
+import RoleSelect from './role-select.vue';
 defineOptions({
   name: 'UserEditForm'
 });
@@ -46,9 +46,7 @@ const {
   {
     immediate: false,
     resetAfterSubmiting: true,
-    initialForm: {
-      msgCode: 123456
-    } as UpdateUserParam & { newPassword?: string }
+    initialForm: {} as UpdateUserParam
   }
 );
 /** 获取详情 */
@@ -63,17 +61,19 @@ const { send: getInfo } = useRequest(
   { immediate: false }
 );
 const title = computed(() => {
-  return formData.id ? $t('common.add') : $t('common.edit');
+  return formData.value.id ? $t('common.add') : $t('common.edit');
 });
 // 打开
 const openForm = async (id?: string) => {
   visible.value = true;
   if (id) {
     await getInfo(id);
+  } else {
+    formData.value.status = true;
   }
 };
 const closeForm = () => {
-  formRef.value?.restoreValidation();
+  restoreValidation();
   resetFrom();
 };
 
@@ -86,27 +86,28 @@ defineExpose({
   <NDrawer v-model:show="visible" display-directive="show" :width="360">
     <NDrawerContent :title="title" :native-scrollbar="false" closable>
       <NForm ref="formRef" :model="formData" :rules="rules">
-        <NFormItem :label="$t('page.manage.user.userName')" path="userName">
-          <NInput v-model:value="formData.userName" :placeholder="$t('page.manage.user.form.userName')" />
+        <NFormItem label="账号名" path="userName">
+          <NInput v-model:value="formData.userName" :placeholder="$t('common.placeholder')" />
         </NFormItem>
-        <NFormItem :label="$t('page.manage.user.userGender')" path="userGender">
-          <NRadioGroup v-model:value="formData.userGender">
-            <NRadio v-for="item in userGenderOptions" :key="item.value" :value="item.value" :label="$t(item.label)" />
-          </NRadioGroup>
-        </NFormItem>
+
         <NFormItem :label="$t('page.manage.user.nickName')" path="nickName">
-          <NInput v-model:value="formData.nickName" :placeholder="$t('page.manage.user.form.nickName')" />
+          <NInput v-model:value="formData.nickName" :placeholder="$t('common.placeholder')" />
         </NFormItem>
-        <NFormItem :label="$t('page.manage.user.userPhone')" path="userPhone">
-          <NInput v-model:value="formData.userPhone" :placeholder="$t('page.manage.user.form.userPhone')" />
+        <NFormItem :label="$t('page.manage.user.userPhone')" path="phone">
+          <NInput v-model:value="formData.phone" :placeholder="$t('common.placeholder')" />
         </NFormItem>
         <NFormItem :label="$t('page.manage.user.userEmail')" path="email">
-          <NInput v-model:value="formData.userEmail" :placeholder="$t('page.manage.user.form.userEmail')" />
+          <NInput v-model:value="formData.email" :placeholder="$t('common.placeholder')" />
         </NFormItem>
         <NFormItem :label="$t('page.manage.user.userStatus')" path="status">
-          <NRadioGroup v-model:value="formData.status">
-            <NRadio v-for="item in enableStatusOptions" :key="item.value" :value="item.value" :label="$t(item.label)" />
-          </NRadioGroup>
+          <NSwitch v-model:value="formData.status">
+            <template #checked>启用</template>
+            <template #unchecked>禁用</template>
+          </NSwitch>
+        </NFormItem>
+
+        <NFormItem label="用户角色" path="roleIds">
+          <RoleSelect v-model:value="formData.roleIds" multiple></RoleSelect>
         </NFormItem>
       </NForm>
       <template #footer>

@@ -82,28 +82,9 @@ namespace Byte.Core.Business
         /// 下拉框
         /// </summary>
         /// <returns></returns>
-        public async Task<List<RoleSelectDTO>> SelectAsync()
+        public async Task<List<RoleSelectDTO>> GetSelectAsync()
         {
             var list = await GetIQueryable(x => x.Code != ParamConfig.Admin).OrderByDescending(x => x.Sort).Select<RoleSelectDTO>().ToListAsync();
-            return list;
-        }
-
-
-        /// <summary>
-        /// 下拉框
-        /// </summary>
-        /// <returns></returns>
-        //[HasRedis("RoleSelect", "" , 30, true)]
-        //[UserInformationFilter]
-        //[Interceptor(typeof(MyBllInterceptor))]
-
-        //List xx
-        //[ServiceInterceptor(typeof(CustomInterceptorAttribute))]
-        [RedisInterceptor("list")]
-        public virtual async Task<List<RoleSelectDTO>> SelectAsync(int[] schoolId)
-        {
-            var list = await GetIQueryable(x => x.Code != ParamConfig.Admin).OrderByDescending(x => x.Sort).Select<RoleSelectDTO>().ToListAsync();
-       
             return list;
         }
 

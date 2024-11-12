@@ -131,7 +131,6 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
       <template #header-extra>
         <TableHeaderOperation
           v-model:columns="columns"
-          tableof="TableColumnDTO"
           :disabled-delete="checkedRowKeys.length === 0"
           :loading="loading"
           @add="openForm"

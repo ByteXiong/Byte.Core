@@ -22,12 +22,7 @@ namespace Byte.Core.Business.Tests
 
         }
 
-        [TestMethod()]
-        public async Task  SelectAsyncTest()
-        {
-            var result=    await _roleLogic.SelectAsync(new Guid[] { Guid.NewGuid(), Guid.NewGuid() });
-            Assert.IsTrue(result != null);
-        }
+    
 
         [TestMethod()]
         public async Task DeleteRedisAsyncTest()

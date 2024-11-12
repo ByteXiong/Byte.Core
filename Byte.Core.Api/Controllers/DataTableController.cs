@@ -39,7 +39,14 @@ namespace Byte.Core.Api.Controllers
         [HttpPut]
         [ApiVersion("1.0", Deprecated = false)]
         public async Task<TableColumn> SetTableHeaderAsync(TableColumn param) =>await _logic.SetTableHeaderAsync(param);
-
+        /// <summary>
+        /// 排序
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [ApiVersion("1.0", Deprecated = false)]
+        public async Task SetTableSortAsync(List<TableSortParam> param) => await _logic.SetTableSortAsync(param);
         /// <summary>
         /// 删除表头
         /// </summary>
@@ -66,6 +73,9 @@ namespace Byte.Core.Api.Controllers
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
         public async Task<PagedResults<dynamic>> PageAsync([FromQuery] TableDataParam param)=> await _logic.PageAsync(param);
+
+      
+
 
         #endregion
 

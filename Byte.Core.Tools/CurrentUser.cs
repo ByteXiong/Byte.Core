@@ -19,7 +19,7 @@ namespace Byte.Core.Tools
             Id = param.Id;
             UserName = param.UserName;
             RoleType = param.RoleType;
-            Name = param.Name;
+            NickName = param.NickName;
             DeptId = param.DeptId;
             //Role = param.Role;
             RoleCode = param.RoleCode;
@@ -49,10 +49,10 @@ namespace Byte.Core.Tools
             get => _session == null ? "" : _session.GetString("CurrentUser_Phone");
             set => _session.SetString("CurrentUser_Phone", !string.IsNullOrEmpty(value) ? value : "");
         }
-        public static string Name
+        public static string NickName
         {
-            get => _session == null ? "" : _session.GetString("CurrentUser_Name");
-            set => _session.SetString("CurrentUser_Name", !string.IsNullOrEmpty(value) ? value : "");
+            get => _session == null ? "" : _session.GetString("CurrentUser_NickName");
+            set => _session.SetString("CurrentUser_NickName", !string.IsNullOrEmpty(value) ? value : "");
         }
         public static Guid DeptId
 

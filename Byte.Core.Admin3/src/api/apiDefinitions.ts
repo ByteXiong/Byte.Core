@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Byte.Core开发接口文档 Web端网站 - version 1.0
+ * Byte.Core_DB开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -21,6 +21,7 @@ export default {
   'DataTable.get_api_datatable_gettableheader': ['GET', '/api/DataTable/GetTableHeader'],
   'DataTable.get_api_datatable_page': ['GET', '/api/DataTable/Page'],
   'DataTable.put_api_datatable_settableheader': ['PUT', '/api/DataTable/SetTableHeader'],
+  'DataTable.put_api_datatable_settablesort': ['PUT', '/api/DataTable/SetTableSort'],
   'Demo.get_api_demo_getpage': ['GET', '/api/Demo/GetPage'],
   'Demo.get_api_demo_getsync': ['GET', '/api/Demo/GetSync'],
   'Demo.post_api_demo_setroledata': ['POST', '/api/Demo/SetRoleData'],
@@ -48,7 +49,7 @@ export default {
   'Role.delete_api_role_delete': ['DELETE', '/api/Role/Delete'],
   'Role.get_api_role_getinfo': ['GET', '/api/Role/GetInfo'],
   'Role.get_api_role_getpage': ['GET', '/api/Role/GetPage'],
-  'Role.get_api_role_select': ['GET', '/api/Role/Select'],
+  'Role.get_api_role_getselect': ['GET', '/api/Role/GetSelect'],
   'Role.put_api_role_setstatus': ['PUT', '/api/Role/SetStatus'],
   'Role.post_api_role_submit': ['POST', '/api/Role/Submit'],
   'TableColumn.delete_api_tablecolumn_delete': ['DELETE', '/api/TableColumn/Delete'],

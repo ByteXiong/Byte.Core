@@ -39,7 +39,7 @@ namespace Byte.Core.Business
                 UserName = user.UserName,
                 //RoleCode = user.Role.Code,
                 //Type = user.Role.Type,
-                Name = user.Name,
+                NickName = user.NickName,
             };
             return await LoginTokenAsync(jwt);
         }

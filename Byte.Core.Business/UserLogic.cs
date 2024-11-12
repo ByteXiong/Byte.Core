@@ -42,7 +42,7 @@ namespace Byte.Core.Business
             if (!string.IsNullOrWhiteSpace(param.KeyWord))
             {
                 param.KeyWord = param.KeyWord.Trim();
-                where = where.And(x => x.Name.Contains(param.KeyWord));
+                where = where.And(x => x.NickName.Contains(param.KeyWord));
             }
 
             if (param.DeptId != default)
@@ -122,7 +122,7 @@ namespace Byte.Core.Business
 
                 await UpdateAsync(x => x.Id == param.Id, x => new User
                 {
-                    Name = param.Name, //名称
+                    NickName = param.NickName, //名称
                     Avatar = param.Avatar, //头像
                     Password = param.Password, //密码
                     CreateTime = param.CreateTime, //创建时间

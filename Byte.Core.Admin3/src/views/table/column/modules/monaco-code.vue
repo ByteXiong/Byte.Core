@@ -10,7 +10,7 @@ const code = defineModel<string>('code', {
   required: true
 });
 interface Emits {
-  (e: 'Change'): void;
+  (e: 'Change', value: string): string;
 }
 const value = ref<string>('');
 const emit = defineEmits<Emits>();

@@ -188,7 +188,7 @@ public static class SqlSugarSetup
                         //}
                         if (!baseEntity.CreateBy.IsNullOrEmpty())
                         {
-                            baseEntity.CreateBy = CurrentUser.Name;
+                            baseEntity.CreateBy = CurrentUser.NickName;
                         }
                         break;
                     }
@@ -200,7 +200,7 @@ public static class SqlSugarSetup
                     //}
                     if (!baseEntity.UpdateBy.IsNullOrEmpty())
                     {
-                        baseEntity.UpdateBy = CurrentUser.Name;
+                        baseEntity.UpdateBy = CurrentUser.NickName;
                     }
                     break;
             }

@@ -70,7 +70,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<List<RoleSelectDTO>> SelectAsync() => await _logic.SelectAsync();
+        public async Task<List<RoleSelectDTO>> GetSelectAsync() => await _logic.GetSelectAsync();
 
         /// <summary>
         /// 设置状态
