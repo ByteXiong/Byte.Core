@@ -98,7 +98,7 @@ namespace Byte.Core.Models
         /// </summary>
         public String UserName { get; set; }
 
-        public string[] Roles => new string[] { CurrentUser.RoleCode };
+        public string[] Roles => CurrentUser.RoleCodes;
         public string[] Buttons { get; set; }
 
     }

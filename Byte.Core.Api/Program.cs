@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebSockets;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using SkiaSharp;
@@ -213,8 +214,8 @@ builder.Services.AddSession(options =>
 #region MemoryCache
 
 //启用MemoryCache
-builder.Services.AddMemoryCache()
-.AddScoped<IDistributedCacheManager, DistributedCacheManager>();
+builder.Services.AddMemoryCache();
+//.AddScoped<IDistributedCacheManager, DistributedCacheManager>();// 添加后单机IMemoryCache会报错，暂时不启用
 #endregion
 
 #region 配置数据库

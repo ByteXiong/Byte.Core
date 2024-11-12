@@ -7,15 +7,16 @@ using Byte.Core.Repository;
 using Byte.Core.Tools.Attributes;
 using System.Linq.Expressions;
 using Byte.Core.Tools;
+using Dm.filter;
 namespace Byte.Core.Business
 {
-    public class LoginLogic(UserRepository userRepository)
+    public class LoginLogic(UserRepository userRepository, MenuRepository menuRepository)
     {
         /// <summary>
         /// 
         /// </summary>
          readonly UserRepository _userRepository= userRepository;
-
+        readonly MenuRepository _menuRepository = menuRepository;
         /// <summary>
         /// 账号登录
         /// </summary>
@@ -29,7 +30,15 @@ namespace Byte.Core.Business
             where = x => x.UserName == param.UserName;
 #endif
 
-            var user = await _userRepository.GetIQueryable(where).FirstAsync();
+            var user = await _userRepository.GetIQueryable(where).Includes(x => x.User_Dept_Roles,y=>y.Role).Select(x => new  {
+
+                Id = x.Id,
+                UserName = x.UserName,
+                RoleCode = x.User_Dept_Roles.Select(y => y.Role.Code).ToArray(),
+                //Type = user.Role.Type,
+                NickName = x.NickName,
+                Status=x.Status
+            } ).FirstAsync();
             if (user == null) throw new BusException("账号或密码错误");
             if (!user.Status) throw new BusException("账号已禁用");
 
@@ -37,7 +46,7 @@ namespace Byte.Core.Business
             {
                 Id = user.Id,
                 UserName = user.UserName,
-                //RoleCode = user.Role.Code,
+                RoleCodes = user.RoleCode,
                 //Type = user.Role.Type,
                 NickName = user.NickName,
             };
@@ -79,8 +88,12 @@ namespace Byte.Core.Business
         {
             Expression<Func<User, bool>> where = x => x.Id == CurrentUser.Id;
             var entity = await _userRepository.GetIQueryable(where)
-                   .Select<LoginInfoDTO>().FirstAsync();
+                   .Select<LoginInfoDTO>()
+                   .FirstAsync();
+          
             if (entity == null) throw new BusException("没有查到用户信息");
+
+            entity.Buttons = await _menuRepository.GetPermAsync(CurrentUser.RoleCodes);
             return entity;
         }
 
@@ -100,7 +113,7 @@ namespace Byte.Core.Business
         /// <returns></returns>
         private async Task<LoginToken> LoginTokenAsync(JWTPayload jwtPayload)
         {
-            jwtPayload.RoleCode = "ROOT";
+            //jwtPayload.RoleCodes = "ROOT";
             jwtPayload.Expire = DateTime.Now.AddDays(30);
             //jwtPayload.Expire = DateTime.Now.AddSeconds(60);
             //entity.Roles = await _user_RoleLogic.GetIQueryable(x => x.UserId == entity.Id).Select(x => x.RoleId).ToArrayAsync();

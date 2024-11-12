@@ -32,7 +32,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<List<MenuSelectDTO>> GetTreeSelectAsync(int? parentId = null) => await _logic.GetTreeSelectAsync(parentId);
+        public async Task<List<MenuSelectDTO>> GetTreeSelectAsync(int parentId = 0) => await _logic.GetTreeSelectAsync(parentId);
 
         /// <summary>
         /// 查询详情

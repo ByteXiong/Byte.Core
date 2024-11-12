@@ -2,6 +2,11 @@
 using Byte.Core.SqlSugar;
 using System.Linq.Expressions;
 using Byte.Core.Common.Filters;
+using Byte.Core.Common.Cache;
+using Byte.Core.Tools;
+using System.Drawing.Drawing2D;
+using SqlSugar;
+using Byte.Core.Common.Extensions;
 
 namespace Byte.Core.Repository
 {
@@ -26,12 +31,53 @@ namespace Byte.Core.Repository
 
             return base.UpdateAsync(entity, lstIgnoreColumns, isLock);
         }
-        public override Task<int> DeleteAsync(int[] ids, bool isLock = true)
+        public override async Task<int> DeleteAsync(int[] ids, bool isLock = true)
         {
 #if !DEBUG
             throw new BusException("线上环境不允许删除菜单");
 #endif
-            return base.DeleteAsync(ids, isLock);
+
+            var any = await base.SugarClient.DeleteNav<Menu>(x => ids.Contains(x.Id)).Include(x => x.Roles, new DeleteNavOptions() { ManyToManyIsDeleteA = true }).ExecuteCommandAsync();
+            //清除缓存
+            MemoryCacheManager.RemoveCacheRegex(ParamConfig.RoleCaChe);
+            return any ? 1 : 0;
         }
+
+        #region 缓存管理
+
+        /// <summary>
+        /// 获取角色拥有的权限
+        /// </summary>
+        /// <param name="roleCode"></param>
+        /// <returns></returns>
+        public async Task<string[]> GetPermAsync(string[] roleCodes)
+        {
+            var arrs = new List<string>();
+            roleCodes.ForEach(async roleCode =>
+            {
+                var key = ParamConfig.RoleButtonCaChe + roleCode;
+                var any = MemoryCacheManager.Exists(key);
+                string[] arr;
+                if (any)
+                {
+                    arr = MemoryCacheManager.Get<string[]>(key);
+                }
+                else
+                {
+                    Expression<Func<Menu, bool>> where = x => x.MenuType == MenuTypeEnum.按钮 && x.Roles.Any(y => y.Code == roleCode);
+                    if (roleCode == ParamConfig.Admin)
+                    {
+                        where = x => x.MenuType == MenuTypeEnum.按钮;
+                    }
+
+
+                    arr = await GetIQueryable(where).Select(x => x.Path).ToArrayAsync();
+                    MemoryCacheManager.Set(key, arr, 60 * 30);
+                    arrs.AddRange(arr);
+                }
+            });
+            return arrs.Distinct().ToArray();
+        }
+        #endregion
     }
 }

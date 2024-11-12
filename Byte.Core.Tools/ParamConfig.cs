@@ -11,10 +11,18 @@ namespace Byte.Core.Tools
         public const string Admin = "ROOT";
 
         /// <summary>
+        /// 后台首页
+        /// </summary>
+        public const string PathHome = "/home";
+        /// <summary>
         /// 用户缓存Key
         /// </summary>
         public const string RoleCaChe = "Role:";
 
+        /// <summary>
+        ///角色按钮缓存
+        /// </summary>
+        public static string RoleButtonCaChe => RoleCaChe + "Button:";
         /// <summary>
         /// 哈希主键
         /// </summary>
@@ -22,5 +30,10 @@ namespace Byte.Core.Tools
 
 
         public const string AopRedisKey = "AopRedisKey";
+
+
+        public static int Error => 500;
+        public static int ErrorJWT => 401;
+        public static int ErrorRole => 403;
     }
 }

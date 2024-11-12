@@ -7,6 +7,7 @@ using Byte.Core.Repository;
 using Byte.Core.SqlSugar;
 using Byte.Core.Tools;
 using Mapster;
+using NPOI.SS.Formula.Functions;
 using System.Drawing.Drawing2D;
 using System.Linq.Expressions;
 namespace Byte.Core.Business
@@ -38,16 +39,16 @@ namespace Byte.Core.Business
         public async Task<List<MenuTreeDTO>> GetTreeAsync()
         {
 
-            var tree = await GetIQueryable().OrderByDescending(x => x.Order).Select<MenuTreeDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, null, it => it.Id);
+            var tree = await GetIQueryable().OrderByDescending(x => x.Order).Select<MenuTreeDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, 0, it => it.Id);
             return tree;
         }
 
         /// <summary>
         /// 下拉框
-        /// </summary>
+        /// </summary>55
         /// <param name="parentId"></param>
         /// <returns></returns>
-        public async Task<List<MenuSelectDTO>> GetTreeSelectAsync(int? parentId = null)
+        public async Task<List<MenuSelectDTO>> GetTreeSelectAsync(int parentId = 0)
         {
             var tree = await GetIQueryable().OrderByDescending(x => x.Order).Select<MenuSelectDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, parentId, it => it.Id);
             return tree;
@@ -308,13 +309,13 @@ namespace Byte.Core.Business
         public async Task<List<RouteDTO>> GetRoutesAsync()
         {
 
-            var code = CurrentUser.RoleCode;
+            var codes = CurrentUser.RoleCodes;
             Expression<Func<Menu, bool>> where = x => x.Status&& x.MenuType != MenuTypeEnum.按钮;
-            if (code != ParamConfig.Admin)
+            if (!codes.Contains(ParamConfig.Admin) )
             {
-                where = where.And(x => x.Roles.Any(y => y.Code == code));
+                where = where.And(x => x.Roles.Any(y => codes.Contains(y.Code)));
             }
-
+            where= where.Or(x => x.Path== ParamConfig.PathHome);
             var db = await GetIQueryable(where)
                          .Includes(x => x.Roles).OrderByDescending(x => x.Order).Select(x =>
                           new RouteDTO()
@@ -353,7 +354,7 @@ namespace Byte.Core.Business
             {
                 //x.Params = new Dictionary<string, dynamic>() { { "TableName", "User" } };
                 x.Children = db.Where(y => y.ParentId == x.Id).ToList();
-                if (x.ParentId == null)
+                if (x.ParentId == 0)
                 {
                     list.Add(x);
                 }

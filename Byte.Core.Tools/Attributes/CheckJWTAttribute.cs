@@ -10,7 +10,7 @@ namespace Byte.Core.Tools.Attributes
     /// </summary>
     public class CheckJWTAttribute : BaseActionFilter
     {
-        private static readonly int _errorCode = 401;
+        private static readonly int _errorCode = ParamConfig.ErrorJWT;
 
         public override async Task OnActionExecuting(ActionExecutingContext context)
         {

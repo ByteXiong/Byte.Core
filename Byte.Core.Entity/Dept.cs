@@ -78,10 +78,16 @@ namespace Byte.Core.Entity
         public DeptTypeEnum Type { get; set; }
 
         #region 导航
-        [SugarColumn(IsIgnore = true)]
-        [Navigate(typeof(User_Dept_Role), nameof(User_Dept_Role.DeptId), nameof(User_Dept_Role.UserId))]
-        public List<User> Users { get; set; }
+        //[SugarColumn(IsIgnore = true)]
+        //[Navigate(typeof(User_Dept_Role), nameof(User_Dept_Role.DeptId), nameof(User_Dept_Role.UserId))]
+        //public List<User> Users { get; set; }
 
+        /// <summary>
+        ///用户部门角色关系
+        /// </summary>
+        [SugarColumn(IsIgnore = true)]
+        [Navigate(NavigateType.OneToMany, nameof(User_Dept_Role.DeptId))]
+        public List<User_Dept_Role> User_Dept_Roles { get; set; }
 
         [SugarColumn(IsIgnore = true)]
         [Navigate(NavigateType.OneToMany, nameof(Id), nameof(Role.DeptId))]

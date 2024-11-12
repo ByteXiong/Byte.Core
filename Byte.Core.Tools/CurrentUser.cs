@@ -22,7 +22,7 @@ namespace Byte.Core.Tools
             NickName = param.NickName;
             DeptId = param.DeptId;
             //Role = param.Role;
-            RoleCode = param.RoleCode;
+            RoleCodes = param.RoleCodes;
         }
 
 
@@ -73,10 +73,10 @@ namespace Byte.Core.Tools
             get => _session == null ? default : (RoleTypeEnum)Enum.Parse(typeof(RoleTypeEnum), _session.GetString("CurrentUser_RoleType"));
             set => _session.SetString("CurrentUser_RoleType", value.ToString());
         }
-        public static string RoleCode
+        public static string[] RoleCodes
         {
-            get => _session == null ? "" : _session.GetString("CurrentUser_RoleCode");
-            set => _session.SetString("CurrentUser_RoleCode", !string.IsNullOrEmpty(value) ? value : "");
+            get => _session == null ? new string[] { } : _session.GetString("CurrentUser_RoleCode").Split(',');
+            set => _session.SetString("CurrentUser_RoleCode", string.Join(",", value??new string[] { }));
         }
 
         #endregion

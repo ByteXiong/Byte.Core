@@ -1,7 +1,9 @@
 ﻿using Byte.Core.Common.Helpers;
 using Byte.Core.Common.IoC;
+using MathNet.Numerics.Distributions;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Logging;
+using NPOI.SS.Formula.Functions;
 using System.Collections;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -186,17 +188,36 @@ namespace Byte.Core.Common.Cache
         {
             try
             {
-                const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
-                var coherentState = _memoryCache.GetType().GetField("_coherentState", flags).GetValue(_memoryCache);
-                var entries = coherentState.GetType().GetField("_entries", flags).GetValue(coherentState);
-                var cacheItems = entries as IDictionary;
-                var keys = new List<string>();
-                if (cacheItems == null) return keys;
-                foreach (DictionaryEntry cacheItem in cacheItems)
-                {
-                    keys.Add(cacheItem.Key.ToString());
-                }
-                return keys;
+                  //BindingFlags flags1 = BindingFlags.Instance | BindingFlags.NonPublic;
+                  //  var entries1 = _memoryCache.GetType().GetField("_entries", flags1).GetValue(_memoryCache);
+                  //   var cacheItems1 = entries1.GetType().GetProperty("Keys").GetValue(entries1) as ICollection<object>;
+
+
+                 const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+                 var coherentState = _memoryCache.GetType().GetField("_coherentState", flags).GetValue(_memoryCache);
+                 var entries = coherentState.GetType().GetField("_entries", flags).GetValue(coherentState);
+                 var cacheItems = entries as IDictionary;
+                 var keys = new List<string>();
+                 if (cacheItems == null) return keys;
+                 foreach (DictionaryEntry cacheItem in cacheItems)
+                 {
+                     keys.Add(cacheItem.Key.ToString());
+                 }
+                 return keys;
+         
+
+
+                //const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+                //var coherentState = _memoryCache.GetType().GetField("_coherentState", flags).GetValue(_memoryCache);
+                //var entries = coherentState.GetType().GetField("_entries", flags).GetValue(coherentState);
+                //var cacheItems = entries as IDictionary;
+                //var keys = new List<string>();
+                //if (cacheItems == null) return keys;
+                //foreach (DictionaryEntry cacheItem in cacheItems)
+                //{
+                //    keys.Add(cacheItem.Key.ToString());
+                //}
+                //return keys;
             } catch (Exception ex) 
             {
                 Log4NetHelper.WriteError(typeof(MemoryCacheManager), "读取本地缓存失败--"+ ex.Message);
