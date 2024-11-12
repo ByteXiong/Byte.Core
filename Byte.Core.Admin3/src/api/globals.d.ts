@@ -1064,21 +1064,26 @@ export type UserInfo = {
   userName?: string;
   depts?: Dept[];
   roles?: Role[];
+  roleIds?: number[];
 };
 export type UserDTO = {
   id?: number;
   /**
-   * 名称
+   * 昵称
    */
-  name?: string;
+  nickName?: string;
   /**
    * 头像
    */
   avatar?: string;
   /**
-   * 密码
+   * 手机号
    */
-  password?: string;
+  phone?: string;
+  /**
+   * 电子邮箱
+   */
+  email?: string;
   /**
    * 状态
    */
@@ -6474,6 +6479,7 @@ declare global {
        *         children?: Array<Menu>
        *       }>
        *     }>
+       *     roleIds?: number[]
        *   }
        *   // [required]
        *   msg: string
@@ -6576,12 +6582,14 @@ declare global {
        *     }
        *     data?: Array<{
        *       id?: number
-       *       // 名称
-       *       name?: string
+       *       // 昵称
+       *       nickName?: string
        *       // 头像
        *       avatar?: string
-       *       // 密码
-       *       password?: string
+       *       // 手机号
+       *       phone?: string
+       *       // 电子邮箱
+       *       email?: string
        *       // 状态
        *       status?: boolean
        *       // 账号

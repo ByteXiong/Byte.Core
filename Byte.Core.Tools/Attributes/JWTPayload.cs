@@ -30,7 +30,7 @@ namespace Byte.Core.Tools.Attributes
         /// <summary>
         /// 用户所属部门的唯一标识符
         /// </summary>
-        public Guid DeptId { get; set; }
+        public int DeptId { get; set; }
 
         /// <summary>
         /// 用户的角色代码

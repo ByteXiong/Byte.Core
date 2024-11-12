@@ -86,7 +86,7 @@ namespace Byte.Core.Models
     /// </summary>
     public class UserInfo : User
     {
-
+        public int[]? RoleIds { get; set; }
     }
     /// <summary>
     /// 设置密码

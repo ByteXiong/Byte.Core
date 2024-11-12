@@ -18,11 +18,11 @@ namespace Byte.Core.Business
     /// </summary>
     public class UserLogic : BaseBusinessLogic<int, User, UserRepository>
     {
-        private readonly User_Dept_RoleLogic _User_Dept_RoleLogic;
+        private readonly User_Dept_RoleRepository _user_Dept_RoleRepository;
         private readonly IUnitOfWork _unitOfWork;
-        public UserLogic(UserRepository repository, User_Dept_RoleLogic user_Dept_RoleLogic, IUnitOfWork unitOfWork) : base(repository)
+        public UserLogic(UserRepository repository, User_Dept_RoleRepository user_Dept_RoleRepository, IUnitOfWork unitOfWork) : base(repository)
         {
-            _User_Dept_RoleLogic = user_Dept_RoleLogic ?? throw new ArgumentNullException(nameof(User_Dept_RoleLogic));
+            _user_Dept_RoleRepository = user_Dept_RoleRepository ?? throw new ArgumentNullException(nameof(User_Dept_RoleRepository));
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
@@ -64,10 +64,9 @@ namespace Byte.Core.Business
         public async Task<UserInfo> GetInfoAsync(int id)
         {
             var entity = await GetIQueryable(x => x.Id == id).Select<UserInfo>().FirstAsync();
+            entity.RoleIds= await  _user_Dept_RoleRepository.GetIQueryable(x => x.UserId == id).Select(x=>x.RoleId).ToArrayAsync();
             return entity;
         }
-
-
         /// <summary>
         /// 添加
         /// </summary>
@@ -90,10 +89,11 @@ namespace Byte.Core.Business
                     User_Dept_Roles.Add(new User_Dept_Role
                     {
                         UserId = model.Id,
+                        DeptId = 1,
                         RoleId = x
                     });
                 });
-                await _User_Dept_RoleLogic.AddRangeAsync(User_Dept_Roles);
+                await _user_Dept_RoleRepository.AddRangeAsync(User_Dept_Roles);
                 _unitOfWork.CommitTran();
                 return model.Id;
             }
@@ -134,15 +134,17 @@ namespace Byte.Core.Business
 
 
                 List<User_Dept_Role> User_Dept_Roles = new List<User_Dept_Role>();
+                await _user_Dept_RoleRepository.DeleteAsync(x => x.UserId == param.Id);
                 param.RoleIds?.ForEach(x =>
                 {
                     User_Dept_Roles.Add(new User_Dept_Role
                     {
                         UserId = param.Id,
+                        DeptId = 1,
                         RoleId = x
                     });
                 });
-                await _User_Dept_RoleLogic.AddRangeAsync(User_Dept_Roles);
+                await _user_Dept_RoleRepository.AddRangeAsync(User_Dept_Roles);
                 _unitOfWork.CommitTran();
                 return param.Id;
             }

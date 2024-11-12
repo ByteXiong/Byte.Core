@@ -2,27 +2,21 @@
 import { computed, ref } from 'vue';
 import { useForm, useRequest } from 'alova/client';
 
-import { useFormRules, useNaiveForm } from '@/hooks/common/form';
+import { useNaiveForm } from '@/hooks/common/form';
 import { $t } from '@/locales';
 import type { UpdateRoleParam } from '@/api/globals';
 
 defineOptions({
   name: 'RoleEditForm'
 });
-type Model = Pick<
-  Api.SystemManage.User,
-  'userName' | 'userGender' | 'nickName' | 'userPhone' | 'userEmail' | 'userRoles' | 'status'
->;
 
 const visible = ref<boolean>(false);
-const { formRef, validate, restoreValidation } = useNaiveForm();
-type RuleKey = Extract<keyof Model, 'userName' | 'status'>;
-const { defaultRequiredRule } = useFormRules();
-const rules: Record<RuleKey, App.Global.FormRule> = {
-  userName: defaultRequiredRule,
-  status: defaultRequiredRule
-};
 
+const { formRef, validate, restoreValidation } = useNaiveForm();
+// 规则验证获取对象
+// const { defaultRequiredRule } = useFormRules();
+type RuleKey = keyof typeof formData.value;
+const rules: Partial<Record<RuleKey, App.Global.FormRule>> = {};
 interface Emits {
   (e: 'refresh', row: any): any;
 }
@@ -47,7 +41,11 @@ const {
   {
     immediate: false,
     resetAfterSubmiting: true,
-    initialForm: {} as UpdateRoleParam
+    initialForm: {} as UpdateRoleParam,
+    async middleware(_, next) {
+      validate();
+      await next();
+    }
   }
 );
 /** 获取详情 */
@@ -59,10 +57,13 @@ const { send: getInfo } = useRequest(
         updateForm(res.data);
       }
     }),
-  { immediate: false }
+  {
+    force: true,
+    immediate: false
+  }
 );
 const title = computed(() => {
-  return formData.value.id ? $t('common.add') : $t('common.edit');
+  return formData.value.id ? $t('common.edit') : $t('common.add');
 });
 // 打开
 const openForm = async (id?: string) => {
@@ -73,6 +74,7 @@ const openForm = async (id?: string) => {
 };
 
 const closeForm = () => {
+  visible.value = false;
   restoreValidation();
   resetFrom();
 };
@@ -83,7 +85,7 @@ defineExpose({
 </script>
 
 <template>
-  <NModal v-model:show="visible" :title="title" preset="card" class="w-800px">
+  <NModal v-model:show="visible" :title="title" preset="card" class="w-800px" @after-leave="closeForm">
     <NScrollbar class="h-480px pr-20px">
       <NForm ref="formRef" :model="formData" :rules="rules" label-placement="left" :label-width="100">
         <NGrid responsive="screen" item-responsive>

@@ -54,10 +54,17 @@ namespace Byte.Core.Tools
             get => _session == null ? "" : _session.GetString("CurrentUser_NickName");
             set => _session.SetString("CurrentUser_NickName", !string.IsNullOrEmpty(value) ? value : "");
         }
-        public static Guid DeptId
+        //public static Guid DeptId
+
+        //{
+        //    get => _session == null ? default : Guid.Parse(_session.GetString("CurrentUser_DeptId"));
+        //    set => _session.SetString("CurrentUser_DeptId", value.ToString());
+        //}
+
+        public static int DeptId
 
         {
-            get => _session == null ? default : Guid.Parse(_session.GetString("CurrentUser_DeptId"));
+            get => _session == null ? default : int.Parse(_session.GetString("CurrentUser_DeptId"));
             set => _session.SetString("CurrentUser_DeptId", value.ToString());
         }
 
