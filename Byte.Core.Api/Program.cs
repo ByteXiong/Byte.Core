@@ -37,8 +37,9 @@ var builder = WebApplication.CreateBuilder(args);
 //new IdHelperBootstrapper().SetWorkderId(1).Boot();
 //Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
+#if DEBUG
 builder.WebHost.UseUrls("http://*:3000");
-
+#endif
 #region 获取Config配置
 var configuration = builder.Configuration;
 #endregion

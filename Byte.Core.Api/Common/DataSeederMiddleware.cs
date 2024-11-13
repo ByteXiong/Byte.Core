@@ -7,6 +7,7 @@ using Byte.Core.SqlSugar.IDbContext;
 using Microsoft.AspNetCore.Builder;
 using Newtonsoft.Json;
 using SqlSugar;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
@@ -96,6 +97,30 @@ namespace Byte.Core.Api.Common
                             }
                         }
 
+                        #endregion
+
+
+                        #region 角色-菜单关系
+
+                        if (!await dataContext.Db.Queryable<Role_Menu>().AnyAsync())
+                        {
+                            var attr = typeof(Role_Menu).GetCustomAttribute<SugarTable>();
+                            if (attr != null)
+                            {
+                                StreamReader f2 = new StreamReader(string.Format(seedDataFolder, attr.TableName), Encoding.UTF8);
+                                var jsonStr = f2.ReadToEnd();
+                                f2.Close();
+                                f2.Dispose();
+
+                                var list = JsonConvert.DeserializeObject<List<Role_Menu>>(jsonStr, setting);
+
+                                await dataContext.GetEntityDb<Role_Menu>().InsertRangeAsync(list);
+
+                                Console.WriteLine(
+                                    $"Entity:{nameof(Role_Menu)}-->Table:{attr.TableName}-->Desc:{attr.TableDescription}-->初始数据成功！",
+                                    ConsoleColor.Green);
+                            }
+                        }
                         #endregion
 
                         #region 角色
@@ -194,6 +219,34 @@ namespace Byte.Core.Api.Common
                         }
 
                         #endregion
+
+
+
+
+
+                        #region 表结构
+
+                        if (!await dataContext.Db.Queryable<TableColumn>().AnyAsync())
+                        {
+                            var attr = typeof(TableColumn).GetCustomAttribute<SugarTable>();
+                            if (attr != null)
+                            {
+                                StreamReader f2 = new StreamReader(string.Format(seedDataFolder, attr.TableName), Encoding.UTF8);
+                                var jsonStr = f2.ReadToEnd();
+                                f2.Close();
+                                f2.Dispose();
+
+                                var list = JsonConvert.DeserializeObject<List<TableColumn>>(jsonStr, setting);
+                                await dataContext.GetEntityDb<TableColumn>().InsertRangeAsync(list);
+
+                                Console.WriteLine(
+                                    $"Entity:{nameof(TableColumn)}-->Table:{attr.TableName}-->Desc:{attr.TableDescription}-->初始数据成功！",
+                                    ConsoleColor.Green);
+                            }
+                        }
+
+                        #endregion
+
                     }
                     #endregion
                 }

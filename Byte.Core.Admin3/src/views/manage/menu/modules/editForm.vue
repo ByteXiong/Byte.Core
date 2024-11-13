@@ -48,7 +48,7 @@ const {
     immediate: false,
     resetAfterSubmiting: true,
     initialForm: {
-      parentId: null,
+      parentId: 0,
       menuType: MenuTypeEnum.菜单,
       iconType: IconTypeEnum.iconify图标,
       status: true,
@@ -163,7 +163,12 @@ defineExpose({
             />
           </NFormItemGi>
 
-          <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.layout')" path="layout">
+          <NFormItemGi
+            v-if="formData.parentId == 0"
+            span="24 m:12"
+            :label="$t('page.manage.menu.layout')"
+            path="layout"
+          >
             <NSelect
               v-model:value="formData.layout"
               :options="getEnumValue(LayoutTypeEnum).map(item => ({ label: LayoutTypeEnum[item], value: item }))"
@@ -291,7 +296,8 @@ defineExpose({
               :placeholder="$t('common.placeholder') + $t('page.manage.menu.form.fixedIndexInTab')"
             />
           </NFormItemGi>
-          <NFormItemGi span="24" :label="$t('page.manage.menu.query')">
+          <!--
+ <NFormItemGi span="24" :label="$t('page.manage.menu.query')">
             <NDynamicInput
               v-model:value="formData.querys"
               preset="pair"
@@ -310,6 +316,7 @@ defineExpose({
               </template>
             </NDynamicInput>
           </NFormItemGi>
+-->
           <NFormItemGi span="24" :label="$t('page.manage.menu.button')">
             <NDynamicInput v-model:value="formData.buttons" :on-create="handleCreateButton">
               <template #default="{ value }">

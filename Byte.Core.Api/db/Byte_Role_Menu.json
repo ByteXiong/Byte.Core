@@ -1,0 +1,86 @@
+ [
+    {
+      "MenuId": 1,
+      "RoleId": 4
+    },
+    {
+      "MenuId": 1,
+      "RoleId": 5
+    },
+    {
+      "MenuId": 2,
+      "RoleId": 4
+    },
+    {
+      "MenuId": 2,
+      "RoleId": 5
+    },
+    {
+      "MenuId": 3,
+      "RoleId": 4
+    },
+    {
+      "MenuId": 3,
+      "RoleId": 5
+    },
+    {
+      "MenuId": 4,
+      "RoleId": 4
+    },
+    {
+      "MenuId": 4,
+      "RoleId": 5
+    },
+    {
+      "MenuId": 5,
+      "RoleId": 4
+    },
+    {
+      "MenuId": 5,
+      "RoleId": 5
+    },
+    {
+      "MenuId": 6,
+      "RoleId": 4
+    },
+    {
+      "MenuId": 6,
+      "RoleId": 5
+    },
+    {
+      "MenuId": 7,
+      "RoleId": 4
+    },
+    {
+      "MenuId": 7,
+      "RoleId": 5
+    },
+    {
+      "MenuId": 8,
+      "RoleId": 4
+    },
+    {
+      "MenuId": 8,
+      "RoleId": 5
+    },
+    {
+      "MenuId": 21,
+      "RoleId": 4
+    },
+    {
+      "MenuId": 21,
+      "RoleId": 5
+    },
+    {
+      "MenuId": 22,
+      "RoleId": 4
+    },
+    {
+      "MenuId": 22,
+      "RoleId": 5
+    },
+    {
+      "MenuId": 25,
+      "RoleId": 5
+    }
+  ]

@@ -15,7 +15,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 表格重写
     /// </summary>
-    [SugarTable("TableColumn")]
+    [SugarTable("Byte_TableColumn")]
     public class TableColumn : BaseEntity<int>
     {
         /// <summary>

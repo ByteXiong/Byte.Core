@@ -8,7 +8,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 字典
     /// </summary>
-    [SugarTable("DicData")]
+    [SugarTable("Byte_DicData")]
     public class DicData : BaseEntity<int>
     {
 

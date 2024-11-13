@@ -5,7 +5,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 用户-部门-角色
     /// </summary>
-    [SugarTable("User_Dept_Role")]
+    [SugarTable("Byte_User_Dept_Role")]
     public class User_Dept_Role
     {
 

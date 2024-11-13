@@ -57,10 +57,10 @@ namespace Byte.Core.Repository
             {
                 var key = ParamConfig.RoleButtonCaChe + roleCode;
                 var any = MemoryCacheManager.Exists(key);
-                string[] arr;
+                List<string> arr;
                 if (any)
                 {
-                    arr = MemoryCacheManager.Get<string[]>(key);
+                    arr = MemoryCacheManager.Get<List<string>>(key);
                 }
                 else
                 {
@@ -71,11 +71,11 @@ namespace Byte.Core.Repository
                     }
 
 
-                    arr = await GetIQueryable(where).Select(x => x.Path).ToArrayAsync();
+                    arr = await GetIQueryable(where).Select(x => x.Path).ToListAsync();
                     MemoryCacheManager.Set(key, arr, 60 * 30);
                     arrs.AddRange(arr);
                 }
-            });
+            });  
             return arrs.Distinct().ToArray();
         }
         #endregion

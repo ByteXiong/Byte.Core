@@ -68,6 +68,7 @@ export const alovaInstance = createAlova({
     },
     onError: err => {
       window.$message?.error(err.response?.data?.msg || '系统出错');
+      throw new Error(err.response?.data?.msg || '系统出错');
       // return Promise.reject({ err, method });
     },
     onComplete: () => {

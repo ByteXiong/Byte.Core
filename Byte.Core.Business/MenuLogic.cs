@@ -105,12 +105,6 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<int> AddAsync(UpdateMenuParam param)
         {
-
-            if (param.ParentId == null && param.MenuType != MenuTypeEnum.目录)
-            {
-                throw new BusException("一级必须是目录");
-            }
-            param.Path =$"/{param.Name}" ;
             Menu model = param.Adapt<Menu>();
             model.Layout = "layout.base";
             try
@@ -153,10 +147,7 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<int> UpdateAsync(UpdateMenuParam param)
         {
-            if (param.ParentId == null && param.MenuType != MenuTypeEnum.目录)
-            {
-                throw new BusException("一级必须是目录");
-            }
+       
             try
             {
                 _unitOfWork.BeginTran();

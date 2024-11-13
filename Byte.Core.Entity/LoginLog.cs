@@ -11,7 +11,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 登录日志
     /// </summary>
-    [SugarTable("LoginLog")]
+    [SugarTable("Byte_LoginLog")]
     public class LoginLog : BaseEntity<int>
     {
 

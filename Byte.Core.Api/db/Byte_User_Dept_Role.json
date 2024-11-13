@@ -1,0 +1,17 @@
+[
+    {
+      "UserId": 1,
+      "DeptId": 1,
+      "RoleId": 1
+    },
+    {
+      "UserId": 1,
+      "DeptId": 1,
+      "RoleId": 4
+    },
+    {
+      "UserId": 2,
+      "DeptId": 1,
+      "RoleId": 4
+    }
+  ]

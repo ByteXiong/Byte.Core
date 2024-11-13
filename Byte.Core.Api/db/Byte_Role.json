@@ -1,0 +1,44 @@
+ [
+    {
+      "Id": 1,
+      "Name": "系统管理员",
+      "Type": 1,
+      "Remark": null,
+      "Code": "ROOT",
+      "Sort": 0,
+      "DeptId": 1,
+      "CreateBy": null,
+      "CreateTime": "8/11/2024 22:01:01",
+      "UpdateBy": null,
+      "UpdateTime": null,
+      "Status": 1
+    },
+    {
+      "Id": 4,
+      "Name": "普通管理员",
+      "Type": 0,
+      "Remark": "",
+      "Code": "Admin",
+      "Sort": 1,
+      "DeptId": 0,
+      "CreateBy": null,
+      "CreateTime": "11/11/2024 17:09:34",
+      "UpdateBy": null,
+      "UpdateTime": null,
+      "Status": 1
+    },
+    {
+      "Id": 5,
+      "Name": "用户",
+      "Type": 0,
+      "Remark": null,
+      "Code": "User",
+      "Sort": 0,
+      "DeptId": 0,
+      "CreateBy": null,
+      "CreateTime": "11/11/2024 22:15:05",
+      "UpdateBy": null,
+      "UpdateTime": null,
+      "Status": 1
+    }
+  ]

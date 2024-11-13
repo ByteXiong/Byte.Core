@@ -56,7 +56,7 @@ const checkedRowKeys = ref<string[]>([]);
 // 打开编辑/新增
 const editFormRef = ref();
 const openForm = (id?: number | null) => {
-  editFormRef.value?.openForm(id, null);
+  editFormRef.value?.openForm(id, 0);
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

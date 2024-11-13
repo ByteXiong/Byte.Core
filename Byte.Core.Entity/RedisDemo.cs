@@ -8,7 +8,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 测试表
     /// </summary>
-    [SugarTable("RedisDemo")]
+    [SugarTable("Byte_RedisDemo")]
     public class RedisDemo : BaseEntity<int>
     {
         /// <summary>

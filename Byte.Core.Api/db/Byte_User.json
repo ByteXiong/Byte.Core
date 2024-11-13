@@ -1,0 +1,58 @@
+[
+    {
+      "Id": 1,
+      "Avatar": "/upload/images/20240813/1723520754.png",
+      "Password": null,
+      "UserName": "admin",
+      "CreateBy": "",
+      "CreateTime": "10/11/2024 19:19:17",
+      "UpdateBy": null,
+      "UpdateTime": null,
+      "Status": 1,
+      "NickName": "管理员",
+      "Phone": null,
+      "Email": null
+    },
+    {
+      "Id": 2,
+      "Avatar": "/upload/images/20240804/1820038220423892992.jpg",
+      "Password": null,
+      "UserName": "admin2",
+      "CreateBy": "",
+      "CreateTime": "10/11/2024 19:19:17",
+      "UpdateBy": null,
+      "UpdateTime": null,
+      "Status": 1,
+      "NickName": "",
+      "Phone": null,
+      "Email": null
+    },
+    {
+      "Id": 3,
+      "Avatar": null,
+      "Password": "e10adc3949ba59abbe56e057f20f883e",
+      "UserName": "admin3",
+      "CreateBy": null,
+      "CreateTime": "10/11/2024 19:19:17",
+      "UpdateBy": null,
+      "UpdateTime": null,
+      "Status": 0,
+      "NickName": null,
+      "Phone": null,
+      "Email": null
+    },
+    {
+      "Id": 4,
+      "Avatar": null,
+      "Password": "e10adc3949ba59abbe56e057f20f883e",
+      "UserName": "admin4",
+      "CreateBy": null,
+      "CreateTime": "10/11/2024 19:19:17",
+      "UpdateBy": null,
+      "UpdateTime": null,
+      "Status": 0,
+      "NickName": null,
+      "Phone": null,
+      "Email": null
+    }
+  ]
