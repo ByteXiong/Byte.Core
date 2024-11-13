@@ -37,9 +37,9 @@ var builder = WebApplication.CreateBuilder(args);
 //new IdHelperBootstrapper().SetWorkderId(1).Boot();
 //Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-#if DEBUG
+//#if DEBUG
 builder.WebHost.UseUrls("http://*:3000");
-#endif
+//#endif
 #region 获取Config配置
 var configuration = builder.Configuration;
 #endregion
@@ -196,12 +196,12 @@ builder.Services.Configure<FormOptions>(options =>
     options.MultipartBodyLengthLimit = long.MaxValue; // In case of multipart
 });
 #region Redis
-var redisConnectionString = configuration["Redis"];
-//启用Redis
-builder.Services.UseCsRedisClient(redisConnectionString);
-////全局设置Redis缓存有效时间为5分钟。
-builder.Services.Configure<DistributedCacheEntryOptions>(option =>
-option.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5));
+//var redisConnectionString = configuration["Redis"];
+////启用Redis
+//builder.Services.UseCsRedisClient(redisConnectionString);
+//////全局设置Redis缓存有效时间为5分钟。
+//builder.Services.Configure<DistributedCacheEntryOptions>(option =>
+//option.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5));
 #endregion 
 #region Session
 builder.Services.AddSession(options =>

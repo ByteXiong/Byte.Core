@@ -48,7 +48,6 @@ export function createServiceConfig(env: Env.ImportMeta) {
  */
 export function getServiceBaseURL(env: Env.ImportMeta, isProxy: boolean) {
   const { baseURL, other } = createServiceConfig(env);
-
   const otherBaseURL = {} as Record<App.Service.OtherBaseURLKey, string>;
 
   other.forEach(item => {

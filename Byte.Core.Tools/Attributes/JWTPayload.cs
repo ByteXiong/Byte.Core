@@ -35,6 +35,6 @@ namespace Byte.Core.Tools.Attributes
         /// <summary>
         /// 用户的角色代码
         /// </summary>
-        public string[] RoleCodes { get; set; }
+        public List<string> RoleCodes { get; set; }
     }
 }

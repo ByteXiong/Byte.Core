@@ -10,13 +10,14 @@ using Byte.Core.Tools;
 using Dm.filter;
 namespace Byte.Core.Business
 {
-    public class LoginLogic(UserRepository userRepository, MenuRepository menuRepository)
+    public class LoginLogic(UserRepository userRepository, MenuRepository menuRepository, RoleRepository roleRepository)
     {
         /// <summary>
         /// 
         /// </summary>
          readonly UserRepository _userRepository= userRepository;
-        readonly MenuRepository _menuRepository = menuRepository;
+          readonly MenuRepository _menuRepository = menuRepository;
+        readonly RoleRepository _roleRepository = roleRepository;
         /// <summary>
         /// 账号登录
         /// </summary>
@@ -30,11 +31,12 @@ namespace Byte.Core.Business
             where = x => x.UserName == param.UserName;
 #endif
 
-            var user = await _userRepository.GetIQueryable(where).Includes(x => x.User_Dept_Roles,y=>y.Role).Select(x => new  {
+            var user = await _userRepository.GetIQueryable(where)
+                .Select(x => new  {
 
                 Id = x.Id,
                 UserName = x.UserName,
-                RoleCode = x.User_Dept_Roles.Select(y => y.Role.Code).ToArray(),
+                //RoleCode = x.User_Dept_Roles.Select(y => y.Role.Code).ToList(),
                 //Type = user.Role.Type,
                 NickName = x.NickName,
                 Status=x.Status
@@ -46,7 +48,7 @@ namespace Byte.Core.Business
             {
                 Id = user.Id,
                 UserName = user.UserName,
-                RoleCodes = user.RoleCode,
+                RoleCodes = _roleRepository.GetIQueryable(x=>x.User_Dept_Roles.Any(y=>y.UserId == user.Id)).Select(x => x.Code).ToList(),
                 //Type = user.Role.Type,
                 NickName = user.NickName,
             };

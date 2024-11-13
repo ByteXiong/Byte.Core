@@ -73,10 +73,10 @@ namespace Byte.Core.Tools
             get => _session == null ? default : (RoleTypeEnum)Enum.Parse(typeof(RoleTypeEnum), _session.GetString("CurrentUser_RoleType"));
             set => _session.SetString("CurrentUser_RoleType", value.ToString());
         }
-        public static string[] RoleCodes
+        public static List<string> RoleCodes
         {
-            get => _session == null ? new string[] { } : _session.GetString("CurrentUser_RoleCode").Split(',');
-            set => _session.SetString("CurrentUser_RoleCode", string.Join(",", value??new string[] { }));
+            get => _session == null ? new List<string>  { } : _session.GetString("CurrentUser_RoleCode").Split(',').ToList();
+            set => _session.SetString("CurrentUser_RoleCode", string.Join(",", value??new List<string> { }));
         }
 
         #endregion

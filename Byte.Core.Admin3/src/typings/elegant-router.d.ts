@@ -38,15 +38,6 @@ declare module "@elegant-router/types" {
     "alova_request": "/alova/request";
     "alova_scenes": "/alova/scenes";
     "alova_user": "/alova/user";
-    "demo": "/demo";
-    "demo_data": "/demo/data";
-    "demo_data_table": "/demo/data/table";
-    "demo_redis": "/demo/redis";
-    "demo_redis_data": "/demo/redis/data";
-    "demo_table": "/demo/table";
-    "demo_table_column": "/demo/table/column";
-    "demo_table_header": "/demo/table/header";
-    "demo_table_header_setting": "/demo/table/header/setting";
     "function": "/function";
     "function_hide-child": "/function/hide-child";
     "function_hide-child_one": "/function/hide-child/one";
@@ -148,7 +139,6 @@ declare module "@elegant-router/types" {
     | "500"
     | "about"
     | "alova"
-    | "demo"
     | "function"
     | "home"
     | "iframe-page"
@@ -185,10 +175,6 @@ declare module "@elegant-router/types" {
     | "alova_request"
     | "alova_scenes"
     | "alova_user"
-    | "demo_data_table"
-    | "demo_redis_data"
-    | "demo_table_column"
-    | "demo_table_header_setting"
     | "function_hide-child_one"
     | "function_hide-child_three"
     | "function_hide-child_two"

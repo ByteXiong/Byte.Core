@@ -6,6 +6,10 @@
     <Nullable>disable</Nullable>
     <DocumentationFile>bin\Byte.Core.Business.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="RedisDemoLogic.cs" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Byte.Core.Common\Byte.Core.Common.csproj" />
     <ProjectReference Include="..\Byte.Core.Entity\Byte.Core.Entity.csproj" />

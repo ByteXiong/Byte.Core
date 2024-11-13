@@ -241,7 +241,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 权限标识
         /// </summary>
-        public string[] Roles => CurrentUser.RoleCodes;
+        public List<string> Roles => CurrentUser.RoleCodes;
         /// <summary>
         /// 缓存页面
         /// </summary>

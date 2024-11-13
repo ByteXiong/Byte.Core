@@ -7,6 +7,7 @@
     <DocumentationFile>bin\Byte.Core.Api.xml</DocumentationFile>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	 <ContainerRepository>DockerWeb</ContainerRepository>
+	 <UserSecretsId>b272a583-3067-47e5-8ff1-af59cd1b3e98</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +15,10 @@
     <Content Remove="wwwroot\**" />
     <EmbeddedResource Remove="wwwroot\**" />
     <None Remove="wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\DemoController.cs" />
   </ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Lazy.Captcha.Core" Version="2.0.8" />
@@ -44,6 +49,12 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Dockerfile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

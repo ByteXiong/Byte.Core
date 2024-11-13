@@ -15,33 +15,33 @@ namespace Byte.Core.Business.Tests
     public class RedisDemoLogicTests
     {
 
-        public RedisDemoLogic _logic;
+        //public RedisDemoLogic _logic;
 
         public IUnitOfWork _unitOfWork;
         [TestInitialize]
         public void Setup()
         {
             Byte.Core.MSTest.Program.Setup();
-            _logic = ServiceLocator.Resolve<RedisDemoLogic>();
+            //_logic = ServiceLocator.Resolve<RedisDemoLogic>();
             _unitOfWork = ServiceLocator.Resolve<IUnitOfWork>();
         }
 
-        [TestMethod()]
-        public async Task GetByIdsTest()
-        {
+        //[TestMethod()]
+        //public async Task GetByIdsTest()
+        //{
 
-            //_roleLogic.AddInterceptor("DoSomething", new MyInterceptor());
+        //    //_roleLogic.AddInterceptor("DoSomething", new MyInterceptor());
 
-            // 调用DoSomething方法
-            await RedisHelper.HSetAsync(ParamConfig.HRedisDemoKey, "DF6CA8BA-F204-4622-BD3F-000061E4E567", "张三");
+        //    // 调用DoSomething方法
+        //    await RedisHelper.HSetAsync(ParamConfig.HRedisDemoKey, "DF6CA8BA-F204-4622-BD3F-000061E4E567", "张三");
 
-            var aa = await RedisHelper.HMGetAsync(ParamConfig.HRedisDemoKey, "DF6CA8BA-F204-4622-BD3F-000061E4E567");
+        //    var aa = await RedisHelper.HMGetAsync(ParamConfig.HRedisDemoKey, "DF6CA8BA-F204-4622-BD3F-000061E4E567");
 
-            var result = await _logic.GetByIdAsync(1);
-            //var result = await _logic.GetByIdsAsync(new Guid[] { Guid.NewGuid(), Guid.NewGuid() });
+        //    var result = await _logic.GetByIdAsync(1);
+        //    //var result = await _logic.GetByIdsAsync(new Guid[] { Guid.NewGuid(), Guid.NewGuid() });
 
-            Assert.IsTrue(result != null);
-        }
+        //    Assert.IsTrue(result != null);
+        //}
 
         [TestMethod()]
         public async Task GetAddRedisTest()

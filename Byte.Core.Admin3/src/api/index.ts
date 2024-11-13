@@ -5,7 +5,11 @@ import vueHook from 'alova/vue';
 // import { useUserStoreHook } from '@/store/modules/user';
 import { localStg } from '@/utils/storage';
 import { useAuthStore } from '@/store/modules/auth';
+import { getServiceBaseURL } from '@/utils/service';
 import { createApis, withConfigType } from './createApis';
+const isHttpProxy = import.meta.env.DEV && import.meta.env.VITE_HTTP_PROXY === 'Y';
+const { baseURL } = getServiceBaseURL(import.meta.env, isHttpProxy);
+
 type ICodeMessage = {
   [key: number]: string;
 };
@@ -26,7 +30,7 @@ const serverCodeMessage: ICodeMessage = {
 };
 // const modal = useModal();
 export const alovaInstance = createAlova({
-  baseURL: 'http://127.0.0.1:3000',
+  baseURL,
   statesHook: vueHook,
   requestAdapter: axiosRequestAdapter(),
   beforeRequest: method => {

@@ -37,7 +37,7 @@ namespace Byte.Core.Repository
             throw new BusException("线上环境不允许删除菜单");
 #endif
 
-            var any = await base.SugarClient.DeleteNav<Menu>(x => ids.Contains(x.Id)).Include(x => x.Roles, new DeleteNavOptions() { ManyToManyIsDeleteA = true }).ExecuteCommandAsync();
+            var any = await SugarClient.DeleteNav<Menu>(x => ids.Contains(x.Id)).Include(x => x.Roles, new DeleteNavOptions() { ManyToManyIsDeleteA = true }).ExecuteCommandAsync();
             //清除缓存
             MemoryCacheManager.RemoveCacheRegex(ParamConfig.RoleCaChe);
             return any ? 1 : 0;
@@ -50,7 +50,7 @@ namespace Byte.Core.Repository
         /// </summary>
         /// <param name="roleCode"></param>
         /// <returns></returns>
-        public async Task<string[]> GetPermAsync(string[] roleCodes)
+        public async Task<List<string>> GetPermAsync(List<string> roleCodes)
         {
             var arrs = new List<string>();
             roleCodes.ForEach(async roleCode =>
@@ -71,12 +71,12 @@ namespace Byte.Core.Repository
                     }
 
 
-                    arr = await GetIQueryable(where).Select(x => x.Path).ToListAsync();
+                    arr = SugarClient.Queryable<Menu>().Where(where).Select(x => x.Path).ToList();
                     MemoryCacheManager.Set(key, arr, 60 * 30);
                     arrs.AddRange(arr);
                 }
             });  
-            return arrs.Distinct().ToArray();
+            return arrs.Distinct().ToList();
         }
         #endregion
     }

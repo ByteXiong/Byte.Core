@@ -86,7 +86,7 @@ namespace Byte.Core.Entity
         ///用户部门角色关系
         /// </summary>
         [SugarColumn(IsIgnore = true)]
-        [Navigate(NavigateType.OneToMany, nameof(User_Dept_Role.DeptId))]
+        [Navigate(NavigateType.OneToMany, nameof(User_Dept_Role.DeptId), nameof(Id))]
         public List<User_Dept_Role> User_Dept_Roles { get; set; }
 
         [SugarColumn(IsIgnore = true)]

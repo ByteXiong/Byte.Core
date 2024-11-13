@@ -17,12 +17,12 @@ namespace Byte.Core.Business.Tests
             _logic = ServiceLocator.Resolve<DataTableLogic>();
         }
 
-        [TestMethod()]
-        public async Task SelectAsyncTest()
-        {
-            var result = await _logic.GetDataAsync();
-            Assert.IsTrue(result != null);
-        }
+        //[TestMethod()]
+        //public async Task SelectAsyncTest()
+        //{
+        //    var result = await _logic.GetDataAsync();
+        //    Assert.IsTrue(result != null);
+        //}
 
 
     }
