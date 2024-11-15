@@ -1,12 +1,12 @@
 {
-  "name": "soybean-admin",
+  "name": "byte.core-admin",
   "type": "module",
   "version": "1.3.8",
   "description": "A fresh and elegant admin template, based on Vue3、Vite3、TypeScript、NaiveUI and UnoCSS. 一个基于Vue3、Vite3、TypeScript、NaiveUI and UnoCSS的清新优雅的中后台模版。",
   "author": {
     "name": "Soybean",
     "email": "soybeanjs@outlook.com",
-    "url": "https://github.com/soybeanjs"
+    "url": "https://github.com/byte.corejs"
   },
   "license": "MIT",
   "homepage": "https://github.com/soybeanjs/soybean-admin",

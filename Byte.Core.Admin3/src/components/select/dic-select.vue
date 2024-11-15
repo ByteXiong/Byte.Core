@@ -27,7 +27,12 @@ const { loading, data } = useRequest(
     }),
   {
     force: true,
-    immediate: true
+    immediate: true,
+    async middleware(_, next) {
+      if (props.groupBy) {
+        await next();
+      }
+    }
   }
 );
 const value = defineModel<string>('value', {
@@ -36,5 +41,5 @@ const value = defineModel<string>('value', {
 </script>
 
 <template>
-  <NSelect v-model:value="value" v-bind="$attrs" :options="data" :loading="loading" />
+  <NSelect v-model:value="value" v-bind="$attrs" :options="data" :loading="loading" clearable />
 </template>

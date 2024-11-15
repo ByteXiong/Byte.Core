@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Byte.Core_DB开发接口文档 Web端网站 - version 1.0
+ * runtest开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -16,15 +16,6 @@
  * **Do not edit the file manually.**
  */
 export default {
-  'DataTable.delete_api_datatable_deletetableheader': ['DELETE', '/api/DataTable/DeleteTableHeader'],
-  'DataTable.get_api_datatable_getheader': ['GET', '/api/DataTable/GetHeader'],
-  'DataTable.get_api_datatable_gettableheader': ['GET', '/api/DataTable/GetTableHeader'],
-  'DataTable.get_api_datatable_page': ['GET', '/api/DataTable/Page'],
-  'DataTable.put_api_datatable_settableheader': ['PUT', '/api/DataTable/SetTableHeader'],
-  'DataTable.put_api_datatable_settablesort': ['PUT', '/api/DataTable/SetTableSort'],
-  'Demo.get_api_demo_getpage': ['GET', '/api/Demo/GetPage'],
-  'Demo.get_api_demo_getsync': ['GET', '/api/Demo/GetSync'],
-  'Demo.post_api_demo_setroledata': ['POST', '/api/Demo/SetRoleData'],
   'Dept.delete_api_dept_delete': ['DELETE', '/api/Dept/Delete'],
   'Dept.get_api_dept_getinfo': ['GET', '/api/Dept/GetInfo'],
   'Dept.get_api_dept_gettree': ['GET', '/api/Dept/GetTree'],
@@ -52,12 +43,17 @@ export default {
   'Role.get_api_role_getselect': ['GET', '/api/Role/GetSelect'],
   'Role.put_api_role_setstatus': ['PUT', '/api/Role/SetStatus'],
   'Role.post_api_role_submit': ['POST', '/api/Role/Submit'],
-  'TableColumn.delete_api_tablecolumn_delete': ['DELETE', '/api/TableColumn/Delete'],
-  'TableColumn.get_api_tablecolumn_getcolumns': ['GET', '/api/TableColumn/GetColumns'],
-  'TableColumn.get_api_tablecolumn_getinfo': ['GET', '/api/TableColumn/GetInfo'],
-  'TableColumn.get_api_tablecolumn_getpage': ['GET', '/api/TableColumn/GetPage'],
-  'TableColumn.post_api_tablecolumn_setcolumns': ['POST', '/api/TableColumn/SetColumns'],
-  'TableColumn.post_api_tablecolumn_submit': ['POST', '/api/TableColumn/Submit'],
+  'TableColumn.delete_api_tablecolumn_delete_tableof': ['DELETE', '/api/TableColumn/Delete/{tableof}'],
+  'TableColumn.get_api_tablecolumn_getform_tableof': ['GET', '/api/TableColumn/GetForm/{tableof}'],
+  'TableColumn.post_api_tablecolumn_submit_tableof': ['POST', '/api/TableColumn/Submit/{tableof}'],
+  'TableView.delete_api_tableview_delete': ['DELETE', '/api/TableView/Delete'],
+  'TableView.delete_api_tableview_deletetableheader': ['DELETE', '/api/TableView/DeleteTableHeader'],
+  'TableView.get_api_tableview_gettableheader': ['GET', '/api/TableView/GetTableHeader'],
+  'TableView.get_api_tableview_getview': ['GET', '/api/TableView/GetView'],
+  'TableView.get_api_tableview_page': ['GET', '/api/TableView/Page'],
+  'TableView.put_api_tableview_settableheader': ['PUT', '/api/TableView/SetTableHeader'],
+  'TableView.put_api_tableview_settablesort': ['PUT', '/api/TableView/SetTableSort'],
+  'TableView.post_api_tableview_submit': ['POST', '/api/TableView/Submit'],
   'Upload.post_api_upload_images': ['POST', '/api/Upload/Images'],
   'User.delete_api_user_delete': ['DELETE', '/api/User/Delete'],
   'User.get_api_user_getinfo': ['GET', '/api/User/GetInfo'],

@@ -11,8 +11,8 @@
 		<PackageReference Include="MiniProfiler.Shared" Version="4.3.8" />
 	</ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Byte.Core.Common\Byte.Core.Common.csproj" />
-    <ProjectReference Include="..\Byte.Core.SqlSugar\Byte.Core.SqlSugar.csproj" />
+    <ProjectReference Include="E:\MyCode\Byte.Core\Byte.Core.Common\Byte.Core.Common.csproj" />
+   <ProjectReference Include="E:\MyCode\Byte.Core\Byte.Core.SqlSugar\Byte.Core.SqlSugar.csproj" />
   </ItemGroup>
 
 </Project>

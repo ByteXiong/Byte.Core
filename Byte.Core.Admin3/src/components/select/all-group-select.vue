@@ -4,7 +4,7 @@ defineOptions({
   name: 'AllGroupSelect',
   inheritAttrs: false
 });
-
+const value = defineModel<string>('value', {});
 const { loading, data } = useRequest(
   // Method实例获取函数，它将接收page和pageSize，并返回一个Method实例
   () =>
@@ -23,11 +23,15 @@ const { loading, data } = useRequest(
     immediate: true
   }
 );
-const value = defineModel<string>('value', {
-  required: true
-});
 </script>
 
 <template>
-  <NSelect v-model:value="value" v-bind="$attrs" :options="data" :loading="loading" />
+  <NSelect
+    v-model:value="value"
+    v-bind="$attrs"
+    :options="data"
+    placeholder="请输入字典"
+    :loading="loading"
+    clearable
+  />
 </template>

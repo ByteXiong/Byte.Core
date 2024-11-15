@@ -11,64 +11,81 @@ namespace Byte.Core.Models
 
     }
     /// <summary>
-    /// 修改
+    /// 排序
     /// </summary>
-    public class UpdateTableColumnParam : AddTableColumnParam
+    public class TableSortParam
     {
-
-
+        public int Id { get; set; }
+        public int Sort { get; set; }
     }
 
-    /// <summary>
-    ///  添加
-    /// </summary>
-    public class AddTableColumnParam : TableColumn
-    {
-        public int[]? RoleIds { get; set; }
-    }
+    public class DataColumn{
 
-    /// <summary>
-    /// 分页
-    /// </summary>
-    public class TableColumnDTO : TableColumn
-    {
-
-
-
-    }
-
-
-    /// <summary>
-    /// 用户 详情
-    /// </summary>
-    public class TableColumnInfo : TableColumn
-    {
-
-    }
-
-
-    public class TableGetColumnParam
-    {
-        public string Table { get; set; }
-        public string Router { get; set; }
-    }
-
-    /// <summary>
-    /// 头部醒醒
-    /// </summary>
-    public class TableModel
-    {
         /// <summary>
-        /// 
+        ///  表名
         /// </summary>
-        public String Table { get; set; }
+        public string TableName { get; set; }
+
+
         /// <summary>
-        /// 
+        ///  注释
         /// </summary>
-        public string Router { get; set; }
+        public string Common { get; set; }
         /// <summary>
-        /// 
+        ///  字段
         /// </summary>
-        public List<TableColumn> Columns { get; set; }
+        public string ColumnKey { get; set; }
+        /// <summary>
+        ///  描述
+        /// </summary>
+        public string Type { get; set; }
+
+
+        /// <summary>
+        /// 是否主键
+        /// </summary>
+        public bool IsPrimaryKey { get; set; }
+
+        /// <summary>
+        /// 是否自增
+        /// </summary>
+        public bool IsIdentity { get; set; }
+
+        /// <summary>
+        /// 是否可空
+        /// </summary>
+        public bool IsNull { get; set; }
+
+        /// <summary>
+        /// 长度
+        /// </summary>
+        public int Length { get; set; }
+        /// <summary>
+        /// 精度
+        /// </summary>
+        public int Accuracy { get; set; }
+
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public string Description { get; set; }
+
     }
+
+   
+    public class TableDataFormParam 
+    {
+        
+        public string Id { get; set; }
+    }
+
+    public class UpdateTableDataParam: TableDataFormParam
+    {
+
+        public Dictionary<string,string> Data { get; set; }
+
+
+    }
+
+
 }

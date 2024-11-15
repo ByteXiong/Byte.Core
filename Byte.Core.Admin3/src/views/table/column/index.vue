@@ -1,25 +1,29 @@
 <script setup lang="tsx">
 import type { DataTableColumn } from 'naive-ui';
-import { NButton, NCheckbox, NInput, NPopconfirm, NSelect } from 'naive-ui';
+import { NButton, NCheckbox, NInput, NPopconfirm, NSelect, useDialog } from 'naive-ui';
 import { ref } from 'vue';
 import { useForm, useRequest } from '@sa/alova/client';
-import { useRoute } from 'vue-router';
-import type { DraggableEvent } from 'vue-draggable-plus';
+import { useRoute, useRouter } from 'vue-router';
 import { useDraggable } from 'vue-draggable-plus';
 import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
 import type { TableColumn } from '@/api/globals';
-import { ColumnTypeEnum, SearchTypeEnum, getEnumValue } from '@/api/apiEnums';
+import { ColumnTypeEnum, SearchTypeEnum, ViewTypeEnum } from '@/api/apiEnums';
 import AllGroupSelect from '@/components/select/all-group-select.vue';
+import AllEnumSelect from '@/components/select/all-enum-select.vue';
+import { getEnumValue } from '@/utils/common';
 import MonacoCode from './modules/monaco-code.vue';
 const route = useRoute();
-const tableof = ref(route.path.split('/').pop());
+const router = useRouter();
+const tableof = ref(route.path.split('/').reverse()[1]);
+const viewType = ref(route.path.split('/').pop());
+const dialog = useDialog();
 const isDraggable = ref(true);
 
 const { send: submitSort } = useForm(
   (_, row) =>
-    Apis.DataTable.put_api_datatable_settablesort({
+    Apis.TableView.put_api_tableview_settablesort({
       data: row,
       transform: ({ data }) => {
         window.$message?.success('保存成功！');
@@ -32,45 +36,65 @@ const { send: submitSort } = useForm(
     initialForm: []
   }
 );
+// 创建视图
+const { send: submitView } = useForm(
+  (_, row) =>
+    Apis.TableView.post_api_tableview_submit({
+      data: row,
+      transform: () => {
+        window.$message?.success('保存成功！');
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        getData();
+      }
+    }),
+  {
+    immediate: false,
+    resetAfterSubmiting: true,
+    initialForm: []
+  }
+);
 
 const {
-  data: tableData,
+  data: tableView,
   loading,
   send: getData
 } = useRequest(
   // Method实例获取函数，它将接收page和pageSize，并返回一个Method实例
   () =>
-    Apis.DataTable.get_api_datatable_gettableheader({
+    Apis.TableView.get_api_tableview_gettableheader({
       params: {
-        Table: tableof.value
+        Tableof: tableof.value,
+        type: viewType.value
       },
       transform: res => {
-        if (isDraggable.value) {
+        if (!res.success) {
+          dialog.warning({
+            title: `${ViewTypeEnum[viewType.value]}-${tableof.value}模型不存在`,
+            content: () => '首次加载请创建模型',
+            negativeText: '返回',
+            positiveText: '确认',
+            onNegativeClick: () => router.back(),
+            onPositiveClick: () =>
+              submitView({
+                Tableof: tableof.value,
+                type: viewType.value
+              })
+          });
+        } else if (isDraggable.value) {
           // 定时器10s后运行
           setTimeout(() => {
             const el = document.getElementsByTagName('tbody')[0];
-            const { start } = useDraggable(el, tableData, {
+            const { start } = useDraggable(el, tableView.value?.tableColumns, {
               animation: 150,
               ghostClass: 'ghost',
               filter: '.no-drag',
-              onStart(event: DraggableEvent) {
-                console.log('start', event);
-              },
               onUpdate() {
-                tableData.value.forEach((item, index) => {
+                tableView.value?.tableColumns?.forEach((item, index) => {
                   item.sort = index + 1;
                 });
-                console.log(
-                  'tableData.value',
-                  tableData.value
-                    ?.filter(x => x.id)
-                    ?.map(item => {
-                      return { sort: item.sort, id: item.id };
-                    })
-                );
 
                 submitSort(
-                  tableData.value
+                  tableView.value?.tableColumns
                     ?.filter(x => x.id)
                     ?.map(item => {
                       return { sort: item.sort, id: item.id };
@@ -84,7 +108,7 @@ const {
         }
 
         // start();
-        return res.data.columns || [];
+        return res.data || [];
       }
     }),
   {
@@ -95,7 +119,7 @@ const {
 
 const { send: submit } = useForm(
   (_, row) =>
-    Apis.DataTable.put_api_datatable_settableheader({
+    Apis.TableView.put_api_tableview_settableheader({
       data: row,
       transform: ({ data }) => {
         window.$message?.success('保存成功！');
@@ -112,7 +136,7 @@ const { send: submit } = useForm(
 const { send: handleDelete } = useRequest(
   // Method实例获取函数，它将接收page和pageSize，并返回一个Method实例
   ids =>
-    Apis.DataTable.delete_api_datatable_deletetableheader({
+    Apis.TableView.delete_api_tableview_deletetableheader({
       data: ids,
       transform: () => {
         window.$message?.success('删除成功！');
@@ -127,7 +151,7 @@ const { send: handleDelete } = useRequest(
 // 获取 class 属性
 
 // const el = document.getElementsByTagName('tbody')[0];
-// const { start } = useDraggable(el, tableData, {
+// const { start } = useDraggable(el, tableView, {
 //   animation: 150,
 //   ghostClass: 'ghost',
 //   onStart() {
@@ -140,14 +164,10 @@ const { send: handleDelete } = useRequest(
 
 function renderColumnType(row: TableColumn) {
   switch (row.columnType) {
+    case ColumnTypeEnum.枚举:
+      return <AllEnumSelect v-model:value={row.columnTypeDetail} onChange={() => submit(row)} />;
     case ColumnTypeEnum.字典:
-      return (
-        <AllGroupSelect
-          v-model:value={row.columnTypeDetail}
-          placeholder="请输入字典"
-          on-update:value={() => submit(row)}
-        />
-      );
+      return <AllGroupSelect v-model:value={row.columnTypeDetail} onChange={() => submit(row)} />;
     case ColumnTypeEnum.时间:
       return (
         <NInput
@@ -176,7 +196,7 @@ const appStore = useAppStore();
 
 const wrapperRef = ref<HTMLElement | null>(null);
 
-const columns = ref<Array<DataTableColumn & { checked: boolean }>>([
+const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
   {
     type: 'selection',
     align: 'center',
@@ -239,7 +259,8 @@ const columns = ref<Array<DataTableColumn & { checked: boolean }>>([
             v-model:value={row.columnType}
             options={getEnumValue(ColumnTypeEnum).map(item => ({ label: ColumnTypeEnum[item], value: item }))}
             placeholder="请选择"
-            on-update:value={() => {
+            clearable
+            onChange={() => {
               submit(row);
             }}
           />
@@ -259,7 +280,8 @@ const columns = ref<Array<DataTableColumn & { checked: boolean }>>([
           v-model:value={row.searchType}
           options={getEnumValue(SearchTypeEnum).map(item => ({ label: SearchTypeEnum[item], value: item }))}
           placeholder="请选择"
-          on-update:value={() => {
+          clearable
+          onChange={() => {
             submit(row);
           }}
         />
@@ -267,23 +289,23 @@ const columns = ref<Array<DataTableColumn & { checked: boolean }>>([
     }
   },
 
-  // {
-  //   key: 'sort',
-  //   title: $t('排序'),
-  //   align: 'center',
-  //   checked: true,
-  //   render: row => {
-  //     return (
-  //       <NInput
-  //         v-model:value={row.sort}
-  //         placeholder="请选择"
-  //         onChange={() => {
-  //           submit(row);
-  //         }}
-  //       />
-  //     );
-  //   }
-  // },
+  {
+    key: 'sort',
+    title: $t('排序'),
+    align: 'center',
+    checked: true,
+    render: row => {
+      return (
+        <NInput
+          v-model:value={row.sort}
+          placeholder="请选择"
+          onChange={() => {
+            submit(row);
+          }}
+        />
+      );
+    }
+  },
   {
     key: 'type',
     title: $t('操作'),
@@ -322,8 +344,9 @@ const checkedRowKeys = ref<string[]>([]);
 // const operateType = ref<OperateType>('add');
 
 function handleAdd() {
-  tableData.value?.push({
-    table: tableof.value
+  tableView.value?.tableColumns?.push({
+    table: tableof.value,
+    viewId: tableView.value?.id
   });
   // operateType.value = 'add';
   // openModal();
@@ -368,10 +391,16 @@ function handleAdd() {
 
 <template>
   <div ref="wrapperRef" class="flex-col-stretch gap-16px overflow-hidden lt-sm:overflow-auto">
-    <NCard :title="$t('设置表头')" :bordered="false" size="small" class="sm:flex-1-hidden card-wrapper">
+    <NCard
+      :title="$t(`设置-${ViewTypeEnum[viewType]}`)"
+      :bordered="false"
+      size="small"
+      class="sm:flex-1-hidden card-wrapper"
+    >
       <template #header-extra>
         <TableHeaderOperation
-          v-model:columns="columns as Array<NaiveUI.TableColumnCheck>"
+          id="TableHeader"
+          v-model:columns="columns as NaiveUI.TableColumnCheck[]"
           tableof="TableHeaderDTO"
           :disabled-delete="checkedRowKeys.length === 0"
           :loading="loading"
@@ -380,10 +409,11 @@ function handleAdd() {
           @refresh="getData"
         />
       </template>
+
       <NDataTable
         v-model:checked-row-keys="checkedRowKeys"
         :columns="columns.filter(item => item.checked)"
-        :data="tableData"
+        :data="tableView?.tableColumns || []"
         size="small"
         :flex-height="!appStore.isMobile"
         :scroll-x="702"

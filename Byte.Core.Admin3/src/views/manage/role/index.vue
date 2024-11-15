@@ -6,6 +6,7 @@ import * as Naive from 'naive-ui';
 import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
+import { ViewTypeEnum } from '@/api/apiEnums';
 import EditForm from './modules/editForm.vue';
 import MenuTree from './modules/menu-tree.vue';
 // 获取当前页面路由参数
@@ -19,7 +20,7 @@ const {
   data,
   page,
   pageSize,
-  total,
+  total: itemCount,
   loading,
   send: getData,
   reload
@@ -81,6 +82,7 @@ const openForm = (id?: string) => {
 };
 // 打开权限
 const menuTreeRef = ref();
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const openMenuTree = (id?: string) => {
   menuTreeRef.value?.openForm(id);
 };
@@ -142,6 +144,7 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
               v-model:columns="columns"
               v-model:search-data="searchData"
               :tableof="tableof"
+              :view-type="ViewTypeEnum.主页"
             ></TableHeaderSetting>
           </template>
         </TableHeaderOperation>
@@ -159,16 +162,17 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
         remote
         class="sm:h-full"
         :pagination="{
-          page: page,
+          page,
           pageSize,
-          itemCount: total,
           showSizePicker: true,
-          pageSizes: [10, 20, 50, 100],
-          onChange: (p: number) => {
-
+          itemCount,
+          pageSizes: [10, 50, 100, 500, 1000],
+          onUpdatePage(value) {
+            page = value;
           },
-          onUpdatePageSize: (pageSize: number) => {
-
+          onUpdatePageSize(value) {
+            page = 1;
+            pageSize = value;
           }
         }"
       />

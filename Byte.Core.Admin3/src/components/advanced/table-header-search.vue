@@ -21,7 +21,7 @@ const searchParams = defineModel<NaiveUI.SearchParams>('searchParams', {
   required: true
 });
 
-const formDada = ref<Record<string, any>>({});
+const formData = ref<Record<string, any>>({});
 // const params = ref<Record<string, NaiveUI.SearchField>>({} as { [key: string]: NaiveUI.SearchField });
 
 type RuleKey = Extract<keyof Api.SystemManage.UserSearchParams, 'userEmail' | 'userPhone'>;
@@ -46,12 +46,13 @@ async function reset() {
   emit('reset');
 }
 watch(
-  () => formDada.value,
+  () => formData.value,
   newVal => {
     Object.keys(newVal).forEach(key => {
       searchParams.value[key] = {
         key,
-        searchType: props.searchData.find(item => item.key === key)?.searchType || SearchTypeEnum.等于,
+        searchType: (props.searchData.find(item => item.key === key)?.searchType ||
+          SearchTypeEnum.等于) as SearchTypeEnum,
         value: newVal[key]
       };
     });
@@ -71,7 +72,7 @@ async function search() {
   <NCard v-if="searchData.length > 0" :bordered="false" size="small" class="card-wrapper">
     <NCollapse>
       <NCollapseItem :title="$t('common.search')" name="user-search">
-        <NForm ref="formRef" :model="formDada" :rules="rules" label-placement="left" :label-width="80">
+        <NForm ref="formRef" :model="formData" :rules="rules" label-placement="left" :label-width="80">
           <NGrid responsive="screen" item-responsive>
             <NFormItemGi
               v-for="(item, index) in searchData"
@@ -83,12 +84,25 @@ async function search() {
             >
               <DicSelect
                 v-if="item.columnType === ColumnTypeEnum.字典"
-                v-model:value="formDada[item.key || '']"
+                v-model:value="formData[item.key || '']"
                 :group-by="item.columnTypeDetail"
+                :placeholder="'请选择' + $t(item.title)"
               ></DicSelect>
+              <EnumSelect
+                v-else-if="item.columnType === ColumnTypeEnum.枚举"
+                v-model:value="formData[item.key || '']"
+                :group-by="item.columnTypeDetail"
+                :placeholder="'请选择' + $t(item.title)"
+              ></EnumSelect>
+
+              <NInputNumber
+                v-else-if="item.columnType === ColumnTypeEnum.整数"
+                v-model:value="formData[item.key || '']"
+                :placeholder="$t('common.placeholder') + $t(item.title)"
+              ></NInputNumber>
               <NInput
                 v-else
-                v-model:value="formDada[item.key || '']"
+                v-model:value="formData[item.key || '']"
                 :placeholder="$t('common.placeholder') + $t(item.title)"
               />
             </NFormItemGi>

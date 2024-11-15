@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Byte.Core_DB开发接口文档 Web端网站 - version 1.0
+ * runtest开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -88,90 +88,6 @@ type Alova2Method<
       >
     : never;
 
-export type ConditionalType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16;
-export type ColumnTypeEnum = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-export type TableAlignEnum = 1 | 2 | 3;
-export type TableColumn = {
-  /**
-   * 主键
-   */
-  id?: number;
-  /**
-   * 创建者名称
-   */
-  createBy?: string;
-  /**
-   * 创建时间
-   */
-  createTime?: string;
-  /**
-   * 更新者名称
-   */
-  updateBy?: string;
-  /**
-   * 最后更新时间
-   */
-  updateTime?: string;
-  table?: string;
-  router?: string;
-  title?: string;
-  key?: string;
-  searchType?: ConditionalType;
-  columnType?: ColumnTypeEnum;
-  columnTypeDetail?: string;
-  /**
-   * 对齐方式
-   */
-  align?: TableAlignEnum;
-  sort?: number;
-  isShow?: boolean;
-  props?: string;
-};
-export type TableHeaderDTO = {
-  table?: string;
-  router?: string;
-  columns?: TableColumn[];
-};
-export type PagerInfo = {
-  totalRowCount?: number;
-  pageSize?: number;
-  startIndex?: number;
-  pageIndex?: number;
-  hasPrev?: boolean;
-  hasNext?: boolean;
-  isFirst?: boolean;
-  isLast?: boolean;
-  totalPageCount?: number;
-};
-export type ObjectPagedResults = {
-  pagerInfo?: PagerInfo;
-  data?: unknown[];
-};
-export type TableSortParam = {
-  id?: number;
-  sort?: number;
-};
-export type RedisDemoDTO = {
-  id?: number;
-  code?: string;
-  srot?: string;
-};
-export type RedisDemoDTOPagedResults = {
-  pagerInfo?: PagerInfo;
-  data?: RedisDemoDTO[];
-};
-export type RedisDemoDTOPagedResultsExcutedResult = {
-  success?: boolean;
-  msg?: string;
-  code?: number;
-  data?: RedisDemoDTOPagedResults;
-};
-export type Int32ExcutedResult = {
-  success?: boolean;
-  msg?: string;
-  code?: number;
-  data?: number;
-};
 export type DeptTypeEnum = 10 | 20 | 30;
 export type RoleTypeEnum = 10 | 20 | 30 | 40;
 export type MenuTypeEnum = 1 | 2 | 3;
@@ -253,8 +169,38 @@ export type Role = {
   sort?: number;
   deptId?: number;
   dept?: Dept;
-  users?: User[];
+  user_Dept_Roles?: User_Dept_Role[];
   menus?: Menu[];
+};
+export type User = {
+  /**
+   * 主键
+   */
+  id?: number;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  nickName?: string;
+  avatar?: string;
+  phone?: string;
+  email?: string;
+  password?: string;
+  status?: boolean;
+  userName?: string;
+  user_Dept_Roles?: User_Dept_Role[];
 };
 export type Dept = {
   /**
@@ -289,40 +235,17 @@ export type Dept = {
   status?: boolean;
   sort?: number;
   type?: DeptTypeEnum;
-  users?: User[];
+  user_Dept_Roles?: User_Dept_Role[];
   roles?: Role[];
   children?: Dept[];
 };
-export type User = {
-  /**
-   * 主键
-   */
-  id?: number;
-  /**
-   * 创建者名称
-   */
-  createBy?: string;
-  /**
-   * 创建时间
-   */
-  createTime?: string;
-  /**
-   * 更新者名称
-   */
-  updateBy?: string;
-  /**
-   * 最后更新时间
-   */
-  updateTime?: string;
-  nickName?: string;
-  avatar?: string;
-  phone?: string;
-  email?: string;
-  password?: string;
-  status?: boolean;
-  userName?: string;
-  depts?: Dept[];
-  roles?: Role[];
+export type User_Dept_Role = {
+  userId?: number;
+  deptId?: number;
+  roleId?: number;
+  dept?: Dept;
+  role?: Role;
+  user?: User;
 };
 export type DeptInfo = {
   /**
@@ -357,7 +280,7 @@ export type DeptInfo = {
   status?: boolean;
   sort?: number;
   type?: DeptTypeEnum;
-  users?: User[];
+  user_Dept_Roles?: User_Dept_Role[];
   roles?: Role[];
   children?: Dept[];
 };
@@ -462,7 +385,7 @@ export type UpdateDeptParam = {
   status?: boolean;
   sort?: number;
   type?: DeptTypeEnum;
-  users?: User[];
+  user_Dept_Roles?: User_Dept_Role[];
   roles?: Role[];
   children?: Dept[];
   /**
@@ -627,6 +550,42 @@ export type RouteMeta = {
    * 菜单和面包屑对应的图标
    */
   icon?: string;
+  /**
+   * 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
+   */
+  localIcon?: string;
+  /**
+   * 菜单和面包屑对应的图标的字体大小
+   */
+  iconFontSize?: number;
+  /**
+   * 路由顺序，可用于菜单的排序
+   */
+  order?: number;
+  /**
+   * 外链链接
+   */
+  href?: string;
+  /**
+   * 是否在菜单中隐藏路线
+   */
+  hideInMenu?: boolean;
+  /**
+   * 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
+   */
+  activeMenu?: string;
+  /**
+   * 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
+   */
+  multiTab?: boolean;
+  /**
+   * 如果设置，路线将固定在制表符中，值是固定制表符的顺序
+   */
+  fixedIndexInTab?: number;
+  /**
+   * 跳转参数
+   */
+  query?: Record<string, string>;
 };
 export type RouteDTO = {
   id?: number;
@@ -638,6 +597,7 @@ export type RouteDTO = {
    * 路径
    */
   path?: string;
+  pathParam?: string;
   /**
    * 重定向
    */
@@ -677,17 +637,13 @@ export type MenuTreeDTO = {
    */
   component?: string;
   /**
-   * 组件名称
-   */
-  componentName?: string;
-  /**
    * 父级菜单ID
    */
   parentId?: number;
   /**
    * 排序
    */
-  sort?: number;
+  order?: number;
   /**
    * icon图标
    */
@@ -829,9 +785,20 @@ export type RoleInfo = {
   sort?: number;
   deptId?: number;
   dept?: Dept;
-  users?: User[];
+  user_Dept_Roles?: User_Dept_Role[];
   menus?: Menu[];
   menuIds?: number[];
+};
+export type PagerInfo = {
+  totalRowCount?: number;
+  pageSize?: number;
+  startIndex?: number;
+  pageIndex?: number;
+  hasPrev?: boolean;
+  hasNext?: boolean;
+  isFirst?: boolean;
+  isLast?: boolean;
+  totalPageCount?: number;
 };
 export type RoleDTO = {
   /**
@@ -862,7 +829,7 @@ export type RoleDTO = {
   sort?: number;
   deptId?: number;
   dept?: Dept;
-  users?: User[];
+  user_Dept_Roles?: User_Dept_Role[];
   menus?: Menu[];
   deptName?: string;
 };
@@ -909,19 +876,18 @@ export type UpdateRoleParam = {
   sort?: number;
   deptId?: number;
   dept?: Dept;
-  users?: User[];
+  user_Dept_Roles?: User_Dept_Role[];
   menus?: Menu[];
   /**
    * 菜单
    */
   menuIds?: number[];
 };
-export type TableModel = {
-  table?: string;
-  router?: string;
-  columns?: TableColumn[];
-};
-export type TableColumnInfo = {
+export type ViewTypeEnum = 1 | 2 | 3;
+export type ConditionalType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16;
+export type ColumnTypeEnum = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+export type TableAlignEnum = 1 | 2 | 3;
+export type TableColumn = {
   /**
    * 主键
    */
@@ -942,6 +908,7 @@ export type TableColumnInfo = {
    * 最后更新时间
    */
   updateTime?: string;
+  viewId?: number;
   table?: string;
   router?: string;
   title?: string;
@@ -956,8 +923,9 @@ export type TableColumnInfo = {
   sort?: number;
   isShow?: boolean;
   props?: string;
+  tableView?: TableView;
 };
-export type TableColumnDTO = {
+export type TableView = {
   /**
    * 主键
    */
@@ -978,26 +946,20 @@ export type TableColumnDTO = {
    * 最后更新时间
    */
   updateTime?: string;
-  table?: string;
+  tableof?: string;
   router?: string;
-  title?: string;
-  key?: string;
-  searchType?: ConditionalType;
-  columnType?: ColumnTypeEnum;
-  columnTypeDetail?: string;
-  /**
-   * 对齐方式
-   */
-  align?: TableAlignEnum;
-  sort?: number;
-  isShow?: boolean;
-  props?: string;
+  type?: ViewTypeEnum;
+  tableColumns?: TableColumn[];
 };
-export type TableColumnDTOPagedResults = {
+export type ObjectPagedResults = {
   pagerInfo?: PagerInfo;
-  data?: TableColumnDTO[];
+  data?: unknown[];
 };
-export type UpdateTableColumnParam = {
+export type TableSortParam = {
+  id?: number;
+  sort?: number;
+};
+export type UpdateTableViewParam = {
   /**
    * 主键
    */
@@ -1018,21 +980,10 @@ export type UpdateTableColumnParam = {
    * 最后更新时间
    */
   updateTime?: string;
-  table?: string;
+  tableof?: string;
   router?: string;
-  title?: string;
-  key?: string;
-  searchType?: ConditionalType;
-  columnType?: ColumnTypeEnum;
-  columnTypeDetail?: string;
-  /**
-   * 对齐方式
-   */
-  align?: TableAlignEnum;
-  sort?: number;
-  isShow?: boolean;
-  props?: string;
-  roleIds?: number[];
+  type?: ViewTypeEnum;
+  tableColumns?: TableColumn[];
 };
 export type UserInfo = {
   /**
@@ -1062,8 +1013,7 @@ export type UserInfo = {
   password?: string;
   status?: boolean;
   userName?: string;
-  depts?: Dept[];
-  roles?: Role[];
+  user_Dept_Roles?: User_Dept_Role[];
   roleIds?: number[];
 };
 export type UserDTO = {
@@ -1125,771 +1075,11 @@ export type UpdateUserParam = {
   password?: string;
   status?: boolean;
   userName?: string;
-  depts?: Dept[];
-  roles?: Role[];
+  user_Dept_Roles?: User_Dept_Role[];
   roleIds?: number[];
 };
 declare global {
   interface Apis {
-    DataTable: {
-      /**
-       * ---
-       *
-       * [DELETE] 删除表头
-       *
-       * **path:** /api/DataTable/DeleteTableHeader
-       *
-       * ---
-       *
-       * **RequestBody**
-       * ```ts
-       * type RequestBody = number[]
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: unknown
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      delete_api_datatable_deletetableheader<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: unknown;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          data: number[];
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: unknown;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'DataTable.delete_api_datatable_deletetableheader',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [GET] 表头信息获取
-       *
-       * **path:** /api/DataTable/GetHeader
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   Table?: string
-       *   Router?: string
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: Array<{
-       *     // 主键
-       *     id?: number
-       *     // 创建者名称
-       *     createBy?: string
-       *     // 创建时间
-       *     createTime?: string
-       *     // 更新者名称
-       *     updateBy?: string
-       *     // 最后更新时间
-       *     updateTime?: string
-       *     table?: string
-       *     router?: string
-       *     title?: string
-       *     key?: string
-       *     searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
-       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
-       *     columnTypeDetail?: string
-       *     // 对齐方式
-       *     align?: 1 | 2 | 3
-       *     sort?: number
-       *     isShow?: boolean
-       *     props?: string
-       *   }>
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      get_api_datatable_getheader<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: TableColumn[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          params: {
-            Table?: string;
-            Router?: string;
-          };
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: TableColumn[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'DataTable.get_api_datatable_getheader',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [GET] 获取表字段
-       *
-       * **path:** /api/DataTable/GetTableHeader
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   Table?: string
-       *   Router?: string
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: {
-       *     table?: string
-       *     router?: string
-       *     columns?: Array<{
-       *       // 主键
-       *       id?: number
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       table?: string
-       *       router?: string
-       *       title?: string
-       *       key?: string
-       *       searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
-       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
-       *       columnTypeDetail?: string
-       *       // 对齐方式
-       *       align?: 1 | 2 | 3
-       *       sort?: number
-       *       isShow?: boolean
-       *       props?: string
-       *     }>
-       *   }
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      get_api_datatable_gettableheader<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: TableHeaderDTO;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          params: {
-            Table?: string;
-            Router?: string;
-          };
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: TableHeaderDTO;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'DataTable.get_api_datatable_gettableheader',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [GET] 分页
-       *
-       * **path:** /api/DataTable/Page
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   Table?: string
-       *   Router?: string
-       *   Search?: Record<string, Record<string, string>>
-       *   StartIndex?: number
-       *   PageIndex?: number
-       *   PageSize?: number
-       *   SortList?: Record<string, string>
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: {
-       *     pagerInfo?: {
-       *       totalRowCount?: number
-       *       pageSize?: number
-       *       startIndex?: number
-       *       pageIndex?: number
-       *       hasPrev?: boolean
-       *       hasNext?: boolean
-       *       isFirst?: boolean
-       *       isLast?: boolean
-       *       totalPageCount?: number
-       *     }
-       *     data?: unknown[]
-       *   }
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      get_api_datatable_page<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: ObjectPagedResults;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          params: {
-            Table?: string;
-            Router?: string;
-            Search?: Record<string, Record<string, string>>;
-            StartIndex?: number;
-            PageIndex?: number;
-            PageSize?: number;
-            SortList?: Record<string, string>;
-          };
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: ObjectPagedResults;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'DataTable.get_api_datatable_page',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [PUT] 设置表头
-       *
-       * **path:** /api/DataTable/SetTableHeader
-       *
-       * ---
-       *
-       * **RequestBody**
-       * ```ts
-       * type RequestBody = {
-       *   // 主键
-       *   id?: number
-       *   // 创建者名称
-       *   createBy?: string
-       *   // 创建时间
-       *   createTime?: string
-       *   // 更新者名称
-       *   updateBy?: string
-       *   // 最后更新时间
-       *   updateTime?: string
-       *   table?: string
-       *   router?: string
-       *   title?: string
-       *   key?: string
-       *   searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
-       *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
-       *   columnTypeDetail?: string
-       *   // 对齐方式
-       *   align?: 1 | 2 | 3
-       *   sort?: number
-       *   isShow?: boolean
-       *   props?: string
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: {
-       *     // 主键
-       *     id?: number
-       *     // 创建者名称
-       *     createBy?: string
-       *     // 创建时间
-       *     createTime?: string
-       *     // 更新者名称
-       *     updateBy?: string
-       *     // 最后更新时间
-       *     updateTime?: string
-       *     table?: string
-       *     router?: string
-       *     title?: string
-       *     key?: string
-       *     searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
-       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
-       *     columnTypeDetail?: string
-       *     // 对齐方式
-       *     align?: 1 | 2 | 3
-       *     sort?: number
-       *     isShow?: boolean
-       *     props?: string
-       *   }
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      put_api_datatable_settableheader<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: TableColumn;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          data: TableColumn;
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: TableColumn;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'DataTable.put_api_datatable_settableheader',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [PUT] 排序
-       *
-       * **path:** /api/DataTable/SetTableSort
-       *
-       * ---
-       *
-       * **RequestBody**
-       * ```ts
-       * type RequestBody = Array<{
-       *   id?: number
-       *   sort?: number
-       * }>
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: unknown
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      put_api_datatable_settablesort<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: unknown;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          data: TableSortParam[];
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: unknown;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'DataTable.put_api_datatable_settablesort',
-        Config
-      >;
-    };
-    Demo: {
-      /**
-       * ---
-       *
-       * [GET] 分页
-       *
-       * **path:** /api/Demo/GetPage
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   StartIndex?: number
-       *   Search?: Record<string, Record<string, string>>
-       *   PageIndex?: number
-       *   PageSize?: number
-       *   SortList?: Record<string, string>
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   success?: boolean
-       *   msg?: string
-       *   code?: number
-       *   data?: {
-       *     pagerInfo?: {
-       *       totalRowCount?: number
-       *       pageSize?: number
-       *       startIndex?: number
-       *       pageIndex?: number
-       *       hasPrev?: boolean
-       *       hasNext?: boolean
-       *       isFirst?: boolean
-       *       isLast?: boolean
-       *       totalPageCount?: number
-       *     }
-       *     data?: Array<{
-       *       id?: number
-       *       code?: string
-       *       srot?: string
-       *     }>
-       *   }
-       * }
-       * ```
-       */
-      get_api_demo_getpage<
-        Config extends Alova2MethodConfig<RedisDemoDTOPagedResultsExcutedResult> & {
-          params: {
-            StartIndex?: number;
-            Search?: Record<string, Record<string, string>>;
-            PageIndex?: number;
-            PageSize?: number;
-            SortList?: Record<string, string>;
-          };
-        }
-      >(
-        config: Config
-      ): Alova2Method<RedisDemoDTOPagedResultsExcutedResult, 'Demo.get_api_demo_getpage', Config>;
-      /**
-       * ---
-       *
-       * [GET] 同步请求
-       *
-       * **path:** /api/Demo/GetSync
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: string
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      get_api_demo_getsync<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }>
-      >(
-        config?: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: string;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Demo.get_api_demo_getsync',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [POST] 插入
-       *
-       * **path:** /api/Demo/SetRoleData
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   num?: number
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   success?: boolean
-       *   msg?: string
-       *   code?: number
-       *   data?: number
-       * }
-       * ```
-       */
-      post_api_demo_setroledata<
-        Config extends Alova2MethodConfig<Int32ExcutedResult> & {
-          params: {
-            num?: number;
-          };
-        }
-      >(
-        config: Config
-      ): Alova2Method<Int32ExcutedResult, 'Demo.post_api_demo_setroledata', Config>;
-    };
     Dept: {
       /**
        * ---
@@ -2014,25 +1204,11 @@ declare global {
        *     status?: boolean
        *     sort?: number
        *     type?: 10 | 20 | 30
-       *     users?: Array<{
-       *       // 主键
-       *       id?: number
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       nickName?: string
-       *       avatar?: string
-       *       phone?: string
-       *       email?: string
-       *       password?: string
-       *       status?: boolean
-       *       userName?: string
-       *       depts?: Array<{
+       *     user_Dept_Roles?: Array<{
+       *       userId?: number
+       *       deptId?: number
+       *       roleId?: number
+       *       dept?: {
        *         // 主键
        *         id?: number
        *         // 创建者名称
@@ -2055,7 +1231,7 @@ declare global {
        *         status?: boolean
        *         sort?: number
        *         type?: DeptTypeEnum
-       *         users?: Array<User>
+       *         user_Dept_Roles?: Array<User_Dept_Role>
        *         roles?: Array<{
        *           // 主键
        *           id?: number
@@ -2075,7 +1251,7 @@ declare global {
        *           sort?: number
        *           deptId?: number
        *           dept?: Dept
-       *           users?: Array<User>
+       *           user_Dept_Roles?: Array<User_Dept_Role>
        *           menus?: Array<{
        *             // 主键
        *             id?: number
@@ -2116,8 +1292,28 @@ declare global {
        *           }>
        *         }>
        *         children?: Array<Dept>
-       *       }>
-       *       roles?: Array<Role>
+       *       }
+       *       role?: Role
+       *       user?: {
+       *         // 主键
+       *         id?: number
+       *         // 创建者名称
+       *         createBy?: string
+       *         // 创建时间
+       *         createTime?: string
+       *         // 更新者名称
+       *         updateBy?: string
+       *         // 最后更新时间
+       *         updateTime?: string
+       *         nickName?: string
+       *         avatar?: string
+       *         phone?: string
+       *         email?: string
+       *         password?: string
+       *         status?: boolean
+       *         userName?: string
+       *         user_Dept_Roles?: Array<User_Dept_Role>
+       *       }
        *     }>
        *     roles?: Array<Role>
        *     children?: Array<Dept>
@@ -2476,25 +1672,11 @@ declare global {
        *   status?: boolean
        *   sort?: number
        *   type?: 10 | 20 | 30
-       *   users?: Array<{
-       *     // 主键
-       *     id?: number
-       *     // 创建者名称
-       *     createBy?: string
-       *     // 创建时间
-       *     createTime?: string
-       *     // 更新者名称
-       *     updateBy?: string
-       *     // 最后更新时间
-       *     updateTime?: string
-       *     nickName?: string
-       *     avatar?: string
-       *     phone?: string
-       *     email?: string
-       *     password?: string
-       *     status?: boolean
-       *     userName?: string
-       *     depts?: Array<{
+       *   user_Dept_Roles?: Array<{
+       *     userId?: number
+       *     deptId?: number
+       *     roleId?: number
+       *     dept?: {
        *       // 主键
        *       id?: number
        *       // 创建者名称
@@ -2517,7 +1699,7 @@ declare global {
        *       status?: boolean
        *       sort?: number
        *       type?: DeptTypeEnum
-       *       users?: Array<User>
+       *       user_Dept_Roles?: Array<User_Dept_Role>
        *       roles?: Array<{
        *         // 主键
        *         id?: number
@@ -2537,7 +1719,7 @@ declare global {
        *         sort?: number
        *         deptId?: number
        *         dept?: Dept
-       *         users?: Array<User>
+       *         user_Dept_Roles?: Array<User_Dept_Role>
        *         menus?: Array<{
        *           // 主键
        *           id?: number
@@ -2578,8 +1760,28 @@ declare global {
        *         }>
        *       }>
        *       children?: Array<Dept>
-       *     }>
-       *     roles?: Array<Role>
+       *     }
+       *     role?: Role
+       *     user?: {
+       *       // 主键
+       *       id?: number
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       nickName?: string
+       *       avatar?: string
+       *       phone?: string
+       *       email?: string
+       *       password?: string
+       *       status?: boolean
+       *       userName?: string
+       *       user_Dept_Roles?: Array<User_Dept_Role>
+       *     }
        *   }>
        *   roles?: Array<{
        *     // 主键
@@ -2600,7 +1802,7 @@ declare global {
        *     sort?: number
        *     deptId?: number
        *     dept?: Dept
-       *     users?: Array<User>
+       *     user_Dept_Roles?: Array<User_Dept_Role>
        *     menus?: Array<{
        *       // 主键
        *       id?: number
@@ -2663,7 +1865,7 @@ declare global {
        *     status?: boolean
        *     sort?: number
        *     type?: DeptTypeEnum
-       *     users?: Array<User>
+       *     user_Dept_Roles?: Array<User_Dept_Role>
        *     roles?: Array<{
        *       // 主键
        *       id?: number
@@ -2683,7 +1885,7 @@ declare global {
        *       sort?: number
        *       deptId?: number
        *       dept?: Dept
-       *       users?: Array<User>
+       *       user_Dept_Roles?: Array<User_Dept_Role>
        *       menus?: Array<{
        *         // 主键
        *         id?: number
@@ -3414,7 +2616,7 @@ declare global {
        *       sort?: number
        *       deptId?: number
        *       dept?: Dept
-       *       users?: Array<User>
+       *       user_Dept_Roles?: Array<User_Dept_Role>
        *       menus?: Array<{
        *         // 主键
        *         id?: number
@@ -3584,6 +2786,7 @@ declare global {
        *     name?: string
        *     // 路径
        *     path?: string
+       *     pathParam?: string
        *     // 重定向
        *     redirect?: string
        *     // 组件
@@ -3606,6 +2809,24 @@ declare global {
        *       constant?: boolean
        *       // 菜单和面包屑对应的图标
        *       icon?: string
+       *       // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
+       *       localIcon?: string
+       *       // 菜单和面包屑对应的图标的字体大小
+       *       iconFontSize?: number
+       *       // 路由顺序，可用于菜单的排序
+       *       order?: number
+       *       // 外链链接
+       *       href?: string
+       *       // 是否在菜单中隐藏路线
+       *       hideInMenu?: boolean
+       *       // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
+       *       activeMenu?: string
+       *       // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
+       *       multiTab?: boolean
+       *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
+       *       fixedIndexInTab?: number
+       *       // 跳转参数
+       *       query?: Record<string, string>
        *     }
        *     // 子节点
        *     children?: Array<RouteDTO>
@@ -3684,12 +2905,10 @@ declare global {
        *     name?: string
        *     // 组件
        *     component?: string
-       *     // 组件名称
-       *     componentName?: string
        *     // 父级菜单ID
        *     parentId?: number
        *     // 排序
-       *     sort?: number
+       *     order?: number
        *     // icon图标
        *     icon?: string
        *     menuType?: 1 | 2 | 3
@@ -4142,7 +3361,7 @@ declare global {
        *     sort?: number
        *     deptId?: number
        *     dept?: Dept
-       *     users?: Array<User>
+       *     user_Dept_Roles?: Array<User_Dept_Role>
        *     menus?: Array<{
        *       // 主键
        *       id?: number
@@ -4441,7 +3660,7 @@ declare global {
        *       status?: boolean
        *       sort?: number
        *       type?: DeptTypeEnum
-       *       users?: Array<User>
+       *       user_Dept_Roles?: Array<User_Dept_Role>
        *       roles?: Array<{
        *         // 主键
        *         id?: number
@@ -4461,7 +3680,7 @@ declare global {
        *         sort?: number
        *         deptId?: number
        *         dept?: Dept
-       *         users?: Array<User>
+       *         user_Dept_Roles?: Array<User_Dept_Role>
        *         menus?: Array<{
        *           // 主键
        *           id?: number
@@ -4503,25 +3722,11 @@ declare global {
        *       }>
        *       children?: Array<Dept>
        *     }
-       *     users?: Array<{
-       *       // 主键
-       *       id?: number
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       nickName?: string
-       *       avatar?: string
-       *       phone?: string
-       *       email?: string
-       *       password?: string
-       *       status?: boolean
-       *       userName?: string
-       *       depts?: Array<{
+       *     user_Dept_Roles?: Array<{
+       *       userId?: number
+       *       deptId?: number
+       *       roleId?: number
+       *       dept?: {
        *         // 主键
        *         id?: number
        *         // 创建者名称
@@ -4544,7 +3749,7 @@ declare global {
        *         status?: boolean
        *         sort?: number
        *         type?: DeptTypeEnum
-       *         users?: Array<User>
+       *         user_Dept_Roles?: Array<User_Dept_Role>
        *         roles?: Array<{
        *           // 主键
        *           id?: number
@@ -4564,7 +3769,7 @@ declare global {
        *           sort?: number
        *           deptId?: number
        *           dept?: Dept
-       *           users?: Array<User>
+       *           user_Dept_Roles?: Array<User_Dept_Role>
        *           menus?: Array<{
        *             // 主键
        *             id?: number
@@ -4605,8 +3810,28 @@ declare global {
        *           }>
        *         }>
        *         children?: Array<Dept>
-       *       }>
-       *       roles?: Array<Role>
+       *       }
+       *       role?: Role
+       *       user?: {
+       *         // 主键
+       *         id?: number
+       *         // 创建者名称
+       *         createBy?: string
+       *         // 创建时间
+       *         createTime?: string
+       *         // 更新者名称
+       *         updateBy?: string
+       *         // 最后更新时间
+       *         updateTime?: string
+       *         nickName?: string
+       *         avatar?: string
+       *         phone?: string
+       *         email?: string
+       *         password?: string
+       *         status?: boolean
+       *         userName?: string
+       *         user_Dept_Roles?: Array<User_Dept_Role>
+       *       }
        *     }>
        *     menus?: Array<{
        *       // 主键
@@ -4786,7 +4011,7 @@ declare global {
        *         status?: boolean
        *         sort?: number
        *         type?: DeptTypeEnum
-       *         users?: Array<User>
+       *         user_Dept_Roles?: Array<User_Dept_Role>
        *         roles?: Array<{
        *           // 主键
        *           id?: number
@@ -4806,7 +4031,7 @@ declare global {
        *           sort?: number
        *           deptId?: number
        *           dept?: Dept
-       *           users?: Array<User>
+       *           user_Dept_Roles?: Array<User_Dept_Role>
        *           menus?: Array<{
        *             // 主键
        *             id?: number
@@ -4848,25 +4073,11 @@ declare global {
        *         }>
        *         children?: Array<Dept>
        *       }
-       *       users?: Array<{
-       *         // 主键
-       *         id?: number
-       *         // 创建者名称
-       *         createBy?: string
-       *         // 创建时间
-       *         createTime?: string
-       *         // 更新者名称
-       *         updateBy?: string
-       *         // 最后更新时间
-       *         updateTime?: string
-       *         nickName?: string
-       *         avatar?: string
-       *         phone?: string
-       *         email?: string
-       *         password?: string
-       *         status?: boolean
-       *         userName?: string
-       *         depts?: Array<{
+       *       user_Dept_Roles?: Array<{
+       *         userId?: number
+       *         deptId?: number
+       *         roleId?: number
+       *         dept?: {
        *           // 主键
        *           id?: number
        *           // 创建者名称
@@ -4889,7 +4100,7 @@ declare global {
        *           status?: boolean
        *           sort?: number
        *           type?: DeptTypeEnum
-       *           users?: Array<User>
+       *           user_Dept_Roles?: Array<User_Dept_Role>
        *           roles?: Array<{
        *             // 主键
        *             id?: number
@@ -4909,7 +4120,7 @@ declare global {
        *             sort?: number
        *             deptId?: number
        *             dept?: Dept
-       *             users?: Array<User>
+       *             user_Dept_Roles?: Array<User_Dept_Role>
        *             menus?: Array<{
        *               // 主键
        *               id?: number
@@ -4950,8 +4161,28 @@ declare global {
        *             }>
        *           }>
        *           children?: Array<Dept>
-       *         }>
-       *         roles?: Array<Role>
+       *         }
+       *         role?: Role
+       *         user?: {
+       *           // 主键
+       *           id?: number
+       *           // 创建者名称
+       *           createBy?: string
+       *           // 创建时间
+       *           createTime?: string
+       *           // 更新者名称
+       *           updateBy?: string
+       *           // 最后更新时间
+       *           updateTime?: string
+       *           nickName?: string
+       *           avatar?: string
+       *           phone?: string
+       *           email?: string
+       *           password?: string
+       *           status?: boolean
+       *           userName?: string
+       *           user_Dept_Roles?: Array<User_Dept_Role>
+       *         }
        *       }>
        *       menus?: Array<{
        *         // 主键
@@ -5257,7 +4488,7 @@ declare global {
        *     status?: boolean
        *     sort?: number
        *     type?: DeptTypeEnum
-       *     users?: Array<User>
+       *     user_Dept_Roles?: Array<User_Dept_Role>
        *     roles?: Array<{
        *       // 主键
        *       id?: number
@@ -5277,7 +4508,7 @@ declare global {
        *       sort?: number
        *       deptId?: number
        *       dept?: Dept
-       *       users?: Array<User>
+       *       user_Dept_Roles?: Array<User_Dept_Role>
        *       menus?: Array<{
        *         // 主键
        *         id?: number
@@ -5319,25 +4550,11 @@ declare global {
        *     }>
        *     children?: Array<Dept>
        *   }
-       *   users?: Array<{
-       *     // 主键
-       *     id?: number
-       *     // 创建者名称
-       *     createBy?: string
-       *     // 创建时间
-       *     createTime?: string
-       *     // 更新者名称
-       *     updateBy?: string
-       *     // 最后更新时间
-       *     updateTime?: string
-       *     nickName?: string
-       *     avatar?: string
-       *     phone?: string
-       *     email?: string
-       *     password?: string
-       *     status?: boolean
-       *     userName?: string
-       *     depts?: Array<{
+       *   user_Dept_Roles?: Array<{
+       *     userId?: number
+       *     deptId?: number
+       *     roleId?: number
+       *     dept?: {
        *       // 主键
        *       id?: number
        *       // 创建者名称
@@ -5360,7 +4577,7 @@ declare global {
        *       status?: boolean
        *       sort?: number
        *       type?: DeptTypeEnum
-       *       users?: Array<User>
+       *       user_Dept_Roles?: Array<User_Dept_Role>
        *       roles?: Array<{
        *         // 主键
        *         id?: number
@@ -5380,7 +4597,7 @@ declare global {
        *         sort?: number
        *         deptId?: number
        *         dept?: Dept
-       *         users?: Array<User>
+       *         user_Dept_Roles?: Array<User_Dept_Role>
        *         menus?: Array<{
        *           // 主键
        *           id?: number
@@ -5421,8 +4638,28 @@ declare global {
        *         }>
        *       }>
        *       children?: Array<Dept>
-       *     }>
-       *     roles?: Array<Role>
+       *     }
+       *     role?: Role
+       *     user?: {
+       *       // 主键
+       *       id?: number
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       nickName?: string
+       *       avatar?: string
+       *       phone?: string
+       *       email?: string
+       *       password?: string
+       *       status?: boolean
+       *       userName?: string
+       *       user_Dept_Roles?: Array<User_Dept_Role>
+       *     }
        *   }>
        *   menus?: Array<{
        *     // 主键
@@ -5533,15 +4770,211 @@ declare global {
       /**
        * ---
        *
-       * [DELETE] 删除
+       * [DELETE] 删除表头
        *
-       * **path:** /api/TableColumn/Delete
+       * **path:** /api/TableColumn/Delete/{tableof}
+       *
+       * ---
+       *
+       * **Path Parameters**
+       * ```ts
+       * type PathParameters = {
+       *   // [required]
+       *   tableof: string
+       * }
+       * ```
        *
        * ---
        *
        * **RequestBody**
        * ```ts
        * type RequestBody = number[]
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: unknown
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      delete_api_tablecolumn_delete_tableof<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          pathParams: {
+            /**
+             * [required]
+             */
+            tableof: string;
+          };
+          data: number[];
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'TableColumn.delete_api_tablecolumn_delete_tableof',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 查询详情
+       *
+       * **path:** /api/TableColumn/GetForm/{tableof}
+       *
+       * ---
+       *
+       * **Path Parameters**
+       * ```ts
+       * type PathParameters = {
+       *   // [required]
+       *   tableof: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   id?: number
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: unknown
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_tablecolumn_getform_tableof<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          pathParams: {
+            /**
+             * [required]
+             */
+            tableof: string;
+          };
+          params: {
+            id?: number;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'TableColumn.get_api_tablecolumn_getform_tableof',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [POST] 新增
+       *
+       * **path:** /api/TableColumn/Submit/{tableof}
+       *
+       * ---
+       *
+       * **Path Parameters**
+       * ```ts
+       * type PathParameters = {
+       *   // [required]
+       *   tableof: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **RequestBody**
+       * ```ts
+       * type RequestBody = Record<string, string>
        * ```
        *
        * ---
@@ -5560,7 +4993,7 @@ declare global {
        * }
        * ```
        */
-      delete_api_tablecolumn_delete<
+      post_api_tablecolumn_submit_tableof<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -5570,6 +5003,89 @@ declare global {
            * [required]
            */
           data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          pathParams: {
+            /**
+             * [required]
+             */
+            tableof: string;
+          };
+          data: Record<string, string>;
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'TableColumn.post_api_tablecolumn_submit_tableof',
+        Config
+      >;
+    };
+    TableView: {
+      /**
+       * ---
+       *
+       * [DELETE] 删除
+       *
+       * **path:** /api/TableView/Delete
+       *
+       * ---
+       *
+       * **RequestBody**
+       * ```ts
+       * type RequestBody = number[]
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: unknown
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      delete_api_tableview_delete<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
           /**
            * [required]
            */
@@ -5592,7 +5108,7 @@ declare global {
           /**
            * [required]
            */
-          data: number;
+          data: unknown;
           /**
            * [required]
            */
@@ -5602,24 +5118,21 @@ declare global {
            */
           success: boolean;
         },
-        'TableColumn.delete_api_tablecolumn_delete',
+        'TableView.delete_api_tableview_delete',
         Config
       >;
       /**
        * ---
        *
-       * [GET] 获取头部列表
+       * [DELETE] 删除表头
        *
-       * **path:** /api/TableColumn/GetColumns
+       * **path:** /api/TableView/DeleteTableHeader
        *
        * ---
        *
-       * **Query Parameters**
+       * **RequestBody**
        * ```ts
-       * type QueryParameters = {
-       *   Table?: string
-       *   Router?: string
-       * }
+       * type RequestBody = number[]
        * ```
        *
        * ---
@@ -5629,36 +5142,8 @@ declare global {
        * type Response = {
        *   // [required]
        *   code: string
-       *   // 头部醒醒
        *   // [required]
-       *   data: {
-       *     table?: string
-       *     router?: string
-       *     columns?: Array<{
-       *       // 主键
-       *       id?: number
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       table?: string
-       *       router?: string
-       *       title?: string
-       *       key?: string
-       *       searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
-       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
-       *       columnTypeDetail?: string
-       *       // 对齐方式
-       *       align?: 1 | 2 | 3
-       *       sort?: number
-       *       isShow?: boolean
-       *       props?: string
-       *     }>
-       *   }
+       *   data: unknown
        *   // [required]
        *   msg: string
        *   // [required]
@@ -5666,17 +5151,16 @@ declare global {
        * }
        * ```
        */
-      get_api_tablecolumn_getcolumns<
+      delete_api_tableview_deletetableheader<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
            */
           code: string;
           /**
-           * 头部醒醒
            * [required]
            */
-          data: TableModel;
+          data: unknown;
           /**
            * [required]
            */
@@ -5686,10 +5170,7 @@ declare global {
            */
           success: boolean;
         }> & {
-          params: {
-            Table?: string;
-            Router?: string;
-          };
+          data: number[];
         }
       >(
         config: Config
@@ -5700,10 +5181,9 @@ declare global {
            */
           code: string;
           /**
-           * 头部醒醒
            * [required]
            */
-          data: TableModel;
+          data: unknown;
           /**
            * [required]
            */
@@ -5713,22 +5193,24 @@ declare global {
            */
           success: boolean;
         },
-        'TableColumn.get_api_tablecolumn_getcolumns',
+        'TableView.delete_api_tableview_deletetableheader',
         Config
       >;
       /**
        * ---
        *
-       * [GET] 查询详情
+       * [GET] 获取表字段
        *
-       * **path:** /api/TableColumn/GetInfo
+       * **path:** /api/TableView/GetTableHeader
        *
        * ---
        *
        * **Query Parameters**
        * ```ts
        * type QueryParameters = {
-       *   id?: number
+       *   Tableof?: string
+       *   Router?: string
+       *   Type?: 1 | 2 | 3
        * }
        * ```
        *
@@ -5739,7 +5221,6 @@ declare global {
        * type Response = {
        *   // [required]
        *   code: string
-       *   // 用户 详情
        *   // [required]
        *   data: {
        *     // 主键
@@ -5752,18 +5233,35 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     table?: string
+       *     tableof?: string
        *     router?: string
-       *     title?: string
-       *     key?: string
-       *     searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
-       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
-       *     columnTypeDetail?: string
-       *     // 对齐方式
-       *     align?: 1 | 2 | 3
-       *     sort?: number
-       *     isShow?: boolean
-       *     props?: string
+       *     type?: 1 | 2 | 3
+       *     tableColumns?: Array<{
+       *       // 主键
+       *       id?: number
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       viewId?: number
+       *       table?: string
+       *       router?: string
+       *       title?: string
+       *       key?: string
+       *       searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+       *       columnTypeDetail?: string
+       *       // 对齐方式
+       *       align?: 1 | 2 | 3
+       *       sort?: number
+       *       isShow?: boolean
+       *       props?: string
+       *       tableView?: TableView
+       *     }>
        *   }
        *   // [required]
        *   msg: string
@@ -5772,17 +5270,16 @@ declare global {
        * }
        * ```
        */
-      get_api_tablecolumn_getinfo<
+      get_api_tableview_gettableheader<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
            */
           code: string;
           /**
-           * 用户 详情
            * [required]
            */
-          data: TableColumnInfo;
+          data: TableView;
           /**
            * [required]
            */
@@ -5793,7 +5290,9 @@ declare global {
           success: boolean;
         }> & {
           params: {
-            id?: number;
+            Tableof?: string;
+            Router?: string;
+            Type?: ViewTypeEnum;
           };
         }
       >(
@@ -5805,10 +5304,9 @@ declare global {
            */
           code: string;
           /**
-           * 用户 详情
            * [required]
            */
-          data: TableColumnInfo;
+          data: TableView;
           /**
            * [required]
            */
@@ -5818,7 +5316,130 @@ declare global {
            */
           success: boolean;
         },
-        'TableColumn.get_api_tablecolumn_getinfo',
+        'TableView.get_api_tableview_gettableheader',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 表头信息获取
+       *
+       * **path:** /api/TableView/GetView
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   Tableof?: string
+       *   Router?: string
+       *   Type?: 1 | 2 | 3
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: {
+       *     // 主键
+       *     id?: number
+       *     // 创建者名称
+       *     createBy?: string
+       *     // 创建时间
+       *     createTime?: string
+       *     // 更新者名称
+       *     updateBy?: string
+       *     // 最后更新时间
+       *     updateTime?: string
+       *     tableof?: string
+       *     router?: string
+       *     type?: 1 | 2 | 3
+       *     tableColumns?: Array<{
+       *       // 主键
+       *       id?: number
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       viewId?: number
+       *       table?: string
+       *       router?: string
+       *       title?: string
+       *       key?: string
+       *       searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+       *       columnTypeDetail?: string
+       *       // 对齐方式
+       *       align?: 1 | 2 | 3
+       *       sort?: number
+       *       isShow?: boolean
+       *       props?: string
+       *       tableView?: TableView
+       *     }>
+       *   }
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_tableview_getview<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: TableView;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            Tableof?: string;
+            Router?: string;
+            Type?: ViewTypeEnum;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: TableView;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'TableView.get_api_tableview_getview',
         Config
       >;
       /**
@@ -5826,14 +5447,16 @@ declare global {
        *
        * [GET] 分页
        *
-       * **path:** /api/TableColumn/GetPage
+       * **path:** /api/TableView/Page
        *
        * ---
        *
        * **Query Parameters**
        * ```ts
        * type QueryParameters = {
-       *   KeyWord?: string
+       *   Tableof?: string
+       *   Router?: string
+       *   Type?: 1 | 2 | 3
        *   StartIndex?: number
        *   Search?: Record<string, Record<string, string>>
        *   PageIndex?: number
@@ -5862,30 +5485,7 @@ declare global {
        *       isLast?: boolean
        *       totalPageCount?: number
        *     }
-       *     data?: Array<{
-       *       // 主键
-       *       id?: number
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       table?: string
-       *       router?: string
-       *       title?: string
-       *       key?: string
-       *       searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
-       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
-       *       columnTypeDetail?: string
-       *       // 对齐方式
-       *       align?: 1 | 2 | 3
-       *       sort?: number
-       *       isShow?: boolean
-       *       props?: string
-       *     }>
+       *     data?: unknown[]
        *   }
        *   // [required]
        *   msg: string
@@ -5894,7 +5494,7 @@ declare global {
        * }
        * ```
        */
-      get_api_tablecolumn_getpage<
+      get_api_tableview_page<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -5903,7 +5503,7 @@ declare global {
           /**
            * [required]
            */
-          data: TableColumnDTOPagedResults;
+          data: ObjectPagedResults;
           /**
            * [required]
            */
@@ -5914,7 +5514,9 @@ declare global {
           success: boolean;
         }> & {
           params: {
-            KeyWord?: string;
+            Tableof?: string;
+            Router?: string;
+            Type?: ViewTypeEnum;
             StartIndex?: number;
             Search?: Record<string, Record<string, string>>;
             PageIndex?: number;
@@ -5933,7 +5535,7 @@ declare global {
           /**
            * [required]
            */
-          data: TableColumnDTOPagedResults;
+          data: ObjectPagedResults;
           /**
            * [required]
            */
@@ -5943,24 +5545,57 @@ declare global {
            */
           success: boolean;
         },
-        'TableColumn.get_api_tablecolumn_getpage',
+        'TableView.get_api_tableview_page',
         Config
       >;
       /**
        * ---
        *
-       * [POST] 设置列表
+       * [PUT] 设置表头
        *
-       * **path:** /api/TableColumn/SetColumns
+       * **path:** /api/TableView/SetTableHeader
        *
        * ---
        *
        * **RequestBody**
        * ```ts
        * type RequestBody = {
+       *   // 主键
+       *   id?: number
+       *   // 创建者名称
+       *   createBy?: string
+       *   // 创建时间
+       *   createTime?: string
+       *   // 更新者名称
+       *   updateBy?: string
+       *   // 最后更新时间
+       *   updateTime?: string
+       *   viewId?: number
        *   table?: string
        *   router?: string
-       *   columns?: Array<{
+       *   title?: string
+       *   key?: string
+       *   searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+       *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+       *   columnTypeDetail?: string
+       *   // 对齐方式
+       *   align?: 1 | 2 | 3
+       *   sort?: number
+       *   isShow?: boolean
+       *   props?: string
+       *   tableView?: TableView
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: {
        *     // 主键
        *     id?: number
        *     // 创建者名称
@@ -5971,6 +5606,7 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
+       *     viewId?: number
        *     table?: string
        *     router?: string
        *     title?: string
@@ -5983,8 +5619,75 @@ declare global {
        *     sort?: number
        *     isShow?: boolean
        *     props?: string
-       *   }>
+       *     tableView?: TableView
+       *   }
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
        * }
+       * ```
+       */
+      put_api_tableview_settableheader<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: TableColumn;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          data: TableColumn;
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: TableColumn;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'TableView.put_api_tableview_settableheader',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [PUT] 排序
+       *
+       * **path:** /api/TableView/SetTableSort
+       *
+       * ---
+       *
+       * **RequestBody**
+       * ```ts
+       * type RequestBody = Array<{
+       *   id?: number
+       *   sort?: number
+       * }>
        * ```
        *
        * ---
@@ -6003,7 +5706,7 @@ declare global {
        * }
        * ```
        */
-      post_api_tablecolumn_setcolumns<
+      put_api_tableview_settablesort<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -6022,7 +5725,7 @@ declare global {
            */
           success: boolean;
         }> & {
-          data: TableModel;
+          data: TableSortParam[];
         }
       >(
         config: Config
@@ -6045,15 +5748,15 @@ declare global {
            */
           success: boolean;
         },
-        'TableColumn.post_api_tablecolumn_setcolumns',
+        'TableView.put_api_tableview_settablesort',
         Config
       >;
       /**
        * ---
        *
-       * [POST] 提交
+       * [POST] 新增
        *
-       * **path:** /api/TableColumn/Submit
+       * **path:** /api/TableView/Submit
        *
        * ---
        *
@@ -6070,19 +5773,35 @@ declare global {
        *   updateBy?: string
        *   // 最后更新时间
        *   updateTime?: string
-       *   table?: string
+       *   tableof?: string
        *   router?: string
-       *   title?: string
-       *   key?: string
-       *   searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
-       *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
-       *   columnTypeDetail?: string
-       *   // 对齐方式
-       *   align?: 1 | 2 | 3
-       *   sort?: number
-       *   isShow?: boolean
-       *   props?: string
-       *   roleIds?: number[]
+       *   type?: 1 | 2 | 3
+       *   tableColumns?: Array<{
+       *     // 主键
+       *     id?: number
+       *     // 创建者名称
+       *     createBy?: string
+       *     // 创建时间
+       *     createTime?: string
+       *     // 更新者名称
+       *     updateBy?: string
+       *     // 最后更新时间
+       *     updateTime?: string
+       *     viewId?: number
+       *     table?: string
+       *     router?: string
+       *     title?: string
+       *     key?: string
+       *     searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+       *     columnTypeDetail?: string
+       *     // 对齐方式
+       *     align?: 1 | 2 | 3
+       *     sort?: number
+       *     isShow?: boolean
+       *     props?: string
+       *     tableView?: TableView
+       *   }>
        * }
        * ```
        *
@@ -6102,7 +5821,7 @@ declare global {
        * }
        * ```
        */
-      post_api_tablecolumn_submit<
+      post_api_tableview_submit<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -6121,7 +5840,7 @@ declare global {
            */
           success: boolean;
         }> & {
-          data: UpdateTableColumnParam;
+          data: UpdateTableViewParam;
         }
       >(
         config: Config
@@ -6144,7 +5863,7 @@ declare global {
            */
           success: boolean;
         },
-        'TableColumn.post_api_tablecolumn_submit',
+        'TableView.post_api_tableview_submit',
         Config
       >;
     };
@@ -6335,31 +6054,11 @@ declare global {
        *     password?: string
        *     status?: boolean
        *     userName?: string
-       *     depts?: Array<{
-       *       // 主键
-       *       id?: number
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       image?: string
-       *       name?: string
-       *       easyName?: string
-       *       parentId?: number
-       *       address?: string
-       *       isDeleted?: boolean
-       *       phone?: string
-       *       man?: string
-       *       remark?: string
-       *       status?: boolean
-       *       sort?: number
-       *       type?: DeptTypeEnum
-       *       users?: Array<User>
-       *       roles?: Array<{
+       *     user_Dept_Roles?: Array<{
+       *       userId?: number
+       *       deptId?: number
+       *       roleId?: number
+       *       dept?: {
        *         // 主键
        *         id?: number
        *         // 创建者名称
@@ -6370,16 +6069,20 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
+       *         image?: string
        *         name?: string
-       *         type?: 10 | 20 | 30 | 40
-       *         status?: boolean
+       *         easyName?: string
+       *         parentId?: number
+       *         address?: string
+       *         isDeleted?: boolean
+       *         phone?: string
+       *         man?: string
        *         remark?: string
-       *         code?: string
+       *         status?: boolean
        *         sort?: number
-       *         deptId?: number
-       *         dept?: Dept
-       *         users?: Array<User>
-       *         menus?: Array<{
+       *         type?: DeptTypeEnum
+       *         user_Dept_Roles?: Array<User_Dept_Role>
+       *         roles?: Array<{
        *           // 主键
        *           id?: number
        *           // 创建者名称
@@ -6391,56 +6094,57 @@ declare global {
        *           // 最后更新时间
        *           updateTime?: string
        *           name?: string
-       *           path?: string
-       *           pathParam?: string
-       *           layout?: string
-       *           redirect?: string
-       *           component?: string
-       *           parentId?: number
-       *           menuType?: 1 | 2 | 3
-       *           iconType?: 1 | 2
+       *           type?: 10 | 20 | 30 | 40
        *           status?: boolean
-       *           title?: string
-       *           i18nKey?: string
-       *           keepAlive?: boolean
-       *           constant?: boolean
-       *           icon?: string
-       *           localIcon?: string
-       *           iconFontSize?: number
-       *           order?: number
-       *           href?: string
-       *           hideInMenu?: boolean
-       *           activeMenu?: string
-       *           multiTab?: boolean
-       *           fixedIndexInTab?: number
-       *           isDeleted?: boolean
-       *           roles?: Array<Role>
-       *           children?: Array<Menu>
+       *           remark?: string
+       *           code?: string
+       *           sort?: number
+       *           deptId?: number
+       *           dept?: Dept
+       *           user_Dept_Roles?: Array<User_Dept_Role>
+       *           menus?: Array<{
+       *             // 主键
+       *             id?: number
+       *             // 创建者名称
+       *             createBy?: string
+       *             // 创建时间
+       *             createTime?: string
+       *             // 更新者名称
+       *             updateBy?: string
+       *             // 最后更新时间
+       *             updateTime?: string
+       *             name?: string
+       *             path?: string
+       *             pathParam?: string
+       *             layout?: string
+       *             redirect?: string
+       *             component?: string
+       *             parentId?: number
+       *             menuType?: 1 | 2 | 3
+       *             iconType?: 1 | 2
+       *             status?: boolean
+       *             title?: string
+       *             i18nKey?: string
+       *             keepAlive?: boolean
+       *             constant?: boolean
+       *             icon?: string
+       *             localIcon?: string
+       *             iconFontSize?: number
+       *             order?: number
+       *             href?: string
+       *             hideInMenu?: boolean
+       *             activeMenu?: string
+       *             multiTab?: boolean
+       *             fixedIndexInTab?: number
+       *             isDeleted?: boolean
+       *             roles?: Array<Role>
+       *             children?: Array<Menu>
+       *           }>
        *         }>
-       *       }>
-       *       children?: Array<Dept>
-       *     }>
-       *     roles?: Array<{
-       *       // 主键
-       *       id?: number
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       name?: string
-       *       type?: 10 | 20 | 30 | 40
-       *       status?: boolean
-       *       remark?: string
-       *       code?: string
-       *       sort?: number
-       *       deptId?: number
-       *       dept?: Dept
-       *       users?: Array<User>
-       *       menus?: Array<{
+       *         children?: Array<Dept>
+       *       }
+       *       role?: Role
+       *       user?: {
        *         // 主键
        *         id?: number
        *         // 创建者名称
@@ -6451,33 +6155,15 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         name?: string
-       *         path?: string
-       *         pathParam?: string
-       *         layout?: string
-       *         redirect?: string
-       *         component?: string
-       *         parentId?: number
-       *         menuType?: 1 | 2 | 3
-       *         iconType?: 1 | 2
+       *         nickName?: string
+       *         avatar?: string
+       *         phone?: string
+       *         email?: string
+       *         password?: string
        *         status?: boolean
-       *         title?: string
-       *         i18nKey?: string
-       *         keepAlive?: boolean
-       *         constant?: boolean
-       *         icon?: string
-       *         localIcon?: string
-       *         iconFontSize?: number
-       *         order?: number
-       *         href?: string
-       *         hideInMenu?: boolean
-       *         activeMenu?: string
-       *         multiTab?: boolean
-       *         fixedIndexInTab?: number
-       *         isDeleted?: boolean
-       *         roles?: Array<Role>
-       *         children?: Array<Menu>
-       *       }>
+       *         userName?: string
+       *         user_Dept_Roles?: Array<User_Dept_Role>
+       *       }
        *     }>
        *     roleIds?: number[]
        *   }
@@ -6769,31 +6455,11 @@ declare global {
        *   password?: string
        *   status?: boolean
        *   userName?: string
-       *   depts?: Array<{
-       *     // 主键
-       *     id?: number
-       *     // 创建者名称
-       *     createBy?: string
-       *     // 创建时间
-       *     createTime?: string
-       *     // 更新者名称
-       *     updateBy?: string
-       *     // 最后更新时间
-       *     updateTime?: string
-       *     image?: string
-       *     name?: string
-       *     easyName?: string
-       *     parentId?: number
-       *     address?: string
-       *     isDeleted?: boolean
-       *     phone?: string
-       *     man?: string
-       *     remark?: string
-       *     status?: boolean
-       *     sort?: number
-       *     type?: DeptTypeEnum
-       *     users?: Array<User>
-       *     roles?: Array<{
+       *   user_Dept_Roles?: Array<{
+       *     userId?: number
+       *     deptId?: number
+       *     roleId?: number
+       *     dept?: {
        *       // 主键
        *       id?: number
        *       // 创建者名称
@@ -6804,16 +6470,20 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
+       *       image?: string
        *       name?: string
-       *       type?: 10 | 20 | 30 | 40
-       *       status?: boolean
+       *       easyName?: string
+       *       parentId?: number
+       *       address?: string
+       *       isDeleted?: boolean
+       *       phone?: string
+       *       man?: string
        *       remark?: string
-       *       code?: string
+       *       status?: boolean
        *       sort?: number
-       *       deptId?: number
-       *       dept?: Dept
-       *       users?: Array<User>
-       *       menus?: Array<{
+       *       type?: DeptTypeEnum
+       *       user_Dept_Roles?: Array<User_Dept_Role>
+       *       roles?: Array<{
        *         // 主键
        *         id?: number
        *         // 创建者名称
@@ -6825,56 +6495,57 @@ declare global {
        *         // 最后更新时间
        *         updateTime?: string
        *         name?: string
-       *         path?: string
-       *         pathParam?: string
-       *         layout?: string
-       *         redirect?: string
-       *         component?: string
-       *         parentId?: number
-       *         menuType?: 1 | 2 | 3
-       *         iconType?: 1 | 2
+       *         type?: 10 | 20 | 30 | 40
        *         status?: boolean
-       *         title?: string
-       *         i18nKey?: string
-       *         keepAlive?: boolean
-       *         constant?: boolean
-       *         icon?: string
-       *         localIcon?: string
-       *         iconFontSize?: number
-       *         order?: number
-       *         href?: string
-       *         hideInMenu?: boolean
-       *         activeMenu?: string
-       *         multiTab?: boolean
-       *         fixedIndexInTab?: number
-       *         isDeleted?: boolean
-       *         roles?: Array<Role>
-       *         children?: Array<Menu>
+       *         remark?: string
+       *         code?: string
+       *         sort?: number
+       *         deptId?: number
+       *         dept?: Dept
+       *         user_Dept_Roles?: Array<User_Dept_Role>
+       *         menus?: Array<{
+       *           // 主键
+       *           id?: number
+       *           // 创建者名称
+       *           createBy?: string
+       *           // 创建时间
+       *           createTime?: string
+       *           // 更新者名称
+       *           updateBy?: string
+       *           // 最后更新时间
+       *           updateTime?: string
+       *           name?: string
+       *           path?: string
+       *           pathParam?: string
+       *           layout?: string
+       *           redirect?: string
+       *           component?: string
+       *           parentId?: number
+       *           menuType?: 1 | 2 | 3
+       *           iconType?: 1 | 2
+       *           status?: boolean
+       *           title?: string
+       *           i18nKey?: string
+       *           keepAlive?: boolean
+       *           constant?: boolean
+       *           icon?: string
+       *           localIcon?: string
+       *           iconFontSize?: number
+       *           order?: number
+       *           href?: string
+       *           hideInMenu?: boolean
+       *           activeMenu?: string
+       *           multiTab?: boolean
+       *           fixedIndexInTab?: number
+       *           isDeleted?: boolean
+       *           roles?: Array<Role>
+       *           children?: Array<Menu>
+       *         }>
        *       }>
-       *     }>
-       *     children?: Array<Dept>
-       *   }>
-       *   roles?: Array<{
-       *     // 主键
-       *     id?: number
-       *     // 创建者名称
-       *     createBy?: string
-       *     // 创建时间
-       *     createTime?: string
-       *     // 更新者名称
-       *     updateBy?: string
-       *     // 最后更新时间
-       *     updateTime?: string
-       *     name?: string
-       *     type?: 10 | 20 | 30 | 40
-       *     status?: boolean
-       *     remark?: string
-       *     code?: string
-       *     sort?: number
-       *     deptId?: number
-       *     dept?: Dept
-       *     users?: Array<User>
-       *     menus?: Array<{
+       *       children?: Array<Dept>
+       *     }
+       *     role?: Role
+       *     user?: {
        *       // 主键
        *       id?: number
        *       // 创建者名称
@@ -6885,33 +6556,15 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       name?: string
-       *       path?: string
-       *       pathParam?: string
-       *       layout?: string
-       *       redirect?: string
-       *       component?: string
-       *       parentId?: number
-       *       menuType?: 1 | 2 | 3
-       *       iconType?: 1 | 2
+       *       nickName?: string
+       *       avatar?: string
+       *       phone?: string
+       *       email?: string
+       *       password?: string
        *       status?: boolean
-       *       title?: string
-       *       i18nKey?: string
-       *       keepAlive?: boolean
-       *       constant?: boolean
-       *       icon?: string
-       *       localIcon?: string
-       *       iconFontSize?: number
-       *       order?: number
-       *       href?: string
-       *       hideInMenu?: boolean
-       *       activeMenu?: string
-       *       multiTab?: boolean
-       *       fixedIndexInTab?: number
-       *       isDeleted?: boolean
-       *       roles?: Array<Role>
-       *       children?: Array<Menu>
-       *     }>
+       *       userName?: string
+       *       user_Dept_Roles?: Array<User_Dept_Role>
+       *     }
        *   }>
        *   roleIds?: number[]
        * }

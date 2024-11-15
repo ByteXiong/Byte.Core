@@ -31,7 +31,7 @@ namespace Byte.Core.Tools
 
         public const string AopRedisKey = "AopRedisKey";
 
-
+        public static int OK => 0;
         public static int Error => 500;
         public static int ErrorJWT => 401;
         public static int ErrorRole => 403;

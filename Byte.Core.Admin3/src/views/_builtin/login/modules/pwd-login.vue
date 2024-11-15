@@ -17,7 +17,7 @@ const { formRef, validate } = useNaiveForm();
 
 const model: LoginParam = reactive({
   userName: 'admin',
-  password: 'qwer123456'
+  password: '123456'
 });
 
 const rules = computed<Record<keyof LoginParam, App.Global.FormRule[]>>(() => {

@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DataTableDTO.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="RedisDemoDTO.cs~RF3a3464.TMP" />
   </ItemGroup>
 

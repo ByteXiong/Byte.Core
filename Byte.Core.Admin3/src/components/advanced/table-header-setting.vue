@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router';
 import { useRequest } from 'alova/client';
 import { $t } from '@/locales';
 import type { TableColumn } from '@/api/globals';
+import type { ViewTypeEnum } from '@/api/apiEnums';
 const router = useRouter();
 defineOptions({
   name: 'TableHeaderSetting'
@@ -11,9 +12,10 @@ defineOptions({
 interface Props {
   // search?: boolean;
   tableof: string | undefined;
+  viewType: ViewTypeEnum;
 }
 
-const { tableof } = defineProps<Props>();
+const { tableof, viewType } = defineProps<Props>();
 
 const columns = defineModel<Array<NaiveUI.TableColumnCheck>>('columns', {
   default: () => []
@@ -31,16 +33,18 @@ const searchData = defineModel<Array<TableColumn>>('searchData', {
 const { loading } = useRequest(
   // Method实例获取函数，它将接收page和pageSize，并返回一个Method实例
   () =>
-    Apis.DataTable.get_api_datatable_getheader({
+    Apis.TableView.get_api_tableview_getview({
       params: {
-        Table: tableof
+        Tableof: tableof,
+        type: viewType
       },
       transform: res => {
         // 为什么这里不处理 返回结果, 父级页面的方法拿不到
-        columns.value = res.data.map(item => {
-          return { ...item, checked: true };
-        });
-        searchData.value = res.data?.filter(item => item.searchType !== null);
+        columns.value =
+          res.data?.tableColumns?.map(item => {
+            return { ...item, checked: true } as NaiveUI.TableColumnCheck;
+          }) || [];
+        searchData.value = res.data?.tableColumns?.filter(item => item.searchType !== null) || [];
       }
     }),
   {
@@ -52,7 +56,7 @@ const { loading } = useRequest(
 // 页面跳转
 function linkPush() {
   router.push({
-    path: `/table/column/${tableof}`
+    path: `/table/column/${tableof}/${viewType}`
   });
 }
 </script>

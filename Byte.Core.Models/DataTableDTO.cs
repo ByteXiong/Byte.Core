@@ -99,8 +99,9 @@ namespace Byte.Core.Models
     public class TableHeaderParam
     {
 
-        public string Table { get; set; }
+        public string Tableof { get; set; }
         public string Router { get; set; }
+        public ViewTypeEnum  Type { get; set; }
     }
 
     public class TableHeaderDTO
@@ -138,6 +139,5 @@ namespace Byte.Core.Models
         public string Table { get; set; }
         public string Router { get; set; }
 
-        public Dictionary<string, Dictionary< string,string>> Search { get; set; }
 }
 }

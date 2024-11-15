@@ -80,7 +80,7 @@ namespace Byte.Core.Business
 
             var header = new TableHeaderDTO();
             header.Table = param.Table;
-            header.Columns = list.OrderBy(x=>x.Sort!=0).ToList();
+            header.Columns = list.OrderBy(x=> !x.IsShow&&string.IsNullOrEmpty(x.Props) ).ThenBy(x=>x.Sort).ToList();
             return header;
             // var aa = await _unitOfWork.GetDbClient().SqlQueryable<DataTableColumnDTO>(sql).ToListAsync();
             //return aa;
@@ -136,9 +136,9 @@ namespace Byte.Core.Business
         /// <returns></returns>5
         public async Task<List<TableColumn>> GetHeaderAsync(TableHeaderParam param)
         {
-            var entity = await _unitOfWork.GetDbClient().Queryable<TableColumn>().Where(x => x.Table == param.Table && x.IsShow).OrderBy(x => x.Sort).ToListAsync();
+            var entity = await _unitOfWork.GetDbClient().Queryable<TableColumn>().Where(x => x.Table == param.Table && x.IsShow).ToListAsync();
             entity.ForEach(x => x.Key= x.Key.ToFirstLowerStr());
-            return entity;
+            return entity.OrderBy(x => !x.IsShow && string.IsNullOrEmpty(x.Props)).ThenBy(x => x.Sort).ToList();
         }
         /// <summary>
         /// 分页

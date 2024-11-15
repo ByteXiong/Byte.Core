@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Byte.Core.Common.Attributes;
 using Byte.Core.Common.Extensions;
 using Byte.Core.Common.IoC;
+using Byte.Core.Entity;
 using Byte.Core.Repository;
 using Byte.Core.Tools;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -13,7 +14,7 @@ namespace Byte.Core.Api.Attributes
     /// <summary>
     /// 权限
     /// </summary>
-    public class CheckRoleAttribute : BaseActionFilter
+    public class CheckRoleAttribute  : BaseActionFilter
     {
 
         public override async Task OnActionExecuting(ActionExecutingContext context)
@@ -21,6 +22,8 @@ namespace Byte.Core.Api.Attributes
             var req = context.HttpContext.Request;
             if (context.ContainsFilter<NoCheckRoleAttribute>()|| context.ContainsFilter<NoCheckJWTAttribute>()|| (req.Method == "GET" && !context.ContainsFilter<GetCheckRoleAttribute>()) || CurrentUser.RoleCodes.Contains(ParamConfig.Admin) || req.Headers["api-version"].ToInt() == (int) VersionEnum.App)
                 return;
+            var _apiLogRepository = ServiceLocator.Resolve<ApiLogRepository>();
+            await _apiLogRepository.AddAsync(new ApiLog { Path = req.Path, Method = req.Method, Ip = req.HttpContext.Connection.RemoteIpAddress.ToString(), Version = (VersionEnum)req.Headers["api-version"].ToInt(), Body = req.Body.ToString() });
 
             try
             {

@@ -6,9 +6,9 @@ import * as Naive from 'naive-ui';
 import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
+import { ViewTypeEnum } from '@/api/apiEnums';
+import EditForm from './modules/editForm.vue';
 
-// 获取当前页面路由参数
-// 获取当前页面路由参数
 const route = useRoute();
 const tableof = ref(route.path.split('/').pop());
 const searchParams = ref<NaiveUI.SearchParams>({});
@@ -19,16 +19,16 @@ const {
   data,
   page,
   pageSize,
-  total,
+  total: itemCount,
   loading,
   send: getData,
   reload
 } = usePagination(
   // Method实例获取函数，它将接收page和pageSize，并返回一个Method实例
   (upPageIndex, upPageSize) =>
-    Apis.DataTable.get_api_datatable_page({
+    Apis.TableView.get_api_tableview_page({
       params: {
-        Table: tableof.value,
+        Tableof: tableof.value,
         PageIndex: upPageIndex,
         pageSize: upPageSize,
         sortList: sortList.value,
@@ -37,15 +37,6 @@ const {
     }),
   {
     watchingStates: [keyWord, sortList],
-    // 请求前的初始数据（接口返回的数据格式）
-    // initialData: {
-    //   pagerInfo: {
-    //     pageIndex: 1,
-    //     pageSize: 10,
-    //     totalRowCount: 0,
-    //   },
-    //   data: [],
-    // },
     force: true,
     initialPage: 1, // 初始页码，默认为1
     initialPageSize: 10, // 初始每页数据条数，默认为10
@@ -58,7 +49,7 @@ const {
 // 删除
 const { send: handleDelete } = useRequest(
   ids =>
-    Apis.User.delete_api_user_delete({
+    Apis.TableView.delete_api_tableview_delete({
       data: ids,
       transform: res => {
         window.$message?.success('删除成功！');
@@ -74,6 +65,11 @@ const appStore = useAppStore();
 // const { bool: visible, setTrue: openModal } = useBoolean();
 
 const checkedRowKeys = ref<string[]>([]);
+// 打开编辑/新增
+const editFormRef = ref();
+const openForm = (id?: string) => {
+  editFormRef.value?.openForm(id);
+};
 
 // ====================开始处理动态生成=====================
 const searchData = ref<Array<any>>([]);
@@ -111,7 +107,7 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
       @reset="reload"
       @search="getData(1, pageSize)"
     />
-
+    {{ searchParams }}
     <NCard
       :title="$t(route.meta.i18nKey || route.meta.title || '')"
       :bordered="false"
@@ -132,6 +128,7 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
               v-model:columns="columns"
               v-model:search-data="searchData"
               :tableof="tableof"
+              :view-type="ViewTypeEnum.主页"
             ></TableHeaderSetting>
           </template>
         </TableHeaderOperation>
@@ -140,7 +137,7 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
       <NDataTable
         v-model:checked-row-keys="checkedRowKeys"
         :columns="columnData"
-        :data="data"
+        :data="data as any"
         size="small"
         :flex-height="!appStore.isMobile"
         :scroll-x="1088"
@@ -149,20 +146,22 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
         remote
         class="sm:h-full"
         :pagination="{
-          page: page,
+          page,
           pageSize,
-          itemCount: total,
           showSizePicker: true,
-          pageSizes: [10, 20, 50, 100],
-          onChange: (p: number) => {
+          itemCount,
+          pageSizes: [10, 50, 100, 500, 1000],
+          onUpdatePage(value) {
+            page = value;
           },
-          onUpdatePageSize: (pageSize: number) => {
-
+          onUpdatePageSize(value) {
+            page = 1;
+            pageSize = value;
           }
         }"
       />
     </NCard>
-    <!-- <EditForm ref="editFormRef"></EditForm> -->
+    <EditForm ref="editFormRef"></EditForm>
   </div>
 </template>
 

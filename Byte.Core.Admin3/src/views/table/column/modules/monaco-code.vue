@@ -14,28 +14,27 @@ interface Emits {
 }
 const value = ref<string>('');
 const emit = defineEmits<Emits>();
-const columns = ref<Array<NaiveUI.TableColumnCheck>>([
+const columns = ref<Array<naive.DataTableColumn>>([
   {
     type: 'selection',
-    align: 'center',
-    checked: true
+    align: 'center'
   },
   {
     key: 'name',
     title: 'name',
-    align: 'center',
-    checked: true
+    align: 'center'
     // render: row => {
     //   return h('p', Enum.MenuTypeEnum[row.id]);
     // }
   }
 ]);
 
+// eslint-disable-next-line @typescript-eslint/no-shadow, @typescript-eslint/no-unused-vars, max-params
 const customRender = (str: string, h: any, Naive: any, Enum: any, El: any) => {
+  // eslint-disable-next-line no-eval
   return eval(`(${str || '{}'})`);
 };
 const editorMounted = (editor: monaco.editor.IStandaloneCodeEditor) => {
-  console.log('加载完成');
   editor.onDidChangeModelContent(() => {
     // const value = editor.getValue();
     // columns.value[2] = customRender(value || '', h, naive)[0];

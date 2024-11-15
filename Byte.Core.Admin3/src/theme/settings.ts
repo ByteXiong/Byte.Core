@@ -52,7 +52,7 @@ export const themeSettings: App.Theme.ThemeSetting = {
   },
   watermark: {
     visible: false,
-    text: 'SoybeanAdmin'
+    text: 'Byte.Core.Admin'
   },
   tokens: {
     light: {
@@ -87,6 +87,6 @@ export const overrideThemeSettings: Partial<App.Theme.ThemeSetting> = {
   resetCacheStrategy: 'close',
   watermark: {
     visible: false,
-    text: 'SoybeanAdmin'
+    text: 'Byte.Core.Admin'
   }
 };

@@ -7,7 +7,9 @@ declare namespace NaiveUI {
   type DataTableSelectionColumn<T> = import('naive-ui').DataTableSelectionColumn<T>;
   type TableColumnGroup<T> = import('naive-ui/es/data-table/src/interface').TableColumnGroup<T>;
   type PaginationProps = import('naive-ui').PaginationProps;
-  type TableColumnCheck = import('@/api/globals').TableColumnDTO & { checked: boolean };
+  type TableColumnCheck = import('@/api/globals').TableColumn & {
+    checked: boolean;
+  };
   type TableDataWithIndex<T> = import('@sa/hooks').TableDataWithIndex<T>;
   type FlatResponseData<T> = import('@sa/axios').FlatResponseData<T>;
 

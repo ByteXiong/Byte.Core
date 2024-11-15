@@ -18,6 +18,12 @@ namespace Byte.Core.Entity
     [SugarTable("Byte_TableColumn")]
     public class TableColumn : BaseEntity<int>
     {
+
+        /// <summary>
+        ///  视图Id
+        /// </summary>
+        public int  ViewId { get; set; }
+
         /// <summary>
         /// 表名
         /// </summary>
@@ -55,6 +61,12 @@ namespace Byte.Core.Entity
         [SugarColumn(IsNullable = true , Length = 50)]
         public string ColumnTypeDetail { get; set; }
 
+
+        /// <summary>
+        /// 字段验证
+        /// </summary>
+        [SugarColumn(IsNullable = true, Length = 50)]
+        public string ColumnTypeRules { get; set; }
         /// <summary>
         /// 对齐方式
         /// </summary>
@@ -161,5 +173,18 @@ namespace Byte.Core.Entity
         /// </summary>
         [SugarColumn( ColumnDataType = "text", IsNullable = true)]
         public string Props { get; set; }
+
+
+
+        #region 导航
+
+        /// <summary>
+        /// 字段
+        /// </summary>
+        [SugarColumn(IsIgnore = true)]
+        [Navigate(NavigateType.ManyToOne, nameof(ViewId))]
+        public TableView TableView { get; set; }
+
+        #endregion
     }
 }

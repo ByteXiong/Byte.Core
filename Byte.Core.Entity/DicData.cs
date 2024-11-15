@@ -1,5 +1,6 @@
 using Byte.Core.Common;
 using Byte.Core.SqlSugar;
+using Byte.Core.SqlSugar.Model;
 using Byte.Core.Tools;
 using SqlSugar;
 
@@ -9,7 +10,7 @@ namespace Byte.Core.Entity
     /// 字典
     /// </summary>
     [SugarTable("Byte_DicData")]
-    public class DicData : BaseEntity<int>
+    public class DicData : BaseEntity<int> , ISoftDeletedEntity
     {
 
 

@@ -8,7 +8,8 @@ import { $t } from '@/locales';
 import type { MenuButton, UpdateMenuParam } from '@/api/globals';
 import { getLocalIcons } from '@/utils/icon';
 import SvgIcon from '@/components/custom/svg-icon.vue';
-import { IconTypeEnum, LayoutTypeEnum, MenuTypeEnum, getEnumValue } from '@/api/apiEnums';
+import { IconTypeEnum, LayoutTypeEnum, MenuTypeEnum } from '@/api/apiEnums';
+import { getEnumValue } from '@/utils/common';
 
 defineOptions({
   name: 'MenuEditForm'
@@ -48,6 +49,7 @@ const {
     immediate: false,
     resetAfterSubmiting: true,
     initialForm: {
+      id: 0,
       parentId: 0,
       menuType: MenuTypeEnum.菜单,
       iconType: IconTypeEnum.iconify图标,
@@ -124,11 +126,10 @@ defineExpose({
 <template>
   <NModal v-model:show="visible" :title="title" preset="card" class="w-800px" @after-leave="closeForm">
     <NScrollbar class="h-480px pr-20px">
-      {{ formData }}
       <NForm ref="formRef" :model="formData" :rules="rules" label-placement="left" :label-width="100">
         <NGrid responsive="screen" item-responsive>
           <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.menuType')" path="menuType">
-            <NRadioGroup v-model:value="formData.menuType" :disabled="formData.id == 0">
+            <NRadioGroup v-model:value="formData.menuType" :disabled="formData.id != 0">
               <NRadio
                 v-for="item in getEnumValue(MenuTypeEnum).filter(item => item != MenuTypeEnum.按钮)"
                 :key="item"
@@ -152,11 +153,15 @@ defineExpose({
           <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.path')" path="path">
             <NInput
               v-model:value="formData.path"
-              disabled
               :placeholder="$t('common.placeholder') + $t('page.manage.menu.path')"
             />
           </NFormItemGi>
-          <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.pathParam')" path="pathParam">
+          <NFormItemGi
+            v-if="formData.menuType === MenuTypeEnum.菜单"
+            span="24 m:12"
+            :label="$t('page.manage.menu.pathParam')"
+            path="pathParam"
+          >
             <NInput
               v-model:value="formData.pathParam"
               :placeholder="$t('common.placeholder') + $t('page.manage.menu.pathParam')"
@@ -164,7 +169,7 @@ defineExpose({
           </NFormItemGi>
 
           <NFormItemGi
-            v-if="formData.parentId == 0"
+            v-if="formData.parentId == 0 && formData.menuType === MenuTypeEnum.目录"
             span="24 m:12"
             :label="$t('page.manage.menu.layout')"
             path="layout"

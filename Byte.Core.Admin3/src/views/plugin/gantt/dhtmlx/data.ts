@@ -3,7 +3,7 @@ import type { Task } from 'dhtmlx-gantt';
 export const ganttTasks: Task[] = [
   {
     id: 11,
-    text: 'Soybean 架构设计',
+    text: 'Byte.Core 架构设计',
     type: 'project',
     progress: 0,
     open: true,

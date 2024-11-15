@@ -1,6 +1,3 @@
-export function getEnumValue(enumName: any): number[] {
-  return Object.values<number>(enumName).filter(x => typeof x === 'number');
-}
 export enum VersionEnum {
   def = 0,
   /// <summary>
@@ -11,6 +8,12 @@ export enum VersionEnum {
   ///
   /// </summary>
   App = 2
+}
+
+export enum ViewTypeEnum {
+  主页 = 1,
+  编辑页 = 2,
+  详情页 = 3
 }
 export enum MenuTypeEnum {
   目录 = 1,
@@ -65,7 +68,9 @@ export enum ColumnTypeEnum {
   字典 = 4,
   小数 = 5,
   时间 = 6,
-  图片 = 7
+  图片 = 7,
+
+  自定义 = 8
 }
 
 export enum LayoutTypeEnum {

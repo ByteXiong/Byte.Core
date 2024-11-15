@@ -37,6 +37,10 @@ export function translateOptions(options: CommonType.Option<string>[]) {
   }));
 }
 
+export function getEnumValue(enumName: any): number[] {
+  return Object.values<number>(enumName).filter(x => typeof x === 'number');
+}
+
 /**
  * Toggle html class
  *

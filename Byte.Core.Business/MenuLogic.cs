@@ -39,7 +39,7 @@ namespace Byte.Core.Business
         public async Task<List<MenuTreeDTO>> GetTreeAsync()
         {
 
-            var tree = await GetIQueryable().OrderByDescending(x => x.Order).Select<MenuTreeDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, 0, it => it.Id);
+            var tree = await GetIQueryable().OrderBy(x => x.Order).Select<MenuTreeDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, 0, it => it.Id);
             return tree;
         }
 
@@ -50,7 +50,7 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<List<MenuSelectDTO>> GetTreeSelectAsync(int parentId = 0)
         {
-            var tree = await GetIQueryable().OrderByDescending(x => x.Order).Select<MenuSelectDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, parentId, it => it.Id);
+            var tree = await GetIQueryable().OrderBy(x => x.Order).Select<MenuSelectDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, parentId, it => it.Id);
             return tree;
         }
 
@@ -106,14 +106,13 @@ namespace Byte.Core.Business
         public async Task<int> AddAsync(UpdateMenuParam param)
         {
             Menu model = param.Adapt<Menu>();
-            model.Layout = "layout.base";
             try
             {
                 _unitOfWork.BeginTran();
          
                 await AddAsync(model);
 
-                var addButtons = param.Buttons.Where(x => x.State != StateEnum.del).Select(x => new Menu
+                var addButtons = param.Buttons?.Where(x => x.State != StateEnum.del).Select(x => new Menu
                 {
                     MenuType = MenuTypeEnum.按钮,
                     Title = x.Desc,
@@ -223,7 +222,7 @@ namespace Byte.Core.Business
         public async Task<List<RouteSelectDTO>> SelectAsync()
         {
 
-            var db = await GetIQueryable(x => x.Status).OrderByDescending(x => x.Order).Select(x => new RouteSelectDTO
+            var db = await GetIQueryable(x => x.Status).OrderBy(x => x.Order).Select(x => new RouteSelectDTO
             {
                 Id = x.Id,
                 ParentId = x.ParentId,
@@ -308,7 +307,7 @@ namespace Byte.Core.Business
             }
             where= where.Or(x => x.Path== ParamConfig.PathHome);
             var db = await GetIQueryable(where)
-                         .Includes(x => x.Roles).OrderByDescending(x => x.Order).Select(x =>
+                         .Includes(x => x.Roles).OrderBy(x => x.Order).Select(x =>
                           new RouteDTO()
                           {
                               Id = x.Id,
@@ -316,16 +315,16 @@ namespace Byte.Core.Business
                               Meta = new RouteMeta
                               {
                                   Icon = x.Icon,
-                                  //LocalIcon = x.LocalIcon,
-                                  //IconFontSize = x.IconFontSize,
-                                  //Order = x.Order,
-                                  //Href = x.Href,
-                                  //HideInMenu = x.HideInMenu,
-                                  //ActiveMenu = x.ActiveMenu,
-                                  //MultiTab = x.MultiTab,
-                                  //FixedIndexInTab = x.FixedIndexInTab,
+                                  LocalIcon = x.LocalIcon,
+                                  IconFontSize = x.IconFontSize,
+                                  Order = x.Order,
+                                  Href = x.Href,
+                                  HideInMenu = x.HideInMenu,
+                                  ActiveMenu = x.ActiveMenu,
+                                  MultiTab = x.MultiTab,
+                                  FixedIndexInTab = x.FixedIndexInTab,
                                   //Query = x.Query,
-                                  //KeepAlive = x.KeepAlive,
+                                  KeepAlive = x.KeepAlive,
                                   Constant = x.Constant,
                                   Title = x.Title,
                                   I18nKey = x.I18nKey,
@@ -333,6 +332,7 @@ namespace Byte.Core.Business
                               Name = x.Name,
                               Component = x.Component,
                               Path = x.Path,
+                              PathParam= x.PathParam,
                               ParentId = x.ParentId,
                               //Type = x.Type,
                               Redirect = x.Redirect,
@@ -343,8 +343,14 @@ namespace Byte.Core.Business
 
             db.ForEach(x =>
             {
+                x.Path= x.Path+ x.PathParam;
                 //x.Params = new Dictionary<string, dynamic>() { { "TableName", "User" } };
-                x.Children = db.Where(y => y.ParentId == x.Id).ToList();
+                x.Children = db.Where(y => y.ParentId == x.Id).Select(y=>
+                    {
+                        y.Path = x.Path+y.Path;
+                        return y;
+                    }
+                    ).ToList();
                 if (x.ParentId == 0)
                 {
                     list.Add(x);

@@ -41,7 +41,14 @@ namespace Byte.Core.Tools
         /// 更新
         /// </summary>
         update=2,
-    
+    }
+
+
+    public enum ViewTypeEnum
+    {
+         主页=1,
+         编辑 =2,
+         详情页=3,
     }
     public enum RoleTypeEnum
     {

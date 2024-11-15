@@ -72,10 +72,6 @@ namespace Byte.Core.Models
         /// </summary>
         public string Component { get; set; }
 
-        /// <summary>
-        /// 组件名称
-        /// </summary>
-        public string ComponentName { get; set; }
 
         /// <summary>
         /// 父级菜单ID
@@ -85,7 +81,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 排序
         /// </summary>
-        public int Sort { get; set; }
+        public int Order { get; set; }
 
         /// <summary>
         /// icon图标
@@ -179,7 +175,7 @@ namespace Byte.Core.Models
         /// 路径
         /// </summary>
         public string Path { get; set; }
-
+        public string PathParam { get; set; }
         /// <summary>
         /// 重定向
         /// </summary>
@@ -256,51 +252,51 @@ namespace Byte.Core.Models
         /// </summary>
         public string Icon { get; set; }
 
-        ///// <summary>
-        ///// 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
-        ///// </summary>
-        //public string LocalIcon { get; set; }
-        ///// <summary>
-        ///// 菜单和面包屑对应的图标的字体大小
-        ///// </summary>
-        //public int? IconFontSize { get; set; }
+        /// <summary>
+        /// 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
+        /// </summary>
+        public string LocalIcon { get; set; }
+        /// <summary>
+        /// 菜单和面包屑对应的图标的字体大小
+        /// </summary>
+        public int? IconFontSize { get; set; }
 
 
-        ///// <summary>
-        ///// 路由顺序，可用于菜单的排序
-        ///// </summary>
-        //public int Order { get; set; }
+        /// <summary>
+        /// 路由顺序，可用于菜单的排序
+        /// </summary>
+        public int Order { get; set; }
 
-        ///// <summary>
-        ///// 外链链接
-        ///// </summary>
-        //public string Href { get; set; }
-        ///// <summary>
-        ///// 是否在菜单中隐藏路线
-        ///// </summary>
-        //public string HideInMenu { get; set; }
-
-
-        ///// <summary>
-        ///// 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
-        ///// </summary>
-        //public string ActiveMenu { get; set; }
+        /// <summary>
+        /// 外链链接
+        /// </summary>
+        public string Href { get; set; }
+        /// <summary>
+        /// 是否在菜单中隐藏路线
+        /// </summary>
+        public bool HideInMenu { get; set; }
 
 
-        ///// <summary>
-        ///// 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
-        ///// </summary>
-        //public bool MultiTab { get; set; }
-        ///// <summary>
-        ///// 如果设置，路线将固定在制表符中，值是固定制表符的顺序
-        ///// </summary>
-        //public int? FixedIndexInTab { get; set; }
+        /// <summary>
+        /// 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
+        /// </summary>
+        public string ActiveMenu { get; set; }
 
-        ///// <summary>
-        ///// 跳转参数
-        ///// </summary>
-        //public string Query { get; set; }
-      
+
+        /// <summary>
+        /// 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
+        /// </summary>
+        public bool MultiTab { get; set; }
+        /// <summary>
+        /// 如果设置，路线将固定在制表符中，值是固定制表符的顺序
+        /// </summary>
+        public int? FixedIndexInTab { get; set; }
+
+        /// <summary>
+        /// 跳转参数
+        /// </summary>
+        public  Dictionary<string,string> Query { get; set; }
+
     }
 
     public class RouteSelectDTO

@@ -11,6 +11,7 @@ import type { MenuTreeDTO } from '@/api/globals';
 import * as Enum from '@/api/apiEnums';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as El from '@/api/apiEls';
+import { ViewTypeEnum } from '@/api/apiEnums';
 import EditForm from './modules/editForm.vue';
 // 获取当前页面路由参数
 const route = useRoute();
@@ -121,6 +122,7 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
               v-model:columns="columns"
               v-model:search-data="searchData"
               :tableof="tableof"
+              :view-type="ViewTypeEnum.主页"
             ></TableHeaderSetting>
           </template>
         </TableHeaderOperation>

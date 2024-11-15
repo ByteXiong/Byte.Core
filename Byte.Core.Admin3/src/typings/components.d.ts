@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AllEnumSelect: typeof import('./../components/select/all-enum-select.vue')['default']
     AllGroupSelect: typeof import('./../components/select/all-group-select.vue')['default']
     AppProvider: typeof import('./../components/common/app-provider.vue')['default']
     BetterScroll: typeof import('./../components/custom/better-scroll.vue')['default']
@@ -15,6 +16,7 @@ declare module 'vue' {
     CustomIconSelect: typeof import('./../components/custom/custom-icon-select.vue')['default']
     DarkModeContainer: typeof import('./../components/common/dark-mode-container.vue')['default']
     DicSelect: typeof import('./../components/select/dic-select.vue')['default']
+    EnumSelect: typeof import('./../components/select/enum-select.vue')['default']
     ExceptionBase: typeof import('./../components/common/exception-base.vue')['default']
     FullScreen: typeof import('./../components/common/full-screen.vue')['default']
     GithubLink: typeof import('./../components/custom/github-link.vue')['default']
