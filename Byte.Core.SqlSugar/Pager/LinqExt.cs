@@ -10,6 +10,7 @@ namespace Byte.Core.SqlSugar
 
             public static ISugarQueryable<T> SearchWhere<T>(this ISugarQueryable<T> source ,PageParam queryParam)
             {
+         
             var conModels = new List<IConditionalModel>();
             queryParam.Search?.ForEach(x =>
             {
