@@ -1336,6 +1336,19 @@ namespace Byte.Core.Common.Extensions
             long unixTimeStamp = (date.ToUniversalTime() - startTime).Ticks / TimeSpan.TicksPerSecond;
             return unixTimeStamp.ToString();
         }
+        /// <summary>
+        /// 时间戳转时间
+        /// </summary>
+        /// <param name="timestamp"></param>
+        /// <returns></returns>
+        public static DateTime ToUnixDateTime(this long timestamp)
+        {
+            // 将时间戳转换为 DateTime 对象（假定时间戳为秒级）
+            DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+             return epochStart.AddMilliseconds(timestamp);
+        }
+
+
 
         private static Regex MobileRegex = new Regex("^1[3|4|5|7|8][0-9]\\d{4,8}$");
         private static Regex EmailRegex = new Regex("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\\.[a-zA-Z0-9_-]{2,3}){1,2})$");
