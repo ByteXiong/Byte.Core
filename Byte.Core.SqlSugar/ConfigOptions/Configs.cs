@@ -202,5 +202,38 @@ public class Configs
         set => _middleware = value;
     }
 
-#endregion
+    #endregion
+
+
+    #region 缓存
+
+    private CacheConfig _cache;
+    /// <summary>
+    /// 中间件
+    /// </summary>
+    public CacheConfig Cache
+    {
+        get
+        {
+            if (_cache == null)
+            {
+                _cache = new CacheConfig();
+
+                _cache.RedisCacheSwitch ??= new RedisCacheSwitch
+                {
+                    Enabled = false
+                };
+                _cache.DistributedCacheSwitch ??= new DistributedCacheSwitch
+                {
+                    Enabled = false
+                };
+             
+            }
+
+            return _cache;
+        }
+        set => _cache = value;
+    }
+
+    #endregion
 }

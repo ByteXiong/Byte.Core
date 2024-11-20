@@ -1,4 +1,6 @@
-﻿namespace Byte.Core.SqlSugar.ConfigOptions;
+﻿using SqlSugar;
+
+namespace Byte.Core.SqlSugar.ConfigOptions;
 
 public class DbConnection
 {
@@ -19,7 +21,7 @@ public class ConnectionItem
     /// <summary>
     /// 数据库类型
     /// </summary>
-    public int DbType { get; set; }
+    public DbType DbType { get; set; }
     /// <summary>
     /// 是否启用
     /// </summary>

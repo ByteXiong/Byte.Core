@@ -39,3 +39,7 @@ public class Elasticsearch
 {
     public bool Enabled { get; set; }
 }
+
+
+
+
