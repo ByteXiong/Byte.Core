@@ -8,6 +8,7 @@ namespace Byte.Core.Entity
     /// 角色
     /// </summary>
     [SugarTable("Byte_Role")]
+    
     public class Role : BaseEntity<int>
     {
         /// <summary>

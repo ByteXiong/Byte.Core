@@ -39,7 +39,7 @@ namespace Byte.Core.Repository
 
             var any = await SugarClient.DeleteNav<Menu>(x => ids.Contains(x.Id)).Include(x => x.Roles, new DeleteNavOptions() { ManyToManyIsDeleteA = true }).ExecuteCommandAsync();
             //清除缓存
-            MemoryCacheManager.RemoveCacheRegex(ParamConfig.RoleCaChe);
+            MemoryCacheManager.RemoveCacheRegex(AppConfig.RoleCaChe);
             return any ? 1 : 0;
         }
 
@@ -55,7 +55,7 @@ namespace Byte.Core.Repository
             var arrs = new List<string>();
             roleCodes.ForEach(async roleCode =>
             {
-                var key = ParamConfig.RoleButtonCaChe + roleCode;
+                var key = AppConfig.RoleButtonCaChe + roleCode;
                 var any = MemoryCacheManager.Exists(key);
                 List<string> arr;
                 if (any)
@@ -65,7 +65,7 @@ namespace Byte.Core.Repository
                 else
                 {
                     Expression<Func<Menu, bool>> where = x => x.MenuType == MenuTypeEnum.按钮 && x.Roles.Any(y => y.Code == roleCode);
-                    if (roleCode == ParamConfig.Admin)
+                    if (roleCode == AppConfig.Admin)
                     {
                         where = x => x.MenuType == MenuTypeEnum.按钮;
                     }

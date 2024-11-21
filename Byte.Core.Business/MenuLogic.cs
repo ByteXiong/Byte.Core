@@ -134,7 +134,7 @@ namespace Byte.Core.Business
             {
 
                 //清除缓存
-                MemoryCacheManager.RemoveCacheRegex(ParamConfig.RoleCaChe);
+                MemoryCacheManager.RemoveCacheRegex(AppConfig.RoleCaChe);
             }
             return model.Id;
         }
@@ -196,7 +196,7 @@ namespace Byte.Core.Business
             }
             finally {
                 //清除缓存
-                MemoryCacheManager.RemoveCacheRegex(ParamConfig.RoleCaChe);
+                MemoryCacheManager.RemoveCacheRegex(AppConfig.RoleCaChe);
             }
             
             return param.Id;
@@ -275,7 +275,7 @@ namespace Byte.Core.Business
                 }).ToList();
                 await _role_MenuRepository.AddRangeAsync(list);
                 //清除缓存
-                MemoryCacheManager.RemoveCacheRegex(ParamConfig.RoleCaChe);
+                MemoryCacheManager.RemoveCacheRegex(AppConfig.RoleCaChe);
                 _unitOfWork.CommitTran();
             }
             catch
@@ -301,11 +301,11 @@ namespace Byte.Core.Business
 
             var codes = CurrentUser.RoleCodes;
             Expression<Func<Menu, bool>> where = x => x.Status&& x.MenuType != MenuTypeEnum.按钮;
-            if (!codes.Contains(ParamConfig.Admin) )
+            if (!codes.Contains(AppConfig.Admin) )
             {
                 where = where.And(x => x.Roles.Any(y => codes.Contains(y.Code)));
             }
-            where= where.Or(x => x.Path== ParamConfig.PathHome);
+            where= where.Or(x => x.Path== AppConfig.PathHome);
             var db = await GetIQueryable(where)
                          .Includes(x => x.Roles).OrderBy(x => x.Order).Select(x =>
                           new RouteDTO()

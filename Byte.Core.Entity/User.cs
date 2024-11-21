@@ -1,4 +1,5 @@
 using Byte.Core.SqlSugar;
+using Byte.Core.Tools;
 using Newtonsoft.Json;
 using SqlSugar;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,6 +10,7 @@ namespace Byte.Core.Entity
     /// 用户
     /// </summary>
     [SugarTable("Byte_User")]
+    
     public class User : BaseEntity<int>
     {
 

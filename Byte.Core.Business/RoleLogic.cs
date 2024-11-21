@@ -27,7 +27,7 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<PagedResults<RoleDTO>> GetPageAsync(RoleParam param)
         {
-            Expression<Func<Role, bool>> where = x => x.Code != ParamConfig.Admin;
+            Expression<Func<Role, bool>> where = x => x.Code != AppConfig.Admin;
             if (!string.IsNullOrWhiteSpace(param.KeyWord))
             {
                 param.KeyWord = param.KeyWord.Trim();
@@ -84,7 +84,7 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<List<RoleSelectDTO>> GetSelectAsync()
         {
-            var list = await GetIQueryable(x => x.Code != ParamConfig.Admin).OrderByDescending(x => x.Sort).Select<RoleSelectDTO>().ToListAsync();
+            var list = await GetIQueryable(x => x.Code != AppConfig.Admin).OrderByDescending(x => x.Sort).Select<RoleSelectDTO>().ToListAsync();
             return list;
         }
 

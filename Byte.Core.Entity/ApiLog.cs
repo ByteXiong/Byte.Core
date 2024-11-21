@@ -12,6 +12,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 登录日志
     /// </summary>
+    
     [SugarTable("Byte_LoginLog")]
     public class ApiLog : BaseEntity<int>
     {

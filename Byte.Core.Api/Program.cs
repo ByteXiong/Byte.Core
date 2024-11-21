@@ -4,7 +4,6 @@ using AspectCore.Extensions.DependencyInjection;
 using Autofac;
 using Byte.Core.Api.Common;
 using Byte.Core.Common.Attributes;
-using Byte.Core.Common.Cache;
 using Byte.Core.Common.Extensions;
 using Byte.Core.Common.Filters;
 using Byte.Core.Common.Helpers;
@@ -21,16 +20,20 @@ using log4net;
 using log4net.Repository;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebSockets;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
+using Quartz.Impl;
+using Quartz;
 using SkiaSharp;
 using StackExchange.Profiling;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Net.Mime;
 using System.Text.Json;
+using Byte.Core.Api.Qz;
+using Byte.Core.Common.Quartz;
+using Quartz.Spi;
+using System.Reflection.PortableExecutable;
 
 var builder = WebApplication.CreateBuilder(args);
 //雪花Id 
@@ -196,12 +199,12 @@ builder.Services.Configure<FormOptions>(options =>
     options.MultipartBodyLengthLimit = long.MaxValue; // In case of multipart
 });
 #region Redis
-//var redisConnectionString = configuration["Redis"];
-////启用Redis
-//builder.Services.UseCsRedisClient(redisConnectionString);
-//////全局设置Redis缓存有效时间为5分钟。
-//builder.Services.Configure<DistributedCacheEntryOptions>(option =>
-//option.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5));
+var redisConnectionString = configuration["Redis"];
+//启用Redis
+builder.Services.UseCsRedisClient(redisConnectionString);
+////全局设置Redis缓存有效时间为5分钟。
+builder.Services.Configure<DistributedCacheEntryOptions>(option =>
+option.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5));
 #endregion 
 #region Session
 builder.Services.AddSession(options =>
@@ -357,6 +360,18 @@ builder.Services.BuildAspectCoreWithAutofacServiceProvider(config =>
     //config.Interceptors.AddTyped<RedisInterceptorAttribute>();
 }); //接入AspectCore.Injector 属性注入
 
+#region 任务调度
+//Console.WriteLine("Quartz:定时器启动" + DateTime.Now.ToString());
+
+
+//builder.Services.AddSingleton<IJobFactory, JobFactory>();
+//builder.Services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
+//builder.Services.AddHostedService<QuartzHostedService>();
+
+//builder.Services.AddSingleton<HelloQuartzJob>();
+//builder.Services.AddSingleton(new JobSchedule(jobType: typeof(HelloQuartzJob), cronExpression: "0/5 * * * * ?"));
+#endregion
+
 
 builder.Host.UseServiceProviderFactory(new DynamicProxyServiceProviderFactory());
 
@@ -392,10 +407,10 @@ app.UseMiniProfiler();
 #endregion
 
 #region WebSocket
-app.UseWebSockets(new WebSocketOptions
-{
-    KeepAliveInterval = TimeSpan.FromMinutes(2)
-});
+//app.UseWebSockets(new WebSocketOptions
+//{
+//    KeepAliveInterval = TimeSpan.FromMinutes(2)
+//});
 //app.UseMiddleware<WebsocketHandlerMiddleware>();
 #endregion
 
@@ -515,7 +530,6 @@ app.UseStaticFiles(new StaticFileOptions
 await app.UseDataSeederMiddlewareAsync("Byte.Core.Entity");
 #endregion
 app.Run();
-
 
 
 

@@ -20,7 +20,7 @@ namespace Byte.Core.Api.Attributes
         public override async Task OnActionExecuting(ActionExecutingContext context)
         {
             var req = context.HttpContext.Request;
-            if (context.ContainsFilter<NoCheckRoleAttribute>()|| context.ContainsFilter<NoCheckJWTAttribute>()|| (req.Method == "GET" && !context.ContainsFilter<GetCheckRoleAttribute>()) || CurrentUser.RoleCodes.Contains(ParamConfig.Admin) || req.Headers["api-version"].ToInt() == (int) VersionEnum.App)
+            if (context.ContainsFilter<NoCheckRoleAttribute>()|| context.ContainsFilter<NoCheckJWTAttribute>()|| (req.Method == "GET" && !context.ContainsFilter<GetCheckRoleAttribute>()) || CurrentUser.RoleCodes.Contains(AppConfig.Admin) || req.Headers["api-version"].ToInt() == (int) VersionEnum.App)
                 return;
             var _apiLogRepository = ServiceLocator.Resolve<ApiLogRepository>();
             await _apiLogRepository.AddAsync(new ApiLog { Path = req.Path, Method = req.Method, Ip = req.HttpContext.Connection.RemoteIpAddress.ToString(), Version = (VersionEnum)req.Headers["api-version"].ToInt(), Body = req.Body.ToString() });
@@ -35,13 +35,13 @@ namespace Byte.Core.Api.Attributes
                 var any= list.Any(x=>"/api/"+x==req.Path);
                 if (!any) { 
                 
-                    context.Result = Error("权限不足", ParamConfig.ErrorRole);
+                    context.Result = Error("权限不足", AppConfig.ErrorRole);
                 }
                 
             }
             catch (Exception ex)
             {
-                context.Result = Error(ex.Message, ParamConfig.ErrorRole);
+                context.Result = Error(ex.Message, AppConfig.ErrorRole);
             }
 
             await Task.CompletedTask;

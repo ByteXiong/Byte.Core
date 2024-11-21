@@ -1,3 +1,4 @@
+using Byte.Core.Tools;
 using SqlSugar;
 
 namespace Byte.Core.Entity
@@ -6,6 +7,7 @@ namespace Byte.Core.Entity
     /// 角色-菜单
     /// </summary>
     [SugarTable("Byte_Role_Menu")]
+    
     public class Role_Menu
     {
         /// <summary>

@@ -9,13 +9,15 @@ using System.Threading.Tasks;
 using Byte.Core.SqlSugar;
 using SqlSugar;
 using Byte.Core.Tools;
+using StackExchange.Redis;
 
 namespace Byte.Core.Entity
 {
     /// <summary>
     /// 表格重写
     /// </summary>
-    [SugarTable("Byte_TableData")]
+    [SugarTable("Byte_TableView")]
+    
     public class TableView : BaseEntity<int>
     {
         /// <summary>
@@ -29,6 +31,23 @@ namespace Byte.Core.Entity
         public string Router { get; set; }
         public ViewTypeEnum Type { get; set; }
 
+        /// <summary>
+        /// 默认排序字段
+        /// </summary>
+        [SugarColumn(Length = 50, IsNullable = true)]
+        public  string SortKey { get; set; }
+
+        /// <summary>
+        /// 排序排序方式
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public OrderTypeEnum SortOrder { get; set; }
+
+        /// <summary>
+        /// 多余参数 
+        /// </summary>
+        [SugarColumn(ColumnDataType = "text", IsNullable = true)]
+        public string Props { get; set; }
 
         #region 导航
 

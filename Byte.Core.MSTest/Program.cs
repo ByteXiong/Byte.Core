@@ -1,5 +1,6 @@
 using Byte.Core.Business;
 using Byte.Core.Common.Extensions;
+using Byte.Core.Common.Filters;
 using Byte.Core.Common.Helpers;
 using Byte.Core.Common.IoC;
 using Byte.Core.SqlSugar;
@@ -89,7 +90,7 @@ namespace Byte.Core.MSTest
             services.AddControllers(options =>
             {
                 //options.Filters.Add<ValidFilterAttribute>();
-                //options.Filters.Add<GlobalExceptionFilter>();
+                options.Filters.Add<GlobalExceptionFilter>();
 
             });
             services.AddSingleton<IConfiguration>(configuration);

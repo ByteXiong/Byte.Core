@@ -8,6 +8,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 部门
     /// </summary>
+    
     [SugarTable("Byte_Dept")]
     public class Dept : BaseEntity<int>
     {

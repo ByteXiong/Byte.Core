@@ -57,14 +57,10 @@ namespace Byte.Core.Business
                 sysList = await GetTableColumnAsync(param.Tableof);
             }
 
-
-
-
-
             //获取自定义字段
             var entity = await GetIQueryable(x => x.Tableof == param.Tableof && x.Type == param.Type).Includes(x=>x.TableColumns).FirstAsync();
 
-            if (entity == null) throw new BusException("暂未创建模型,请创建模型", ParamConfig.OK);
+            if (entity == null) throw new BusException("暂未创建模型,请创建模型", AppConfig.OK);
 
             var keys1 = entity?.TableColumns?.Select(x => x.Key).ToList()??  new List<string>();
             var keys2 = sysList.Select(x => x.Key).ToList();
@@ -116,7 +112,8 @@ namespace Byte.Core.Business
         /// <param name="param"></param>
         /// <returns></returns>
         public async Task<TableColumn> SetTableHeaderAsync(TableColumn param) {
-            param.Key??=Guid.NewGuid().ToString();  
+            param.Key??=Guid.NewGuid().ToString();
+            param.IsCustom = true;
             await _unitOfWork.GetDbClient().Storageable(param).ExecuteReturnEntityAsync();
             return param;
         }
@@ -227,7 +224,6 @@ namespace Byte.Core.Business
                 var common = xmlCommentHelper.GetFieldOrPropertyComment(prop);
                 var model = new TableColumn()
                 {
-                    Table = tableName.Trim(),
                     Title =  common.Trim(),
                     Key = prop.Name.ToFirstLowerStr(),//转小写,
                     //Sortable = sortable,
@@ -245,35 +241,16 @@ namespace Byte.Core.Business
         /// <returns></returns>
         private async Task<List<TableColumn>>  GetTableColumnAsync(string tableName){
 
-            var sql = "";
-            if (_unitOfWork.GetDbClient().CurrentConnectionConfig.DbType == DbType.MySql)
-            {
-                sql =
-                 @"SELECT
-                    table_name AS   TableName,
-	                column_name AS  ColumnKey,
-	                column_default AS DefaultValue,
-	            COLUMN_COMMENT AS Common,
-		        table_schema
-                FROM
-                information_schema.COLUMNS";
-            }
-    var columnView = await _unitOfWork.GetDbClient().SqlQueryable<DataColumn>(sql).
-        Where("table_schema = @schema And TableName =@tableName ", new
-        {
-            schema = _unitOfWork.GetDbClient().CurrentConnectionConfig.ConfigId,
-            tableName = tableName
-        })
-    .ToListAsync();
-     var columns = columnView.Select(x=>new  TableColumn{ 
-          Table = x.TableName,
-           Key= x.ColumnKey,
-         Title =x.Common,
 
-     }).ToList();
-   return columns;
-    #endregion
-}
+            var columnView = _unitOfWork.GetDbClient().DbMaintenance.GetColumnInfosByTableName(tableName,false);//true 走缓存 false不走缓存
+            var columns = columnView.Select(x => new TableColumn
+            {
+                Key = x.DbColumnName,
+                Title = x.PropertyName,
+            }).ToList();
+            return columns;
+            #endregion
+        }
 
     }
 }

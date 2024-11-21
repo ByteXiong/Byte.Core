@@ -10,6 +10,7 @@ namespace Byte.Core.Entity
     /// 菜单
     /// </summary>
     [SugarTable("Byte_Menu")]
+    
     public class Menu : BaseEntity<int>
     {
         /// <summary>

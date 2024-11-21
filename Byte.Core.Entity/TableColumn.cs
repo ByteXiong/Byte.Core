@@ -16,6 +16,7 @@ namespace Byte.Core.Entity
     /// 表格重写
     /// </summary>
     [SugarTable("Byte_TableColumn")]
+    
     public class TableColumn : BaseEntity<int>
     {
 
@@ -24,15 +25,6 @@ namespace Byte.Core.Entity
         /// </summary>
         public int  ViewId { get; set; }
 
-        /// <summary>
-        /// 表名
-        /// </summary>
-        public string Table { get; set; }
-        /// <summary>
-        /// 路由
-        /// </summary>
-        [SugarColumn(Length = 50, IsNullable = true)]
-        public string Router { get; set; }
         /// <summary>
         /// 字段名称
         /// </summary>
@@ -44,7 +36,7 @@ namespace Byte.Core.Entity
         [SugarColumn( Length = 50,IsNullable = true)]
         public string Key { get; set; }
         /// <summary>
-        /// 显示
+        /// 搜索类型
         /// </summary>
         [SugarColumn( IsNullable = true)]
         public ConditionalType? SearchType { get; set; }
@@ -67,11 +59,11 @@ namespace Byte.Core.Entity
         /// </summary>
         [SugarColumn(IsNullable = true, Length = 50)]
         public string ColumnTypeRules { get; set; }
-        /// <summary>
-        /// 对齐方式
-        /// </summary>
-        public TableAlignEnum Align { get; set; }
 
+        /// <summary>
+        /// 是否自定义
+        /// </summary>
+        public bool IsCustom { get; set; }
         ///// <summary>
         ///// 这一列是否可以导出
         ///// </summary>

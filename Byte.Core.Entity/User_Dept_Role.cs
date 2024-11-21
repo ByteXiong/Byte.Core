@@ -1,4 +1,5 @@
-﻿using SqlSugar;
+﻿using Byte.Core.Tools;
+using SqlSugar;
 
 namespace Byte.Core.Entity
 {
@@ -6,6 +7,7 @@ namespace Byte.Core.Entity
     /// 用户-部门-角色
     /// </summary>
     [SugarTable("Byte_User_Dept_Role")]
+    
     public class User_Dept_Role
     {
 
