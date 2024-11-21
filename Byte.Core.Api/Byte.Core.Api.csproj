@@ -36,11 +36,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Byte.Core.Business\Byte.Core.Business.csproj" />
-    <ProjectReference Include="E:\MyCode\Byte.Core\Byte.Core.Common\Byte.Core.Common.csproj" />
+    <ProjectReference Include="..\Byte.Core.Common\Byte.Core.Common.csproj" />
     <ProjectReference Include="..\Byte.Core.Entity\Byte.Core.Entity.csproj" />
     <ProjectReference Include="..\Byte.Core.Models\Byte.Core.Models.csproj" />
     <ProjectReference Include="..\Byte.Core.Repository\Byte.Core.Repository.csproj" />
-        <ProjectReference Include="E:\MyCode\Byte.Core\Byte.Core.SqlSugar\Byte.Core.SqlSugar.csproj" />
+        <ProjectReference Include="..\Byte.Core.SqlSugar\Byte.Core.SqlSugar.csproj" />
     <ProjectReference Include="..\Byte.Core.Tools\Byte.Core.Tools.csproj" />
   </ItemGroup>
 

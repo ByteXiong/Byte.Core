@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Byte.Core.Tools
 {
-    public static class ParamConfig
+    public static class AppConfig
     {
         public const string Admin = "ROOT";
 

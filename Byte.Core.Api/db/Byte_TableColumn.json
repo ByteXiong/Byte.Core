@@ -13,7 +13,7 @@
       "IsShow": 0,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -31,7 +31,7 @@
       "IsShow": 0,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -49,7 +49,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -67,7 +67,7 @@
       "IsShow": 1,
       "Props": "{\r\n  key: 'e',\r\n    title: '操作',\r\n      align: 'center',\r\n        render: row => {\r\n          return h('div', {\r\n            class: \"flex-center gap-8px\",\r\n          },\r\n            [\r\n              h(Naive.NButton,\r\n                {   \r\n                  ghost: true,\r\n                  size:\"small\",\r\n                  type: \"primary\",\r\n                  onClick: () => {\r\n                    openForm(row.id)\r\n                  }\r\n                },\r\n                $t('common.edit')\r\n              ),\r\n              h(Naive.NPopconfirm,\r\n                {\r\n             \r\n                   onPositiveClick: () => {\r\n                    handleDelete([row.id])\r\n                  },\r\n                },\r\n                {\r\n                  default: () => $t('common.confirmDelete'),\r\n                  trigger: () => h(Naive.NButton,\r\n                    {\r\n                      type: \"error\",\r\n                      size: \"small\",\r\n                      ghost: true\r\n                    },\r\n                    $t('common.delete')\r\n                  )\r\n                }\r\n\r\n              )\r\n\r\n\r\n            ]\r\n          )\r\n        }\r\n} ",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -85,7 +85,7 @@
       "IsShow": 1,
       "Props": "{\r\n    key: 'operate',\r\n        title: $t('common.operate'),\r\n            align: 'center',\r\n                width: 230,\r\n                    render: row => {\r\n                        return h('div', {\r\n                            class: \"flex-center gap-8px\",\r\n                            onClick: () => {\r\n                                handClick()\r\n                            }\r\n                        },\r\n                            [\r\n                                h(Naive.NButton,\r\n                                    {\r\n                                        ghost: true,\r\n                                        type: \"primary\",\r\n                                        size: \"small\",\r\n                                        style: {\r\n                                            display: (row.menuType == Enum.MenuTypeEnum.目录) ? \"inline-block\" : \"none\",\r\n                                        },\r\n\r\n                                        onClick: () => {\r\n                                            handleAddChildMenu(row)\r\n                                        }\r\n                                    },\r\n                                    $t('page.manage.menu.addChildMenu')\r\n                                ),\r\n                                h(Naive.NButton,\r\n                                    {\r\n                                        ghost: true,\r\n                                        type: \"primary\",\r\n                                        size: \"small\",\r\n                                        onClick: () => {\r\n                                            openForm(row.id)\r\n                                        },\r\n                                          style: {\r\n                                            display: (row.menuType != Enum.MenuTypeEnum.按钮) ? \"inline-block\" : \"none\",\r\n                                        },\r\n                                    },\r\n                                    $t('common.edit')\r\n                                ),\r\n                                h(Naive.NPopconfirm,\r\n                                    {\r\n\r\n                                        onPositiveClick: () => {\r\n                                            handleDelete([row.id])\r\n                                        },\r\n                                    },\r\n                                    {\r\n                                        default: () => $t('common.confirmDelete'),\r\n                                        trigger: () => h(Naive.NButton,\r\n                                            {\r\n                                                type: \"error\",\r\n                                                size: \"small\",\r\n                                                ghost: true\r\n                                            },\r\n                                            $t('common.delete')\r\n                                        )\r\n                                    }\r\n\r\n                                )\r\n\r\n\r\n                            ]\r\n                        )\r\n                    }\r\n} ",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -103,7 +103,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -121,7 +121,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -139,7 +139,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -157,7 +157,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -175,7 +175,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -193,7 +193,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -211,7 +211,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -229,7 +229,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -247,7 +247,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -265,7 +265,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -283,7 +283,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -301,7 +301,7 @@
       "IsShow": 1,
       "Props": "{\r\n  key: 'e',\r\n    title: '操作',\r\n      align: 'center',\r\n        render: row => {\r\n          return h('div', {\r\n            class: \"flex-center gap-8px\",\r\n          },\r\n            [\r\n              h(Naive.NButton,\r\n                {   \r\n                  ghost: true,\r\n                  size:\"small\",\r\n                  type: \"primary\",\r\n                  onClick: () => {\r\n                    openMenuTree(row.id)\r\n                  }\r\n                },\r\n                '分配权限'\r\n              ),\r\n              h(Naive.NButton,\r\n                {   \r\n                  ghost: true,\r\n                  size:\"small\",\r\n                  type: \"primary\",\r\n                  onClick: () => {\r\n                    openForm(row.id)\r\n                  }\r\n                },\r\n                $t('common.edit')\r\n              ),\r\n              h(Naive.NPopconfirm,\r\n                {\r\n             \r\n                   onPositiveClick: () => {\r\n                    handleDelete([row.id])\r\n                  },\r\n                },\r\n                {\r\n                  default: () => $t('common.confirmDelete'),\r\n                  trigger: () => h(Naive.NButton,\r\n                    {\r\n                      type: \"error\",\r\n                      size: \"small\",\r\n                      ghost: true\r\n                    },\r\n                    $t('common.delete')\r\n                  )\r\n                }\r\n\r\n              )\r\n\r\n\r\n            ]\r\n          )\r\n        }\r\n} ",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -319,7 +319,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -337,7 +337,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -355,7 +355,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -373,7 +373,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -391,7 +391,7 @@
       "IsShow": 1,
       "Props": " {\r\n    key: 'name',\r\n    title: 'name',\r\n    align: 'center',\r\n    checked: true,\r\n    render: row => {\r\n      return h(Naive.NTag,{\r\n         \"type\":El.MenuTypeEl[row.menuType]\r\n      }, Enum.MenuTypeEnum[row.menuType]);\r\n    }\r\n  }",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -409,7 +409,7 @@
       "IsShow": 0,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -427,7 +427,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -445,7 +445,7 @@
       "IsShow": 0,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -463,7 +463,7 @@
       "IsShow": 0,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -481,7 +481,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -499,7 +499,7 @@
       "IsShow": 0,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -517,7 +517,7 @@
       "IsShow": 0,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -535,7 +535,7 @@
       "IsShow": 0,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -553,7 +553,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -571,7 +571,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -589,7 +589,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -607,7 +607,7 @@
       "IsShow": 1,
       "Props": "{\r\n    key: 'tag',\r\n    title: '数据库',\r\n    align: 'center',\r\n    render: row => {\r\n      return h(Naive.NTag, { type: row.status?'success':'warning' },  { default: () => row.status?\"启用\":\"禁用\" });\r\n    }\r\n  }",
       "CreateBy": "",
-      "CreateTime": "13/11/2024 10:20:05",
+      "CreateTime": "2024/11/13 10:20:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -625,7 +625,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 11:44:01",
+      "CreateTime": "2024/11/13 11:44:01",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -643,7 +643,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 11:44:02",
+      "CreateTime": "2024/11/13 11:44:02",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -661,7 +661,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 11:44:03",
+      "CreateTime": "2024/11/13 11:44:03",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -679,7 +679,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 11:44:04",
+      "CreateTime": "2024/11/13 11:44:04",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -697,7 +697,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 11:44:05",
+      "CreateTime": "2024/11/13 11:44:05",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -715,7 +715,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 11:44:06",
+      "CreateTime": "2024/11/13 11:44:06",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -733,7 +733,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 11:44:06",
+      "CreateTime": "2024/11/13 11:44:06",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -805,7 +805,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 11:47:41",
+      "CreateTime": "2024/11/13 11:47:41",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -823,7 +823,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 11:47:42",
+      "CreateTime": "2024/11/13 11:47:42",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -841,7 +841,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 16:00:37",
+      "CreateTime": "2024/11/13 16:00:37",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -859,7 +859,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 16:03:54",
+      "CreateTime": "2024/11/13 16:03:54",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -877,7 +877,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 16:09:58",
+      "CreateTime": "2024/11/13 16:09:58",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -895,7 +895,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 17:17:27",
+      "CreateTime": "2024/11/13 17:17:27",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -913,7 +913,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 17:17:28",
+      "CreateTime": "2024/11/13 17:17:28",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -931,7 +931,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 17:17:28",
+      "CreateTime": "2024/11/13 17:17:28",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -949,7 +949,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 17:17:30",
+      "CreateTime": "2024/11/13 17:17:30",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -967,7 +967,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 17:17:31",
+      "CreateTime": "2024/11/13 17:17:31",
       "UpdateBy": "",
       "UpdateTime": null
     },
@@ -985,7 +985,7 @@
       "IsShow": 1,
       "Props": "",
       "CreateBy": "",
-      "CreateTime": "14/11/2024 17:17:32",
+      "CreateTime": "2024/11/13 17:17:32",
       "UpdateBy": "",
       "UpdateTime": null
     },

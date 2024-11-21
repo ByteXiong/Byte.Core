@@ -42,7 +42,17 @@ namespace Byte.Core.Tools
         /// </summary>
         update=2,
     }
-
+    public enum OrderTypeEnum
+    {
+        /// <summary>
+        /// 升序
+        /// </summary>
+        asc = 1,
+        /// <summary>
+        /// 降序
+        /// </summary>
+        desc = 2
+    }
 
     public enum ViewTypeEnum
     {
