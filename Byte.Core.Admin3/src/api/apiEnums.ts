@@ -9,12 +9,41 @@ export enum VersionEnum {
   /// </summary>
   App = 2
 }
+export enum StateEnum {
+  /// <summary>
+  /// 删除
+  /// </summary>
+  del = -1,
+  /// <summary>
+  /// 正常
+  /// </summary>
+  normal = 0,
+  /// <summary>
+  /// 新增
+  /// </summary>
+  add = 1,
+  /// <summary>
+  /// 更新
+  /// </summary>
+  update = 2
+}
+export enum OrderType {
+  /// <summary>
+  /// 正序
+  /// </summary>
+  asc = 1,
+  /// <summary>
+  /// 倒序
+  /// </summary>
+  desc = 2
+}
 
 export enum ViewTypeEnum {
   主页 = 1,
   编辑页 = 2,
   详情页 = 3
 }
+
 export enum MenuTypeEnum {
   目录 = 1,
   菜单 = 2,
@@ -67,10 +96,16 @@ export enum ColumnTypeEnum {
   枚举 = 3,
   字典 = 4,
   小数 = 5,
-  时间 = 6,
-  图片 = 7,
-
-  自定义 = 8
+  日期 = 6,
+  时间 = 7,
+  时间戳转当地日期 = 8,
+  时间戳转当地时间 = 9,
+  单图 = 10,
+  多图 = 11,
+  文件 = 12,
+  布尔 = 13,
+  颜色 = 14,
+  自定义 = 99
 }
 
 export enum LayoutTypeEnum {

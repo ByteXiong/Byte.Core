@@ -6,8 +6,9 @@ import * as Naive from 'naive-ui';
 import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
-import { ViewTypeEnum } from '@/api/apiEnums';
-import EditForm from './modules/editForm.vue';
+import * as El from '@/api/apiEls';
+import * as Enum from '@/api/apiEnums';
+import * as EditForm from './modules/editForm.vue';
 import MenuTree from './modules/menu-tree.vue';
 // 获取当前页面路由参数
 const route = useRoute();
@@ -92,7 +93,7 @@ const searchData = ref<Array<any>>([]);
 const columns = ref<Array<NaiveUI.TableColumnCheck>>([]);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-shadow
-const customRender = (str?: string, h?: unknown, Naive?: any) => {
+const customRender = ({ str, h, Naive, Enum, El }: any) => {
   // eslint-disable-next-line no-eval
   return eval(`(${str || '{}'})`);
 };
@@ -100,7 +101,7 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
   return columns.value
     ?.filter(item => item.checked)
     .map(item => {
-      const column = customRender(item.props, h, Naive);
+      const column = customRender({ str: item.props, h, Naive, Enum, El });
       return {
         ...column,
         key: item.key,
@@ -108,11 +109,6 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
       } as Naive.DataTableColumn;
     });
 });
-// const column = customRender(item.props, h, Naive);
-//           console.error(column);
-//           // console.log(JSON.parse(item.props || '{}'));
-//           return {
-//             ...column,
 </script>
 
 <template>
@@ -144,7 +140,7 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
               v-model:columns="columns"
               v-model:search-data="searchData"
               :tableof="tableof"
-              :view-type="ViewTypeEnum.主页"
+              :view-type="Enum.ViewTypeEnum.主页"
             ></TableHeaderSetting>
           </template>
         </TableHeaderOperation>

@@ -756,6 +756,50 @@ export type UpdateMenuParam = {
   children?: Menu[];
   buttons?: MenuButton[];
 };
+export type DayRankDTO = {
+  /**
+   * 排名
+   */
+  sort?: number;
+  /**
+   * 赢
+   */
+  win?: number;
+  /**
+   * 宝石数
+   */
+  gems?: number;
+  /**
+   * 用户ID
+   */
+  userId?: number;
+  /**
+   * 昵称
+   */
+  nickName?: string;
+};
+export type WeekRankDTO = {
+  /**
+   * 排名
+   */
+  sort?: number;
+  /**
+   * 赢
+   */
+  win?: number;
+  /**
+   * 宝石数
+   */
+  gems?: number;
+  /**
+   * 用户ID
+   */
+  userId?: number;
+  /**
+   * 昵称
+   */
+  nickName?: string;
+};
 export type RoleInfo = {
   /**
    * 主键
@@ -886,7 +930,6 @@ export type UpdateRoleParam = {
 export type ViewTypeEnum = 1 | 2 | 3;
 export type ConditionalType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16;
 export type ColumnTypeEnum = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-export type TableAlignEnum = 1 | 2 | 3;
 export type TableColumn = {
   /**
    * 主键
@@ -916,10 +959,7 @@ export type TableColumn = {
   searchType?: ConditionalType;
   columnType?: ColumnTypeEnum;
   columnTypeDetail?: string;
-  /**
-   * 对齐方式
-   */
-  align?: TableAlignEnum;
+  columnTypeRules?: string;
   sort?: number;
   isShow?: boolean;
   props?: string;
@@ -949,6 +989,9 @@ export type TableView = {
   tableof?: string;
   router?: string;
   type?: ViewTypeEnum;
+  defSortColumn?: string;
+  defSort?: string;
+  props?: string;
   tableColumns?: TableColumn[];
 };
 export type ObjectPagedResults = {
@@ -983,6 +1026,9 @@ export type UpdateTableViewParam = {
   tableof?: string;
   router?: string;
   type?: ViewTypeEnum;
+  defSortColumn?: string;
+  defSort?: string;
+  props?: string;
   tableColumns?: TableColumn[];
 };
 export type UserInfo = {
@@ -3518,6 +3564,188 @@ declare global {
         Config
       >;
     };
+    Rank: {
+      /**
+       * ---
+       *
+       * [GET] 天数排行榜
+       *
+       * **path:** /api/Rank/Day
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   dateTime?: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: Array<{
+       *     // 排名
+       *     sort?: number
+       *     // 赢
+       *     win?: number
+       *     // 宝石数
+       *     gems?: number
+       *     // 用户ID
+       *     userId?: number
+       *     // 昵称
+       *     nickName?: string
+       *   }>
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_rank_day<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: DayRankDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            dateTime?: string;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: DayRankDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Rank.get_api_rank_day',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 周排行榜
+       *
+       * **path:** /api/Rank/Week
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   timestamp?: number
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: Array<{
+       *     // 排名
+       *     sort?: number
+       *     // 赢
+       *     win?: number
+       *     // 宝石数
+       *     gems?: number
+       *     // 用户ID
+       *     userId?: number
+       *     // 昵称
+       *     nickName?: string
+       *   }>
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_rank_week<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: WeekRankDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            timestamp?: number;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: WeekRankDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Rank.get_api_rank_week',
+        Config
+      >;
+    };
     Role: {
       /**
        * ---
@@ -4974,7 +5202,7 @@ declare global {
        *
        * **RequestBody**
        * ```ts
-       * type RequestBody = Record<string, string>
+       * type RequestBody = Record<string, unknown>
        * ```
        *
        * ---
@@ -5018,7 +5246,7 @@ declare global {
              */
             tableof: string;
           };
-          data: Record<string, string>;
+          data: Record<string, unknown>;
         }
       >(
         config: Config
@@ -5236,6 +5464,9 @@ declare global {
        *     tableof?: string
        *     router?: string
        *     type?: 1 | 2 | 3
+       *     defSortColumn?: string
+       *     defSort?: string
+       *     props?: string
        *     tableColumns?: Array<{
        *       // 主键
        *       id?: number
@@ -5255,8 +5486,7 @@ declare global {
        *       searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
        *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
        *       columnTypeDetail?: string
-       *       // 对齐方式
-       *       align?: 1 | 2 | 3
+       *       columnTypeRules?: string
        *       sort?: number
        *       isShow?: boolean
        *       props?: string
@@ -5359,6 +5589,9 @@ declare global {
        *     tableof?: string
        *     router?: string
        *     type?: 1 | 2 | 3
+       *     defSortColumn?: string
+       *     defSort?: string
+       *     props?: string
        *     tableColumns?: Array<{
        *       // 主键
        *       id?: number
@@ -5378,8 +5611,7 @@ declare global {
        *       searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
        *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
        *       columnTypeDetail?: string
-       *       // 对齐方式
-       *       align?: 1 | 2 | 3
+       *       columnTypeRules?: string
        *       sort?: number
        *       isShow?: boolean
        *       props?: string
@@ -5578,8 +5810,7 @@ declare global {
        *   searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
        *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
        *   columnTypeDetail?: string
-       *   // 对齐方式
-       *   align?: 1 | 2 | 3
+       *   columnTypeRules?: string
        *   sort?: number
        *   isShow?: boolean
        *   props?: string
@@ -5614,8 +5845,7 @@ declare global {
        *     searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
        *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
        *     columnTypeDetail?: string
-       *     // 对齐方式
-       *     align?: 1 | 2 | 3
+       *     columnTypeRules?: string
        *     sort?: number
        *     isShow?: boolean
        *     props?: string
@@ -5776,6 +6006,9 @@ declare global {
        *   tableof?: string
        *   router?: string
        *   type?: 1 | 2 | 3
+       *   defSortColumn?: string
+       *   defSort?: string
+       *   props?: string
        *   tableColumns?: Array<{
        *     // 主键
        *     id?: number
@@ -5795,8 +6028,7 @@ declare global {
        *     searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
        *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
        *     columnTypeDetail?: string
-       *     // 对齐方式
-       *     align?: 1 | 2 | 3
+       *     columnTypeRules?: string
        *     sort?: number
        *     isShow?: boolean
        *     props?: string

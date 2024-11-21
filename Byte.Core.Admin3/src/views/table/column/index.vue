@@ -161,6 +161,9 @@ const { send: handleDelete } = useRequest(
 //     console.log('update');
 //   }
 // });
+//= ===========================================设置头部=================================
+
+//= ===========================================设置头部结束=================================
 
 function renderColumnType(row: TableColumn) {
   switch (row.columnType) {
@@ -203,13 +206,6 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
     width: 48,
     checked: true,
     disabled: row => row.id === 0
-  },
-  {
-    key: 'table',
-    title: $t('模型'),
-    align: 'center',
-    width: 80,
-    checked: true
   },
   {
     key: 'key',
@@ -288,24 +284,23 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
       );
     }
   },
-
-  {
-    key: 'sort',
-    title: $t('排序'),
-    align: 'center',
-    checked: true,
-    render: row => {
-      return (
-        <NInput
-          v-model:value={row.sort}
-          placeholder="请选择"
-          onChange={() => {
-            submit(row);
-          }}
-        />
-      );
-    }
-  },
+  // {
+  //   key: 'sort',
+  //   title: $t('排序'),
+  //   align: 'center',
+  //   checked: true,
+  //   render: row => {
+  //     return (
+  //       <NInput
+  //         v-model:value={row.sort}
+  //         placeholder="请选择"
+  //         onChange={() => {
+  //           submit(row);
+  //         }}
+  //       />
+  //     );
+  //   }
+  // },
   {
     key: 'type',
     title: $t('操作'),
@@ -400,7 +395,7 @@ function handleAdd() {
       <template #header-extra>
         <TableHeaderOperation
           id="TableHeader"
-          v-model:columns="columns as NaiveUI.TableColumnCheck[]"
+          v-model:columns="columns"
           tableof="TableHeaderDTO"
           :disabled-delete="checkedRowKeys.length === 0"
           :loading="loading"
@@ -409,6 +404,11 @@ function handleAdd() {
           @refresh="getData"
         />
       </template>
+
+      <NSelect
+        v-model:value="tableof"
+        :options="tableView?.tableColumns?.map(item => ({ label: item.title, value: item.key }))"
+      ></NSelect>
 
       <NDataTable
         v-model:checked-row-keys="checkedRowKeys"

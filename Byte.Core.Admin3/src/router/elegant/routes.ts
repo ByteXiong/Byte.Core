@@ -623,6 +623,35 @@ export const generatedRoutes: GeneratedRoute[] = [
     ]
   },
   {
+    name: 'rank',
+    path: '/rank',
+    component: 'layout.base',
+    meta: {
+      title: 'rank',
+      i18nKey: 'route.rank'
+    },
+    children: [
+      {
+        name: 'rank_day',
+        path: '/rank/day',
+        component: 'view.rank_day',
+        meta: {
+          title: 'rank_day',
+          i18nKey: 'route.rank_day'
+        }
+      },
+      {
+        name: 'rank_week',
+        path: '/rank/week',
+        component: 'view.rank_week',
+        meta: {
+          title: 'rank_week',
+          i18nKey: 'route.rank_week'
+        }
+      }
+    ]
+  },
+  {
     name: 'table',
     path: '/table',
     component: 'layout.base',

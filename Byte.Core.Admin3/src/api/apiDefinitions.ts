@@ -37,6 +37,8 @@ export default {
   'Menu.post_api_menu_setbyroleid': ['POST', '/api/Menu/SetByRoleId'],
   'Menu.put_api_menu_setstatus': ['PUT', '/api/Menu/SetStatus'],
   'Menu.post_api_menu_submit': ['POST', '/api/Menu/Submit'],
+  'Rank.get_api_rank_day': ['GET', '/api/Rank/Day'],
+  'Rank.get_api_rank_week': ['GET', '/api/Rank/Week'],
   'Role.delete_api_role_delete': ['DELETE', '/api/Role/Delete'],
   'Role.get_api_role_getinfo': ['GET', '/api/Role/GetInfo'],
   'Role.get_api_role_getpage': ['GET', '/api/Role/GetPage'],
