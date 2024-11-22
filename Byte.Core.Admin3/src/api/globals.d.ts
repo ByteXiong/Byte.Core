@@ -927,9 +927,14 @@ export type UpdateRoleParam = {
    */
   menuIds?: number[];
 };
+export type ObjectPagedResults = {
+  pagerInfo?: PagerInfo;
+  data?: unknown[];
+};
 export type ViewTypeEnum = 1 | 2 | 3;
+export type OrderTypeEnum = 1 | 2;
 export type ConditionalType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16;
-export type ColumnTypeEnum = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+export type ColumnTypeEnum = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 99;
 export type TableColumn = {
   /**
    * 主键
@@ -952,14 +957,13 @@ export type TableColumn = {
    */
   updateTime?: string;
   viewId?: number;
-  table?: string;
-  router?: string;
   title?: string;
   key?: string;
   searchType?: ConditionalType;
   columnType?: ColumnTypeEnum;
   columnTypeDetail?: string;
   columnTypeRules?: string;
+  isCustom?: boolean;
   sort?: number;
   isShow?: boolean;
   props?: string;
@@ -989,14 +993,10 @@ export type TableView = {
   tableof?: string;
   router?: string;
   type?: ViewTypeEnum;
-  defSortColumn?: string;
-  defSort?: string;
+  sortKey?: string;
+  sortOrder?: OrderTypeEnum;
   props?: string;
   tableColumns?: TableColumn[];
-};
-export type ObjectPagedResults = {
-  pagerInfo?: PagerInfo;
-  data?: unknown[];
 };
 export type TableSortParam = {
   id?: number;
@@ -1026,8 +1026,8 @@ export type UpdateTableViewParam = {
   tableof?: string;
   router?: string;
   type?: ViewTypeEnum;
-  defSortColumn?: string;
-  defSort?: string;
+  sortKey?: string;
+  sortOrder?: OrderTypeEnum;
   props?: string;
   tableColumns?: TableColumn[];
 };
@@ -3667,7 +3667,7 @@ declare global {
        * **Query Parameters**
        * ```ts
        * type QueryParameters = {
-       *   timestamp?: number
+       *   dateTime?: string
        * }
        * ```
        *
@@ -3718,7 +3718,7 @@ declare global {
           success: boolean;
         }> & {
           params: {
-            timestamp?: number;
+            dateTime?: string;
           };
         }
       >(
@@ -5184,6 +5184,122 @@ declare global {
       /**
        * ---
        *
+       * [GET] 分页
+       *
+       * **path:** /api/TableColumn/Page/{tableof}
+       *
+       * ---
+       *
+       * **Path Parameters**
+       * ```ts
+       * type PathParameters = {
+       *   // [required]
+       *   tableof: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   StartIndex?: number
+       *   Search?: Record<string, Record<string, string>>
+       *   PageIndex?: number
+       *   PageSize?: number
+       *   SortList?: Record<string, string>
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: {
+       *     pagerInfo?: {
+       *       totalRowCount?: number
+       *       pageSize?: number
+       *       startIndex?: number
+       *       pageIndex?: number
+       *       hasPrev?: boolean
+       *       hasNext?: boolean
+       *       isFirst?: boolean
+       *       isLast?: boolean
+       *       totalPageCount?: number
+       *     }
+       *     data?: unknown[]
+       *   }
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_tablecolumn_page_tableof<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: ObjectPagedResults;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          pathParams: {
+            /**
+             * [required]
+             */
+            tableof: string;
+          };
+          params: {
+            StartIndex?: number;
+            Search?: Record<string, Record<string, string>>;
+            PageIndex?: number;
+            PageSize?: number;
+            SortList?: Record<string, string>;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: ObjectPagedResults;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'TableColumn.get_api_tablecolumn_page_tableof',
+        Config
+      >;
+      /**
+       * ---
+       *
        * [POST] 新增
        *
        * **path:** /api/TableColumn/Submit/{tableof}
@@ -5274,81 +5390,6 @@ declare global {
       >;
     };
     TableView: {
-      /**
-       * ---
-       *
-       * [DELETE] 删除
-       *
-       * **path:** /api/TableView/Delete
-       *
-       * ---
-       *
-       * **RequestBody**
-       * ```ts
-       * type RequestBody = number[]
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: unknown
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      delete_api_tableview_delete<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: unknown;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          data: number[];
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: unknown;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'TableView.delete_api_tableview_delete',
-        Config
-      >;
       /**
        * ---
        *
@@ -5464,8 +5505,8 @@ declare global {
        *     tableof?: string
        *     router?: string
        *     type?: 1 | 2 | 3
-       *     defSortColumn?: string
-       *     defSort?: string
+       *     sortKey?: string
+       *     sortOrder?: 1 | 2
        *     props?: string
        *     tableColumns?: Array<{
        *       // 主键
@@ -5479,14 +5520,13 @@ declare global {
        *       // 最后更新时间
        *       updateTime?: string
        *       viewId?: number
-       *       table?: string
-       *       router?: string
        *       title?: string
        *       key?: string
        *       searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
-       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 99
        *       columnTypeDetail?: string
        *       columnTypeRules?: string
+       *       isCustom?: boolean
        *       sort?: number
        *       isShow?: boolean
        *       props?: string
@@ -5589,8 +5629,8 @@ declare global {
        *     tableof?: string
        *     router?: string
        *     type?: 1 | 2 | 3
-       *     defSortColumn?: string
-       *     defSort?: string
+       *     sortKey?: string
+       *     sortOrder?: 1 | 2
        *     props?: string
        *     tableColumns?: Array<{
        *       // 主键
@@ -5604,14 +5644,13 @@ declare global {
        *       // 最后更新时间
        *       updateTime?: string
        *       viewId?: number
-       *       table?: string
-       *       router?: string
        *       title?: string
        *       key?: string
        *       searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
-       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+       *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 99
        *       columnTypeDetail?: string
        *       columnTypeRules?: string
+       *       isCustom?: boolean
        *       sort?: number
        *       isShow?: boolean
        *       props?: string
@@ -5677,112 +5716,6 @@ declare global {
       /**
        * ---
        *
-       * [GET] 分页
-       *
-       * **path:** /api/TableView/Page
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   Tableof?: string
-       *   Router?: string
-       *   Type?: 1 | 2 | 3
-       *   StartIndex?: number
-       *   Search?: Record<string, Record<string, string>>
-       *   PageIndex?: number
-       *   PageSize?: number
-       *   SortList?: Record<string, string>
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: {
-       *     pagerInfo?: {
-       *       totalRowCount?: number
-       *       pageSize?: number
-       *       startIndex?: number
-       *       pageIndex?: number
-       *       hasPrev?: boolean
-       *       hasNext?: boolean
-       *       isFirst?: boolean
-       *       isLast?: boolean
-       *       totalPageCount?: number
-       *     }
-       *     data?: unknown[]
-       *   }
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      get_api_tableview_page<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: ObjectPagedResults;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          params: {
-            Tableof?: string;
-            Router?: string;
-            Type?: ViewTypeEnum;
-            StartIndex?: number;
-            Search?: Record<string, Record<string, string>>;
-            PageIndex?: number;
-            PageSize?: number;
-            SortList?: Record<string, string>;
-          };
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: ObjectPagedResults;
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'TableView.get_api_tableview_page',
-        Config
-      >;
-      /**
-       * ---
-       *
        * [PUT] 设置表头
        *
        * **path:** /api/TableView/SetTableHeader
@@ -5803,14 +5736,13 @@ declare global {
        *   // 最后更新时间
        *   updateTime?: string
        *   viewId?: number
-       *   table?: string
-       *   router?: string
        *   title?: string
        *   key?: string
        *   searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
-       *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+       *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 99
        *   columnTypeDetail?: string
        *   columnTypeRules?: string
+       *   isCustom?: boolean
        *   sort?: number
        *   isShow?: boolean
        *   props?: string
@@ -5838,14 +5770,13 @@ declare global {
        *     // 最后更新时间
        *     updateTime?: string
        *     viewId?: number
-       *     table?: string
-       *     router?: string
        *     title?: string
        *     key?: string
        *     searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
-       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 99
        *     columnTypeDetail?: string
        *     columnTypeRules?: string
+       *     isCustom?: boolean
        *     sort?: number
        *     isShow?: boolean
        *     props?: string
@@ -6006,8 +5937,8 @@ declare global {
        *   tableof?: string
        *   router?: string
        *   type?: 1 | 2 | 3
-       *   defSortColumn?: string
-       *   defSort?: string
+       *   sortKey?: string
+       *   sortOrder?: 1 | 2
        *   props?: string
        *   tableColumns?: Array<{
        *     // 主键
@@ -6021,14 +5952,13 @@ declare global {
        *     // 最后更新时间
        *     updateTime?: string
        *     viewId?: number
-       *     table?: string
-       *     router?: string
        *     title?: string
        *     key?: string
        *     searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
-       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+       *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 99
        *     columnTypeDetail?: string
        *     columnTypeRules?: string
+       *     isCustom?: boolean
        *     sort?: number
        *     isShow?: boolean
        *     props?: string

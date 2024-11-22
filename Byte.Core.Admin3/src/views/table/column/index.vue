@@ -340,7 +340,7 @@ const checkedRowKeys = ref<string[]>([]);
 
 function handleAdd() {
   tableView.value?.tableColumns?.push({
-    table: tableof.value,
+    tableof: tableof.value,
     viewId: tableView.value?.id
   });
   // operateType.value = 'add';
@@ -399,10 +399,27 @@ function handleAdd() {
           tableof="TableHeaderDTO"
           :disabled-delete="checkedRowKeys.length === 0"
           :loading="loading"
-          @add="handleAdd"
-          @delete="handleDelete(checkedRowKeys)"
           @refresh="getData"
-        />
+        >
+          <NButton size="small" ghost type="primary" @click="handleAdd()">
+            <template #icon>
+              <icon-ic-round-plus class="text-icon" />
+            </template>
+            {{ $t('common.add') }}
+          </NButton>
+          <!--       -->
+          <NPopconfirm @positive-click="handleDelete">
+            <template #trigger>
+              <NButton size="small" ghost type="error" :disabled="checkedRowKeys?.length === 0">
+                <template #icon>
+                  <icon-ic-round-delete class="text-icon" />
+                </template>
+                {{ $t('common.batchDelete') }}
+              </NButton>
+            </template>
+            {{ $t('common.confirmDelete') }}
+          </NPopconfirm>
+        </TableHeaderOperation>
       </template>
 
       <NSelect

@@ -56,7 +56,7 @@ const statisticData = computed<StatisticData[]>(() => [
       </NGi>
       <NGi span="24 s:24 m:6">
         <NSpace :size="24" justify="end">
-          <NStatistic v-for="item in statisticData" :key="item.id" class="whitespace-nowrap" v-bind="item" />
+          <!-- <NStatistic v-for="item in statisticData" :key="item.id" class="whitespace-nowrap" v-bind="item" /> -->
         </NSpace>
       </NGi>
     </NGrid>

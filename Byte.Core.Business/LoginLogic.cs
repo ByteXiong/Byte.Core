@@ -92,9 +92,7 @@ namespace Byte.Core.Business
             var entity = await _userRepository.GetIQueryable(where)
                    .Select<LoginInfoDTO>()
                    .FirstAsync();
-          
             if (entity == null) throw new BusException("没有查到用户信息");
-
             entity.Buttons = await _menuRepository.GetPermAsync(CurrentUser.RoleCodes);
             return entity;
         }

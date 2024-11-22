@@ -65,7 +65,7 @@ namespace Byte.Core.Repository
                 else
                 {
                     Expression<Func<Menu, bool>> where = x => x.MenuType == MenuTypeEnum.按钮 && x.Roles.Any(y => y.Code == roleCode);
-                    if (roleCode == AppConfig.Admin)
+                    if (roleCode == AppConfig.Root)
                     {
                         where = x => x.MenuType == MenuTypeEnum.按钮;
                     }
@@ -73,8 +73,9 @@ namespace Byte.Core.Repository
 
                     arr = SugarClient.Queryable<Menu>().Where(where).Select(x => x.Path).ToList();
                     MemoryCacheManager.Set(key, arr, 60 * 30);
-                    arrs.AddRange(arr);
+                 
                 }
+                arrs.AddRange(arr);
             });  
             return arrs.Distinct().ToList();
         }

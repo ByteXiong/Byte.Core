@@ -23,11 +23,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
+using Quartz.Impl;
+using Quartz;
 using SkiaSharp;
 using StackExchange.Profiling;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Net.Mime;
 using System.Text.Json;
+using Byte.Core.Api.Qz;
+using Byte.Core.Common.Quartz;
+using Quartz.Spi;
+using System.Reflection.PortableExecutable;
 
 var builder = WebApplication.CreateBuilder(args);
 //雪花Id 

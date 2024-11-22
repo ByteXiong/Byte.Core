@@ -1,18 +1,17 @@
 <script setup lang="tsx">
-import { computed, h, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useRequest } from 'alova/client';
 import { useRoute } from 'vue-router';
-import * as Naive from 'naive-ui';
+import type * as Naive from 'naive-ui';
 import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
 import type { MenuTreeDTO } from '@/api/globals';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import * as Enum from '@/api/apiEnums';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import * as El from '@/api/apiEls';
 import { ViewTypeEnum } from '@/api/apiEnums';
+import customRender from '@/utils/customRender';
+import { useAuth } from '@/hooks/business/auth';
 import EditForm from './modules/editForm.vue';
+const { hasAuth } = useAuth();
 // 获取当前页面路由参数
 const route = useRoute();
 const tableof = ref('MenuTreeDTO');
@@ -66,19 +65,21 @@ const handleAddChildMenu = (row: MenuTreeDTO) => {
 };
 
 // ====================开始处理动态生成=====================
+// 共享函数
+defineExpose({
+  openForm,
+  handleDelete,
+  handleAddChildMenu
+});
+
 const searchData = ref<Array<any>>([]);
 const columns = ref<Array<NaiveUI.TableColumnCheck>>([]);
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-shadow
-const customRender = ({ str, h, Naive, Enum, El }: any) => {
-  // eslint-disable-next-line no-eval
-  return eval(`(${str || '{}'})`);
-};
 const columnData = computed<Array<Naive.DataTableColumn>>(() => {
   return columns.value
     ?.filter(item => item.checked)
     .map(item => {
-      const column = customRender({ str: item.props, h, Naive, Enum, El });
+      const column = customRender(item.props);
       return {
         ...column,
         key: item.key,
@@ -86,11 +87,6 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
       } as Naive.DataTableColumn;
     });
 });
-// const column = customRender(item.props, h, Naive);
-//           console.error(column);
-//           // console.log(JSON.parse(item.props || '{}'));
-//           return {
-//             ...column,
 </script>
 
 <template>
@@ -125,6 +121,24 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
               :view-type="ViewTypeEnum.主页"
             ></TableHeaderSetting>
           </template>
+
+          <NButton v-if="hasAuth('menu/submit')" size="small" ghost type="primary" @click="openForm()">
+            <template #icon>
+              <icon-ic-round-plus class="text-icon" />
+            </template>
+            {{ $t('common.add') }}
+          </NButton>
+          <NPopconfirm v-if="hasAuth('menu/delete')" @positive-click="handleDelete">
+            <template #trigger>
+              <NButton size="small" ghost type="error" :disabled="checkedRowKeys?.length === 0">
+                <template #icon>
+                  <icon-ic-round-delete class="text-icon" />
+                </template>
+                {{ $t('common.batchDelete') }}
+              </NButton>
+            </template>
+            {{ $t('common.confirmDelete') }}
+          </NPopconfirm>
         </TableHeaderOperation>
       </template>
 

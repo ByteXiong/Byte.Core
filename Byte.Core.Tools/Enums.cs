@@ -43,13 +43,13 @@ namespace Byte.Core.Tools
         update=2,
     }
     public enum OrderTypeEnum
-    {
+    { 
         /// <summary>
-        /// 升序
+        /// 正序
         /// </summary>
         asc = 1,
         /// <summary>
-        /// 降序
+        /// 倒序
         /// </summary>
         desc = 2
     }
@@ -109,7 +109,9 @@ namespace Byte.Core.Tools
         单聊 = 100,
         群聊 = 110,
     }
-
+    /// <summary>
+    /// 查询方式,不能删除同步给前端用
+    /// </summary>
     public enum SearchTypeEnum
     {
         // 后端使用 SqlSuger.ConditionalType
@@ -124,14 +126,21 @@ namespace Byte.Core.Tools
 
     public enum ColumnTypeEnum
     {
-        整数=1,
-        文本 =2,
-        枚举=3,
-        字典=4,
-        小数=5,
-        时间=6,
-        图片=7,
-        布尔=8
+        整数 = 1,
+        文本 = 2,
+        枚举 = 3,
+        字典 = 4,
+        小数 = 5,
+        日期 = 6,
+        时间 = 7,
+        时间戳转当地日期 = 8,
+        时间戳转当地时间 = 9,
+        单图 = 10,
+        多图 = 11,
+        文件 = 12,
+        布尔 = 13,
+        颜色 = 14,
+        自定义 = 99
     }
     public enum LayoutTypeEnum
     {

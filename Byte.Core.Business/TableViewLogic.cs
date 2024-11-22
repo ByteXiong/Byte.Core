@@ -73,7 +73,7 @@ namespace Byte.Core.Business
                 list.Add(model);
             }
             list.ForEach(x=>x.ViewId=entity.Id);
-             entity.TableColumns = list;
+             entity.TableColumns = list.OrderBy(x => !x.IsShow && string.IsNullOrEmpty(x.Props)).ThenBy(x => x.Sort).ToList();
             return entity;
             // var aa = await _unitOfWork.GetDbClient().SqlQueryable<TableViewColumnDTO>(sql).ToListAsync();
             //return aa;
@@ -165,17 +165,7 @@ namespace Byte.Core.Business
 
             return entity;
         }
-        /// <summary>
-        /// 分页
-        /// </summary>
-        /// <returns></returns>
-        public async Task<PagedResults<dynamic>> PageAsync(TableViewPageParam param)
-        {
-            var sql = $"select * from {param.Tableof}".ToSqlFilter();
-            var page = await _unitOfWork.GetDbClient().SqlQueryable<dynamic>(sql).SearchWhere(param).ToPagedResultsAsync(param);
-            return page;
-        }
-
+        
         /// <summary>
         /// 删除
         /// </summary>

@@ -10,6 +10,7 @@ using MiniProfiler = StackExchange.Profiling.MiniProfiler;
 using Microsoft.Extensions.Configuration;
 using StackExchange.Profiling;
 using Byte.Core.SqlSugar.Cache;
+using Microsoft.Identity.Client;
 namespace Byte.Core.Tools.Extensions;
 
 /// <summary>
@@ -43,9 +44,9 @@ public static class SqlSugarSetup
 
         foreach (var connectionItem in allConnectionItem)
         {
-            //if (connectionItem.DbType == (int)DatabaseType.Sqlite)
+            //if (connectionItem.DbType == DbType.Sqlite)
             //{
-            //    connectionItem.ConnectionString = "DataSource=" + Path.Combine(AppSettings.ContentRootPath,
+            //    connectionItem.ConnectionString = "DataSource=" + Path.Combine(App.WebHostEnvironment.ContentRootPath,
             //        connectionItem.ConnectionString ?? string.Empty);
             //}
 
@@ -73,12 +74,12 @@ public static class SqlSugarSetup
                     });
                 });
             }
-            //ICacheService myCache = new SqlSugarCsRedisCache();//这个类如何建看标题5
+            ICacheService myCache = new SqlSugarCsRedisCache();//这个类如何建看标题5
             masterDb = new ConnectionConfig
             {
                 ConfigId = connectionItem.ConnId,
                 ConnectionString = connectionItem.ConnectionString,
-                DbType = (DbType)connectionItem.DbType,
+                DbType = connectionItem.DbType,
                 LanguageType = LanguageType.Chinese,
                 IsAutoCloseConnection = true,
                 //IsShardSameThread = false,
@@ -89,11 +90,13 @@ public static class SqlSugarSetup
                 },
                 ConfigureExternalServices = new ConfigureExternalServices
                 {
-                    //DataInfoCacheService = myCache, 
+                    //DataInfoCacheService = configs.Cache.RedisCacheSwitch.Enabled
+                    //    ? new SqlSugarCsRedisCache()
+                    //    : new SqlSugarDistributedCache()
                     EntityService = (c, p) =>
                     {
                         //p.DbColumnName = UtilMethods.ToUnderLine(p.DbColumnName); //字段使用驼峰转下划线，不需要请注释
-                        if ((DbType)connectionItem.DbType == DbType.MySql && p.DataType == "varchar(max)")
+                        if (connectionItem.DbType == DbType.MySql && p.DataType == "varchar(max)")
                         {
                             p.DataType = "longtext";
                         }

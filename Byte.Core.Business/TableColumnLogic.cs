@@ -29,8 +29,20 @@ namespace Byte.Core.Business
             _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <returns></returns>
+        public async Task<PagedResults<dynamic>> PageAsync(TableDataPageParam param, string tableof)
+        {
+            var sql = $"select * from {tableof}".ToSqlFilter();
+            var page = await _unitOfWork.GetDbClient().SqlQueryable<dynamic>(sql).SearchWhere(param).ToPagedResultsAsync(param);
+            return page;
+        }
 
-        public  async Task<dynamic> GetFormAsync(int id, string tableof)
+
+
+        public async Task<dynamic> GetFormAsync(int id, string tableof)
         {
            var columns = GetIQueryable(x=>x.TableView.Tableof== tableof && x.TableView.Type== ViewTypeEnum.编辑).ToList();
               

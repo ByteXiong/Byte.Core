@@ -20,7 +20,7 @@ namespace Byte.Core.Api.Attributes
         public override async Task OnActionExecuting(ActionExecutingContext context)
         {
             var req = context.HttpContext.Request;
-            if (context.ContainsFilter<NoCheckRoleAttribute>()|| context.ContainsFilter<NoCheckJWTAttribute>()|| (req.Method == "GET" && !context.ContainsFilter<GetCheckRoleAttribute>()) || CurrentUser.RoleCodes.Contains(AppConfig.Admin) || req.Headers["api-version"].ToInt() == (int) VersionEnum.App)
+            if (context.ContainsFilter<NoCheckRoleAttribute>()|| context.ContainsFilter<NoCheckJWTAttribute>()|| (req.Method == "GET" && !context.ContainsFilter<GetCheckRoleAttribute>()) || CurrentUser.RoleCodes.Contains(AppConfig.Root) || req.Headers["api-version"].ToInt() == (int) VersionEnum.App)
                 return;
             var _apiLogRepository = ServiceLocator.Resolve<ApiLogRepository>();
             await _apiLogRepository.AddAsync(new ApiLog { Path = req.Path, Method = req.Method, Ip = req.HttpContext.Connection.RemoteIpAddress.ToString(), Version = (VersionEnum)req.Headers["api-version"].ToInt(), Body = req.Body.ToString() });

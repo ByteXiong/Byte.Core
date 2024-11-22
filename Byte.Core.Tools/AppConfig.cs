@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Hosting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,18 @@ using System.Threading.Tasks;
 
 namespace Byte.Core.Tools
 {
+     
     public static class AppConfig
     {
-        public const string Admin = "ROOT";
+        #region 数据库表配置
+        public const string Tenant = "runtest";
+        public const string Tenant1 = "DataConnection";
+        public const string Tenant2 = "Byte.Core_DB";
+        public const string TenantDts = "runtest2";
+        
+        //public static IWebHostEnvironment WebHostEnvironment => InternalApp.WebHostEnvironment;
+        #endregion
+        public const string Root = "root";
 
         /// <summary>
         /// 后台首页

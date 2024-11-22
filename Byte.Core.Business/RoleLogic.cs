@@ -1,4 +1,5 @@
 ﻿using Byte.Core.Common.Attributes.RedisAttribute;
+using Byte.Core.Common.Cache;
 using Byte.Core.Common.Extensions;
 using Byte.Core.Entity;
 using Byte.Core.Models;
@@ -6,6 +7,8 @@ using Byte.Core.Repository;
 using Byte.Core.SqlSugar;
 using Byte.Core.Tools;
 using Mapster;
+using NPOI.SS.Formula.Functions;
+using Quartz.Util;
 using System.Linq.Expressions;
 
 namespace Byte.Core.Business
@@ -27,7 +30,7 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<PagedResults<RoleDTO>> GetPageAsync(RoleParam param)
         {
-            Expression<Func<Role, bool>> where = x => x.Code != AppConfig.Admin;
+            Expression<Func<Role, bool>> where = x => x.Code != AppConfig.Root;
             if (!string.IsNullOrWhiteSpace(param.KeyWord))
             {
                 param.KeyWord = param.KeyWord.Trim();
@@ -84,7 +87,7 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<List<RoleSelectDTO>> GetSelectAsync()
         {
-            var list = await GetIQueryable(x => x.Code != AppConfig.Admin).OrderByDescending(x => x.Sort).Select<RoleSelectDTO>().ToListAsync();
+            var list = await GetIQueryable(x => x.Code != AppConfig.Root).OrderByDescending(x => x.Sort).Select<RoleSelectDTO>().ToListAsync();
             return list;
         }
 

@@ -38,7 +38,7 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<PagedResults<UserDTO>> GetPageAsync([FromQuery] UserParam param)
         {
-            Expression<Func<User, bool>> where = x => x.UserName!= AppConfig.Admin;
+            Expression<Func<User, bool>> where = x => x.UserName!= AppConfig.Root;
             if (!string.IsNullOrWhiteSpace(param.KeyWord))
             {
                 param.KeyWord = param.KeyWord.Trim();

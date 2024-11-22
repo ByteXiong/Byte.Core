@@ -8,7 +8,7 @@ import { $t } from '@/locales';
 import type { MenuButton, UpdateMenuParam } from '@/api/globals';
 import { getLocalIcons } from '@/utils/icon';
 import SvgIcon from '@/components/custom/svg-icon.vue';
-import { IconTypeEnum, LayoutTypeEnum, MenuTypeEnum } from '@/api/apiEnums';
+import { IconTypeEnum, LayoutTypeEnum, MenuTypeEnum, StateEnum } from '@/api/apiEnums';
 import { getEnumValue } from '@/utils/common';
 
 defineOptions({
@@ -336,11 +336,13 @@ defineExpose({
                     :placeholder="$t('common.placeholder') + $t('page.manage.menu.form.buttonDesc')"
                     class="flex-1"
                   />
-                  <NInput
+                  <!--
+ <NInput
                     v-model:value="value.i18nKey"
                     :placeholder="$t('common.placeholder') + $t('page.manage.menu.form.buttonDesc')"
                     class="flex-1"
                   />
+-->
                 </div>
               </template>
               <template #action="{ index, create, remove }">

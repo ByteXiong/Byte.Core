@@ -86,6 +86,9 @@ declare module "@elegant-router/types" {
     "plugin_tables_vtable": "/plugin/tables/vtable";
     "plugin_typeit": "/plugin/typeit";
     "plugin_video": "/plugin/video";
+    "rank": "/rank";
+    "rank_day": "/rank/day";
+    "rank_week": "/rank/week";
     "table": "/table";
     "table_column": "/table/column";
     "table_list": "/table/list";
@@ -146,6 +149,7 @@ declare module "@elegant-router/types" {
     | "manage"
     | "multi-menu"
     | "plugin"
+    | "rank"
     | "table"
     | "user-center"
   >;
@@ -209,6 +213,8 @@ declare module "@elegant-router/types" {
     | "plugin_tables_vtable"
     | "plugin_typeit"
     | "plugin_video"
+    | "rank_day"
+    | "rank_week"
     | "table_column"
     | "table_list"
     | "user-center"

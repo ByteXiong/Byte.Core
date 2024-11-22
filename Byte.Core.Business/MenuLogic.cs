@@ -174,8 +174,10 @@ namespace Byte.Core.Business
                     Redirect = param.Redirect,
                     Status = param.Status,
                 });
-               //新增/编辑
-             var buttons = param.Buttons.Where(x => x.State != StateEnum.del).Select(x => new Menu
+                //删除
+                await DeleteAsync(x=>x.MenuType== MenuTypeEnum.按钮&& x.ParentId==param.Id && (param.Buttons .Count==0||param.Buttons.Any(y=>y.Id!= x.Id )));
+                //新增/编辑
+                var buttons = param.Buttons.Select(x => new Menu
                 {
                     Id = x.Id,
                     MenuType = MenuTypeEnum.按钮,
@@ -184,8 +186,7 @@ namespace Byte.Core.Business
                     ParentId = param.Id,
                 }).ToList();
                 await   _unitOfWork.GetDbClient().Storageable(buttons).ExecuteCommandAsync();
-                //删除
-                await DeleteAsync(param.Buttons.Where(x => x.State == StateEnum.del).Select(x => x.Id).ToArray());
+         
 
                 _unitOfWork.CommitTran();
             }
@@ -301,7 +302,7 @@ namespace Byte.Core.Business
 
             var codes = CurrentUser.RoleCodes;
             Expression<Func<Menu, bool>> where = x => x.Status&& x.MenuType != MenuTypeEnum.按钮;
-            if (!codes.Contains(AppConfig.Admin) )
+            if (!codes.Contains(AppConfig.Root) )
             {
                 where = where.And(x => x.Roles.Any(y => codes.Contains(y.Code)));
             }

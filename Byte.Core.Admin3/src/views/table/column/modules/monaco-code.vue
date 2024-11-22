@@ -1,10 +1,9 @@
 <script setup lang="tsx">
 import type * as monaco from 'monaco-editor';
-import { h, ref } from 'vue';
-import * as naive from 'naive-ui';
+import type * as naive from 'naive-ui';
+import { ref } from 'vue';
 import { $t } from '@/locales';
-import * as Enum from '@/api/apiEnums';
-import * as El from '@/api/apiEls';
+import customRender from '@/utils/customRender';
 const language = ref('javascript');
 const code = defineModel<string>('code', {
   required: true
@@ -29,11 +28,6 @@ const columns = ref<Array<naive.DataTableColumn>>([
   }
 ]);
 
-// eslint-disable-next-line @typescript-eslint/no-shadow, @typescript-eslint/no-unused-vars, max-params
-const customRender = (str: string, h: any, Naive: any, Enum: any, El: any) => {
-  // eslint-disable-next-line no-eval
-  return eval(`(${str || '{}'})`);
-};
 const editorMounted = (editor: monaco.editor.IStandaloneCodeEditor) => {
   editor.onDidChangeModelContent(() => {
     // const value = editor.getValue();
@@ -59,7 +53,7 @@ const loading = ref(false);
 const handlTest = () => {
   loading.value = true;
   try {
-    columns.value[2] = customRender(value.value, h, naive, Enum, El);
+    columns.value[2] = customRender(value.value);
   } catch (e) {
     console.error(e);
   }

@@ -12,13 +12,7 @@ namespace Byte.Core.Models
 
     //}
 
-    public class TableViewPageParam:PageParam
-    {
 
-        public string Tableof { get; set; }
-        public string Router { get; set; }
-        public ViewTypeEnum Type { get; set; }
-    }
     public class TableViewParam
     {
 
@@ -26,12 +20,7 @@ namespace Byte.Core.Models
         public string Router { get; set; }
         public ViewTypeEnum Type { get; set; }
     }
-
-
-
     public class UpdateTableViewParam : TableView { 
-    
-    
     }
 
 

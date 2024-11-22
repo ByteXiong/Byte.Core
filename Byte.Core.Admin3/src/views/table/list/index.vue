@@ -1,15 +1,16 @@
 <script setup lang="tsx">
-import { computed, h, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { usePagination, useRequest } from 'alova/client';
 import { useRoute } from 'vue-router';
-import * as Naive from 'naive-ui';
+import type { DataTableColumn, DataTableSortState } from 'naive-ui';
 import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
-import * as El from '@/api/apiEls';
-import * as Enum from '@/api/apiEnums';
+import customRender from '@/utils/customRender';
+import { ViewTypeEnum } from '@/api/apiEnums';
+import { useAuth } from '@/hooks/business/auth';
 import EditForm from './modules/editForm.vue';
-
+const { hasAuth } = useAuth();
 const route = useRoute();
 const tableof = ref(route.path.split('/').pop());
 const searchParams = ref<NaiveUI.SearchParams>({});
@@ -27,9 +28,9 @@ const {
 } = usePagination(
   // Method实例获取函数，它将接收page和pageSize，并返回一个Method实例
   (upPageIndex, upPageSize) =>
-    Apis.TableView.get_api_tableview_page({
+    Apis.TableColumn.get_api_tablecolumn_page_tableof({
+      pathParams: { tableof: tableof.value || '' },
       params: {
-        Tableof: tableof.value,
         PageIndex: upPageIndex,
         pageSize: upPageSize,
         sortList: sortList.value,
@@ -50,7 +51,8 @@ const {
 // 删除
 const { send: handleDelete } = useRequest(
   ids =>
-    Apis.TableView.delete_api_tableview_delete({
+    Apis.TableColumn.delete_api_tablecolumn_delete_tableof({
+      pathParams: { tableof: tableof.value || '' },
       data: ids,
       transform: res => {
         window.$message?.success('删除成功！');
@@ -82,32 +84,28 @@ const openForm = (id?: string) => {
 };
 
 // ====================开始处理动态生成=====================
+// 共享函数
+defineExpose({
+  openForm,
+  handleDelete,
+  tableof
+});
 const searchData = ref<Array<any>>([]);
 const columns = ref<Array<NaiveUI.TableColumnCheck>>([]);
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-shadow
-const customRender = ({ str, h, Naive, Enum, El }: any) => {
-  // eslint-disable-next-line no-eval
-  return eval(`(${str || '{}'})`);
-};
-const columnData = computed<Array<Naive.DataTableColumn>>(() => {
+const columnData = computed<Array<DataTableColumn>>(() => {
   return columns.value
     ?.filter(item => item.checked)
     .map(item => {
-      const column = customRender({ str: item.props, h, Naive, Enum, El });
+      const column = customRender(item.props);
       return {
         ...column,
         key: item.key,
         title: item.title,
         sorter: true
-      } as Naive.DataTableColumn;
+      } as DataTableColumn;
     });
 });
-// const column = customRender(item.props, h, Naive);
-//           console.error(column);
-//           // console.log(JSON.parse(item.props || '{}'));
-//           return {
-//             ...column,
 </script>
 
 <template>
@@ -129,8 +127,6 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
           v-model:columns="columns"
           :disabled-delete="checkedRowKeys.length === 0"
           :loading="loading"
-          @add="openForm"
-          @delete="handleDelete(checkedRowKeys)"
           @refresh="reload"
         >
           <template #prefix>
@@ -138,9 +134,28 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
               v-model:columns="columns"
               v-model:search-data="searchData"
               :tableof="tableof"
-              :view-type="Enum.ViewTypeEnum.主页"
+              :view-type="ViewTypeEnum.主页"
             ></TableHeaderSetting>
           </template>
+
+          <NButton v-if="hasAuth('submit/' + tableof)" size="small" ghost type="primary" @click="openForm()">
+            <template #icon>
+              <icon-ic-round-plus class="text-icon" />
+            </template>
+            {{ $t('common.add') }}
+          </NButton>
+          <!--       -->
+          <NPopconfirm v-if="hasAuth('delete/' + tableof)" @positive-click="handleDelete">
+            <template #trigger>
+              <NButton size="small" ghost type="error" :disabled="checkedRowKeys?.length === 0">
+                <template #icon>
+                  <icon-ic-round-delete class="text-icon" />
+                </template>
+                {{ $t('common.batchDelete') }}
+              </NButton>
+            </template>
+            {{ $t('common.confirmDelete') }}
+          </NPopconfirm>
         </TableHeaderOperation>
       </template>
 

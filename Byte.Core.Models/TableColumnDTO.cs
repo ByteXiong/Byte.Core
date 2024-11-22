@@ -72,7 +72,9 @@ namespace Byte.Core.Models
 
     }
 
-   
+    public class TableDataPageParam : PageParam
+    {
+    }
     public class TableDataFormParam 
     {
         

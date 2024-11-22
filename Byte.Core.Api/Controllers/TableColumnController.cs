@@ -13,7 +13,22 @@ namespace Byte.Core.Api.Controllers
     [Route("api/[controller]/[action]/{tableof}")]
     public class TableColumnController(TableColumnLogic logic) : BaseApiController
     {
+
+
         private readonly TableColumnLogic _logic = logic ?? throw new ArgumentNullException(nameof(logic));
+
+
+
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ApiVersion("1.0", Deprecated = false)]
+        public async Task<PagedResults<dynamic>> PageAsync([FromQuery] TableDataPageParam param, string tableof) => await _logic.PageAsync(param, tableof);
+
+
+
         /// <summary>
         /// 查询详情
         /// </summary>

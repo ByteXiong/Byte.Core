@@ -62,7 +62,7 @@ const { send: getInfo } = useRequest(
       pathParams: { tableof: tableof.value || '' },
       params: { id },
       transform: res => {
-        updateForm(res.data);
+        updateForm(res.data || {});
       }
     }),
   { force: true, immediate: false }

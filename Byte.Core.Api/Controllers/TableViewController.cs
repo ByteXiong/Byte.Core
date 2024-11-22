@@ -87,22 +87,6 @@ namespace Byte.Core.Api.Controllers
         [ApiVersion("1.0", Deprecated = false)]
         public async Task<TableView> GetViewAsync([FromQuery] TableViewParam param) => await _logic.GetViewAsync(param);
 
-        /// <summary>
-        /// 分页
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [ApiVersion("1.0", Deprecated = false)]
-        public async Task<PagedResults<dynamic>> PageAsync([FromQuery] TableViewPageParam param)=> await _logic.PageAsync(param);
-
-        /// <summary>
-        /// 删除
-        /// </summary>
-        /// <returns></returns>
-        [HttpDelete]
-        [ApiVersion("1.0", Deprecated = false)]
-        public async Task DeleteAsync(int[] ids) => await _logic.DeleteAsync(ids);
-
 
         #endregion
 
