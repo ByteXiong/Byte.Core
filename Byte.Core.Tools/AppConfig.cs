@@ -18,7 +18,7 @@ namespace Byte.Core.Tools
         
         //public static IWebHostEnvironment WebHostEnvironment => InternalApp.WebHostEnvironment;
         #endregion
-        public const string Root = "root";
+        public const string Root = "ROOT";
 
         /// <summary>
         /// 后台首页

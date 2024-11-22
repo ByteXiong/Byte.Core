@@ -225,6 +225,26 @@ namespace Byte.Core.Api.Common
 
 
                         #region 表结构
+                        if (!await dataContext.Db.Queryable<TableView>().AnyAsync())
+                        {
+                            var attr = typeof(TableView).GetCustomAttribute<SugarTable>();
+                            if (attr != null)
+                            {
+                                StreamReader f2 = new StreamReader(string.Format(seedDataFolder, attr.TableName), Encoding.UTF8);
+                                var jsonStr = f2.ReadToEnd();
+                                f2.Close();
+                                f2.Dispose();
+
+                                var list = JsonConvert.DeserializeObject<List<TableView>>(jsonStr, setting);
+                                await dataContext.GetEntityDb<TableView>().InsertRangeAsync(list);
+
+                                Console.WriteLine(
+                                    $"Entity:{nameof(TableView)}-->Table:{attr.TableName}-->Desc:{attr.TableDescription}-->初始数据成功！",
+                                    ConsoleColor.Green);
+                            }
+                        }
+
+
 
                         if (!await dataContext.Db.Queryable<TableColumn>().AnyAsync())
                         {

@@ -48,7 +48,7 @@ const statisticData = computed<StatisticData[]>(() => [
           </div>
           <div class="pl-12px">
             <h3 class="text-18px font-semibold">
-              {{ $t('page.home.greeting', { userName: authStore.userInfo.userName }) }}
+              {{ $t('page.home.greeting', { account: authStore.userInfo.account }) }}
             </h3>
             <p class="text-#999 leading-30px">{{ $t('page.home.weatherDesc') }}</p>
           </div>
@@ -56,7 +56,7 @@ const statisticData = computed<StatisticData[]>(() => [
       </NGi>
       <NGi span="24 s:24 m:6">
         <NSpace :size="24" justify="end">
-          <!-- <NStatistic v-for="item in statisticData" :key="item.id" class="whitespace-nowrap" v-bind="item" /> -->
+          <NStatistic v-for="item in statisticData" :key="item.id" class="whitespace-nowrap" v-bind="item" />
         </NSpace>
       </NGi>
     </NGrid>

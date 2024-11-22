@@ -36,7 +36,6 @@ export function translateOptions(options: CommonType.Option<string>[]) {
     label: $t(option.label as App.I18n.I18nKey)
   }));
 }
-
 export function getEnumValue(enumName: any): number[] {
   return Object.values<number>(enumName).filter(x => typeof x === 'number');
 }
