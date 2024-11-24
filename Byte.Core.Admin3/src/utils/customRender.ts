@@ -10,9 +10,21 @@ const customRender = (str: string | undefined) => {
 
   // eslint-disable-next-line consistent-this, @typescript-eslint/no-unused-vars
   const that = currentCpn?.exposed;
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  Object.defineProperty(window, 'that', {
+    value: that,
+    configurable: true,
+    enumerable: false, // 不会出现在 Object.keys 中
+    writable: true
+  });
+  
   const { hasAuth } = useAuth();
+
+  Object.defineProperty(window, 'hasAuth', {
+    value: hasAuth,
+    configurable: true,
+    enumerable: false, // 不会出现在 Object.keys 中
+    writable: true
+  });
 
   Object.defineProperty(window, 'h', {
     value: h,
