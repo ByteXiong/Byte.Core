@@ -33,7 +33,7 @@ namespace Byte.Core.Entity
         /// 布局
         /// </summary>
         [SugarColumn(IsNullable = true)]
-        public string Layout { get; set; }
+        public LayoutTypeEnum? Layout { get; set; }
 
         /// <summary>
         /// 重定向

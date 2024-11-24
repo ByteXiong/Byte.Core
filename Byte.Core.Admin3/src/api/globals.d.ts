@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * runtest开发接口文档 Web端网站 - version 1.0
+ * Byte.Core开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -90,7 +90,8 @@ type Alova2Method<
 
 export type DeptTypeEnum = 10 | 20 | 30;
 export type RoleTypeEnum = 10 | 20 | 30 | 40;
-export type MenuTypeEnum = 1 | 2 | 3;
+export type LayoutTypeEnum = 1 | 2;
+export type MenuTypeEnum = 1 | 2 | 3 | 4;
 export type IconTypeEnum = 1 | 2;
 export type Menu = {
   /**
@@ -116,7 +117,7 @@ export type Menu = {
   name?: string;
   path?: string;
   pathParam?: string;
-  layout?: string;
+  layout?: LayoutTypeEnum;
   redirect?: string;
   component?: string;
   parentId?: number;
@@ -451,79 +452,18 @@ export type LoginParam = {
   captchaId?: string;
   captchaCode?: string;
 };
-export type StateEnum = 0 | 1 | 2 | -1;
-export type MenuButton = {
+export type MenuQuery = {
   id?: number;
-  /**
-   * 按钮编码
-   */
-  code?: string;
-  /**
-   * 描述
-   */
-  desc?: string;
   /**
    * 父级Id
    */
   parentId?: number;
+  key?: string;
+  value?: string;
   /**
    * 状态
    */
   status?: boolean;
-  state?: StateEnum;
-  /**
-   * 多语言
-   */
-  i18nKey?: string;
-};
-export type MenuInfo = {
-  /**
-   * 主键
-   */
-  id?: number;
-  /**
-   * 创建者名称
-   */
-  createBy?: string;
-  /**
-   * 创建时间
-   */
-  createTime?: string;
-  /**
-   * 更新者名称
-   */
-  updateBy?: string;
-  /**
-   * 最后更新时间
-   */
-  updateTime?: string;
-  name?: string;
-  path?: string;
-  pathParam?: string;
-  layout?: string;
-  redirect?: string;
-  component?: string;
-  parentId?: number;
-  menuType?: MenuTypeEnum;
-  iconType?: IconTypeEnum;
-  status?: boolean;
-  title?: string;
-  i18nKey?: string;
-  keepAlive?: boolean;
-  constant?: boolean;
-  icon?: string;
-  localIcon?: string;
-  iconFontSize?: number;
-  order?: number;
-  href?: string;
-  hideInMenu?: boolean;
-  activeMenu?: string;
-  multiTab?: boolean;
-  fixedIndexInTab?: number;
-  isDeleted?: boolean;
-  roles?: Role[];
-  children?: Menu[];
-  buttons?: MenuButton[];
 };
 export type RouteMeta = {
   /**
@@ -585,7 +525,7 @@ export type RouteMeta = {
   /**
    * 跳转参数
    */
-  query?: Record<string, string>;
+  query?: MenuQuery[];
 };
 export type RouteDTO = {
   id?: number;
@@ -620,7 +560,75 @@ export type RouteDTO = {
    * 子节点
    */
   children?: RouteDTO[];
-  params?: Record<string, unknown>;
+};
+export type MenuButton = {
+  id?: number;
+  /**
+   * 按钮编码
+   */
+  code?: string;
+  /**
+   * 描述
+   */
+  desc?: string;
+  /**
+   * 父级Id
+   */
+  parentId?: number;
+  /**
+   * 状态
+   */
+  status?: boolean;
+};
+export type MenuInfo = {
+  /**
+   * 主键
+   */
+  id?: number;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  name?: string;
+  path?: string;
+  pathParam?: string;
+  layout?: LayoutTypeEnum;
+  redirect?: string;
+  component?: string;
+  parentId?: number;
+  menuType?: MenuTypeEnum;
+  iconType?: IconTypeEnum;
+  status?: boolean;
+  title?: string;
+  i18nKey?: string;
+  keepAlive?: boolean;
+  constant?: boolean;
+  icon?: string;
+  localIcon?: string;
+  iconFontSize?: number;
+  order?: number;
+  href?: string;
+  hideInMenu?: boolean;
+  activeMenu?: string;
+  multiTab?: boolean;
+  fixedIndexInTab?: number;
+  isDeleted?: boolean;
+  roles?: Role[];
+  children?: Menu[];
+  buttons?: MenuButton[];
+  querys?: MenuQuery[];
 };
 export type MenuTreeDTO = {
   id?: number;
@@ -731,7 +739,7 @@ export type UpdateMenuParam = {
   name?: string;
   path?: string;
   pathParam?: string;
-  layout?: string;
+  layout?: LayoutTypeEnum;
   redirect?: string;
   component?: string;
   parentId?: number;
@@ -755,50 +763,7 @@ export type UpdateMenuParam = {
   roles?: Role[];
   children?: Menu[];
   buttons?: MenuButton[];
-};
-export type DayRankDTO = {
-  /**
-   * 排名
-   */
-  sort?: number;
-  /**
-   * 赢
-   */
-  win?: number;
-  /**
-   * 宝石数
-   */
-  gems?: number;
-  /**
-   * 用户ID
-   */
-  userId?: number;
-  /**
-   * 昵称
-   */
-  nickName?: string;
-};
-export type WeekRankDTO = {
-  /**
-   * 排名
-   */
-  sort?: number;
-  /**
-   * 赢
-   */
-  win?: number;
-  /**
-   * 宝石数
-   */
-  gems?: number;
-  /**
-   * 用户ID
-   */
-  userId?: number;
-  /**
-   * 昵称
-   */
-  nickName?: string;
+  querys?: MenuQuery[];
 };
 export type RoleInfo = {
   /**
@@ -1312,11 +1277,11 @@ declare global {
        *             name?: string
        *             path?: string
        *             pathParam?: string
-       *             layout?: string
+       *             layout?: 1 | 2
        *             redirect?: string
        *             component?: string
        *             parentId?: number
-       *             menuType?: 1 | 2 | 3
+       *             menuType?: 1 | 2 | 3 | 4
        *             iconType?: 1 | 2
        *             status?: boolean
        *             title?: string
@@ -1780,11 +1745,11 @@ declare global {
        *           name?: string
        *           path?: string
        *           pathParam?: string
-       *           layout?: string
+       *           layout?: 1 | 2
        *           redirect?: string
        *           component?: string
        *           parentId?: number
-       *           menuType?: 1 | 2 | 3
+       *           menuType?: 1 | 2 | 3 | 4
        *           iconType?: 1 | 2
        *           status?: boolean
        *           title?: string
@@ -1863,11 +1828,11 @@ declare global {
        *       name?: string
        *       path?: string
        *       pathParam?: string
-       *       layout?: string
+       *       layout?: 1 | 2
        *       redirect?: string
        *       component?: string
        *       parentId?: number
-       *       menuType?: 1 | 2 | 3
+       *       menuType?: 1 | 2 | 3 | 4
        *       iconType?: 1 | 2
        *       status?: boolean
        *       title?: string
@@ -1946,11 +1911,11 @@ declare global {
        *         name?: string
        *         path?: string
        *         pathParam?: string
-       *         layout?: string
+       *         layout?: 1 | 2
        *         redirect?: string
        *         component?: string
        *         parentId?: number
-       *         menuType?: 1 | 2 | 3
+       *         menuType?: 1 | 2 | 3 | 4
        *         iconType?: 1 | 2
        *         status?: boolean
        *         title?: string
@@ -2586,6 +2551,130 @@ declare global {
       /**
        * ---
        *
+       * [GET] 获取常量路由
+       *
+       * **path:** /api/Menu/GetConstantRoutes
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: Array<{
+       *     id?: number
+       *     // 菜单名
+       *     name?: string
+       *     // 路径
+       *     path?: string
+       *     pathParam?: string
+       *     // 重定向
+       *     redirect?: string
+       *     // 组件
+       *     component?: string
+       *     // 父级
+       *     parentId?: number
+       *     type?: 1 | 2 | 3 | 4
+       *     // 状态
+       *     status?: boolean
+       *     meta?: {
+       *       // 路由标题(可用来作document.title或者菜单的名称)
+       *       title?: string
+       *       // 多语言
+       *       i18nKey?: string
+       *       // 权限标识
+       *       roles?: string[]
+       *       // 缓存页面
+       *       keepAlive?: boolean
+       *       // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
+       *       constant?: boolean
+       *       // 菜单和面包屑对应的图标
+       *       icon?: string
+       *       // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
+       *       localIcon?: string
+       *       // 菜单和面包屑对应的图标的字体大小
+       *       iconFontSize?: number
+       *       // 路由顺序，可用于菜单的排序
+       *       order?: number
+       *       // 外链链接
+       *       href?: string
+       *       // 是否在菜单中隐藏路线
+       *       hideInMenu?: boolean
+       *       // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
+       *       activeMenu?: string
+       *       // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
+       *       multiTab?: boolean
+       *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
+       *       fixedIndexInTab?: number
+       *       // 跳转参数
+       *       query?: Array<{
+       *         id?: number
+       *         // 父级Id
+       *         parentId?: number
+       *         key?: string
+       *         value?: string
+       *         // 状态
+       *         status?: boolean
+       *       }>
+       *     }
+       *     // 子节点
+       *     children?: Array<RouteDTO>
+       *   }>
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_menu_getconstantroutes<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: RouteDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }>
+      >(
+        config?: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: RouteDTO[];
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Menu.get_api_menu_getconstantroutes',
+        Config
+      >;
+      /**
+       * ---
+       *
        * [GET] 查询详情
        *
        * **path:** /api/Menu/GetInfo
@@ -2622,11 +2711,11 @@ declare global {
        *     name?: string
        *     path?: string
        *     pathParam?: string
-       *     layout?: string
+       *     layout?: 1 | 2
        *     redirect?: string
        *     component?: string
        *     parentId?: number
-       *     menuType?: 1 | 2 | 3
+       *     menuType?: 1 | 2 | 3 | 4
        *     iconType?: 1 | 2
        *     status?: boolean
        *     title?: string
@@ -2677,11 +2766,11 @@ declare global {
        *         name?: string
        *         path?: string
        *         pathParam?: string
-       *         layout?: string
+       *         layout?: 1 | 2
        *         redirect?: string
        *         component?: string
        *         parentId?: number
-       *         menuType?: 1 | 2 | 3
+       *         menuType?: 1 | 2 | 3 | 4
        *         iconType?: 1 | 2
        *         status?: boolean
        *         title?: string
@@ -2716,11 +2805,11 @@ declare global {
        *       name?: string
        *       path?: string
        *       pathParam?: string
-       *       layout?: string
+       *       layout?: 1 | 2
        *       redirect?: string
        *       component?: string
        *       parentId?: number
-       *       menuType?: 1 | 2 | 3
+       *       menuType?: 1 | 2 | 3 | 4
        *       iconType?: 1 | 2
        *       status?: boolean
        *       title?: string
@@ -2750,9 +2839,15 @@ declare global {
        *       parentId?: number
        *       // 状态
        *       status?: boolean
-       *       state?: 0 | 1 | 2 | -1
-       *       // 多语言
-       *       i18nKey?: string
+       *     }>
+       *     querys?: Array<{
+       *       id?: number
+       *       // 父级Id
+       *       parentId?: number
+       *       key?: string
+       *       value?: string
+       *       // 状态
+       *       status?: boolean
        *     }>
        *   }
        *   // [required]
@@ -2839,7 +2934,7 @@ declare global {
        *     component?: string
        *     // 父级
        *     parentId?: number
-       *     type?: 1 | 2 | 3
+       *     type?: 1 | 2 | 3 | 4
        *     // 状态
        *     status?: boolean
        *     meta?: {
@@ -2872,11 +2967,18 @@ declare global {
        *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *       fixedIndexInTab?: number
        *       // 跳转参数
-       *       query?: Record<string, string>
+       *       query?: Array<{
+       *         id?: number
+       *         // 父级Id
+       *         parentId?: number
+       *         key?: string
+       *         value?: string
+       *         // 状态
+       *         status?: boolean
+       *       }>
        *     }
        *     // 子节点
        *     children?: Array<RouteDTO>
-       *     params?: Record<string, unknown>
        *   }>
        *   // [required]
        *   msg: string
@@ -2957,7 +3059,7 @@ declare global {
        *     order?: number
        *     // icon图标
        *     icon?: string
-       *     menuType?: 1 | 2 | 3
+       *     menuType?: 1 | 2 | 3 | 4
        *     // 是否缓存
        *     keepAlive?: boolean
        *     // 是否隐藏
@@ -3112,6 +3214,85 @@ declare global {
       /**
        * ---
        *
+       * [GET] 判断路由是否存在
+       *
+       * **path:** /api/Menu/IsRouteExist
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   name?: string
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: boolean
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_menu_isrouteexist<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: boolean;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            name?: string;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: boolean;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Menu.get_api_menu_isrouteexist',
+        Config
+      >;
+      /**
+       * ---
+       *
        * [GET] 菜单下拉
        *
        * **path:** /api/Menu/Select
@@ -3130,7 +3311,7 @@ declare global {
        *     parentId?: number
        *     // 标题
        *     title?: string
-       *     menuType?: 1 | 2 | 3
+       *     menuType?: 1 | 2 | 3 | 4
        *     children?: Array<RouteSelectDTO>
        *   }>
        *   // [required]
@@ -3367,11 +3548,11 @@ declare global {
        *   name?: string
        *   path?: string
        *   pathParam?: string
-       *   layout?: string
+       *   layout?: 1 | 2
        *   redirect?: string
        *   component?: string
        *   parentId?: number
-       *   menuType?: 1 | 2 | 3
+       *   menuType?: 1 | 2 | 3 | 4
        *   iconType?: 1 | 2
        *   status?: boolean
        *   title?: string
@@ -3422,11 +3603,11 @@ declare global {
        *       name?: string
        *       path?: string
        *       pathParam?: string
-       *       layout?: string
+       *       layout?: 1 | 2
        *       redirect?: string
        *       component?: string
        *       parentId?: number
-       *       menuType?: 1 | 2 | 3
+       *       menuType?: 1 | 2 | 3 | 4
        *       iconType?: 1 | 2
        *       status?: boolean
        *       title?: string
@@ -3461,11 +3642,11 @@ declare global {
        *     name?: string
        *     path?: string
        *     pathParam?: string
-       *     layout?: string
+       *     layout?: 1 | 2
        *     redirect?: string
        *     component?: string
        *     parentId?: number
-       *     menuType?: 1 | 2 | 3
+       *     menuType?: 1 | 2 | 3 | 4
        *     iconType?: 1 | 2
        *     status?: boolean
        *     title?: string
@@ -3495,9 +3676,15 @@ declare global {
        *     parentId?: number
        *     // 状态
        *     status?: boolean
-       *     state?: 0 | 1 | 2 | -1
-       *     // 多语言
-       *     i18nKey?: string
+       *   }>
+       *   querys?: Array<{
+       *     id?: number
+       *     // 父级Id
+       *     parentId?: number
+       *     key?: string
+       *     value?: string
+       *     // 状态
+       *     status?: boolean
        *   }>
        * }
        * ```
@@ -3561,188 +3748,6 @@ declare global {
           success: boolean;
         },
         'Menu.post_api_menu_submit',
-        Config
-      >;
-    };
-    Rank: {
-      /**
-       * ---
-       *
-       * [GET] 天数排行榜
-       *
-       * **path:** /api/Rank/Day
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   dateTime?: string
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: Array<{
-       *     // 排名
-       *     sort?: number
-       *     // 赢
-       *     win?: number
-       *     // 宝石数
-       *     gems?: number
-       *     // 用户ID
-       *     userId?: number
-       *     // 昵称
-       *     nickName?: string
-       *   }>
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      get_api_rank_day<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: DayRankDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          params: {
-            dateTime?: string;
-          };
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: DayRankDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Rank.get_api_rank_day',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [GET] 周排行榜
-       *
-       * **path:** /api/Rank/Week
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   dateTime?: string
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: Array<{
-       *     // 排名
-       *     sort?: number
-       *     // 赢
-       *     win?: number
-       *     // 宝石数
-       *     gems?: number
-       *     // 用户ID
-       *     userId?: number
-       *     // 昵称
-       *     nickName?: string
-       *   }>
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      get_api_rank_week<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: WeekRankDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          params: {
-            dateTime?: string;
-          };
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: WeekRankDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Rank.get_api_rank_week',
         Config
       >;
     };
@@ -3923,11 +3928,11 @@ declare global {
        *           name?: string
        *           path?: string
        *           pathParam?: string
-       *           layout?: string
+       *           layout?: 1 | 2
        *           redirect?: string
        *           component?: string
        *           parentId?: number
-       *           menuType?: 1 | 2 | 3
+       *           menuType?: 1 | 2 | 3 | 4
        *           iconType?: 1 | 2
        *           status?: boolean
        *           title?: string
@@ -4012,11 +4017,11 @@ declare global {
        *             name?: string
        *             path?: string
        *             pathParam?: string
-       *             layout?: string
+       *             layout?: 1 | 2
        *             redirect?: string
        *             component?: string
        *             parentId?: number
-       *             menuType?: 1 | 2 | 3
+       *             menuType?: 1 | 2 | 3 | 4
        *             iconType?: 1 | 2
        *             status?: boolean
        *             title?: string
@@ -4075,11 +4080,11 @@ declare global {
        *       name?: string
        *       path?: string
        *       pathParam?: string
-       *       layout?: string
+       *       layout?: 1 | 2
        *       redirect?: string
        *       component?: string
        *       parentId?: number
-       *       menuType?: 1 | 2 | 3
+       *       menuType?: 1 | 2 | 3 | 4
        *       iconType?: 1 | 2
        *       status?: boolean
        *       title?: string
@@ -4274,11 +4279,11 @@ declare global {
        *             name?: string
        *             path?: string
        *             pathParam?: string
-       *             layout?: string
+       *             layout?: 1 | 2
        *             redirect?: string
        *             component?: string
        *             parentId?: number
-       *             menuType?: 1 | 2 | 3
+       *             menuType?: 1 | 2 | 3 | 4
        *             iconType?: 1 | 2
        *             status?: boolean
        *             title?: string
@@ -4363,11 +4368,11 @@ declare global {
        *               name?: string
        *               path?: string
        *               pathParam?: string
-       *               layout?: string
+       *               layout?: 1 | 2
        *               redirect?: string
        *               component?: string
        *               parentId?: number
-       *               menuType?: 1 | 2 | 3
+       *               menuType?: 1 | 2 | 3 | 4
        *               iconType?: 1 | 2
        *               status?: boolean
        *               title?: string
@@ -4426,11 +4431,11 @@ declare global {
        *         name?: string
        *         path?: string
        *         pathParam?: string
-       *         layout?: string
+       *         layout?: 1 | 2
        *         redirect?: string
        *         component?: string
        *         parentId?: number
-       *         menuType?: 1 | 2 | 3
+       *         menuType?: 1 | 2 | 3 | 4
        *         iconType?: 1 | 2
        *         status?: boolean
        *         title?: string
@@ -4751,11 +4756,11 @@ declare global {
        *         name?: string
        *         path?: string
        *         pathParam?: string
-       *         layout?: string
+       *         layout?: 1 | 2
        *         redirect?: string
        *         component?: string
        *         parentId?: number
-       *         menuType?: 1 | 2 | 3
+       *         menuType?: 1 | 2 | 3 | 4
        *         iconType?: 1 | 2
        *         status?: boolean
        *         title?: string
@@ -4840,11 +4845,11 @@ declare global {
        *           name?: string
        *           path?: string
        *           pathParam?: string
-       *           layout?: string
+       *           layout?: 1 | 2
        *           redirect?: string
        *           component?: string
        *           parentId?: number
-       *           menuType?: 1 | 2 | 3
+       *           menuType?: 1 | 2 | 3 | 4
        *           iconType?: 1 | 2
        *           status?: boolean
        *           title?: string
@@ -4903,11 +4908,11 @@ declare global {
        *     name?: string
        *     path?: string
        *     pathParam?: string
-       *     layout?: string
+       *     layout?: 1 | 2
        *     redirect?: string
        *     component?: string
        *     parentId?: number
-       *     menuType?: 1 | 2 | 3
+       *     menuType?: 1 | 2 | 3 | 4
        *     iconType?: 1 | 2
        *     status?: boolean
        *     title?: string
@@ -6278,11 +6283,11 @@ declare global {
        *             name?: string
        *             path?: string
        *             pathParam?: string
-       *             layout?: string
+       *             layout?: 1 | 2
        *             redirect?: string
        *             component?: string
        *             parentId?: number
-       *             menuType?: 1 | 2 | 3
+       *             menuType?: 1 | 2 | 3 | 4
        *             iconType?: 1 | 2
        *             status?: boolean
        *             title?: string
@@ -6679,11 +6684,11 @@ declare global {
        *           name?: string
        *           path?: string
        *           pathParam?: string
-       *           layout?: string
+       *           layout?: 1 | 2
        *           redirect?: string
        *           component?: string
        *           parentId?: number
-       *           menuType?: 1 | 2 | 3
+       *           menuType?: 1 | 2 | 3 | 4
        *           iconType?: 1 | 2
        *           status?: boolean
        *           title?: string

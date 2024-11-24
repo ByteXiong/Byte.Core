@@ -2,9 +2,11 @@
 using Asp.Versioning;
 using Byte.Core.Api.Common;
 using Byte.Core.Business;
+using Byte.Core.Common.Attributes;
 using Byte.Core.Entity;
 using Byte.Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 
 namespace Byte.Core.Api.Controllers
 {
@@ -110,6 +112,15 @@ namespace Byte.Core.Api.Controllers
         [ApiVersion("1.0", Deprecated = false)]
         public async Task SetByRoleIdAsync(SetByRoleIdDTO param) => await _logic.SetByRoleIdAsync(param);
 
+
+        /// <summary>
+        /// 判断路由是否存在
+        /// </summary>
+        /// <returns></returns>'
+        [HttpGet]
+        [ApiVersion("1.0", Deprecated = false)]
+        public async Task<bool> IsRouteExistAsync( string name) => await _logic.IsRouteExistAsync(name );
+
         /// <summary>
         ///  获取我的路由
         /// </summary>
@@ -117,6 +128,14 @@ namespace Byte.Core.Api.Controllers
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
         public async Task<List<RouteDTO>> GetRoutesAsync() => await _logic.GetRoutesAsync();
-
+        /// <summary>
+        ///  获取常量路由
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ApiVersion("1.0", Deprecated = false)]
+        [NoCheckJWT]
+        public async Task<List<RouteDTO>> GetConstantRoutesAsync() => await _logic.GetConstantRoutesAsync();
+        
     }
 }

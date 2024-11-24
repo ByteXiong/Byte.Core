@@ -73,6 +73,7 @@ namespace Byte.Core.Tools
         目录 = 1,
         菜单 = 2,
         按钮 = 3,
+        参数 = 4,
     }
 
     public enum DeptTypeEnum
@@ -144,8 +145,10 @@ namespace Byte.Core.Tools
     }
     public enum LayoutTypeEnum
     {
+        [Description("layout.base")]
         Base = 1,
-        Blank=2,
+        [Description("layout.blank")]
+        Blank =2,
     }
 
     public enum IconTypeEnum { 

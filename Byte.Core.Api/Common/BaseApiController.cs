@@ -1,4 +1,5 @@
-﻿using Byte.Core.Tools.Attributes;
+﻿using Byte.Core.Api.Attributes;
+using Byte.Core.Tools.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Byte.Core.Api.Common
@@ -8,6 +9,7 @@ namespace Byte.Core.Api.Common
     [CheckJWT]
     //[ApiLog]
     [ApiController]
+    [CheckRole]
     public class BaseApiController : BaseController
     {
     }

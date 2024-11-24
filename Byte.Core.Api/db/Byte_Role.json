@@ -1,44 +1,44 @@
- [
+[
     {
       "Id": 1,
       "Name": "系统管理员",
       "Type": 1,
+      "Status": 1,
       "Remark": null,
       "Code": "ROOT",
       "Sort": 0,
       "DeptId": 1,
       "CreateBy": null,
-      "CreateTime": "8/11/2024 22:01:01",
+      "CreateTime": "2024/11/22 21:51:44",
       "UpdateBy": null,
-      "UpdateTime": null,
-      "Status": 1
+      "UpdateTime": null
     },
     {
-      "Id": 4,
+      "Id": 2,
       "Name": "普通管理员",
       "Type": 0,
+      "Status": 1,
       "Remark": "",
       "Code": "Admin",
       "Sort": 1,
       "DeptId": 0,
       "CreateBy": null,
-      "CreateTime": "11/11/2024 17:09:34",
+      "CreateTime": "2024/11/22 21:51:44",
       "UpdateBy": null,
-      "UpdateTime": null,
-      "Status": 1
+      "UpdateTime": null
     },
     {
-      "Id": 5,
+      "Id": 3,
       "Name": "用户",
       "Type": 0,
+      "Status": 1,
       "Remark": null,
       "Code": "User",
       "Sort": 0,
       "DeptId": 0,
       "CreateBy": null,
-      "CreateTime": "11/11/2024 22:15:05",
+      "CreateTime": "2024/11/22 21:51:44",
       "UpdateBy": null,
-      "UpdateTime": null,
-      "Status": 1
+      "UpdateTime": null
     }
   ]

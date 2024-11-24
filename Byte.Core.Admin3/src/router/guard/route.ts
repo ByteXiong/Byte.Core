@@ -26,7 +26,6 @@ export function createRouteGuard(router: Router) {
     }
 
     const authStore = useAuthStore();
-
     const rootRoute: RouteKey = 'root';
     const loginRoute: RouteKey = 'login';
     const noAuthorizationRoute: RouteKey = '403';
@@ -34,7 +33,6 @@ export function createRouteGuard(router: Router) {
     const isLogin = Boolean(localStg.get('token'));
     const needLogin = !to.meta.constant;
     const routeRoles = to.meta.roles || [];
-
     const hasRole = authStore.userInfo.roles?.some(role => routeRoles.includes(role));
     const hasAuth = authStore.isStaticSuper || !routeRoles.length || hasRole;
 
@@ -120,7 +118,6 @@ async function initRoute(to: RouteLocationNormalized): Promise<RouteLocationRaw 
   if (!routeStore.isInitAuthRoute) {
     // initialize the auth route
     await routeStore.initAuthRoute();
-
     // the route is captured by the "not-found" route because the auth route is not initialized
     // after the auth route is initialized, redirect to the original route
     if (isNotFoundRoute) {
@@ -141,7 +138,7 @@ async function initRoute(to: RouteLocationNormalized): Promise<RouteLocationRaw 
   // the auth route is initialized
   // it is not the "not-found" route, then it is allowed to access
   if (!isNotFoundRoute) {
-    routeStore.onRouteSwitchWhenLoggedIn();
+    await routeStore.onRouteSwitchWhenLoggedIn();
 
     return null;
   }

@@ -20,6 +20,7 @@ namespace Byte.Core.Models
 
         public List<MenuButton> Buttons { get; set; }
 
+        public List<MenuQuery> Querys { get; set; }
     }
     public class MenuButton {
         public int Id { get; set; }
@@ -39,17 +40,24 @@ namespace Byte.Core.Models
         /// 状态
         /// </summary>
         public bool Status { get; set; }
-        //parent
+    }
+
+
+    public class MenuQuery
+    {
+        public int Id { get; set; }
+        /// <summary>
+        /// 父级Id
+        /// </summary>
+        public int? ParentId { get; set; }
+
+        public string Key { get; set; }
+
+        public string Value { get; set; }
         /// <summary>
         /// 状态
         /// </summary>
-        public StateEnum State { get; set; }
-
-        /// <summary>
-        ///  多语言
-        /// </summary>
-        public string I18nKey { get; set; }
-
+        public bool Status { get; set; }
     }
     /// <summary>
     /// 菜单
@@ -67,11 +75,6 @@ namespace Byte.Core.Models
         /// </summary>
         public string Name { get; set; }
      
-        /// <summary>
-        /// 组件
-        /// </summary>
-        public string Component { get; set; }
-
 
         /// <summary>
         /// 父级菜单ID
@@ -90,14 +93,8 @@ namespace Byte.Core.Models
 
         /// <summary>
         /// 类型
-        /// 1.目录 2.菜单 3.按钮
         /// </summary>
         public MenuTypeEnum MenuType { get; set; }
-
-        /// <summary>
-        /// 是否缓存
-        /// </summary>
-        public bool KeepAlive { get; set; }
 
         /// <summary>
         /// 是否隐藏
@@ -156,9 +153,12 @@ namespace Byte.Core.Models
     public class MenuInfo : Menu
     {
         public List<MenuButton> Buttons { get; set; }
-
+        public List<MenuQuery> Querys { get; set; }
         //public List<Permission> PermissionList { get; set; }
     }
+
+
+
 
     /// <summary>
     /// 当前系统我的所有权限
@@ -211,8 +211,6 @@ namespace Byte.Core.Models
         /// 子节点
         /// </summary>
         public List<RouteDTO> Children { get; set; }
-
-        public Dictionary<string, dynamic> Params { get; set; } = new Dictionary<string, dynamic>();
 
     }
 
@@ -295,7 +293,8 @@ namespace Byte.Core.Models
         /// <summary>
         /// 跳转参数
         /// </summary>
-        public  Dictionary<string,string> Query { get; set; }
+        public  List<MenuQuery> Query { get; set; }
+
 
     }
 

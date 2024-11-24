@@ -75,7 +75,7 @@ namespace Byte.Core.Tools
         }
         public static List<string> RoleCodes
         {
-            get => _session == null ? new List<string>  { } : _session.GetString("CurrentUser_RoleCode").Split(',').ToList();
+            get => _session == null ? new List<string>  { } : _session.GetString("CurrentUser_RoleCode")?.Split(',')?.ToList();
             set => _session.SetString("CurrentUser_RoleCode", string.Join(",", value??new List<string> { }));
         }
 

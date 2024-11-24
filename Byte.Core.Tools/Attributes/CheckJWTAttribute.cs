@@ -14,6 +14,7 @@ namespace Byte.Core.Tools.Attributes
 
         public override async Task OnActionExecuting(ActionExecutingContext context)
         {
+            
             if (context.ContainsFilter<NoCheckJWTAttribute>())
                 return;
 

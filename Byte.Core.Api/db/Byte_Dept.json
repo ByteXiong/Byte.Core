@@ -1,4 +1,4 @@
-[
+ [
     {
       "Id": 1,
       "Image": "/upload/images/20240808/1723131040.png",
@@ -10,13 +10,13 @@
       "Phone": null,
       "Man": null,
       "Remark": null,
+      "Status": 0,
       "Sort": 0,
       "Type": 30,
       "CreateBy": null,
-      "CreateTime": "8/11/2024 22:01:01",
+      "CreateTime": "2024/11/22 21:51:45",
       "UpdateBy": null,
-      "UpdateTime": null,
-      "Status": 0
+      "UpdateTime": null
     },
     {
       "Id": 2,
@@ -29,13 +29,13 @@
       "Phone": null,
       "Man": null,
       "Remark": null,
+      "Status": 0,
       "Sort": 0,
       "Type": 20,
       "CreateBy": null,
-      "CreateTime": "8/11/2024 22:01:01",
+      "CreateTime": "2024/11/22 21:51:45",
       "UpdateBy": null,
-      "UpdateTime": null,
-      "Status": 0
+      "UpdateTime": null
     },
     {
       "Id": 3,
@@ -48,12 +48,12 @@
       "Phone": null,
       "Man": null,
       "Remark": null,
+      "Status": 0,
       "Sort": 0,
       "Type": 30,
       "CreateBy": null,
-      "CreateTime": "8/11/2024 22:01:01",
+      "CreateTime": "2024/11/22 21:51:45",
       "UpdateBy": null,
-      "UpdateTime": null,
-      "Status": 0
+      "UpdateTime": null
     }
   ]

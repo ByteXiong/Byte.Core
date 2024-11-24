@@ -1,13 +1,17 @@
 ﻿using Byte.Core.Common.Cache;
 using Byte.Core.Common.Extensions;
 using Byte.Core.Common.Filters;
+using Byte.Core.Common.Helpers;
 using Byte.Core.Entity;
 using Byte.Core.Models;
 using Byte.Core.Repository;
 using Byte.Core.SqlSugar;
 using Byte.Core.Tools;
+using log4net.Layout;
 using Mapster;
+using NPOI.POIFS.Properties;
 using NPOI.SS.Formula.Functions;
+using System.ComponentModel;
 using System.Drawing.Drawing2D;
 using System.Linq.Expressions;
 namespace Byte.Core.Business
@@ -89,11 +93,19 @@ namespace Byte.Core.Business
               Id = x.Id,
               Code = x.Path,
               Desc = x.Title,
-              I18nKey=x.I18nKey,
-              State= StateEnum.normal,
               ParentId=x.ParentId,
               Status=x.Status
             }).ToListAsync();
+
+            entity.Querys = await GetIQueryable(x => x.ParentId == id && x.MenuType == MenuTypeEnum.参数).Select(x => new MenuQuery
+            {
+                Id = x.Id,
+                Key = x.Path,
+                Value = x.PathParam,
+                ParentId = x.ParentId,
+                Status = x.Status
+            }).ToListAsync();
+
 
             return entity;
         }
@@ -112,27 +124,39 @@ namespace Byte.Core.Business
          
                 await AddAsync(model);
 
-                var addButtons = param.Buttons?.Where(x => x.State != StateEnum.del).Select(x => new Menu
+                var addButtons = param.Buttons?.Select(x => new Menu
                 {
                     MenuType = MenuTypeEnum.按钮,
                     Title = x.Desc,
                     Path = x.Code,
                     ParentId = model.Id,
-                    I18nKey=x.I18nKey,
+                    I18nKey=x.Desc,
                     Status = x.Status
                 }).ToList();
                 await AddRangeAsync(addButtons);
 
-            
+
+
+                var addQuerys = param.Querys?.Select(x => new Menu
+                {
+                    MenuType = MenuTypeEnum.参数,
+                    PathParam = x.Value,
+                    Path = x.Key,
+                    ParentId = model.Id,
+                    Status = x.Status
+                }).ToList();
+                await AddRangeAsync(addQuerys);
+
+
                 _unitOfWork.CommitTran();
          
             }
             catch (Exception ex) { 
                 _unitOfWork.RollbackTran();
                 throw ex;
-            }finally
+            }
+            finally
             {
-
                 //清除缓存
                 MemoryCacheManager.RemoveCacheRegex(AppConfig.RoleCaChe);
             }
@@ -182,11 +206,27 @@ namespace Byte.Core.Business
                     Id = x.Id,
                     MenuType = MenuTypeEnum.按钮,
                     Title = x.Desc,
+                    I18nKey = x.Desc,
                     Path = x.Code,
                     ParentId = param.Id,
                 }).ToList();
                 await   _unitOfWork.GetDbClient().Storageable(buttons).ExecuteCommandAsync();
-         
+
+                //删除
+                await DeleteAsync(x => x.MenuType == MenuTypeEnum.参数 && x.ParentId == param.Id && (param.Querys.Count == 0 || param.Querys.Any(y => y.Id != x.Id)));
+                //新增/编辑
+                var querys = param.Querys.Select(x => new Menu
+                {
+                    Id = x.Id,
+                    MenuType = MenuTypeEnum.参数,
+                    PathParam = x.Value,
+                    Path = x.Key,
+                    ParentId = param.Id,
+                }).ToList();
+                await _unitOfWork.GetDbClient().Storageable(querys).ExecuteCommandAsync();
+
+
+
 
                 _unitOfWork.CommitTran();
             }
@@ -288,8 +328,22 @@ namespace Byte.Core.Business
         }
 
 
+        /// <summary>
+        /// 判断路由是否存在
+        /// </summary>
+        /// <returns></returns>
+        public async  Task<bool> IsRouteExistAsync(string name) {
 
 
+            var codes = CurrentUser.RoleCodes;
+            Expression<Func<Menu, bool>> where = x => x.Status && x.MenuType != MenuTypeEnum.按钮 && x.MenuType != MenuTypeEnum.参数;
+            if (!codes.Contains(AppConfig.Root))
+            {
+                where = where.And(x => x.Roles.Any(y => codes.Contains(y.Code)));
+            }
+            where = where.Or(x => x.Name == name);
+            return await GetIQueryable(where).AnyAsync();
+        }
 
 
 
@@ -299,58 +353,86 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<List<RouteDTO>> GetRoutesAsync()
         {
-
             var codes = CurrentUser.RoleCodes;
-            Expression<Func<Menu, bool>> where = x => x.Status&& x.MenuType != MenuTypeEnum.按钮;
-            if (!codes.Contains(AppConfig.Root) )
+
+            Expression<Func<Menu, bool>> where = x => !x.Constant;
+            if (!codes.Contains(AppConfig.Root))
             {
                 where = where.And(x => x.Roles.Any(y => codes.Contains(y.Code)));
             }
-            where= where.Or(x => x.Path== AppConfig.PathHome);
-            var db = await GetIQueryable(where)
-                         .Includes(x => x.Roles).OrderBy(x => x.Order).Select(x =>
-                          new RouteDTO()
-                          {
-                              Id = x.Id,
+         
 
-                              Meta = new RouteMeta
-                              {
-                                  Icon = x.Icon,
-                                  LocalIcon = x.LocalIcon,
-                                  IconFontSize = x.IconFontSize,
-                                  Order = x.Order,
-                                  Href = x.Href,
-                                  HideInMenu = x.HideInMenu,
-                                  ActiveMenu = x.ActiveMenu,
-                                  MultiTab = x.MultiTab,
-                                  FixedIndexInTab = x.FixedIndexInTab,
-                                  //Query = x.Query,
-                                  KeepAlive = x.KeepAlive,
-                                  Constant = x.Constant,
-                                  Title = x.Title,
-                                  I18nKey = x.I18nKey,
-                              },
-                              Name = x.Name,
-                              Component = x.Component,
-                              Path = x.Path,
-                              PathParam= x.PathParam,
-                              ParentId = x.ParentId,
-                              //Type = x.Type,
-                              Redirect = x.Redirect,
-                              //Status = x.Status,
-                            
-                          }).ToListAsync();
+            return  await GetRoutesAsync(where);
+        }
+
+        /// <summary>
+        /// 获取常量路由,公共路由
+        /// </summary>
+        /// <returns></returns>5
+        public async Task<List<RouteDTO>> GetConstantRoutesAsync() {
+
+            return await GetRoutesAsync(x => x.Constant);
+        }
+        #region 私有获取路由
+        private async Task<List<RouteDTO>> GetRoutesAsync(Expression<Func<Menu, bool>> where) {
+
+
+          
+            where = where.And(x => x.Status && x.MenuType != MenuTypeEnum.按钮 && x.MenuType != MenuTypeEnum.参数);
+           
+            var db = await GetIQueryable(where).OrderBy(x => x.Order).ToListAsync();
+            //查出请求参数有
+            var querys = GetIQueryable(x => x.MenuType == MenuTypeEnum.参数&& db.Any(y=>y.Id==x.ParentId)).Select(x => new MenuQuery { 
+                ParentId=   x.ParentId,
+                Key=  x.Path,
+                Value = x.PathParam
+            }).ToList();
+
+            var entity = db.Select(x => new RouteDTO()
+            {
+                Id = x.Id,
+                Meta = new RouteMeta
+                {
+                    Icon = x.Icon,
+                    LocalIcon = x.LocalIcon,
+                    IconFontSize = x.IconFontSize,
+                    Order = x.Order,
+                    Href = x.Href,
+                    HideInMenu = x.HideInMenu,
+                    ActiveMenu = x.ActiveMenu,
+                    MultiTab = x.MultiTab,
+                    FixedIndexInTab = x.FixedIndexInTab,
+                    //Query = x.Query,
+                    KeepAlive = x.KeepAlive,
+                    Constant = x.Constant,
+                    Title = x.Title,
+                    I18nKey = x.I18nKey,
+                    Query = querys.Where(y => y.ParentId == x.Id && !string.IsNullOrEmpty(y.Value) && !string.IsNullOrEmpty(y.Key)).ToList()
+                },
+                Name = x.Name,
+                Component = Component(x.Layout, x.Component),
+                Path = x.Path + x.PathParam,
+                PathParam = x.PathParam,
+                ParentId = x.ParentId,
+                //Type = x.Type,
+                Redirect = x.Redirect,
+                //Status = x.Status,
+
+            }).ToList();
+
+
             List<RouteDTO> list = new List<RouteDTO>();
 
-            db.ForEach(x =>
+            entity.ForEach(x =>
             {
-                x.Path= x.Path+ x.PathParam;
+                     
+               
                 //x.Params = new Dictionary<string, dynamic>() { { "TableName", "User" } };
-                x.Children = db.Where(y => y.ParentId == x.Id).Select(y=>
-                    {
-                        y.Path = x.Path+y.Path;
-                        return y;
-                    }
+                x.Children = entity.Where(y => y.ParentId == x.Id).Select(y =>
+                {
+                    y.Path = x.Path + y.Path;
+                    return y;
+                }
                     ).ToList();
                 if (x.ParentId == 0)
                 {
@@ -358,7 +440,20 @@ namespace Byte.Core.Business
                 }
             });
             return list;
-        }
 
+            //返回组件
+            string Component(LayoutTypeEnum? layout ,string component) {
+                var str = string.Empty;
+                if (layout != null && !string.IsNullOrEmpty(component)) {
+                    Console.WriteLine($"{layout}&{component}");
+                    str = EnumHelper.GetEnumDescription(layout) + "$" + component;
+                }
+            
+                else
+                    str = layout != null ? EnumHelper.GetEnumDescription(layout) : component;
+                return str;
+            }
+        }
+        #endregion
     }
 }

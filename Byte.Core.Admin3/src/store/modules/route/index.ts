@@ -3,14 +3,12 @@ import type { RouteRecordRaw } from 'vue-router';
 import { defineStore } from 'pinia';
 import { useBoolean } from '@sa/hooks';
 import type { CustomRoute, ElegantConstRoute, LastLevelRouteKey, RouteKey, RouteMap } from '@elegant-router/types';
-
-import { useRequest } from 'alova/client';
+import { useRequest } from '@sa/alova/client';
 import { SetupStoreId } from '@/enum';
 import { router } from '@/router';
 import { createStaticRoutes, getAuthVueRoutes } from '@/router/routes';
 import { ROOT_ROUTE } from '@/router/routes/builtin';
 import { getRouteName, getRoutePath } from '@/router/elegant/transform';
-import { fetchGetConstantRoutes, fetchGetUserRoutes, fetchIsRouteExist } from '@/service/api';
 import { useAuthStore } from '../auth';
 import { useTabStore } from '../tab';
 import {
@@ -149,6 +147,9 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
     removeRouteFns.forEach(fn => fn());
     removeRouteFns.length = 0;
   }
+  const { send: fetchGetConstantRoutes } = useRequest(() => Apis.Menu.get_api_menu_getconstantroutes(), {
+    immediate: false
+  });
 
   /** init constant route */
   async function initConstantRoute() {
@@ -159,10 +160,10 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
     if (authRouteMode.value === 'static') {
       addConstantRoutes(staticRoute.constantRoutes);
     } else {
-      const { data, error } = await fetchGetConstantRoutes();
+      const { data, success } = await fetchGetConstantRoutes();
 
-      if (!error) {
-        addConstantRoutes(data);
+      if (!success) {
+        addConstantRoutes(data as ElegantConstRoute[]);
       } else {
         // if fetch constant routes failed, use static constant routes
         addConstantRoutes(staticRoute.constantRoutes);
@@ -174,6 +175,28 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
     setIsInitConstantRoute(true);
   }
 
+  const { send: initDynamicAuthRoute } = useRequest(
+    () =>
+      Apis.Menu.get_api_menu_getroutes({
+        transform: async ({ success, data }) => {
+          if (success) {
+            // const { routes, home } = data;
+            const home = 'home';
+            // const { routes, home } = data;
+            addAuthRoutes(data as ElegantConstRoute[]);
+            handleConstantAndAuthRoutes();
+            setRouteHome(home);
+            handleUpdateRootRouteRedirect(home);
+            setIsInitAuthRoute(true);
+          } else {
+            authStore.resetStore();
+          }
+        }
+      }),
+    {
+      immediate: false
+    }
+  );
   /** Init auth route */
   async function initAuthRoute() {
     if (authRouteMode.value === 'static') {
@@ -181,7 +204,6 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
     } else {
       await initDynamicAuthRoute();
     }
-
     tabStore.initHomeTab();
   }
 
@@ -192,7 +214,7 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
     if (authStore.isStaticSuper) {
       addAuthRoutes(staticAuthRoutes);
     } else {
-      const filteredAuthRoutes = filterAuthRoutesByRoles(staticAuthRoutes, authStore.userInfo.roles || []);
+      const filteredAuthRoutes = filterAuthRoutesByRoles(staticAuthRoutes, authStore.userInfo?.roles || []);
 
       addAuthRoutes(filteredAuthRoutes);
     }
@@ -223,31 +245,6 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
   //     authStore.resetStore();
   //   }
   // }
-  const { send: initDynamicAuthRoute } = useRequest(
-    () =>
-      Apis.Menu.get_api_menu_getroutes({
-        transform: async ({ success, data }) => {
-          if (success) {
-            // const { routes, home } = data;
-            const home = 'home';
-            addAuthRoutes(data as ElegantConstRoute[]);
-
-            handleConstantAndAuthRoutes();
-
-            setRouteHome(home);
-
-            handleUpdateRootRouteRedirect(home);
-
-            setIsInitAuthRoute(true);
-          } else {
-            authStore.resetStore();
-          }
-        }
-      }),
-    {
-      immediate: false
-    }
-  );
 
   /** handle constant and auth routes */
   function handleConstantAndAuthRoutes() {
@@ -306,6 +303,16 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
     }
   }
 
+  const { send: fetchIsRouteExist } = useRequest(
+    name =>
+      Apis.Menu.get_api_menu_isrouteexist({
+        params: { name }
+      }),
+    {
+      immediate: false
+    }
+  );
+
   /**
    * Get is auth route exist
    *
@@ -338,7 +345,7 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
   }
 
   async function onRouteSwitchWhenLoggedIn() {
-    authStore.initUserInfo();
+    await authStore.initUserInfo();
   }
 
   async function onRouteSwitchWhenNotLoggedIn() {

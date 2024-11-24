@@ -46,7 +46,6 @@ export function useRouterPush(inSetup = true) {
     const meta = allRoutes.find(item => item.name === key)?.meta || null;
 
     const query: Record<string, string> = {};
-
     meta?.query?.forEach(item => {
       query[item.key] = item.value;
     });

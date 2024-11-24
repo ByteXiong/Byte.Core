@@ -8,7 +8,7 @@ import { $t } from '@/locales';
 import type { MenuButton, UpdateMenuParam } from '@/api/globals';
 import { getLocalIcons } from '@/utils/icon';
 import SvgIcon from '@/components/custom/svg-icon.vue';
-import { IconTypeEnum, LayoutTypeEnum, MenuTypeEnum, StateEnum } from '@/api/apiEnums';
+import { IconTypeEnum, LayoutTypeEnum, MenuTypeEnum } from '@/api/apiEnums';
 import { getEnumValue } from '@/utils/common';
 
 defineOptions({
@@ -110,9 +110,7 @@ function handleCreateButton() {
   const buttonItem: MenuButton = {
     id: 0,
     code: '',
-    desc: '',
-    state: 0,
-    i18nKey: ''
+    desc: ''
   };
 
   return buttonItem;
@@ -131,7 +129,9 @@ defineExpose({
           <NFormItemGi span="24 m:12" :label="$t('page.manage.menu.menuType')" path="menuType">
             <NRadioGroup v-model:value="formData.menuType" :disabled="formData.id != 0">
               <NRadio
-                v-for="item in getEnumValue(MenuTypeEnum).filter(item => item != MenuTypeEnum.按钮)"
+                v-for="item in getEnumValue(MenuTypeEnum).filter(
+                  item => item != MenuTypeEnum.按钮 && item != MenuTypeEnum.参数
+                )"
                 :key="item"
                 :value="item"
                 :label="$t(MenuTypeEnum[item])"
@@ -301,14 +301,23 @@ defineExpose({
               :placeholder="$t('common.placeholder') + $t('page.manage.menu.form.fixedIndexInTab')"
             />
           </NFormItemGi>
-          <!--
- <NFormItemGi span="24" :label="$t('page.manage.menu.query')">
-            <NDynamicInput
-              v-model:value="formData.querys"
-              preset="pair"
-              :key-placeholder="$t('common.placeholder') + $t('page.manage.menu.form.queryKey')"
-              :value-placeholder="$t('common.placeholder') + $t('page.manage.menu.form.queryValue')"
-            >
+
+          <NFormItemGi span="24" :label="$t('page.manage.menu.query')">
+            <NDynamicInput v-model:value="formData.querys" preset="pair" :on-create="handleCreateButton">
+              <template #default="{ value }">
+                <div class="ml-8px flex-y-center flex-1 gap-12px">
+                  <NInput
+                    v-model:value="value.key"
+                    :placeholder="$t('common.placeholder') + $t('page.manage.menu.form.queryKey')"
+                    class="flex-1"
+                  />
+                  <NInput
+                    v-model:value="value.value"
+                    :placeholder="$t('common.placeholder') + $t('page.manage.menu.form.queryValue')"
+                    class="flex-1"
+                  />
+                </div>
+              </template>
               <template #action="{ index, create, remove }">
                 <NSpace class="ml-12px">
                   <NButton size="medium" @click="() => create(index)">
@@ -321,7 +330,7 @@ defineExpose({
               </template>
             </NDynamicInput>
           </NFormItemGi>
--->
+
           <NFormItemGi span="24" :label="$t('page.manage.menu.button')">
             <NDynamicInput v-model:value="formData.buttons" :on-create="handleCreateButton">
               <template #default="{ value }">
@@ -336,13 +345,6 @@ defineExpose({
                     :placeholder="$t('common.placeholder') + $t('page.manage.menu.form.buttonDesc')"
                     class="flex-1"
                   />
-                  <!--
- <NInput
-                    v-model:value="value.i18nKey"
-                    :placeholder="$t('common.placeholder') + $t('page.manage.menu.form.buttonDesc')"
-                    class="flex-1"
-                  />
--->
                 </div>
               </template>
               <template #action="{ index, create, remove }">

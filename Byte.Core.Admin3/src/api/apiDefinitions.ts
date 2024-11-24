@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * runtest开发接口文档 Web端网站 - version 1.0
+ * Byte.Core开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -29,16 +29,16 @@ export default {
   'Login.post_api_login_loginout': ['POST', '/api/Login/LoginOut'],
   'Menu.delete_api_menu_delete': ['DELETE', '/api/Menu/Delete'],
   'Menu.get_api_menu_getbyroleid': ['GET', '/api/Menu/GetByRoleId'],
+  'Menu.get_api_menu_getconstantroutes': ['GET', '/api/Menu/GetConstantRoutes'],
   'Menu.get_api_menu_getinfo': ['GET', '/api/Menu/GetInfo'],
   'Menu.get_api_menu_getroutes': ['GET', '/api/Menu/GetRoutes'],
   'Menu.get_api_menu_gettree': ['GET', '/api/Menu/GetTree'],
   'Menu.get_api_menu_gettreeselect': ['GET', '/api/Menu/GetTreeSelect'],
+  'Menu.get_api_menu_isrouteexist': ['GET', '/api/Menu/IsRouteExist'],
   'Menu.get_api_menu_select': ['GET', '/api/Menu/Select'],
   'Menu.post_api_menu_setbyroleid': ['POST', '/api/Menu/SetByRoleId'],
   'Menu.put_api_menu_setstatus': ['PUT', '/api/Menu/SetStatus'],
   'Menu.post_api_menu_submit': ['POST', '/api/Menu/Submit'],
-  'Rank.get_api_rank_day': ['GET', '/api/Rank/Day'],
-  'Rank.get_api_rank_week': ['GET', '/api/Rank/Week'],
   'Role.delete_api_role_delete': ['DELETE', '/api/Role/Delete'],
   'Role.get_api_role_getinfo': ['GET', '/api/Role/GetInfo'],
   'Role.get_api_role_getpage': ['GET', '/api/Role/GetPage'],

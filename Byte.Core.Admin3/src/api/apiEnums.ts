@@ -47,7 +47,8 @@ export enum ViewTypeEnum {
 export enum MenuTypeEnum {
   目录 = 1,
   菜单 = 2,
-  按钮 = 3
+  按钮 = 3,
+  参数 = 4
 }
 export enum RoleTypeEnum {
   系统角色 = 10,
