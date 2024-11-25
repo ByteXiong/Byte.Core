@@ -10,7 +10,7 @@ using Org.BouncyCastle.Crypto;
 namespace Byte.Core.Api.Controllers
 {
 
-    [Route("api/[controller]/[action]/{tableof}")]
+    [Route("api/[controller]/[action]/{configId}/{tableof}")]
     public class TableColumnController(TableColumnLogic logic) : BaseApiController
     {
 
@@ -25,7 +25,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<PagedResults<dynamic>> PageAsync([FromQuery] TableDataPageParam param, string tableof) => await _logic.PageAsync(param, tableof);
+        public async Task<PagedResults<dynamic>> PageAsync([FromQuery] TableDataPageParam param, string configId, string tableof) => await _logic.PageAsync(param, configId, tableof);
 
 
 
@@ -36,7 +36,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<dynamic> GetFormAsync( int id, string tableof) => await _logic.GetFormAsync(id, tableof);
+        public async Task<dynamic> GetFormAsync( int id, string configId, string tableof) => await _logic.GetFormAsync(id, configId, tableof);
 
         /// <summary>
         /// 新增
@@ -45,17 +45,17 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPost]
     [ApiVersion("1.0", Deprecated = false)]
-    public async Task<int> Submit(Dictionary<string, object> param, string tableof)
+    public async Task<int> Submit(Dictionary<string, object> param, string configId, string tableof)
     {
             object id = "";
             param.TryGetValue("id", out id);
         if ( string .IsNullOrEmpty(id?.ToString()))
         {
-            return await _logic.AddAsync(param, tableof);
+            return await _logic.AddAsync(param,configId, tableof);
         }
         else
         {
-            return await _logic.UpdateAsync(param, tableof);
+            return await _logic.UpdateAsync(param, configId, tableof);
         }
     }
     /// <summary>
@@ -65,6 +65,6 @@ namespace Byte.Core.Api.Controllers
     /// <returns></returns>
     [HttpDelete]
     [ApiVersion("1.0", Deprecated = false)]
-    public async Task DeleteAsync(int[] ids, string tableof) => await _logic.DeleteAsync(ids, tableof);
+    public async Task DeleteAsync(int[] ids, string configId, string tableof) => await _logic.DeleteAsync(ids,  configId, tableof);
     }
 }

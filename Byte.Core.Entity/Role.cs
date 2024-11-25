@@ -12,11 +12,13 @@ namespace Byte.Core.Entity
     public class Role : BaseEntity<int>
     {
         /// <summary>
-        /// 账号
+        /// 角色名称
         /// </summary>
         [SugarColumn(Length = 50, IsNullable = true)]
         public String Name { get; set; }
-
+        /// <summary>
+        /// 角色类型
+        /// </summary>
         public RoleTypeEnum Type { get; set; }
         /// <summary>
         /// 状态

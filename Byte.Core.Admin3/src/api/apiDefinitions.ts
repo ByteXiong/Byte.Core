@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Byte.Core开发接口文档 Web端网站 - version 1.0
+ * runtest开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -39,16 +39,21 @@ export default {
   'Menu.post_api_menu_setbyroleid': ['POST', '/api/Menu/SetByRoleId'],
   'Menu.put_api_menu_setstatus': ['PUT', '/api/Menu/SetStatus'],
   'Menu.post_api_menu_submit': ['POST', '/api/Menu/Submit'],
+  'Rank.get_api_rank_day': ['GET', '/api/Rank/Day'],
+  'Rank.get_api_rank_week': ['GET', '/api/Rank/Week'],
   'Role.delete_api_role_delete': ['DELETE', '/api/Role/Delete'],
   'Role.get_api_role_getinfo': ['GET', '/api/Role/GetInfo'],
   'Role.get_api_role_getpage': ['GET', '/api/Role/GetPage'],
   'Role.get_api_role_getselect': ['GET', '/api/Role/GetSelect'],
   'Role.put_api_role_setstatus': ['PUT', '/api/Role/SetStatus'],
   'Role.post_api_role_submit': ['POST', '/api/Role/Submit'],
-  'TableColumn.delete_api_tablecolumn_delete_tableof': ['DELETE', '/api/TableColumn/Delete/{tableof}'],
-  'TableColumn.get_api_tablecolumn_getform_tableof': ['GET', '/api/TableColumn/GetForm/{tableof}'],
-  'TableColumn.get_api_tablecolumn_page_tableof': ['GET', '/api/TableColumn/Page/{tableof}'],
-  'TableColumn.post_api_tablecolumn_submit_tableof': ['POST', '/api/TableColumn/Submit/{tableof}'],
+  'TableColumn.delete_api_tablecolumn_delete_configid_tableof': [
+    'DELETE',
+    '/api/TableColumn/Delete/{configId}/{tableof}'
+  ],
+  'TableColumn.get_api_tablecolumn_getform_configid_tableof': ['GET', '/api/TableColumn/GetForm/{configId}/{tableof}'],
+  'TableColumn.get_api_tablecolumn_page_configid_tableof': ['GET', '/api/TableColumn/Page/{configId}/{tableof}'],
+  'TableColumn.post_api_tablecolumn_submit_configid_tableof': ['POST', '/api/TableColumn/Submit/{configId}/{tableof}'],
   'TableView.delete_api_tableview_deletetableheader': ['DELETE', '/api/TableView/DeleteTableHeader'],
   'TableView.get_api_tableview_gettableheader': ['GET', '/api/TableView/GetTableHeader'],
   'TableView.get_api_tableview_getview': ['GET', '/api/TableView/GetView'],

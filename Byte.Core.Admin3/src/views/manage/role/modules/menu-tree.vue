@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-import { computed, h, ref, shallowRef } from 'vue';
+import { computed, h, ref } from 'vue';
 import { useForm, useRequest } from 'alova/client';
 import type { TreeOption } from 'naive-ui';
 import { NButton, NTag } from 'naive-ui';
@@ -65,7 +65,7 @@ const { send: getData, data: treeIds } = useRequest(
     }),
   {
     force: true,
-    immediate: true
+    immediate: false
   }
 );
 const title = computed(() => {

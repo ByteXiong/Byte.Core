@@ -12,6 +12,8 @@ import { useAuth } from '@/hooks/business/auth';
 import EditForm from './modules/editForm.vue';
 const { hasAuth } = useAuth();
 const route = useRoute();
+
+const configId = ref(route.query.configId as string);
 const tableof = ref(route.path.split('/').pop());
 const searchParams = ref<NaiveUI.SearchParams>({});
 const keyWord = ref('');
@@ -28,8 +30,11 @@ const {
 } = usePagination(
   // Method实例获取函数，它将接收page和pageSize，并返回一个Method实例
   (upPageIndex, upPageSize) =>
-    Apis.TableColumn.get_api_tablecolumn_page_tableof({
-      pathParams: { tableof: tableof.value || '' },
+    Apis.TableColumn.get_api_tablecolumn_page_configid_tableof({
+      pathParams: {
+        configId: configId.value || '',
+        tableof: tableof.value || ''
+      },
       params: {
         PageIndex: upPageIndex,
         pageSize: upPageSize,
@@ -45,14 +50,14 @@ const {
     preloadPreviousPage: false, // 是否预加载下一页
     preloadNextPage: false, // 是否预加载上一页
     total: res => res.data?.pagerInfo?.totalRowCount,
-    data: res => res.data?.data
+    data: res => res.data?.data as any
   }
 );
 // 删除
 const { send: handleDelete } = useRequest(
   ids =>
-    Apis.TableColumn.delete_api_tablecolumn_delete_tableof({
-      pathParams: { tableof: tableof.value || '' },
+    Apis.TableColumn.delete_api_tablecolumn_delete_configid_tableof({
+      pathParams: { configId: configId.value || '', tableof: tableof.value || '' },
       data: ids,
       transform: res => {
         window.$message?.success('删除成功！');
@@ -133,6 +138,7 @@ const columnData = computed<Array<DataTableColumn>>(() => {
             <TableHeaderSetting
               v-model:columns="columns"
               v-model:search-data="searchData"
+              :config-id="configId"
               :tableof="tableof"
               :view-type="ViewTypeEnum.主页"
             ></TableHeaderSetting>

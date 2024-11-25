@@ -9,6 +9,7 @@ defineOptions({
   name: 'TableEditForm'
 });
 const route = useRoute();
+const configId = ref(route.query.configId as string);
 const tableof = ref(route.path.split('/').pop());
 type FormDataType = Record<string, string>;
 
@@ -35,7 +36,7 @@ const {
   updateForm
 } = useForm(
   form =>
-    Apis.TableColumn.post_api_tablecolumn_submit_tableof({
+    Apis.TableColumn.post_api_tablecolumn_submit_configid_tableof({
       pathParams: { tableof: tableof.value || '' },
       data: form,
       transform: () => {
@@ -58,8 +59,8 @@ const {
 /** 获取详情 */
 const { send: getInfo } = useRequest(
   id =>
-    Apis.TableColumn.get_api_tablecolumn_getform_tableof({
-      pathParams: { tableof: tableof.value || '' },
+    Apis.TableColumn.get_api_tablecolumn_getform_configid_tableof({
+      pathParams: { configId: configId.value || '', tableof: tableof.value || '' },
       params: { id },
       transform: res => {
         updateForm(res.data || {});
@@ -94,6 +95,7 @@ defineExpose({
     <NScrollbar class="h-480px pr-20px">
       <TableHeaderSetting
         v-model:columns="formColumns"
+        :config-id="configId"
         :tableof="tableof"
         :view-type="ViewTypeEnum.编辑页"
       ></TableHeaderSetting>

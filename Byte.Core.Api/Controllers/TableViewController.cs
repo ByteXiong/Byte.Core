@@ -20,12 +20,12 @@ namespace Byte.Core.Api.Controllers
         private readonly TableViewLogic _logic = logic ?? throw new ArgumentNullException(nameof(logic));
 
         #region 表头信息
-        /// <summary>
-        /// 获取表字段
-        /// </summary>
-        /// <param name="param"></param>
-        /// <returns></returns>
-        /// <returns></returns>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="param"></param>
+    /// <param name="configId"></param>
+    /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
         public async Task<TableView> GetTableHeaderAsync([FromQuery] TableViewParam param)=> await _logic.GetTableHeaderAsync(param);

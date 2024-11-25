@@ -236,7 +236,7 @@ namespace Byte.Core.Api.Common
                                 f2.Dispose();
 
                                 var list = JsonConvert.DeserializeObject<List<TableView>>(jsonStr, setting);
-                                await dataContext.GetEntityDb<TableView>().InsertRangeAsync(list);
+                                await dataContext.Db.InsertNav(list).Include(x => x.TableColumns).ExecuteCommandAsync();
 
                                 Console.WriteLine(
                                     $"Entity:{nameof(TableView)}-->Table:{attr.TableName}-->Desc:{attr.TableDescription}-->初始数据成功！",
@@ -244,26 +244,24 @@ namespace Byte.Core.Api.Common
                             }
                         }
 
+                        //if (!await dataContext.Db.Queryable<TableColumn>().AnyAsync())
+                        //{
+                        //    var attr = typeof(TableColumn).GetCustomAttribute<SugarTable>();
+                        //    if (attr != null)
+                        //    {
+                        //        StreamReader f2 = new StreamReader(string.Format(seedDataFolder, attr.TableName), Encoding.UTF8);
+                        //        var jsonStr = f2.ReadToEnd();
+                        //        f2.Close();
+                        //        f2.Dispose();
 
+                        //        var list = JsonConvert.DeserializeObject<List<TableColumn>>(jsonStr, setting);
+                        //        await dataContext.GetEntityDb<TableColumn>().InsertRangeAsync(list);
 
-                        if (!await dataContext.Db.Queryable<TableColumn>().AnyAsync())
-                        {
-                            var attr = typeof(TableColumn).GetCustomAttribute<SugarTable>();
-                            if (attr != null)
-                            {
-                                StreamReader f2 = new StreamReader(string.Format(seedDataFolder, attr.TableName), Encoding.UTF8);
-                                var jsonStr = f2.ReadToEnd();
-                                f2.Close();
-                                f2.Dispose();
-
-                                var list = JsonConvert.DeserializeObject<List<TableColumn>>(jsonStr, setting);
-                                await dataContext.GetEntityDb<TableColumn>().InsertRangeAsync(list);
-
-                                Console.WriteLine(
-                                    $"Entity:{nameof(TableColumn)}-->Table:{attr.TableName}-->Desc:{attr.TableDescription}-->初始数据成功！",
-                                    ConsoleColor.Green);
-                            }
-                        }
+                        //        Console.WriteLine(
+                        //            $"Entity:{nameof(TableColumn)}-->Table:{attr.TableName}-->Desc:{attr.TableDescription}-->初始数据成功！",
+                        //            ConsoleColor.Green);
+                        //    }
+                        //}
 
                         #endregion
 

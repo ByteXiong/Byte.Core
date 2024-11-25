@@ -16,7 +16,6 @@ const customRender = (str: string | undefined) => {
     enumerable: false, // 不会出现在 Object.keys 中
     writable: true
   });
-  
   const { hasAuth } = useAuth();
 
   Object.defineProperty(window, 'hasAuth', {

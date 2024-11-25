@@ -48,13 +48,12 @@ namespace Byte.Core.Business
         {
             var sysList = new List<TableColumn>();
             if (param.Tableof.IsNullOrEmpty()) throw new BusException("表名不能为空");
-            else if (param.Tableof.Substring(param.Tableof.Length - 3) == "DTO")
+            else if (param.ConfigId.IsNullOrEmpty())
             {
                 sysList = GetXml(param.Tableof);
             }
             else {
-
-                sysList = await GetTableColumnAsync(param.Tableof);
+                sysList = await GetTableColumnAsync(param.Tableof, param.ConfigId);
             }
 
             //获取自定义字段
@@ -229,10 +228,9 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="tableName"></param>
         /// <returns></returns>
-        private async Task<List<TableColumn>>  GetTableColumnAsync(string tableName){
+        private async Task<List<TableColumn>>  GetTableColumnAsync(string tableName,string configId){
 
-
-            var columnView = _unitOfWork.GetDbClient().DbMaintenance.GetColumnInfosByTableName(tableName,false);//true 走缓存 false不走缓存
+            var columnView = _unitOfWork.GetDbClient().GetConnection(configId).DbMaintenance.GetColumnInfosByTableName(tableName,false);//true 走缓存 false不走缓存
             var columns = columnView.Select(x => new TableColumn
             {
                 Key = x.DbColumnName,

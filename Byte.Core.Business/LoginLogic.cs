@@ -51,6 +51,7 @@ namespace Byte.Core.Business
                 RoleCodes = _roleRepository.GetIQueryable(x=>x.User_Dept_Roles.Any(y=>y.UserId == user.Id)).Select(x => x.Code).ToList(),
                 //Type = user.Role.Type,
                 NickName = user.NickName,
+                DeptId =1,
             };
             return await LoginTokenAsync(jwt);
         }

@@ -35,6 +35,10 @@ namespace Byte.Core.Models
     /// </summary>
     public class RoleDTO : Role
     {
+
+        /// <summary>
+        /// 组织名称
+        /// </summary>
         public string DeptName { get; set; }
     }
 

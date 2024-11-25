@@ -71,7 +71,11 @@ namespace Byte.Core.Entity
         /// 排序
         /// </summary>
         public int Sort { get; set; }
-
+        /// <summary>
+        /// 首页
+        /// </summary>
+        [SugarColumn(Length = 200, IsNullable = true)]
+        public String Home { get; set; }
 
         /// <summary>
         /// 类型 公司.部门
@@ -97,8 +101,10 @@ namespace Byte.Core.Entity
         [SugarColumn(IsIgnore = true)]
         public List<Dept> Children { get; set; }
 
+        [SugarColumn(IsIgnore = true)]
+        [Navigate(typeof(Dept_Tenant), nameof(Dept_Tenant.DeptId), nameof(Dept_Tenant.TenantId))]
+        public List<Tenant> Tenants { get; set; }
         #endregion
     }
-
     //[JsonIgnore]//隐藏
 }

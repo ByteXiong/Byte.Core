@@ -14,6 +14,7 @@ public abstract class BaseRepository<TKey,T>: IRepository<TKey,T > where T : cla
     public BaseRepository(IUnitOfWork unitOfWork)
     {
         var sqlSugarScope = unitOfWork.GetDbClient();
+        //这里要判断是否是多租户
         var tenantAttribute = typeof(T).GetCustomAttribute<TenantAttribute>();
         if (tenantAttribute == null)
         {

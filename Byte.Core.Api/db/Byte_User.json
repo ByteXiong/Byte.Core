@@ -1,58 +1,31 @@
 [
-    {
-      "Id": 1,
-      "NickName": "管理员",
-      "Avatar": "/upload/images/20240813/1723520754.png",
-      "Phone": null,
-      "Email": null,
-      "Password": "e10adc3949ba59abbe56e057f20f883e",
-      "Status": 1,
-      "UserName": "admin",
-      "CreateBy": "",
-      "CreateTime": "2024/11/22 21:51:44",
-      "UpdateBy": null,
-      "UpdateTime": null
-    },
-    {
-      "Id": 2,
-      "NickName": "",
-      "Avatar": "/upload/images/20240804/1820038220423892992.jpg",
-      "Phone": null,
-      "Email": null,
-      "Password": "e10adc3949ba59abbe56e057f20f883e",
-      "Status": 1,
-      "UserName": "admin2",
-      "CreateBy": "",
-      "CreateTime": "2024/11/22 21:51:44",
-      "UpdateBy": null,
-      "UpdateTime": null
-    },
-    {
-      "Id": 3,
-      "NickName": null,
-      "Avatar": null,
-      "Phone": null,
-      "Email": null,
-      "Password": "e10adc3949ba59abbe56e057f20f883e",
-      "Status": 0,
-      "UserName": "admin3",
-      "CreateBy": null,
-      "CreateTime": "2024/11/22 21:51:44",
-      "UpdateBy": null,
-      "UpdateTime": null
-    },
-    {
-      "Id": 4,
-      "NickName": null,
-      "Avatar": null,
-      "Phone": null,
-      "Email": null,
-      "Password": "e10adc3949ba59abbe56e057f20f883e",
-      "Status": 0,
-      "UserName": "admin4",
-      "CreateBy": null,
-      "CreateTime": "2024/11/22 21:51:44",
-      "UpdateBy": null,
-      "UpdateTime": null
-    }
+  {
+    "Id": 1,
+    "NickName": "系统管理员",
+    "Avatar": "/upload/images/20240813/1723520754.png",
+    "Phone": null,
+    "Email": null,
+    "Password": "e10adc3949ba59abbe56e057f20f883e",
+    "Status": 1,
+    "UserName": "root",
+    "CreateBy": "",
+    "CreateTime": "2024/11/22 21:51:44",
+    "UpdateBy": null,
+    "UpdateTime": null
+  },
+  {
+    "Id": 2,
+    "NickName": "管理员",
+    "Avatar": "/upload/images/20240804/1820038220423892992.jpg",
+    "Phone": null,
+    "Email": null,
+    "Password": "e10adc3949ba59abbe56e057f20f883e",
+    "Status": 1,
+    "UserName": "admin",
+    "CreateBy": "",
+    "CreateTime": "2024/11/22 21:51:44",
+    "UpdateBy": null,
+    "UpdateTime": null,
+
+  }
   ]

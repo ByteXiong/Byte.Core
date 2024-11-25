@@ -1,158 +1,508 @@
-[
-    {
-      "Id": 2,
-      "Tableof": "UserDTO",
-      "Router": null,
-      "Type": 1,
-      "SortKey": null,
-      "SortOrder": 0,
-      "Props": null,
-      "CreateBy": null,
-      "CreateTime": "2024/11/24 12:17:21",
-      "UpdateBy": null,
-      "UpdateTime": null
-    },
-    {
-      "Id": 3,
-      "Tableof": "MenuTreeDTO",
-      "Router": null,
-      "Type": 1,
-      "SortKey": null,
-      "SortOrder": 0,
-      "Props": null,
-      "CreateBy": null,
-      "CreateTime": "2024/11/24 12:17:21",
-      "UpdateBy": null,
-      "UpdateTime": null
-    },
-    {
-      "Id": 5,
-      "Tableof": "dts_game_log",
-      "Router": null,
-      "Type": 1,
-      "SortKey": null,
-      "SortOrder": 0,
-      "Props": null,
-      "CreateBy": null,
-      "CreateTime": "2024/11/24 12:17:21",
-      "UpdateBy": null,
-      "UpdateTime": null
-    },
-    {
-      "Id": 6,
-      "Tableof": "dts_game_log",
-      "Router": null,
-      "Type": 2,
-      "SortKey": null,
-      "SortOrder": 0,
-      "Props": null,
-      "CreateBy": null,
-      "CreateTime": "2024/11/24 12:17:21",
-      "UpdateBy": null,
-      "UpdateTime": null
-    },
-    {
-      "Id": 7,
-      "Tableof": "dts_betting_log",
-      "Router": null,
-      "Type": 1,
-      "SortKey": null,
-      "SortOrder": 0,
-      "Props": null,
-      "CreateBy": null,
-      "CreateTime": "2024/11/24 12:17:21",
-      "UpdateBy": null,
-      "UpdateTime": null
-    },
-    {
-      "Id": 8,
-      "Tableof": "dts_betting_log",
-      "Router": null,
-      "Type": 2,
-      "SortKey": null,
-      "SortOrder": 0,
-      "Props": null,
-      "CreateBy": null,
-      "CreateTime": "2024/11/24 12:17:21",
-      "UpdateBy": null,
-      "UpdateTime": null
-    },
-    {
-      "Id": 9,
-      "Tableof": "Byte_DicData",
-      "Router": null,
-      "Type": 1,
-      "SortKey": null,
-      "SortOrder": 0,
-      "Props": null,
-      "CreateBy": null,
-      "CreateTime": "2024/11/24 12:17:21",
-      "UpdateBy": null,
-      "UpdateTime": null
-    },
-    {
-      "Id": 10,
-      "Tableof": "Byte_DicData",
-      "Router": null,
-      "Type": 2,
-      "SortKey": null,
-      "SortOrder": 0,
-      "Props": null,
-      "CreateBy": null,
-      "CreateTime": "2024/11/24 12:17:21",
-      "UpdateBy": null,
-      "UpdateTime": null
-    },
-    {
-      "Id": 11,
-      "Tableof": "DayRankDTO",
-      "Router": null,
-      "Type": 1,
-      "SortKey": null,
-      "SortOrder": 0,
-      "Props": null,
-      "CreateBy": null,
-      "CreateTime": "2024/11/24 12:17:21",
-      "UpdateBy": null,
-      "UpdateTime": null
-    },
-    {
-      "Id": 12,
-      "Tableof": "WeekRankDTO",
-      "Router": null,
-      "Type": 1,
-      "SortKey": null,
-      "SortOrder": 0,
-      "Props": null,
-      "CreateBy": null,
-      "CreateTime": "2024/11/24 12:17:21",
-      "UpdateBy": null,
-      "UpdateTime": null
-    },
-    {
-      "Id": 13,
-      "Tableof": "dts_sha_log",
-      "Router": null,
-      "Type": 1,
-      "SortKey": null,
-      "SortOrder": 0,
-      "Props": null,
-      "CreateBy": null,
-      "CreateTime": "2024/11/24 12:17:21",
-      "UpdateBy": null,
-      "UpdateTime": null
-    },
-    {
-      "Id": 14,
-      "Tableof": "RoleDTO",
-      "Router": null,
-      "Type": 1,
-      "SortKey": null,
-      "SortOrder": 0,
-      "Props": null,
-      "CreateBy": null,
-      "CreateTime": "2024/11/24 12:17:21",
-      "UpdateBy": null,
-      "UpdateTime": null
-    }
+ [
+  {
+
+    "Tableof": "UserDTO",
+    "Router": null,
+    "Type": 1,
+    "SortKey": null,
+    "SortOrder": 0,
+    "Props": null,
+
+    "TableColumns": [
+      {
+        "Title": "昵称",
+        "Key": "nickName",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 1,
+        "IsShow": 1,
+        "Props": "",
+      },
+      {
+      
+        "Title": "头像",
+        "Key": "avatar",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 3,
+        "IsShow": 1,
+        "Props": "",
+       
+      },
+      {
+     
+        "Title": "手机号",
+        "Key": "phone",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 4,
+        "IsShow": 1,
+        "Props": "",
+      
+      },
+      {
+    
+        "Title": "电子邮箱",
+        "Key": "email",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 5,
+        "IsShow": 1,
+        "Props": "",
+       
+      },
+      {
+      
+        "Title": "状态",
+        "Key": "status",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 6,
+        "IsShow": 1,
+        "Props": "{\r\n  align: 'center',\r\n    render: row => {\r\n      return h(Naive.NTag, { type: row.status?\"success\":\"error\" },\r\n        { default: () => row.status?\"启用\":\"禁用\" });\r\n    }\r\n}",
+       
+      },
+      {
+    
+        "Title": "账号",
+        "Key": "userName",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 2,
+        "IsShow": 1,
+        "Props": "",
+       
+      },
+      {
+     
+        "Title": "操作",
+        "Key": "65113a56-0888-43ef-93a8-c1196a04e74d",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 7,
+        "IsShow": 1,
+        "Props": "{\r\n       align: 'center',\r\n        render: row => {\r\n          return h('div', {\r\n            class: \"flex-center gap-8px\",\r\n          },\r\n            [\r\n            hasAuth('user/submit')&&  h(Naive.NButton,\r\n                {\r\n                  ghost: true,\r\n                  size: \"small\",\r\n                  type: \"primary\",\r\n                  onClick: () => {\r\n                    that.openForm(row.id)\r\n                  },\r\n                },\r\n                $t('common.edit')\r\n              ),\r\n            hasAuth('user/delete')&&h(Naive.NPopconfirm,\r\n                {\r\n\r\n                  onPositiveClick: () => {\r\n                      that.handleDelete([row.id])\r\n                  },\r\n                },\r\n                {\r\n                  default: () => $t('common.confirmDelete'),\r\n                  trigger: () => h(Naive.NButton,\r\n                    {\r\n                      type: \"error\",\r\n                      size: \"small\",\r\n                      ghost: true,\r\n                    \r\n                    },\r\n                    $t('common.delete')\r\n                  )\r\n                }\r\n\r\n              )\r\n\r\n\r\n            ]\r\n          )\r\n        }\r\n} ",
+       
+      }
+    ]
+  },
+  {
+    "Tableof": "RoleDTO",
+    "Router": null,
+    "Type": 1,
+    "SortKey": null,
+    "SortOrder": 0,
+    "Props": null,
+    "TableColumns": [
+
+      {
+  
+        "Title": "组织名称",
+        "Key": "deptName",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 0,
+        "IsShow": 1,
+        "Props": "",
+   
+      },
+      {
+      
+        "Title": "角色名称",
+        "Key": "name",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 0,
+        "IsShow": 1,
+        "Props": "",
+
+      },
+      {
+    
+        "Title": "角色类型",
+        "Key": "type",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 0,
+        "IsShow": 1,
+        "Props": "",
+  
+      },
+      {
+      
+        "Title": "状态",
+        "Key": "status",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 0,
+        "IsShow": 1,
+        "Props": "{\r\n  align: 'center',\r\n    render: row => {\r\n      return h(Naive.NTag, { type: row.status?\"success\":\"error\" },\r\n        { default: () => row.status?\"启用\":\"禁用\" });\r\n    }\r\n}",
+     
+      },
+      {
+      
+        "Title": "备注",
+        "Key": "remark",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 0,
+        "IsShow": 1,
+        "Props": "",
+ 
+      },
+      {
+        
+        "Title": "角色代码",
+        "Key": "code",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 0,
+        "IsShow": 1,
+        "Props": "",
+   
+      },
+      {
+  
+        "Title": "排序",
+        "Key": "sort",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 0,
+        "IsShow": 1,
+        "Props": "",
+    
+      },
+      {
+      
+        "Title": "操作",
+        "Key": "fb0fec12-4f69-4d59-9996-cfcb372a27b8",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 0,
+        "IsShow": 1,
+        "Props": "{\r\n       align: 'center',\r\n        render: row => {\r\n          return h('div', {\r\n            class: \"flex-center gap-8px\",\r\n          },\r\n            [\r\n            hasAuth('menu/setbyroleId')&&  h(Naive.NButton,\r\n                {\r\n                  ghost: true,\r\n                  size: \"small\",\r\n                  type: \"primary\",\r\n                  onClick: () => {\r\n                    that.openMenuTree(row.id)\r\n                  },\r\n                },\r\n                $t('权限范围')\r\n              ),\r\n\r\n\r\n\r\n            hasAuth('role/submit')&&  h(Naive.NButton,\r\n                {\r\n                  ghost: true,\r\n                  size: \"small\",\r\n                  type: \"primary\",\r\n                  onClick: () => {\r\n                    that.openForm(row.id)\r\n                  },\r\n                },\r\n                $t('common.edit')\r\n              ),\r\n            hasAuth('role/delete')&&h(Naive.NPopconfirm,\r\n                {\r\n\r\n                  onPositiveClick: () => {\r\n                      that.handleDelete([row.id])\r\n                  },\r\n                },\r\n                {\r\n                  default: () => $t('common.confirmDelete'),\r\n                  trigger: () => h(Naive.NButton,\r\n                    {\r\n                      type: \"error\",\r\n                      size: \"small\",\r\n                      ghost: true,\r\n                    \r\n                    },\r\n                    $t('common.delete')\r\n                  )\r\n                }\r\n\r\n              )\r\n\r\n\r\n            ]\r\n          )\r\n        }\r\n} ",
+   
+      }
+
+    ]
+
+  },
+  {
+    "Tableof": "MenuTreeDTO",
+    "Router": null,
+    "Type": 1,
+    "SortKey": null,
+    "SortOrder": 0,
+    "Props": null,
+    "TableColumns": [
+
+      {
+        
+        "Title": "状态",
+        "Key": "status",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 2,
+        "IsShow": 1,
+        "Props": "{\r\n  align: 'center',\r\n    render: row => {\r\n      return h(Naive.NTag, { type: row.status?\"success\":\"error\" },\r\n        { default: () => row.status?\"启用\":\"禁用\" });\r\n    }\r\n}",
+       
+      },
+      {
+    
+        "Title": "根目录始终显示",
+        "Key": "alwaysShow",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 12,
+        "IsShow": 0,
+        "Props": "",
+     
+      },
+      {
+     
+        "Title": "跳转路由",
+        "Key": "redirect",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 3,
+        "IsShow": 1,
+        "Props": "",
+    
+      },
+      {
+     
+        "Title": "是否隐藏",
+        "Key": "hideInMenu",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 4,
+        "IsShow": 1,
+        "Props": "{\r\n  align: 'center',\r\n    render: row => {\r\n      return h(Naive.NTag, { type: !row.hideInMenu?\"success\":\"error\" },\r\n        { default: () => !row.hideInMenu?\"显示\":\"隐藏\" });\r\n    }\r\n}",
+       
+      },
+      {
+    
+        "Title": "类型",
+        "Key": "menuType",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 5,
+        "IsShow": 1,
+        "Props": "{\r\n  align: 'center',\r\n    render: row => {\r\n      return h(Naive.NTag, { type: El.MenuTypeEl[row.menuType] },\r\n        { default: () => Enum.MenuTypeEnum[row.menuType] });\r\n    }\r\n}",
+        
+      },
+      {
+     
+        "Title": "icon图标",
+        "Key": "icon",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 6,
+        "IsShow": 1,
+        "Props": "",
+     
+      },
+      {
+     
+        "Title": "排序",
+        "Key": "order",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 7,
+        "IsShow": 1,
+        "Props": "",
+      
+      },
+      {
+      
+        "Title": "父级菜单ID",
+        "Key": "parentId",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 13,
+        "IsShow": 0,
+        "Props": "",
+       
+      },
+      {
+       
+        "Title": "路由名称",
+        "Key": "name",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 8,
+        "IsShow": 1,
+        "Props": "",
+      
+      },
+      {
+     
+        "Title": "菜单标题",
+        "Key": "title",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 1,
+        "IsShow": 1,
+        "Props": "",
+      
+      },
+      {
+     
+        "Title": "操作",
+        "Key": "c0845de7-a162-45c9-a6ed-fe3108df91a8",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 9,
+        "IsShow": 1,
+        "Props": "{\r\n    key: 'operate',\r\n        title: $t('common.operate'),\r\n            align: 'center',\r\n                width: 230,\r\n                    render: row => {\r\n                        return h('div', {\r\n                            class: \"flex-center gap-8px\",\r\n                            onClick: () => {\r\n                                that.handClick()\r\n                            }\r\n                        },\r\n                            [\r\n                           hasAuth('menu/submit')&&  row.menuType == Enum.MenuTypeEnum.目录 &&   h(Naive.NButton,\r\n                                    {\r\n                                        ghost: true,\r\n                                        type: \"primary\",\r\n                                        size: \"small\",\r\n                                        onClick: () => {\r\n                                             that.handleAddChildMenu(row)\r\n                                        }\r\n                                    },\r\n                                    $t('page.manage.menu.addChildMenu')\r\n                                ),\r\n                          hasAuth('menu/submit')&&     row.menuType != Enum.MenuTypeEnum.按钮 &&  row.menuType != Enum.MenuTypeEnum.参数&&     h(Naive.NButton,\r\n                                    {\r\n                                        ghost: true,\r\n                                        type: \"primary\",\r\n                                        size: \"small\",\r\n                                        onClick: () => {\r\n                                             that.openForm(row.id)\r\n                                        }\r\n                                    },\r\n                                    $t('common.edit')\r\n                                ),\r\n                            hasAuth('menu/delete')&&        h(Naive.NPopconfirm,\r\n                                    {\r\n\r\n                                        onPositiveClick: () => {\r\n                                             that.handleDelete([row.id])\r\n                                        },\r\n                                    },\r\n                                    {\r\n                                        default: () => $t('common.confirmDelete'),\r\n                                        trigger: () => h(Naive.NButton,\r\n                                            {\r\n                                                type: \"error\",\r\n                                                size: \"small\",\r\n                                                ghost: true\r\n                                            },\r\n                                            $t('common.delete')\r\n                                        )\r\n                                    }\r\n                                )\r\n                            ]\r\n                        )\r\n                    }\r\n} ",
+       
+      }
+
+    ]
+  },
+  {
+    "Tableof": "Byte_DicData",
+    "Router": null,
+    "Type": 1,
+    "SortKey": null,
+    "SortOrder": 0,
+    "Props": null,
+    "TableColumns": [
+      {
+    
+        "Title": "分类",
+        "Key": "GroupBy",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 0,
+        "IsShow": 1,
+        "Props": "",
+      
+      },
+      {
+       
+        "Title": "名称",
+        "Key": "Label",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 0,
+        "IsShow": 1,
+        "Props": "",
+       
+      },
+      {
+      
+        "Title": "值",
+        "Key": "Value",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 0,
+        "IsShow": 1,
+        "Props": "",
+       
+      },
+      {
+   
+        "Title": "备注",
+        "Key": "Remark",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 0,
+        "IsShow": 1,
+        "Props": "",
+    
+      },
+      {
+       
+        "Title": "状态",
+        "Key": "Status",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 0,
+        "IsShow": 1,
+        "Props": "",
+     
+      },
+      {
+     
+        "Title": "排序",
+        "Key": "Sort",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 0,
+        "IsShow": 1,
+        "Props": "",
+    
+      },
+      {
+        "Title": "操作",
+        "Key": "9a99e948-bce0-4dc3-a920-93da4924b263",
+        "SearchType": null,
+        "ColumnType": null,
+        "ColumnTypeDetail": "",
+        "ColumnTypeRules": "",
+        "IsCustom": 1,
+        "Sort": 0,
+        "IsShow": 1,
+        "Props": "{\r\n    key: 'e',\r\n        title: '操作',\r\n            align: 'center',\r\n                render: row => {\r\n                    return h('div', {\r\n                        class: \"flex-center gap-8px\",\r\n                    },\r\n                        [\r\n                            hasAuth(\"submit/\" + that.tableof.value) && h(Naive.NButton,\r\n                                {\r\n                                    ghost: true,\r\n                                    size: \"small\",\r\n                                    type: \"primary\",\r\n                                    onClick: () => {\r\n                                        that.openForm(row.id)\r\n                                    }\r\n                                },\r\n                                $t('common.edit')\r\n                            ),\r\n                            hasAuth(\"delete/\" + that.tableof.value) && h(Naive.NPopconfirm,\r\n                                {\r\n\r\n                                    onPositiveClick: () => {\r\n                                        that.handleDelete([row.id])\r\n                                    },\r\n                                },\r\n                                {\r\n                                    default: () => $t('common.confirmDelete'),\r\n                                    trigger: () => h(Naive.NButton,\r\n                                        {\r\n                                            type: \"error\",\r\n                                            size: \"small\",\r\n                                            ghost: true\r\n                                        },\r\n                                        $t('common.delete')\r\n                                    )\r\n                                }\r\n\r\n                            )\r\n\r\n\r\n                        ]\r\n                    )\r\n                }\r\n} ",
+     
+      }
+    ]
+  }
   ]

@@ -99,7 +99,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 是否隐藏
         /// </summary>
-        public bool Hidden { get; set; }
+        public bool HideInMenu { get; set; }
         /// <summary>
         /// 跳转路由
         /// </summary>

@@ -10,12 +10,12 @@ defineOptions({
 });
 
 interface Props {
-  // search?: boolean;
+  configId?: string | undefined;
   tableof: string | undefined;
   viewType: ViewTypeEnum;
 }
 
-const { tableof, viewType } = defineProps<Props>();
+const { configId, tableof, viewType } = defineProps<Props>();
 
 const columns = defineModel<Array<NaiveUI.TableColumnCheck>>('columns', {
   default: () => []
@@ -36,7 +36,8 @@ const { loading } = useRequest(
     Apis.TableView.get_api_tableview_getview({
       params: {
         Tableof: tableof,
-        type: viewType
+        type: viewType,
+        ConfigId: tableof
       },
       transform: res => {
         // 为什么这里不处理 返回结果, 父级页面的方法拿不到
@@ -56,7 +57,12 @@ const { loading } = useRequest(
 // 页面跳转
 function linkPush() {
   router.push({
-    path: `/table/column/${tableof}/${viewType}`
+    path: `/table/column`,
+    query: {
+      configId,
+      tableof,
+      viewType
+    }
   });
 }
 </script>

@@ -263,7 +263,7 @@ namespace Byte.Core.Business
         public async Task<List<RouteSelectDTO>> SelectAsync()
         {
 
-            var db = await GetIQueryable(x => x.Status).OrderBy(x => x.Order).Select(x => new RouteSelectDTO
+            var db = await GetIQueryable(x => x.Status&& !x.Constant &&x.MenuType != MenuTypeEnum.参数).OrderBy(x => x.Order).Select(x => new RouteSelectDTO
             {
                 Id = x.Id,
                 ParentId = x.ParentId,
@@ -276,7 +276,7 @@ namespace Byte.Core.Business
             {
                 x.Children = db.Where(y => y.ParentId == x.Id)?.ToList();
                 x.Children= x.Children.Count()==0?null:x.Children;
-                if (x.ParentId == default)
+                if (x.ParentId == 0)
                 {
                     list.Add(x);
                 }

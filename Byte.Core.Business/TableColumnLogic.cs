@@ -33,21 +33,21 @@ namespace Byte.Core.Business
         /// 分页
         /// </summary>
         /// <returns></returns>
-        public async Task<PagedResults<dynamic>> PageAsync(TableDataPageParam param, string tableof)
+        public async Task<PagedResults<dynamic>> PageAsync(TableDataPageParam param, string configId, string tableof)
         {
             var sql = $"select * from {tableof}".ToSqlFilter();
-            var page = await _unitOfWork.GetDbClient().SqlQueryable<dynamic>(sql).SearchWhere(param).ToPagedResultsAsync(param);
+            var page = await _unitOfWork.GetDbClient().GetConnection(configId).SqlQueryable<dynamic>(sql).SearchWhere(param).ToPagedResultsAsync(param);
             return page;
         }
 
 
 
-        public async Task<dynamic> GetFormAsync(int id, string tableof)
+        public async Task<dynamic> GetFormAsync(int id, string configId, string tableof)
         {
            var columns = GetIQueryable(x=>x.TableView.Tableof== tableof && x.TableView.Type== ViewTypeEnum.编辑).ToList();
               
             var sql = $"select * from {tableof} ".ToSqlFilter();
-            var info = await _unitOfWork.GetDbClient().SqlQueryable<dynamic>(sql)
+            var info = await _unitOfWork.GetDbClient().GetConnection(configId).SqlQueryable<dynamic>(sql)
                 .Where("id = @id ", new
             {
                 id = id
@@ -60,10 +60,10 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<int> AddAsync(Dictionary<string, object> param, string tableof)
+        public async Task<int> AddAsync(Dictionary<string, object> param, string configId, string tableof)
         {
 
-            return _unitOfWork.GetDbClient().Insertable(param).AS(tableof).ExecuteCommand();
+            return _unitOfWork.GetDbClient().GetConnection(configId).Insertable(param).AS(tableof).ExecuteCommand();
         }
 
         /// <summary>
@@ -71,10 +71,10 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<int> UpdateAsync(Dictionary<string, object> param,string tableof)
+        public async Task<int> UpdateAsync(Dictionary<string, object> param, string configId, string tableof)
         {
 
-            return _unitOfWork.GetDbClient().Updateable(param).AS(tableof).WhereColumns("id").ExecuteCommand();
+            return _unitOfWork.GetDbClient().GetConnection(configId).Updateable(param).AS(tableof).WhereColumns("id").ExecuteCommand();
         }
 
         /// <summary>
@@ -82,13 +82,10 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<int> DeleteAsync(int[] ids, string tableof)
+        public async Task<int> DeleteAsync(int[] ids, string configId, string tableof)
         {
 
-            return _unitOfWork.GetDbClient().Deleteable<object>().AS(tableof).Where("id in (@id) ", new { id = ids }).ExecuteCommand();//批量
+            return _unitOfWork.GetDbClient().GetConnection(configId).Deleteable<object>().AS(tableof).Where("id in (@id) ", new { id = ids }).ExecuteCommand();//批量
         }
-
-
-
     }
 }

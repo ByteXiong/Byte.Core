@@ -16,8 +16,9 @@ import { getEnumValue } from '@/utils/common';
 import MonacoCode from './modules/monaco-code.vue';
 const route = useRoute();
 const router = useRouter();
-const tableof = ref(route.path.split('/').reverse()[1]);
-const viewType = ref(route.path.split('/').pop());
+const configId = ref(route.query.configId as string);
+const tableof = ref(route.query.tableof as string);
+const viewType = ref<number>(route.query.viewType as unknown as number);
 const dialog = useDialog();
 const isDraggable = ref(true);
 
@@ -63,6 +64,7 @@ const {
   () =>
     Apis.TableView.get_api_tableview_gettableheader({
       params: {
+        ConfigId: configId.value,
         Tableof: tableof.value,
         type: viewType.value
       },
@@ -180,7 +182,9 @@ function renderColumnType(row: TableColumn) {
           onChange={() => submit(row)}
         />
       );
-    case ColumnTypeEnum.图片:
+    case ColumnTypeEnum.单图:
+    case ColumnTypeEnum.多图:
+    case ColumnTypeEnum.文件:
       return (
         <NInput
           type="text"

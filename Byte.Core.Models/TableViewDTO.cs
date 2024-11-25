@@ -19,6 +19,7 @@ namespace Byte.Core.Models
         public string Tableof { get; set; }
         public string Router { get; set; }
         public ViewTypeEnum Type { get; set; }
+        public string ConfigId { get; set; }
     }
     public class UpdateTableViewParam : TableView { 
     }

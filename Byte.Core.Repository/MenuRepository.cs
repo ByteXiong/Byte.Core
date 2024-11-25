@@ -19,14 +19,14 @@ namespace Byte.Core.Repository
         public override Task<int> AddAsync(Menu entity)
         {
 #if !DEBUG
-            throw new BusException("线上环境不允许新增菜单");
+                 if (!CurrentUser.RoleCodes.Contains(AppConfig.Root))throw new BusException("线上环境不允许新增菜单,请联系管理员");
 #endif
             return base.AddAsync(entity);
         }
         public override Task<int> UpdateAsync(Menu entity, Expression<Func<Menu, object>> lstIgnoreColumns = null, bool isLock = true)
         {
 #if !DEBUG
-            throw new BusException("线上环境不允许编辑菜单");
+           if (!CurrentUser.RoleCodes.Contains(AppConfig.Root))throw new BusException("线上环境不允许编辑菜单,请联系管理员"); 
 #endif
 
             return base.UpdateAsync(entity, lstIgnoreColumns, isLock);
@@ -34,7 +34,7 @@ namespace Byte.Core.Repository
         public override async Task<int> DeleteAsync(int[] ids, bool isLock = true)
         {
 #if !DEBUG
-            throw new BusException("线上环境不允许删除菜单");
+        if (!CurrentUser.RoleCodes.Contains(AppConfig.Root))throw new BusException("线上环境不允许删除菜单,请联系管理员"); 
 #endif
 
             var any = await SugarClient.DeleteNav<Menu>(x => ids.Contains(x.Id)).Include(x => x.Roles, new DeleteNavOptions() { ManyToManyIsDeleteA = true }).ExecuteCommandAsync();

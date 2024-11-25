@@ -1,25 +1,6 @@
  [
     {
-      "Id": 1,
-      "Image": "/upload/images/20240808/1723131040.png",
-      "Name": "第一小组",
-      "EasyName": "第一组",
-      "ParentId": 11,
-      "Address": "xxx",
-      "IsDeleted": 0,
-      "Phone": null,
-      "Man": null,
-      "Remark": null,
-      "Status": 0,
-      "Sort": 0,
-      "Type": 30,
-      "CreateBy": null,
-      "CreateTime": "2024/11/22 21:51:45",
-      "UpdateBy": null,
-      "UpdateTime": null
-    },
-    {
-      "Id": 2,
+      "Id":1,
       "Image": "/upload/images/20240808/1723128786.png",
       "Name": "深圳不怕影子斜但能力有限公司",
       "EasyName": "深圳不怕影子斜",
@@ -38,11 +19,11 @@
       "UpdateTime": null
     },
     {
-      "Id": 3,
+      "Id": 2,
       "Image": "/upload/images/20240808/1723131543.png",
       "Name": "IT部门",
       "EasyName": "IT部门",
-      "ParentId": 2,
+      "ParentId": 1,
       "Address": "xx",
       "IsDeleted": 0,
       "Phone": null,
@@ -51,9 +32,5 @@
       "Status": 0,
       "Sort": 0,
       "Type": 30,
-      "CreateBy": null,
-      "CreateTime": "2024/11/22 21:51:45",
-      "UpdateBy": null,
-      "UpdateTime": null
     }
   ]
