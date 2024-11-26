@@ -4,9 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 
-namespace Byte.Core.Common.Helpers
-{
-    public static class JWTHelper
+namespace Byte.Core.Common.Helpers;
+public static class JWTHelper
     {
         private static readonly string _headerBase64Url = "{\"alg\":\"HS256\",\"typ\":\"JWT\"}".Base64UrlEncode();
         public static readonly string JWTSecret = ConfigHelper.GetValue("JWTSecret");
@@ -19,7 +18,7 @@ namespace Byte.Core.Common.Helpers
         /// <returns></returns>
         public static string SetToken(string payloadJsonStr, string secret)
         {
-            string payloadBase64Url = payloadJsonStr.Base64UrlEncode();
+        string payloadBase64Url = payloadJsonStr.Base64UrlEncode();
             string sign = $"{_headerBase64Url}.{payloadBase64Url}".ToHMACSHA256String(secret);
 
             return $"{_headerBase64Url}.{payloadBase64Url}.{sign}";
@@ -87,4 +86,3 @@ namespace Byte.Core.Common.Helpers
             return oldSign == newSign;
         }
     }
-}
