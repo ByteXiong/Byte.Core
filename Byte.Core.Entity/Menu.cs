@@ -143,9 +143,11 @@ namespace Byte.Core.Entity
         [SugarColumn(IsNullable = true)]
         public int? FixedIndexInTab { get; set; }
 
-       
+        public bool Props { get; set; }
+        
+
         #endregion
-      
+
 
         /// <summary>
         /// 是否已删除

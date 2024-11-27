@@ -74,19 +74,16 @@ namespace Byte.Core.Entity
         #region 导航
 
         /// <summary>
-        ///用户部门角色关系
+        ///用户部门关系
         /// </summary>
         [SugarColumn(IsIgnore = true)]
-        [Navigate(NavigateType.OneToMany, nameof(User_Dept_Role.UserId), nameof(Id))]
-        public List<User_Dept_Role> User_Dept_Roles { get; set; }
-        //[SugarColumn(IsIgnore = true)]
-        //[Navigate(typeof(User_Dept_Role), nameof(User_Dept_Role.UserId), nameof(User_Dept_Role.DeptId))]
-        //public List<Dept> Depts { get; set; }
+        [Navigate(typeof(User_Dept_Role), nameof(User_Dept_Role.UserId), nameof(User_Dept_Role.DeptId))]
+        public List<Dept> Depts { get; set; }
 
 
-        //[SugarColumn(IsIgnore = true)]
-        //[Navigate(typeof(User_Dept_Role), nameof(User_Dept_Role.UserId), nameof(User_Dept_Role.RoleId))]
-        //public List<Role> Roles { get; set; }
+        [SugarColumn(IsIgnore = true)]
+        [Navigate(typeof(User_Dept_Role), nameof(User_Dept_Role.UserId), nameof(User_Dept_Role.RoleId))]
+        public List<Role> Roles { get; set; }
 
         #endregion
     }

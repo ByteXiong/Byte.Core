@@ -1,5 +1,6 @@
 ﻿using Byte.Core.Entity;
 using Byte.Core.Tools;
+using NPOI.SS.Formula.Functions;
 using SqlSugar;
 namespace Byte.Core.Models
 {
@@ -163,7 +164,12 @@ namespace Byte.Core.Models
     /// <summary>
     /// 当前系统我的所有权限
     /// </summary>
+    public class MyRouteDTO { 
+     public string Home { get; set; }
+     public List<RouteDTO> Routes { get; set; }
 
+
+    }
     public class RouteDTO
     {
         public int Id { get; set; }
@@ -175,7 +181,7 @@ namespace Byte.Core.Models
         /// 路径
         /// </summary>
         public string Path { get; set; }
-        public string PathParam { get; set; }
+        //public string PathParam { get; set; }
         /// <summary>
         /// 重定向
         /// </summary>
@@ -207,6 +213,7 @@ namespace Byte.Core.Models
 
         public RouteMeta Meta { get; set; }
 
+        public bool Props { get; set; }
         /// <summary>
         /// 子节点
         /// </summary>

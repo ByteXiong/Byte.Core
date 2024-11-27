@@ -10,6 +10,9 @@ using Byte.Core.Common.Filters;
 using Byte.Core.Tools;
 using LogicExtensions;
 using NPOI.OpenXmlFormats.Dml;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using SqlSugar;
 
 namespace Byte.Core.Business
 {
@@ -18,11 +21,9 @@ namespace Byte.Core.Business
     /// </summary>
     public class UserLogic : BaseBusinessLogic<int, User, UserRepository>
     {
-        private readonly User_Dept_RoleRepository _user_Dept_RoleRepository;
         private readonly IUnitOfWork _unitOfWork;
-        public UserLogic(UserRepository repository, User_Dept_RoleRepository user_Dept_RoleRepository, IUnitOfWork unitOfWork) : base(repository)
+        public UserLogic(UserRepository repository,  IUnitOfWork unitOfWork) : base(repository)
         {
-            _user_Dept_RoleRepository = user_Dept_RoleRepository ?? throw new ArgumentNullException(nameof(User_Dept_RoleRepository));
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
@@ -47,7 +48,7 @@ namespace Byte.Core.Business
 
             if (param.DeptId != default)
             {
-                where = where.And(x => x.User_Dept_Roles.Any(y=>y.DeptId== param.DeptId) );
+                where = where.And(x => x.Depts.Any(y=>y.Id== param.DeptId) );
             }
             var page = await GetIQueryable(where).Select<UserDTO>().SearchWhere(param).ToPagedResultsAsync(param);
 
@@ -63,8 +64,13 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<UserInfo> GetInfoAsync(int id)
         {
-            var entity = await GetIQueryable(x => x.Id == id).Select<UserInfo>().FirstAsync();
-            entity.RoleIds= await  _user_Dept_RoleRepository.GetIQueryable(x => x.UserId == id).Select(x=>x.RoleId).ToArrayAsync();
+            var entity = await GetIQueryable(x => x.Id == id)
+                .Includes(x => x.Roles)
+                .Select<UserInfo>(
+                 x=> new UserInfo {
+                  RoleIds= x.Roles.Select(y=>y.Id).ToList()
+                 },true
+                ).FirstAsync();
             return entity;
         }
         /// <summary>
@@ -81,19 +87,21 @@ namespace Byte.Core.Business
 
                 User model = param.Adapt<User>();
 
-                await AddAsync(model);
+                model.Roles = param.RoleIds.Select(x => new Role { Id = x }).ToList();
 
-                List<User_Dept_Role> User_Dept_Roles = new List<User_Dept_Role>();
-                param.RoleIds.ForEach(x =>
-                {
-                    User_Dept_Roles.Add(new User_Dept_Role
-                    {
-                        UserId = model.Id,
-                        DeptId = 1,
-                        RoleId = x
-                    });
-                });
-                await _user_Dept_RoleRepository.AddRangeAsync(User_Dept_Roles);
+             
+                await _unitOfWork.GetDbClient().InsertNav(model)
+                        .Include(z1 => z1.Roles, new InsertNavOptions
+                        {
+                            ManyToManyNoDeleteMap = true,
+                             //设置中间表其他字段 （5.1.4.86)
+                            ManyToManySaveMappingTemplate = new User_Dept_Role()
+                           {
+                                DeptId = CurrentUser.DeptId
+                           }
+                        })
+                   .ExecuteCommandAsync();
+
                 _unitOfWork.CommitTran();
                 return model.Id;
             }
@@ -120,7 +128,7 @@ namespace Byte.Core.Business
 
                 _unitOfWork.BeginTran();
 
-                await UpdateAsync(x => x.Id == param.Id, x => new User
+           var model =  new User
                 {
                     NickName = param.NickName, //名称
                     Avatar = param.Avatar, //头像
@@ -129,22 +137,23 @@ namespace Byte.Core.Business
                     CreateBy = param.CreateBy, //创建人
                     Status = param.Status, //状态
                     UserName = param.UserName, //账号
+                    
+                };
+                model.Roles = param.RoleIds.Select(x => new Role { Id = x }).ToList();
 
-                });
-
-
-                List<User_Dept_Role> User_Dept_Roles = new List<User_Dept_Role>();
-                await _user_Dept_RoleRepository.DeleteAsync(x => x.UserId == param.Id);
-                param.RoleIds?.ForEach(x =>
-                {
-                    User_Dept_Roles.Add(new User_Dept_Role
-                    {
-                        UserId = param.Id,
-                        DeptId = 1,
-                        RoleId = x
-                    });
-                });
-                await _user_Dept_RoleRepository.AddRangeAsync(User_Dept_Roles);
+               await _unitOfWork.GetDbClient().Deleteable<User_Dept_Role>(x => x.DeptId == CurrentUser.DeptId && x.UserId != model.Id && !param.RoleIds.Contains(x.RoleId)).ExecuteCommandAsync();
+                await   _unitOfWork.GetDbClient().UpdateNav(model)
+                 .Include(z1 => z1.Roles, new UpdateNavOptions
+            {
+                ManyToManyIsUpdateA = true,
+                     //设置中间表其他字段 （5.1.4.86)
+                     ManyToManySaveMappingTemplate = new User_Dept_Role()
+                     {
+                         DeptId = CurrentUser.DeptId
+                     }
+                 })
+            .ExecuteCommandAsync();
+                
                 _unitOfWork.CommitTran();
                 return param.Id;
             }

@@ -4,10 +4,8 @@ using Byte.Core.Common.Helpers;
 using Byte.Core.Common.IoC;
 using Byte.Core.Entity;
 using Byte.Core.SqlSugar.IDbContext;
-using Microsoft.AspNetCore.Builder;
 using Newtonsoft.Json;
 using SqlSugar;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
@@ -236,6 +234,7 @@ namespace Byte.Core.Api.Common
                                 f2.Dispose();
 
                                 var list = JsonConvert.DeserializeObject<List<TableView>>(jsonStr, setting);
+                                Console.WriteLine(list.Count());
                                 await dataContext.Db.InsertNav(list).Include(x => x.TableColumns).ExecuteCommandAsync();
 
                                 Console.WriteLine(

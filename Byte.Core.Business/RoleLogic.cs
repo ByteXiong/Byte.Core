@@ -36,7 +36,7 @@ namespace Byte.Core.Business
                 param.KeyWord = param.KeyWord.Trim();
                 where = where.And(x => x.Name.Contains(param.KeyWord));
             }
-            var page = await Repository.GetIQueryable(where).Includes(x => x.User_Dept_Roles).Select(x=>new RoleDTO {
+            var page = await Repository.GetIQueryable(where).Select(x=>new RoleDTO {
              DeptName=x.Dept.EasyName,
             }, true).ToPagedResultsAsync(param);
             return page;

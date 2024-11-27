@@ -7,12 +7,7 @@ using Byte.Core.Models;
 using Byte.Core.Repository;
 using Byte.Core.SqlSugar;
 using Byte.Core.Tools;
-using log4net.Layout;
 using Mapster;
-using NPOI.POIFS.Properties;
-using NPOI.SS.Formula.Functions;
-using System.ComponentModel;
-using System.Drawing.Drawing2D;
 using System.Linq.Expressions;
 namespace Byte.Core.Business
 {
@@ -23,14 +18,16 @@ namespace Byte.Core.Business
     {
         private readonly IUnitOfWork _unitOfWork;
         public readonly Role_MenuRepository   _role_MenuRepository;
+        public readonly DeptRepository _deptRepository;
         /// <summary>
         /// 构造
         /// </summary>
         /// <param name="repository"></param>
-        public MenuLogic(MenuRepository repository, IUnitOfWork unitOfWork, Role_MenuRepository  role_MenuRepository) : base(repository)
+        public MenuLogic(MenuRepository repository, IUnitOfWork unitOfWork, Role_MenuRepository  role_MenuRepository ,DeptRepository deptRepository) : base(repository)
         {
             _unitOfWork = unitOfWork;
             _role_MenuRepository = role_MenuRepository;
+            _deptRepository = deptRepository;
         }
 
 
@@ -209,6 +206,7 @@ namespace Byte.Core.Business
                     I18nKey = x.Desc,
                     Path = x.Code,
                     ParentId = param.Id,
+                    Status = x.Status
                 }).ToList();
                 await   _unitOfWork.GetDbClient().Storageable(buttons).ExecuteCommandAsync();
 
@@ -222,6 +220,7 @@ namespace Byte.Core.Business
                     PathParam = x.Value,
                     Path = x.Key,
                     ParentId = param.Id,
+                    Status = x.Status
                 }).ToList();
                 await _unitOfWork.GetDbClient().Storageable(querys).ExecuteCommandAsync();
 
@@ -351,7 +350,7 @@ namespace Byte.Core.Business
         /// 获取当前用户的路由
         /// </summary>
         /// <returns></returns>
-        public async Task<List<RouteDTO>> GetRoutesAsync()
+        public async Task<MyRouteDTO> GetRoutesAsync()
         {
             var codes = CurrentUser.RoleCodes;
 
@@ -360,9 +359,13 @@ namespace Byte.Core.Business
             {
                 where = where.And(x => x.Roles.Any(y => codes.Contains(y.Code)));
             }
-         
-
-            return  await GetRoutesAsync(where);
+            var home = await _deptRepository.GetIQueryable(x => x.Id == CurrentUser.DeptId).Select(x => x.Home).FirstOrDefaultAsync();
+            var model = new MyRouteDTO()
+            {
+                Home=  home,
+                Routes = await GetRoutesAsync(where)
+            };
+            return model;
         }
 
         /// <summary>
@@ -409,10 +412,10 @@ namespace Byte.Core.Business
                     I18nKey = x.I18nKey,
                     Query = querys.Where(y => y.ParentId == x.Id && !string.IsNullOrEmpty(y.Value) && !string.IsNullOrEmpty(y.Key)).ToList()
                 },
+                Props = x.Props,
                 Name = x.Name,
                 Component = Component(x.Layout, x.Component),
                 Path = x.Path + x.PathParam,
-                PathParam = x.PathParam,
                 ParentId = x.ParentId,
                 //Type = x.Type,
                 Redirect = x.Redirect,

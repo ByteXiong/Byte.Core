@@ -174,7 +174,7 @@ namespace Byte.Core.Entity
         /// 字段
         /// </summary>
         [SugarColumn(IsIgnore = true)]
-        [Navigate(NavigateType.ManyToOne, nameof(ViewId))]
+        [Navigate(NavigateType.ManyToOne, nameof(ViewId), nameof(TableView.Id))]
         public TableView TableView { get; set; }
 
         #endregion

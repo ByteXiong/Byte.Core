@@ -6,7 +6,6 @@ using Byte.Core.Common.Attributes;
 using Byte.Core.Entity;
 using Byte.Core.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 
 namespace Byte.Core.Api.Controllers
 {
@@ -127,7 +126,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<List<RouteDTO>> GetRoutesAsync() => await _logic.GetRoutesAsync();
+        public async Task<MyRouteDTO> GetRoutesAsync() => await _logic.GetRoutesAsync();
         /// <summary>
         ///  获取常量路由
         /// </summary>

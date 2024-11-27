@@ -48,12 +48,13 @@ namespace Byte.Core.Business
         {
             var sysList = new List<TableColumn>();
             if (param.Tableof.IsNullOrEmpty()) throw new BusException("表名不能为空");
-            else if (param.ConfigId.IsNullOrEmpty())
+            else if (!param.ConfigId.IsNullOrEmpty())
             {
-                sysList = GetXml(param.Tableof);
+                sysList = await GetTableColumnAsync(param.Tableof, param.ConfigId);
             }
             else {
-                sysList = await GetTableColumnAsync(param.Tableof, param.ConfigId);
+             
+                sysList = GetXml(param.Tableof);
             }
 
             //获取自定义字段

@@ -4,10 +4,9 @@ using Byte.Core.Common.Helpers;
 using Byte.Core.Entity;
 using Byte.Core.Models;
 using Byte.Core.Repository;
+using Byte.Core.Tools;
 using Byte.Core.Tools.Attributes;
 using System.Linq.Expressions;
-using Byte.Core.Tools;
-using Dm.filter;
 namespace Byte.Core.Business
 {
     public class LoginLogic(UserRepository userRepository, MenuRepository menuRepository, RoleRepository roleRepository)
@@ -48,7 +47,7 @@ namespace Byte.Core.Business
             {
                 Id = user.Id,
                 UserName = user.UserName,
-                RoleCodes = _roleRepository.GetIQueryable(x=>x.User_Dept_Roles.Any(y=>y.UserId == user.Id)).Select(x => x.Code).ToList(),
+                RoleCodes = _roleRepository.GetIQueryable(x=>x.DeptId==1&&x.Users.Any(y=>y.Id==user.Id)).Select(x => x.Code).ToList(),
                 //Type = user.Role.Type,
                 NickName = user.NickName,
                 DeptId =1,
@@ -119,6 +118,7 @@ namespace Byte.Core.Business
             //jwtPayload.Expire = DateTime.Now.AddSeconds(60);
             //entity.Roles = await _user_RoleLogic.GetIQueryable(x => x.UserId == entity.Id).Select(x => x.RoleId).ToArrayAsync();
             var str = jwtPayload.ToJson();
+         
             string token = JWTHelper.SetToken(str, JWTHelper.JWTSecret);
             var loginToken = new LoginToken()
             {

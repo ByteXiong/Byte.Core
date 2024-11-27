@@ -61,16 +61,15 @@ namespace Byte.Core.Entity
         public Dept Dept { get; set; }
 
 
-        /// <summary>
-        ///用户部门角色关系
-        /// </summary>
-        [SugarColumn(IsIgnore = true)]
-        [Navigate(NavigateType.OneToMany, nameof(User_Dept_Role.RoleId), nameof(Id))]
-        public List<User_Dept_Role> User_Dept_Roles { get; set; }
 
         [SugarColumn(IsIgnore = true)]
         [Navigate(typeof(Role_Menu), nameof(Role_Menu.RoleId), nameof(Role_Menu.MenuId))]
         public List<Menu> Menus { get; set; }
+
+
+        [SugarColumn(IsIgnore = true)]
+        [Navigate(typeof(User_Dept_Role), nameof(User_Dept_Role.RoleId), nameof(User_Dept_Role.UserId))]
+        public List<User> Users { get; set; }
         #endregion
     }
 

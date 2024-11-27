@@ -157,4 +157,7 @@ namespace Byte.Core.Tools
     
     }
 
+    #region 业务枚举
+    #endregion
+
 }
