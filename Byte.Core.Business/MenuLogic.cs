@@ -353,17 +353,18 @@ namespace Byte.Core.Business
         public async Task<MyRouteDTO> GetRoutesAsync()
         {
             var codes = CurrentUser.RoleCodes;
-
+            var home = await _deptRepository.GetIQueryable(x => x.Id == CurrentUser.DeptId).Select(x => x.Home).FirstOrDefaultAsync();
             Expression<Func<Menu, bool>> where = x => !x.Constant;
             if (!codes.Contains(AppConfig.Root))
             {
                 where = where.And(x => x.Roles.Any(y => codes.Contains(y.Code)));
             }
-            var home = await _deptRepository.GetIQueryable(x => x.Id == CurrentUser.DeptId).Select(x => x.Home).FirstOrDefaultAsync();
-            var model = new MyRouteDTO()
+            where= where.Or(x => x.Name == home);
+             var model = new MyRouteDTO()
             {
                 Home=  home,
                 Routes = await GetRoutesAsync(where)
+
             };
             return model;
         }

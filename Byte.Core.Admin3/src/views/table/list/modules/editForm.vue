@@ -37,7 +37,7 @@ const {
 } = useForm(
   form =>
     Apis.TableColumn.post_api_tablecolumn_submit_configid_tableof({
-      pathParams: { tableof: tableof.value || '' },
+      pathParams: { configId: configId.value || '', tableof: tableof.value || '' },
       data: form,
       transform: () => {
         visible.value = false;
