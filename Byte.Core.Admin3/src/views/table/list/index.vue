@@ -144,14 +144,20 @@ const columnData = computed<Array<DataTableColumn>>(() => {
             ></TableHeaderSetting>
           </template>
 
-          <NButton v-if="hasAuth('submit/' + tableof)" size="small" ghost type="primary" @click="openForm()">
+          <NButton
+            v-if="hasAuth('tablecolumn/submit/' + tableof)"
+            size="small"
+            ghost
+            type="primary"
+            @click="openForm()"
+          >
             <template #icon>
               <icon-ic-round-plus class="text-icon" />
             </template>
             {{ $t('common.add') }}
           </NButton>
           <!--       -->
-          <NPopconfirm v-if="hasAuth('delete/' + tableof)" @positive-click="handleDelete">
+          <NPopconfirm v-if="hasAuth('tablecolumn/delete/' + tableof)" @positive-click="handleDelete">
             <template #trigger>
               <NButton size="small" ghost type="error" :disabled="checkedRowKeys?.length === 0">
                 <template #icon>

@@ -5,7 +5,7 @@ import { useForm, useRequest } from 'alova/client';
 
 import { useNaiveForm } from '@/hooks/common/form';
 import { $t } from '@/locales';
-import type { MenuButton, UpdateMenuParam } from '@/api/globals';
+import type { MenuButton, MenuQuery, UpdateMenuParam } from '@/api/globals';
 import { getLocalIcons } from '@/utils/icon';
 import SvgIcon from '@/components/custom/svg-icon.vue';
 import { IconTypeEnum, LayoutTypeEnum, MenuTypeEnum } from '@/api/apiEnums';
@@ -106,11 +106,23 @@ const localIconOptions = localIcons.map<SelectOption>(item => ({
   value: item
 }));
 
+function handleCreateQuery() {
+  const buttonItem: MenuQuery = {
+    id: 0,
+    key: '',
+    value: '',
+    status: true
+  };
+
+  return buttonItem;
+}
+
 function handleCreateButton() {
   const buttonItem: MenuButton = {
     id: 0,
     code: '',
-    desc: ''
+    desc: '',
+    status: true
   };
 
   return buttonItem;
@@ -303,7 +315,7 @@ defineExpose({
           </NFormItemGi>
 
           <NFormItemGi span="24" :label="$t('page.manage.menu.query')">
-            <NDynamicInput v-model:value="formData.querys" preset="pair" :on-create="handleCreateButton">
+            <NDynamicInput v-model:value="formData.querys" preset="pair" :on-create="handleCreateQuery">
               <template #default="{ value }">
                 <div class="ml-8px flex-y-center flex-1 gap-12px">
                   <NInput

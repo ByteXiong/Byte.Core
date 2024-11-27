@@ -161,8 +161,9 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
       addConstantRoutes(staticRoute.constantRoutes);
     } else {
       const { data, success } = await fetchGetConstantRoutes();
+      console.log(data, staticRoute.constantRoutes);
 
-      if (!success) {
+      if (success) {
         addConstantRoutes(data as ElegantConstRoute[]);
       } else {
         // if fetch constant routes failed, use static constant routes
@@ -180,13 +181,13 @@ export const useRouteStore = defineStore(SetupStoreId.Route, () => {
       Apis.Menu.get_api_menu_getroutes({
         transform: async ({ success, data }) => {
           if (success) {
-            // const { routes, home } = data;
-            const home = 'home';
-            // const { routes, home } = data;
-            addAuthRoutes(data as ElegantConstRoute[]);
+            const { routes, home } = data;
+            // const home = 'home';
+            // // const { routes, home } = data;
+            addAuthRoutes(routes as ElegantConstRoute[]);
             handleConstantAndAuthRoutes();
-            setRouteHome(home);
-            handleUpdateRootRouteRedirect(home);
+            setRouteHome((home || 'home') as LastLevelRouteKey);
+            handleUpdateRootRouteRedirect((home || 'home') as LastLevelRouteKey);
             setIsInitAuthRoute(true);
           } else {
             authStore.resetStore();

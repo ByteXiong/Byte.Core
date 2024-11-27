@@ -254,65 +254,8 @@ export type Role = {
    * 部门
    */
   dept?: Dept;
-  /**
-   * 用户部门角色关系
-   */
-  user_Dept_Roles?: User_Dept_Role[];
   menus?: Menu[];
-};
-export type User = {
-  /**
-   * 主键
-   */
-  id?: number;
-  /**
-   * 创建者名称
-   */
-  createBy?: string;
-  /**
-   * 创建时间
-   */
-  createTime?: string;
-  /**
-   * 更新者名称
-   */
-  updateBy?: string;
-  /**
-   * 最后更新时间
-   */
-  updateTime?: string;
-  /**
-   * 昵称
-   */
-  nickName?: string;
-  /**
-   * 头像
-   */
-  avatar?: string;
-  /**
-   * 手机号
-   */
-  phone?: string;
-  /**
-   * 邮箱
-   */
-  email?: string;
-  /**
-   * 密码
-   */
-  password?: string;
-  /**
-   * 状态
-   */
-  status?: boolean;
-  /**
-   * 账号
-   */
-  userName?: string;
-  /**
-   * 用户部门角色关系
-   */
-  user_Dept_Roles?: User_Dept_Role[];
+  users?: User[];
 };
 export type DbType =
   | 0
@@ -456,39 +399,65 @@ export type Dept = {
    */
   home?: string;
   type?: DeptTypeEnum;
-  /**
-   * 用户部门角色关系
-   */
-  user_Dept_Roles?: User_Dept_Role[];
+  users?: User[];
   roles?: Role[];
   children?: Dept[];
   tenants?: Tenant[];
 };
-export type User_Dept_Role = {
+export type User = {
   /**
-   * 用户Id
+   * 主键
    */
-  userId?: number;
+  id?: number;
   /**
-   * 部门Id
+   * 创建者名称
    */
-  deptId?: number;
+  createBy?: string;
   /**
-   * 角色Id
+   * 创建时间
    */
-  roleId?: number;
+  createTime?: string;
   /**
-   * 部门
+   * 更新者名称
    */
-  dept?: Dept;
+  updateBy?: string;
   /**
-   * 角色
+   * 最后更新时间
    */
-  role?: Role;
+  updateTime?: string;
   /**
-   * 用户
+   * 昵称
    */
-  user?: User;
+  nickName?: string;
+  /**
+   * 头像
+   */
+  avatar?: string;
+  /**
+   * 手机号
+   */
+  phone?: string;
+  /**
+   * 邮箱
+   */
+  email?: string;
+  /**
+   * 密码
+   */
+  password?: string;
+  /**
+   * 状态
+   */
+  status?: boolean;
+  /**
+   * 账号
+   */
+  userName?: string;
+  /**
+   * 用户部门关系
+   */
+  depts?: Dept[];
+  roles?: Role[];
 };
 export type DeptInfo = {
   /**
@@ -560,10 +529,7 @@ export type DeptInfo = {
    */
   home?: string;
   type?: DeptTypeEnum;
-  /**
-   * 用户部门角色关系
-   */
-  user_Dept_Roles?: User_Dept_Role[];
+  users?: User[];
   roles?: Role[];
   children?: Dept[];
   tenants?: Tenant[];
@@ -706,10 +672,7 @@ export type UpdateDeptParam = {
    */
   home?: string;
   type?: DeptTypeEnum;
-  /**
-   * 用户部门角色关系
-   */
-  user_Dept_Roles?: User_Dept_Role[];
+  users?: User[];
   roles?: Role[];
   children?: Dept[];
   tenants?: Tenant[];
@@ -1017,6 +980,10 @@ export type MenuInfo = {
   buttons?: MenuButton[];
   querys?: MenuQuery[];
 };
+export type MyRouteDTO = {
+  home?: string;
+  routes?: RouteDTO[];
+};
 export type MenuTreeDTO = {
   id?: number;
   /**
@@ -1301,11 +1268,8 @@ export type RoleInfo = {
    * 部门
    */
   dept?: Dept;
-  /**
-   * 用户部门角色关系
-   */
-  user_Dept_Roles?: User_Dept_Role[];
   menus?: Menu[];
+  users?: User[];
   menuIds?: number[];
 };
 export type PagerInfo = {
@@ -1369,11 +1333,8 @@ export type RoleDTO = {
    * 部门
    */
   dept?: Dept;
-  /**
-   * 用户部门角色关系
-   */
-  user_Dept_Roles?: User_Dept_Role[];
   menus?: Menu[];
+  users?: User[];
   /**
    * 组织名称
    */
@@ -1443,11 +1404,8 @@ export type UpdateRoleParam = {
    * 部门
    */
   dept?: Dept;
-  /**
-   * 用户部门角色关系
-   */
-  user_Dept_Roles?: User_Dept_Role[];
   menus?: Menu[];
+  users?: User[];
   /**
    * 菜单
    */
@@ -1667,9 +1625,10 @@ export type UserInfo = {
    */
   userName?: string;
   /**
-   * 用户部门角色关系
+   * 用户部门关系
    */
-  user_Dept_Roles?: User_Dept_Role[];
+  depts?: Dept[];
+  roles?: Role[];
   roleIds?: number[];
 };
 export type UserDTO = {
@@ -1753,9 +1712,10 @@ export type UpdateUserParam = {
    */
   userName?: string;
   /**
-   * 用户部门角色关系
+   * 用户部门关系
    */
-  user_Dept_Roles?: User_Dept_Role[];
+  depts?: Dept[];
+  roles?: Role[];
   roleIds?: number[];
 };
 declare global {
@@ -1897,16 +1857,33 @@ declare global {
        *     // 首页
        *     home?: string
        *     type?: 10 | 20 | 30
-       *     // 用户部门角色关系
-       *     user_Dept_Roles?: Array<{
-       *       // 用户Id
-       *       userId?: number
-       *       // 部门Id
-       *       deptId?: number
-       *       // 角色Id
-       *       roleId?: number
-       *       // 部门
-       *       dept?: {
+       *     users?: Array<{
+       *       // 主键
+       *       id?: number
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       // 昵称
+       *       nickName?: string
+       *       // 头像
+       *       avatar?: string
+       *       // 手机号
+       *       phone?: string
+       *       // 邮箱
+       *       email?: string
+       *       // 密码
+       *       password?: string
+       *       // 状态
+       *       status?: boolean
+       *       // 账号
+       *       userName?: string
+       *       // 用户部门关系
+       *       depts?: Array<{
        *         // 主键
        *         id?: number
        *         // 创建者名称
@@ -1942,8 +1919,7 @@ declare global {
        *         // 首页
        *         home?: string
        *         type?: DeptTypeEnum
-       *         // 用户部门角色关系
-       *         user_Dept_Roles?: Array<User_Dept_Role>
+       *         users?: Array<User>
        *         roles?: Array<{
        *           // 主键
        *           id?: number
@@ -1970,8 +1946,6 @@ declare global {
        *           deptId?: number
        *           // 部门
        *           dept?: Dept
-       *           // 用户部门角色关系
-       *           user_Dept_Roles?: Array<User_Dept_Role>
        *           menus?: Array<{
        *             // 主键
        *             id?: number
@@ -2031,6 +2005,7 @@ declare global {
        *             roles?: Array<Role>
        *             children?: Array<Menu>
        *           }>
+       *           users?: Array<User>
        *         }>
        *         children?: Array<Dept>
        *         tenants?: Array<{
@@ -2084,38 +2059,8 @@ declare global {
        *           orderNo?: number
        *           depts?: Array<Dept>
        *         }>
-       *       }
-       *       // 角色
-       *       role?: Role
-       *       // 用户
-       *       user?: {
-       *         // 主键
-       *         id?: number
-       *         // 创建者名称
-       *         createBy?: string
-       *         // 创建时间
-       *         createTime?: string
-       *         // 更新者名称
-       *         updateBy?: string
-       *         // 最后更新时间
-       *         updateTime?: string
-       *         // 昵称
-       *         nickName?: string
-       *         // 头像
-       *         avatar?: string
-       *         // 手机号
-       *         phone?: string
-       *         // 邮箱
-       *         email?: string
-       *         // 密码
-       *         password?: string
-       *         // 状态
-       *         status?: boolean
-       *         // 账号
-       *         userName?: string
-       *         // 用户部门角色关系
-       *         user_Dept_Roles?: Array<User_Dept_Role>
-       *       }
+       *       }>
+       *       roles?: Array<Role>
        *     }>
        *     roles?: Array<Role>
        *     children?: Array<Dept>
@@ -2488,16 +2433,33 @@ declare global {
        *   // 首页
        *   home?: string
        *   type?: 10 | 20 | 30
-       *   // 用户部门角色关系
-       *   user_Dept_Roles?: Array<{
-       *     // 用户Id
-       *     userId?: number
-       *     // 部门Id
-       *     deptId?: number
-       *     // 角色Id
-       *     roleId?: number
-       *     // 部门
-       *     dept?: {
+       *   users?: Array<{
+       *     // 主键
+       *     id?: number
+       *     // 创建者名称
+       *     createBy?: string
+       *     // 创建时间
+       *     createTime?: string
+       *     // 更新者名称
+       *     updateBy?: string
+       *     // 最后更新时间
+       *     updateTime?: string
+       *     // 昵称
+       *     nickName?: string
+       *     // 头像
+       *     avatar?: string
+       *     // 手机号
+       *     phone?: string
+       *     // 邮箱
+       *     email?: string
+       *     // 密码
+       *     password?: string
+       *     // 状态
+       *     status?: boolean
+       *     // 账号
+       *     userName?: string
+       *     // 用户部门关系
+       *     depts?: Array<{
        *       // 主键
        *       id?: number
        *       // 创建者名称
@@ -2533,8 +2495,7 @@ declare global {
        *       // 首页
        *       home?: string
        *       type?: DeptTypeEnum
-       *       // 用户部门角色关系
-       *       user_Dept_Roles?: Array<User_Dept_Role>
+       *       users?: Array<User>
        *       roles?: Array<{
        *         // 主键
        *         id?: number
@@ -2561,8 +2522,6 @@ declare global {
        *         deptId?: number
        *         // 部门
        *         dept?: Dept
-       *         // 用户部门角色关系
-       *         user_Dept_Roles?: Array<User_Dept_Role>
        *         menus?: Array<{
        *           // 主键
        *           id?: number
@@ -2622,6 +2581,7 @@ declare global {
        *           roles?: Array<Role>
        *           children?: Array<Menu>
        *         }>
+       *         users?: Array<User>
        *       }>
        *       children?: Array<Dept>
        *       tenants?: Array<{
@@ -2675,38 +2635,8 @@ declare global {
        *         orderNo?: number
        *         depts?: Array<Dept>
        *       }>
-       *     }
-       *     // 角色
-       *     role?: Role
-       *     // 用户
-       *     user?: {
-       *       // 主键
-       *       id?: number
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       // 昵称
-       *       nickName?: string
-       *       // 头像
-       *       avatar?: string
-       *       // 手机号
-       *       phone?: string
-       *       // 邮箱
-       *       email?: string
-       *       // 密码
-       *       password?: string
-       *       // 状态
-       *       status?: boolean
-       *       // 账号
-       *       userName?: string
-       *       // 用户部门角色关系
-       *       user_Dept_Roles?: Array<User_Dept_Role>
-       *     }
+       *     }>
+       *     roles?: Array<Role>
        *   }>
        *   roles?: Array<{
        *     // 主键
@@ -2734,8 +2664,6 @@ declare global {
        *     deptId?: number
        *     // 部门
        *     dept?: Dept
-       *     // 用户部门角色关系
-       *     user_Dept_Roles?: Array<User_Dept_Role>
        *     menus?: Array<{
        *       // 主键
        *       id?: number
@@ -2795,6 +2723,7 @@ declare global {
        *       roles?: Array<Role>
        *       children?: Array<Menu>
        *     }>
+       *     users?: Array<User>
        *   }>
        *   children?: Array<{
        *     // 主键
@@ -2832,8 +2761,7 @@ declare global {
        *     // 首页
        *     home?: string
        *     type?: DeptTypeEnum
-       *     // 用户部门角色关系
-       *     user_Dept_Roles?: Array<User_Dept_Role>
+       *     users?: Array<User>
        *     roles?: Array<{
        *       // 主键
        *       id?: number
@@ -2860,8 +2788,6 @@ declare global {
        *       deptId?: number
        *       // 部门
        *       dept?: Dept
-       *       // 用户部门角色关系
-       *       user_Dept_Roles?: Array<User_Dept_Role>
        *       menus?: Array<{
        *         // 主键
        *         id?: number
@@ -2921,6 +2847,7 @@ declare global {
        *         roles?: Array<Role>
        *         children?: Array<Menu>
        *       }>
+       *       users?: Array<User>
        *     }>
        *     children?: Array<Dept>
        *     tenants?: Array<{
@@ -3867,8 +3794,6 @@ declare global {
        *       deptId?: number
        *       // 部门
        *       dept?: Dept
-       *       // 用户部门角色关系
-       *       user_Dept_Roles?: Array<User_Dept_Role>
        *       menus?: Array<{
        *         // 主键
        *         id?: number
@@ -3928,6 +3853,7 @@ declare global {
        *         roles?: Array<Role>
        *         children?: Array<Menu>
        *       }>
+       *       users?: Array<User>
        *     }>
        *     children?: Array<{
        *       // 主键
@@ -4079,66 +4005,70 @@ declare global {
        * type Response = {
        *   // [required]
        *   code: string
+       *   // 当前系统我的所有权限
        *   // [required]
-       *   data: Array<{
-       *     id?: number
-       *     // 菜单名
-       *     name?: string
-       *     // 路径
-       *     path?: string
-       *     pathParam?: string
-       *     // 重定向
-       *     redirect?: string
-       *     // 组件
-       *     component?: string
-       *     // 父级
-       *     parentId?: number
-       *     type?: 1 | 2 | 3 | 4
-       *     // 状态
-       *     status?: boolean
-       *     meta?: {
-       *       // 路由标题(可用来作document.title或者菜单的名称)
-       *       title?: string
-       *       // 多语言
-       *       i18nKey?: string
-       *       // 权限标识
-       *       roles?: string[]
-       *       // 缓存页面
-       *       keepAlive?: boolean
-       *       // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
-       *       constant?: boolean
-       *       // 菜单和面包屑对应的图标
-       *       icon?: string
-       *       // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
-       *       localIcon?: string
-       *       // 菜单和面包屑对应的图标的字体大小
-       *       iconFontSize?: number
-       *       // 路由顺序，可用于菜单的排序
-       *       order?: number
-       *       // 外链链接
-       *       href?: string
-       *       // 是否在菜单中隐藏路线
-       *       hideInMenu?: boolean
-       *       // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
-       *       activeMenu?: string
-       *       // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
-       *       multiTab?: boolean
-       *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
-       *       fixedIndexInTab?: number
-       *       // 跳转参数
-       *       query?: Array<{
-       *         id?: number
-       *         // 父级Id
-       *         parentId?: number
-       *         key?: string
-       *         value?: string
-       *         // 状态
-       *         status?: boolean
-       *       }>
-       *     }
-       *     // 子节点
-       *     children?: Array<RouteDTO>
-       *   }>
+       *   data: {
+       *     home?: string
+       *     routes?: Array<{
+       *       id?: number
+       *       // 菜单名
+       *       name?: string
+       *       // 路径
+       *       path?: string
+       *       pathParam?: string
+       *       // 重定向
+       *       redirect?: string
+       *       // 组件
+       *       component?: string
+       *       // 父级
+       *       parentId?: number
+       *       type?: 1 | 2 | 3 | 4
+       *       // 状态
+       *       status?: boolean
+       *       meta?: {
+       *         // 路由标题(可用来作document.title或者菜单的名称)
+       *         title?: string
+       *         // 多语言
+       *         i18nKey?: string
+       *         // 权限标识
+       *         roles?: string[]
+       *         // 缓存页面
+       *         keepAlive?: boolean
+       *         // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
+       *         constant?: boolean
+       *         // 菜单和面包屑对应的图标
+       *         icon?: string
+       *         // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
+       *         localIcon?: string
+       *         // 菜单和面包屑对应的图标的字体大小
+       *         iconFontSize?: number
+       *         // 路由顺序，可用于菜单的排序
+       *         order?: number
+       *         // 外链链接
+       *         href?: string
+       *         // 是否在菜单中隐藏路线
+       *         hideInMenu?: boolean
+       *         // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
+       *         activeMenu?: string
+       *         // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
+       *         multiTab?: boolean
+       *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
+       *         fixedIndexInTab?: number
+       *         // 跳转参数
+       *         query?: Array<{
+       *           id?: number
+       *           // 父级Id
+       *           parentId?: number
+       *           key?: string
+       *           value?: string
+       *           // 状态
+       *           status?: boolean
+       *         }>
+       *       }
+       *       // 子节点
+       *       children?: Array<RouteDTO>
+       *     }>
+       *   }
        *   // [required]
        *   msg: string
        *   // [required]
@@ -4153,9 +4083,10 @@ declare global {
            */
           code: string;
           /**
+           * 当前系统我的所有权限
            * [required]
            */
-          data: RouteDTO[];
+          data: MyRouteDTO;
           /**
            * [required]
            */
@@ -4174,9 +4105,10 @@ declare global {
            */
           code: string;
           /**
+           * 当前系统我的所有权限
            * [required]
            */
-          data: RouteDTO[];
+          data: MyRouteDTO;
           /**
            * [required]
            */
@@ -4771,8 +4703,6 @@ declare global {
        *     deptId?: number
        *     // 部门
        *     dept?: Dept
-       *     // 用户部门角色关系
-       *     user_Dept_Roles?: Array<User_Dept_Role>
        *     menus?: Array<{
        *       // 主键
        *       id?: number
@@ -4832,6 +4762,7 @@ declare global {
        *       roles?: Array<Role>
        *       children?: Array<Menu>
        *     }>
+       *     users?: Array<User>
        *   }>
        *   children?: Array<{
        *     // 主键
@@ -5321,8 +5252,7 @@ declare global {
        *       // 首页
        *       home?: string
        *       type?: DeptTypeEnum
-       *       // 用户部门角色关系
-       *       user_Dept_Roles?: Array<User_Dept_Role>
+       *       users?: Array<User>
        *       roles?: Array<{
        *         // 主键
        *         id?: number
@@ -5349,8 +5279,6 @@ declare global {
        *         deptId?: number
        *         // 部门
        *         dept?: Dept
-       *         // 用户部门角色关系
-       *         user_Dept_Roles?: Array<User_Dept_Role>
        *         menus?: Array<{
        *           // 主键
        *           id?: number
@@ -5410,6 +5338,7 @@ declare global {
        *           roles?: Array<Role>
        *           children?: Array<Menu>
        *         }>
+       *         users?: Array<User>
        *       }>
        *       children?: Array<Dept>
        *       tenants?: Array<{
@@ -5464,16 +5393,92 @@ declare global {
        *         depts?: Array<Dept>
        *       }>
        *     }
-       *     // 用户部门角色关系
-       *     user_Dept_Roles?: Array<{
-       *       // 用户Id
-       *       userId?: number
-       *       // 部门Id
-       *       deptId?: number
-       *       // 角色Id
-       *       roleId?: number
-       *       // 部门
-       *       dept?: {
+       *     menus?: Array<{
+       *       // 主键
+       *       id?: number
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       // 菜单名
+       *       name?: string
+       *       // 路径
+       *       path?: string
+       *       // 路径
+       *       pathParam?: string
+       *       layout?: 1 | 2
+       *       // 重定向
+       *       redirect?: string
+       *       // 组件
+       *       component?: string
+       *       // 父级
+       *       parentId?: number
+       *       menuType?: 1 | 2 | 3 | 4
+       *       iconType?: 1 | 2
+       *       // 状态
+       *       status?: boolean
+       *       // 路由标题(可用来作document.title或者菜单的名称)
+       *       title?: string
+       *       // 多语言
+       *       i18nKey?: string
+       *       // 缓存页面
+       *       keepAlive?: boolean
+       *       // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
+       *       constant?: boolean
+       *       // 菜单和面包屑对应的图标
+       *       icon?: string
+       *       // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
+       *       localIcon?: string
+       *       // 菜单和面包屑对应的图标的字体大小
+       *       iconFontSize?: number
+       *       // 路由顺序，可用于菜单的排序
+       *       order?: number
+       *       // 外链链接
+       *       href?: string
+       *       // 是否在菜单中隐藏路线
+       *       hideInMenu?: boolean
+       *       // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
+       *       activeMenu?: string
+       *       // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
+       *       multiTab?: boolean
+       *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
+       *       fixedIndexInTab?: number
+       *       // 是否已删除
+       *       isDeleted?: boolean
+       *       roles?: Array<Role>
+       *       children?: Array<Menu>
+       *     }>
+       *     users?: Array<{
+       *       // 主键
+       *       id?: number
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       // 昵称
+       *       nickName?: string
+       *       // 头像
+       *       avatar?: string
+       *       // 手机号
+       *       phone?: string
+       *       // 邮箱
+       *       email?: string
+       *       // 密码
+       *       password?: string
+       *       // 状态
+       *       status?: boolean
+       *       // 账号
+       *       userName?: string
+       *       // 用户部门关系
+       *       depts?: Array<{
        *         // 主键
        *         id?: number
        *         // 创建者名称
@@ -5509,8 +5514,7 @@ declare global {
        *         // 首页
        *         home?: string
        *         type?: DeptTypeEnum
-       *         // 用户部门角色关系
-       *         user_Dept_Roles?: Array<User_Dept_Role>
+       *         users?: Array<User>
        *         roles?: Array<{
        *           // 主键
        *           id?: number
@@ -5537,8 +5541,6 @@ declare global {
        *           deptId?: number
        *           // 部门
        *           dept?: Dept
-       *           // 用户部门角色关系
-       *           user_Dept_Roles?: Array<User_Dept_Role>
        *           menus?: Array<{
        *             // 主键
        *             id?: number
@@ -5598,6 +5600,7 @@ declare global {
        *             roles?: Array<Role>
        *             children?: Array<Menu>
        *           }>
+       *           users?: Array<User>
        *         }>
        *         children?: Array<Dept>
        *         tenants?: Array<{
@@ -5651,97 +5654,8 @@ declare global {
        *           orderNo?: number
        *           depts?: Array<Dept>
        *         }>
-       *       }
-       *       // 角色
-       *       role?: Role
-       *       // 用户
-       *       user?: {
-       *         // 主键
-       *         id?: number
-       *         // 创建者名称
-       *         createBy?: string
-       *         // 创建时间
-       *         createTime?: string
-       *         // 更新者名称
-       *         updateBy?: string
-       *         // 最后更新时间
-       *         updateTime?: string
-       *         // 昵称
-       *         nickName?: string
-       *         // 头像
-       *         avatar?: string
-       *         // 手机号
-       *         phone?: string
-       *         // 邮箱
-       *         email?: string
-       *         // 密码
-       *         password?: string
-       *         // 状态
-       *         status?: boolean
-       *         // 账号
-       *         userName?: string
-       *         // 用户部门角色关系
-       *         user_Dept_Roles?: Array<User_Dept_Role>
-       *       }
-       *     }>
-       *     menus?: Array<{
-       *       // 主键
-       *       id?: number
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       // 菜单名
-       *       name?: string
-       *       // 路径
-       *       path?: string
-       *       // 路径
-       *       pathParam?: string
-       *       layout?: 1 | 2
-       *       // 重定向
-       *       redirect?: string
-       *       // 组件
-       *       component?: string
-       *       // 父级
-       *       parentId?: number
-       *       menuType?: 1 | 2 | 3 | 4
-       *       iconType?: 1 | 2
-       *       // 状态
-       *       status?: boolean
-       *       // 路由标题(可用来作document.title或者菜单的名称)
-       *       title?: string
-       *       // 多语言
-       *       i18nKey?: string
-       *       // 缓存页面
-       *       keepAlive?: boolean
-       *       // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
-       *       constant?: boolean
-       *       // 菜单和面包屑对应的图标
-       *       icon?: string
-       *       // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
-       *       localIcon?: string
-       *       // 菜单和面包屑对应的图标的字体大小
-       *       iconFontSize?: number
-       *       // 路由顺序，可用于菜单的排序
-       *       order?: number
-       *       // 外链链接
-       *       href?: string
-       *       // 是否在菜单中隐藏路线
-       *       hideInMenu?: boolean
-       *       // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
-       *       activeMenu?: string
-       *       // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
-       *       multiTab?: boolean
-       *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
-       *       fixedIndexInTab?: number
-       *       // 是否已删除
-       *       isDeleted?: boolean
+       *       }>
        *       roles?: Array<Role>
-       *       children?: Array<Menu>
        *     }>
        *     menuIds?: number[]
        *   }
@@ -5903,8 +5817,7 @@ declare global {
        *         // 首页
        *         home?: string
        *         type?: DeptTypeEnum
-       *         // 用户部门角色关系
-       *         user_Dept_Roles?: Array<User_Dept_Role>
+       *         users?: Array<User>
        *         roles?: Array<{
        *           // 主键
        *           id?: number
@@ -5931,8 +5844,6 @@ declare global {
        *           deptId?: number
        *           // 部门
        *           dept?: Dept
-       *           // 用户部门角色关系
-       *           user_Dept_Roles?: Array<User_Dept_Role>
        *           menus?: Array<{
        *             // 主键
        *             id?: number
@@ -5992,6 +5903,7 @@ declare global {
        *             roles?: Array<Role>
        *             children?: Array<Menu>
        *           }>
+       *           users?: Array<User>
        *         }>
        *         children?: Array<Dept>
        *         tenants?: Array<{
@@ -6046,16 +5958,92 @@ declare global {
        *           depts?: Array<Dept>
        *         }>
        *       }
-       *       // 用户部门角色关系
-       *       user_Dept_Roles?: Array<{
-       *         // 用户Id
-       *         userId?: number
-       *         // 部门Id
-       *         deptId?: number
-       *         // 角色Id
-       *         roleId?: number
-       *         // 部门
-       *         dept?: {
+       *       menus?: Array<{
+       *         // 主键
+       *         id?: number
+       *         // 创建者名称
+       *         createBy?: string
+       *         // 创建时间
+       *         createTime?: string
+       *         // 更新者名称
+       *         updateBy?: string
+       *         // 最后更新时间
+       *         updateTime?: string
+       *         // 菜单名
+       *         name?: string
+       *         // 路径
+       *         path?: string
+       *         // 路径
+       *         pathParam?: string
+       *         layout?: 1 | 2
+       *         // 重定向
+       *         redirect?: string
+       *         // 组件
+       *         component?: string
+       *         // 父级
+       *         parentId?: number
+       *         menuType?: 1 | 2 | 3 | 4
+       *         iconType?: 1 | 2
+       *         // 状态
+       *         status?: boolean
+       *         // 路由标题(可用来作document.title或者菜单的名称)
+       *         title?: string
+       *         // 多语言
+       *         i18nKey?: string
+       *         // 缓存页面
+       *         keepAlive?: boolean
+       *         // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
+       *         constant?: boolean
+       *         // 菜单和面包屑对应的图标
+       *         icon?: string
+       *         // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
+       *         localIcon?: string
+       *         // 菜单和面包屑对应的图标的字体大小
+       *         iconFontSize?: number
+       *         // 路由顺序，可用于菜单的排序
+       *         order?: number
+       *         // 外链链接
+       *         href?: string
+       *         // 是否在菜单中隐藏路线
+       *         hideInMenu?: boolean
+       *         // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
+       *         activeMenu?: string
+       *         // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
+       *         multiTab?: boolean
+       *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
+       *         fixedIndexInTab?: number
+       *         // 是否已删除
+       *         isDeleted?: boolean
+       *         roles?: Array<Role>
+       *         children?: Array<Menu>
+       *       }>
+       *       users?: Array<{
+       *         // 主键
+       *         id?: number
+       *         // 创建者名称
+       *         createBy?: string
+       *         // 创建时间
+       *         createTime?: string
+       *         // 更新者名称
+       *         updateBy?: string
+       *         // 最后更新时间
+       *         updateTime?: string
+       *         // 昵称
+       *         nickName?: string
+       *         // 头像
+       *         avatar?: string
+       *         // 手机号
+       *         phone?: string
+       *         // 邮箱
+       *         email?: string
+       *         // 密码
+       *         password?: string
+       *         // 状态
+       *         status?: boolean
+       *         // 账号
+       *         userName?: string
+       *         // 用户部门关系
+       *         depts?: Array<{
        *           // 主键
        *           id?: number
        *           // 创建者名称
@@ -6091,8 +6079,7 @@ declare global {
        *           // 首页
        *           home?: string
        *           type?: DeptTypeEnum
-       *           // 用户部门角色关系
-       *           user_Dept_Roles?: Array<User_Dept_Role>
+       *           users?: Array<User>
        *           roles?: Array<{
        *             // 主键
        *             id?: number
@@ -6119,8 +6106,6 @@ declare global {
        *             deptId?: number
        *             // 部门
        *             dept?: Dept
-       *             // 用户部门角色关系
-       *             user_Dept_Roles?: Array<User_Dept_Role>
        *             menus?: Array<{
        *               // 主键
        *               id?: number
@@ -6180,6 +6165,7 @@ declare global {
        *               roles?: Array<Role>
        *               children?: Array<Menu>
        *             }>
+       *             users?: Array<User>
        *           }>
        *           children?: Array<Dept>
        *           tenants?: Array<{
@@ -6233,97 +6219,8 @@ declare global {
        *             orderNo?: number
        *             depts?: Array<Dept>
        *           }>
-       *         }
-       *         // 角色
-       *         role?: Role
-       *         // 用户
-       *         user?: {
-       *           // 主键
-       *           id?: number
-       *           // 创建者名称
-       *           createBy?: string
-       *           // 创建时间
-       *           createTime?: string
-       *           // 更新者名称
-       *           updateBy?: string
-       *           // 最后更新时间
-       *           updateTime?: string
-       *           // 昵称
-       *           nickName?: string
-       *           // 头像
-       *           avatar?: string
-       *           // 手机号
-       *           phone?: string
-       *           // 邮箱
-       *           email?: string
-       *           // 密码
-       *           password?: string
-       *           // 状态
-       *           status?: boolean
-       *           // 账号
-       *           userName?: string
-       *           // 用户部门角色关系
-       *           user_Dept_Roles?: Array<User_Dept_Role>
-       *         }
-       *       }>
-       *       menus?: Array<{
-       *         // 主键
-       *         id?: number
-       *         // 创建者名称
-       *         createBy?: string
-       *         // 创建时间
-       *         createTime?: string
-       *         // 更新者名称
-       *         updateBy?: string
-       *         // 最后更新时间
-       *         updateTime?: string
-       *         // 菜单名
-       *         name?: string
-       *         // 路径
-       *         path?: string
-       *         // 路径
-       *         pathParam?: string
-       *         layout?: 1 | 2
-       *         // 重定向
-       *         redirect?: string
-       *         // 组件
-       *         component?: string
-       *         // 父级
-       *         parentId?: number
-       *         menuType?: 1 | 2 | 3 | 4
-       *         iconType?: 1 | 2
-       *         // 状态
-       *         status?: boolean
-       *         // 路由标题(可用来作document.title或者菜单的名称)
-       *         title?: string
-       *         // 多语言
-       *         i18nKey?: string
-       *         // 缓存页面
-       *         keepAlive?: boolean
-       *         // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
-       *         constant?: boolean
-       *         // 菜单和面包屑对应的图标
-       *         icon?: string
-       *         // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
-       *         localIcon?: string
-       *         // 菜单和面包屑对应的图标的字体大小
-       *         iconFontSize?: number
-       *         // 路由顺序，可用于菜单的排序
-       *         order?: number
-       *         // 外链链接
-       *         href?: string
-       *         // 是否在菜单中隐藏路线
-       *         hideInMenu?: boolean
-       *         // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
-       *         activeMenu?: string
-       *         // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
-       *         multiTab?: boolean
-       *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
-       *         fixedIndexInTab?: number
-       *         // 是否已删除
-       *         isDeleted?: boolean
+       *         }>
        *         roles?: Array<Role>
-       *         children?: Array<Menu>
        *       }>
        *       // 组织名称
        *       deptName?: string
@@ -6612,8 +6509,7 @@ declare global {
        *     // 首页
        *     home?: string
        *     type?: DeptTypeEnum
-       *     // 用户部门角色关系
-       *     user_Dept_Roles?: Array<User_Dept_Role>
+       *     users?: Array<User>
        *     roles?: Array<{
        *       // 主键
        *       id?: number
@@ -6640,8 +6536,6 @@ declare global {
        *       deptId?: number
        *       // 部门
        *       dept?: Dept
-       *       // 用户部门角色关系
-       *       user_Dept_Roles?: Array<User_Dept_Role>
        *       menus?: Array<{
        *         // 主键
        *         id?: number
@@ -6701,6 +6595,7 @@ declare global {
        *         roles?: Array<Role>
        *         children?: Array<Menu>
        *       }>
+       *       users?: Array<User>
        *     }>
        *     children?: Array<Dept>
        *     tenants?: Array<{
@@ -6755,16 +6650,92 @@ declare global {
        *       depts?: Array<Dept>
        *     }>
        *   }
-       *   // 用户部门角色关系
-       *   user_Dept_Roles?: Array<{
-       *     // 用户Id
-       *     userId?: number
-       *     // 部门Id
-       *     deptId?: number
-       *     // 角色Id
-       *     roleId?: number
-       *     // 部门
-       *     dept?: {
+       *   menus?: Array<{
+       *     // 主键
+       *     id?: number
+       *     // 创建者名称
+       *     createBy?: string
+       *     // 创建时间
+       *     createTime?: string
+       *     // 更新者名称
+       *     updateBy?: string
+       *     // 最后更新时间
+       *     updateTime?: string
+       *     // 菜单名
+       *     name?: string
+       *     // 路径
+       *     path?: string
+       *     // 路径
+       *     pathParam?: string
+       *     layout?: 1 | 2
+       *     // 重定向
+       *     redirect?: string
+       *     // 组件
+       *     component?: string
+       *     // 父级
+       *     parentId?: number
+       *     menuType?: 1 | 2 | 3 | 4
+       *     iconType?: 1 | 2
+       *     // 状态
+       *     status?: boolean
+       *     // 路由标题(可用来作document.title或者菜单的名称)
+       *     title?: string
+       *     // 多语言
+       *     i18nKey?: string
+       *     // 缓存页面
+       *     keepAlive?: boolean
+       *     // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
+       *     constant?: boolean
+       *     // 菜单和面包屑对应的图标
+       *     icon?: string
+       *     // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
+       *     localIcon?: string
+       *     // 菜单和面包屑对应的图标的字体大小
+       *     iconFontSize?: number
+       *     // 路由顺序，可用于菜单的排序
+       *     order?: number
+       *     // 外链链接
+       *     href?: string
+       *     // 是否在菜单中隐藏路线
+       *     hideInMenu?: boolean
+       *     // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
+       *     activeMenu?: string
+       *     // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
+       *     multiTab?: boolean
+       *     // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
+       *     fixedIndexInTab?: number
+       *     // 是否已删除
+       *     isDeleted?: boolean
+       *     roles?: Array<Role>
+       *     children?: Array<Menu>
+       *   }>
+       *   users?: Array<{
+       *     // 主键
+       *     id?: number
+       *     // 创建者名称
+       *     createBy?: string
+       *     // 创建时间
+       *     createTime?: string
+       *     // 更新者名称
+       *     updateBy?: string
+       *     // 最后更新时间
+       *     updateTime?: string
+       *     // 昵称
+       *     nickName?: string
+       *     // 头像
+       *     avatar?: string
+       *     // 手机号
+       *     phone?: string
+       *     // 邮箱
+       *     email?: string
+       *     // 密码
+       *     password?: string
+       *     // 状态
+       *     status?: boolean
+       *     // 账号
+       *     userName?: string
+       *     // 用户部门关系
+       *     depts?: Array<{
        *       // 主键
        *       id?: number
        *       // 创建者名称
@@ -6800,8 +6771,7 @@ declare global {
        *       // 首页
        *       home?: string
        *       type?: DeptTypeEnum
-       *       // 用户部门角色关系
-       *       user_Dept_Roles?: Array<User_Dept_Role>
+       *       users?: Array<User>
        *       roles?: Array<{
        *         // 主键
        *         id?: number
@@ -6828,8 +6798,6 @@ declare global {
        *         deptId?: number
        *         // 部门
        *         dept?: Dept
-       *         // 用户部门角色关系
-       *         user_Dept_Roles?: Array<User_Dept_Role>
        *         menus?: Array<{
        *           // 主键
        *           id?: number
@@ -6889,6 +6857,7 @@ declare global {
        *           roles?: Array<Role>
        *           children?: Array<Menu>
        *         }>
+       *         users?: Array<User>
        *       }>
        *       children?: Array<Dept>
        *       tenants?: Array<{
@@ -6942,97 +6911,8 @@ declare global {
        *         orderNo?: number
        *         depts?: Array<Dept>
        *       }>
-       *     }
-       *     // 角色
-       *     role?: Role
-       *     // 用户
-       *     user?: {
-       *       // 主键
-       *       id?: number
-       *       // 创建者名称
-       *       createBy?: string
-       *       // 创建时间
-       *       createTime?: string
-       *       // 更新者名称
-       *       updateBy?: string
-       *       // 最后更新时间
-       *       updateTime?: string
-       *       // 昵称
-       *       nickName?: string
-       *       // 头像
-       *       avatar?: string
-       *       // 手机号
-       *       phone?: string
-       *       // 邮箱
-       *       email?: string
-       *       // 密码
-       *       password?: string
-       *       // 状态
-       *       status?: boolean
-       *       // 账号
-       *       userName?: string
-       *       // 用户部门角色关系
-       *       user_Dept_Roles?: Array<User_Dept_Role>
-       *     }
-       *   }>
-       *   menus?: Array<{
-       *     // 主键
-       *     id?: number
-       *     // 创建者名称
-       *     createBy?: string
-       *     // 创建时间
-       *     createTime?: string
-       *     // 更新者名称
-       *     updateBy?: string
-       *     // 最后更新时间
-       *     updateTime?: string
-       *     // 菜单名
-       *     name?: string
-       *     // 路径
-       *     path?: string
-       *     // 路径
-       *     pathParam?: string
-       *     layout?: 1 | 2
-       *     // 重定向
-       *     redirect?: string
-       *     // 组件
-       *     component?: string
-       *     // 父级
-       *     parentId?: number
-       *     menuType?: 1 | 2 | 3 | 4
-       *     iconType?: 1 | 2
-       *     // 状态
-       *     status?: boolean
-       *     // 路由标题(可用来作document.title或者菜单的名称)
-       *     title?: string
-       *     // 多语言
-       *     i18nKey?: string
-       *     // 缓存页面
-       *     keepAlive?: boolean
-       *     // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
-       *     constant?: boolean
-       *     // 菜单和面包屑对应的图标
-       *     icon?: string
-       *     // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
-       *     localIcon?: string
-       *     // 菜单和面包屑对应的图标的字体大小
-       *     iconFontSize?: number
-       *     // 路由顺序，可用于菜单的排序
-       *     order?: number
-       *     // 外链链接
-       *     href?: string
-       *     // 是否在菜单中隐藏路线
-       *     hideInMenu?: boolean
-       *     // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
-       *     activeMenu?: string
-       *     // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
-       *     multiTab?: boolean
-       *     // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
-       *     fixedIndexInTab?: number
-       *     // 是否已删除
-       *     isDeleted?: boolean
+       *     }>
        *     roles?: Array<Role>
-       *     children?: Array<Menu>
        *   }>
        *   // 菜单
        *   menuIds?: number[]
@@ -8432,16 +8312,45 @@ declare global {
        *     status?: boolean
        *     // 账号
        *     userName?: string
-       *     // 用户部门角色关系
-       *     user_Dept_Roles?: Array<{
-       *       // 用户Id
-       *       userId?: number
-       *       // 部门Id
-       *       deptId?: number
-       *       // 角色Id
-       *       roleId?: number
-       *       // 部门
-       *       dept?: {
+       *     // 用户部门关系
+       *     depts?: Array<{
+       *       // 主键
+       *       id?: number
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       // 图标
+       *       image?: string
+       *       // 单位名称
+       *       name?: string
+       *       // 简写名称
+       *       easyName?: string
+       *       // 父级部门ID
+       *       parentId?: number
+       *       // 地址
+       *       address?: string
+       *       // 是否删除
+       *       isDeleted?: boolean
+       *       // 默认联系电话
+       *       phone?: string
+       *       // 默认联系人
+       *       man?: string
+       *       // 备注
+       *       remark?: string
+       *       // 状态
+       *       status?: boolean
+       *       // 排序
+       *       sort?: number
+       *       // 首页
+       *       home?: string
+       *       type?: DeptTypeEnum
+       *       users?: Array<User>
+       *       roles?: Array<{
        *         // 主键
        *         id?: number
        *         // 创建者名称
@@ -8452,34 +8361,22 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 图标
-       *         image?: string
-       *         // 单位名称
+       *         // 角色名称
        *         name?: string
-       *         // 简写名称
-       *         easyName?: string
-       *         // 父级部门ID
-       *         parentId?: number
-       *         // 地址
-       *         address?: string
-       *         // 是否删除
-       *         isDeleted?: boolean
-       *         // 默认联系电话
-       *         phone?: string
-       *         // 默认联系人
-       *         man?: string
+       *         type?: 10 | 20 | 30 | 40
+       *         // 状态
+       *         status?: boolean
        *         // 备注
        *         remark?: string
-       *         // 状态
-       *         status?: boolean
+       *         // 角色代码
+       *         code?: string
        *         // 排序
        *         sort?: number
-       *         // 首页
-       *         home?: string
-       *         type?: DeptTypeEnum
-       *         // 用户部门角色关系
-       *         user_Dept_Roles?: Array<User_Dept_Role>
-       *         roles?: Array<{
+       *         // 公司id
+       *         deptId?: number
+       *         // 部门
+       *         dept?: Dept
+       *         menus?: Array<{
        *           // 主键
        *           id?: number
        *           // 创建者名称
@@ -8490,140 +8387,58 @@ declare global {
        *           updateBy?: string
        *           // 最后更新时间
        *           updateTime?: string
-       *           // 角色名称
+       *           // 菜单名
        *           name?: string
-       *           type?: 10 | 20 | 30 | 40
+       *           // 路径
+       *           path?: string
+       *           // 路径
+       *           pathParam?: string
+       *           layout?: 1 | 2
+       *           // 重定向
+       *           redirect?: string
+       *           // 组件
+       *           component?: string
+       *           // 父级
+       *           parentId?: number
+       *           menuType?: 1 | 2 | 3 | 4
+       *           iconType?: 1 | 2
        *           // 状态
        *           status?: boolean
-       *           // 备注
-       *           remark?: string
-       *           // 角色代码
-       *           code?: string
-       *           // 排序
-       *           sort?: number
-       *           // 公司id
-       *           deptId?: number
-       *           // 部门
-       *           dept?: Dept
-       *           // 用户部门角色关系
-       *           user_Dept_Roles?: Array<User_Dept_Role>
-       *           menus?: Array<{
-       *             // 主键
-       *             id?: number
-       *             // 创建者名称
-       *             createBy?: string
-       *             // 创建时间
-       *             createTime?: string
-       *             // 更新者名称
-       *             updateBy?: string
-       *             // 最后更新时间
-       *             updateTime?: string
-       *             // 菜单名
-       *             name?: string
-       *             // 路径
-       *             path?: string
-       *             // 路径
-       *             pathParam?: string
-       *             layout?: 1 | 2
-       *             // 重定向
-       *             redirect?: string
-       *             // 组件
-       *             component?: string
-       *             // 父级
-       *             parentId?: number
-       *             menuType?: 1 | 2 | 3 | 4
-       *             iconType?: 1 | 2
-       *             // 状态
-       *             status?: boolean
-       *             // 路由标题(可用来作document.title或者菜单的名称)
-       *             title?: string
-       *             // 多语言
-       *             i18nKey?: string
-       *             // 缓存页面
-       *             keepAlive?: boolean
-       *             // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
-       *             constant?: boolean
-       *             // 菜单和面包屑对应的图标
-       *             icon?: string
-       *             // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
-       *             localIcon?: string
-       *             // 菜单和面包屑对应的图标的字体大小
-       *             iconFontSize?: number
-       *             // 路由顺序，可用于菜单的排序
-       *             order?: number
-       *             // 外链链接
-       *             href?: string
-       *             // 是否在菜单中隐藏路线
-       *             hideInMenu?: boolean
-       *             // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
-       *             activeMenu?: string
-       *             // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
-       *             multiTab?: boolean
-       *             // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
-       *             fixedIndexInTab?: number
-       *             // 是否已删除
-       *             isDeleted?: boolean
-       *             roles?: Array<Role>
-       *             children?: Array<Menu>
-       *           }>
+       *           // 路由标题(可用来作document.title或者菜单的名称)
+       *           title?: string
+       *           // 多语言
+       *           i18nKey?: string
+       *           // 缓存页面
+       *           keepAlive?: boolean
+       *           // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
+       *           constant?: boolean
+       *           // 菜单和面包屑对应的图标
+       *           icon?: string
+       *           // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
+       *           localIcon?: string
+       *           // 菜单和面包屑对应的图标的字体大小
+       *           iconFontSize?: number
+       *           // 路由顺序，可用于菜单的排序
+       *           order?: number
+       *           // 外链链接
+       *           href?: string
+       *           // 是否在菜单中隐藏路线
+       *           hideInMenu?: boolean
+       *           // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
+       *           activeMenu?: string
+       *           // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
+       *           multiTab?: boolean
+       *           // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
+       *           fixedIndexInTab?: number
+       *           // 是否已删除
+       *           isDeleted?: boolean
+       *           roles?: Array<Role>
+       *           children?: Array<Menu>
        *         }>
-       *         children?: Array<Dept>
-       *         tenants?: Array<{
-       *           // 主键
-       *           id?: number
-       *           // 创建者名称
-       *           createBy?: string
-       *           // 创建时间
-       *           createTime?: string
-       *           // 更新者名称
-       *           updateBy?: string
-       *           // 最后更新时间
-       *           updateTime?: string
-       *           // 配置Id
-       *           connId?: string
-       *           dbType?:
-       *             | 0
-       *             | 1
-       *             | 2
-       *             | 3
-       *             | 4
-       *             | 5
-       *             | 6
-       *             | 7
-       *             | 8
-       *             | 9
-       *             | 10
-       *             | 11
-       *             | 12
-       *             | 13
-       *             | 14
-       *             | 15
-       *             | 16
-       *             | 17
-       *             | 18
-       *             | 19
-       *             | 20
-       *             | 21
-       *             | 22
-       *             | 23
-       *             | 24
-       *             | 25
-       *             | 900
-       *           // 状态
-       *           enabled?: boolean
-       *           // 命中率
-       *           hitRate?: number
-       *           // 数据库链接
-       *           connectionString?: string
-       *           // 排序
-       *           orderNo?: number
-       *           depts?: Array<Dept>
-       *         }>
-       *       }
-       *       // 角色
-       *       role?: Role
-       *       // 用户
-       *       user?: {
+       *         users?: Array<User>
+       *       }>
+       *       children?: Array<Dept>
+       *       tenants?: Array<{
        *         // 主键
        *         id?: number
        *         // 创建者名称
@@ -8634,23 +8449,133 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 昵称
-       *         nickName?: string
-       *         // 头像
-       *         avatar?: string
-       *         // 手机号
-       *         phone?: string
-       *         // 邮箱
-       *         email?: string
-       *         // 密码
-       *         password?: string
+       *         // 配置Id
+       *         connId?: string
+       *         dbType?:
+       *           | 0
+       *           | 1
+       *           | 2
+       *           | 3
+       *           | 4
+       *           | 5
+       *           | 6
+       *           | 7
+       *           | 8
+       *           | 9
+       *           | 10
+       *           | 11
+       *           | 12
+       *           | 13
+       *           | 14
+       *           | 15
+       *           | 16
+       *           | 17
+       *           | 18
+       *           | 19
+       *           | 20
+       *           | 21
+       *           | 22
+       *           | 23
+       *           | 24
+       *           | 25
+       *           | 900
+       *         // 状态
+       *         enabled?: boolean
+       *         // 命中率
+       *         hitRate?: number
+       *         // 数据库链接
+       *         connectionString?: string
+       *         // 排序
+       *         orderNo?: number
+       *         depts?: Array<Dept>
+       *       }>
+       *     }>
+       *     roles?: Array<{
+       *       // 主键
+       *       id?: number
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       // 角色名称
+       *       name?: string
+       *       type?: 10 | 20 | 30 | 40
+       *       // 状态
+       *       status?: boolean
+       *       // 备注
+       *       remark?: string
+       *       // 角色代码
+       *       code?: string
+       *       // 排序
+       *       sort?: number
+       *       // 公司id
+       *       deptId?: number
+       *       // 部门
+       *       dept?: Dept
+       *       menus?: Array<{
+       *         // 主键
+       *         id?: number
+       *         // 创建者名称
+       *         createBy?: string
+       *         // 创建时间
+       *         createTime?: string
+       *         // 更新者名称
+       *         updateBy?: string
+       *         // 最后更新时间
+       *         updateTime?: string
+       *         // 菜单名
+       *         name?: string
+       *         // 路径
+       *         path?: string
+       *         // 路径
+       *         pathParam?: string
+       *         layout?: 1 | 2
+       *         // 重定向
+       *         redirect?: string
+       *         // 组件
+       *         component?: string
+       *         // 父级
+       *         parentId?: number
+       *         menuType?: 1 | 2 | 3 | 4
+       *         iconType?: 1 | 2
        *         // 状态
        *         status?: boolean
-       *         // 账号
-       *         userName?: string
-       *         // 用户部门角色关系
-       *         user_Dept_Roles?: Array<User_Dept_Role>
-       *       }
+       *         // 路由标题(可用来作document.title或者菜单的名称)
+       *         title?: string
+       *         // 多语言
+       *         i18nKey?: string
+       *         // 缓存页面
+       *         keepAlive?: boolean
+       *         // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
+       *         constant?: boolean
+       *         // 菜单和面包屑对应的图标
+       *         icon?: string
+       *         // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
+       *         localIcon?: string
+       *         // 菜单和面包屑对应的图标的字体大小
+       *         iconFontSize?: number
+       *         // 路由顺序，可用于菜单的排序
+       *         order?: number
+       *         // 外链链接
+       *         href?: string
+       *         // 是否在菜单中隐藏路线
+       *         hideInMenu?: boolean
+       *         // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
+       *         activeMenu?: string
+       *         // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
+       *         multiTab?: boolean
+       *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
+       *         fixedIndexInTab?: number
+       *         // 是否已删除
+       *         isDeleted?: boolean
+       *         roles?: Array<Role>
+       *         children?: Array<Menu>
+       *       }>
+       *       users?: Array<User>
        *     }>
        *     roleIds?: number[]
        *   }
@@ -8949,16 +8874,45 @@ declare global {
        *   status?: boolean
        *   // 账号
        *   userName?: string
-       *   // 用户部门角色关系
-       *   user_Dept_Roles?: Array<{
-       *     // 用户Id
-       *     userId?: number
-       *     // 部门Id
-       *     deptId?: number
-       *     // 角色Id
-       *     roleId?: number
-       *     // 部门
-       *     dept?: {
+       *   // 用户部门关系
+       *   depts?: Array<{
+       *     // 主键
+       *     id?: number
+       *     // 创建者名称
+       *     createBy?: string
+       *     // 创建时间
+       *     createTime?: string
+       *     // 更新者名称
+       *     updateBy?: string
+       *     // 最后更新时间
+       *     updateTime?: string
+       *     // 图标
+       *     image?: string
+       *     // 单位名称
+       *     name?: string
+       *     // 简写名称
+       *     easyName?: string
+       *     // 父级部门ID
+       *     parentId?: number
+       *     // 地址
+       *     address?: string
+       *     // 是否删除
+       *     isDeleted?: boolean
+       *     // 默认联系电话
+       *     phone?: string
+       *     // 默认联系人
+       *     man?: string
+       *     // 备注
+       *     remark?: string
+       *     // 状态
+       *     status?: boolean
+       *     // 排序
+       *     sort?: number
+       *     // 首页
+       *     home?: string
+       *     type?: DeptTypeEnum
+       *     users?: Array<User>
+       *     roles?: Array<{
        *       // 主键
        *       id?: number
        *       // 创建者名称
@@ -8969,34 +8923,22 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 图标
-       *       image?: string
-       *       // 单位名称
+       *       // 角色名称
        *       name?: string
-       *       // 简写名称
-       *       easyName?: string
-       *       // 父级部门ID
-       *       parentId?: number
-       *       // 地址
-       *       address?: string
-       *       // 是否删除
-       *       isDeleted?: boolean
-       *       // 默认联系电话
-       *       phone?: string
-       *       // 默认联系人
-       *       man?: string
+       *       type?: 10 | 20 | 30 | 40
+       *       // 状态
+       *       status?: boolean
        *       // 备注
        *       remark?: string
-       *       // 状态
-       *       status?: boolean
+       *       // 角色代码
+       *       code?: string
        *       // 排序
        *       sort?: number
-       *       // 首页
-       *       home?: string
-       *       type?: DeptTypeEnum
-       *       // 用户部门角色关系
-       *       user_Dept_Roles?: Array<User_Dept_Role>
-       *       roles?: Array<{
+       *       // 公司id
+       *       deptId?: number
+       *       // 部门
+       *       dept?: Dept
+       *       menus?: Array<{
        *         // 主键
        *         id?: number
        *         // 创建者名称
@@ -9007,140 +8949,58 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 角色名称
+       *         // 菜单名
        *         name?: string
-       *         type?: 10 | 20 | 30 | 40
+       *         // 路径
+       *         path?: string
+       *         // 路径
+       *         pathParam?: string
+       *         layout?: 1 | 2
+       *         // 重定向
+       *         redirect?: string
+       *         // 组件
+       *         component?: string
+       *         // 父级
+       *         parentId?: number
+       *         menuType?: 1 | 2 | 3 | 4
+       *         iconType?: 1 | 2
        *         // 状态
        *         status?: boolean
-       *         // 备注
-       *         remark?: string
-       *         // 角色代码
-       *         code?: string
-       *         // 排序
-       *         sort?: number
-       *         // 公司id
-       *         deptId?: number
-       *         // 部门
-       *         dept?: Dept
-       *         // 用户部门角色关系
-       *         user_Dept_Roles?: Array<User_Dept_Role>
-       *         menus?: Array<{
-       *           // 主键
-       *           id?: number
-       *           // 创建者名称
-       *           createBy?: string
-       *           // 创建时间
-       *           createTime?: string
-       *           // 更新者名称
-       *           updateBy?: string
-       *           // 最后更新时间
-       *           updateTime?: string
-       *           // 菜单名
-       *           name?: string
-       *           // 路径
-       *           path?: string
-       *           // 路径
-       *           pathParam?: string
-       *           layout?: 1 | 2
-       *           // 重定向
-       *           redirect?: string
-       *           // 组件
-       *           component?: string
-       *           // 父级
-       *           parentId?: number
-       *           menuType?: 1 | 2 | 3 | 4
-       *           iconType?: 1 | 2
-       *           // 状态
-       *           status?: boolean
-       *           // 路由标题(可用来作document.title或者菜单的名称)
-       *           title?: string
-       *           // 多语言
-       *           i18nKey?: string
-       *           // 缓存页面
-       *           keepAlive?: boolean
-       *           // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
-       *           constant?: boolean
-       *           // 菜单和面包屑对应的图标
-       *           icon?: string
-       *           // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
-       *           localIcon?: string
-       *           // 菜单和面包屑对应的图标的字体大小
-       *           iconFontSize?: number
-       *           // 路由顺序，可用于菜单的排序
-       *           order?: number
-       *           // 外链链接
-       *           href?: string
-       *           // 是否在菜单中隐藏路线
-       *           hideInMenu?: boolean
-       *           // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
-       *           activeMenu?: string
-       *           // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
-       *           multiTab?: boolean
-       *           // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
-       *           fixedIndexInTab?: number
-       *           // 是否已删除
-       *           isDeleted?: boolean
-       *           roles?: Array<Role>
-       *           children?: Array<Menu>
-       *         }>
+       *         // 路由标题(可用来作document.title或者菜单的名称)
+       *         title?: string
+       *         // 多语言
+       *         i18nKey?: string
+       *         // 缓存页面
+       *         keepAlive?: boolean
+       *         // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
+       *         constant?: boolean
+       *         // 菜单和面包屑对应的图标
+       *         icon?: string
+       *         // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
+       *         localIcon?: string
+       *         // 菜单和面包屑对应的图标的字体大小
+       *         iconFontSize?: number
+       *         // 路由顺序，可用于菜单的排序
+       *         order?: number
+       *         // 外链链接
+       *         href?: string
+       *         // 是否在菜单中隐藏路线
+       *         hideInMenu?: boolean
+       *         // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
+       *         activeMenu?: string
+       *         // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
+       *         multiTab?: boolean
+       *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
+       *         fixedIndexInTab?: number
+       *         // 是否已删除
+       *         isDeleted?: boolean
+       *         roles?: Array<Role>
+       *         children?: Array<Menu>
        *       }>
-       *       children?: Array<Dept>
-       *       tenants?: Array<{
-       *         // 主键
-       *         id?: number
-       *         // 创建者名称
-       *         createBy?: string
-       *         // 创建时间
-       *         createTime?: string
-       *         // 更新者名称
-       *         updateBy?: string
-       *         // 最后更新时间
-       *         updateTime?: string
-       *         // 配置Id
-       *         connId?: string
-       *         dbType?:
-       *           | 0
-       *           | 1
-       *           | 2
-       *           | 3
-       *           | 4
-       *           | 5
-       *           | 6
-       *           | 7
-       *           | 8
-       *           | 9
-       *           | 10
-       *           | 11
-       *           | 12
-       *           | 13
-       *           | 14
-       *           | 15
-       *           | 16
-       *           | 17
-       *           | 18
-       *           | 19
-       *           | 20
-       *           | 21
-       *           | 22
-       *           | 23
-       *           | 24
-       *           | 25
-       *           | 900
-       *         // 状态
-       *         enabled?: boolean
-       *         // 命中率
-       *         hitRate?: number
-       *         // 数据库链接
-       *         connectionString?: string
-       *         // 排序
-       *         orderNo?: number
-       *         depts?: Array<Dept>
-       *       }>
-       *     }
-       *     // 角色
-       *     role?: Role
-       *     // 用户
-       *     user?: {
+       *       users?: Array<User>
+       *     }>
+       *     children?: Array<Dept>
+       *     tenants?: Array<{
        *       // 主键
        *       id?: number
        *       // 创建者名称
@@ -9151,23 +9011,133 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 昵称
-       *       nickName?: string
-       *       // 头像
-       *       avatar?: string
-       *       // 手机号
-       *       phone?: string
-       *       // 邮箱
-       *       email?: string
-       *       // 密码
-       *       password?: string
+       *       // 配置Id
+       *       connId?: string
+       *       dbType?:
+       *         | 0
+       *         | 1
+       *         | 2
+       *         | 3
+       *         | 4
+       *         | 5
+       *         | 6
+       *         | 7
+       *         | 8
+       *         | 9
+       *         | 10
+       *         | 11
+       *         | 12
+       *         | 13
+       *         | 14
+       *         | 15
+       *         | 16
+       *         | 17
+       *         | 18
+       *         | 19
+       *         | 20
+       *         | 21
+       *         | 22
+       *         | 23
+       *         | 24
+       *         | 25
+       *         | 900
+       *       // 状态
+       *       enabled?: boolean
+       *       // 命中率
+       *       hitRate?: number
+       *       // 数据库链接
+       *       connectionString?: string
+       *       // 排序
+       *       orderNo?: number
+       *       depts?: Array<Dept>
+       *     }>
+       *   }>
+       *   roles?: Array<{
+       *     // 主键
+       *     id?: number
+       *     // 创建者名称
+       *     createBy?: string
+       *     // 创建时间
+       *     createTime?: string
+       *     // 更新者名称
+       *     updateBy?: string
+       *     // 最后更新时间
+       *     updateTime?: string
+       *     // 角色名称
+       *     name?: string
+       *     type?: 10 | 20 | 30 | 40
+       *     // 状态
+       *     status?: boolean
+       *     // 备注
+       *     remark?: string
+       *     // 角色代码
+       *     code?: string
+       *     // 排序
+       *     sort?: number
+       *     // 公司id
+       *     deptId?: number
+       *     // 部门
+       *     dept?: Dept
+       *     menus?: Array<{
+       *       // 主键
+       *       id?: number
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       // 菜单名
+       *       name?: string
+       *       // 路径
+       *       path?: string
+       *       // 路径
+       *       pathParam?: string
+       *       layout?: 1 | 2
+       *       // 重定向
+       *       redirect?: string
+       *       // 组件
+       *       component?: string
+       *       // 父级
+       *       parentId?: number
+       *       menuType?: 1 | 2 | 3 | 4
+       *       iconType?: 1 | 2
        *       // 状态
        *       status?: boolean
-       *       // 账号
-       *       userName?: string
-       *       // 用户部门角色关系
-       *       user_Dept_Roles?: Array<User_Dept_Role>
-       *     }
+       *       // 路由标题(可用来作document.title或者菜单的名称)
+       *       title?: string
+       *       // 多语言
+       *       i18nKey?: string
+       *       // 缓存页面
+       *       keepAlive?: boolean
+       *       // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
+       *       constant?: boolean
+       *       // 菜单和面包屑对应的图标
+       *       icon?: string
+       *       // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
+       *       localIcon?: string
+       *       // 菜单和面包屑对应的图标的字体大小
+       *       iconFontSize?: number
+       *       // 路由顺序，可用于菜单的排序
+       *       order?: number
+       *       // 外链链接
+       *       href?: string
+       *       // 是否在菜单中隐藏路线
+       *       hideInMenu?: boolean
+       *       // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
+       *       activeMenu?: string
+       *       // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
+       *       multiTab?: boolean
+       *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
+       *       fixedIndexInTab?: number
+       *       // 是否已删除
+       *       isDeleted?: boolean
+       *       roles?: Array<Role>
+       *       children?: Array<Menu>
+       *     }>
+       *     users?: Array<User>
        *   }>
        *   roleIds?: number[]
        * }
