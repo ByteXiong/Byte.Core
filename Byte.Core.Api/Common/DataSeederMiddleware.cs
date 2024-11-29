@@ -1,3 +1,4 @@
+using Byte.Core.Api.db;
 using Byte.Core.Common.Converters;
 using Byte.Core.Common.Extensions;
 using Byte.Core.Common.Helpers;
@@ -85,9 +86,9 @@ namespace Byte.Core.Api.Common
                                 f2.Close();
                                 f2.Dispose();
 
-                                var list = JsonConvert.DeserializeObject<List<Menu>>(jsonStr, setting);
+                                var list = JsonConvert.DeserializeObject<NavicatJson<Menu>>(jsonStr, setting);
 
-                                await dataContext.GetEntityDb<Menu>().InsertRangeAsync(list);
+                                await dataContext.GetEntityDb<Menu>().InsertRangeAsync(list.RECORDS);
 
                                 Console.WriteLine(
                                     $"Entity:{nameof(Menu)}-->Table:{attr.TableName}-->Desc:{attr.TableDescription}-->初始数据成功！",

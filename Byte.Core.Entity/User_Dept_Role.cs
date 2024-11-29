@@ -14,19 +14,16 @@ namespace Byte.Core.Entity
         /// <summary>
         /// 用户Id
         /// </summary>
-        [SugarColumn(IsPrimaryKey = true)]
         public int UserId { get; set; }
 
         /// <summary>
         /// 部门Id
         /// </summary>
-        [SugarColumn(IsPrimaryKey = true)]
         public int DeptId { get; set; }
 
         /// <summary>
         /// 角色Id
         /// </summary>
-        [SugarColumn(IsPrimaryKey = true)]
         public int RoleId { get; set; }
         #region 导航
         /// <summary>

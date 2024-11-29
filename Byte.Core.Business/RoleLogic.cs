@@ -62,6 +62,7 @@ namespace Byte.Core.Business
         public async Task<int> AddAsync(UpdateRoleParam param)
         {
             Role model = param.Adapt<Role>();
+            model.DeptId = CurrentUser.DeptId;
             await AddAsync(model);
             return model.Id;
         }
@@ -73,13 +74,15 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<int> UpdateAsync(UpdateRoleParam param)
         {
-            var role = await GetIQueryable(x => x.Id == param.Id).FirstOrDefaultAsync();
-            role.Name = param.Name; //角色名称
-            role.Type = param.Type; //用户类型
-            role.Remark = param.Remark; //描述
-            role.Code = param.Code;
-            role.Sort = param.Sort;
-            await UpdateAsync(role);
+            var entity = await GetIQueryable(x => x.Id == param.Id).FirstOrDefaultAsync();
+            entity.Name = param.Name; //角色名称
+            entity.Type = param.Type; //用户类型
+            entity.Remark = param.Remark; //描述
+            entity.Code = param.Code;
+            entity.Sort = param.Sort;
+            entity.Status = param.Status;
+            entity.DeptId = CurrentUser.DeptId;
+            await UpdateAsync(entity);
             return param.Id;
         }
 

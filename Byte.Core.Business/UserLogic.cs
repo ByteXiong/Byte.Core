@@ -88,8 +88,8 @@ namespace Byte.Core.Business
                 User model = param.Adapt<User>();
 
                 model.Roles = param.RoleIds.Select(x => new Role { Id = x }).ToList();
+                model.Password= "123456".ToMD5String();
 
-             
                 await _unitOfWork.GetDbClient().InsertNav(model)
                         .Include(z1 => z1.Roles, new InsertNavOptions
                         {
@@ -130,13 +130,13 @@ namespace Byte.Core.Business
 
            var model =  new User
                 {
-                    NickName = param.NickName, //名称
+                    Id = param.Id,
+
+                        UserName = param.UserName, //账号
+                     NickName = param.NickName, //名称
                     Avatar = param.Avatar, //头像
                     Password = param.Password, //密码
-                    CreateTime = param.CreateTime, //创建时间
-                    CreateBy = param.CreateBy, //创建人
                     Status = param.Status, //状态
-                    UserName = param.UserName, //账号
                     
                 };
                 model.Roles = param.RoleIds.Select(x => new Role { Id = x }).ToList();
