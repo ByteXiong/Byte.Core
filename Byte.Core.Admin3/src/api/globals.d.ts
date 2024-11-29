@@ -197,6 +197,7 @@ export type Menu = {
    * 如果设置，路线将固定在制表符中，值是固定制表符的顺序
    */
   fixedIndexInTab?: number;
+  props?: boolean;
   /**
    * 是否已删除
    */
@@ -824,7 +825,6 @@ export type RouteDTO = {
    * 路径
    */
   path?: string;
-  pathParam?: string;
   /**
    * 重定向
    */
@@ -843,6 +843,7 @@ export type RouteDTO = {
    */
   status?: boolean;
   meta?: RouteMeta;
+  props?: boolean;
   /**
    * 子节点
    */
@@ -971,6 +972,7 @@ export type MenuInfo = {
    * 如果设置，路线将固定在制表符中，值是固定制表符的顺序
    */
   fixedIndexInTab?: number;
+  props?: boolean;
   /**
    * 是否已删除
    */
@@ -1165,6 +1167,7 @@ export type UpdateMenuParam = {
    * 如果设置，路线将固定在制表符中，值是固定制表符的顺序
    */
   fixedIndexInTab?: number;
+  props?: boolean;
   /**
    * 是否已删除
    */
@@ -1195,6 +1198,19 @@ export type DayRankDTO = {
    * 昵称
    */
   nickName?: string;
+};
+export type SetWinParam = {
+  type?: number;
+  timeStamp?: number;
+  userId?: number;
+  /**
+   * 赢
+   */
+  newWin?: number;
+  /**
+   * 宝石数
+   */
+  newGems?: number;
 };
 export type WeekRankDTO = {
   /**
@@ -2000,6 +2016,7 @@ declare global {
        *             multiTab?: boolean
        *             // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *             fixedIndexInTab?: number
+       *             props?: boolean
        *             // 是否已删除
        *             isDeleted?: boolean
        *             roles?: Array<Role>
@@ -2576,6 +2593,7 @@ declare global {
        *           multiTab?: boolean
        *           // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *           fixedIndexInTab?: number
+       *           props?: boolean
        *           // 是否已删除
        *           isDeleted?: boolean
        *           roles?: Array<Role>
@@ -2718,6 +2736,7 @@ declare global {
        *       multiTab?: boolean
        *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *       fixedIndexInTab?: number
+       *       props?: boolean
        *       // 是否已删除
        *       isDeleted?: boolean
        *       roles?: Array<Role>
@@ -2842,6 +2861,7 @@ declare global {
        *         multiTab?: boolean
        *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *         fixedIndexInTab?: number
+       *         props?: boolean
        *         // 是否已删除
        *         isDeleted?: boolean
        *         roles?: Array<Role>
@@ -3584,7 +3604,6 @@ declare global {
        *     name?: string
        *     // 路径
        *     path?: string
-       *     pathParam?: string
        *     // 重定向
        *     redirect?: string
        *     // 组件
@@ -3634,6 +3653,7 @@ declare global {
        *         status?: boolean
        *       }>
        *     }
+       *     props?: boolean
        *     // 子节点
        *     children?: Array<RouteDTO>
        *   }>
@@ -3766,6 +3786,7 @@ declare global {
        *     multiTab?: boolean
        *     // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *     fixedIndexInTab?: number
+       *     props?: boolean
        *     // 是否已删除
        *     isDeleted?: boolean
        *     roles?: Array<{
@@ -3848,6 +3869,7 @@ declare global {
        *         multiTab?: boolean
        *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *         fixedIndexInTab?: number
+       *         props?: boolean
        *         // 是否已删除
        *         isDeleted?: boolean
        *         roles?: Array<Role>
@@ -3909,6 +3931,7 @@ declare global {
        *       multiTab?: boolean
        *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *       fixedIndexInTab?: number
+       *       props?: boolean
        *       // 是否已删除
        *       isDeleted?: boolean
        *       roles?: Array<Role>
@@ -4015,7 +4038,6 @@ declare global {
        *       name?: string
        *       // 路径
        *       path?: string
-       *       pathParam?: string
        *       // 重定向
        *       redirect?: string
        *       // 组件
@@ -4065,6 +4087,7 @@ declare global {
        *           status?: boolean
        *         }>
        *       }
+       *       props?: boolean
        *       // 子节点
        *       children?: Array<RouteDTO>
        *     }>
@@ -4675,6 +4698,7 @@ declare global {
        *   multiTab?: boolean
        *   // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *   fixedIndexInTab?: number
+       *   props?: boolean
        *   // 是否已删除
        *   isDeleted?: boolean
        *   roles?: Array<{
@@ -4757,6 +4781,7 @@ declare global {
        *       multiTab?: boolean
        *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *       fixedIndexInTab?: number
+       *       props?: boolean
        *       // 是否已删除
        *       isDeleted?: boolean
        *       roles?: Array<Role>
@@ -4818,6 +4843,7 @@ declare global {
        *     multiTab?: boolean
        *     // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *     fixedIndexInTab?: number
+       *     props?: boolean
        *     // 是否已删除
        *     isDeleted?: boolean
        *     roles?: Array<Role>
@@ -4921,7 +4947,7 @@ declare global {
        * **Query Parameters**
        * ```ts
        * type QueryParameters = {
-       *   dateTime?: string
+       *   timestamp?: number
        * }
        * ```
        *
@@ -4972,7 +4998,7 @@ declare global {
           success: boolean;
         }> & {
           params: {
-            dateTime?: string;
+            timestamp?: number;
           };
         }
       >(
@@ -5002,6 +5028,89 @@ declare global {
       /**
        * ---
        *
+       * [PUT] 设置连赢
+       *
+       * **path:** /api/Rank/SetWin
+       *
+       * ---
+       *
+       * **RequestBody**
+       * ```ts
+       * type RequestBody = {
+       *   type?: number
+       *   timeStamp?: number
+       *   userId?: number
+       *   // 赢
+       *   newWin?: number
+       *   // 宝石数
+       *   newGems?: number
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: unknown
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      put_api_rank_setwin<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          data: SetWinParam;
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Rank.put_api_rank_setwin',
+        Config
+      >;
+      /**
+       * ---
+       *
        * [GET] 周排行榜
        *
        * **path:** /api/Rank/Week
@@ -5011,7 +5120,7 @@ declare global {
        * **Query Parameters**
        * ```ts
        * type QueryParameters = {
-       *   dateTime?: string
+       *   timestamp?: number
        * }
        * ```
        *
@@ -5062,7 +5171,7 @@ declare global {
           success: boolean;
         }> & {
           params: {
-            dateTime?: string;
+            timestamp?: number;
           };
         }
       >(
@@ -5333,6 +5442,7 @@ declare global {
        *           multiTab?: boolean
        *           // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *           fixedIndexInTab?: number
+       *           props?: boolean
        *           // 是否已删除
        *           isDeleted?: boolean
        *           roles?: Array<Role>
@@ -5447,6 +5557,7 @@ declare global {
        *       multiTab?: boolean
        *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *       fixedIndexInTab?: number
+       *       props?: boolean
        *       // 是否已删除
        *       isDeleted?: boolean
        *       roles?: Array<Role>
@@ -5595,6 +5706,7 @@ declare global {
        *             multiTab?: boolean
        *             // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *             fixedIndexInTab?: number
+       *             props?: boolean
        *             // 是否已删除
        *             isDeleted?: boolean
        *             roles?: Array<Role>
@@ -5898,6 +6010,7 @@ declare global {
        *             multiTab?: boolean
        *             // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *             fixedIndexInTab?: number
+       *             props?: boolean
        *             // 是否已删除
        *             isDeleted?: boolean
        *             roles?: Array<Role>
@@ -6012,6 +6125,7 @@ declare global {
        *         multiTab?: boolean
        *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *         fixedIndexInTab?: number
+       *         props?: boolean
        *         // 是否已删除
        *         isDeleted?: boolean
        *         roles?: Array<Role>
@@ -6160,6 +6274,7 @@ declare global {
        *               multiTab?: boolean
        *               // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *               fixedIndexInTab?: number
+       *               props?: boolean
        *               // 是否已删除
        *               isDeleted?: boolean
        *               roles?: Array<Role>
@@ -6590,6 +6705,7 @@ declare global {
        *         multiTab?: boolean
        *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *         fixedIndexInTab?: number
+       *         props?: boolean
        *         // 是否已删除
        *         isDeleted?: boolean
        *         roles?: Array<Role>
@@ -6704,6 +6820,7 @@ declare global {
        *     multiTab?: boolean
        *     // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *     fixedIndexInTab?: number
+       *     props?: boolean
        *     // 是否已删除
        *     isDeleted?: boolean
        *     roles?: Array<Role>
@@ -6852,6 +6969,7 @@ declare global {
        *           multiTab?: boolean
        *           // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *           fixedIndexInTab?: number
+       *           props?: boolean
        *           // 是否已删除
        *           isDeleted?: boolean
        *           roles?: Array<Role>
@@ -8430,6 +8548,7 @@ declare global {
        *           multiTab?: boolean
        *           // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *           fixedIndexInTab?: number
+       *           props?: boolean
        *           // 是否已删除
        *           isDeleted?: boolean
        *           roles?: Array<Role>
@@ -8570,6 +8689,7 @@ declare global {
        *         multiTab?: boolean
        *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *         fixedIndexInTab?: number
+       *         props?: boolean
        *         // 是否已删除
        *         isDeleted?: boolean
        *         roles?: Array<Role>
@@ -8992,6 +9112,7 @@ declare global {
        *         multiTab?: boolean
        *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *         fixedIndexInTab?: number
+       *         props?: boolean
        *         // 是否已删除
        *         isDeleted?: boolean
        *         roles?: Array<Role>
@@ -9132,6 +9253,7 @@ declare global {
        *       multiTab?: boolean
        *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *       fixedIndexInTab?: number
+       *       props?: boolean
        *       // 是否已删除
        *       isDeleted?: boolean
        *       roles?: Array<Role>

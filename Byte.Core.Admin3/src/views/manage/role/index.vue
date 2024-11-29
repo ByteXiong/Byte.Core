@@ -51,7 +51,7 @@ const {
     // },
     force: true,
     initialPage: 1, // 初始页码，默认为1
-    initialPageSize: 10, // 初始每页数据条数，默认为10
+    initialPageSize: 20, // 初始每页数据条数，默认为10
     preloadPreviousPage: false, // 是否预加载下一页
     preloadNextPage: false, // 是否预加载上一页
     total: res => res.data?.pagerInfo?.totalRowCount,
@@ -179,7 +179,7 @@ const columnData = computed<Array<DataTableColumn>>(() => {
           pageSize,
           showSizePicker: true,
           itemCount,
-          pageSizes: [10, 50, 100, 500, 1000],
+          pageSizes: [20, 50, 100, 500, 1000],
           onUpdatePage(value) {
             page = value;
           },

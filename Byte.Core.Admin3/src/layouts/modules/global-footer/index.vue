@@ -6,8 +6,8 @@ defineOptions({
 
 <template>
   <DarkModeContainer class="h-full flex-center">
-    <a href="https://github.com/soybeanjs/soybean-admin/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">
-      Copyright MIT © 2021 Byte.Core
+    <a href="https://gitee.com/ByteXiong/Byte.Core/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">
+      Copyright MIT © 2024 Byte.Core
     </a>
   </DarkModeContainer>
 </template>

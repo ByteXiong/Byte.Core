@@ -41,7 +41,9 @@ const {
   {
     immediate: false,
     resetAfterSubmiting: true,
-    initialForm: {} as UpdateRoleParam,
+    initialForm: {
+      status: true
+    } as UpdateRoleParam,
     async middleware(_, next) {
       validate();
       await next();
@@ -94,6 +96,12 @@ defineExpose({
           </NFormItemGi>
           <NFormItemGi span="24 m:12" label="角色编码" path="code">
             <NInput v-model:value="formData.code" :placeholder="$t('common.placeholder')" />
+          </NFormItemGi>
+          <NFormItemGi span="24 m:12" label="状态" path="status">
+            <NRadioGroup v-model:value="formData.status">
+              <NRadio :value="true" label="启用" />
+              <NRadio :value="false" label="禁用" />
+            </NRadioGroup>
           </NFormItemGi>
           <NFormItemGi span="24 m:12" label="排序" path="sort">
             <NInputNumber v-model:value="formData.sort" :placeholder="$t('common.placeholder')" />

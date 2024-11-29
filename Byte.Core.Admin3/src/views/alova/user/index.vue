@@ -203,7 +203,7 @@ const { columnChecks, columns } = useCheckedColumns<typeof fetchGetUserList>(() 
           pageSize,
           showSizePicker: true,
           pageCount,
-          pageSizes: [10, 50, 100, 500, 1000],
+          pageSizes: [20, 50, 100, 500, 1000],
           onUpdatePage(value) {
             page = value;
           },

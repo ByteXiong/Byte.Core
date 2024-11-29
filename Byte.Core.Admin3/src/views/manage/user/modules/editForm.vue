@@ -17,7 +17,8 @@ const { formRef, validate, restoreValidation } = useNaiveForm();
 const { defaultRequiredRule } = useFormRules();
 type RuleKey = keyof FormDataType;
 const rules: Partial<Record<RuleKey, App.Global.FormRule>> = {
-  userName: defaultRequiredRule
+  userName: defaultRequiredRule,
+  roleIds: defaultRequiredRule
 };
 
 interface Emits {
@@ -44,7 +45,9 @@ const {
   {
     immediate: false,
     resetAfterSubmiting: true,
-    initialForm: {} as FormDataType,
+    initialForm: {
+      status: true
+    } as FormDataType,
     async middleware(_, next) {
       validate().then(async () => {
         await next();
@@ -114,7 +117,7 @@ defineExpose({
       </NForm>
     </NScrollbar>
     <template #footer>
-      <NSpace :size="16">
+      <NSpace justify="end" :size="16">
         <NButton @click="closeForm">{{ $t('common.cancel') }}</NButton>
         <NButton type="primary" @click="handleSubmit">{{ $t('common.confirm') }}</NButton>
       </NSpace>

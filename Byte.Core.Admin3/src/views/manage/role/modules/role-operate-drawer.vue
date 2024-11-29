@@ -122,7 +122,7 @@ watch(visible, () => {
         <ButtonAuthModal v-model:visible="buttonAuthVisible" :role-id="roleId" />
       </NSpace>
       <template #footer>
-        <NSpace :size="16">
+        <NSpace justify="end" :size="16">
           <NButton @click="closeDrawer">{{ $t('common.cancel') }}</NButton>
           <NButton type="primary" @click="handleSubmit">{{ $t('common.confirm') }}</NButton>
         </NSpace>
