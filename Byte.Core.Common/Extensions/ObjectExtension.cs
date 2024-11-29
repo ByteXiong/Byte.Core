@@ -1312,14 +1312,13 @@ namespace Byte.Core.Common.Extensions
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public static string ToUnixTimeStamp(this DateTime date)
+        public static long ToUnixTimeStamp(this DateTime date)
         {
             //DateTime startTime = TimeZoneInfo.ConvertTimeToUtc(new DateTime(1970, 1, 1));
             //string timeStamp = date.Subtract(startTime).Ticks.ToString();
             //return timeStamp.Substring(0, timeStamp.Length - 7);
             DateTime startTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            long unixTimeStamp = (long)(date.ToUniversalTime() - startTime).TotalSeconds;
-            return unixTimeStamp.ToString();
+           return (long)(date.ToUniversalTime() - startTime).TotalSeconds;
         }
 
         /// <summary>
@@ -1327,14 +1326,14 @@ namespace Byte.Core.Common.Extensions
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public static string ToTimeStamp(this DateTime date)
+        public static long ToTimeStamp(this DateTime date)
         {
             //DateTime startTime = TimeZoneInfo.ConvertTime(new DateTime(1970, 1, 1), TimeZoneInfo.Local);
             //string timeStamp = date.Subtract(startTime).Ticks.ToString();
             //return timeStamp.Substring(0, timeStamp.Length - 7);
             DateTimeOffset startTime = new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero);
-            long unixTimeStamp = (date.ToUniversalTime() - startTime).Ticks / TimeSpan.TicksPerSecond;
-            return unixTimeStamp.ToString();
+            return (date.ToUniversalTime() - startTime).Ticks / TimeSpan.TicksPerMillisecond;
+     
         }
         /// <summary>
         /// 时间戳转时间
