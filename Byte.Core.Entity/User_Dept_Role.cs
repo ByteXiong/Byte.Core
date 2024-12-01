@@ -14,17 +14,17 @@ namespace Byte.Core.Entity
         /// <summary>
         /// 用户Id
         /// </summary>
-        public int UserId { get; set; }
+        public long UserId { get; set; }
 
         /// <summary>
         /// 部门Id
         /// </summary>
-        public int DeptId { get; set; }
+        public long DeptId { get; set; }
 
         /// <summary>
         /// 角色Id
         /// </summary>
-        public int RoleId { get; set; }
+        public long RoleId { get; set; }
         #region 导航
         /// <summary>
         ///部门

@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * runtest开发接口文档 Web端网站 - version 1.0
+ * Byte.Core开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -114,93 +114,30 @@ export type Menu = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 菜单名
-   */
   name?: string;
-  /**
-   * 路径
-   */
   path?: string;
-  /**
-   * 路径
-   */
   pathParam?: string;
   layout?: LayoutTypeEnum;
-  /**
-   * 重定向
-   */
   redirect?: string;
-  /**
-   * 组件
-   */
   component?: string;
-  /**
-   * 父级
-   */
   parentId?: number;
   menuType?: MenuTypeEnum;
   iconType?: IconTypeEnum;
-  /**
-   * 状态
-   */
   status?: boolean;
-  /**
-   * 路由标题(可用来作document.title或者菜单的名称)
-   */
   title?: string;
-  /**
-   * 多语言
-   */
   i18nKey?: string;
-  /**
-   * 缓存页面
-   */
   keepAlive?: boolean;
-  /**
-   * 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
-   */
   constant?: boolean;
-  /**
-   * 菜单和面包屑对应的图标
-   */
   icon?: string;
-  /**
-   * 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
-   */
   localIcon?: string;
-  /**
-   * 菜单和面包屑对应的图标的字体大小
-   */
   iconFontSize?: number;
-  /**
-   * 路由顺序，可用于菜单的排序
-   */
   order?: number;
-  /**
-   * 外链链接
-   */
   href?: string;
-  /**
-   * 是否在菜单中隐藏路线
-   */
   hideInMenu?: boolean;
-  /**
-   * 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
-   */
   activeMenu?: string;
-  /**
-   * 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
-   */
   multiTab?: boolean;
-  /**
-   * 如果设置，路线将固定在制表符中，值是固定制表符的顺序
-   */
   fixedIndexInTab?: number;
   props?: boolean;
-  /**
-   * 是否已删除
-   */
   isDeleted?: boolean;
   roles?: Role[];
   children?: Menu[];
@@ -226,34 +163,13 @@ export type Role = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 角色名称
-   */
   name?: string;
   type?: RoleTypeEnum;
-  /**
-   * 状态
-   */
   status?: boolean;
-  /**
-   * 备注
-   */
   remark?: string;
-  /**
-   * 角色代码
-   */
   code?: string;
-  /**
-   * 排序
-   */
   sort?: number;
-  /**
-   * 公司id
-   */
   deptId?: number;
-  /**
-   * 部门
-   */
   dept?: Dept;
   menus?: Menu[];
   users?: User[];
@@ -307,26 +223,11 @@ export type Tenant = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 配置Id
-   */
   connId?: string;
   dbType?: DbType;
-  /**
-   * 状态
-   */
   enabled?: boolean;
-  /**
-   * 命中率
-   */
   hitRate?: number;
-  /**
-   * 数据库链接
-   */
   connectionString?: string;
-  /**
-   * 排序
-   */
   orderNo?: number;
   depts?: Dept[];
 };
@@ -351,53 +252,17 @@ export type Dept = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 图标
-   */
   image?: string;
-  /**
-   * 单位名称
-   */
   name?: string;
-  /**
-   * 简写名称
-   */
   easyName?: string;
-  /**
-   * 父级部门ID
-   */
   parentId?: number;
-  /**
-   * 地址
-   */
   address?: string;
-  /**
-   * 是否删除
-   */
   isDeleted?: boolean;
-  /**
-   * 默认联系电话
-   */
   phone?: string;
-  /**
-   * 默认联系人
-   */
   man?: string;
-  /**
-   * 备注
-   */
   remark?: string;
-  /**
-   * 状态
-   */
   status?: boolean;
-  /**
-   * 排序
-   */
   sort?: number;
-  /**
-   * 首页
-   */
   home?: string;
   type?: DeptTypeEnum;
   users?: User[];
@@ -426,37 +291,13 @@ export type User = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 昵称
-   */
   nickName?: string;
-  /**
-   * 头像
-   */
   avatar?: string;
-  /**
-   * 手机号
-   */
   phone?: string;
-  /**
-   * 邮箱
-   */
   email?: string;
-  /**
-   * 密码
-   */
   password?: string;
-  /**
-   * 状态
-   */
   status?: boolean;
-  /**
-   * 账号
-   */
   userName?: string;
-  /**
-   * 用户部门关系
-   */
   depts?: Dept[];
   roles?: Role[];
 };
@@ -481,53 +322,17 @@ export type DeptInfo = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 图标
-   */
   image?: string;
-  /**
-   * 单位名称
-   */
   name?: string;
-  /**
-   * 简写名称
-   */
   easyName?: string;
-  /**
-   * 父级部门ID
-   */
   parentId?: number;
-  /**
-   * 地址
-   */
   address?: string;
-  /**
-   * 是否删除
-   */
   isDeleted?: boolean;
-  /**
-   * 默认联系电话
-   */
   phone?: string;
-  /**
-   * 默认联系人
-   */
   man?: string;
-  /**
-   * 备注
-   */
   remark?: string;
-  /**
-   * 状态
-   */
   status?: boolean;
-  /**
-   * 排序
-   */
   sort?: number;
-  /**
-   * 首页
-   */
   home?: string;
   type?: DeptTypeEnum;
   users?: User[];
@@ -624,53 +429,17 @@ export type UpdateDeptParam = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 图标
-   */
   image?: string;
-  /**
-   * 单位名称
-   */
   name?: string;
-  /**
-   * 简写名称
-   */
   easyName?: string;
-  /**
-   * 父级部门ID
-   */
   parentId?: number;
-  /**
-   * 地址
-   */
   address?: string;
-  /**
-   * 是否删除
-   */
   isDeleted?: boolean;
-  /**
-   * 默认联系电话
-   */
   phone?: string;
-  /**
-   * 默认联系人
-   */
   man?: string;
-  /**
-   * 备注
-   */
   remark?: string;
-  /**
-   * 状态
-   */
   status?: boolean;
-  /**
-   * 排序
-   */
   sort?: number;
-  /**
-   * 首页
-   */
   home?: string;
   type?: DeptTypeEnum;
   users?: User[];
@@ -685,6 +454,245 @@ export type UpdateDeptParam = {
 export type DicDataSelectDTO = {
   label?: string;
   value?: string;
+};
+export type JobDetailInfo = object;
+export type PagerInfo = {
+  totalRowCount?: number;
+  pageSize?: number;
+  startIndex?: number;
+  pageIndex?: number;
+  hasPrev?: boolean;
+  hasNext?: boolean;
+  isFirst?: boolean;
+  isLast?: boolean;
+  totalPageCount?: number;
+};
+export type JobCreateTypeEnum = 1 | 2 | 3;
+export type ClusterStatus = 0 | 1 | 2;
+export type TriggerStatus = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+export type JobTriggerRecord = {
+  /**
+   * 主键
+   */
+  id?: number;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  numberOfRuns?: number;
+  lastRunTime?: string;
+  nextRunTime?: string;
+  /**
+   * 作业触发器状态
+   */
+  status?: TriggerStatus;
+  result?: string;
+  elapsedTime?: number;
+  triggerId?: number;
+  trigger?: JobTrigger;
+};
+export type JobTrigger = {
+  /**
+   * 主键
+   */
+  id?: number;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  name?: string;
+  triggerType?: string;
+  assemblyName?: string;
+  props?: string;
+  description?: string;
+  /**
+   * 作业触发器状态
+   */
+  status?: TriggerStatus;
+  startTime?: string;
+  endTime?: string;
+  lastRunTime?: string;
+  nextRunTime?: string;
+  numberOfRuns?: number;
+  maxNumberOfRuns?: number;
+  numberOfErrors?: number;
+  maxNumberOfErrors?: number;
+  numRetries?: number;
+  retryTimeout?: number;
+  startNow?: boolean;
+  runOnStart?: boolean;
+  resetOnlyOnce?: boolean;
+  detailId?: number;
+  detail?: JobDetail;
+  records?: JobTriggerRecord[];
+};
+export type JobDetail = {
+  /**
+   * 主键
+   */
+  id?: number;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  name?: string;
+  groupName?: string;
+  jobType?: string;
+  assemblyName?: string;
+  description?: string;
+  concurrent?: boolean;
+  includeAnnotation?: boolean;
+  props?: string;
+  /**
+   * 作业创建类型枚举
+   */
+  type?: JobCreateTypeEnum;
+  scriptCode?: string;
+  clusterId?: number;
+  cluster?: JobCluster;
+  triggers?: JobTrigger[];
+};
+export type JobCluster = {
+  /**
+   * 主键
+   */
+  id?: number;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  groupName?: string;
+  description?: string;
+  status?: ClusterStatus;
+  details?: JobDetail[];
+};
+export type JobDetailDTO = {
+  /**
+   * 主键
+   */
+  id?: number;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  name?: string;
+  groupName?: string;
+  jobType?: string;
+  assemblyName?: string;
+  description?: string;
+  concurrent?: boolean;
+  includeAnnotation?: boolean;
+  props?: string;
+  /**
+   * 作业创建类型枚举
+   */
+  type?: JobCreateTypeEnum;
+  scriptCode?: string;
+  clusterId?: number;
+  cluster?: JobCluster;
+  triggers?: JobTrigger[];
+};
+export type JobDetailDTOPagedResults = {
+  pagerInfo?: PagerInfo;
+  data?: JobDetailDTO[];
+};
+export type UpdateJobDetailParam = {
+  /**
+   * 主键
+   */
+  id?: number;
+  /**
+   * 创建者名称
+   */
+  createBy?: string;
+  /**
+   * 创建时间
+   */
+  createTime?: string;
+  /**
+   * 更新者名称
+   */
+  updateBy?: string;
+  /**
+   * 最后更新时间
+   */
+  updateTime?: string;
+  name?: string;
+  groupName?: string;
+  jobType?: string;
+  assemblyName?: string;
+  description?: string;
+  concurrent?: boolean;
+  includeAnnotation?: boolean;
+  props?: string;
+  /**
+   * 作业创建类型枚举
+   */
+  type?: JobCreateTypeEnum;
+  scriptCode?: string;
+  clusterId?: number;
+  cluster?: JobCluster;
+  triggers?: JobTrigger[];
 };
 export type LoginInfoDTO = {
   /**
@@ -889,93 +897,30 @@ export type MenuInfo = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 菜单名
-   */
   name?: string;
-  /**
-   * 路径
-   */
   path?: string;
-  /**
-   * 路径
-   */
   pathParam?: string;
   layout?: LayoutTypeEnum;
-  /**
-   * 重定向
-   */
   redirect?: string;
-  /**
-   * 组件
-   */
   component?: string;
-  /**
-   * 父级
-   */
   parentId?: number;
   menuType?: MenuTypeEnum;
   iconType?: IconTypeEnum;
-  /**
-   * 状态
-   */
   status?: boolean;
-  /**
-   * 路由标题(可用来作document.title或者菜单的名称)
-   */
   title?: string;
-  /**
-   * 多语言
-   */
   i18nKey?: string;
-  /**
-   * 缓存页面
-   */
   keepAlive?: boolean;
-  /**
-   * 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
-   */
   constant?: boolean;
-  /**
-   * 菜单和面包屑对应的图标
-   */
   icon?: string;
-  /**
-   * 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
-   */
   localIcon?: string;
-  /**
-   * 菜单和面包屑对应的图标的字体大小
-   */
   iconFontSize?: number;
-  /**
-   * 路由顺序，可用于菜单的排序
-   */
   order?: number;
-  /**
-   * 外链链接
-   */
   href?: string;
-  /**
-   * 是否在菜单中隐藏路线
-   */
   hideInMenu?: boolean;
-  /**
-   * 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
-   */
   activeMenu?: string;
-  /**
-   * 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
-   */
   multiTab?: boolean;
-  /**
-   * 如果设置，路线将固定在制表符中，值是固定制表符的顺序
-   */
   fixedIndexInTab?: number;
   props?: boolean;
-  /**
-   * 是否已删除
-   */
   isDeleted?: boolean;
   roles?: Role[];
   children?: Menu[];
@@ -1084,155 +1029,35 @@ export type UpdateMenuParam = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 菜单名
-   */
   name?: string;
-  /**
-   * 路径
-   */
   path?: string;
-  /**
-   * 路径
-   */
   pathParam?: string;
   layout?: LayoutTypeEnum;
-  /**
-   * 重定向
-   */
   redirect?: string;
-  /**
-   * 组件
-   */
   component?: string;
-  /**
-   * 父级
-   */
   parentId?: number;
   menuType?: MenuTypeEnum;
   iconType?: IconTypeEnum;
-  /**
-   * 状态
-   */
   status?: boolean;
-  /**
-   * 路由标题(可用来作document.title或者菜单的名称)
-   */
   title?: string;
-  /**
-   * 多语言
-   */
   i18nKey?: string;
-  /**
-   * 缓存页面
-   */
   keepAlive?: boolean;
-  /**
-   * 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
-   */
   constant?: boolean;
-  /**
-   * 菜单和面包屑对应的图标
-   */
   icon?: string;
-  /**
-   * 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
-   */
   localIcon?: string;
-  /**
-   * 菜单和面包屑对应的图标的字体大小
-   */
   iconFontSize?: number;
-  /**
-   * 路由顺序，可用于菜单的排序
-   */
   order?: number;
-  /**
-   * 外链链接
-   */
   href?: string;
-  /**
-   * 是否在菜单中隐藏路线
-   */
   hideInMenu?: boolean;
-  /**
-   * 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
-   */
   activeMenu?: string;
-  /**
-   * 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
-   */
   multiTab?: boolean;
-  /**
-   * 如果设置，路线将固定在制表符中，值是固定制表符的顺序
-   */
   fixedIndexInTab?: number;
   props?: boolean;
-  /**
-   * 是否已删除
-   */
   isDeleted?: boolean;
   roles?: Role[];
   children?: Menu[];
   buttons?: MenuButton[];
   querys?: MenuQuery[];
-};
-export type DayRankDTO = {
-  /**
-   * 排名
-   */
-  sort?: number;
-  /**
-   * 赢
-   */
-  win?: number;
-  /**
-   * 宝石数
-   */
-  gems?: number;
-  /**
-   * 用户ID
-   */
-  userId?: number;
-  /**
-   * 昵称
-   */
-  nickName?: string;
-};
-export type SetWinParam = {
-  type?: number;
-  timeStamp?: number;
-  userId?: number;
-  /**
-   * 赢
-   */
-  newWin?: number;
-  /**
-   * 宝石数
-   */
-  newGems?: number;
-};
-export type WeekRankDTO = {
-  /**
-   * 排名
-   */
-  sort?: number;
-  /**
-   * 赢
-   */
-  win?: number;
-  /**
-   * 宝石数
-   */
-  gems?: number;
-  /**
-   * 用户ID
-   */
-  userId?: number;
-  /**
-   * 昵称
-   */
-  nickName?: string;
 };
 export type RoleInfo = {
   /**
@@ -1255,49 +1080,17 @@ export type RoleInfo = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 角色名称
-   */
   name?: string;
   type?: RoleTypeEnum;
-  /**
-   * 状态
-   */
   status?: boolean;
-  /**
-   * 备注
-   */
   remark?: string;
-  /**
-   * 角色代码
-   */
   code?: string;
-  /**
-   * 排序
-   */
   sort?: number;
-  /**
-   * 公司id
-   */
   deptId?: number;
-  /**
-   * 部门
-   */
   dept?: Dept;
   menus?: Menu[];
   users?: User[];
   menuIds?: number[];
-};
-export type PagerInfo = {
-  totalRowCount?: number;
-  pageSize?: number;
-  startIndex?: number;
-  pageIndex?: number;
-  hasPrev?: boolean;
-  hasNext?: boolean;
-  isFirst?: boolean;
-  isLast?: boolean;
-  totalPageCount?: number;
 };
 export type RoleDTO = {
   /**
@@ -1320,34 +1113,13 @@ export type RoleDTO = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 角色名称
-   */
   name?: string;
   type?: RoleTypeEnum;
-  /**
-   * 状态
-   */
   status?: boolean;
-  /**
-   * 备注
-   */
   remark?: string;
-  /**
-   * 角色代码
-   */
   code?: string;
-  /**
-   * 排序
-   */
   sort?: number;
-  /**
-   * 公司id
-   */
   deptId?: number;
-  /**
-   * 部门
-   */
   dept?: Dept;
   menus?: Menu[];
   users?: User[];
@@ -1391,34 +1163,13 @@ export type UpdateRoleParam = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 角色名称
-   */
   name?: string;
   type?: RoleTypeEnum;
-  /**
-   * 状态
-   */
   status?: boolean;
-  /**
-   * 备注
-   */
   remark?: string;
-  /**
-   * 角色代码
-   */
   code?: string;
-  /**
-   * 排序
-   */
   sort?: number;
-  /**
-   * 公司id
-   */
   deptId?: number;
-  /**
-   * 部门
-   */
   dept?: Dept;
   menus?: Menu[];
   users?: User[];
@@ -1456,47 +1207,17 @@ export type TableColumn = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 视图Id
-   */
   viewId?: number;
-  /**
-   * 字段名称
-   */
   title?: string;
-  /**
-   * 字段
-   */
   key?: string;
   searchType?: ConditionalType;
   columnType?: ColumnTypeEnum;
-  /**
-   * 字段描述
-   */
   columnTypeDetail?: string;
-  /**
-   * 字段验证
-   */
   columnTypeRules?: string;
-  /**
-   * 是否自定义
-   */
   isCustom?: boolean;
-  /**
-   * 排序
-   */
   sort?: number;
-  /**
-   * 是否隐藏
-   */
   isShow?: boolean;
-  /**
-   * 多余参数
-   */
   props?: string;
-  /**
-   * 表格重写
-   */
   tableView?: TableView;
 };
 export type TableView = {
@@ -1520,27 +1241,12 @@ export type TableView = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 表名
-   */
   tableof?: string;
-  /**
-   * 路由
-   */
   router?: string;
   type?: ViewTypeEnum;
-  /**
-   * 默认排序字段
-   */
   sortKey?: string;
   sortOrder?: OrderTypeEnum;
-  /**
-   * 多余参数
-   */
   props?: string;
-  /**
-   * 字段
-   */
   tableColumns?: TableColumn[];
 };
 export type TableSortParam = {
@@ -1568,27 +1274,12 @@ export type UpdateTableViewParam = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 表名
-   */
   tableof?: string;
-  /**
-   * 路由
-   */
   router?: string;
   type?: ViewTypeEnum;
-  /**
-   * 默认排序字段
-   */
   sortKey?: string;
   sortOrder?: OrderTypeEnum;
-  /**
-   * 多余参数
-   */
   props?: string;
-  /**
-   * 字段
-   */
   tableColumns?: TableColumn[];
 };
 export type UserInfo = {
@@ -1612,37 +1303,13 @@ export type UserInfo = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 昵称
-   */
   nickName?: string;
-  /**
-   * 头像
-   */
   avatar?: string;
-  /**
-   * 手机号
-   */
   phone?: string;
-  /**
-   * 邮箱
-   */
   email?: string;
-  /**
-   * 密码
-   */
   password?: string;
-  /**
-   * 状态
-   */
   status?: boolean;
-  /**
-   * 账号
-   */
   userName?: string;
-  /**
-   * 用户部门关系
-   */
   depts?: Dept[];
   roles?: Role[];
   roleIds?: number[];
@@ -1699,37 +1366,13 @@ export type UpdateUserParam = {
    * 最后更新时间
    */
   updateTime?: string;
-  /**
-   * 昵称
-   */
   nickName?: string;
-  /**
-   * 头像
-   */
   avatar?: string;
-  /**
-   * 手机号
-   */
   phone?: string;
-  /**
-   * 邮箱
-   */
   email?: string;
-  /**
-   * 密码
-   */
   password?: string;
-  /**
-   * 状态
-   */
   status?: boolean;
-  /**
-   * 账号
-   */
   userName?: string;
-  /**
-   * 用户部门关系
-   */
   depts?: Dept[];
   roles?: Role[];
   roleIds?: number[];
@@ -1848,29 +1491,17 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 图标
        *     image?: string
-       *     // 单位名称
        *     name?: string
-       *     // 简写名称
        *     easyName?: string
-       *     // 父级部门ID
        *     parentId?: number
-       *     // 地址
        *     address?: string
-       *     // 是否删除
        *     isDeleted?: boolean
-       *     // 默认联系电话
        *     phone?: string
-       *     // 默认联系人
        *     man?: string
-       *     // 备注
        *     remark?: string
-       *     // 状态
        *     status?: boolean
-       *     // 排序
        *     sort?: number
-       *     // 首页
        *     home?: string
        *     type?: 10 | 20 | 30
        *     users?: Array<{
@@ -1884,21 +1515,13 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 昵称
        *       nickName?: string
-       *       // 头像
        *       avatar?: string
-       *       // 手机号
        *       phone?: string
-       *       // 邮箱
        *       email?: string
-       *       // 密码
        *       password?: string
-       *       // 状态
        *       status?: boolean
-       *       // 账号
        *       userName?: string
-       *       // 用户部门关系
        *       depts?: Array<{
        *         // 主键
        *         id?: number
@@ -1910,29 +1533,17 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 图标
        *         image?: string
-       *         // 单位名称
        *         name?: string
-       *         // 简写名称
        *         easyName?: string
-       *         // 父级部门ID
        *         parentId?: number
-       *         // 地址
        *         address?: string
-       *         // 是否删除
        *         isDeleted?: boolean
-       *         // 默认联系电话
        *         phone?: string
-       *         // 默认联系人
        *         man?: string
-       *         // 备注
        *         remark?: string
-       *         // 状态
        *         status?: boolean
-       *         // 排序
        *         sort?: number
-       *         // 首页
        *         home?: string
        *         type?: DeptTypeEnum
        *         users?: Array<User>
@@ -1947,20 +1558,13 @@ declare global {
        *           updateBy?: string
        *           // 最后更新时间
        *           updateTime?: string
-       *           // 角色名称
        *           name?: string
        *           type?: 10 | 20 | 30 | 40
-       *           // 状态
        *           status?: boolean
-       *           // 备注
        *           remark?: string
-       *           // 角色代码
        *           code?: string
-       *           // 排序
        *           sort?: number
-       *           // 公司id
        *           deptId?: number
-       *           // 部门
        *           dept?: Dept
        *           menus?: Array<{
        *             // 主键
@@ -1973,51 +1577,30 @@ declare global {
        *             updateBy?: string
        *             // 最后更新时间
        *             updateTime?: string
-       *             // 菜单名
        *             name?: string
-       *             // 路径
        *             path?: string
-       *             // 路径
        *             pathParam?: string
        *             layout?: 1 | 2
-       *             // 重定向
        *             redirect?: string
-       *             // 组件
        *             component?: string
-       *             // 父级
        *             parentId?: number
        *             menuType?: 1 | 2 | 3 | 4
        *             iconType?: 1 | 2
-       *             // 状态
        *             status?: boolean
-       *             // 路由标题(可用来作document.title或者菜单的名称)
        *             title?: string
-       *             // 多语言
        *             i18nKey?: string
-       *             // 缓存页面
        *             keepAlive?: boolean
-       *             // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *             constant?: boolean
-       *             // 菜单和面包屑对应的图标
        *             icon?: string
-       *             // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *             localIcon?: string
-       *             // 菜单和面包屑对应的图标的字体大小
        *             iconFontSize?: number
-       *             // 路由顺序，可用于菜单的排序
        *             order?: number
-       *             // 外链链接
        *             href?: string
-       *             // 是否在菜单中隐藏路线
        *             hideInMenu?: boolean
-       *             // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *             activeMenu?: string
-       *             // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *             multiTab?: boolean
-       *             // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *             fixedIndexInTab?: number
        *             props?: boolean
-       *             // 是否已删除
        *             isDeleted?: boolean
        *             roles?: Array<Role>
        *             children?: Array<Menu>
@@ -2036,7 +1619,6 @@ declare global {
        *           updateBy?: string
        *           // 最后更新时间
        *           updateTime?: string
-       *           // 配置Id
        *           connId?: string
        *           dbType?:
        *             | 0
@@ -2066,13 +1648,9 @@ declare global {
        *             | 24
        *             | 25
        *             | 900
-       *           // 状态
        *           enabled?: boolean
-       *           // 命中率
        *           hitRate?: number
-       *           // 数据库链接
        *           connectionString?: string
-       *           // 排序
        *           orderNo?: number
        *           depts?: Array<Dept>
        *         }>
@@ -2425,29 +2003,17 @@ declare global {
        *   updateBy?: string
        *   // 最后更新时间
        *   updateTime?: string
-       *   // 图标
        *   image?: string
-       *   // 单位名称
        *   name?: string
-       *   // 简写名称
        *   easyName?: string
-       *   // 父级部门ID
        *   parentId?: number
-       *   // 地址
        *   address?: string
-       *   // 是否删除
        *   isDeleted?: boolean
-       *   // 默认联系电话
        *   phone?: string
-       *   // 默认联系人
        *   man?: string
-       *   // 备注
        *   remark?: string
-       *   // 状态
        *   status?: boolean
-       *   // 排序
        *   sort?: number
-       *   // 首页
        *   home?: string
        *   type?: 10 | 20 | 30
        *   users?: Array<{
@@ -2461,21 +2027,13 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 昵称
        *     nickName?: string
-       *     // 头像
        *     avatar?: string
-       *     // 手机号
        *     phone?: string
-       *     // 邮箱
        *     email?: string
-       *     // 密码
        *     password?: string
-       *     // 状态
        *     status?: boolean
-       *     // 账号
        *     userName?: string
-       *     // 用户部门关系
        *     depts?: Array<{
        *       // 主键
        *       id?: number
@@ -2487,29 +2045,17 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 图标
        *       image?: string
-       *       // 单位名称
        *       name?: string
-       *       // 简写名称
        *       easyName?: string
-       *       // 父级部门ID
        *       parentId?: number
-       *       // 地址
        *       address?: string
-       *       // 是否删除
        *       isDeleted?: boolean
-       *       // 默认联系电话
        *       phone?: string
-       *       // 默认联系人
        *       man?: string
-       *       // 备注
        *       remark?: string
-       *       // 状态
        *       status?: boolean
-       *       // 排序
        *       sort?: number
-       *       // 首页
        *       home?: string
        *       type?: DeptTypeEnum
        *       users?: Array<User>
@@ -2524,20 +2070,13 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 角色名称
        *         name?: string
        *         type?: 10 | 20 | 30 | 40
-       *         // 状态
        *         status?: boolean
-       *         // 备注
        *         remark?: string
-       *         // 角色代码
        *         code?: string
-       *         // 排序
        *         sort?: number
-       *         // 公司id
        *         deptId?: number
-       *         // 部门
        *         dept?: Dept
        *         menus?: Array<{
        *           // 主键
@@ -2550,51 +2089,30 @@ declare global {
        *           updateBy?: string
        *           // 最后更新时间
        *           updateTime?: string
-       *           // 菜单名
        *           name?: string
-       *           // 路径
        *           path?: string
-       *           // 路径
        *           pathParam?: string
        *           layout?: 1 | 2
-       *           // 重定向
        *           redirect?: string
-       *           // 组件
        *           component?: string
-       *           // 父级
        *           parentId?: number
        *           menuType?: 1 | 2 | 3 | 4
        *           iconType?: 1 | 2
-       *           // 状态
        *           status?: boolean
-       *           // 路由标题(可用来作document.title或者菜单的名称)
        *           title?: string
-       *           // 多语言
        *           i18nKey?: string
-       *           // 缓存页面
        *           keepAlive?: boolean
-       *           // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *           constant?: boolean
-       *           // 菜单和面包屑对应的图标
        *           icon?: string
-       *           // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *           localIcon?: string
-       *           // 菜单和面包屑对应的图标的字体大小
        *           iconFontSize?: number
-       *           // 路由顺序，可用于菜单的排序
        *           order?: number
-       *           // 外链链接
        *           href?: string
-       *           // 是否在菜单中隐藏路线
        *           hideInMenu?: boolean
-       *           // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *           activeMenu?: string
-       *           // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *           multiTab?: boolean
-       *           // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *           fixedIndexInTab?: number
        *           props?: boolean
-       *           // 是否已删除
        *           isDeleted?: boolean
        *           roles?: Array<Role>
        *           children?: Array<Menu>
@@ -2613,7 +2131,6 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 配置Id
        *         connId?: string
        *         dbType?:
        *           | 0
@@ -2643,13 +2160,9 @@ declare global {
        *           | 24
        *           | 25
        *           | 900
-       *         // 状态
        *         enabled?: boolean
-       *         // 命中率
        *         hitRate?: number
-       *         // 数据库链接
        *         connectionString?: string
-       *         // 排序
        *         orderNo?: number
        *         depts?: Array<Dept>
        *       }>
@@ -2667,20 +2180,13 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 角色名称
        *     name?: string
        *     type?: 10 | 20 | 30 | 40
-       *     // 状态
        *     status?: boolean
-       *     // 备注
        *     remark?: string
-       *     // 角色代码
        *     code?: string
-       *     // 排序
        *     sort?: number
-       *     // 公司id
        *     deptId?: number
-       *     // 部门
        *     dept?: Dept
        *     menus?: Array<{
        *       // 主键
@@ -2693,51 +2199,30 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 菜单名
        *       name?: string
-       *       // 路径
        *       path?: string
-       *       // 路径
        *       pathParam?: string
        *       layout?: 1 | 2
-       *       // 重定向
        *       redirect?: string
-       *       // 组件
        *       component?: string
-       *       // 父级
        *       parentId?: number
        *       menuType?: 1 | 2 | 3 | 4
        *       iconType?: 1 | 2
-       *       // 状态
        *       status?: boolean
-       *       // 路由标题(可用来作document.title或者菜单的名称)
        *       title?: string
-       *       // 多语言
        *       i18nKey?: string
-       *       // 缓存页面
        *       keepAlive?: boolean
-       *       // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *       constant?: boolean
-       *       // 菜单和面包屑对应的图标
        *       icon?: string
-       *       // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *       localIcon?: string
-       *       // 菜单和面包屑对应的图标的字体大小
        *       iconFontSize?: number
-       *       // 路由顺序，可用于菜单的排序
        *       order?: number
-       *       // 外链链接
        *       href?: string
-       *       // 是否在菜单中隐藏路线
        *       hideInMenu?: boolean
-       *       // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *       activeMenu?: string
-       *       // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *       multiTab?: boolean
-       *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *       fixedIndexInTab?: number
        *       props?: boolean
-       *       // 是否已删除
        *       isDeleted?: boolean
        *       roles?: Array<Role>
        *       children?: Array<Menu>
@@ -2755,29 +2240,17 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 图标
        *     image?: string
-       *     // 单位名称
        *     name?: string
-       *     // 简写名称
        *     easyName?: string
-       *     // 父级部门ID
        *     parentId?: number
-       *     // 地址
        *     address?: string
-       *     // 是否删除
        *     isDeleted?: boolean
-       *     // 默认联系电话
        *     phone?: string
-       *     // 默认联系人
        *     man?: string
-       *     // 备注
        *     remark?: string
-       *     // 状态
        *     status?: boolean
-       *     // 排序
        *     sort?: number
-       *     // 首页
        *     home?: string
        *     type?: DeptTypeEnum
        *     users?: Array<User>
@@ -2792,20 +2265,13 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 角色名称
        *       name?: string
        *       type?: 10 | 20 | 30 | 40
-       *       // 状态
        *       status?: boolean
-       *       // 备注
        *       remark?: string
-       *       // 角色代码
        *       code?: string
-       *       // 排序
        *       sort?: number
-       *       // 公司id
        *       deptId?: number
-       *       // 部门
        *       dept?: Dept
        *       menus?: Array<{
        *         // 主键
@@ -2818,51 +2284,30 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 菜单名
        *         name?: string
-       *         // 路径
        *         path?: string
-       *         // 路径
        *         pathParam?: string
        *         layout?: 1 | 2
-       *         // 重定向
        *         redirect?: string
-       *         // 组件
        *         component?: string
-       *         // 父级
        *         parentId?: number
        *         menuType?: 1 | 2 | 3 | 4
        *         iconType?: 1 | 2
-       *         // 状态
        *         status?: boolean
-       *         // 路由标题(可用来作document.title或者菜单的名称)
        *         title?: string
-       *         // 多语言
        *         i18nKey?: string
-       *         // 缓存页面
        *         keepAlive?: boolean
-       *         // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *         constant?: boolean
-       *         // 菜单和面包屑对应的图标
        *         icon?: string
-       *         // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *         localIcon?: string
-       *         // 菜单和面包屑对应的图标的字体大小
        *         iconFontSize?: number
-       *         // 路由顺序，可用于菜单的排序
        *         order?: number
-       *         // 外链链接
        *         href?: string
-       *         // 是否在菜单中隐藏路线
        *         hideInMenu?: boolean
-       *         // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *         activeMenu?: string
-       *         // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *         multiTab?: boolean
-       *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *         fixedIndexInTab?: number
        *         props?: boolean
-       *         // 是否已删除
        *         isDeleted?: boolean
        *         roles?: Array<Role>
        *         children?: Array<Menu>
@@ -2881,7 +2326,6 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 配置Id
        *       connId?: string
        *       dbType?:
        *         | 0
@@ -2911,13 +2355,9 @@ declare global {
        *         | 24
        *         | 25
        *         | 900
-       *       // 状态
        *       enabled?: boolean
-       *       // 命中率
        *       hitRate?: number
-       *       // 数据库链接
        *       connectionString?: string
-       *       // 排序
        *       orderNo?: number
        *       depts?: Array<Dept>
        *     }>
@@ -2933,7 +2373,6 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 配置Id
        *     connId?: string
        *     dbType?:
        *       | 0
@@ -2963,13 +2402,9 @@ declare global {
        *       | 24
        *       | 25
        *       | 900
-       *     // 状态
        *     enabled?: boolean
-       *     // 命中率
        *     hitRate?: number
-       *     // 数据库链接
        *     connectionString?: string
-       *     // 排序
        *     orderNo?: number
        *     depts?: Array<Dept>
        *   }>
@@ -3187,6 +2622,629 @@ declare global {
           success: boolean;
         },
         'DicData.get_api_dicdata_getselect',
+        Config
+      >;
+    };
+    JobDetail: {
+      /**
+       * ---
+       *
+       * [DELETE] 删除
+       *
+       * **path:** /api/JobDetail/Delete
+       *
+       * ---
+       *
+       * **RequestBody**
+       * ```ts
+       * type RequestBody = number[]
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: number
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      delete_api_jobdetail_delete<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          data: number[];
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'JobDetail.delete_api_jobdetail_delete',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 查询详情
+       *
+       * **path:** /api/JobDetail/GetInfo
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   id?: number
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: object
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_jobdetail_getinfo<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: JobDetailInfo;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            id?: number;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: JobDetailInfo;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'JobDetail.get_api_jobdetail_getinfo',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET] 分页
+       *
+       * **path:** /api/JobDetail/GetPage
+       *
+       * ---
+       *
+       * **Query Parameters**
+       * ```ts
+       * type QueryParameters = {
+       *   StartIndex?: number
+       *   Search?: Record<string, Record<string, string>>
+       *   PageIndex?: number
+       *   PageSize?: number
+       *   SortList?: Record<string, string>
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: {
+       *     pagerInfo?: {
+       *       totalRowCount?: number
+       *       pageSize?: number
+       *       startIndex?: number
+       *       pageIndex?: number
+       *       hasPrev?: boolean
+       *       hasNext?: boolean
+       *       isFirst?: boolean
+       *       isLast?: boolean
+       *       totalPageCount?: number
+       *     }
+       *     data?: Array<{
+       *       // 主键
+       *       id?: number
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       name?: string
+       *       groupName?: string
+       *       jobType?: string
+       *       assemblyName?: string
+       *       description?: string
+       *       concurrent?: boolean
+       *       includeAnnotation?: boolean
+       *       props?: string
+       *       // 作业创建类型枚举
+       *       type?: 1 | 2 | 3
+       *       scriptCode?: string
+       *       clusterId?: number
+       *       cluster?: {
+       *         // 主键
+       *         id?: number
+       *         // 创建者名称
+       *         createBy?: string
+       *         // 创建时间
+       *         createTime?: string
+       *         // 更新者名称
+       *         updateBy?: string
+       *         // 最后更新时间
+       *         updateTime?: string
+       *         groupName?: string
+       *         description?: string
+       *         status?: 0 | 1 | 2
+       *         details?: Array<{
+       *           // 主键
+       *           id?: number
+       *           // 创建者名称
+       *           createBy?: string
+       *           // 创建时间
+       *           createTime?: string
+       *           // 更新者名称
+       *           updateBy?: string
+       *           // 最后更新时间
+       *           updateTime?: string
+       *           name?: string
+       *           groupName?: string
+       *           jobType?: string
+       *           assemblyName?: string
+       *           description?: string
+       *           concurrent?: boolean
+       *           includeAnnotation?: boolean
+       *           props?: string
+       *           // 作业创建类型枚举
+       *           type?: JobCreateTypeEnum
+       *           scriptCode?: string
+       *           clusterId?: number
+       *           cluster?: JobCluster
+       *           triggers?: Array<{
+       *             // 主键
+       *             id?: number
+       *             // 创建者名称
+       *             createBy?: string
+       *             // 创建时间
+       *             createTime?: string
+       *             // 更新者名称
+       *             updateBy?: string
+       *             // 最后更新时间
+       *             updateTime?: string
+       *             name?: string
+       *             triggerType?: string
+       *             assemblyName?: string
+       *             props?: string
+       *             description?: string
+       *             // 作业触发器状态
+       *             status?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+       *             startTime?: string
+       *             endTime?: string
+       *             lastRunTime?: string
+       *             nextRunTime?: string
+       *             numberOfRuns?: number
+       *             maxNumberOfRuns?: number
+       *             numberOfErrors?: number
+       *             maxNumberOfErrors?: number
+       *             numRetries?: number
+       *             retryTimeout?: number
+       *             startNow?: boolean
+       *             runOnStart?: boolean
+       *             resetOnlyOnce?: boolean
+       *             detailId?: number
+       *             detail?: JobDetail
+       *             records?: Array<{
+       *               // 主键
+       *               id?: number
+       *               // 创建者名称
+       *               createBy?: string
+       *               // 创建时间
+       *               createTime?: string
+       *               // 更新者名称
+       *               updateBy?: string
+       *               // 最后更新时间
+       *               updateTime?: string
+       *               numberOfRuns?: number
+       *               lastRunTime?: string
+       *               nextRunTime?: string
+       *               // 作业触发器状态
+       *               status?: TriggerStatus
+       *               result?: string
+       *               elapsedTime?: number
+       *               triggerId?: number
+       *               trigger?: JobTrigger
+       *             }>
+       *           }>
+       *         }>
+       *       }
+       *       triggers?: Array<JobTrigger>
+       *     }>
+       *   }
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_jobdetail_getpage<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: JobDetailDTOPagedResults;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          params: {
+            StartIndex?: number;
+            Search?: Record<string, Record<string, string>>;
+            PageIndex?: number;
+            PageSize?: number;
+            SortList?: Record<string, string>;
+          };
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: JobDetailDTOPagedResults;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'JobDetail.get_api_jobdetail_getpage',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [POST] 新增
+       *
+       * **path:** /api/JobDetail/Submit
+       *
+       * ---
+       *
+       * **RequestBody**
+       * ```ts
+       * type RequestBody = {
+       *   // 主键
+       *   id?: number
+       *   // 创建者名称
+       *   createBy?: string
+       *   // 创建时间
+       *   createTime?: string
+       *   // 更新者名称
+       *   updateBy?: string
+       *   // 最后更新时间
+       *   updateTime?: string
+       *   name?: string
+       *   groupName?: string
+       *   jobType?: string
+       *   assemblyName?: string
+       *   description?: string
+       *   concurrent?: boolean
+       *   includeAnnotation?: boolean
+       *   props?: string
+       *   // 作业创建类型枚举
+       *   type?: 1 | 2 | 3
+       *   scriptCode?: string
+       *   clusterId?: number
+       *   cluster?: {
+       *     // 主键
+       *     id?: number
+       *     // 创建者名称
+       *     createBy?: string
+       *     // 创建时间
+       *     createTime?: string
+       *     // 更新者名称
+       *     updateBy?: string
+       *     // 最后更新时间
+       *     updateTime?: string
+       *     groupName?: string
+       *     description?: string
+       *     status?: 0 | 1 | 2
+       *     details?: Array<{
+       *       // 主键
+       *       id?: number
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       name?: string
+       *       groupName?: string
+       *       jobType?: string
+       *       assemblyName?: string
+       *       description?: string
+       *       concurrent?: boolean
+       *       includeAnnotation?: boolean
+       *       props?: string
+       *       // 作业创建类型枚举
+       *       type?: JobCreateTypeEnum
+       *       scriptCode?: string
+       *       clusterId?: number
+       *       cluster?: JobCluster
+       *       triggers?: Array<{
+       *         // 主键
+       *         id?: number
+       *         // 创建者名称
+       *         createBy?: string
+       *         // 创建时间
+       *         createTime?: string
+       *         // 更新者名称
+       *         updateBy?: string
+       *         // 最后更新时间
+       *         updateTime?: string
+       *         name?: string
+       *         triggerType?: string
+       *         assemblyName?: string
+       *         props?: string
+       *         description?: string
+       *         // 作业触发器状态
+       *         status?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+       *         startTime?: string
+       *         endTime?: string
+       *         lastRunTime?: string
+       *         nextRunTime?: string
+       *         numberOfRuns?: number
+       *         maxNumberOfRuns?: number
+       *         numberOfErrors?: number
+       *         maxNumberOfErrors?: number
+       *         numRetries?: number
+       *         retryTimeout?: number
+       *         startNow?: boolean
+       *         runOnStart?: boolean
+       *         resetOnlyOnce?: boolean
+       *         detailId?: number
+       *         detail?: JobDetail
+       *         records?: Array<{
+       *           // 主键
+       *           id?: number
+       *           // 创建者名称
+       *           createBy?: string
+       *           // 创建时间
+       *           createTime?: string
+       *           // 更新者名称
+       *           updateBy?: string
+       *           // 最后更新时间
+       *           updateTime?: string
+       *           numberOfRuns?: number
+       *           lastRunTime?: string
+       *           nextRunTime?: string
+       *           // 作业触发器状态
+       *           status?: TriggerStatus
+       *           result?: string
+       *           elapsedTime?: number
+       *           triggerId?: number
+       *           trigger?: JobTrigger
+       *         }>
+       *       }>
+       *     }>
+       *   }
+       *   triggers?: Array<{
+       *     // 主键
+       *     id?: number
+       *     // 创建者名称
+       *     createBy?: string
+       *     // 创建时间
+       *     createTime?: string
+       *     // 更新者名称
+       *     updateBy?: string
+       *     // 最后更新时间
+       *     updateTime?: string
+       *     name?: string
+       *     triggerType?: string
+       *     assemblyName?: string
+       *     props?: string
+       *     description?: string
+       *     // 作业触发器状态
+       *     status?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+       *     startTime?: string
+       *     endTime?: string
+       *     lastRunTime?: string
+       *     nextRunTime?: string
+       *     numberOfRuns?: number
+       *     maxNumberOfRuns?: number
+       *     numberOfErrors?: number
+       *     maxNumberOfErrors?: number
+       *     numRetries?: number
+       *     retryTimeout?: number
+       *     startNow?: boolean
+       *     runOnStart?: boolean
+       *     resetOnlyOnce?: boolean
+       *     detailId?: number
+       *     detail?: JobDetail
+       *     records?: Array<{
+       *       // 主键
+       *       id?: number
+       *       // 创建者名称
+       *       createBy?: string
+       *       // 创建时间
+       *       createTime?: string
+       *       // 更新者名称
+       *       updateBy?: string
+       *       // 最后更新时间
+       *       updateTime?: string
+       *       numberOfRuns?: number
+       *       lastRunTime?: string
+       *       nextRunTime?: string
+       *       // 作业触发器状态
+       *       status?: TriggerStatus
+       *       result?: string
+       *       elapsedTime?: number
+       *       triggerId?: number
+       *       trigger?: JobTrigger
+       *     }>
+       *   }>
+       * }
+       * ```
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: number
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      post_api_jobdetail_submit<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }> & {
+          data: UpdateJobDetailParam;
+        }
+      >(
+        config: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: number;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'JobDetail.post_api_jobdetail_submit',
         Config
       >;
     };
@@ -3743,51 +3801,30 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 菜单名
        *     name?: string
-       *     // 路径
        *     path?: string
-       *     // 路径
        *     pathParam?: string
        *     layout?: 1 | 2
-       *     // 重定向
        *     redirect?: string
-       *     // 组件
        *     component?: string
-       *     // 父级
        *     parentId?: number
        *     menuType?: 1 | 2 | 3 | 4
        *     iconType?: 1 | 2
-       *     // 状态
        *     status?: boolean
-       *     // 路由标题(可用来作document.title或者菜单的名称)
        *     title?: string
-       *     // 多语言
        *     i18nKey?: string
-       *     // 缓存页面
        *     keepAlive?: boolean
-       *     // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *     constant?: boolean
-       *     // 菜单和面包屑对应的图标
        *     icon?: string
-       *     // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *     localIcon?: string
-       *     // 菜单和面包屑对应的图标的字体大小
        *     iconFontSize?: number
-       *     // 路由顺序，可用于菜单的排序
        *     order?: number
-       *     // 外链链接
        *     href?: string
-       *     // 是否在菜单中隐藏路线
        *     hideInMenu?: boolean
-       *     // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *     activeMenu?: string
-       *     // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *     multiTab?: boolean
-       *     // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *     fixedIndexInTab?: number
        *     props?: boolean
-       *     // 是否已删除
        *     isDeleted?: boolean
        *     roles?: Array<{
        *       // 主键
@@ -3800,20 +3837,13 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 角色名称
        *       name?: string
        *       type?: 10 | 20 | 30 | 40
-       *       // 状态
        *       status?: boolean
-       *       // 备注
        *       remark?: string
-       *       // 角色代码
        *       code?: string
-       *       // 排序
        *       sort?: number
-       *       // 公司id
        *       deptId?: number
-       *       // 部门
        *       dept?: Dept
        *       menus?: Array<{
        *         // 主键
@@ -3826,51 +3856,30 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 菜单名
        *         name?: string
-       *         // 路径
        *         path?: string
-       *         // 路径
        *         pathParam?: string
        *         layout?: 1 | 2
-       *         // 重定向
        *         redirect?: string
-       *         // 组件
        *         component?: string
-       *         // 父级
        *         parentId?: number
        *         menuType?: 1 | 2 | 3 | 4
        *         iconType?: 1 | 2
-       *         // 状态
        *         status?: boolean
-       *         // 路由标题(可用来作document.title或者菜单的名称)
        *         title?: string
-       *         // 多语言
        *         i18nKey?: string
-       *         // 缓存页面
        *         keepAlive?: boolean
-       *         // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *         constant?: boolean
-       *         // 菜单和面包屑对应的图标
        *         icon?: string
-       *         // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *         localIcon?: string
-       *         // 菜单和面包屑对应的图标的字体大小
        *         iconFontSize?: number
-       *         // 路由顺序，可用于菜单的排序
        *         order?: number
-       *         // 外链链接
        *         href?: string
-       *         // 是否在菜单中隐藏路线
        *         hideInMenu?: boolean
-       *         // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *         activeMenu?: string
-       *         // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *         multiTab?: boolean
-       *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *         fixedIndexInTab?: number
        *         props?: boolean
-       *         // 是否已删除
        *         isDeleted?: boolean
        *         roles?: Array<Role>
        *         children?: Array<Menu>
@@ -3888,51 +3897,30 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 菜单名
        *       name?: string
-       *       // 路径
        *       path?: string
-       *       // 路径
        *       pathParam?: string
        *       layout?: 1 | 2
-       *       // 重定向
        *       redirect?: string
-       *       // 组件
        *       component?: string
-       *       // 父级
        *       parentId?: number
        *       menuType?: 1 | 2 | 3 | 4
        *       iconType?: 1 | 2
-       *       // 状态
        *       status?: boolean
-       *       // 路由标题(可用来作document.title或者菜单的名称)
        *       title?: string
-       *       // 多语言
        *       i18nKey?: string
-       *       // 缓存页面
        *       keepAlive?: boolean
-       *       // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *       constant?: boolean
-       *       // 菜单和面包屑对应的图标
        *       icon?: string
-       *       // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *       localIcon?: string
-       *       // 菜单和面包屑对应的图标的字体大小
        *       iconFontSize?: number
-       *       // 路由顺序，可用于菜单的排序
        *       order?: number
-       *       // 外链链接
        *       href?: string
-       *       // 是否在菜单中隐藏路线
        *       hideInMenu?: boolean
-       *       // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *       activeMenu?: string
-       *       // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *       multiTab?: boolean
-       *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *       fixedIndexInTab?: number
        *       props?: boolean
-       *       // 是否已删除
        *       isDeleted?: boolean
        *       roles?: Array<Role>
        *       children?: Array<Menu>
@@ -4655,51 +4643,30 @@ declare global {
        *   updateBy?: string
        *   // 最后更新时间
        *   updateTime?: string
-       *   // 菜单名
        *   name?: string
-       *   // 路径
        *   path?: string
-       *   // 路径
        *   pathParam?: string
        *   layout?: 1 | 2
-       *   // 重定向
        *   redirect?: string
-       *   // 组件
        *   component?: string
-       *   // 父级
        *   parentId?: number
        *   menuType?: 1 | 2 | 3 | 4
        *   iconType?: 1 | 2
-       *   // 状态
        *   status?: boolean
-       *   // 路由标题(可用来作document.title或者菜单的名称)
        *   title?: string
-       *   // 多语言
        *   i18nKey?: string
-       *   // 缓存页面
        *   keepAlive?: boolean
-       *   // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *   constant?: boolean
-       *   // 菜单和面包屑对应的图标
        *   icon?: string
-       *   // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *   localIcon?: string
-       *   // 菜单和面包屑对应的图标的字体大小
        *   iconFontSize?: number
-       *   // 路由顺序，可用于菜单的排序
        *   order?: number
-       *   // 外链链接
        *   href?: string
-       *   // 是否在菜单中隐藏路线
        *   hideInMenu?: boolean
-       *   // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *   activeMenu?: string
-       *   // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *   multiTab?: boolean
-       *   // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *   fixedIndexInTab?: number
        *   props?: boolean
-       *   // 是否已删除
        *   isDeleted?: boolean
        *   roles?: Array<{
        *     // 主键
@@ -4712,20 +4679,13 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 角色名称
        *     name?: string
        *     type?: 10 | 20 | 30 | 40
-       *     // 状态
        *     status?: boolean
-       *     // 备注
        *     remark?: string
-       *     // 角色代码
        *     code?: string
-       *     // 排序
        *     sort?: number
-       *     // 公司id
        *     deptId?: number
-       *     // 部门
        *     dept?: Dept
        *     menus?: Array<{
        *       // 主键
@@ -4738,51 +4698,30 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 菜单名
        *       name?: string
-       *       // 路径
        *       path?: string
-       *       // 路径
        *       pathParam?: string
        *       layout?: 1 | 2
-       *       // 重定向
        *       redirect?: string
-       *       // 组件
        *       component?: string
-       *       // 父级
        *       parentId?: number
        *       menuType?: 1 | 2 | 3 | 4
        *       iconType?: 1 | 2
-       *       // 状态
        *       status?: boolean
-       *       // 路由标题(可用来作document.title或者菜单的名称)
        *       title?: string
-       *       // 多语言
        *       i18nKey?: string
-       *       // 缓存页面
        *       keepAlive?: boolean
-       *       // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *       constant?: boolean
-       *       // 菜单和面包屑对应的图标
        *       icon?: string
-       *       // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *       localIcon?: string
-       *       // 菜单和面包屑对应的图标的字体大小
        *       iconFontSize?: number
-       *       // 路由顺序，可用于菜单的排序
        *       order?: number
-       *       // 外链链接
        *       href?: string
-       *       // 是否在菜单中隐藏路线
        *       hideInMenu?: boolean
-       *       // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *       activeMenu?: string
-       *       // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *       multiTab?: boolean
-       *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *       fixedIndexInTab?: number
        *       props?: boolean
-       *       // 是否已删除
        *       isDeleted?: boolean
        *       roles?: Array<Role>
        *       children?: Array<Menu>
@@ -4800,51 +4739,30 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 菜单名
        *     name?: string
-       *     // 路径
        *     path?: string
-       *     // 路径
        *     pathParam?: string
        *     layout?: 1 | 2
-       *     // 重定向
        *     redirect?: string
-       *     // 组件
        *     component?: string
-       *     // 父级
        *     parentId?: number
        *     menuType?: 1 | 2 | 3 | 4
        *     iconType?: 1 | 2
-       *     // 状态
        *     status?: boolean
-       *     // 路由标题(可用来作document.title或者菜单的名称)
        *     title?: string
-       *     // 多语言
        *     i18nKey?: string
-       *     // 缓存页面
        *     keepAlive?: boolean
-       *     // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *     constant?: boolean
-       *     // 菜单和面包屑对应的图标
        *     icon?: string
-       *     // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *     localIcon?: string
-       *     // 菜单和面包屑对应的图标的字体大小
        *     iconFontSize?: number
-       *     // 路由顺序，可用于菜单的排序
        *     order?: number
-       *     // 外链链接
        *     href?: string
-       *     // 是否在菜单中隐藏路线
        *     hideInMenu?: boolean
-       *     // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *     activeMenu?: string
-       *     // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *     multiTab?: boolean
-       *     // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *     fixedIndexInTab?: number
        *     props?: boolean
-       *     // 是否已删除
        *     isDeleted?: boolean
        *     roles?: Array<Role>
        *     children?: Array<Menu>
@@ -4934,118 +4852,13 @@ declare global {
         Config
       >;
     };
-    Rank: {
+    Quartz: {
       /**
        * ---
        *
-       * [GET] 天数排行榜
+       * [GET]
        *
-       * **path:** /api/Rank/Day
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   timestamp?: number
-       * }
-       * ```
-       *
-       * ---
-       *
-       * **Response**
-       * ```ts
-       * type Response = {
-       *   // [required]
-       *   code: string
-       *   // [required]
-       *   data: Array<{
-       *     // 排名
-       *     sort?: number
-       *     // 赢
-       *     win?: number
-       *     // 宝石数
-       *     gems?: number
-       *     // 用户ID
-       *     userId?: number
-       *     // 昵称
-       *     nickName?: string
-       *   }>
-       *   // [required]
-       *   msg: string
-       *   // [required]
-       *   success: boolean
-       * }
-       * ```
-       */
-      get_api_rank_day<
-        Config extends Alova2MethodConfig<{
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: DayRankDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        }> & {
-          params: {
-            timestamp?: number;
-          };
-        }
-      >(
-        config: Config
-      ): Alova2Method<
-        {
-          /**
-           * [required]
-           */
-          code: string;
-          /**
-           * [required]
-           */
-          data: DayRankDTO[];
-          /**
-           * [required]
-           */
-          msg: string;
-          /**
-           * [required]
-           */
-          success: boolean;
-        },
-        'Rank.get_api_rank_day',
-        Config
-      >;
-      /**
-       * ---
-       *
-       * [PUT] 设置连赢
-       *
-       * **path:** /api/Rank/SetWin
-       *
-       * ---
-       *
-       * **RequestBody**
-       * ```ts
-       * type RequestBody = {
-       *   type?: number
-       *   timeStamp?: number
-       *   userId?: number
-       *   // 赢
-       *   newWin?: number
-       *   // 宝石数
-       *   newGems?: number
-       * }
-       * ```
+       * **path:** /api/Quartz/All
        *
        * ---
        *
@@ -5063,7 +4876,7 @@ declare global {
        * }
        * ```
        */
-      put_api_rank_setwin<
+      get_api_quartz_all<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -5081,11 +4894,9 @@ declare global {
            * [required]
            */
           success: boolean;
-        }> & {
-          data: SetWinParam;
-        }
+        }>
       >(
-        config: Config
+        config?: Config
       ): Alova2Method<
         {
           /**
@@ -5105,24 +4916,15 @@ declare global {
            */
           success: boolean;
         },
-        'Rank.put_api_rank_setwin',
+        'Quartz.get_api_quartz_all',
         Config
       >;
       /**
        * ---
        *
-       * [GET] 周排行榜
+       * [DELETE]
        *
-       * **path:** /api/Rank/Week
-       *
-       * ---
-       *
-       * **Query Parameters**
-       * ```ts
-       * type QueryParameters = {
-       *   timestamp?: number
-       * }
-       * ```
+       * **path:** /api/Quartz/DeleteJob
        *
        * ---
        *
@@ -5132,18 +4934,7 @@ declare global {
        *   // [required]
        *   code: string
        *   // [required]
-       *   data: Array<{
-       *     // 排名
-       *     sort?: number
-       *     // 赢
-       *     win?: number
-       *     // 宝石数
-       *     gems?: number
-       *     // 用户ID
-       *     userId?: number
-       *     // 昵称
-       *     nickName?: string
-       *   }>
+       *   data: unknown
        *   // [required]
        *   msg: string
        *   // [required]
@@ -5151,7 +4942,7 @@ declare global {
        * }
        * ```
        */
-      get_api_rank_week<
+      delete_api_quartz_deletejob<
         Config extends Alova2MethodConfig<{
           /**
            * [required]
@@ -5160,7 +4951,7 @@ declare global {
           /**
            * [required]
            */
-          data: WeekRankDTO[];
+          data: unknown;
           /**
            * [required]
            */
@@ -5169,13 +4960,9 @@ declare global {
            * [required]
            */
           success: boolean;
-        }> & {
-          params: {
-            timestamp?: number;
-          };
-        }
+        }>
       >(
-        config: Config
+        config?: Config
       ): Alova2Method<
         {
           /**
@@ -5185,7 +4972,7 @@ declare global {
           /**
            * [required]
            */
-          data: WeekRankDTO[];
+          data: unknown;
           /**
            * [required]
            */
@@ -5195,7 +4982,73 @@ declare global {
            */
           success: boolean;
         },
-        'Rank.get_api_rank_week',
+        'Quartz.delete_api_quartz_deletejob',
+        Config
+      >;
+      /**
+       * ---
+       *
+       * [GET]
+       *
+       * **path:** /api/Quartz/ScheduleJob
+       *
+       * ---
+       *
+       * **Response**
+       * ```ts
+       * type Response = {
+       *   // [required]
+       *   code: string
+       *   // [required]
+       *   data: unknown
+       *   // [required]
+       *   msg: string
+       *   // [required]
+       *   success: boolean
+       * }
+       * ```
+       */
+      get_api_quartz_schedulejob<
+        Config extends Alova2MethodConfig<{
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        }>
+      >(
+        config?: Config
+      ): Alova2Method<
+        {
+          /**
+           * [required]
+           */
+          code: string;
+          /**
+           * [required]
+           */
+          data: unknown;
+          /**
+           * [required]
+           */
+          msg: string;
+          /**
+           * [required]
+           */
+          success: boolean;
+        },
+        'Quartz.get_api_quartz_schedulejob',
         Config
       >;
     };
@@ -5311,20 +5164,13 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 角色名称
        *     name?: string
        *     type?: 10 | 20 | 30 | 40
-       *     // 状态
        *     status?: boolean
-       *     // 备注
        *     remark?: string
-       *     // 角色代码
        *     code?: string
-       *     // 排序
        *     sort?: number
-       *     // 公司id
        *     deptId?: number
-       *     // 部门
        *     dept?: {
        *       // 主键
        *       id?: number
@@ -5336,29 +5182,17 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 图标
        *       image?: string
-       *       // 单位名称
        *       name?: string
-       *       // 简写名称
        *       easyName?: string
-       *       // 父级部门ID
        *       parentId?: number
-       *       // 地址
        *       address?: string
-       *       // 是否删除
        *       isDeleted?: boolean
-       *       // 默认联系电话
        *       phone?: string
-       *       // 默认联系人
        *       man?: string
-       *       // 备注
        *       remark?: string
-       *       // 状态
        *       status?: boolean
-       *       // 排序
        *       sort?: number
-       *       // 首页
        *       home?: string
        *       type?: DeptTypeEnum
        *       users?: Array<User>
@@ -5373,20 +5207,13 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 角色名称
        *         name?: string
        *         type?: 10 | 20 | 30 | 40
-       *         // 状态
        *         status?: boolean
-       *         // 备注
        *         remark?: string
-       *         // 角色代码
        *         code?: string
-       *         // 排序
        *         sort?: number
-       *         // 公司id
        *         deptId?: number
-       *         // 部门
        *         dept?: Dept
        *         menus?: Array<{
        *           // 主键
@@ -5399,51 +5226,30 @@ declare global {
        *           updateBy?: string
        *           // 最后更新时间
        *           updateTime?: string
-       *           // 菜单名
        *           name?: string
-       *           // 路径
        *           path?: string
-       *           // 路径
        *           pathParam?: string
        *           layout?: 1 | 2
-       *           // 重定向
        *           redirect?: string
-       *           // 组件
        *           component?: string
-       *           // 父级
        *           parentId?: number
        *           menuType?: 1 | 2 | 3 | 4
        *           iconType?: 1 | 2
-       *           // 状态
        *           status?: boolean
-       *           // 路由标题(可用来作document.title或者菜单的名称)
        *           title?: string
-       *           // 多语言
        *           i18nKey?: string
-       *           // 缓存页面
        *           keepAlive?: boolean
-       *           // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *           constant?: boolean
-       *           // 菜单和面包屑对应的图标
        *           icon?: string
-       *           // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *           localIcon?: string
-       *           // 菜单和面包屑对应的图标的字体大小
        *           iconFontSize?: number
-       *           // 路由顺序，可用于菜单的排序
        *           order?: number
-       *           // 外链链接
        *           href?: string
-       *           // 是否在菜单中隐藏路线
        *           hideInMenu?: boolean
-       *           // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *           activeMenu?: string
-       *           // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *           multiTab?: boolean
-       *           // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *           fixedIndexInTab?: number
        *           props?: boolean
-       *           // 是否已删除
        *           isDeleted?: boolean
        *           roles?: Array<Role>
        *           children?: Array<Menu>
@@ -5462,7 +5268,6 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 配置Id
        *         connId?: string
        *         dbType?:
        *           | 0
@@ -5492,13 +5297,9 @@ declare global {
        *           | 24
        *           | 25
        *           | 900
-       *         // 状态
        *         enabled?: boolean
-       *         // 命中率
        *         hitRate?: number
-       *         // 数据库链接
        *         connectionString?: string
-       *         // 排序
        *         orderNo?: number
        *         depts?: Array<Dept>
        *       }>
@@ -5514,51 +5315,30 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 菜单名
        *       name?: string
-       *       // 路径
        *       path?: string
-       *       // 路径
        *       pathParam?: string
        *       layout?: 1 | 2
-       *       // 重定向
        *       redirect?: string
-       *       // 组件
        *       component?: string
-       *       // 父级
        *       parentId?: number
        *       menuType?: 1 | 2 | 3 | 4
        *       iconType?: 1 | 2
-       *       // 状态
        *       status?: boolean
-       *       // 路由标题(可用来作document.title或者菜单的名称)
        *       title?: string
-       *       // 多语言
        *       i18nKey?: string
-       *       // 缓存页面
        *       keepAlive?: boolean
-       *       // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *       constant?: boolean
-       *       // 菜单和面包屑对应的图标
        *       icon?: string
-       *       // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *       localIcon?: string
-       *       // 菜单和面包屑对应的图标的字体大小
        *       iconFontSize?: number
-       *       // 路由顺序，可用于菜单的排序
        *       order?: number
-       *       // 外链链接
        *       href?: string
-       *       // 是否在菜单中隐藏路线
        *       hideInMenu?: boolean
-       *       // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *       activeMenu?: string
-       *       // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *       multiTab?: boolean
-       *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *       fixedIndexInTab?: number
        *       props?: boolean
-       *       // 是否已删除
        *       isDeleted?: boolean
        *       roles?: Array<Role>
        *       children?: Array<Menu>
@@ -5574,21 +5354,13 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 昵称
        *       nickName?: string
-       *       // 头像
        *       avatar?: string
-       *       // 手机号
        *       phone?: string
-       *       // 邮箱
        *       email?: string
-       *       // 密码
        *       password?: string
-       *       // 状态
        *       status?: boolean
-       *       // 账号
        *       userName?: string
-       *       // 用户部门关系
        *       depts?: Array<{
        *         // 主键
        *         id?: number
@@ -5600,29 +5372,17 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 图标
        *         image?: string
-       *         // 单位名称
        *         name?: string
-       *         // 简写名称
        *         easyName?: string
-       *         // 父级部门ID
        *         parentId?: number
-       *         // 地址
        *         address?: string
-       *         // 是否删除
        *         isDeleted?: boolean
-       *         // 默认联系电话
        *         phone?: string
-       *         // 默认联系人
        *         man?: string
-       *         // 备注
        *         remark?: string
-       *         // 状态
        *         status?: boolean
-       *         // 排序
        *         sort?: number
-       *         // 首页
        *         home?: string
        *         type?: DeptTypeEnum
        *         users?: Array<User>
@@ -5637,20 +5397,13 @@ declare global {
        *           updateBy?: string
        *           // 最后更新时间
        *           updateTime?: string
-       *           // 角色名称
        *           name?: string
        *           type?: 10 | 20 | 30 | 40
-       *           // 状态
        *           status?: boolean
-       *           // 备注
        *           remark?: string
-       *           // 角色代码
        *           code?: string
-       *           // 排序
        *           sort?: number
-       *           // 公司id
        *           deptId?: number
-       *           // 部门
        *           dept?: Dept
        *           menus?: Array<{
        *             // 主键
@@ -5663,51 +5416,30 @@ declare global {
        *             updateBy?: string
        *             // 最后更新时间
        *             updateTime?: string
-       *             // 菜单名
        *             name?: string
-       *             // 路径
        *             path?: string
-       *             // 路径
        *             pathParam?: string
        *             layout?: 1 | 2
-       *             // 重定向
        *             redirect?: string
-       *             // 组件
        *             component?: string
-       *             // 父级
        *             parentId?: number
        *             menuType?: 1 | 2 | 3 | 4
        *             iconType?: 1 | 2
-       *             // 状态
        *             status?: boolean
-       *             // 路由标题(可用来作document.title或者菜单的名称)
        *             title?: string
-       *             // 多语言
        *             i18nKey?: string
-       *             // 缓存页面
        *             keepAlive?: boolean
-       *             // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *             constant?: boolean
-       *             // 菜单和面包屑对应的图标
        *             icon?: string
-       *             // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *             localIcon?: string
-       *             // 菜单和面包屑对应的图标的字体大小
        *             iconFontSize?: number
-       *             // 路由顺序，可用于菜单的排序
        *             order?: number
-       *             // 外链链接
        *             href?: string
-       *             // 是否在菜单中隐藏路线
        *             hideInMenu?: boolean
-       *             // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *             activeMenu?: string
-       *             // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *             multiTab?: boolean
-       *             // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *             fixedIndexInTab?: number
        *             props?: boolean
-       *             // 是否已删除
        *             isDeleted?: boolean
        *             roles?: Array<Role>
        *             children?: Array<Menu>
@@ -5726,7 +5458,6 @@ declare global {
        *           updateBy?: string
        *           // 最后更新时间
        *           updateTime?: string
-       *           // 配置Id
        *           connId?: string
        *           dbType?:
        *             | 0
@@ -5756,13 +5487,9 @@ declare global {
        *             | 24
        *             | 25
        *             | 900
-       *           // 状态
        *           enabled?: boolean
-       *           // 命中率
        *           hitRate?: number
-       *           // 数据库链接
        *           connectionString?: string
-       *           // 排序
        *           orderNo?: number
        *           depts?: Array<Dept>
        *         }>
@@ -5879,20 +5606,13 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 角色名称
        *       name?: string
        *       type?: 10 | 20 | 30 | 40
-       *       // 状态
        *       status?: boolean
-       *       // 备注
        *       remark?: string
-       *       // 角色代码
        *       code?: string
-       *       // 排序
        *       sort?: number
-       *       // 公司id
        *       deptId?: number
-       *       // 部门
        *       dept?: {
        *         // 主键
        *         id?: number
@@ -5904,29 +5624,17 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 图标
        *         image?: string
-       *         // 单位名称
        *         name?: string
-       *         // 简写名称
        *         easyName?: string
-       *         // 父级部门ID
        *         parentId?: number
-       *         // 地址
        *         address?: string
-       *         // 是否删除
        *         isDeleted?: boolean
-       *         // 默认联系电话
        *         phone?: string
-       *         // 默认联系人
        *         man?: string
-       *         // 备注
        *         remark?: string
-       *         // 状态
        *         status?: boolean
-       *         // 排序
        *         sort?: number
-       *         // 首页
        *         home?: string
        *         type?: DeptTypeEnum
        *         users?: Array<User>
@@ -5941,20 +5649,13 @@ declare global {
        *           updateBy?: string
        *           // 最后更新时间
        *           updateTime?: string
-       *           // 角色名称
        *           name?: string
        *           type?: 10 | 20 | 30 | 40
-       *           // 状态
        *           status?: boolean
-       *           // 备注
        *           remark?: string
-       *           // 角色代码
        *           code?: string
-       *           // 排序
        *           sort?: number
-       *           // 公司id
        *           deptId?: number
-       *           // 部门
        *           dept?: Dept
        *           menus?: Array<{
        *             // 主键
@@ -5967,51 +5668,30 @@ declare global {
        *             updateBy?: string
        *             // 最后更新时间
        *             updateTime?: string
-       *             // 菜单名
        *             name?: string
-       *             // 路径
        *             path?: string
-       *             // 路径
        *             pathParam?: string
        *             layout?: 1 | 2
-       *             // 重定向
        *             redirect?: string
-       *             // 组件
        *             component?: string
-       *             // 父级
        *             parentId?: number
        *             menuType?: 1 | 2 | 3 | 4
        *             iconType?: 1 | 2
-       *             // 状态
        *             status?: boolean
-       *             // 路由标题(可用来作document.title或者菜单的名称)
        *             title?: string
-       *             // 多语言
        *             i18nKey?: string
-       *             // 缓存页面
        *             keepAlive?: boolean
-       *             // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *             constant?: boolean
-       *             // 菜单和面包屑对应的图标
        *             icon?: string
-       *             // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *             localIcon?: string
-       *             // 菜单和面包屑对应的图标的字体大小
        *             iconFontSize?: number
-       *             // 路由顺序，可用于菜单的排序
        *             order?: number
-       *             // 外链链接
        *             href?: string
-       *             // 是否在菜单中隐藏路线
        *             hideInMenu?: boolean
-       *             // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *             activeMenu?: string
-       *             // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *             multiTab?: boolean
-       *             // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *             fixedIndexInTab?: number
        *             props?: boolean
-       *             // 是否已删除
        *             isDeleted?: boolean
        *             roles?: Array<Role>
        *             children?: Array<Menu>
@@ -6030,7 +5710,6 @@ declare global {
        *           updateBy?: string
        *           // 最后更新时间
        *           updateTime?: string
-       *           // 配置Id
        *           connId?: string
        *           dbType?:
        *             | 0
@@ -6060,13 +5739,9 @@ declare global {
        *             | 24
        *             | 25
        *             | 900
-       *           // 状态
        *           enabled?: boolean
-       *           // 命中率
        *           hitRate?: number
-       *           // 数据库链接
        *           connectionString?: string
-       *           // 排序
        *           orderNo?: number
        *           depts?: Array<Dept>
        *         }>
@@ -6082,51 +5757,30 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 菜单名
        *         name?: string
-       *         // 路径
        *         path?: string
-       *         // 路径
        *         pathParam?: string
        *         layout?: 1 | 2
-       *         // 重定向
        *         redirect?: string
-       *         // 组件
        *         component?: string
-       *         // 父级
        *         parentId?: number
        *         menuType?: 1 | 2 | 3 | 4
        *         iconType?: 1 | 2
-       *         // 状态
        *         status?: boolean
-       *         // 路由标题(可用来作document.title或者菜单的名称)
        *         title?: string
-       *         // 多语言
        *         i18nKey?: string
-       *         // 缓存页面
        *         keepAlive?: boolean
-       *         // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *         constant?: boolean
-       *         // 菜单和面包屑对应的图标
        *         icon?: string
-       *         // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *         localIcon?: string
-       *         // 菜单和面包屑对应的图标的字体大小
        *         iconFontSize?: number
-       *         // 路由顺序，可用于菜单的排序
        *         order?: number
-       *         // 外链链接
        *         href?: string
-       *         // 是否在菜单中隐藏路线
        *         hideInMenu?: boolean
-       *         // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *         activeMenu?: string
-       *         // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *         multiTab?: boolean
-       *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *         fixedIndexInTab?: number
        *         props?: boolean
-       *         // 是否已删除
        *         isDeleted?: boolean
        *         roles?: Array<Role>
        *         children?: Array<Menu>
@@ -6142,21 +5796,13 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 昵称
        *         nickName?: string
-       *         // 头像
        *         avatar?: string
-       *         // 手机号
        *         phone?: string
-       *         // 邮箱
        *         email?: string
-       *         // 密码
        *         password?: string
-       *         // 状态
        *         status?: boolean
-       *         // 账号
        *         userName?: string
-       *         // 用户部门关系
        *         depts?: Array<{
        *           // 主键
        *           id?: number
@@ -6168,29 +5814,17 @@ declare global {
        *           updateBy?: string
        *           // 最后更新时间
        *           updateTime?: string
-       *           // 图标
        *           image?: string
-       *           // 单位名称
        *           name?: string
-       *           // 简写名称
        *           easyName?: string
-       *           // 父级部门ID
        *           parentId?: number
-       *           // 地址
        *           address?: string
-       *           // 是否删除
        *           isDeleted?: boolean
-       *           // 默认联系电话
        *           phone?: string
-       *           // 默认联系人
        *           man?: string
-       *           // 备注
        *           remark?: string
-       *           // 状态
        *           status?: boolean
-       *           // 排序
        *           sort?: number
-       *           // 首页
        *           home?: string
        *           type?: DeptTypeEnum
        *           users?: Array<User>
@@ -6205,20 +5839,13 @@ declare global {
        *             updateBy?: string
        *             // 最后更新时间
        *             updateTime?: string
-       *             // 角色名称
        *             name?: string
        *             type?: 10 | 20 | 30 | 40
-       *             // 状态
        *             status?: boolean
-       *             // 备注
        *             remark?: string
-       *             // 角色代码
        *             code?: string
-       *             // 排序
        *             sort?: number
-       *             // 公司id
        *             deptId?: number
-       *             // 部门
        *             dept?: Dept
        *             menus?: Array<{
        *               // 主键
@@ -6231,51 +5858,30 @@ declare global {
        *               updateBy?: string
        *               // 最后更新时间
        *               updateTime?: string
-       *               // 菜单名
        *               name?: string
-       *               // 路径
        *               path?: string
-       *               // 路径
        *               pathParam?: string
        *               layout?: 1 | 2
-       *               // 重定向
        *               redirect?: string
-       *               // 组件
        *               component?: string
-       *               // 父级
        *               parentId?: number
        *               menuType?: 1 | 2 | 3 | 4
        *               iconType?: 1 | 2
-       *               // 状态
        *               status?: boolean
-       *               // 路由标题(可用来作document.title或者菜单的名称)
        *               title?: string
-       *               // 多语言
        *               i18nKey?: string
-       *               // 缓存页面
        *               keepAlive?: boolean
-       *               // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *               constant?: boolean
-       *               // 菜单和面包屑对应的图标
        *               icon?: string
-       *               // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *               localIcon?: string
-       *               // 菜单和面包屑对应的图标的字体大小
        *               iconFontSize?: number
-       *               // 路由顺序，可用于菜单的排序
        *               order?: number
-       *               // 外链链接
        *               href?: string
-       *               // 是否在菜单中隐藏路线
        *               hideInMenu?: boolean
-       *               // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *               activeMenu?: string
-       *               // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *               multiTab?: boolean
-       *               // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *               fixedIndexInTab?: number
        *               props?: boolean
-       *               // 是否已删除
        *               isDeleted?: boolean
        *               roles?: Array<Role>
        *               children?: Array<Menu>
@@ -6294,7 +5900,6 @@ declare global {
        *             updateBy?: string
        *             // 最后更新时间
        *             updateTime?: string
-       *             // 配置Id
        *             connId?: string
        *             dbType?:
        *               | 0
@@ -6324,13 +5929,9 @@ declare global {
        *               | 24
        *               | 25
        *               | 900
-       *             // 状态
        *             enabled?: boolean
-       *             // 命中率
        *             hitRate?: number
-       *             // 数据库链接
        *             connectionString?: string
-       *             // 排序
        *             orderNo?: number
        *             depts?: Array<Dept>
        *           }>
@@ -6574,20 +6175,13 @@ declare global {
        *   updateBy?: string
        *   // 最后更新时间
        *   updateTime?: string
-       *   // 角色名称
        *   name?: string
        *   type?: 10 | 20 | 30 | 40
-       *   // 状态
        *   status?: boolean
-       *   // 备注
        *   remark?: string
-       *   // 角色代码
        *   code?: string
-       *   // 排序
        *   sort?: number
-       *   // 公司id
        *   deptId?: number
-       *   // 部门
        *   dept?: {
        *     // 主键
        *     id?: number
@@ -6599,29 +6193,17 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 图标
        *     image?: string
-       *     // 单位名称
        *     name?: string
-       *     // 简写名称
        *     easyName?: string
-       *     // 父级部门ID
        *     parentId?: number
-       *     // 地址
        *     address?: string
-       *     // 是否删除
        *     isDeleted?: boolean
-       *     // 默认联系电话
        *     phone?: string
-       *     // 默认联系人
        *     man?: string
-       *     // 备注
        *     remark?: string
-       *     // 状态
        *     status?: boolean
-       *     // 排序
        *     sort?: number
-       *     // 首页
        *     home?: string
        *     type?: DeptTypeEnum
        *     users?: Array<User>
@@ -6636,20 +6218,13 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 角色名称
        *       name?: string
        *       type?: 10 | 20 | 30 | 40
-       *       // 状态
        *       status?: boolean
-       *       // 备注
        *       remark?: string
-       *       // 角色代码
        *       code?: string
-       *       // 排序
        *       sort?: number
-       *       // 公司id
        *       deptId?: number
-       *       // 部门
        *       dept?: Dept
        *       menus?: Array<{
        *         // 主键
@@ -6662,51 +6237,30 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 菜单名
        *         name?: string
-       *         // 路径
        *         path?: string
-       *         // 路径
        *         pathParam?: string
        *         layout?: 1 | 2
-       *         // 重定向
        *         redirect?: string
-       *         // 组件
        *         component?: string
-       *         // 父级
        *         parentId?: number
        *         menuType?: 1 | 2 | 3 | 4
        *         iconType?: 1 | 2
-       *         // 状态
        *         status?: boolean
-       *         // 路由标题(可用来作document.title或者菜单的名称)
        *         title?: string
-       *         // 多语言
        *         i18nKey?: string
-       *         // 缓存页面
        *         keepAlive?: boolean
-       *         // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *         constant?: boolean
-       *         // 菜单和面包屑对应的图标
        *         icon?: string
-       *         // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *         localIcon?: string
-       *         // 菜单和面包屑对应的图标的字体大小
        *         iconFontSize?: number
-       *         // 路由顺序，可用于菜单的排序
        *         order?: number
-       *         // 外链链接
        *         href?: string
-       *         // 是否在菜单中隐藏路线
        *         hideInMenu?: boolean
-       *         // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *         activeMenu?: string
-       *         // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *         multiTab?: boolean
-       *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *         fixedIndexInTab?: number
        *         props?: boolean
-       *         // 是否已删除
        *         isDeleted?: boolean
        *         roles?: Array<Role>
        *         children?: Array<Menu>
@@ -6725,7 +6279,6 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 配置Id
        *       connId?: string
        *       dbType?:
        *         | 0
@@ -6755,13 +6308,9 @@ declare global {
        *         | 24
        *         | 25
        *         | 900
-       *       // 状态
        *       enabled?: boolean
-       *       // 命中率
        *       hitRate?: number
-       *       // 数据库链接
        *       connectionString?: string
-       *       // 排序
        *       orderNo?: number
        *       depts?: Array<Dept>
        *     }>
@@ -6777,51 +6326,30 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 菜单名
        *     name?: string
-       *     // 路径
        *     path?: string
-       *     // 路径
        *     pathParam?: string
        *     layout?: 1 | 2
-       *     // 重定向
        *     redirect?: string
-       *     // 组件
        *     component?: string
-       *     // 父级
        *     parentId?: number
        *     menuType?: 1 | 2 | 3 | 4
        *     iconType?: 1 | 2
-       *     // 状态
        *     status?: boolean
-       *     // 路由标题(可用来作document.title或者菜单的名称)
        *     title?: string
-       *     // 多语言
        *     i18nKey?: string
-       *     // 缓存页面
        *     keepAlive?: boolean
-       *     // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *     constant?: boolean
-       *     // 菜单和面包屑对应的图标
        *     icon?: string
-       *     // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *     localIcon?: string
-       *     // 菜单和面包屑对应的图标的字体大小
        *     iconFontSize?: number
-       *     // 路由顺序，可用于菜单的排序
        *     order?: number
-       *     // 外链链接
        *     href?: string
-       *     // 是否在菜单中隐藏路线
        *     hideInMenu?: boolean
-       *     // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *     activeMenu?: string
-       *     // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *     multiTab?: boolean
-       *     // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *     fixedIndexInTab?: number
        *     props?: boolean
-       *     // 是否已删除
        *     isDeleted?: boolean
        *     roles?: Array<Role>
        *     children?: Array<Menu>
@@ -6837,21 +6365,13 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 昵称
        *     nickName?: string
-       *     // 头像
        *     avatar?: string
-       *     // 手机号
        *     phone?: string
-       *     // 邮箱
        *     email?: string
-       *     // 密码
        *     password?: string
-       *     // 状态
        *     status?: boolean
-       *     // 账号
        *     userName?: string
-       *     // 用户部门关系
        *     depts?: Array<{
        *       // 主键
        *       id?: number
@@ -6863,29 +6383,17 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 图标
        *       image?: string
-       *       // 单位名称
        *       name?: string
-       *       // 简写名称
        *       easyName?: string
-       *       // 父级部门ID
        *       parentId?: number
-       *       // 地址
        *       address?: string
-       *       // 是否删除
        *       isDeleted?: boolean
-       *       // 默认联系电话
        *       phone?: string
-       *       // 默认联系人
        *       man?: string
-       *       // 备注
        *       remark?: string
-       *       // 状态
        *       status?: boolean
-       *       // 排序
        *       sort?: number
-       *       // 首页
        *       home?: string
        *       type?: DeptTypeEnum
        *       users?: Array<User>
@@ -6900,20 +6408,13 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 角色名称
        *         name?: string
        *         type?: 10 | 20 | 30 | 40
-       *         // 状态
        *         status?: boolean
-       *         // 备注
        *         remark?: string
-       *         // 角色代码
        *         code?: string
-       *         // 排序
        *         sort?: number
-       *         // 公司id
        *         deptId?: number
-       *         // 部门
        *         dept?: Dept
        *         menus?: Array<{
        *           // 主键
@@ -6926,51 +6427,30 @@ declare global {
        *           updateBy?: string
        *           // 最后更新时间
        *           updateTime?: string
-       *           // 菜单名
        *           name?: string
-       *           // 路径
        *           path?: string
-       *           // 路径
        *           pathParam?: string
        *           layout?: 1 | 2
-       *           // 重定向
        *           redirect?: string
-       *           // 组件
        *           component?: string
-       *           // 父级
        *           parentId?: number
        *           menuType?: 1 | 2 | 3 | 4
        *           iconType?: 1 | 2
-       *           // 状态
        *           status?: boolean
-       *           // 路由标题(可用来作document.title或者菜单的名称)
        *           title?: string
-       *           // 多语言
        *           i18nKey?: string
-       *           // 缓存页面
        *           keepAlive?: boolean
-       *           // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *           constant?: boolean
-       *           // 菜单和面包屑对应的图标
        *           icon?: string
-       *           // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *           localIcon?: string
-       *           // 菜单和面包屑对应的图标的字体大小
        *           iconFontSize?: number
-       *           // 路由顺序，可用于菜单的排序
        *           order?: number
-       *           // 外链链接
        *           href?: string
-       *           // 是否在菜单中隐藏路线
        *           hideInMenu?: boolean
-       *           // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *           activeMenu?: string
-       *           // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *           multiTab?: boolean
-       *           // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *           fixedIndexInTab?: number
        *           props?: boolean
-       *           // 是否已删除
        *           isDeleted?: boolean
        *           roles?: Array<Role>
        *           children?: Array<Menu>
@@ -6989,7 +6469,6 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 配置Id
        *         connId?: string
        *         dbType?:
        *           | 0
@@ -7019,13 +6498,9 @@ declare global {
        *           | 24
        *           | 25
        *           | 900
-       *         // 状态
        *         enabled?: boolean
-       *         // 命中率
        *         hitRate?: number
-       *         // 数据库链接
        *         connectionString?: string
-       *         // 排序
        *         orderNo?: number
        *         depts?: Array<Dept>
        *       }>
@@ -7620,7 +7095,6 @@ declare global {
        * type Response = {
        *   // [required]
        *   code: string
-       *   // 表格重写
        *   // [required]
        *   data: {
        *     // 主键
@@ -7633,17 +7107,12 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 表名
        *     tableof?: string
-       *     // 路由
        *     router?: string
        *     type?: 1 | 2 | 3
-       *     // 默认排序字段
        *     sortKey?: string
        *     sortOrder?: 1 | 2
-       *     // 多余参数
        *     props?: string
-       *     // 字段
        *     tableColumns?: Array<{
        *       // 主键
        *       id?: number
@@ -7655,27 +7124,17 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 视图Id
        *       viewId?: number
-       *       // 字段名称
        *       title?: string
-       *       // 字段
        *       key?: string
        *       searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
        *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 99
-       *       // 字段描述
        *       columnTypeDetail?: string
-       *       // 字段验证
        *       columnTypeRules?: string
-       *       // 是否自定义
        *       isCustom?: boolean
-       *       // 排序
        *       sort?: number
-       *       // 是否隐藏
        *       isShow?: boolean
-       *       // 多余参数
        *       props?: string
-       *       // 表格重写
        *       tableView?: TableView
        *     }>
        *   }
@@ -7693,7 +7152,6 @@ declare global {
            */
           code: string;
           /**
-           * 表格重写
            * [required]
            */
           data: TableView;
@@ -7722,7 +7180,6 @@ declare global {
            */
           code: string;
           /**
-           * 表格重写
            * [required]
            */
           data: TableView;
@@ -7764,7 +7221,6 @@ declare global {
        * type Response = {
        *   // [required]
        *   code: string
-       *   // 表格重写
        *   // [required]
        *   data: {
        *     // 主键
@@ -7777,17 +7233,12 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 表名
        *     tableof?: string
-       *     // 路由
        *     router?: string
        *     type?: 1 | 2 | 3
-       *     // 默认排序字段
        *     sortKey?: string
        *     sortOrder?: 1 | 2
-       *     // 多余参数
        *     props?: string
-       *     // 字段
        *     tableColumns?: Array<{
        *       // 主键
        *       id?: number
@@ -7799,27 +7250,17 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 视图Id
        *       viewId?: number
-       *       // 字段名称
        *       title?: string
-       *       // 字段
        *       key?: string
        *       searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
        *       columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 99
-       *       // 字段描述
        *       columnTypeDetail?: string
-       *       // 字段验证
        *       columnTypeRules?: string
-       *       // 是否自定义
        *       isCustom?: boolean
-       *       // 排序
        *       sort?: number
-       *       // 是否隐藏
        *       isShow?: boolean
-       *       // 多余参数
        *       props?: string
-       *       // 表格重写
        *       tableView?: TableView
        *     }>
        *   }
@@ -7837,7 +7278,6 @@ declare global {
            */
           code: string;
           /**
-           * 表格重写
            * [required]
            */
           data: TableView;
@@ -7866,7 +7306,6 @@ declare global {
            */
           code: string;
           /**
-           * 表格重写
            * [required]
            */
           data: TableView;
@@ -7904,27 +7343,17 @@ declare global {
        *   updateBy?: string
        *   // 最后更新时间
        *   updateTime?: string
-       *   // 视图Id
        *   viewId?: number
-       *   // 字段名称
        *   title?: string
-       *   // 字段
        *   key?: string
        *   searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
        *   columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 99
-       *   // 字段描述
        *   columnTypeDetail?: string
-       *   // 字段验证
        *   columnTypeRules?: string
-       *   // 是否自定义
        *   isCustom?: boolean
-       *   // 排序
        *   sort?: number
-       *   // 是否隐藏
        *   isShow?: boolean
-       *   // 多余参数
        *   props?: string
-       *   // 表格重写
        *   tableView?: TableView
        * }
        * ```
@@ -7936,7 +7365,6 @@ declare global {
        * type Response = {
        *   // [required]
        *   code: string
-       *   // 表格重写
        *   // [required]
        *   data: {
        *     // 主键
@@ -7949,27 +7377,17 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 视图Id
        *     viewId?: number
-       *     // 字段名称
        *     title?: string
-       *     // 字段
        *     key?: string
        *     searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
        *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 99
-       *     // 字段描述
        *     columnTypeDetail?: string
-       *     // 字段验证
        *     columnTypeRules?: string
-       *     // 是否自定义
        *     isCustom?: boolean
-       *     // 排序
        *     sort?: number
-       *     // 是否隐藏
        *     isShow?: boolean
-       *     // 多余参数
        *     props?: string
-       *     // 表格重写
        *     tableView?: TableView
        *   }
        *   // [required]
@@ -7986,7 +7404,6 @@ declare global {
            */
           code: string;
           /**
-           * 表格重写
            * [required]
            */
           data: TableColumn;
@@ -8010,7 +7427,6 @@ declare global {
            */
           code: string;
           /**
-           * 表格重写
            * [required]
            */
           data: TableColumn;
@@ -8126,17 +7542,12 @@ declare global {
        *   updateBy?: string
        *   // 最后更新时间
        *   updateTime?: string
-       *   // 表名
        *   tableof?: string
-       *   // 路由
        *   router?: string
        *   type?: 1 | 2 | 3
-       *   // 默认排序字段
        *   sortKey?: string
        *   sortOrder?: 1 | 2
-       *   // 多余参数
        *   props?: string
-       *   // 字段
        *   tableColumns?: Array<{
        *     // 主键
        *     id?: number
@@ -8148,27 +7559,17 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 视图Id
        *     viewId?: number
-       *     // 字段名称
        *     title?: string
-       *     // 字段
        *     key?: string
        *     searchType?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
        *     columnType?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 99
-       *     // 字段描述
        *     columnTypeDetail?: string
-       *     // 字段验证
        *     columnTypeRules?: string
-       *     // 是否自定义
        *     isCustom?: boolean
-       *     // 排序
        *     sort?: number
-       *     // 是否隐藏
        *     isShow?: boolean
-       *     // 多余参数
        *     props?: string
-       *     // 表格重写
        *     tableView?: TableView
        *   }>
        * }
@@ -8416,21 +7817,13 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 昵称
        *     nickName?: string
-       *     // 头像
        *     avatar?: string
-       *     // 手机号
        *     phone?: string
-       *     // 邮箱
        *     email?: string
-       *     // 密码
        *     password?: string
-       *     // 状态
        *     status?: boolean
-       *     // 账号
        *     userName?: string
-       *     // 用户部门关系
        *     depts?: Array<{
        *       // 主键
        *       id?: number
@@ -8442,29 +7835,17 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 图标
        *       image?: string
-       *       // 单位名称
        *       name?: string
-       *       // 简写名称
        *       easyName?: string
-       *       // 父级部门ID
        *       parentId?: number
-       *       // 地址
        *       address?: string
-       *       // 是否删除
        *       isDeleted?: boolean
-       *       // 默认联系电话
        *       phone?: string
-       *       // 默认联系人
        *       man?: string
-       *       // 备注
        *       remark?: string
-       *       // 状态
        *       status?: boolean
-       *       // 排序
        *       sort?: number
-       *       // 首页
        *       home?: string
        *       type?: DeptTypeEnum
        *       users?: Array<User>
@@ -8479,20 +7860,13 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 角色名称
        *         name?: string
        *         type?: 10 | 20 | 30 | 40
-       *         // 状态
        *         status?: boolean
-       *         // 备注
        *         remark?: string
-       *         // 角色代码
        *         code?: string
-       *         // 排序
        *         sort?: number
-       *         // 公司id
        *         deptId?: number
-       *         // 部门
        *         dept?: Dept
        *         menus?: Array<{
        *           // 主键
@@ -8505,51 +7879,30 @@ declare global {
        *           updateBy?: string
        *           // 最后更新时间
        *           updateTime?: string
-       *           // 菜单名
        *           name?: string
-       *           // 路径
        *           path?: string
-       *           // 路径
        *           pathParam?: string
        *           layout?: 1 | 2
-       *           // 重定向
        *           redirect?: string
-       *           // 组件
        *           component?: string
-       *           // 父级
        *           parentId?: number
        *           menuType?: 1 | 2 | 3 | 4
        *           iconType?: 1 | 2
-       *           // 状态
        *           status?: boolean
-       *           // 路由标题(可用来作document.title或者菜单的名称)
        *           title?: string
-       *           // 多语言
        *           i18nKey?: string
-       *           // 缓存页面
        *           keepAlive?: boolean
-       *           // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *           constant?: boolean
-       *           // 菜单和面包屑对应的图标
        *           icon?: string
-       *           // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *           localIcon?: string
-       *           // 菜单和面包屑对应的图标的字体大小
        *           iconFontSize?: number
-       *           // 路由顺序，可用于菜单的排序
        *           order?: number
-       *           // 外链链接
        *           href?: string
-       *           // 是否在菜单中隐藏路线
        *           hideInMenu?: boolean
-       *           // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *           activeMenu?: string
-       *           // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *           multiTab?: boolean
-       *           // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *           fixedIndexInTab?: number
        *           props?: boolean
-       *           // 是否已删除
        *           isDeleted?: boolean
        *           roles?: Array<Role>
        *           children?: Array<Menu>
@@ -8568,7 +7921,6 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 配置Id
        *         connId?: string
        *         dbType?:
        *           | 0
@@ -8598,13 +7950,9 @@ declare global {
        *           | 24
        *           | 25
        *           | 900
-       *         // 状态
        *         enabled?: boolean
-       *         // 命中率
        *         hitRate?: number
-       *         // 数据库链接
        *         connectionString?: string
-       *         // 排序
        *         orderNo?: number
        *         depts?: Array<Dept>
        *       }>
@@ -8620,20 +7968,13 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 角色名称
        *       name?: string
        *       type?: 10 | 20 | 30 | 40
-       *       // 状态
        *       status?: boolean
-       *       // 备注
        *       remark?: string
-       *       // 角色代码
        *       code?: string
-       *       // 排序
        *       sort?: number
-       *       // 公司id
        *       deptId?: number
-       *       // 部门
        *       dept?: Dept
        *       menus?: Array<{
        *         // 主键
@@ -8646,51 +7987,30 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 菜单名
        *         name?: string
-       *         // 路径
        *         path?: string
-       *         // 路径
        *         pathParam?: string
        *         layout?: 1 | 2
-       *         // 重定向
        *         redirect?: string
-       *         // 组件
        *         component?: string
-       *         // 父级
        *         parentId?: number
        *         menuType?: 1 | 2 | 3 | 4
        *         iconType?: 1 | 2
-       *         // 状态
        *         status?: boolean
-       *         // 路由标题(可用来作document.title或者菜单的名称)
        *         title?: string
-       *         // 多语言
        *         i18nKey?: string
-       *         // 缓存页面
        *         keepAlive?: boolean
-       *         // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *         constant?: boolean
-       *         // 菜单和面包屑对应的图标
        *         icon?: string
-       *         // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *         localIcon?: string
-       *         // 菜单和面包屑对应的图标的字体大小
        *         iconFontSize?: number
-       *         // 路由顺序，可用于菜单的排序
        *         order?: number
-       *         // 外链链接
        *         href?: string
-       *         // 是否在菜单中隐藏路线
        *         hideInMenu?: boolean
-       *         // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *         activeMenu?: string
-       *         // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *         multiTab?: boolean
-       *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *         fixedIndexInTab?: number
        *         props?: boolean
-       *         // 是否已删除
        *         isDeleted?: boolean
        *         roles?: Array<Role>
        *         children?: Array<Menu>
@@ -8980,21 +8300,13 @@ declare global {
        *   updateBy?: string
        *   // 最后更新时间
        *   updateTime?: string
-       *   // 昵称
        *   nickName?: string
-       *   // 头像
        *   avatar?: string
-       *   // 手机号
        *   phone?: string
-       *   // 邮箱
        *   email?: string
-       *   // 密码
        *   password?: string
-       *   // 状态
        *   status?: boolean
-       *   // 账号
        *   userName?: string
-       *   // 用户部门关系
        *   depts?: Array<{
        *     // 主键
        *     id?: number
@@ -9006,29 +8318,17 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 图标
        *     image?: string
-       *     // 单位名称
        *     name?: string
-       *     // 简写名称
        *     easyName?: string
-       *     // 父级部门ID
        *     parentId?: number
-       *     // 地址
        *     address?: string
-       *     // 是否删除
        *     isDeleted?: boolean
-       *     // 默认联系电话
        *     phone?: string
-       *     // 默认联系人
        *     man?: string
-       *     // 备注
        *     remark?: string
-       *     // 状态
        *     status?: boolean
-       *     // 排序
        *     sort?: number
-       *     // 首页
        *     home?: string
        *     type?: DeptTypeEnum
        *     users?: Array<User>
@@ -9043,20 +8343,13 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 角色名称
        *       name?: string
        *       type?: 10 | 20 | 30 | 40
-       *       // 状态
        *       status?: boolean
-       *       // 备注
        *       remark?: string
-       *       // 角色代码
        *       code?: string
-       *       // 排序
        *       sort?: number
-       *       // 公司id
        *       deptId?: number
-       *       // 部门
        *       dept?: Dept
        *       menus?: Array<{
        *         // 主键
@@ -9069,51 +8362,30 @@ declare global {
        *         updateBy?: string
        *         // 最后更新时间
        *         updateTime?: string
-       *         // 菜单名
        *         name?: string
-       *         // 路径
        *         path?: string
-       *         // 路径
        *         pathParam?: string
        *         layout?: 1 | 2
-       *         // 重定向
        *         redirect?: string
-       *         // 组件
        *         component?: string
-       *         // 父级
        *         parentId?: number
        *         menuType?: 1 | 2 | 3 | 4
        *         iconType?: 1 | 2
-       *         // 状态
        *         status?: boolean
-       *         // 路由标题(可用来作document.title或者菜单的名称)
        *         title?: string
-       *         // 多语言
        *         i18nKey?: string
-       *         // 缓存页面
        *         keepAlive?: boolean
-       *         // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *         constant?: boolean
-       *         // 菜单和面包屑对应的图标
        *         icon?: string
-       *         // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *         localIcon?: string
-       *         // 菜单和面包屑对应的图标的字体大小
        *         iconFontSize?: number
-       *         // 路由顺序，可用于菜单的排序
        *         order?: number
-       *         // 外链链接
        *         href?: string
-       *         // 是否在菜单中隐藏路线
        *         hideInMenu?: boolean
-       *         // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *         activeMenu?: string
-       *         // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *         multiTab?: boolean
-       *         // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *         fixedIndexInTab?: number
        *         props?: boolean
-       *         // 是否已删除
        *         isDeleted?: boolean
        *         roles?: Array<Role>
        *         children?: Array<Menu>
@@ -9132,7 +8404,6 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 配置Id
        *       connId?: string
        *       dbType?:
        *         | 0
@@ -9162,13 +8433,9 @@ declare global {
        *         | 24
        *         | 25
        *         | 900
-       *       // 状态
        *       enabled?: boolean
-       *       // 命中率
        *       hitRate?: number
-       *       // 数据库链接
        *       connectionString?: string
-       *       // 排序
        *       orderNo?: number
        *       depts?: Array<Dept>
        *     }>
@@ -9184,20 +8451,13 @@ declare global {
        *     updateBy?: string
        *     // 最后更新时间
        *     updateTime?: string
-       *     // 角色名称
        *     name?: string
        *     type?: 10 | 20 | 30 | 40
-       *     // 状态
        *     status?: boolean
-       *     // 备注
        *     remark?: string
-       *     // 角色代码
        *     code?: string
-       *     // 排序
        *     sort?: number
-       *     // 公司id
        *     deptId?: number
-       *     // 部门
        *     dept?: Dept
        *     menus?: Array<{
        *       // 主键
@@ -9210,51 +8470,30 @@ declare global {
        *       updateBy?: string
        *       // 最后更新时间
        *       updateTime?: string
-       *       // 菜单名
        *       name?: string
-       *       // 路径
        *       path?: string
-       *       // 路径
        *       pathParam?: string
        *       layout?: 1 | 2
-       *       // 重定向
        *       redirect?: string
-       *       // 组件
        *       component?: string
-       *       // 父级
        *       parentId?: number
        *       menuType?: 1 | 2 | 3 | 4
        *       iconType?: 1 | 2
-       *       // 状态
        *       status?: boolean
-       *       // 路由标题(可用来作document.title或者菜单的名称)
        *       title?: string
-       *       // 多语言
        *       i18nKey?: string
-       *       // 缓存页面
        *       keepAlive?: boolean
-       *       // 当设置为true时，将不会进行登录验证，也不会进行访问路径的权限验证
        *       constant?: boolean
-       *       // 菜单和面包屑对应的图标
        *       icon?: string
-       *       // 使用本地svg作为的菜单和面包屑对应的图标(assets/svg-icon文件夹的的svg文件名)
        *       localIcon?: string
-       *       // 菜单和面包屑对应的图标的字体大小
        *       iconFontSize?: number
-       *       // 路由顺序，可用于菜单的排序
        *       order?: number
-       *       // 外链链接
        *       href?: string
-       *       // 是否在菜单中隐藏路线
        *       hideInMenu?: boolean
-       *       // 当前路由需要选中的菜单项(用于跳转至不在左侧菜单显示的路由且需要高亮某个菜单的情况)
        *       activeMenu?: string
-       *       // 是否支持多个tab页签(默认一个，即相同name的路由会被替换)
        *       multiTab?: boolean
-       *       // 如果设置，路线将固定在制表符中，值是固定制表符的顺序
        *       fixedIndexInTab?: number
        *       props?: boolean
-       *       // 是否已删除
        *       isDeleted?: boolean
        *       roles?: Array<Role>
        *       children?: Array<Menu>

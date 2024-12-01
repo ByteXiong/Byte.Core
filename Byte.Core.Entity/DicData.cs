@@ -9,7 +9,7 @@ namespace Byte.Core.Entity
     /// </summary>
     [SugarTable("Byte_DicData")]
     
-    public class DicData : BaseEntity<int> , ISoftDeletedEntity
+    public class DicData : BaseEntity<long> , ISoftDeletedEntity
     {
 
 

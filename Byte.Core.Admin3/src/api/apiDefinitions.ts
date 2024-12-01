@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * runtest开发接口文档 Web端网站 - version 1.0
+ * Byte.Core开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -24,6 +24,10 @@ export default {
   'Dept.post_api_dept_submit': ['POST', '/api/Dept/Submit'],
   'DicData.get_api_dicdata_getallgroupby': ['GET', '/api/DicData/GetAllGroupBy'],
   'DicData.get_api_dicdata_getselect': ['GET', '/api/DicData/GetSelect'],
+  'JobDetail.delete_api_jobdetail_delete': ['DELETE', '/api/JobDetail/Delete'],
+  'JobDetail.get_api_jobdetail_getinfo': ['GET', '/api/JobDetail/GetInfo'],
+  'JobDetail.get_api_jobdetail_getpage': ['GET', '/api/JobDetail/GetPage'],
+  'JobDetail.post_api_jobdetail_submit': ['POST', '/api/JobDetail/Submit'],
   'Login.get_api_login_info': ['GET', '/api/Login/Info'],
   'Login.post_api_login_login': ['POST', '/api/Login/Login'],
   'Login.post_api_login_loginout': ['POST', '/api/Login/LoginOut'],
@@ -39,9 +43,9 @@ export default {
   'Menu.post_api_menu_setbyroleid': ['POST', '/api/Menu/SetByRoleId'],
   'Menu.put_api_menu_setstatus': ['PUT', '/api/Menu/SetStatus'],
   'Menu.post_api_menu_submit': ['POST', '/api/Menu/Submit'],
-  'Rank.get_api_rank_day': ['GET', '/api/Rank/Day'],
-  'Rank.put_api_rank_setwin': ['PUT', '/api/Rank/SetWin'],
-  'Rank.get_api_rank_week': ['GET', '/api/Rank/Week'],
+  'Quartz.get_api_quartz_all': ['GET', '/api/Quartz/All'],
+  'Quartz.delete_api_quartz_deletejob': ['DELETE', '/api/Quartz/DeleteJob'],
+  'Quartz.get_api_quartz_schedulejob': ['GET', '/api/Quartz/ScheduleJob'],
   'Role.delete_api_role_delete': ['DELETE', '/api/Role/Delete'],
   'Role.get_api_role_getinfo': ['GET', '/api/Role/GetInfo'],
   'Role.get_api_role_getpage': ['GET', '/api/Role/GetPage'],

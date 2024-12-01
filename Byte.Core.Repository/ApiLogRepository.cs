@@ -6,7 +6,7 @@ namespace Byte.Core.Repository
     /// <summary>
     /// 接口日志
     /// </summary>
-    public class ApiLogRepository : BaseRepository<int, ApiLog>
+    public class ApiLogRepository : BaseRepository<long, ApiLog>
     {
         public ApiLogRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

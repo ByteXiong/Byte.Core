@@ -16,7 +16,7 @@ namespace Byte.Core.Business
     /// <summary>
     /// 角色
     /// </summary>
-    public class RoleLogic : BaseBusinessLogic<int, Role, RoleRepository>
+    public class RoleLogic : BaseBusinessLogic<long, Role, RoleRepository>
     {
         /// <summary />
         /// <param name="repository"></param>
@@ -59,7 +59,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<int> AddAsync(UpdateRoleParam param)
+        public async Task<long> AddAsync(UpdateRoleParam param)
         {
             Role model = param.Adapt<Role>();
             model.DeptId = CurrentUser.DeptId;
@@ -72,7 +72,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<int> UpdateAsync(UpdateRoleParam param)
+        public async Task<long> UpdateAsync(UpdateRoleParam param)
         {
             var entity = await GetIQueryable(x => x.Id == param.Id).FirstOrDefaultAsync();
             entity.Name = param.Name; //角色名称

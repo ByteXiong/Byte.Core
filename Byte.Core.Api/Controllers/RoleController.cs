@@ -41,7 +41,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> Submit(UpdateRoleParam param)
+        public async Task<long> Submit(UpdateRoleParam param)
         {
             if (param.Id == default)
             {
@@ -60,7 +60,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpDelete]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> DeleteAsync(int[] ids) => await _logic.DeleteAsync(ids);
+        public async Task<int> DeleteAsync(long[] ids) => await _logic.DeleteAsync(ids);
 
 
 

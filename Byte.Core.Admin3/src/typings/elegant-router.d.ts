@@ -50,6 +50,8 @@ declare module "@elegant-router/types" {
     "function_toggle-auth": "/function/toggle-auth";
     "home": "/home";
     "iframe-page": "/iframe-page/:url";
+    "job": "/job";
+    "job_detail": "/job/detail";
     "login": "/login/:module(pwd-login|code-login|register|reset-pwd|bind-wechat)?";
     "manage": "/manage";
     "manage_menu": "/manage/menu";
@@ -86,9 +88,6 @@ declare module "@elegant-router/types" {
     "plugin_tables_vtable": "/plugin/tables/vtable";
     "plugin_typeit": "/plugin/typeit";
     "plugin_video": "/plugin/video";
-    "rank": "/rank";
-    "rank_day": "/rank/day";
-    "rank_week": "/rank/week";
     "table": "/table";
     "table_column": "/table/column";
     "table_list": "/table/list";
@@ -145,11 +144,11 @@ declare module "@elegant-router/types" {
     | "function"
     | "home"
     | "iframe-page"
+    | "job"
     | "login"
     | "manage"
     | "multi-menu"
     | "plugin"
-    | "rank"
     | "table"
     | "user-center"
   >;
@@ -188,6 +187,7 @@ declare module "@elegant-router/types" {
     | "function_tab"
     | "function_toggle-auth"
     | "home"
+    | "job_detail"
     | "manage_menu"
     | "manage_role"
     | "manage_user-detail"
@@ -213,8 +213,6 @@ declare module "@elegant-router/types" {
     | "plugin_tables_vtable"
     | "plugin_typeit"
     | "plugin_video"
-    | "rank_day"
-    | "rank_week"
     | "table_column"
     | "table_list"
     | "user-center"

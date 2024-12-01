@@ -9,7 +9,7 @@ namespace Byte.Core.Entity
     /// </summary>
     [SugarTable("Byte_Role")]
     
-    public class Role : BaseEntity<int>
+    public class Role : BaseEntity<long>
     {
         /// <summary>
         /// 角色名称
@@ -53,7 +53,7 @@ namespace Byte.Core.Entity
         /// 公司id
         /// </summary>
         [SugarColumn(Length = 200, IsNullable = true)]
-        public int DeptId { get; set; }
+        public long DeptId { get; set; }
 
         #region 导航
         [SugarColumn(IsIgnore = true)]

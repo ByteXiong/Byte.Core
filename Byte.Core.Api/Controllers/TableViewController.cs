@@ -56,7 +56,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> Submit(UpdateTableViewParam param)
+        public async Task<long> Submit(UpdateTableViewParam param)
         {
             if (param.Id == default)
             {

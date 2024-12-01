@@ -31,10 +31,10 @@ namespace Byte.Core.Tools
 
         #region Attribute
 
-        public static int Id
+        public static long Id
 
         {
-            get => _session == null ? default : int.Parse(_session.GetString("CurrentUser_Id"));
+            get => _session == null ? default : long.Parse(_session.GetString("CurrentUser_Id"));
             set => _session.SetString("CurrentUser_Id", value.ToString());
         }
 
@@ -61,10 +61,10 @@ namespace Byte.Core.Tools
         //    set => _session.SetString("CurrentUser_DeptId", value.ToString());
         //}
 
-        public static int DeptId
+        public static long DeptId
 
         {
-            get => _session == null ? default : int.Parse(_session.GetString("CurrentUser_DeptId"));
+            get => _session == null ? default : long.Parse(_session.GetString("CurrentUser_DeptId"));
             set => _session.SetString("CurrentUser_DeptId", value.ToString());
         }
 

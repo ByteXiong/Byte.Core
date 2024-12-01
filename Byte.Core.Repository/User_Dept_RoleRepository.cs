@@ -6,7 +6,7 @@ namespace Byte.Core.Repository
     /// <summary>
     /// 用户-角色
     /// </summary>
-    public class User_Dept_RoleRepository : BaseRepository<int, User_Dept_Role>
+    public class User_Dept_RoleRepository : BaseRepository<long, User_Dept_Role>
     {
         public User_Dept_RoleRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

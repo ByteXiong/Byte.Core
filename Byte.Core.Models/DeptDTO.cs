@@ -38,7 +38,7 @@ namespace Byte.Core.Models
     /// </summary>
     public class DeptTreeDTO
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// 图标
         /// </summary>
@@ -56,7 +56,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 父级部门ID
         /// </summary>
-        public int? ParentId { get; set; }
+        public long? ParentId { get; set; }
         /// <summary>
         /// 地址
         /// </summary>
@@ -116,12 +116,12 @@ namespace Byte.Core.Models
         /// <summary>
         /// 主键Id!
         /// </summary>
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// 父级
         /// </summary>
-        public int? ParentId { get; set; }
+        public long? ParentId { get; set; }
         /// <summary>
         /// 菜单
         /// </summary>

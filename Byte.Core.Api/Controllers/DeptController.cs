@@ -37,7 +37,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<List<DeptSelectDTO>> GetTreeSelectAsync([ FromQuery]DeptTypeEnum[] types=null, [FromQuery]int? parentId = null) => await _logic.GetTreeSelectAsync(types, parentId);
+        public async Task<List<DeptSelectDTO>> GetTreeSelectAsync([ FromQuery]DeptTypeEnum[] types=null, [FromQuery] long? parentId = null) => await _logic.GetTreeSelectAsync(types, parentId);
 
         /// <summary>
         /// 查询详情
@@ -46,7 +46,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<DeptInfo> GetInfoAsync(int id) => await _logic.GetInfoAsync(id);
+        public async Task<DeptInfo> GetInfoAsync(long id) => await _logic.GetInfoAsync(id);
 
         /// <summary>
         /// 提交
@@ -55,7 +55,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> Submit(UpdateDeptParam param)
+        public async Task<long> Submit(UpdateDeptParam param)
         {
             if (param.Id == default)
             {
@@ -74,7 +74,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpDelete]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> DeleteAsync(int[] ids) => await _logic.DeleteAsync(ids);
+        public async Task<int> DeleteAsync(long[] ids) => await _logic.DeleteAsync(ids);
 
         /// <summary>
         /// 设置状态
@@ -84,7 +84,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPut]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> SetStatusAsync(int id, bool status) => await _logic.SetStatusAsync(id, status);
+        public async Task<int> SetStatusAsync(long id, bool status) => await _logic.SetStatusAsync(id, status);
 
 
     }

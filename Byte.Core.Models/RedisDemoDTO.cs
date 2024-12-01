@@ -15,7 +15,7 @@ namespace Byte.Core.Models
     public class RedisDemoDTO
     {
         [FindKey]
-        public int Id { get; set; }
+        public long Id { get; set; }
         [FindKey]
         public string Code { get; set; }
         public string Srot { get; set; }

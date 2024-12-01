@@ -97,9 +97,9 @@ namespace Byte.Core.Business
             return entity;
         }
 
-        /// <summary>
+        /// <summary>5
         /// 退出登录
-        /// </summary>
+        /// </summary>5
         /// <returns></returns>
         public async Task LoginOutAsync()
         {

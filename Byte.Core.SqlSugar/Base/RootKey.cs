@@ -11,7 +11,7 @@ namespace Byte.Core.SqlSugar
         /// <summary>
         /// 主键
         /// </summary>
-        [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
+        [SugarColumn(IsPrimaryKey = true)]
         public T Id { get; set; }
     }
 }

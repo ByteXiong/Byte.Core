@@ -33,7 +33,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<List<MenuSelectDTO>> GetTreeSelectAsync(int parentId = 0) => await _logic.GetTreeSelectAsync(parentId);
+        public async Task<List<MenuSelectDTO>> GetTreeSelectAsync(long parentId = 0) => await _logic.GetTreeSelectAsync(parentId);
 
         /// <summary>
         /// 查询详情
@@ -50,7 +50,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> Submit(UpdateMenuParam param)
+        public async Task<long> Submit(UpdateMenuParam param)
         {
             if (param.Id ==default)
             {
@@ -71,7 +71,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPut]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> SetStatusAsync(int id, bool status) => await _logic.UpdateAsync(x => id == x.Id, x => new Menu { Status = status });
+        public async Task<int> SetStatusAsync(long id, bool status) => await _logic.UpdateAsync(x => id == x.Id, x => new Menu { Status = status });
 
         /// <summary>
         ///  删除
@@ -80,7 +80,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpDelete]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> DeleteAsync(int[] ids) => await _logic.DeleteAsync(ids);
+        public async Task<int> DeleteAsync(long[] ids) => await _logic.DeleteAsync(ids);
 
 
 
@@ -99,7 +99,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int[]> GetByRoleIdAsync(int roleId) => await _logic.GetByRoleIdAsync(roleId);
+        public async Task<long[]> GetByRoleIdAsync(long roleId) => await _logic.GetByRoleIdAsync(roleId);
 
 
         /// <summary>

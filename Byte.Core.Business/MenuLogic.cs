@@ -14,7 +14,7 @@ namespace Byte.Core.Business
     /// <summary>
     /// 角色-菜单
     /// </summary>
-    public class MenuLogic : BaseBusinessLogic<int, Menu, MenuRepository>
+    public class MenuLogic : BaseBusinessLogic<long, Menu, MenuRepository>
     {
         private readonly IUnitOfWork _unitOfWork;
         public readonly Role_MenuRepository   _role_MenuRepository;
@@ -49,7 +49,7 @@ namespace Byte.Core.Business
         /// </summary>55
         /// <param name="parentId"></param>
         /// <returns></returns>
-        public async Task<List<MenuSelectDTO>> GetTreeSelectAsync(int parentId = 0)
+        public async Task<List<MenuSelectDTO>> GetTreeSelectAsync(long parentId = 0)
         {
             var tree = await GetIQueryable().OrderBy(x => x.Order).Select<MenuSelectDTO>().ToTreeAsync(it => it.Children, it => it.ParentId, parentId, it => it.Id);
             return tree;
@@ -112,7 +112,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<int> AddAsync(UpdateMenuParam param)
+        public async Task<long> AddAsync(UpdateMenuParam param)
         {
             Menu model = param.Adapt<Menu>();
             try
@@ -165,7 +165,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<int> UpdateAsync(UpdateMenuParam param)
+        public async Task<long> UpdateAsync(UpdateMenuParam param)
         {
        
             try
@@ -289,7 +289,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
-        public async Task<int[]> GetByRoleIdAsync(int roleId)
+        public async Task<long[]> GetByRoleIdAsync(long roleId)
         {
             var ids = await  _role_MenuRepository.GetIQueryable(x => x.RoleId == roleId).Select(x => x.MenuId).ToArrayAsync();
             return ids;

@@ -24,7 +24,7 @@ namespace Byte.Core.Models
         public List<MenuQuery> Querys { get; set; }
     }
     public class MenuButton {
-        public int Id { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// 按钮编码
         /// </summary>
@@ -36,7 +36,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 父级Id
         /// </summary>
-        public int? ParentId { get; set; }
+        public long? ParentId { get; set; }
         /// <summary>
         /// 状态
         /// </summary>
@@ -46,11 +46,11 @@ namespace Byte.Core.Models
 
     public class MenuQuery
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// 父级Id
         /// </summary>
-        public int? ParentId { get; set; }
+        public long? ParentId { get; set; }
 
         public string Key { get; set; }
 
@@ -66,7 +66,7 @@ namespace Byte.Core.Models
     public class MenuTreeDTO 
     {
 
-        public int Id { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// 菜单标题
         /// </summary>
@@ -80,7 +80,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 父级菜单ID
         /// </summary>
-        public int? ParentId { get; set; }
+        public long? ParentId { get; set; }
 
         /// <summary>
         /// 排序
@@ -130,12 +130,12 @@ namespace Byte.Core.Models
         /// <summary>
         /// 主键Id!
         /// </summary>
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// 父级
         /// </summary>
-        public int? ParentId { get; set; }
+        public long? ParentId { get; set; }
         /// <summary>
         /// 菜单
         /// </summary>
@@ -172,7 +172,7 @@ namespace Byte.Core.Models
     }
     public class RouteDTO
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// 菜单名
         /// </summary>
@@ -200,7 +200,7 @@ namespace Byte.Core.Models
         /// 父级
         /// </summary>
         [SugarColumn(IsNullable = true)]
-        public int? ParentId { get; set; }
+        public long? ParentId { get; set; }
         /// <summary>
         /// 类型
         /// </summary>
@@ -307,11 +307,11 @@ namespace Byte.Core.Models
 
     public class RouteSelectDTO
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// 父级ID
         /// </summary>
-        public int? ParentId { get; set; }
+        public long? ParentId { get; set; }
         /// <summary>
         /// 标题
         /// </summary>
@@ -325,8 +325,8 @@ namespace Byte.Core.Models
     }
     public class SetByRoleIdDTO
     {
-        public int RoleId { get; set; }
-        public int[] MenuIds { get; set; }
+        public long RoleId { get; set; }
+        public long[] MenuIds { get; set; }
 
     }
 

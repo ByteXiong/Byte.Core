@@ -9,7 +9,7 @@ namespace Byte.Core.Repository
     /// <summary>
     /// 角色
     /// </summary>
-    public class RoleRepository : BaseRepository<int, Role>
+    public class RoleRepository : BaseRepository<long, Role>
     {
         public RoleRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
@@ -30,7 +30,7 @@ namespace Byte.Core.Repository
         /// 账号唯一
         /// </summary>
         /// <returns></returns>
-        private async Task OnlyAccountAsync(string code, int? id = default)
+        private async Task OnlyAccountAsync(string code, long? id = default)
         {
 
             Expression<Func<Role, bool>> where = x => x.Code == code;

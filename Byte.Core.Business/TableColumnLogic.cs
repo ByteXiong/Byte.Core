@@ -16,7 +16,7 @@ namespace Byte.Core.Business
     /// <summary>
     /// 
     /// </summary>
-    public class TableColumnLogic : BaseBusinessLogic<int, TableColumn, TableColumnRepository>
+    public class TableColumnLogic : BaseBusinessLogic<long, TableColumn, TableColumnRepository>
     {
 
         readonly IUnitOfWork _unitOfWork;

@@ -15,7 +15,7 @@ namespace Byte.Core.Models
     /// </summary>
     public class TableSortParam
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public int Sort { get; set; }
     }
 

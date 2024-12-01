@@ -8,7 +8,7 @@ namespace Byte.Core.Entity
     /// 数据库 
     /// </summary>
     [SugarTable("Byte_Tenant")]
-    public class Tenant : BaseEntity<int>
+    public class Tenant : BaseEntity<long>
     {
         /// <summary>
         /// 配置Id

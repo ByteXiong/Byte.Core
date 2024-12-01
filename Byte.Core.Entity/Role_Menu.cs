@@ -14,14 +14,14 @@ namespace Byte.Core.Entity
         /// 菜单Id
         /// </summary>
         [SugarColumn(IsPrimaryKey = true)]
-        public int MenuId { get; set; }
+        public long MenuId { get; set; }
 
 
         /// <summary>
         /// 角色Id
         /// </summary>
         [SugarColumn(IsPrimaryKey = true)]
-        public int RoleId { get; set; }
+        public long RoleId { get; set; }
     }
 
     //[JsonIgnore]//隐藏

@@ -31,7 +31,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<UserInfo> GetInfoAsync(int id) => await _logic.GetInfoAsync(id);
+        public async Task<UserInfo> GetInfoAsync(long id) => await _logic.GetInfoAsync(id);
 
         /// <summary>
         /// 提交
@@ -40,7 +40,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> Submit(UpdateUserParam param)
+        public async Task<long> Submit(UpdateUserParam param)
         {
             if (param.Id == default)
             {
@@ -59,7 +59,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpDelete]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> DeleteAsync(int[] ids) => await _logic.DeleteAsync(ids);
+        public async Task<int> DeleteAsync(long[] ids) => await _logic.DeleteAsync(ids);
 
 
         /// <summary>
@@ -70,6 +70,6 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPut]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<int> SetStatusAsync(int id, bool status) => await _logic.SetStatusAsync(id, status);
+        public async Task<int> SetStatusAsync(long id, bool status) => await _logic.SetStatusAsync(id, status);
     }
 }

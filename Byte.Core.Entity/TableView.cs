@@ -18,7 +18,7 @@ namespace Byte.Core.Entity
     /// </summary>
     [SugarTable("Byte_TableView")]
     
-    public class TableView : BaseEntity<int>
+    public class TableView : BaseEntity<long>
     {
         /// <summary>
         /// 表名

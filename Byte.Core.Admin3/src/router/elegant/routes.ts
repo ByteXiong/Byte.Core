@@ -238,6 +238,26 @@ export const generatedRoutes: GeneratedRoute[] = [
     }
   },
   {
+    name: 'job',
+    path: '/job',
+    component: 'layout.base',
+    meta: {
+      title: 'job',
+      i18nKey: 'route.job'
+    },
+    children: [
+      {
+        name: 'job_detail',
+        path: '/job/detail',
+        component: 'view.job_detail',
+        meta: {
+          title: 'job_detail',
+          i18nKey: 'route.job_detail'
+        }
+      }
+    ]
+  },
+  {
     name: 'login',
     path: '/login/:module(pwd-login|code-login|register|reset-pwd|bind-wechat)?',
     component: 'layout.blank$view.login',
@@ -618,35 +638,6 @@ export const generatedRoutes: GeneratedRoute[] = [
           title: 'plugin_video',
           i18nKey: 'route.plugin_video',
           icon: 'mdi:video'
-        }
-      }
-    ]
-  },
-  {
-    name: 'rank',
-    path: '/rank',
-    component: 'layout.base',
-    meta: {
-      title: 'rank',
-      i18nKey: 'route.rank'
-    },
-    children: [
-      {
-        name: 'rank_day',
-        path: '/rank/day',
-        component: 'view.rank_day',
-        meta: {
-          title: 'rank_day',
-          i18nKey: 'route.rank_day'
-        }
-      },
-      {
-        name: 'rank_week',
-        path: '/rank/week',
-        component: 'view.rank_week',
-        meta: {
-          title: 'rank_week',
-          i18nKey: 'route.rank_week'
         }
       }
     ]

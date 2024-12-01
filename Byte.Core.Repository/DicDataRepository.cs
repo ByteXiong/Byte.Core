@@ -6,7 +6,7 @@ namespace Byte.Core.Repository
     /// <summary>
     /// 字典数据
     /// </summary>
-    public class DicDataRepository : BaseRepository<int, DicData>
+    public class DicDataRepository : BaseRepository<long, DicData>
     {
         public DicDataRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

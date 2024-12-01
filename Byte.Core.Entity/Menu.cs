@@ -11,7 +11,7 @@ namespace Byte.Core.Entity
     /// </summary>
     [SugarTable("Byte_Menu")]
     
-    public class Menu : BaseEntity<int>
+    public class Menu : BaseEntity<long>
     {
         /// <summary>
         /// 菜单名
@@ -53,7 +53,7 @@ namespace Byte.Core.Entity
         /// 父级
         /// </summary>
         [SugarColumn(IsNullable = true)]
-        public int? ParentId { get; set; }
+        public long? ParentId { get; set; }
         /// <summary>
         /// 类型
         /// </summary>

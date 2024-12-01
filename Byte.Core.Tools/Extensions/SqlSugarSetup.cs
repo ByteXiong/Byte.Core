@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using StackExchange.Profiling;
 using Byte.Core.SqlSugar.Cache;
 using Microsoft.Identity.Client;
+using Byte.Core.Common.SnowflakeIdHelper;
 namespace Byte.Core.Tools.Extensions;
 
 /// <summary>
@@ -173,10 +174,10 @@ public static class SqlSugarSetup
     private static void DataExecuting(object value, DataFilterModel entityInfo)
     {
 
-        if (entityInfo.EntityValue is RootKey<Guid> { } rootEntity)
+        if (entityInfo.EntityValue is RootKey<long> { } rootEntity)
         {
-            if (rootEntity.Id == Guid.Empty)
-                rootEntity.Id = Guid.NewGuid();
+            if (rootEntity.Id == default)
+                rootEntity.Id = IdHelper.GetLongId();
         }
 
         if (entityInfo.EntityValue is BaseEntity<Guid> baseEntity)

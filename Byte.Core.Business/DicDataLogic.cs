@@ -13,7 +13,7 @@ namespace Byte.Core.Business
     /// <summary>
     /// 字典
     /// </summary>
-    public  class DicDataLogic : BaseBusinessLogic<int, DicData, DicDataRepository>
+    public  class DicDataLogic : BaseBusinessLogic<long, DicData, DicDataRepository>
     {
         /// <summary>
         /// 

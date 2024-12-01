@@ -10,7 +10,7 @@ using Byte.Core.Common.Extensions;
 
 namespace Byte.Core.Repository
 {
-    public class MenuRepository : BaseRepository<int, Menu>
+    public class MenuRepository : BaseRepository<long, Menu>
     {
         public MenuRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
@@ -31,7 +31,7 @@ namespace Byte.Core.Repository
 
             return base.UpdateAsync(entity, lstIgnoreColumns, isLock);
         }
-        public override async Task<int> DeleteAsync(int[] ids, bool isLock = true)
+        public override async Task<int> DeleteAsync(long[] ids, bool isLock = true)
         {
 #if !DEBUG
         if (!CurrentUser.RoleCodes.Contains(AppConfig.Root))throw new BusException("线上环境不允许删除菜单,请联系管理员"); 

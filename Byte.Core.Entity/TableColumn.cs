@@ -17,13 +17,13 @@ namespace Byte.Core.Entity
     /// </summary>
     [SugarTable("Byte_TableColumn")]
     
-    public class TableColumn : BaseEntity<int>
+    public class TableColumn : BaseEntity<long>
     {
 
         /// <summary>
         ///  视图Id
         /// </summary>
-        public int  ViewId { get; set; }
+        public long ViewId { get; set; }
 
         /// <summary>
         /// 字段名称

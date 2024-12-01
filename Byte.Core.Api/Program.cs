@@ -3,11 +3,13 @@ using Asp.Versioning.ApiExplorer;
 using AspectCore.Extensions.DependencyInjection;
 using Autofac;
 using Byte.Core.Api.Common;
+using Byte.Core.Api.Common.Quartz;
 using Byte.Core.Common.Attributes;
 using Byte.Core.Common.Extensions;
 using Byte.Core.Common.Filters;
 using Byte.Core.Common.Helpers;
 using Byte.Core.Common.Models;
+using Byte.Core.Common.SnowflakeIdHelper;
 using Byte.Core.Common.Web;
 using Byte.Core.SqlSugar;
 using Byte.Core.SqlSugar.ConfigOptions;
@@ -21,8 +23,11 @@ using log4net.Repository;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
+using Quartz;
+using Quartz.Impl;
 using SkiaSharp;
 using StackExchange.Profiling;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -31,7 +36,7 @@ using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 //雪花Id 
-//new IdHelperBootstrapper().SetWorkderId(1).Boot();
+new IdHelperBootstrapper().SetWorkderId(1).Boot();
 //Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
 //#if DEBUG
@@ -222,8 +227,14 @@ builder.Services.Configure<Configs>(configuration)
 .AddScoped<SugarDbContext>();
 builder.Services.AddSqlSugarSetup(configuration);
 #endregion
-
-
+#region 任务调度
+IScheduler _scheduler = null;
+builder.Services.AddSingleton<IScheduler>(provider =>
+{
+    StdSchedulerFactory factory = new StdSchedulerFactory();
+    _scheduler = factory.GetScheduler().Result; // use Wait to block the execution
+    return _scheduler;
+});
 
 
 #region 各种 注入
@@ -354,7 +365,9 @@ builder.Services.BuildAspectCoreWithAutofacServiceProvider(config =>
     //config.Interceptors.AddTyped<RedisInterceptorAttribute>();
 }); //接入AspectCore.Injector 属性注入
 
-#region 任务调度
+
+
+
 //Console.WriteLine("Quartz:定时器启动" + DateTime.Now.ToString());
 
 
@@ -518,12 +531,28 @@ app.UseStaticFiles(new StaticFileOptions
 //    RequestPath = "/UploadFiles"
 //});
 #endregion
+//#region 初始数据库
+//await DataSeederMiddleware.Init("Byte.Core.Entity");
+//#endregion
+//#region  任务调度
+//await QuartzJobMiddleware.Init();
+//#endregion
 
-
+// 在 app.Run() 之后执行一个方法
 #region 初始数据库
 await app.UseDataSeederMiddlewareAsync("Byte.Core.Entity");
 #endregion
+//app.Services.GetService<IHostApplicationLifetime>().ApplicationStarted.Register(async () =>
+//{
+
+//    #region  任务调度
+//    await QuartzJobMiddleware.Init(_scheduler);
+//    #endregion
+//});
+
+await app.QuartzJobInit();
 app.Run();
+
 
 
 

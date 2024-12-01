@@ -18,7 +18,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// 公司
         /// </summary>
-        public int? DeptId { get; set; }
+        public long? DeptId { get; set; }
     }
     /// <summary>!
     ///  用户 修改
@@ -33,7 +33,7 @@ namespace Byte.Core.Models
     /// </summary>
     public class AddUserParam : User
     {
-        public List<int>? RoleIds { get; set; }
+        public List<long>? RoleIds { get; set; }
     }
 
     /// <summary>
@@ -42,7 +42,7 @@ namespace Byte.Core.Models
     public class UserDTO
     {
        
-        public int? Id { get; set; }
+        public long? Id { get; set; }
         /// <summary>
         /// 昵称
         /// </summary>
@@ -86,7 +86,7 @@ namespace Byte.Core.Models
     /// </summary>
     public class UserInfo : User
     {
-        public List<int>? RoleIds { get; set; }
+        public List<long>? RoleIds { get; set; }
     }
     /// <summary>
     /// 设置密码
@@ -95,7 +95,7 @@ namespace Byte.Core.Models
         /// <summary>
         /// Id
         /// </summary>
-    public  int Id { get; set; }
+    public long Id { get; set; }
         /// <summary>
         /// 旧密码
         /// </summary>

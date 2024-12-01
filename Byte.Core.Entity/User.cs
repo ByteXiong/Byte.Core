@@ -11,7 +11,7 @@ namespace Byte.Core.Entity
     /// </summary>
     [SugarTable("Byte_User")]
     
-    public class User : BaseEntity<int>
+    public class User : BaseEntity<long>
     {
 
         /// <summary>

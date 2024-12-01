@@ -27,7 +27,7 @@ namespace Byte.Core.Business
     /// <summary>
     ///  数据表
     /// </summary>
-    public class TableViewLogic : BaseBusinessLogic<int, TableView, TableViewRepository>
+    public class TableViewLogic : BaseBusinessLogic<long, TableView, TableViewRepository>
     {
         public readonly IUnitOfWork _unitOfWork;
         readonly TableColumnRepository _tableColumnRepository;
@@ -83,7 +83,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<int> AddAsync(UpdateTableViewParam param)
+        public async Task<long> AddAsync(UpdateTableViewParam param)
         {
             TableView model = param.Adapt<TableView>();
             await AddAsync(model);
@@ -95,7 +95,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<int> UpdateAsync(UpdateTableViewParam param)
+        public async Task<long> UpdateAsync(UpdateTableViewParam param)
         {
             var entity = await GetIQueryable(x => x.Id == param.Id).FirstOrDefaultAsync();
             entity.Tableof = param.Tableof;

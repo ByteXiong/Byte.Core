@@ -9,7 +9,7 @@ namespace Byte.Core.Entity
     /// </summary>
 
     [SugarTable("Byte_Dept")]
-    public class Dept : BaseEntity<int>
+    public class Dept : BaseEntity<long>
     {
 
         

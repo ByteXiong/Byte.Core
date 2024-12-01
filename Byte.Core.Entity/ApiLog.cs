@@ -14,7 +14,7 @@ namespace Byte.Core.Entity
     /// </summary>
     
     [SugarTable("Byte_LoginLog")]
-    public class ApiLog : BaseEntity<int>
+    public class ApiLog : BaseEntity<long>
     {
 
 

@@ -9,7 +9,7 @@ namespace Byte.Core.Repository
     /// <summary>
     /// 用户
     /// </summary>
-    public class UserRepository : BaseRepository<int, User>
+    public class UserRepository : BaseRepository<long, User>
     {
         public UserRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
@@ -43,7 +43,7 @@ namespace Byte.Core.Repository
         /// 账号唯一
         /// </summary>
         /// <returns></returns>
-        private async Task OnlyAccountAsync(string userName, int? id = default)
+        private async Task OnlyAccountAsync(string userName, long? id = default)
         {
 
             Expression<Func<User, bool>> where = x => x.UserName == userName;
