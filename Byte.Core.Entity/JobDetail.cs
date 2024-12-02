@@ -15,15 +15,9 @@ namespace Byte.Core.Entity
 
 
         /// <summary>
-        /// 名称
-        /// </summary>
-        [SugarColumn(ColumnDescription = "名称", Length = 128)]
-        public string Name { get; set; }
-
-        /// <summary>
         /// 组名称
         /// </summary>
-        [SugarColumn(ColumnDescription = "组名称", Length = 128, IsNullable = true)]
+        [SugarColumn(ColumnDescription = "名称", Length = 128, IsNullable = true)]
         public string GroupName { get; set; }
 
         /// <summary>

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Byte.Core.Api.Common.Quartz
+namespace Byte.Core.Business.Quartz
 {
     /// <summary>
     /// 动态作业任务

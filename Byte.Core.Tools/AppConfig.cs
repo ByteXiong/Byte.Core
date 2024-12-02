@@ -14,7 +14,7 @@ namespace Byte.Core.Tools
         public const string Tenant = "runtest";
         public const string Tenant1 = "DataConnection";
         public const string Tenant2 = "Byte.Core_DB";
-        public const string TenantDts = "runtest2";
+        public const string TenantDts = "dataosha";
         
         //public static IWebHostEnvironment WebHostEnvironment => InternalApp.WebHostEnvironment;
         #endregion

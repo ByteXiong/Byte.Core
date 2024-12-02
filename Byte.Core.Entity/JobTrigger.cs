@@ -17,8 +17,8 @@ namespace Byte.Core.Entity
         /// <summary>
         /// 名称
         /// </summary>
-        [SugarColumn(ColumnDescription = "名称", Length = 128)]
-        public string Name { get; set; }
+        [SugarColumn(ColumnDescription = "名称", Length = 128, IsNullable = true)]
+        public string GroupName { get; set; }
         /// <summary>
         /// 触发器类型FullName
         /// </summary>
@@ -81,25 +81,25 @@ namespace Byte.Core.Entity
         /// 触发次数
         /// </summary>
         [SugarColumn(ColumnDescription = "触发次数")]
-        public long NumberOfRuns { get; set; }
+        public int NumberOfRuns { get; set; }
 
         /// <summary>
         /// 最大触发次数（0:不限制，n:N次）
         /// </summary>
         [SugarColumn(ColumnDescription = "最大触发次数")]
-        public long MaxNumberOfRuns { get; set; }
+        public int MaxNumberOfRuns { get; set; }
 
         /// <summary>
         /// 出错次数
         /// </summary>
         [SugarColumn(ColumnDescription = "出错次数")]
-        public long NumberOfErrors { get; set; }
+        public int NumberOfErrors { get; set; }
 
         /// <summary>
         /// 最大出错次数（0:不限制，n:N次）
         /// </summary>
         [SugarColumn(ColumnDescription = "最大出错次数")]
-        public long MaxNumberOfErrors { get; set; }
+        public int MaxNumberOfErrors { get; set; }
 
         /// <summary>
         /// 重试次数

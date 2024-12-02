@@ -549,8 +549,9 @@ await app.UseDataSeederMiddlewareAsync("Byte.Core.Entity");
 //    await QuartzJobMiddleware.Init(_scheduler);
 //    #endregion
 //});
-
+#region  任务调度
 await app.QuartzJobInit();
+#endregion
 app.Run();
 
 
