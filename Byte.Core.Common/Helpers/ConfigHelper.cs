@@ -16,7 +16,6 @@ namespace Byte.Core.Common.Helpers
                     {
                         if (_config == null)
                         {
-                            Console.WriteLine($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json");
                             var builder = new ConfigurationBuilder()
                                 .SetBasePath(AppContext.BaseDirectory)
                              .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
