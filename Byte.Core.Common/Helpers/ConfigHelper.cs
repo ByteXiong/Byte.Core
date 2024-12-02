@@ -16,9 +16,11 @@ namespace Byte.Core.Common.Helpers
                     {
                         if (_config == null)
                         {
+                            Console.WriteLine($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json");
                             var builder = new ConfigurationBuilder()
                                 .SetBasePath(AppContext.BaseDirectory)
-                                .AddJsonFile("appsettings.json");
+                             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                             .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true, reloadOnChange: true);
                             _config = builder.Build();
                         }
                     }

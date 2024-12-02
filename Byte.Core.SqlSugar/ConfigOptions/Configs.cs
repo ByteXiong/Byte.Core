@@ -7,6 +7,11 @@ namespace Byte.Core.SqlSugar.ConfigOptions;
 /// </summary>
 public class Configs
 {
+    /// <summary>
+    /// JWT密钥
+    /// </summary>
+    public string JWTSecret { get; set; }
+
     #region 是否开发模式
 
     private bool? _isQuickDebug;
