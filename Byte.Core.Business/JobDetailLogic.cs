@@ -1,4 +1,4 @@
-﻿using Byte.Core.Business.Quartz;
+using Byte.Core.Business.Quartz;
 using Byte.Core.Common.Extensions;
 using Byte.Core.Entity;
 using Byte.Core.Models;
@@ -43,9 +43,9 @@ namespace Byte.Core.Repository
             var page = await Repository.GetIQueryable()
                 .Includes(x => x.Triggers)
                 .Select(
-                 x=> new JobDetailDTO { Triggers = x.Triggers },true
+                 x => new JobDetailDTO { Triggers = x.Triggers }, true
                 ).ToPagedResultsAsync(param);
-             
+
             return page;
         }
 
@@ -87,45 +87,38 @@ namespace Byte.Core.Repository
 
 
 
-
         /// <summary>
         ///  设置状态
         /// </summary>
         /// <returns></returns>
-        public async Task<int> SetStatusAsync(int id, bool Status) {
+        public async Task<int> SetStatusAsync(int id, bool Status)
+        {
             var type = 1;
             var entiy = await GetIQueryable(x => x.Id == id).Includes(x => x.Triggers).FirstOrDefaultAsync();
-            if (type==1)
+            if (type == 1)
             {
-           
-            
-             await _scheduler.PauseJob(new JobKey(entiy.Id.ToString()) );
+
+                await _scheduler.PauseJob(new JobKey(entiy.Id.ToString()));
             }
             else
             {
-             await   _scheduler.PauseTrigger(new TriggerKey("myTrigger"));
+                await _scheduler.PauseTrigger(new TriggerKey("myTrigger"));
             }
 
 
             //return await UpdateAsync(x => id == x.Id, x => new JobDetail { Status = Status });
             return 1;
         }
-/// <summary>
-///  
-/// </summary>
-/// <returns></returns>
-        public async Task StratAsync() {
-
-
+         
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <returns></returns>
+        public async Task StratAsync()
+        {
             //IScheduler _scheduler = ServiceLocator.Resolve<IScheduler>();
-            _scheduler.ListenerManager.AddSchedulerListener(new SchedulerListener());
-            _scheduler.ListenerManager.AddJobListener(new JobListener());
-            _scheduler.ListenerManager.AddTriggerListener(new TriggerListener());
-              
             //获取数据库的QZ配置
-            var list = Repository.GetIQueryable().Includes(x => x.Triggers.Where(y=>y.Status== TriggerStatus.Ready).ToList()).ToList();
-            //先判断_scheduler 是否存在
-            var jobKeys = await _scheduler.GetJobKeys(GroupMatcher<JobKey>.AnyGroup());
+            var list = GetIQueryable().Includes(x => x.Triggers.Where(y => y.Status == TriggerStatus.Ready).ToList()).ToList();
             Dictionary<IJobDetail, IReadOnlyCollection<ITrigger>> triggersAndJobs = new Dictionary<IJobDetail, IReadOnlyCollection<ITrigger>>();
             // Get the job detail for each job
             foreach (JobDetail detail in list)
@@ -159,13 +152,11 @@ namespace Byte.Core.Repository
                     .WithIdentity(trigger.Id.ToString(), trigger.GroupName ?? $"Trigger-{trigger.Id.ToString()}")
                     .UsingJobData(triggerMap)//设置触发器的数据
                     .ForJob(jobDetail.Key)// 设置触发器的作业
-
-
                     .WithSimpleSchedule(x => x
-                      .WithRepeatCount(trigger.MaxNumberOfRuns)//最大触发次数\
+                      .WithRepeatCount(trigger.MaxNumberOfRuns > 0 ? trigger.MaxNumberOfRuns - 1 : 0)//最大触发次数（需要减1，因为第一次执行不计入重复次数）
                       )
                      .WithCronSchedule(trigger.TriggerType)//设置触发器的类型 
-                                                           //设置开始时间
+                    //设置开始时间
                     .StartAt(new DateTimeOffset(trigger.StartTime ?? DateTime.Now, TimeSpan.Zero))
                     //设置结束时间
                     .EndAt(new DateTimeOffset(trigger.EndTime ?? DateTime.Now.AddYears(9), TimeSpan.Zero))
@@ -177,7 +168,7 @@ namespace Byte.Core.Repository
             }
             if (triggersAndJobs.Count > 0)
             {
-                await _scheduler.Start();
+               
                 Console.WriteLine("调度任务启动");
                 await _scheduler.ScheduleJobs(triggersAndJobs, true);
             }

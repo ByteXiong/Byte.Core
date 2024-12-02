@@ -96,6 +96,7 @@ namespace Byte.Core.Api.Controllers
                 .WithDescription("测试")
                 .Build();
 
+
             var trigger = TriggerBuilder.Create()
                 .WithIdentity("testTrigger")
                 .StartNow()

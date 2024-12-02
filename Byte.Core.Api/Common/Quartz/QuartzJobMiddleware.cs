@@ -1,4 +1,5 @@
-﻿using Byte.Core.Common.Extensions;
+﻿using Byte.Core.Business.Quartz;
+using Byte.Core.Common.Extensions;
 using Byte.Core.Common.IoC;
 using Byte.Core.Entity;
 using Byte.Core.Repository;
@@ -27,6 +28,11 @@ namespace Byte.Core.Api.Common.Quartz
       
         public static async Task QuartzJobInit(this IApplicationBuilder app)
         {
+            var _scheduler = app.ApplicationServices.GetService<IScheduler>();
+            _scheduler.ListenerManager.AddSchedulerListener(new SchedulerListener());
+            _scheduler.ListenerManager.AddJobListener(new JobListener());
+            _scheduler.ListenerManager.AddTriggerListener(new TriggerListener());
+            await _scheduler.Start();
             var _jobDetail = app.ApplicationServices.GetService<JobDetailLogic>();
             await  _jobDetail.StratAsync();
         }
