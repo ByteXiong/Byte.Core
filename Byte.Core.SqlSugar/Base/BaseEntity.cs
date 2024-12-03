@@ -17,8 +17,8 @@ namespace Byte.Core.SqlSugar
         /// <summary>
         /// 创建时间
         /// </summary>
-        [SugarColumn(InsertServerTime = true, IsNullable = true)]
-        public DateTime CreateTime { get; set; }
+        [SugarColumn( IsNullable = true)]
+        public long CreateTime { get; set; }
         /// <summary>
         /// 更新者名称
         /// </summary>
@@ -28,7 +28,7 @@ namespace Byte.Core.SqlSugar
         /// <summary>
         /// 最后更新时间
         /// </summary>
-        [SugarColumn(IsOnlyIgnoreUpdate = true,IsNullable = true)]
-        public DateTime? UpdateTime { get; set; }
+        [SugarColumn(IsNullable = true)]
+        public long? UpdateTime { get; set; }
     }
 }
