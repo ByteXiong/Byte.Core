@@ -47,35 +47,38 @@ namespace Byte.Core.Entity
         [MaxLength(128)]
         public string Description { get; set; }
 
+
         /// <summary>
         /// 状态
         /// </summary>
         [SugarColumn(ColumnDescription = "状态")]
-        public TriggerStatus Status { get; set; }
+        public bool Status { get; set; }
+
+       
 
         /// <summary>
         /// 起始时间
         /// </summary>
         [SugarColumn(ColumnDescription = "起始时间")]
-        public DateTime? StartTime { get; set; }
+        public long? StartTime { get; set; }
 
         /// <summary>
         /// 结束时间
         /// </summary>
         [SugarColumn(ColumnDescription = "结束时间")]
-        public DateTime? EndTime { get; set; }
+        public long? EndTime { get; set; }
 
         /// <summary>
         /// 最近运行时间
         /// </summary>
         [SugarColumn(ColumnDescription = "最近运行时间")]
-        public DateTime? LastRunTime { get; set; }
+        public long? LastRunTime { get; set; }
 
         /// <summary>
         /// 下一次运行时间
         /// </summary>
         [SugarColumn(ColumnDescription = "下一次运行时间")]
-        public DateTime? NextRunTime { get; set; }
+        public long? NextRunTime { get; set; }
 
         /// <summary>
         /// 触发次数
@@ -135,10 +138,15 @@ namespace Byte.Core.Entity
         /// <summary>
         /// 任务Id
         /// </summary>
-        public long DetailId { get; set; } 
+        public long DetailId { get; set; }
 
         #region 导航
 
+        /// <summary>
+        /// 状态
+        /// </summary>
+        [SugarColumn(IsIgnore = true)]
+        public TriggerStateEnum State { get; set; }
         /// <summary>
         ///  任务
         /// </summary>

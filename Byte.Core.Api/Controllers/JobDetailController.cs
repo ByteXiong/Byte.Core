@@ -1,14 +1,17 @@
 ﻿using Asp.Versioning;
 using Byte.Core.Api.Common;
 using Byte.Core.Business;
+using Byte.Core.Business.Quartz;
 using Byte.Core.Models;
-using Byte.Core.Repository;
 using Byte.Core.SqlSugar;
+using Byte.Core.Tools;
 using Microsoft.AspNetCore.Mvc;
+using Quartz;
+using System;
 
 namespace Byte.Core.Api.Controllers
 {
-  
+
     [Route("api/[controller]/[action]")]
     public class JobDetailController(JobDetailLogic logic) : BaseApiController
     {
@@ -59,5 +62,32 @@ namespace Byte.Core.Api.Controllers
         [HttpDelete]
         [ApiVersion("1.0", Deprecated = false)]
         public async Task<int> DeleteAsync(long[] ids) => await _logic.DeleteAsync(ids);
-    }
+
+
+        /// <summary>
+        /// 全局启动
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [ApiVersion("1.0", Deprecated = false)]
+        public async Task SetAllStateAsync([FromBody] JobActionEnum action) => await _logic.SetAllStateAsync(action);
+
+
+        /// <summary>
+        ///  设置作业状态
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [ApiVersion("1.0", Deprecated = false)]
+        public async Task SetJobStateAsync(long id, [FromBody] JobActionEnum action)=>await _logic.SetJobStateAsync( id,action);
+
+
+        /// <summary>
+        ///  设置触发器状态
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [ApiVersion("1.0", Deprecated = false)]
+        public async Task SetTriggerStateAsync(long id, [FromBody] JobActionEnum action) => await _logic.SetTriggerStateAsync( id, action);
+}
 }

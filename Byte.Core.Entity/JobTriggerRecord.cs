@@ -36,7 +36,7 @@ namespace Byte.Core.Entity
         /// 触发器状态
         /// </summary>
         [SugarColumn(ColumnDescription = "触发器状态")]
-        public TriggerStatus Status { get; set; } = TriggerStatus.Ready;
+        public TriggerStateEnum Status { get; set; }
 
         /// <summary>
         /// 本次执行结果

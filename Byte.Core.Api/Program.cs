@@ -3,6 +3,7 @@ using Asp.Versioning.ApiExplorer;
 using AspectCore.Extensions.DependencyInjection;
 using Autofac;
 using Byte.Core.Api.Common;
+using Byte.Core.Api.Common.Authorization;
 using Byte.Core.Api.Common.Quartz;
 using Byte.Core.Common.Attributes;
 using Byte.Core.Common.Extensions;
@@ -22,6 +23,7 @@ using log4net;
 using log4net.Repository;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
@@ -260,6 +262,10 @@ builder.Services.AddMiniProfiler(options =>
 }
 );
 #endregion
+builder.Services.Configure<KestrelServerOptions>(options =>
+{
+    options.AllowSynchronousIO = true;
+});
 
 
 //builder.Services.AddHttpContextAccessor();
@@ -275,6 +281,8 @@ builder.Services.AddControllersWithViews();
 #region 过滤器
 builder.Services.AddControllers(options =>
 {
+
+    options.Filters.Add<ApiLogAttribute>();
     //options.Filters.Add<ValidFilterAttribute>();
     //全局异常过滤器
     options.Filters.Add<GlobalExceptionFilter>();

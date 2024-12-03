@@ -13,32 +13,36 @@ namespace Byte.Core.Entity
     /// 登录日志
     /// </summary>
     
-    [SugarTable("Byte_LoginLog")]
+    [SugarTable("Byte_ApiLog")]
     public class ApiLog : BaseEntity<long>
     {
-
 
 
         /// <summary>
         /// 请求路径
         /// </summary>
         [SugarColumn(IsNullable = true)]
-        public  string Path { get; set; }
-       
+        public  string Url { get; set; }
+
         /// <summary>
         /// 请求方式
         /// </summary>
-
+        [SugarColumn(IsNullable = true)]
         public string Method { get; set; }
         /// <summary>
         /// 请求参数
         /// </summary>
         [SugarColumn(IsNullable = true)]
-        public  string Body { get; set; }
-
+        public  string Query { get; set; }
+        /// <summary>
+        /// 请求参数
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public string Body { get; set; }
         /// <summary>
         /// 返回结果
         /// </summary>
+        [SugarColumn(IsNullable = true)]
         public  string Result { get; set; }
 
         /// <summary>
@@ -52,6 +56,13 @@ namespace Byte.Core.Entity
         /// </summary>
         [SugarColumn(IsNullable = true)]
         public VersionEnum? Version { get; set; }
+
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public string Description { get; set; }
+
+        
     }
 
     //[JsonIgnore]//隐藏

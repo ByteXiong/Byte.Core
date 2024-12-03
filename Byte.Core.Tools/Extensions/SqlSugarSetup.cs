@@ -180,16 +180,16 @@ public static class SqlSugarSetup
                 rootEntity.Id = IdHelper.GetLongId();
         }
 
-        if (entityInfo.EntityValue is BaseEntity<Guid> baseEntity)
+        if (entityInfo.EntityValue is BaseEntity<long> baseEntity)
         {
             switch (entityInfo.OperationType)
             {
                 case DataFilterType.InsertByObject:
                     {
-                        //if (baseEntity.CreateTime == DateTime.MinValue)
-                        //{
-                        //    baseEntity.CreateTime = DateTime.Now;
-                        //}
+                        if (baseEntity.CreateTime == default)
+                        {
+                            baseEntity.CreateTime = DateTime.UtcNow.ToUnixTimeStamp();
+                        }
                         if (!baseEntity.CreateBy.IsNullOrEmpty())
                         {
                             baseEntity.CreateBy = CurrentUser.NickName;
@@ -198,10 +198,10 @@ public static class SqlSugarSetup
                     }
                 case DataFilterType.UpdateByObject:
 
-                    //if (baseEntity.UpdateTime == DateTime.MinValue)
-                    //{
-                    //    baseEntity.UpdateTime = DateTime.Now;
-                    //}
+                    if (baseEntity.UpdateTime == default)
+                    {
+                        baseEntity.UpdateTime = DateTime.UtcNow.ToUnixTimeStamp();
+                    }
                     if (!baseEntity.UpdateBy.IsNullOrEmpty())
                     {
                         baseEntity.UpdateBy = CurrentUser.NickName;
