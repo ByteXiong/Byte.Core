@@ -117,3 +117,89 @@ export enum IconTypeEnum {
   iconify图标 = 1,
   本地图标 = 2
 }
+
+export enum JobActionEnum {
+  启动 = 1,
+  暂停 = 2,
+  重启 = 3,
+  执行 = 4
+}
+
+/// <summary>
+/// 作业触发器状态
+/// </summary>
+export enum TriggerStateEnum {
+  /// <summary>
+  /// 积压 Backlog
+  /// </summary>
+  /// <remarks>起始时间大于当前时间</remarks>
+  Backlog = 1,
+
+  /// <summary>
+  /// 就绪
+  /// </summary>
+  Ready = 2,
+
+  /// <summary>
+  /// 正在运行
+  /// </summary>
+  Running = 3,
+
+  /// <summary>
+  /// 暂停
+  /// </summary>
+  Paused = 4,
+
+  /// <summary>
+  /// 阻塞
+  /// </summary>
+  /// <remarks>本该执行但是没有执行</remarks>
+  Blocked = 5,
+
+  /// <summary>
+  /// 由失败进入就绪
+  /// </summary>
+  /// <remarks>运行错误当并未超出最大错误数，进入下一轮就绪</remarks>
+  ErrorToReady = 6,
+
+  /// <summary>
+  /// 归档
+  /// </summary>
+  /// <remarks>结束时间小于当前时间</remarks>
+  Complete = 7,
+
+  /// <summary>
+  /// 崩溃
+  /// </summary>
+  /// <remarks>错误次数超出了最大错误数</remarks>
+  Panic = 8,
+
+  /// <summary>
+  /// 超限
+  /// </summary>
+  /// <remarks>运行次数超出了最大限制</remarks>
+  Overrun = 9,
+
+  /// <summary>
+  /// 无触发时间
+  /// </summary>
+  /// <remarks>下一次执行时间为 null </remarks>
+  Unoccupied = 10,
+
+  /// <summary>
+  /// 未启动
+  /// </summary>
+  NotStart = 11,
+
+  /// <summary>
+  /// 未知作业触发器
+  /// </summary>
+  /// <remarks>作业触发器运行时类型为 null</remarks>
+  Unknown = 12,
+
+  /// <summary>
+  /// 未知作业处理程序
+  /// </summary>
+  /// <remarks>作业处理程序类型运行时类型为 null</remarks>
+  Unhandled = 13
+}

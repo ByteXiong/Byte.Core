@@ -3,11 +3,13 @@ import { ref } from 'vue';
 import { usePagination, useRequest } from 'alova/client';
 import { useRoute } from 'vue-router';
 import { type DataTableColumn, NButton, NDataTable, NTag } from 'naive-ui';
+import dayjs from 'dayjs';
 import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
 import { useAuth } from '@/hooks/business/auth';
 import type { JobDetailDTO } from '@/api/globals';
+import { JobActionEnum, TriggerStateEnum } from '@/api/apiEnums';
 import EditForm from './modules/editForm.vue';
 const { hasAuth } = useAuth();
 // 获取当前页面路由参数
@@ -69,6 +71,48 @@ const { send: handleDelete } = useRequest(
   { force: true, immediate: false }
 );
 
+// 修改全局状态
+const { send: setAllState } = useRequest(
+  action =>
+    Apis.JobDetail.post_api_jobdetail_setallstate({
+      data: action,
+      transform: res => {
+        window.$message?.success('操作成功');
+        getData(1, pageSize.value);
+        return res.data;
+      }
+    }),
+  { force: true, immediate: false }
+);
+// 修改作业状态
+const { send: setJobState } = useRequest(
+  action =>
+    Apis.JobDetail.post_api_jobdetail_setjobstate({
+      params: { id: action.id },
+      data: action.action,
+      transform: res => {
+        window.$message?.success('操作成功');
+        getData(page.value, pageSize.value);
+        return res.data;
+      }
+    }),
+  { force: true, immediate: false }
+);
+// 修改触发器
+const { send: setTriggerState } = useRequest(
+  action =>
+    Apis.JobDetail.post_api_jobdetail_settriggerstate({
+      params: { id: action.id },
+      data: action.action,
+      transform: res => {
+        window.$message?.success('操作成功');
+        getData(page.value, pageSize.value);
+        return res.data;
+      }
+    }),
+  { force: true, immediate: false }
+);
+
 const appStore = useAppStore();
 
 // const { bool: visible, setTrue: openModal } = useBoolean();
@@ -80,22 +124,11 @@ const editFormRef = ref();
 const openForm = (id?: string) => {
   editFormRef.value?.openForm(id);
 };
-// 打开权限
-const menuTreeRef = ref();
-const openMenuTree = (id?: string) => {
-  menuTreeRef.value?.openForm(id);
-};
 
-// 共享函数
-defineExpose({
-  openForm,
-  handleDelete,
-  openMenuTree
-});
 // 触发器 处理
 const columnTriggers = ref<Array<DataTableColumn & { checked?: boolean }>>([
   {
-    key: 'name',
+    key: 'groupName',
     title: $t('名称'),
     align: 'center',
     checked: true
@@ -113,12 +146,107 @@ const columnTriggers = ref<Array<DataTableColumn & { checked?: boolean }>>([
     checked: true
   },
   {
-    key: 'status',
+    key: 'props',
+    title: $t('程序集'),
+    align: 'center',
+    checked: true
+  },
+  {
+    key: 'startTime',
+    title: $t('开始时间'),
+    align: 'center',
+    checked: true,
+    render: row => {
+      return row.startTime ? dayjs.unix(row.startTime).format('YYYY-MM-DD HH:mm:ss') : '';
+    }
+  },
+  {
+    key: 'endTime',
+    title: $t('结束时间'),
+    align: 'center',
+    checked: true,
+    render: row => {
+      return row.endTime ? dayjs.unix(row.endTime).format('YYYY-MM-DD HH:mm:ss') : '';
+    }
+  },
+  {
+    key: 'LastRunTime',
+    title: $t('最近运行时间'),
+    align: 'center',
+    checked: true,
+    render: row => {
+      return row.lastRunTime ? dayjs.unix(row.lastRunTime).format('YYYY-MM-DD HH:mm:ss') : '';
+    }
+  },
+  {
+    key: 'NextRunTime',
+    title: $t('下次运行时间'),
+    align: 'center',
+    checked: true,
+    render: row => {
+      return row.nextRunTime ? dayjs.unix(row.nextRunTime).format('YYYY-MM-DD HH:mm:ss') : '';
+    }
+  },
+  {
+    key: 'numberOfRuns',
+    title: $t('触发次数'),
+    align: 'center',
+    checked: true
+  },
+
+  {
+    key: 'maxNumberOfRuns',
+    title: $t('最大触发次数'),
+    align: 'center',
+    checked: true
+  },
+
+  {
+    key: 'numberOfErrors',
+    title: $t('出错次数'),
+    align: 'center',
+    checked: true
+  },
+
+  {
+    key: 'maxNumberOfErrors',
+    title: $t('最大出错次数'),
+    align: 'center',
+    checked: true
+  },
+
+  {
+    key: 'numRetries',
+    title: $t('重试次数'),
+    align: 'center',
+    checked: true
+  },
+  {
+    key: 'retryTimeout',
+    title: $t('重试间隔时间'),
+    align: 'center',
+    checked: true
+  },
+  {
+    key: 'startNow',
+    title: $t('是否立即启动'),
+    align: 'center',
+    checked: true
+  },
+  {
+    key: 'runOnStart',
+    title: $t('是否启动时执行一次'),
+    align: 'center',
+    checked: true
+  },
+
+  {
+    key: 'state',
     title: $t('状态'),
     align: 'center',
     checked: true,
     render: row => {
-      return <NTag> {row.status}</NTag>;
+      return <NTag> {TriggerStateEnum[row.state]}</NTag>;
     }
   },
   {
@@ -128,11 +256,11 @@ const columnTriggers = ref<Array<DataTableColumn & { checked?: boolean }>>([
     checked: true,
     render: row => (
       <div class="flex-center gap-8px">
-        <NButton size="small" onClick={() => openForm(row.id)}>
+        <NButton size="small" onClick={() => setTriggerState({ id: row.id, action: JobActionEnum.启动 })}>
           启动
         </NButton>
-        <NButton size="small" onClick={() => openMenuTree(row.id)}>
-          停止
+        <NButton size="small" onClick={() => setTriggerState({ id: row.id, action: JobActionEnum.暂停 })}>
+          暂停
         </NButton>
       </div>
     )
@@ -144,27 +272,15 @@ const searchData = ref<Array<any>>([]);
 const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
   {
     type: 'expand',
+    checked: true,
     expandable: (row: JobDetailDTO) => (row?.triggers?.length ?? 0) > 0,
     renderExpand: (row: JobDetailDTO) => {
       return <NDataTable columns={columnTriggers.value} data={row.triggers || []} size="small" />;
     }
   },
   {
-    key: 'name',
-    title: $t('名称'),
-    align: 'center',
-    checked: true
-  },
-
-  {
     key: 'groupName',
     title: $t('组名称'),
-    align: 'center',
-    checked: true
-  },
-  {
-    key: 'jobType',
-    title: $t('作业类型'),
     align: 'center',
     checked: true
   },
@@ -179,6 +295,22 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
     title: $t('程序集'),
     align: 'center',
     checked: true
+  },
+  {
+    key: 'props',
+    title: $t('额外参数'),
+    align: 'center',
+    checked: true,
+    render: row => (
+      <div class="flex-center gap-8px">
+        <NButton size="small" onClick={() => setJobState({ id: row.id, action: JobActionEnum.启动 })}>
+          启动
+        </NButton>
+        <NButton size="small" onClick={() => setJobState({ id: row.id, action: JobActionEnum.暂停 })}>
+          暂停
+        </NButton>
+      </div>
+    )
   }
 ]);
 </script>
@@ -191,7 +323,6 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
       @reset="reload"
       @search="getData(1, pageSize)"
     />
-
     <NCard
       :title="$t(route.meta.i18nKey || route.meta.title || '')"
       :bordered="false"
@@ -205,6 +336,18 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
           :loading="loading"
           @refresh="reload"
         >
+          <NButton size="small" ghost type="primary" @click="setAllState(JobActionEnum.启动)">
+            <template #icon>
+              <icon-ic-round-plus class="text-icon" />
+            </template>
+            全部启动
+          </NButton>
+          <NButton size="small" ghost type="primary" @click="setAllState(JobActionEnum.暂停)">
+            <template #icon>
+              <icon-ic-round-plus class="text-icon" />
+            </template>
+            全部暂停
+          </NButton>
           <NButton v-if="hasAuth('jobdetail/submit')" size="small" ghost type="primary" @click="openForm()">
             <template #icon>
               <icon-ic-round-plus class="text-icon" />
@@ -227,7 +370,7 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
 
       <NDataTable
         v-model:checked-row-keys="checkedRowKeys"
-        :columns="columns"
+        :columns="columns.filter(item => item.checked)"
         :data="data"
         size="small"
         :flex-height="!appStore.isMobile"
