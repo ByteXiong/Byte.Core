@@ -72,7 +72,7 @@ namespace Byte.Core.Common.Attributes
             //_timer?.Dispose();
             //iis会回收这个定时任务，这边在回收的时候触发一个请求，来再次唤醒该服务
             Thread.Sleep(5000);
-            HttpHelper.GetData("http://localhost:4050/API/Quartz/");
+            HttpHelper.HttpGet("http://localhost:4050/API/Quartz/");
         }
     }
 }

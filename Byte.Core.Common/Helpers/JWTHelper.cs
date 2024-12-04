@@ -1,12 +1,14 @@
 ﻿using Byte.Core.Common.Extensions;
 using Byte.Core.Common.Filters;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 
 namespace Byte.Core.Common.Helpers;
 public static class JWTHelper
     {
+       private static readonly IConfiguration _config;
         private static readonly string _headerBase64Url = "{\"alg\":\"HS256\",\"typ\":\"JWT\"}".Base64UrlEncode();
         public static readonly string JWTSecret = ConfigHelper.GetValue("JWTSecret");
 
