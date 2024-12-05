@@ -9,11 +9,12 @@ import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
 import type { TableColumn } from '@/api/globals';
-import { ColumnTypeEnum, SearchTypeEnum, ViewTypeEnum } from '@/api/apiEnums';
+import { ColumnTypeEnum, OrderByEnum, SearchTypeEnum, ViewTypeEnum } from '@/api/apiEnums';
 import AllGroupSelect from '@/components/select/all-group-select.vue';
 import AllEnumSelect from '@/components/select/all-enum-select.vue';
 import { getEnumValue } from '@/utils/common';
 import MonacoCode from '../modules/monaco-code.vue';
+import DataTableSetting from '../modules/data-table-setting.vue';
 const route = useRoute();
 const router = useRouter();
 const configId = ref(route.query.configId as string);
@@ -71,7 +72,7 @@ const {
       transform: res => {
         if (!res.success) {
           dialog.warning({
-            title: `${ViewTypeEnum[viewType.value]}-${tableof.value}模型不存在`,
+            title: `${ViewTypeEnum[viewType.value]}配置-${tableof.value}模型`,
             content: () => '首次加载请创建模型',
             negativeText: '返回',
             positiveText: '确认',
@@ -277,6 +278,7 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
     render: row => {
       return (
         <NSelect
+          disabled={row.isCustom}
           v-model:value={row.searchType}
           options={getEnumValue(SearchTypeEnum).map(item => ({ label: SearchTypeEnum[item], value: item }))}
           placeholder="请选择"
@@ -310,18 +312,24 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
     title: $t('操作'),
     align: 'center',
     checked: true,
-    render: row => (
+    render: (row: TableColumn) => (
       <div class="flex-center gap-8px">
-        <MonacoCode
+        {/* <MonacoCode
           v-model:code={row.props}
           onChange={code => {
             row.props = code;
             submit(row);
           }}
-        >
-          {' '}
-        </MonacoCode>
-        {row.id !== 0 ? (
+        ></MonacoCode> */}
+        <DataTableSetting
+          columnId={row.id}
+          v-model:code={row.props}
+          onChange={code => {
+            row.props = code;
+            submit(row);
+          }}
+        ></DataTableSetting>
+        {row.id !== 0 && row.isCustom ? (
           <NPopconfirm onPositiveClick={() => handleDelete([row.id])}>
             {{
               default: () => $t('common.confirmDelete'),
@@ -343,55 +351,16 @@ const checkedRowKeys = ref<string[]>([]);
 // const operateType = ref<OperateType>('add');
 
 function handleAdd() {
-  tableView.value?.tableColumns?.push({
-    tableof: tableof.value,
+  tableView.value?.tableColumns?.unshift({
     viewId: tableView.value?.id
   });
-  // operateType.value = 'add';
-  // openModal();
 }
-// function handleDelete(id: number) {
-//   // request
-//   // console.log(id);
-//   // onDeleted();
-// }
-
-// /** the edit menu data or the parent menu data when adding a child menu */
-// const editingData: Ref<Api.SystemManage.Menu | null> = ref(null);
-
-// function handleEdit(item: Api.SystemManage.Menu) {
-//   operateType.value = 'edit';
-//   editingData.value = { ...item };
-
-//   openModal();
-// }
-
-// function handleAddChildMenu(item: Api.SystemManage.Menu) {
-//   operateType.value = 'addChild';
-
-//   editingData.value = { ...item };
-
-//   openModal();
-// }
-
-// const allPages = ref<string[]>([]);
-// const columnChecks = ref<NaiveUI.TableColumnCheck[]>([
-//   {
-//     key: 'name',
-//     title: $t('page.manage.menu.menuName'),
-//     checked: true
-//   }
-// ]);
-// async function getAllPages() {
-//   const { data: pages } = await fetchGetAllPages();
-//   allPages.value = pages || [];
-// }
 </script>
 
 <template>
   <div ref="wrapperRef" class="flex-col-stretch gap-16px overflow-hidden lt-sm:overflow-auto">
     <NCard
-      :title="$t(`设置-${ViewTypeEnum[viewType]}`)"
+      :title="$t(`${ViewTypeEnum[viewType]}配置`)"
       :bordered="false"
       size="small"
       class="sm:flex-1-hidden card-wrapper"
@@ -426,10 +395,35 @@ function handleAdd() {
         </TableHeaderOperation>
       </template>
 
-      <NSelect
-        v-model:value="tableof"
-        :options="tableView?.tableColumns?.map(item => ({ label: item.title, value: item.key }))"
-      ></NSelect>
+      <NForm ref="formRef" :model="tableView" label-placement="left" :label-width="80">
+        <NGrid responsive="screen" item-responsive>
+          <NFormItemGi span="24 s:12 m:6" label="默认排序" path="sortKey" class="pr-24px">
+            <!--    v-model:value="tableView.sortKey" -->
+            <NSelect
+              :options="
+                tableView?.tableColumns
+                  ?.filter(x => !x.isCustom)
+                  ?.map(item => ({ label: item.title || item.key, value: item.key }))
+              "
+            ></NSelect>
+            <NSelect
+              :options="getEnumValue(OrderByEnum).map(item => ({ label: OrderByEnum[item], value: item }))"
+            ></NSelect>
+          </NFormItemGi>
+          <NFormItemGi span="24 m:12" class="pr-24px">
+            <NSpace class="w-full" justify="end">
+              <!--
+ <NButton type="primary" ghost @click="search">
+                <template #icon>
+                  <icon-ic-round-search class="text-icon" />
+                </template>
+                配置
+              </NButton>
+-->
+            </NSpace>
+          </NFormItemGi>
+        </NGrid>
+      </NForm>
 
       <NDataTable
         v-model:checked-row-keys="checkedRowKeys"

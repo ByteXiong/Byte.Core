@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { DataTableColumn } from 'naive-ui';
 import { $t } from '@/locales';
 
 defineOptions({
@@ -18,7 +19,7 @@ interface Emits {
 
 const emit = defineEmits<Emits>();
 
-const columns = defineModel<Array<NaiveUI.TableColumnCheck>>('columns', {
+const columns = defineModel<Array<NaiveUI.TableColumnCheck | (DataTableColumn & { checked?: boolean })>>('columns', {
   default: () => []
 });
 

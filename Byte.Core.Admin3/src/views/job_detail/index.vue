@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { usePagination, useRequest } from 'alova/client';
 import { useRoute } from 'vue-router';
-import { type DataTableColumn, NButton, NDataTable, NTag } from 'naive-ui';
+import { type DataTableColumn, NButton, NDataTable, NSwitch, NTag } from 'naive-ui';
 import dayjs from 'dayjs';
 import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
@@ -201,43 +201,64 @@ const columnTriggers = ref<Array<DataTableColumn & { checked?: boolean }>>([
     checked: true
   },
 
-  {
-    key: 'numberOfErrors',
-    title: $t('出错次数'),
-    align: 'center',
-    checked: true
-  },
+  // {
+  //   key: 'numberOfErrors',
+  //   title: $t('出错次数'),
+  //   align: 'center',
+  //   checked: true
+  // },
 
-  {
-    key: 'maxNumberOfErrors',
-    title: $t('最大出错次数'),
-    align: 'center',
-    checked: true
-  },
+  // {
+  //   key: 'maxNumberOfErrors',
+  //   title: $t('最大出错次数'),
+  //   align: 'center',
+  //   checked: true
+  // },
 
+  // {
+  //   key: 'numRetries',
+  //   title: $t('重试次数'),
+  //   align: 'center',
+  //   checked: true
+  // },
+  // {
+  //   key: 'retryTimeout',
+  //   title: $t('重试间隔时间'),
+  //   align: 'center',
+  //   checked: true
+  // },
+  // {
+  //   key: 'startNow',
+  //   title: $t('是否立即启动'),
+  //   align: 'center',
+  //   checked: true
+  // },
+  // {
+  //   key: 'runOnStart',
+  //   title: $t('是否启动时执行一次'),
+  //   align: 'center',
+  //   checked: true
+  // },
   {
-    key: 'numRetries',
-    title: $t('重试次数'),
+    key: 'status',
+    title: $t('状态'),
     align: 'center',
-    checked: true
-  },
-  {
-    key: 'retryTimeout',
-    title: $t('重试间隔时间'),
-    align: 'center',
-    checked: true
-  },
-  {
-    key: 'startNow',
-    title: $t('是否立即启动'),
-    align: 'center',
-    checked: true
-  },
-  {
-    key: 'runOnStart',
-    title: $t('是否启动时执行一次'),
-    align: 'center',
-    checked: true
+    checked: true,
+    render: row => {
+      return (
+        <NSwitch
+          v-model:value={row.status}
+          onUpdate:value={value =>
+            setTriggerState({ id: row.id, action: value ? JobActionEnum.加入 : JobActionEnum.移除 })
+          }
+        >
+          {{
+            checked: () => '移除',
+            unchecked: () => '加入'
+          }}
+        </NSwitch>
+      );
+    }
   },
 
   {
@@ -246,7 +267,7 @@ const columnTriggers = ref<Array<DataTableColumn & { checked?: boolean }>>([
     align: 'center',
     checked: true,
     render: row => {
-      return <NTag> {TriggerStateEnum[row.state]}</NTag>;
+      return <NTag> {TriggerStateEnum[row.state as number]}</NTag>;
     }
   },
   {
@@ -254,14 +275,19 @@ const columnTriggers = ref<Array<DataTableColumn & { checked?: boolean }>>([
     title: $t('操作'),
     align: 'center',
     checked: true,
+    fixed: 'right',
     render: row => (
       <div class="flex-center gap-8px">
-        <NButton size="small" onClick={() => setTriggerState({ id: row.id, action: JobActionEnum.启动 })}>
-          启动
-        </NButton>
-        <NButton size="small" onClick={() => setTriggerState({ id: row.id, action: JobActionEnum.暂停 })}>
-          暂停
-        </NButton>
+        {row.status ? (
+          <>
+            <NButton size="small" onClick={() => setTriggerState({ id: row.id, action: JobActionEnum.启动 })}>
+              启动
+            </NButton>
+            <NButton size="small" onClick={() => setTriggerState({ id: row.id, action: JobActionEnum.暂停 })}>
+              暂停
+            </NButton>
+          </>
+        ) : null}
       </div>
     )
   }

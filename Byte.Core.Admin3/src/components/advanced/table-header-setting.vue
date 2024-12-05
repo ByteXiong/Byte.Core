@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router';
 import { useRequest } from 'alova/client';
 import { $t } from '@/locales';
 import type { TableColumn } from '@/api/globals';
-import type { ViewTypeEnum } from '@/api/apiEnums';
+import { ViewTypeEnum } from '@/api/apiEnums';
 const router = useRouter();
 defineOptions({
   name: 'TableHeaderSetting'
@@ -64,6 +64,31 @@ function linkPush() {
       viewType
     }
   });
+  // switch (viewType) {
+  //   case ViewTypeEnum.主页:
+  //     router.push({
+  //       path: `/table/view`,
+  //       query: {
+  //         configId,
+  //         tableof,
+  //         viewType
+  //       }
+  //     });
+  //     break;
+
+  //   case ViewTypeEnum.详情页:
+  //     router.push({
+  //       path: `/table/form`,
+  //       query: {
+  //         configId,
+  //         tableof,
+  //         viewType
+  //       }
+  //     });
+  //     break;
+  //   default:
+  //     break;
+  // }
 }
 </script>
 
@@ -72,7 +97,7 @@ function linkPush() {
     <template #icon>
       <icon-ant-design-setting-outlined class="text-icon" />
     </template>
-    {{ $t('common.headerSetting') }}
+    {{ ViewTypeEnum[viewType] + '配置' }}
   </NButton>
 </template>
 

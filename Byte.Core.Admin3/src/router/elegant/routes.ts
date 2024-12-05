@@ -643,6 +643,35 @@ export const generatedRoutes: GeneratedRoute[] = [
     ]
   },
   {
+    name: 'rank',
+    path: '/rank',
+    component: 'layout.base',
+    meta: {
+      title: 'rank',
+      i18nKey: 'route.rank'
+    },
+    children: [
+      {
+        name: 'rank_day',
+        path: '/rank/day',
+        component: 'view.rank_day',
+        meta: {
+          title: 'rank_day',
+          i18nKey: 'route.rank_day'
+        }
+      },
+      {
+        name: 'rank_week',
+        path: '/rank/week',
+        component: 'view.rank_week',
+        meta: {
+          title: 'rank_week',
+          i18nKey: 'route.rank_week'
+        }
+      }
+    ]
+  },
+  {
     name: 'table',
     path: '/table',
     component: 'layout.base',
@@ -661,12 +690,30 @@ export const generatedRoutes: GeneratedRoute[] = [
         }
       },
       {
+        name: 'table_form',
+        path: '/table/form',
+        component: 'view.table_form',
+        meta: {
+          title: 'table_form',
+          i18nKey: 'route.table_form'
+        }
+      },
+      {
         name: 'table_list',
         path: '/table/list',
         component: 'view.table_list',
         meta: {
           title: 'table_list',
           i18nKey: 'route.table_list'
+        }
+      },
+      {
+        name: 'table_view',
+        path: '/table/view',
+        component: 'view.table_view',
+        meta: {
+          title: 'table_view',
+          i18nKey: 'route.table_view'
         }
       }
     ]

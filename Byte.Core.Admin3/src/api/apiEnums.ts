@@ -27,7 +27,7 @@ export enum StateEnum {
   /// </summary>
   update = 2
 }
-export enum OrderType {
+export enum OrderByEnum {
   /// <summary>
   /// 正序
   /// </summary>
@@ -122,7 +122,9 @@ export enum JobActionEnum {
   启动 = 1,
   暂停 = 2,
   重启 = 3,
-  执行 = 4
+  执行 = 4,
+  加入 = 5,
+  移除 = 6
 }
 
 /// <summary>

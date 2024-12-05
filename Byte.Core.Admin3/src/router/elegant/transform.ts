@@ -234,9 +234,14 @@ const routeMap: RouteMap = {
   "plugin_tables_vtable": "/plugin/tables/vtable",
   "plugin_typeit": "/plugin/typeit",
   "plugin_video": "/plugin/video",
+  "rank": "/rank",
+  "rank_day": "/rank/day",
+  "rank_week": "/rank/week",
   "table": "/table",
   "table_column": "/table/column",
+  "table_form": "/table/form",
   "table_list": "/table/list",
+  "table_view": "/table/view",
   "user-center": "/user-center"
 };
 
