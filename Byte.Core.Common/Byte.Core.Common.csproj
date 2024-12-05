@@ -63,7 +63,7 @@
 		<PackageReference Include="StackExchange.Redis.Extensions.JilCore" Version="1.0.1" />
 		<PackageReference Include="System.Reflection" Version="4.3.0" />
 		<PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
-		<PackageReference Include="Quartz" Version="3.13.0" />
+		<PackageReference Include="Quartz" Version="3.13.1" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="WebSocket\" />

@@ -74,20 +74,6 @@ namespace Byte.Core.SqlSugar
             };
         }
 
-
-        public static async Task<T> FirstOrDefaultAsync<T>(this ISugarQueryable<T> queryable, Expression<Func<T, bool>> whereLambda = null)
-        {
-            if (whereLambda == null)
-            {
-                return await queryable.FirstAsync();
-            }
-            else
-            {
-                return await queryable.FirstAsync(whereLambda);
-            }
-
-        }
-
     }
 }
 
