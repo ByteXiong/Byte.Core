@@ -14,7 +14,7 @@ using SqlSugar;
 namespace Byte.Core.Business
 {
     /// <summary>
-    /// 
+    /// 模型
     /// </summary>
     public class TableColumnLogic : BaseBusinessLogic<long, TableColumn, TableColumnRepository>
     {

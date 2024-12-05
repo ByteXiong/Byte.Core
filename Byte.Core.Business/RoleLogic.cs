@@ -49,7 +49,7 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<RoleInfo> GetInfoAsync(int id)
         {
-            var entity = await Repository.GetIQueryable(x => x.Id == id).Select<RoleInfo>().FirstOrDefaultAsync();
+            var entity = await Repository.GetIQueryable(x => x.Id == id).Select<RoleInfo>().FirstAsync();
             return entity;
         }
 
@@ -74,7 +74,7 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<long> UpdateAsync(UpdateRoleParam param)
         {
-            var entity = await GetIQueryable(x => x.Id == param.Id).FirstOrDefaultAsync();
+            var entity = await GetIQueryable(x => x.Id == param.Id).FirstAsync();
             entity.Name = param.Name; //角色名称
             entity.Type = param.Type; //用户类型
             entity.Remark = param.Remark; //描述

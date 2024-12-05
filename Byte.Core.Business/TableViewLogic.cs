@@ -97,7 +97,7 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<long> UpdateAsync(UpdateTableViewParam param)
         {
-            var entity = await GetIQueryable(x => x.Id == param.Id).FirstOrDefaultAsync();
+            var entity = await GetIQueryable(x => x.Id == param.Id).FirstAsync();
             entity.Tableof = param.Tableof;
             entity.Type = param.Type;
             entity.Router = param.Router;
@@ -112,8 +112,11 @@ namespace Byte.Core.Business
         /// <param name="param"></param>
         /// <returns></returns>
         public async Task<TableColumn> SetTableHeaderAsync(TableColumn param) {
-            param.Key??=Guid.NewGuid().ToString();
-            param.IsCustom = true;
+            //param.Key??=Guid.NewGuid().ToString();
+            if (param.Key==null) {
+                param.IsCustom = true;
+            }
+          
             await _unitOfWork.GetDbClient().Storageable(param).ExecuteReturnEntityAsync();
             return param;
         }
@@ -129,7 +132,18 @@ namespace Byte.Core.Business
         }
 
 
-
+        /// <summary>
+        /// 设置高阶字段
+        /// </summary>
+        /// <param name="columnId"></param>
+        /// <param name="props"></param>
+        /// <returns></returns>
+        public async Task SetPropsAsync(SetPropsParam param)
+        {
+         await   _tableColumnRepository.UpdateAsync(x => x.Id == param.ColumnId, x => new TableColumn {
+                Props = param.Props
+         });
+        }
 
 
         /// <summary>

@@ -23,7 +23,6 @@ namespace Byte.Core.Entity
         /// 触发器类型FullName
         /// </summary>
         [SugarColumn(ColumnDescription = "触发器类型", Length = 128, IsNullable = true)]
-        [MaxLength(128)]
         public string TriggerType { get; set; }
 
         /// <summary>

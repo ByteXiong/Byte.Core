@@ -78,7 +78,7 @@ namespace Byte.Core.Models
     public class TableDataFormParam 
     {
         
-        public string Id { get; set; }
+        public long Id { get; set; }
     }
 
     public class UpdateTableDataParam: TableDataFormParam
@@ -86,6 +86,17 @@ namespace Byte.Core.Models
 
         public Dictionary<string,string> Data { get; set; }
 
+
+    }
+    public class SetPropsParam {
+        /// <summary>
+        /// 字段Id
+        /// </summary>
+        public long  ColumnId { get; set; }
+        /// <summary>
+        /// 字段
+        /// </summary>
+        public string Props { get; set; }
 
     }
 

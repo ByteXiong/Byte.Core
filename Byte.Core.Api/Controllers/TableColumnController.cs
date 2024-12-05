@@ -10,6 +10,10 @@ using Org.BouncyCastle.Crypto;
 namespace Byte.Core.Api.Controllers
 {
 
+    /// <summary>
+    /// 模型
+    /// </summary>
+    /// <param name="logic"></param>
     [Route("api/[controller]/[action]/{configId}/{tableof}")]
     public class TableColumnController(TableColumnLogic logic) : BaseApiController
     {

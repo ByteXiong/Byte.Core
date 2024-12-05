@@ -9,6 +9,7 @@ using Mapster;
 using Org.BouncyCastle.Asn1.Ocsp;
 using Quartz;
 using Quartz.Impl.Matchers;
+using Quartz.Impl.Triggers;
 using System.Reflection;
 using static NPOI.HSSF.Util.HSSFColor;
 
@@ -115,7 +116,7 @@ namespace Byte.Core.Business.Quartz
         /// <returns></returns>
         public async Task<JobDetailInfo> GetInfoAsync(long id)
         {
-            var entity = await Repository.GetIQueryable(x => x.Id == id).Select<JobDetailInfo>().FirstOrDefaultAsync();
+            var entity = await Repository.GetIQueryable(x => x.Id == id).Select<JobDetailInfo>().FirstAsync();
             return entity;
         }
 
@@ -139,7 +140,7 @@ namespace Byte.Core.Business.Quartz
         /// <returns></returns>
         public async Task<long> UpdateAsync(UpdateJobDetailParam param)
         {
-            var entity = await GetIQueryable(x => x.Id == param.Id).FirstOrDefaultAsync();
+            var entity = await GetIQueryable(x => x.Id == param.Id).FirstAsync();
             await UpdateAsync(entity);
             return param.Id;
         }
@@ -216,7 +217,19 @@ namespace Byte.Core.Business.Quartz
                     break;
                 case JobActionEnum.执行:
                     break;
+                case JobActionEnum.加入:
+              var trigger = await  _jobTriggerRepository.GetIQueryable(x => x.Id == id).FirstAsync();
+                     ITrigger jobTrigger = AddTrigger(trigger);
+                    await  _scheduler.ScheduleJob(jobTrigger);
+                   await _jobTriggerRepository.UpdateAsync(x => x.Id == id, x => new JobTrigger {Status=true});
+                    break;
+                case JobActionEnum.移除:
+                    await _scheduler.UnscheduleJob(new TriggerKey(id.ToString()));
+                    await _jobTriggerRepository.UpdateAsync(x => x.Id == id, x => new JobTrigger { Status = false });
+                    break;
                 default:
+
+
                     break;
             }
 
@@ -233,55 +246,90 @@ namespace Byte.Core.Business.Quartz
             //IScheduler _scheduler = ServiceLocator.Resolve<IScheduler>();
             //获取数据库的QZ配置
             var list = GetIQueryable().Includes(x => x.Triggers.Where(y => y.Status).ToList()).ToList();
-            Dictionary<IJobDetail, IReadOnlyCollection<ITrigger>> triggersAndJobs = new Dictionary<IJobDetail, IReadOnlyCollection<ITrigger>>();
             // Get the job detail for each job
             foreach (JobDetail detail in list)
             {
-                //await _scheduler.DeleteJob(jobDetail.Key);
-                JobDataMap dataMap = new JobDataMap();
-                var props = detail.Props?.ToObject<Dictionary<string, object>>();
-                props?.ForEach(x => dataMap.Put(x.Key, x.Value));
-
-                Assembly assIBll = Assembly.LoadFrom(AppDomain.CurrentDomain.BaseDirectory + "/Byte.Core.Api.dll");
-                //加载dll后,需要使用dll中某类.
-                Type type = assIBll.GetType($"Byte.Core.Api.Common.Quartz.{detail.AssemblyName}");//获取类名，必须 命名空间+类名 
-
-                IJobDetail jobDetail = JobBuilder.Create(type)
-                        .WithIdentity(detail.Id.ToString())
-                         .SetJobData(dataMap)
-                         .StoreDurably()
-                        .Build();
-                //Console.WriteLine($"Job Name: {jobKey.Name}, Group Name: {jobKey.Group}");
+                IJobDetail jobDetail = AddJob(detail);
                 await _scheduler.AddJob(jobDetail, true);
 
                 List<ITrigger> triggers = new List<ITrigger>();
                 foreach (JobTrigger trigger in detail.Triggers)
                 {
 
-                    JobDataMap triggerMap = new JobDataMap();
-                    var triggerProps = trigger.Props?.ToObject<Dictionary<string, object>>();
-                    triggerProps?.ForEach(x => triggerMap.Put(x.Key, x.Value));
-
-                    ITrigger jobTrigger = TriggerBuilder.Create()
-                    .WithIdentity(trigger.Id.ToString())
-                    .UsingJobData(triggerMap)//设置触发器的数据
-                    .ForJob(jobDetail.Key)// 设置触发器的作业
-                    .WithSimpleSchedule(x => x
-                      .WithRepeatCount(trigger.MaxNumberOfRuns > 0 ? trigger.MaxNumberOfRuns - 1 : 0)//最大触发次数（需要减1，因为第一次执行不计入重复次数）
-                      )
-                     .WithCronSchedule(trigger.TriggerType)//设置触发器的类型 
-                    //设置开始时间
-                    .StartAt(DateTimeOffset.FromUnixTimeSeconds(trigger.StartTime ?? DateTime.UtcNow.ToTimeStamp()))
-                    //设置结束时间
-                    .EndAt(DateTimeOffset.FromUnixTimeSeconds(trigger.EndTime ?? DateTime.UtcNow.AddYears(1).ToTimeStamp()))
-                    .Build();
+                    ITrigger jobTrigger =AddTrigger(trigger);
                     triggers.Add(jobTrigger);
                 }
-                triggersAndJobs.Add(jobDetail, triggers);
-
+                await _scheduler.ScheduleJob(jobDetail, triggers,true);
             }
+        }
 
-            await _scheduler.ScheduleJobs(triggersAndJobs, true);
+
+        public IJobDetail AddJob(JobDetail detail)
+        {
+
+            JobDataMap dataMap = new JobDataMap();
+            var props = detail.Props?.ToObject<Dictionary<string, object>>();
+            props?.ForEach(x => dataMap.Put(x.Key, x.Value));
+
+            Assembly assIBll = Assembly.LoadFrom(AppDomain.CurrentDomain.BaseDirectory + "/Byte.Core.Api.dll");
+            //加载dll后,需要使用dll中某类.
+            Type type = assIBll.GetType($"Byte.Core.Api.Quartz.{detail.AssemblyName}");//获取类名，必须 命名空间+类名 
+
+            IJobDetail jobDetail = JobBuilder.Create(type)
+                    .WithIdentity(detail.Id.ToString())
+                     .SetJobData(dataMap)
+                     .StoreDurably()
+                    .Build();
+
+            return jobDetail;
+        }
+
+        public ITrigger AddTrigger(JobTrigger trigger) {
+
+            JobDataMap triggerMap = new JobDataMap();
+            var triggerProps = trigger.Props?.ToObject<Dictionary<string, object>>();
+            triggerProps?.ForEach(x => triggerMap.Put(x.Key, x.Value));
+
+            //ITrigger jobTrigger = TriggerBuilder.Create()
+            //.WithIdentity(trigger.Id.ToString())
+            //.UsingJobData(triggerMap)//设置触发器的数据
+            //.ForJob(trigger.DetailId.ToString())// 设置触发器的作业
+            //.WithSimpleSchedule(x => x
+            //  .WithRepeatCount(trigger.MaxNumberOfRuns > 0 ? trigger.MaxNumberOfRuns - 1 : 0)//最大触发次数（需要减1，因为第一次执行不计入重复次数）
+            //  )
+            // .WithCronSchedule(trigger.TriggerType)//设置触发器的类型 
+            //                                       //设置开始时间
+            ////.StartAt(DateTimeOffset.FromUnixTimeSeconds(trigger.StartTime ?? DateTime.UtcNow.ToTimeStamp()))
+            //////设置结束时间
+            ////.EndAt(DateTimeOffset.FromUnixTimeSeconds(trigger.EndTime ?? DateTime.UtcNow.AddYears(1).ToTimeStamp()))
+            //.Build();
+            int   simple= 0;
+            var any = int.TryParse(trigger.TriggerType, out simple);
+            if(any){
+                ITrigger jobTrigger = new SimpleTriggerImpl(trigger.Id.ToString())
+                {
+                    JobDataMap = triggerMap,
+                    JobName = trigger.DetailId.ToString(),
+                    StartTimeUtc = DateTimeOffset.FromUnixTimeSeconds(trigger.StartTime ?? DateTime.UtcNow.ToTimeStamp()),
+                    EndTimeUtc = DateTimeOffset.FromUnixTimeSeconds(trigger.EndTime ?? DateTime.UtcNow.AddYears(1).ToTimeStamp()),
+                    RepeatCount = trigger.MaxNumberOfRuns > 0 ? trigger.MaxNumberOfRuns - 1 : 0,//指定触发器的重复次数
+                    TimesTriggered = trigger.MaxNumberOfRuns > 0 ? trigger.MaxNumberOfRuns - 1 : 0,//指定触发器被触发的次数
+                    RepeatInterval = TimeSpan.FromSeconds(simple)
+                };
+                return jobTrigger;
+            }
+            else { 
+            ITrigger jobTrigger = new CronTriggerImpl(trigger.Id.ToString(), null, trigger.TriggerType)
+            {
+                JobDataMap=triggerMap,
+                JobName = trigger.DetailId.ToString(),
+                StartTimeUtc = DateTimeOffset.FromUnixTimeSeconds(trigger.StartTime ?? DateTime.UtcNow.ToTimeStamp()),
+                EndTimeUtc = DateTimeOffset.FromUnixTimeSeconds(trigger.EndTime ?? DateTime.UtcNow.AddYears(1).ToTimeStamp()),
+                MisfireInstruction = MisfireInstruction.CronTrigger.DoNothing,
+            };
+
+            return jobTrigger;
+            }
         }
 
     }

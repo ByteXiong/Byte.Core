@@ -1,7 +1,7 @@
 ﻿
 using Asp.Versioning;
 using Byte.Core.Api.Common;
-using Byte.Core.Api.Common.Quartz;
+using Byte.Core.Api.Quartz;
 using Byte.Core.Business;
 using Byte.Core.Common.Attributes;
 using Byte.Core.Entity;

@@ -38,7 +38,7 @@ namespace Byte.Core.Api.Common.Authorization
             Type type = assIBll.GetType($"{assIBll.GetName().Name}.Controllers.{controller}Controller");
             var controllerName =    xmlCommentHelper.GetTypeComment(type);
             req.RouteValues.TryGetValue("action", out var action);
-            var method = type.GetMethod(action.ToString()+ "Async");
+            var method = type.GetMethod(action.ToString()+ "Async")??type.GetMethod(action.ToString());
             var methodName = xmlCommentHelper.GetMethodComment(method);
 
 
@@ -62,3 +62,5 @@ namespace Byte.Core.Api.Common.Authorization
         }
     }
 }
+
+

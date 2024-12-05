@@ -4,7 +4,7 @@ using AspectCore.Extensions.DependencyInjection;
 using Autofac;
 using Byte.Core.Api.Common;
 using Byte.Core.Api.Common.Authorization;
-using Byte.Core.Api.Common.Quartz;
+using Byte.Core.Api.Quartz;
 using Byte.Core.Common.Attributes;
 using Byte.Core.Common.Extensions;
 using Byte.Core.Common.Filters;
@@ -473,7 +473,7 @@ app.UseSwaggerUI(options =>
     //{
     //    url = "/swagger/logo.png" // 添加 logo
     //};
-    //options.RoutePrefix = "Byte.CoreApi";
+    options.RoutePrefix = "Byte.API.Swagger";
     //options.InjectStylesheet("/swagger/custom.css");
     //options.InjectJavascript("/swagger/custom.js");
 });

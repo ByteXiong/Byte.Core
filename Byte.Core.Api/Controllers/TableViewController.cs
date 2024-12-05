@@ -50,6 +50,16 @@ namespace Byte.Core.Api.Controllers
 
 
         /// <summary>
+        /// 设置高阶字段
+        /// </summary>
+        /// <param name="columnId"></param>
+        /// <param name="props"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [ApiVersion("1.0", Deprecated = false)]
+        public async Task SetPropsAsync(SetPropsParam param)=> await _logic.SetPropsAsync(param);
+
+        /// <summary>
         /// 新增
         /// </summary>
         /// <param name="param"></param>

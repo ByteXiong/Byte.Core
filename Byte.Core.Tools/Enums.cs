@@ -186,6 +186,8 @@ namespace Byte.Core.Tools
         暂停=2,
         重启=3,
         执行=4,
+        加入=5,
+        移除=6,
     }
 
 
