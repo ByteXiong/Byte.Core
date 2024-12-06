@@ -2,6 +2,7 @@
 using Asp.Versioning;
 using Byte.Core.Api.Common;
 using Byte.Core.Business;
+using Byte.Core.Common.Filters;
 using Byte.Core.Models;
 using Byte.Core.SqlSugar;
 using Microsoft.AspNetCore.Mvc;
@@ -71,5 +72,16 @@ namespace Byte.Core.Api.Controllers
         [HttpPut]
         [ApiVersion("1.0", Deprecated = false)]
         public async Task<int> SetStatusAsync(long id, bool status) => await _logic.SetStatusAsync(id, status);
+
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        /// <exception cref="BusException"></exception>
+        [HttpPut]
+        [ApiVersion("1.0", Deprecated = false)]
+        public async Task SetPassword(SetPasswordParam param) => await _logic.SetPassword(param);
     }
 }

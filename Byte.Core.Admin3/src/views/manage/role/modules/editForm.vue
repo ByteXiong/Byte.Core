@@ -16,7 +16,7 @@ const { formRef, validate, restoreValidation } = useNaiveForm();
 // 规则验证获取对象
 // const { defaultRequiredRule } = useFormRules();
 type RuleKey = keyof typeof formData.value;
-const rules: Partial<Record<RuleKey, App.Global.FormRule>> = {};
+const rules: Partial<Record<RuleKey, App.Global.FormRule | App.Global.FormRule[]>> = {};
 interface Emits {
   (e: 'refresh', row: any): any;
 }

@@ -37,6 +37,7 @@ namespace Byte.Core.Entity
         [SugarColumn(Length = 50, IsNullable = true)]
         public  string SortKey { get; set; }
 
+
         /// <summary>
         /// 排序排序方式
         /// </summary>
@@ -48,6 +49,14 @@ namespace Byte.Core.Entity
         /// </summary>
         [SugarColumn(ColumnDataType = "text", IsNullable = true)]
         public string Props { get; set; }
+
+
+
+        /// <summary>
+        /// 多余参数 
+        /// </summary>
+        [SugarColumn( IsNullable = true)]
+        public string ConfigId { get; set; }
 
         #region 导航
 

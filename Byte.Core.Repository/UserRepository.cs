@@ -3,6 +3,7 @@ using Byte.Core.Entity;
 using Byte.Core.Common.Filters;
 using System.Linq.Expressions;
 using Byte.Core.Common.Extensions;
+using Byte.Core.Models;
 
 namespace Byte.Core.Repository
 {
@@ -53,6 +54,24 @@ namespace Byte.Core.Repository
             }
             var any = await GetIQueryable(where).AnyAsync();
             if (any) throw new BusException("账号已存在");
+        }
+
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        /// <exception cref="BusException"></exception>
+        public async Task SetPassword(SetPasswordParam param)
+        {
+
+            var password = await GetIQueryable(x => x.Id == param.Id).Select(x => x.Password).FirstAsync();
+
+            if (password != param.OldPassword.ToMD5String()) throw new BusException("旧密码不正确");
+
+            var newPassword = param.NewPassword.ToMD5String();
+            await UpdateAsync(x => x.Id == param.Id, x => new User { Password = newPassword });
         }
     }
 }

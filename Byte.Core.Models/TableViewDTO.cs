@@ -22,6 +22,7 @@ namespace Byte.Core.Models
         public string ConfigId { get; set; }
     }
     public class UpdateTableViewParam : TableView { 
+       
     }
 
 

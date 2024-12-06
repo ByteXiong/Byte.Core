@@ -88,11 +88,17 @@ const editFormRef = ref();
 const openForm = (id?: string) => {
   editFormRef.value?.openForm(id);
 };
+// 打开设置密码
+const setPassword = ref();
+const openSetPassword = (id?: string) => {
+  setPassword.value?.openForm(id);
+};
 
 // ====================开始处理动态生成=====================
 // 共享函数
 defineExpose({
   openForm,
+  openSetPassword,
   handleDelete
 });
 const searchData = ref<Array<any>>([]);
@@ -192,6 +198,7 @@ const columnData = computed<Array<DataTableColumn>>(() => {
       />
     </NCard>
     <EditForm ref="editFormRef"></EditForm>
+    <SetPassword ref="setPassword" />
   </div>
 </template>
 

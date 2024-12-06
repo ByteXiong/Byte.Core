@@ -88,7 +88,7 @@ namespace Byte.Core.Business
                 User model = param.Adapt<User>();
 
                 model.Roles = param.RoleIds.Select(x => new Role { Id = x }).ToList();
-                model.Password= "123456".ToMD5String();
+                model.Password=model.Password.ToMD5String();
 
                 await _unitOfWork.GetDbClient().InsertNav(model)
                         .Include(z1 => z1.Roles, new InsertNavOptions
@@ -131,13 +131,11 @@ namespace Byte.Core.Business
            var model =  new User
                 {
                     Id = param.Id,
-
-                        UserName = param.UserName, //账号
-                     NickName = param.NickName, //名称
+                    UserName = param.UserName, //账号
+                    NickName = param.NickName, //名称
                     Avatar = param.Avatar, //头像
-                    Password = param.Password, //密码
+                    //Password = param.Password, //密码
                     Status = param.Status, //状态
-                    
                 };
                 model.Roles = param.RoleIds.Select(x => new Role { Id = x }).ToList();
 
@@ -174,15 +172,6 @@ namespace Byte.Core.Business
 
 
 
-        public async Task<int> SetPassword(SetPasswordParam param)
-        {
-            var oldPwd = param.OldPassword.Md5();
-            var newPwd = param.NewPassword.Md5();
-            var any = await GetIQueryable(x => x.Id != param.Id && x.Password == oldPwd).AnyAsync();
-            if (!any)
-                throw new BusException("旧密码不正确");
-            return await UpdateAsync(x => param.Id == x.Id, x => new User { Password = newPwd });
-
-        }
+        public async Task SetPassword(SetPasswordParam param) =>await Repository.SetPassword(param);
     }
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import type { VNode } from 'vue';
 import { useAuthStore } from '@/store/modules/auth';
 import { useRouterPush } from '@/hooks/common/router';
@@ -18,7 +18,7 @@ function loginOrRegister() {
   toLogin();
 }
 
-type DropdownKey = 'user-center' | 'logout';
+type DropdownKey = 'user-center' | 'set-password' | 'logout';
 
 type DropdownOption =
   | {
@@ -37,6 +37,15 @@ const options = computed(() => {
       label: $t('common.userCenter'),
       key: 'user-center',
       icon: SvgIconVNode({ icon: 'ph:user-circle', fontSize: 18 })
+    },
+    {
+      type: 'divider',
+      key: 'divider'
+    },
+    {
+      label: $t('修改密码'),
+      key: 'set-password',
+      icon: SvgIconVNode({ icon: 'uil:brightness-plus', fontSize: 18 })
     },
     {
       type: 'divider',
@@ -64,9 +73,14 @@ function logout() {
   });
 }
 
+// 打开编辑/新增
+const pwdFormRef = ref();
 function handleDropdown(key: DropdownKey) {
   if (key === 'logout') {
     logout();
+  }
+  if (key === 'set-password') {
+    pwdFormRef.value?.openForm();
   } else {
     // If your other options are jumps from other routes, they will be directly supported here
     routerPushByKey(key);
@@ -80,6 +94,7 @@ function handleDropdown(key: DropdownKey) {
   </NButton>
   <NDropdown v-else placement="bottom" trigger="click" :options="options" @select="handleDropdown">
     <div>
+      <SetPassword ref="pwdFormRef" />
       <ButtonIcon>
         <SvgIcon icon="ph:user-circle" class="text-icon-large" />
         <span class="text-16px font-medium">{{ authStore.userInfo.userName }}</span>

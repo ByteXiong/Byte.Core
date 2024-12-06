@@ -356,6 +356,7 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
       class="sm:flex-1-hidden card-wrapper"
     >
       <template #header-extra>
+        任务调度是根据 UTC 时间启动, UTC ({{ dayjs(new Date(), { utc: true }) }})
         <TableHeaderOperation
           v-model:columns="columns"
           :disabled-delete="checkedRowKeys.length === 0"

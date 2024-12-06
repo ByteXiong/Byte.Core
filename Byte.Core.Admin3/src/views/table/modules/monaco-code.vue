@@ -1,9 +1,9 @@
 <script setup lang="tsx">
 import type * as monaco from 'monaco-editor';
 import { ref } from 'vue';
+import type { DataTableColumn } from 'naive-ui';
 import { $t } from '@/locales';
 import customRender from '@/utils/customRender';
-import { DataTableColumn } from 'naive-ui';
 const language = ref('javascript');
 const code = defineModel<string>('code', {
   required: true

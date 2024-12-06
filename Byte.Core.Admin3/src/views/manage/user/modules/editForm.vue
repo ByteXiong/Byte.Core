@@ -14,11 +14,12 @@ const visible = ref<boolean>(false);
 
 const { formRef, validate, restoreValidation } = useNaiveForm();
 // 规则验证获取对象
-const { defaultRequiredRule } = useFormRules();
+const { defaultRequiredRule, patternRules } = useFormRules();
 type RuleKey = keyof FormDataType;
-const rules: Partial<Record<RuleKey, App.Global.FormRule>> = {
+const rules: Partial<Record<RuleKey, App.Global.FormRule | App.Global.FormRule[]>> = {
   userName: defaultRequiredRule,
-  roleIds: defaultRequiredRule
+  roleIds: defaultRequiredRule,
+  password: [defaultRequiredRule, patternRules.pwd]
 };
 
 interface Emits {
@@ -113,6 +114,14 @@ defineExpose({
 
         <NFormItem label="用户角色" path="roleIds">
           <RoleSelect v-model:value="formData.roleIds" multiple></RoleSelect>
+        </NFormItem>
+        <NFormItem v-if="!formData.id" :label="$t('密码')" path="password">
+          <NInput
+            v-model:value="formData.password"
+            type="password"
+            show-password-on="click"
+            :placeholder="$t('common.placeholder')"
+          />
         </NFormItem>
       </NForm>
     </NScrollbar>

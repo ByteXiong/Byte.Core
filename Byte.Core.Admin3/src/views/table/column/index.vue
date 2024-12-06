@@ -78,6 +78,7 @@ const {
             onNegativeClick: () => router.back(),
             onPositiveClick: () =>
               submitView({
+                ConfigId: configId.value,
                 Tableof: tableof.value,
                 type: viewType.value
               })
@@ -344,7 +345,6 @@ const checkedRowKeys = ref<string[]>([]);
 
 function handleAdd() {
   tableView.value?.tableColumns?.push({
-    tableof: tableof.value,
     viewId: tableView.value?.id
   });
   // operateType.value = 'add';

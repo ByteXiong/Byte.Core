@@ -113,11 +113,33 @@ namespace Byte.Core.Business
         /// <returns></returns>
         public async Task<TableColumn> SetTableHeaderAsync(TableColumn param) {
             //param.Key??=Guid.NewGuid().ToString();
-            if (param.Key==null) {
+            try
+            {
+
+                _unitOfWork.BeginTran();
+            if (param.Key == null)
+            {
                 param.IsCustom = true;
             }
-          
+            else {
+
+                //回填数据库注释
+                var view = await GetIQueryable(x => x.Id == param.ViewId).Select(x => new { x.ConfigId, x.Tableof, x.Type }).FirstAsync();
+                    if (view.Type == ViewTypeEnum.主页 && !string.IsNullOrEmpty(view.ConfigId) && !string.IsNullOrEmpty(view.Tableof) && !string.IsNullOrEmpty(param.Key) && !string.IsNullOrEmpty(param.Title)) {
+                       _unitOfWork.GetDbClient().GetConnection(view.ConfigId).DbMaintenance.AddColumnRemark(param.Key, view.Tableof, param.Title);
+                    }
+                }
+
             await _unitOfWork.GetDbClient().Storageable(param).ExecuteReturnEntityAsync();
+                _unitOfWork.CommitTran();
+            }
+            catch (Exception)
+            {
+
+                _unitOfWork.RollbackTran();
+                throw;
+
+            }
             return param;
         }
         /// <summary>

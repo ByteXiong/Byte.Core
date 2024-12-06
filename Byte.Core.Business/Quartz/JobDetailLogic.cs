@@ -312,7 +312,7 @@ namespace Byte.Core.Business.Quartz
                     JobName = trigger.DetailId.ToString(),
                     StartTimeUtc = DateTimeOffset.FromUnixTimeSeconds(trigger.StartTime ?? DateTime.UtcNow.ToTimeStamp()),
                     EndTimeUtc = DateTimeOffset.FromUnixTimeSeconds(trigger.EndTime ?? DateTime.UtcNow.AddYears(1).ToTimeStamp()),
-                    RepeatCount = trigger.MaxNumberOfRuns > 0 ? trigger.MaxNumberOfRuns - 1 : 0,//指定触发器的重复次数
+                    //RepeatCount = trigger.MaxNumberOfRuns > 0 ? trigger.MaxNumberOfRuns - 1 : 0,//指定触发器的重复次数
                     TimesTriggered = trigger.MaxNumberOfRuns > 0 ? trigger.MaxNumberOfRuns - 1 : 0,//指定触发器被触发的次数
                     RepeatInterval = TimeSpan.FromSeconds(simple)
                 };

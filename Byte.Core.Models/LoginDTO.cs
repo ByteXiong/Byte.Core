@@ -102,4 +102,5 @@ namespace Byte.Core.Models
         public List<string> Buttons { get; set; }
 
     }
+
 }

@@ -34,6 +34,7 @@ namespace Byte.Core.Models
     public class AddUserParam : User
     {
         public List<long>? RoleIds { get; set; }
+        public string  Password { get; set; }
     }
 
     /// <summary>

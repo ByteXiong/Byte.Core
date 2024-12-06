@@ -14,8 +14,8 @@ namespace Byte.Core.Business
         /// <summary>
         /// 
         /// </summary>
-         readonly UserRepository _userRepository= userRepository;
-          readonly MenuRepository _menuRepository = menuRepository;
+        readonly UserRepository _userRepository = userRepository;
+        readonly MenuRepository _menuRepository = menuRepository;
         readonly RoleRepository _roleRepository = roleRepository;
         /// <summary>
         /// 账号登录
@@ -26,20 +26,20 @@ namespace Byte.Core.Business
         {
             param.Password = param.Password.ToMD5String();
             Expression<Func<User, bool>> where = x => x.UserName == param.UserName && x.Password == param.Password;
-#if DEBUG
-            where = x => x.UserName == param.UserName;
-#endif
+            //#if DEBUG
+            //            where = x => x.UserName == param.UserName;
+            //#endif
 
             var user = await _userRepository.GetIQueryable(where)
-                .Select(x => new  {
+                .Select(x => new {
 
-                Id = x.Id,
-                UserName = x.UserName,
-                //RoleCode = x.User_Dept_Roles.Select(y => y.Role.Code).ToList(),
-                //Type = user.Role.Type,
-                NickName = x.NickName,
-                Status=x.Status
-            } ).FirstAsync();
+                    Id = x.Id,
+                    UserName = x.UserName,
+                    //RoleCode = x.User_Dept_Roles.Select(y => y.Role.Code).ToList(),
+                    //Type = user.Role.Type,
+                    NickName = x.NickName,
+                    Status = x.Status
+                }).FirstAsync();
             if (user == null) throw new BusException("账号或密码错误");
             if (!user.Status) throw new BusException("账号已禁用");
 
@@ -47,10 +47,10 @@ namespace Byte.Core.Business
             {
                 Id = user.Id,
                 UserName = user.UserName,
-                RoleCodes = _roleRepository.GetIQueryable(x=>x.DeptId==1&&x.Users.Any(y=>y.Id==user.Id)).Select(x => x.Code).ToList(),
+                RoleCodes = _roleRepository.GetIQueryable(x => x.DeptId == 1 && x.Users.Any(y => y.Id == user.Id)).Select(x => x.Code).ToList(),
                 //Type = user.Role.Type,
                 NickName = user.NickName,
-                DeptId =1,
+                DeptId = 1,
             };
             return await LoginTokenAsync(jwt);
         }
@@ -77,9 +77,6 @@ namespace Byte.Core.Business
             string token = JWTHelper.SetToken(str, JWTHelper.JWTSecret);
             return await LoginTokenAsync(entity);
         }
-
-
-
 
         /// <summary>
         /// 获取登录信息
@@ -118,7 +115,7 @@ namespace Byte.Core.Business
             //jwtPayload.Expire = DateTime.Now.AddSeconds(60);
             //entity.Roles = await _user_RoleLogic.GetIQueryable(x => x.UserId == entity.Id).Select(x => x.RoleId).ToArrayAsync();
             var str = jwtPayload.ToJson();
-         
+
             string token = JWTHelper.SetToken(str, JWTHelper.JWTSecret);
             var loginToken = new LoginToken()
             {
@@ -129,5 +126,16 @@ namespace Byte.Core.Business
             };
             return loginToken;
         }
+
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        /// <exception cref="BusException"></exception>
+        public async Task SetPassword(SetPasswordParam param){
+            param.Id = CurrentUser.Id;
+            await _userRepository.SetPassword(param);
+        } 
     }
 }
