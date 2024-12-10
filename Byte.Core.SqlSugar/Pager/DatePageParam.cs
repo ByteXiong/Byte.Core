@@ -23,4 +23,26 @@
         //    EndTime = DateTime.MaxValue;
         //}
     }
+
+
+    public abstract class TimeStampPageParam : PageParam
+    {
+        public long? StartTimeStamp
+        {
+            get;
+            set;
+        }
+
+        public long? EndTimeStamp
+        {
+            get;
+            set;
+        }
+
+        //protected TimePageParam()
+        //{
+        //    StartTime = DateTime.MinValue;
+        //    EndTime = DateTime.MaxValue;
+        //}
+    }
 }
