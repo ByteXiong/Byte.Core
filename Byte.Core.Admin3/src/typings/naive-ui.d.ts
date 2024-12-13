@@ -21,6 +21,14 @@ declare namespace NaiveUI {
       searchType?: import('@/api/apiEnums').SearchTypeEnum;
     };
   };
+
+  // 配置
+  type dataTableConfig = {
+    sortList: Record<string, string>;
+    // sortKey: string;
+    // sortOrder: import('@/api/apiEnums').OrderTypeEnum;
+  };
+
   /**
    * the custom column key
    *

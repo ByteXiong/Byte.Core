@@ -11,6 +11,10 @@ const data = computed(() => {
   const enumNames = Object.keys(Enums);
   return enumNames.map(item => ({ label: item, value: item }));
 });
+
+// interface Emits {
+//   (e: 'onChange'): void;
+// }
 </script>
 
 <template>

@@ -1,27 +1,26 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useForm } from 'alova/client';
+import dayjs from 'dayjs';
 import { useFormRules, useNaiveForm } from '@/hooks/common/form';
 import { $t } from '@/locales';
-import type { SetPasswordParam } from '@/api/globals';
-
+import type { SetWinParam } from '@/api/globals';
 defineOptions({
-  name: 'SetPasswordForm'
+  name: 'RankWeekEditForm'
 });
-const visible = ref<boolean>(false);
+type FormDataType = SetWinParam;
 
-type FormDataType = typeof formData.value;
+const visible = ref<boolean>(false);
 
 const { formRef, validate, restoreValidation } = useNaiveForm();
 // 规则验证获取对象
-const { defaultRequiredRule, patternRules } = useFormRules();
+const { defaultRequiredRule } = useFormRules();
 type RuleKey = keyof FormDataType;
 const rules: Partial<Record<RuleKey, App.Global.FormRule | App.Global.FormRule[]>> = {
-  oldPassword: [defaultRequiredRule, patternRules.pwd],
-  newPassword: [defaultRequiredRule, patternRules.pwd],
-  newPassword2: [defaultRequiredRule, patternRules.pwd]
+  newWin: defaultRequiredRule,
+  newGems: defaultRequiredRule
 };
-const id = ref<number>(0);
+
 interface Emits {
   (e: 'refresh', row: any): any;
 }
@@ -31,11 +30,12 @@ const emit = defineEmits<Emits>();
 const {
   send: handleSubmit,
   form: formData,
-  reset: resetFrom
+  reset: resetFrom,
+  updateForm
 } = useForm(
   form =>
-    (id.value ? Apis.User.put_api_user_setpassword : Apis.Login.put_api_login_setpassword)({
-      data: { id: id.value, ...form },
+    Apis.Rank.put_api_rank_setwin({
+      data: form,
       transform: () => {
         visible.value = false;
         window.$message?.success($t('common.updateSuccess'));
@@ -45,8 +45,11 @@ const {
   {
     immediate: false,
     resetAfterSubmiting: true,
-    initialForm: {} as SetPasswordParam & {
-      newPassword2: '';
+    initialForm: {} as FormDataType & {
+      nickName: '';
+      win: 0;
+      gems: 0;
+      date: '';
     },
     async middleware(_, next) {
       validate().then(async () => {
@@ -55,17 +58,19 @@ const {
     }
   }
 );
-
 const title = computed(() => {
-  return '修改密码';
+  return '编辑-周排行榜';
 });
 // 打开
-const openForm = async (userid?: number) => {
-  id.value = userid || 0;
+const openForm = async (row: any, timestamp: string) => {
   visible.value = true;
+  updateForm({ ...row, type: 2, date: dayjs(timestamp).format('YYYY-MM-DD HH:mm:ss') });
 };
 const closeForm = () => {
   // 关闭页面 清空formData
+  /** ✨ Codeium Command ⭐ ************ */
+  /** Closes the form dialog, resets the form data, and clears the validation state. */
+  /** 38810830-7b81-406c-81b5-f9f7d5c0ce8e ****** */
   visible.value = false;
   restoreValidation();
   resetFrom();
@@ -79,30 +84,23 @@ defineExpose({
   <NModal v-model:show="visible" :title="title" preset="card" class="w-800px" @after-leave="closeForm">
     <NScrollbar class="h-480px pr-20px">
       <NForm ref="formRef" :model="formData" :rules="rules" label-placement="left" :label-width="100">
-        <NFormItem :label="$t('旧密码')" path="oldPassword">
-          <NInput
-            v-model:value="formData.oldPassword"
-            type="password"
-            show-password-on="click"
-            :placeholder="$t('common.placeholder')"
-          />
-        </NFormItem>
-        <NFormItem :label="$t('新密码')" path="newPassword">
-          <NInput
-            v-model:value="formData.newPassword"
-            type="password"
-            show-password-on="click"
-            :placeholder="$t('common.placeholder')"
-          />
+        <NFormItem label="昵称" path="nickName">
+          {{ formData.nickName }} 日期:{{ dayjs(formData.timestamp).format('YYYY-MM-DD') }}
         </NFormItem>
 
-        <NFormItem :label="$t('确认密码')" path="newPassword2">
-          <NInput
-            v-model:value="formData.newPassword2"
-            type="password"
-            show-password-on="click"
-            :placeholder="$t('common.placeholder')"
-          />
+        <NFormItem label="原宝石数" path="gems">
+          {{ formData.gems }}
+        </NFormItem>
+        <NFormItem label="原连胜场次" path="gems">
+          {{ formData.win }}
+        </NFormItem>
+
+        <NFormItem label="修改宝石数" path="newGems">
+          <NInputNumber v-model:value="formData.newGems" :placeholder="$t('common.placeholder')" />
+        </NFormItem>
+
+        <NFormItem label="修改连胜场次" path="newWin">
+          <NInputNumber v-model:value="formData.newWin" :placeholder="$t('common.placeholder')" />
         </NFormItem>
       </NForm>
     </NScrollbar>

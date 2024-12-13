@@ -5,6 +5,12 @@ import type { DataTableColumn } from 'naive-ui';
 import { $t } from '@/locales';
 import customRender from '@/utils/customRender';
 const language = ref('javascript');
+interface Props {
+  loading?: boolean;
+}
+
+defineProps<Props>();
+
 const code = defineModel<string>('code', {
   required: true
 });
@@ -49,16 +55,12 @@ const handClick = () => {
   visible.value = true;
   value.value = code.value;
 };
-const loading = ref(false);
 const handlTest = () => {
-  loading.value = true;
   try {
     columns.value[2] = customRender(value.value);
   } catch (e) {
     console.error(e);
   }
-
-  loading.value = false;
 };
 
 const tableData = ref([
@@ -74,7 +76,9 @@ const tableData = ref([
 </script>
 
 <template>
-  <NButton type="primary" :ghost="!code || code.length == 0" size="small" @click="handClick">重写插槽</NButton>
+  <NButton type="primary" :ghost="!code || code.length == 0" :loading="loading" size="small" @click="handClick">
+    重写插槽
+  </NButton>
   <NModal v-model:show="visible" :title="title" preset="card" class="w-1400px">
     <NGrid :x-gap="12" :y-gap="12" :cols="4">
       <NGi>
@@ -103,7 +107,7 @@ const tableData = ref([
 
     <template #footer>
       <NSpace justify="space-between" :size="16">
-        <NButton type="primary" @click="handlTest">{{ $t('测试代码') }}</NButton>
+        <NButton type="primary" :loading="loading" @click="handlTest">{{ $t('测试代码') }}</NButton>
         <NSpace justify="end" :size="16">
           <NButton type="primary" @click="closeModal">{{ $t('common.cancel') }}</NButton>
           <NButton type="primary" @click="handleSubmit">{{ $t('common.confirm') }}</NButton>

@@ -1,3 +1,4 @@
+// 写在同一文件夹内 方便前端拷贝
 export enum VersionEnum {
   def = 0,
   /// <summary>
@@ -27,7 +28,7 @@ export enum StateEnum {
   /// </summary>
   update = 2
 }
-export enum OrderByEnum {
+export enum OrderTypeEnum {
   /// <summary>
   /// 正序
   /// </summary>
@@ -40,8 +41,14 @@ export enum OrderByEnum {
 
 export enum ViewTypeEnum {
   主页 = 1,
-  编辑页 = 2,
+  编辑 = 2,
   详情页 = 3
+}
+export enum RoleTypeEnum {
+  系统角色 = 10,
+  公司角色 = 20,
+  部门角色 = 30,
+  个人角色 = 40
 }
 
 export enum MenuTypeEnum {
@@ -49,12 +56,6 @@ export enum MenuTypeEnum {
   菜单 = 2,
   按钮 = 3,
   参数 = 4
-}
-export enum RoleTypeEnum {
-  系统角色 = 10,
-  公司角色 = 20,
-  部门角色 = 30,
-  个人角色 = 40
 }
 
 export enum DeptTypeEnum {
@@ -77,11 +78,19 @@ export enum TableAlignEnum {
 /// </summary>
 export enum TableFixedEnum {
   left = 1,
-  '' = 2,
   right = 3
 }
-
+export enum WebSocketModelTypeEnum {
+  发送心跳 = 0,
+  在线用户 = 1,
+  单聊 = 100,
+  群聊 = 110
+}
+/// <summary>
+/// 查询方式,不能删除同步给前端用
+/// </summary>
 export enum SearchTypeEnum {
+  // 后端使用 SqlSuger.ConditionalType
   等于,
   模糊,
   大于,
@@ -106,19 +115,41 @@ export enum ColumnTypeEnum {
   文件 = 12,
   布尔 = 13,
   颜色 = 14,
+  TexTarea文本 = 15,
+  富文本 = 50,
   自定义 = 99
 }
-
 export enum LayoutTypeEnum {
   Base = 1,
   Blank = 2
 }
+
 export enum IconTypeEnum {
   iconify图标 = 1,
   本地图标 = 2
 }
 
-export enum JobActionEnum {
+/// <summary>
+///
+/// </summary>
+export enum ClusterStatus {
+  /// <summary>
+  /// 宕机
+  /// </summary>
+  Crashed = 0,
+
+  /// <summary>
+  /// 工作中
+  /// </summary>
+  Working = 1,
+
+  /// <summary>
+  /// 等待被唤醒
+  /// </summary>
+  Waiting = 2
+}
+
+export enum TriggerActionEnum {
   启动 = 1,
   暂停 = 2,
   重启 = 3,
@@ -138,12 +169,12 @@ export enum TriggerStateEnum {
   Backlog = 1,
 
   /// <summary>
-  /// 就绪
+  /// 就绪Ready
   /// </summary>
   Ready = 2,
 
   /// <summary>
-  /// 正在运行
+  /// 正在运行Running
   /// </summary>
   Running = 3,
 
@@ -204,4 +235,30 @@ export enum TriggerStateEnum {
   /// </summary>
   /// <remarks>作业处理程序类型运行时类型为 null</remarks>
   Unhandled = 13
+}
+
+export enum TriggerTypeEnum {
+  简单触发器 = 1,
+  Cron触发器 = 2,
+  日历间隔触发器 = 3,
+  每日时间间隔触发器 = 4
+}
+/// <summary>
+/// 作业创建类型枚举
+/// </summary>
+export enum JobCreateTypeEnum {
+  /// <summary>
+  /// 内置
+  /// </summary>
+  BuiltIn = 1,
+
+  /// <summary>
+  /// 脚本
+  /// </summary>
+  Script = 2,
+
+  /// <summary>
+  /// HTTP请求
+  /// </summary>
+  Http = 3
 }

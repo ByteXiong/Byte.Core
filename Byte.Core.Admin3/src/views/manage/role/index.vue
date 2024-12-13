@@ -190,7 +190,7 @@ const columnData = computed<Array<DataTableColumn>>(() => {
         }"
       />
     </NCard>
-    <EditForm ref="editFormRef"></EditForm>
+    <EditForm ref="editFormRef" @refresh="getData(page, pageSize)"></EditForm>
     <MenuTree ref="menuTreeRef"></MenuTree>
   </div>
 </template>

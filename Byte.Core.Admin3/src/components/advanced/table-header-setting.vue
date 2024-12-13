@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { useRequest } from 'alova/client';
-import { $t } from '@/locales';
 import type { TableColumn } from '@/api/globals';
 import { ViewTypeEnum } from '@/api/apiEnums';
 const router = useRouter();
@@ -25,6 +24,10 @@ const searchData = defineModel<Array<TableColumn>>('searchData', {
   default: () => []
 });
 
+const dataTableConfig = defineModel<NaiveUI.dataTableConfig | undefined>('dataTableConfig', {
+  required: true
+});
+
 // const jsonString =
 //   '{"name": "example", "renderFunction": "function render(row, submit) { return `<div>${row.isShow ? \'显示\' : \'隐藏\'}</div>`; }"}';
 // const parsedObject = JSON.parse(jsonString);
@@ -42,10 +45,17 @@ const { loading } = useRequest(
       transform: res => {
         // 为什么这里不处理 返回结果, 父级页面的方法拿不到
         columns.value =
-          res.data?.tableColumns?.map(item => {
-            return { ...item, checked: true } as NaiveUI.TableColumnCheck;
-          }) || [];
-        searchData.value = res.data?.tableColumns?.filter(item => item.searchType !== null) || [];
+          res.data?.tableColumns
+            ?.filter(item => item.isShow)
+            .map(item => {
+              return { ...item, checked: true } as NaiveUI.TableColumnCheck;
+            }) || [];
+        if (viewType === ViewTypeEnum.主页) {
+          searchData.value = res.data?.tableColumns?.filter(item => item.searchType !== null) || [];
+          dataTableConfig.value.sortList[res.data?.sortKey || 'id'] = res.data?.sortOrder || 'desc';
+        }
+
+        // dataTableConfig.value.sortOrder = res.data?.sortOrder || OrderTypeEnum.desc;
       }
     }),
   {

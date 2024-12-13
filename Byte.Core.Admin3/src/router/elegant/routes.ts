@@ -96,6 +96,55 @@ export const generatedRoutes: GeneratedRoute[] = [
     ]
   },
   {
+    name: 'dts',
+    path: '/dts',
+    component: 'layout.base',
+    meta: {
+      title: 'dts',
+      i18nKey: 'route.dts'
+    },
+    children: [
+      {
+        name: 'dts_sha',
+        path: '/dts/sha',
+        meta: {
+          title: 'dts_sha',
+          i18nKey: 'route.dts_sha'
+        },
+        children: [
+          {
+            name: 'dts_sha_total',
+            path: '/dts/sha/total',
+            component: 'view.dts_sha_total',
+            meta: {
+              title: 'dts_sha_total',
+              i18nKey: 'route.dts_sha_total'
+            }
+          }
+        ]
+      },
+      {
+        name: 'dts_user',
+        path: '/dts/user',
+        meta: {
+          title: 'dts_user',
+          i18nKey: 'route.dts_user'
+        },
+        children: [
+          {
+            name: 'dts_user_total',
+            path: '/dts/user/total',
+            component: 'view.dts_user_total',
+            meta: {
+              title: 'dts_user_total',
+              i18nKey: 'route.dts_user_total'
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
     name: 'function',
     path: '/function',
     component: 'layout.base',

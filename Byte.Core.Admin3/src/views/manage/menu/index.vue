@@ -155,7 +155,7 @@ const columnData = computed<Array<Naive.DataTableColumn>>(() => {
         class="sm:h-full"
       />
     </NCard>
-    <EditForm ref="editFormRef"></EditForm>
+    <EditForm ref="editFormRef" @refresh="getData"></EditForm>
   </div>
 </template>
 

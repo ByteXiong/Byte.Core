@@ -9,7 +9,7 @@ import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
 import '@/api';
 import type { TableColumn } from '@/api/globals';
-import { ColumnTypeEnum, OrderByEnum, SearchTypeEnum, ViewTypeEnum } from '@/api/apiEnums';
+import { ColumnTypeEnum, OrderTypeEnum, SearchTypeEnum, ViewTypeEnum } from '@/api/apiEnums';
 import AllGroupSelect from '@/components/select/all-group-select.vue';
 import AllEnumSelect from '@/components/select/all-enum-select.vue';
 import { getEnumValue } from '@/utils/common';
@@ -407,7 +407,7 @@ function handleAdd() {
               "
             ></NSelect>
             <NSelect
-              :options="getEnumValue(OrderByEnum).map(item => ({ label: OrderByEnum[item], value: item }))"
+              :options="getEnumValue(OrderTypeEnum).map(item => ({ label: OrderTypeEnum[item], value: item }))"
             ></NSelect>
           </NFormItemGi>
           <NFormItemGi span="24 m:12" class="pr-24px">

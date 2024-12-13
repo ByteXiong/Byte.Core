@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Byte.Core开发接口文档 Web端网站 - version 1.0
+ * runtest开发接口文档 Web端网站 - version 1.0
  *
  *
  *
@@ -27,10 +27,17 @@ export default {
   'JobDetail.delete_api_jobdetail_delete': ['DELETE', '/api/JobDetail/Delete'],
   'JobDetail.get_api_jobdetail_getinfo': ['GET', '/api/JobDetail/GetInfo'],
   'JobDetail.get_api_jobdetail_getpage': ['GET', '/api/JobDetail/GetPage'],
+  'JobDetail.post_api_jobdetail_setallstate': ['POST', '/api/JobDetail/SetAllState'],
   'JobDetail.post_api_jobdetail_submit': ['POST', '/api/JobDetail/Submit'],
+  'JobTrigger.delete_api_jobtrigger_delete': ['DELETE', '/api/JobTrigger/Delete'],
+  'JobTrigger.get_api_jobtrigger_getinfo': ['GET', '/api/JobTrigger/GetInfo'],
+  'JobTrigger.get_api_jobtrigger_getpage': ['GET', '/api/JobTrigger/GetPage'],
+  'JobTrigger.post_api_jobtrigger_setstate': ['POST', '/api/JobTrigger/SetState'],
+  'JobTrigger.post_api_jobtrigger_submit': ['POST', '/api/JobTrigger/Submit'],
   'Login.get_api_login_info': ['GET', '/api/Login/Info'],
   'Login.post_api_login_login': ['POST', '/api/Login/Login'],
   'Login.post_api_login_loginout': ['POST', '/api/Login/LoginOut'],
+  'Login.put_api_login_setpassword': ['PUT', '/api/Login/SetPassword'],
   'Menu.delete_api_menu_delete': ['DELETE', '/api/Menu/Delete'],
   'Menu.get_api_menu_getbyroleid': ['GET', '/api/Menu/GetByRoleId'],
   'Menu.get_api_menu_getconstantroutes': ['GET', '/api/Menu/GetConstantRoutes'],
@@ -46,22 +53,30 @@ export default {
   'Quartz.get_api_quartz_all': ['GET', '/api/Quartz/All'],
   'Quartz.delete_api_quartz_deletejob': ['DELETE', '/api/Quartz/DeleteJob'],
   'Quartz.get_api_quartz_schedulejob': ['GET', '/api/Quartz/ScheduleJob'],
+  'Rank.get_api_rank_adduser': ['GET', '/api/Rank/Adduser'],
+  'Rank.get_api_rank_alluserlogin': ['GET', '/api/Rank/AllUserLogin'],
+  'Rank.get_api_rank_day': ['GET', '/api/Rank/Day'],
+  'Rank.put_api_rank_setwin': ['PUT', '/api/Rank/SetWin'],
+  'Rank.get_api_rank_week': ['GET', '/api/Rank/Week'],
   'Role.delete_api_role_delete': ['DELETE', '/api/Role/Delete'],
   'Role.get_api_role_getinfo': ['GET', '/api/Role/GetInfo'],
   'Role.get_api_role_getpage': ['GET', '/api/Role/GetPage'],
   'Role.get_api_role_getselect': ['GET', '/api/Role/GetSelect'],
   'Role.put_api_role_setstatus': ['PUT', '/api/Role/SetStatus'],
   'Role.post_api_role_submit': ['POST', '/api/Role/Submit'],
+  'Sha.get_api_sha_totalpage': ['GET', '/api/Sha/TotalPage'],
+  'Sha.get_api_sha_usertotal': ['GET', '/api/Sha/UserTotal'],
   'TableColumn.delete_api_tablecolumn_delete_configid_tableof': [
     'DELETE',
     '/api/TableColumn/Delete/{configId}/{tableof}'
   ],
-  'TableColumn.get_api_tablecolumn_getform_configid_tableof': ['GET', '/api/TableColumn/GetForm/{configId}/{tableof}'],
-  'TableColumn.get_api_tablecolumn_page_configid_tableof': ['GET', '/api/TableColumn/Page/{configId}/{tableof}'],
+  'TableColumn.get_api_tablecolumn_getinfo_configid_tableof': ['GET', '/api/TableColumn/GetInfo/{configId}/{tableof}'],
+  'TableColumn.get_api_tablecolumn_getpage_configid_tableof': ['GET', '/api/TableColumn/GetPage/{configId}/{tableof}'],
   'TableColumn.post_api_tablecolumn_submit_configid_tableof': ['POST', '/api/TableColumn/Submit/{configId}/{tableof}'],
   'TableView.delete_api_tableview_deletetableheader': ['DELETE', '/api/TableView/DeleteTableHeader'],
   'TableView.get_api_tableview_gettableheader': ['GET', '/api/TableView/GetTableHeader'],
   'TableView.get_api_tableview_getview': ['GET', '/api/TableView/GetView'],
+  'TableView.put_api_tableview_setprops': ['PUT', '/api/TableView/SetProps'],
   'TableView.put_api_tableview_settableheader': ['PUT', '/api/TableView/SetTableHeader'],
   'TableView.put_api_tableview_settablesort': ['PUT', '/api/TableView/SetTableSort'],
   'TableView.post_api_tableview_submit': ['POST', '/api/TableView/Submit'],
@@ -69,6 +84,7 @@ export default {
   'User.delete_api_user_delete': ['DELETE', '/api/User/Delete'],
   'User.get_api_user_getinfo': ['GET', '/api/User/GetInfo'],
   'User.get_api_user_getpage': ['GET', '/api/User/GetPage'],
+  'User.put_api_user_setpassword': ['PUT', '/api/User/SetPassword'],
   'User.put_api_user_setstatus': ['PUT', '/api/User/SetStatus'],
   'User.post_api_user_submit': ['POST', '/api/User/Submit']
 };

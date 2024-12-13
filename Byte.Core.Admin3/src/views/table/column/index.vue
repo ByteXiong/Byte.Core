@@ -7,21 +7,21 @@ import { useRoute, useRouter } from 'vue-router';
 import { useDraggable } from 'vue-draggable-plus';
 import { useAppStore } from '@/store/modules/app';
 import { $t } from '@/locales';
-import '@/api';
-import type { TableColumn } from '@/api/globals';
-import { ColumnTypeEnum, SearchTypeEnum, ViewTypeEnum } from '@/api/apiEnums';
+import type { TableColumn, TableView } from '@/api/globals';
+import { ColumnTypeEnum, OrderTypeEnum, SearchTypeEnum, ViewTypeEnum } from '@/api/apiEnums';
 import AllGroupSelect from '@/components/select/all-group-select.vue';
 import AllEnumSelect from '@/components/select/all-enum-select.vue';
 import { getEnumValue } from '@/utils/common';
+import { useFormRules, useNaiveForm } from '@/hooks/common/form';
 import MonacoCode from '../modules/monaco-code.vue';
 const route = useRoute();
 const router = useRouter();
 const configId = ref(route.query.configId as string);
 const tableof = ref(route.query.tableof as string);
-const viewType = ref<number>(route.query.viewType as unknown as number);
+const viewType = ref<ViewTypeEnum>(route.query.viewType as unknown as number);
 const dialog = useDialog();
 const isDraggable = ref(true);
-
+// #region 排序
 const { send: submitSort } = useForm(
   (_, row) =>
     Apis.TableView.put_api_tableview_settablesort({
@@ -37,29 +37,49 @@ const { send: submitSort } = useForm(
     initialForm: []
   }
 );
-// 创建视图
-const { send: submitView } = useForm(
-  (_, row) =>
+// #endregion
+// #region 提交视图(TableView)
+
+type FormDataType = typeof tableView.value;
+
+const { formRef, validate, restoreValidation } = useNaiveForm();
+// 规则验证获取对象
+const { defaultRequiredRule, patternRules } = useFormRules();
+type RuleKey = keyof FormDataType;
+const rules: Partial<Record<RuleKey, App.Global.FormRule | App.Global.FormRule[]>> = {
+  sortKey: defaultRequiredRule,
+  sortOrder: defaultRequiredRule
+};
+
+const {
+  form: tableView,
+  send: submitView,
+  updateForm
+} = useForm(
+  from =>
     Apis.TableView.post_api_tableview_submit({
-      data: row,
-      transform: () => {
+      data: from,
+      transform: res => {
         window.$message?.success('保存成功！');
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        getData();
+        tableView.value.id = res.data;
       }
     }),
   {
     immediate: false,
-    resetAfterSubmiting: true,
-    initialForm: []
+    resetAfterSubmiting: false,
+    initialForm: {
+      sortKey: '',
+      sortOrder: ''
+    } as TableView,
+    async middleware(_, next) {
+      validate();
+      await next();
+    }
   }
 );
-
-const {
-  data: tableView,
-  loading,
-  send: getData
-} = useRequest(
+// #endregion
+const { loading, send: getTableHeader } = useRequest(
   // Method实例获取函数，它将接收page和pageSize，并返回一个Method实例
   () =>
     Apis.TableView.get_api_tableview_gettableheader({
@@ -76,21 +96,22 @@ const {
             negativeText: '返回',
             positiveText: '确认',
             onNegativeClick: () => router.back(),
-            onPositiveClick: () =>
-              submitView({
-                ConfigId: configId.value,
-                Tableof: tableof.value,
-                type: viewType.value
-              })
+            onPositiveClick: () => {
+              tableView.value.configId = configId.value;
+              tableView.value.tableof = tableof.value;
+              tableView.value.type = viewType.value;
+              submitView();
+            }
           });
         } else if (isDraggable.value) {
+          updateForm(res.data || {});
           // 定时器10s后运行
           setTimeout(() => {
             const el = document.getElementsByTagName('tbody')[0];
             const { start } = useDraggable(el, tableView.value?.tableColumns, {
               animation: 150,
-              ghostClass: 'ghost',
-              filter: '.no-drag',
+              // ghostClass: 'ghost',
+              handle: '.handle',
               onUpdate() {
                 tableView.value?.tableColumns?.forEach((item, index) => {
                   item.sort = index + 1;
@@ -119,8 +140,8 @@ const {
     immediate: true
   }
 );
-
-const { send: submit } = useForm(
+// #region  行操作
+const { send: submit, loading: submitLoading } = useForm(
   (_, row) =>
     Apis.TableView.put_api_tableview_settableheader({
       data: row,
@@ -143,7 +164,7 @@ const { send: handleDelete } = useRequest(
       data: ids,
       transform: () => {
         window.$message?.success('删除成功！');
-        getData();
+        getTableHeader();
       }
     }),
   {
@@ -151,19 +172,7 @@ const { send: handleDelete } = useRequest(
     immediate: false
   }
 );
-// 获取 class 属性
 
-// const el = document.getElementsByTagName('tbody')[0];
-// const { start } = useDraggable(el, tableView, {
-//   animation: 150,
-//   ghostClass: 'ghost',
-//   onStart() {
-//     console.log('start');
-//   },
-//   onUpdate() {
-//     console.log('update');
-//   }
-// });
 //= ===========================================设置头部=================================
 
 //= ===========================================设置头部结束=================================
@@ -171,9 +180,9 @@ const { send: handleDelete } = useRequest(
 function renderColumnType(row: TableColumn) {
   switch (row.columnType) {
     case ColumnTypeEnum.枚举:
-      return <AllEnumSelect v-model:value={row.columnTypeDetail} onChange={() => submit(row)} />;
+      return <AllEnumSelect v-model:value={row.columnTypeDetail} onUpdate:value={() => submit(row)} />;
     case ColumnTypeEnum.字典:
-      return <AllGroupSelect v-model:value={row.columnTypeDetail} onChange={() => submit(row)} />;
+      return <AllGroupSelect v-model:value={row.columnTypeDetail} onUpdate:value={() => submit(row)} />;
     case ColumnTypeEnum.时间:
       return (
         <NInput
@@ -200,8 +209,6 @@ function renderColumnType(row: TableColumn) {
 }
 
 const appStore = useAppStore();
-// const { bool: visible, setTrue: openModal } = useBoolean();
-
 const wrapperRef = ref<HTMLElement | null>(null);
 
 const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
@@ -210,14 +217,28 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
     align: 'center',
     width: 48,
     checked: true,
-    disabled: row => row.id === 0
+    disabled: row => row.id === '0'
+  },
+  {
+    key: 'sort',
+    title: '拖拽排序',
+    align: 'center',
+    checked: true,
+    width: 80,
+    render: row => {
+      return (
+        <div class="handle">
+          <icon-mdi-drag class="mr-8px h-full cursor-move text-icon" />
+          {row.sort}
+        </div>
+      );
+    }
   },
   {
     key: 'key',
     title: $t('字段'),
     align: 'center',
-    checked: true,
-    className: 'draggable'
+    checked: true
   },
   {
     key: 'title',
@@ -225,7 +246,15 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
     align: 'center',
     checked: true,
     render: row => {
-      return <NInput type="text" v-model:value={row.title} placeholder="请输入注释" onChange={() => submit(row)} />;
+      return (
+        <NInput
+          type="text"
+          v-model:value={row.title}
+          placeholder="请输入注释"
+          onChange={() => submit(row)}
+          loading={submitLoading.value}
+        />
+      );
     }
   },
   {
@@ -242,6 +271,7 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
           onUpdate:checked={() => {
             submit(row);
           }}
+          disabled={submitLoading.value}
         >
           {row.isShow ? '显示' : '隐藏'}
         </NCheckbox>
@@ -261,6 +291,7 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
             options={getEnumValue(ColumnTypeEnum).map(item => ({ label: ColumnTypeEnum[item], value: item }))}
             placeholder="请选择"
             clearable
+            loading={submitLoading.value}
             onChange={() => {
               submit(row);
             }}
@@ -282,6 +313,7 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
           options={getEnumValue(SearchTypeEnum).map(item => ({ label: SearchTypeEnum[item], value: item }))}
           placeholder="请选择"
           clearable
+          loading={submitLoading.value}
           onChange={() => {
             submit(row);
           }}
@@ -289,23 +321,6 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
       );
     }
   },
-  // {
-  //   key: 'sort',
-  //   title: $t('排序'),
-  //   align: 'center',
-  //   checked: true,
-  //   render: row => {
-  //     return (
-  //       <NInput
-  //         v-model:value={row.sort}
-  //         placeholder="请选择"
-  //         onChange={() => {
-  //           submit(row);
-  //         }}
-  //       />
-  //     );
-  //   }
-  // },
   {
     key: 'type',
     title: $t('操作'),
@@ -314,6 +329,7 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
     render: row => (
       <div class="flex-center gap-8px">
         <MonacoCode
+          loading={submitLoading.value}
           v-model:code={row.props}
           onChange={code => {
             row.props = code;
@@ -322,12 +338,12 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
         >
           {' '}
         </MonacoCode>
-        {row.id !== 0 ? (
+        {row.id !== '0' ? (
           <NPopconfirm onPositiveClick={() => handleDelete([row.id])}>
             {{
               default: () => $t('common.confirmDelete'),
               trigger: () => (
-                <NButton type="error" ghost size="small">
+                <NButton type="error" ghost size="small" loading={submitLoading.value}>
                   {$t('common.delete')}
                 </NButton>
               )
@@ -339,53 +355,12 @@ const columns = ref<Array<DataTableColumn & { checked?: boolean }>>([
   }
 ]);
 const checkedRowKeys = ref<string[]>([]);
-// const { checkedRowKeys, onBatchDeleted, onDeleted } = useTableOperate(data, getData);
-
-// const operateType = ref<OperateType>('add');
 
 function handleAdd() {
   tableView.value?.tableColumns?.push({
     viewId: tableView.value?.id
   });
-  // operateType.value = 'add';
-  // openModal();
 }
-// function handleDelete(id: number) {
-//   // request
-//   // console.log(id);
-//   // onDeleted();
-// }
-
-// /** the edit menu data or the parent menu data when adding a child menu */
-// const editingData: Ref<Api.SystemManage.Menu | null> = ref(null);
-
-// function handleEdit(item: Api.SystemManage.Menu) {
-//   operateType.value = 'edit';
-//   editingData.value = { ...item };
-
-//   openModal();
-// }
-
-// function handleAddChildMenu(item: Api.SystemManage.Menu) {
-//   operateType.value = 'addChild';
-
-//   editingData.value = { ...item };
-
-//   openModal();
-// }
-
-// const allPages = ref<string[]>([]);
-// const columnChecks = ref<NaiveUI.TableColumnCheck[]>([
-//   {
-//     key: 'name',
-//     title: $t('page.manage.menu.menuName'),
-//     checked: true
-//   }
-// ]);
-// async function getAllPages() {
-//   const { data: pages } = await fetchGetAllPages();
-//   allPages.value = pages || [];
-// }
 </script>
 
 <template>
@@ -403,7 +378,7 @@ function handleAdd() {
           tableof="TableHeaderDTO"
           :disabled-delete="checkedRowKeys.length === 0"
           :loading="loading"
-          @refresh="getData"
+          @refresh="getTableHeader"
         >
           <NButton size="small" ghost type="primary" @click="handleAdd()">
             <template #icon>
@@ -412,7 +387,7 @@ function handleAdd() {
             {{ $t('common.add') }}
           </NButton>
           <!--       -->
-          <NPopconfirm @positive-click="handleDelete">
+          <NPopconfirm @positive-click="handleDelete(checkedRowKeys)">
             <template #trigger>
               <NButton size="small" ghost type="error" :disabled="checkedRowKeys?.length === 0">
                 <template #icon>
@@ -426,10 +401,30 @@ function handleAdd() {
         </TableHeaderOperation>
       </template>
 
-      <NSelect
-        v-model:value="tableof"
-        :options="tableView?.tableColumns?.map(item => ({ label: item.title, value: item.key }))"
-      ></NSelect>
+      <NForm ref="formRef" :model="tableView" :rules="rules" label-placement="left" :label-width="80">
+        <NGrid responsive="screen" item-responsive>
+          <NFormItemGi span="24 s:12 m:6" label="默认排序" path="sortKey" class="pr-24px">
+            <NSelect
+              v-model:value="tableView.sortKey"
+              :options="
+                tableView?.tableColumns
+                  ?.filter(x => !x.isCustom)
+                  ?.map(item => ({ label: item.title || item.key, value: item.key }))
+              "
+              :loading="submitLoading"
+              @update:value="submitView"
+            ></NSelect>
+            <NSelect
+              v-model:value="tableView.sortOrder"
+              :options="
+                getEnumValue(OrderTypeEnum).map(item => ({ label: OrderTypeEnum[item], value: OrderTypeEnum[item] }))
+              "
+              placeholder="请选择"
+              @update:value="submitView"
+            ></NSelect>
+          </NFormItemGi>
+        </NGrid>
+      </NForm>
 
       <NDataTable
         v-model:checked-row-keys="checkedRowKeys"
@@ -448,8 +443,8 @@ function handleAdd() {
 </template>
 
 <style scoped>
-.ghost {
+/* .ghost {
   opacity: 0.5;
   background: #c8ebfb;
-}
+} */
 </style>

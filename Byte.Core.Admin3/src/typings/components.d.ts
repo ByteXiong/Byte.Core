@@ -125,6 +125,7 @@ declare module 'vue' {
     TableHeaderSearch: typeof import('./../components/advanced/table-header-search.vue')['default']
     TableHeaderSetting: typeof import('./../components/advanced/table-header-setting.vue')['default']
     ThemeSchemaSwitch: typeof import('./../components/common/theme-schema-switch.vue')['default']
+    WangEditor: typeof import('./../components/wang-editor.vue')['default']
     WaveBg: typeof import('./../components/custom/wave-bg.vue')['default']
     WebSiteLink: typeof import('./../components/custom/web-site-link.vue')['default']
   }

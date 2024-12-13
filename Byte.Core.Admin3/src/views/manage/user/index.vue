@@ -197,7 +197,7 @@ const columnData = computed<Array<DataTableColumn>>(() => {
         }"
       />
     </NCard>
-    <EditForm ref="editFormRef"></EditForm>
+    <EditForm ref="editFormRef" @refresh="getData(page, pageSize)"></EditForm>
     <SetPassword ref="setPassword" />
   </div>
 </template>
