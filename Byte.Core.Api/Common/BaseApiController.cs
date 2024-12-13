@@ -12,5 +12,6 @@ namespace Byte.Core.Api.Common
     [CheckRole]
     public class BaseApiController : BaseController
     {
+
     }
 }

@@ -51,8 +51,8 @@ namespace Byte.Core.Business.Quartz
             {
                 TriggerId = triggerId,
                 NumberOfRuns = numberOfRuns + 1,
-                LastRunTime = context.FireTimeUtc.LocalDateTime,
-                NextRunTime = context.NextFireTimeUtc?.LocalDateTime,
+                LastRunTime = context.FireTimeUtc.ToUnixTimeSeconds(),
+                NextRunTime = context.NextFireTimeUtc?.ToUnixTimeSeconds(),
             };
             await _jobTriggerRecordLogic.AddAsync(jobTriggerRecord);
 

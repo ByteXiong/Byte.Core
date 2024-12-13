@@ -47,7 +47,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<RoleInfo> GetInfoAsync(int id)
+        public async Task<RoleInfo> GetInfoAsync(long id)
         {
             var entity = await Repository.GetIQueryable(x => x.Id == id).Select<RoleInfo>().FirstAsync();
             return entity;

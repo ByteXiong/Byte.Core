@@ -20,13 +20,13 @@ namespace Byte.Core.Entity
         [SugarColumn(ColumnDescription = "名称", Length = 128, IsNullable = true)]
         public string GroupName { get; set; }
         /// <summary>
-        /// 触发器类型FullName
+        /// 触发器类型
         /// </summary>
-        [SugarColumn(ColumnDescription = "触发器类型", Length = 128, IsNullable = true)]
-        public string TriggerType { get; set; }
+        [SugarColumn(ColumnDescription = "触发器类型", IsNullable = true)]
+        public TriggerTypeEnum TriggerType { get; set; }
 
         /// <summary>
-        /// 程序集Name
+        /// 程序集
         /// </summary>
         [SugarColumn(ColumnDescription = "程序集", Length = 128, IsNullable = true)]
         [MaxLength(128)]
@@ -52,8 +52,6 @@ namespace Byte.Core.Entity
         /// </summary>
         [SugarColumn(ColumnDescription = "状态")]
         public bool Status { get; set; }
-
-       
 
         /// <summary>
         /// 起始时间
@@ -137,7 +135,7 @@ namespace Byte.Core.Entity
         /// <summary>
         /// 任务Id
         /// </summary>
-        public long DetailId { get; set; }
+        public long JobId { get; set; }
 
         #region 导航
 
@@ -150,7 +148,7 @@ namespace Byte.Core.Entity
         ///  任务
         /// </summary>
         [SugarColumn(IsIgnore = true)]
-        [Navigate(NavigateType.ManyToOne, nameof(DetailId), nameof(JobDetail.Id))]
+        [Navigate(NavigateType.ManyToOne, nameof(JobId), nameof(JobDetail.Id))]
         public JobDetail Detail { get; set; }
 
         /// <summary>

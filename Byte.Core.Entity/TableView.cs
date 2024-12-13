@@ -41,8 +41,8 @@ namespace Byte.Core.Entity
         /// <summary>
         /// 排序排序方式
         /// </summary>
-        [SugarColumn(IsNullable = true)]
-        public OrderTypeEnum SortOrder { get; set; }
+        [SugarColumn(IsNullable = true,Length = 10)]
+        public string SortOrder { get; set; }
 
         /// <summary>
         /// 多余参数 

@@ -24,13 +24,13 @@ namespace Byte.Core.Entity
         /// 最近运行时间
         /// </summary>
         [SugarColumn(ColumnDescription = "最近运行时间")]
-        public DateTime? LastRunTime { get; set; }
+        public long? LastRunTime { get; set; }
 
         /// <summary>
         /// 下一次运行时间
         /// </summary>
         [SugarColumn(ColumnDescription = "下一次运行时间")]
-        public DateTime? NextRunTime { get; set; }
+        public long? NextRunTime { get; set; }
 
         /// <summary>
         /// 触发器状态

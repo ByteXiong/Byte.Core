@@ -85,7 +85,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpDelete]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task DeleteTableHeaderAsync(int[] ids) => await _logic.DeleteTableHeaderAsync(ids);
+        public async Task DeleteTableHeaderAsync( long[] ids) => await _logic.DeleteTableHeaderAsync(ids);
         #endregion
 
         #region 表头信息获取

@@ -62,7 +62,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<MenuInfo> GetInfoAsync(int id)
+        public async Task<MenuInfo> GetInfoAsync(long id)
         {
             var entity = await GetIQueryable(x => x.Id == id).Select(x => new MenuInfo
                 {
@@ -125,7 +125,7 @@ namespace Byte.Core.Business
                 {
                     MenuType = MenuTypeEnum.按钮,
                     Title = x.Desc,
-                    Path = x.Code,
+                    Path = x.Code.ToLower(),
                     ParentId = model.Id,
                     I18nKey=x.Desc,
                     Status = x.Status
@@ -204,7 +204,7 @@ namespace Byte.Core.Business
                     MenuType = MenuTypeEnum.按钮,
                     Title = x.Desc,
                     I18nKey = x.Desc,
-                    Path = x.Code,
+                    Path = x.Code.ToLower(),
                     ParentId = param.Id,
                     Status = x.Status
                 }).ToList();

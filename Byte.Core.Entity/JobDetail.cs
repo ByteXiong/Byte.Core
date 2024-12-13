@@ -91,7 +91,7 @@ namespace Byte.Core.Entity
         /// 触发器
         /// </summary>
         [SugarColumn(IsIgnore = true)]
-        [Navigate(NavigateType.OneToMany, nameof(JobTrigger.DetailId), nameof(Id))]
+        [Navigate(NavigateType.OneToMany, nameof(JobTrigger.JobId), nameof(Id))]
         public List<JobTrigger> Triggers { get; set; }
 
         #endregion

@@ -1,6 +1,7 @@
 ﻿using Byte.Core.Common.Extensions;
 using Byte.Core.Common.Filters;
 using Byte.Core.Common.Helpers;
+using Byte.Core.Common.SnowflakeIdHelper;
 using Byte.Core.Entity;
 using Byte.Core.Models;
 using Byte.Core.Repository;
@@ -69,6 +70,10 @@ namespace Byte.Core.Business
             foreach (var item in keys)
             {
                 var model = entity?.TableColumns?.FirstOrDefault(x => x.Key == item);
+                if (model != null) {
+                    entity.TableColumns.Remove(model);
+                }
+
                 model ??= sysList.FirstOrDefault(x => x.Key == item);
                 list.Add(model);
             }
@@ -101,6 +106,8 @@ namespace Byte.Core.Business
             entity.Tableof = param.Tableof;
             entity.Type = param.Type;
             entity.Router = param.Router;
+            entity.SortKey = param.SortKey;
+            entity.SortOrder = param.SortOrder;
             await UpdateAsync(entity);
             return param.Id;
         }
@@ -117,18 +124,19 @@ namespace Byte.Core.Business
             {
 
                 _unitOfWork.BeginTran();
+                
             if (param.Key == null)
             {
                 param.IsCustom = true;
-            }
+                //param.Key = IdHelper.GetId();
+                }
             else {
-
                 //回填数据库注释
                 var view = await GetIQueryable(x => x.Id == param.ViewId).Select(x => new { x.ConfigId, x.Tableof, x.Type }).FirstAsync();
                     if (view.Type == ViewTypeEnum.主页 && !string.IsNullOrEmpty(view.ConfigId) && !string.IsNullOrEmpty(view.Tableof) && !string.IsNullOrEmpty(param.Key) && !string.IsNullOrEmpty(param.Title)) {
                        _unitOfWork.GetDbClient().GetConnection(view.ConfigId).DbMaintenance.AddColumnRemark(param.Key, view.Tableof, param.Title);
                     }
-                }
+              }
 
             await _unitOfWork.GetDbClient().Storageable(param).ExecuteReturnEntityAsync();
                 _unitOfWork.CommitTran();
@@ -173,7 +181,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public async Task DeleteTableHeaderAsync(int[] ids)
+        public async Task DeleteTableHeaderAsync(long[] ids)
         {
             await _unitOfWork.GetDbClient().Deleteable<TableColumn>().In(ids).ExecuteCommandAsync();
 
@@ -196,7 +204,7 @@ namespace Byte.Core.Business
         public async Task<TableView> GetViewAsync(TableViewParam param)
         {
             var entity = await GetIQueryable(x => x.Tableof == param.Tableof &x.Type  == param.Type )
-                .Includes(x=>x.TableColumns.Where(y=>y.IsShow).OrderBy(x => !x.IsShow && string.IsNullOrEmpty(x.Props)).ThenBy(x => x.Sort).ToList()).FirstAsync();
+                .Includes(x=>x.TableColumns.OrderBy(x => !x.IsShow && string.IsNullOrEmpty(x.Props)).ThenBy(x => x.Sort).ToList()).FirstAsync();
             entity?.TableColumns?.ForEach(x => x.Key= x.Key.ToFirstLowerStr());
 
             return entity;
@@ -271,7 +279,7 @@ namespace Byte.Core.Business
             var columns = columnView.Select(x => new TableColumn
             {
                 Key = x.DbColumnName,
-                Title = x.PropertyName,
+                Title = x.ColumnDescription,
             }).ToList();
             return columns;
             #endregion

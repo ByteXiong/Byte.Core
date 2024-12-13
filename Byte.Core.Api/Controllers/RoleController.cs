@@ -33,7 +33,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<RoleInfo> GetInfoAsync(int id) => await _logic.GetInfoAsync(id);
+        public async Task<RoleInfo> GetInfoAsync(long id) => await _logic.GetInfoAsync(id);
         /// <summary>
         /// 新增
         /// </summary>

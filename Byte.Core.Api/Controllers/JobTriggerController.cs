@@ -6,16 +6,16 @@ using Byte.Core.Models;
 using Byte.Core.SqlSugar;
 using Byte.Core.Tools;
 using Microsoft.AspNetCore.Mvc;
-using Quartz;
-using System;
 
 namespace Byte.Core.Api.Controllers
 {
 
     [Route("api/[controller]/[action]")]
-    public class JobDetailController(JobDetailLogic logic) : BaseApiController
+    public class JobTriggerController(JobTriggerLogic logic) : BaseApiController
     {
-        private readonly JobDetailLogic _logic = logic ?? throw new ArgumentNullException(nameof(logic));
+
+        private readonly JobTriggerLogic _logic = logic ?? throw new ArgumentNullException(nameof(logic));
+
 
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<PagedResults<JobDetailDTO>> GetPageAsync([FromQuery] JobDetailParam param) => await _logic.GetPageAsync(param);
+        public async Task<PagedResults<JobTriggerDTO>> GetPageAsync([FromQuery] JobTriggerParam param) => await _logic.GetPageAsync(param);
 
         /// <summary>
         /// 查询详情
@@ -34,7 +34,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<JobDetailInfo> GetInfoAsync(long id) => await _logic.GetInfoAsync(id);
+        public async Task<JobTriggerInfo> GetInfoAsync(long id) => await _logic.GetInfoAsync(id);
         /// <summary>
         /// 新增
         /// </summary>
@@ -42,7 +42,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<long> Submit(UpdateJobDetailParam param)
+        public async Task<long> Submit(UpdateJobTriggerParam param)
         {
             if (param.Id == default)
             {
@@ -65,23 +65,12 @@ namespace Byte.Core.Api.Controllers
 
 
         /// <summary>
-        /// 全局启动
+        ///  设置触发器状态
         /// </summary>
         /// <returns></returns>
         [HttpPost]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task SetAllStateAsync([FromBody] TriggerActionEnum action) => await _logic.SetAllStateAsync(action);
+        public async Task SetStateAsync(long id, [FromBody] TriggerActionEnum action) => await _logic.SetStateAsync(id, action);
 
-
-        ///// <summary>
-        /////  设置作业状态
-        ///// </summary>
-        ///// <returns></returns>
-        //[HttpPost]
-        //[ApiVersion("1.0", Deprecated = false)]
-        //public async Task SetJobStateAsync(long id, [FromBody] TriggerActionEnum action)=>await _logic.SetJobStateAsync( id,action);
-
-
-       
-}
+    }
 }

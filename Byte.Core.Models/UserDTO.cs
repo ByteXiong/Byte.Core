@@ -13,7 +13,7 @@ namespace Byte.Core.Models
         // public string KeyWord { get; set; }	
 
 
-        public string? KeyWord { get; set; }
+        public string KeyWord { get; set; }
 
         /// <summary>
         /// 公司

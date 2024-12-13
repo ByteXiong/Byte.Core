@@ -32,17 +32,9 @@ namespace Byte.Core.Api.Quartz
             _scheduler.ListenerManager.AddJobListener(new MyJobListener());
             _scheduler.ListenerManager.AddTriggerListener(new MyTriggerListener());
             await _scheduler.Start();
-            var _jobDetail = app.ApplicationServices.GetService<JobDetailLogic>();
-            await _jobDetail.ScheduleJobs();
+            var _qz = app.ApplicationServices.GetService<QuartzPersistence>();
+            await _qz.ScheduleJobs();
         }
-
-
-
-
-
-
-
     }
-
 }
 

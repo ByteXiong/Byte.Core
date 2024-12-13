@@ -8,7 +8,7 @@ namespace Byte.Core.Models
 
     //public class TableViewParam : PageParam
     //{
-    //    public string? KeyWord { get; set; }
+    //    public string KeyWord { get; set; }
 
     //}
 

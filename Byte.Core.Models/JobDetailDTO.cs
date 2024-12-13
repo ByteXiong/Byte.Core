@@ -10,9 +10,17 @@ using System.Threading.Tasks;
 
 namespace Byte.Core.Models
 {
-    public class JobDetailDTO: JobDetail
+    public class JobDetailDTO
     {
-        
+        /// <summary>
+        /// 组名称
+        /// </summary>
+        public string GroupName { get; set; }
+        /// <summary>
+        /// 程序集Name
+        /// </summary>
+
+        public string AssemblyName { get; set; }
     }
     public  class JobDetailParam : PageParam
     {

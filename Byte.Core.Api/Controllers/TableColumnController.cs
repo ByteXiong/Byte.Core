@@ -29,7 +29,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<PagedResults<dynamic>> PageAsync([FromQuery] TableDataPageParam param, string configId, string tableof) => await _logic.PageAsync(param, configId, tableof);
+        public async Task<PagedResults<dynamic>> GetPageAsync([FromQuery] TableDataPageParam param, string configId, string tableof) => await _logic.GetPageAsync(param, configId, tableof);
 
 
 
@@ -40,7 +40,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<dynamic> GetFormAsync( int id, string configId, string tableof) => await _logic.GetFormAsync(id, configId, tableof);
+        public async Task<dynamic> GetInfoAsync( int id, string configId, string tableof) => await _logic.GetInfoAsync(id, configId, tableof);
 
         /// <summary>
         /// 新增
@@ -69,6 +69,6 @@ namespace Byte.Core.Api.Controllers
     /// <returns></returns>
     [HttpDelete]
     [ApiVersion("1.0", Deprecated = false)]
-    public async Task DeleteAsync(int[] ids, string configId, string tableof) => await _logic.DeleteAsync(ids,  configId, tableof);
+    public async Task DeleteAsync(long[] ids, string configId, string tableof) => await _logic.DeleteAsync(ids,  configId, tableof);
     }
 }

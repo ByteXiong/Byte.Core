@@ -7,7 +7,7 @@ namespace Byte.Core.Models
 
     public class TableColumnParam : PageParam
     {
-        public string? KeyWord { get; set; }
+        public string KeyWord { get; set; }
 
     }
     /// <summary>

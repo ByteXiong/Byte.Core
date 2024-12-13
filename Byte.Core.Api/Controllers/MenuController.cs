@@ -42,7 +42,7 @@ namespace Byte.Core.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [ApiVersion("1.0", Deprecated = false)]
-        public async Task<MenuInfo> GetInfoAsync(int id) => await _logic.GetInfoAsync(id);
+        public async Task<MenuInfo> GetInfoAsync(long id) => await _logic.GetInfoAsync(id);
         /// <summary>
         /// 提交
         /// </summary>

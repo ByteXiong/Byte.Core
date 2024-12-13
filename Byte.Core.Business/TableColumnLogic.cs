@@ -33,7 +33,7 @@ namespace Byte.Core.Business
         /// 分页
         /// </summary>
         /// <returns></returns>
-        public async Task<PagedResults<dynamic>> PageAsync(TableDataPageParam param, string configId, string tableof)
+        public async Task<PagedResults<dynamic>> GetPageAsync(TableDataPageParam param, string configId, string tableof)
         {
             var sql = $"select * from {tableof}".ToSqlFilter();
             var page = await _unitOfWork.GetDbClient().GetConnection(configId).SqlQueryable<dynamic>(sql).SearchWhere(param).ToPagedResultsAsync(param);
@@ -42,7 +42,7 @@ namespace Byte.Core.Business
 
 
 
-        public async Task<dynamic> GetFormAsync(int id, string configId, string tableof)
+        public async Task<dynamic> GetInfoAsync(int id, string configId, string tableof)
         {
            var columns = GetIQueryable(x=>x.TableView.Tableof== tableof && x.TableView.Type== ViewTypeEnum.编辑).ToList();
               
@@ -82,7 +82,7 @@ namespace Byte.Core.Business
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public async Task<int> DeleteAsync(int[] ids, string configId, string tableof)
+        public async Task<int> DeleteAsync(long[] ids, string configId, string tableof)
         {
 
             return _unitOfWork.GetDbClient().GetConnection(configId).Deleteable<object>().AS(tableof).Where("id in (@id) ", new { id = ids }).ExecuteCommand();//批量
