@@ -46,10 +46,10 @@ const {
   updateForm
 } = useForm(
   form =>
-    alovaInstance.Post(submitUrl, {
+    alovaInstance.Post(submitUrl, form, {
       // Apis.TableColumn.post_api_tablecolumn_submit_configid_tableof({
       //   pathParams: { configId: configId || '', tableof: tableof || '' },
-      data: form,
+
       transform: () => {
         visible.value = false;
         window.$message?.success($t('common.updateSuccess'));
@@ -131,7 +131,6 @@ onMounted(() => {
         :tableof="tableof"
         :view-type="ViewTypeEnum.编辑"
       ></TableHeaderSetting>
-      {{ infoUrl }}
       <NForm ref="formRef" :model="formData" label-placement="left" :label-width="80">
         <NFormItem
           v-for="(item, index) in formColumns"

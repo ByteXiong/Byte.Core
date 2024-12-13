@@ -93,8 +93,7 @@ const {
 const { send: handleDelete } = useRequest(
   ids =>
     // Apis.TableColumn.delete_api_tablecolumn_delete_configid_tableof({
-    alovaInstance.Delete(dbConfig.value.delUrl || '', {
-      data: ids,
+    alovaInstance.Delete(dbConfig.value.delUrl || '', ids, {
       transform: (res: any) => {
         window.$message?.success('删除成功！');
         getData(page.value, pageSize.value);
@@ -181,7 +180,6 @@ const columnData = computed<Array<DataTableColumn>>(() => {
               :view-type="ViewTypeEnum.主页"
             ></TableHeaderSetting>
           </template>
-          {{ dbConfig.submitConfig?.info }}
           <NButton
             v-if="hasAuth(dbConfig.submitConfig?.url?.replace('/api/', ''))"
             size="small"
