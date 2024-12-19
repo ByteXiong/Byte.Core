@@ -1,10 +1,11 @@
 ﻿
-     
+namespace Byte.Core.Tools
+{
     public static partial class AppConfig
     {
         #region 数据库表配置
         public const string Tenant = "Byte.Core";
-        
+
         //public static IWebHostEnvironment WebHostEnvironment => InternalApp.WebHostEnvironment;
         #endregion
         public const string Root = "ROOT";
@@ -25,7 +26,7 @@
         /// <summary>
         /// 哈希主键
         /// </summary>
-        public const string  HRedisDemoKey = "HRedisDemo";
+        public const string HRedisDemoKey = "HRedisDemo";
 
 
         public const string AopRedisKey = "AopRedisKey";
@@ -35,3 +36,4 @@
         public static int ErrorJWT => 401;
         public static int ErrorRole => 403;
     }
+}
