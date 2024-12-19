@@ -389,6 +389,7 @@ namespace Byte.Core.Business
             var querys = GetIQueryable(x => x.MenuType == MenuTypeEnum.参数&& db.Any(y=>y.Id==x.ParentId)).Select(x => new MenuQuery { 
                 ParentId=   x.ParentId,
                 Key=  x.Path,
+                Status = x.Status,
                 Value = x.PathParam
             }).ToList();
 

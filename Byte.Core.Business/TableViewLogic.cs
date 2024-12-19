@@ -80,8 +80,6 @@ namespace Byte.Core.Business
             list.ForEach(x=>x.ViewId=entity.Id);
              entity.TableColumns = list.OrderBy(x => !x.IsShow && string.IsNullOrEmpty(x.Props)).ThenBy(x => x.Sort).ToList();
             return entity;
-            // var aa = await _unitOfWork.GetDbClient().SqlQueryable<TableViewColumnDTO>(sql).ToListAsync();
-            //return aa;
         }
         /// <summary>
         /// 添加模型
@@ -130,13 +128,13 @@ namespace Byte.Core.Business
                 param.IsCustom = true;
                 //param.Key = IdHelper.GetId();
                 }
-            else {
-                //回填数据库注释
-                var view = await GetIQueryable(x => x.Id == param.ViewId).Select(x => new { x.ConfigId, x.Tableof, x.Type }).FirstAsync();
-                    if (view.Type == ViewTypeEnum.主页 && !string.IsNullOrEmpty(view.ConfigId) && !string.IsNullOrEmpty(view.Tableof) && !string.IsNullOrEmpty(param.Key) && !string.IsNullOrEmpty(param.Title)) {
-                       _unitOfWork.GetDbClient().GetConnection(view.ConfigId).DbMaintenance.AddColumnRemark(param.Key, view.Tableof, param.Title);
-                    }
-              }
+            //else {
+            //    //回填数据库注释 /页面的字段很少 可能会吧详细注释覆盖
+            //    var view = await GetIQueryable(x => x.Id == param.ViewId).Select(x => new { x.ConfigId, x.Tableof, x.Type }).FirstAsync();
+            //        if (view.Type == ViewTypeEnum.主页 && !string.IsNullOrEmpty(view.ConfigId) && !string.IsNullOrEmpty(view.Tableof) && !string.IsNullOrEmpty(param.Key) && !string.IsNullOrEmpty(param.Title)) {
+            //           _unitOfWork.GetDbClient().GetConnection(view.ConfigId).DbMaintenance.AddColumnRemark(param.Key, view.Tableof, param.Title);
+            //        }
+            //  }
 
             await _unitOfWork.GetDbClient().Storageable(param).ExecuteReturnEntityAsync();
                 _unitOfWork.CommitTran();
@@ -232,7 +230,7 @@ namespace Byte.Core.Business
         private List<TableColumn> GetXml(string tableName)
         {
 
-            var typeName = "Byte.Core.Models";
+
             var xmlCommentHelper = new XmlCommentHelper();
             //var xmlFile = AppDomain.CurrentDomain.BaseDirectory + typeName + ".xml";
             //"E:\\MyCode\\LY_WMSCloud\\LY_WMSCloud.Business\\bin\\Debug\\net6.0\\LY_WMSCloud.Models.xml"
@@ -257,9 +255,6 @@ namespace Byte.Core.Business
                 }
 
             }
-
-
-
             var props = type.GetProperties().Where(p => p .GetCustomAttribute<JsonIgnoreAttribute>()  == null).ToArray();
 
             
