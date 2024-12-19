@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Byte.Core.Repository;
+using Byte.Core.Common.Helpers;
 
 namespace Byte.Core.Business.Quartz
 {
@@ -62,9 +63,21 @@ namespace Byte.Core.Business.Quartz
             var props = detail.Props?.ToObject<Dictionary<string, object>>();
             props?.ForEach(x => dataMap.Put(x.Key, x.Value));
 
-            Assembly assIBll = Assembly.LoadFrom(AppDomain.CurrentDomain.BaseDirectory + "/Byte.Core.Api.dll");
+            Type type =null;
+            foreach (var assembly in RuntimeHelper.GetAllAssemblies()) {
+
+                type = assembly.GetTypes().Where(x => x.Name == detail.AssemblyName).FirstOrDefault();
+                if (type != null)
+                {
+                    break;
+                }
+
+            }
+
+            //var assembly = RuntimeHelper.GetAssembly(detail.AssemblyName);
+         ;
             //加载dll后,需要使用dll中某类.
-            Type type = assIBll.GetType($"Byte.Core.Api.Quartz.{detail.AssemblyName}");//获取类名，必须 命名空间+类名 
+            //Type type = RuntimeHelper.GetAllAssemblies().Where(assembly =>).FirstOrDefault();//获取类名，必须 命名空间+类名
 
             IJobDetail jobDetail = JobBuilder.Create(type)
                     .WithIdentity(detail.Id.ToString())

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Byte.Core.Tools
 {
     // 写在同一文件夹内 方便前端拷贝
-    public enum VersionEnum
+    public  enum VersionEnum
     {
 
         [Description("公共/第三方")]
@@ -24,7 +24,8 @@ namespace Byte.Core.Tools
         [Description("移动端/微信小程序/钉钉/H5")]
         App = 2,
     }
-    public enum StateEnum { 
+    public enum StateEnum
+    {
         /// <summary>
         /// 删除
         /// </summary>
@@ -40,10 +41,10 @@ namespace Byte.Core.Tools
         /// <summary>
         /// 更新
         /// </summary>
-        update=2,
+        update = 2,
     }
     public enum OrderTypeEnum
-    { 
+    {
         /// <summary>
         /// 正序
         /// </summary>
@@ -56,9 +57,9 @@ namespace Byte.Core.Tools
 
     public enum ViewTypeEnum
     {
-         主页=1,
-         编辑 =2,
-         详情页=3,
+        主页 = 1,
+        编辑 = 2,
+        详情页 = 3,
     }
     public enum RoleTypeEnum
     {
@@ -125,7 +126,7 @@ namespace Byte.Core.Tools
         小于,
         小于或等于,
         区间,
-     }
+    }
 
     public enum ColumnTypeEnum
     {
@@ -143,6 +144,8 @@ namespace Byte.Core.Tools
         文件 = 12,
         布尔 = 13,
         颜色 = 14,
+        TexTarea文本 = 15,
+        富文本 = 50,
         自定义 = 99
     }
     public enum LayoutTypeEnum
@@ -150,20 +153,21 @@ namespace Byte.Core.Tools
         [Description("layout.base")]
         Base = 1,
         [Description("layout.blank")]
-        Blank =2,
+        Blank = 2,
     }
 
-    public enum IconTypeEnum { 
-       iconify图标=1,
-       本地图标=2,
-    
+    public enum IconTypeEnum
+    {
+        iconify图标 = 1,
+        本地图标 = 2,
+
     }
 
     #region  定时任务
     /// <summary>
     /// 
     /// </summary>
-    public enum ClusterStatus 
+    public enum ClusterStatus
     {
         /// <summary>
         /// 宕机
@@ -181,13 +185,14 @@ namespace Byte.Core.Tools
         Waiting = 2
     }
 
-    public enum JobActionEnum { 
-        启动=1,
-        暂停=2,
-        重启=3,
-        执行=4,
-        加入=5,
-        移除=6,
+    public enum TriggerActionEnum
+    {
+        启动 = 1,
+        暂停 = 2,
+        重启 = 3,
+        执行 = 4,
+        加入 = 5,
+        移除 = 6,
     }
 
 
@@ -204,14 +209,14 @@ namespace Byte.Core.Tools
         Backlog = 1,
 
         /// <summary>
-        /// 就绪
+        /// 就绪Ready
         /// </summary>
         Ready = 2,
 
         /// <summary>
-        /// 正在运行
+        /// 正在运行Running
         /// </summary>
-        Running =3,
+        Running = 3,
 
         /// <summary>
         /// 暂停
@@ -273,6 +278,17 @@ namespace Byte.Core.Tools
 
     }
 
+
+    public enum TriggerTypeEnum
+    {
+
+
+        简单触发器 = 1,
+        Cron触发器 = 2,
+        日历间隔触发器 = 3,
+        每日时间间隔触发器 = 4,
+
+    }
     /// <summary>
     /// 作业创建类型枚举
     /// </summary>

@@ -1,20 +1,9 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Byte.Core.Tools
-{
+﻿
      
-    public static class AppConfig
+    public static partial class AppConfig
     {
         #region 数据库表配置
-        public const string Tenant = "runtest";
-        public const string Tenant1 = "DataConnection";
-        public const string Tenant2 = "Byte.Core_DB";
-        public const string TenantDts = "dataosha";
+        public const string Tenant = "Byte.Core";
         
         //public static IWebHostEnvironment WebHostEnvironment => InternalApp.WebHostEnvironment;
         #endregion
@@ -46,4 +35,3 @@ namespace Byte.Core.Tools
         public static int ErrorJWT => 401;
         public static int ErrorRole => 403;
     }
-}

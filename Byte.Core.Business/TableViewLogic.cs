@@ -242,9 +242,22 @@ namespace Byte.Core.Business
             //var path = $"LY_WMSCloud.Models.{model}";
             //Type type= Type.GetType(path);
 
-            Assembly assIBll = Assembly.LoadFrom(AppDomain.CurrentDomain.BaseDirectory + "/" + typeName + ".dll");
-            //加载dll后,需要使用dll中某类.
-            Type type = assIBll.GetType($"{typeName}.{tableName}");//获取类名，必须 命名空间+类名 
+            //Assembly assIBll = Assembly.LoadFrom(AppDomain.CurrentDomain.BaseDirectory + "/" + typeName + ".dll");
+            ////加载dll后,需要使用dll中某类.
+            //Type type = assIBll.GetType($"{typeName}.{tableName}");//获取类名，必须 命名空间+类名 
+
+            Type type = null;
+            foreach (var assembly in RuntimeHelper.GetAllAssemblies())
+            {
+
+                type = assembly.GetTypes().Where(x => x.Name == tableName).FirstOrDefault();
+                if (type != null)
+                {
+                    break;
+                }
+
+            }
+
 
 
             var props = type.GetProperties().Where(p => p .GetCustomAttribute<JsonIgnoreAttribute>()  == null).ToArray();
