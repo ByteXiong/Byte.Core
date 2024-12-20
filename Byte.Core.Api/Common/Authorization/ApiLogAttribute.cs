@@ -25,17 +25,25 @@ namespace Byte.Core.Api.Common.Authorization
 
         public override async Task OnActionExecuting(ActionExecutingContext context)
         {
-
-         
+       
+            //var actionDescriptor = context.ActionDescriptor;
+            //var methodInfo = actionDescriptor.GetMethodInfo();
+            //var controllerType = actionDescriptor.RouteValues["action"];
+            //var aaa = aa.GetMethod(controllerType);
+            //var a = actionDescriptor.AttributeRouteInfo;
+            ////var actionType = actionDescriptor.MethodInfo.DeclaringType;
+            //actionDescriptor.AttributeRouteInfo.Template = actionDescriptor.AttributeRouteInfo.Template.Replace("/api/", "");
             var req = context.HttpContext.Request;
 
 
             var xmlCommentHelper = new XmlCommentHelper();
             xmlCommentHelper.LoadAll();
 
-            Assembly assIBll = Assembly.GetExecutingAssembly();
-            req.RouteValues.TryGetValue("controller", out var controller);
-            Type type = assIBll.GetType($"{assIBll.GetName().Name}.Controllers.{controller}Controller");
+            //var actionDescriptor = context.ActionDescriptor;
+            //Assembly assIBll = Assembly.GetExecutingAssembly();
+            //req.RouteValues.TryGetValue("controller", out var controller);
+            Type type = context.Controller.GetType();
+            //actionDescriptor.GetMethod();
             var controllerName =    xmlCommentHelper.GetTypeComment(type);
             req.RouteValues.TryGetValue("action", out var action);
             var method = type.GetMethod(action.ToString()+ "Async")??type.GetMethod(action.ToString());

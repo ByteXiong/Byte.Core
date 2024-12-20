@@ -48,6 +48,11 @@ namespace Byte.Core.Api
         //}
         public static WebApplicationBuilder Build()
         {
+
+            AppDomain.CurrentDomain.ProcessExit += (sender, eventArgs) => {
+                var aa = (sender, eventArgs);
+                // 优雅停止处理，例如保存未完成的任务状态
+            };
             //// 获取命令行参数
             //var args = options.Args ?? Environment.GetCommandLineArgs().Skip(1).ToArray();
 

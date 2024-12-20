@@ -41,7 +41,7 @@ namespace Byte.Core.Entity
         /// <summary>
         /// 本次执行结果
         /// </summary>
-        [SugarColumn(ColumnDescription = "本次执行结果", Length = 128, IsNullable = true)]
+        [SugarColumn(ColumnDescription = "本次执行结果", Length = 128, IsNullable = true,ColumnDataType = "text")]
         [MaxLength(128)]
         public string Result { get; set; }
 
