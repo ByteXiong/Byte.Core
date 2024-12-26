@@ -5,7 +5,7 @@ namespace Byte.Core.Tools
     {
         #region 数据库表配置
         public const string Tenant = "Byte.Core";
-
+        public const string TenantTable = "Byte.Sqlite";
         //public static IWebHostEnvironment WebHostEnvironment => InternalApp.WebHostEnvironment;
         #endregion
         public const string Root = "ROOT";
