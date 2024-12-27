@@ -66,9 +66,11 @@ namespace Byte.Core.Api
             new IdHelperBootstrapper().SetWorkderId(1).Boot();
             //Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-            //#if DEBUG
+#if DEBUG
             builder.WebHost.UseUrls("http://*:3000");
-            //#endif
+#else
+            builder.WebHost.UseUrls(builder.Configuration.GetValue<string>("Urls"));
+#endif
             #region 获取Config配置
             var configuration = builder.Configuration;
             #endregion
