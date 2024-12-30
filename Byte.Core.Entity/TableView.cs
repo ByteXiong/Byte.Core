@@ -17,7 +17,7 @@ namespace Byte.Core.Entity
     /// 表格重写
     /// </summary>
     [SugarTable("Byte_TableView")]
-    [Tenant(AppConfig.TenantTable)]
+    //[Tenant(AppConfig.TenantTable)]   
     
     public class TableView : BaseEntity<long>
     {

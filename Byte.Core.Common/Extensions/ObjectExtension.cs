@@ -1343,8 +1343,7 @@ namespace Byte.Core.Common.Extensions
         public static DateTime ToUnixDateTime(this long timestamp)
         {
             // 将时间戳转换为 DateTime 对象（假定时间戳为秒级）
-            DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-             return epochStart.AddMilliseconds(timestamp);
+            return DateTimeOffset.FromUnixTimeSeconds(timestamp).DateTime;
         }
 
 
