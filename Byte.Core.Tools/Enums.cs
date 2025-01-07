@@ -24,6 +24,16 @@ namespace Byte.Core.Tools
         [Description("移动端/微信小程序/钉钉/H5")]
         App = 2,
     }
+
+    public enum LogLevel
+    {
+        Trace,
+        Debug,
+        Info,
+        Warn,
+        Error,
+        Fatal
+    }
     public enum StateEnum
     {
         /// <summary>

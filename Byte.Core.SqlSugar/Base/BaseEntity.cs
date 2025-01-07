@@ -6,6 +6,7 @@ namespace Byte.Core.SqlSugar
     /// <summary>
     /// 实体基类
     /// </summary>
+    [SugarIndex("index_{table}_CreateBy", nameof(CreateBy), OrderByType.Asc)]
     public class BaseEntity<T> : RootKey<T> where T : IEquatable<T>
     {
         /// <summary>

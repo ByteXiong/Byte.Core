@@ -45,6 +45,7 @@
 		<PackageReference Include="Autofac.Extras.DynamicProxy" Version="7.1.0" />
 		<PackageReference Include="Caching.CSRedis" Version="3.8.800" />
 		<PackageReference Include="Exceptionless" Version="6.0.4" />
+		<PackageReference Include="IP2Region.Net" Version="2.0.2" />
 		<PackageReference Include="Jaeger.Thrift.VendoredThrift" Version="0.3.7" />
 		<PackageReference Include="Jil" Version="2.17.0" />
 		<PackageReference Include="log4net" Version="2.0.17" />
@@ -59,11 +60,14 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="8.0.1" />
 		<!--<PackageReference Include="NPOI" Version="2.6.2" />-->
 		<PackageReference Include="Npoi.Mapper" Version="6.2.1" />
+		<PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
 	
 		<PackageReference Include="StackExchange.Redis.Extensions.JilCore" Version="1.0.1" />
 		<PackageReference Include="System.Reflection" Version="4.3.0" />
 		<PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
 		<PackageReference Include="Quartz" Version="3.13.1" />
+		<PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.3.8" />
+		<PackageReference Include="MiniProfiler.Shared" Version="4.3.8" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="WebSocket\" />

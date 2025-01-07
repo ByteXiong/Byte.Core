@@ -75,9 +75,11 @@ namespace Byte.Core.Api
             var configuration = builder.Configuration;
             #endregion
 
-            #region 配置log4net
-            ILoggerRepository repository = LogManager.CreateRepository("NETCoreRepository");
-            Log4NetHelper.SetConfig(repository, "log4net.config");
+            #region 配置log日志
+            //ILoggerRepository repository = LogManager.CreateRepository("NETCoreRepository");
+            //Log4NetHelper.SetConfig(repository, "log4net.config");
+
+            builder.Services.AddSerilogSetup();
             #endregion
             #region 配置版本管理
             builder.Services.AddApiVersioning(option =>

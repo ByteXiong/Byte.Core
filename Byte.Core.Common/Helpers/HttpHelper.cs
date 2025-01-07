@@ -4,13 +4,82 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Text;
+using Byte.Core.Common.Extensions;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace Byte.Core.Common.Helpers
 {
     public static class HttpHelper
     {
-      
+        /// <summary>
+        /// 获取所有请求的参数（包括get参数和post参数）
+        /// </summary>
+        /// <param name="context">请求上下文</param>
+        /// <returns></returns>
+        public static Dictionary<string, object> GetAllRequestParams(HttpContext context)
+        {
+            Dictionary<string, object> allParams = new Dictionary<string, object>();
+
+            var request = context.Request;
+            List<string> paramKeys = new List<string>();
+            var getParams = request.Query.Keys.ToList();
+            var postParams = new List<string>();
+            try
+            {
+                if (request.Method.ToLower() != "get")
+                    postParams = request.Form.Keys.ToList();
+            }
+            catch
+            {
+                // ignored
+            }
+
+            paramKeys.AddRange(getParams);
+            paramKeys.AddRange(postParams);
+
+            paramKeys.ForEach(aParam =>
+            {
+                object value = null;
+                if (request.Query.ContainsKey(aParam))
+                {
+                    value = request.Query[aParam].ToString();
+                }
+                else if (request.Form.ContainsKey(aParam))
+                {
+                    value = request.Form[aParam].ToString();
+                }
+
+                if (aParam == "Password")
+                {
+                    allParams.Add("Password", "********");
+                }
+                else
+                {
+                    allParams.Add(aParam, value);
+                }
+            });
+
+            string contentType = request.ContentType?.ToLower() ?? "";
+
+            //若为POST的application/json
+            if (contentType.Contains("application/json"))
+            {
+                var stream = request.Body;
+                string str = stream.ReadToString(Encoding.UTF8);
+
+                if (!str.IsNullOrEmpty())
+                {
+                    var obj = str.ToJObject();
+                    foreach (var aProperty in obj)
+                    {
+                        allParams[aProperty.Key] = aProperty.Value;
+                    }
+                }
+            }
+
+            return allParams;
+        }
         #region 同步方法
 
         /// <summary>

@@ -4,9 +4,19 @@ using Byte.Core.Api;
 using Byte.Core.Api.Common;
 using Byte.Core.Api.Quartz;
 using Byte.Core.Common.Extensions;
+using Mapster;
+using MapsterMapper;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 var builder = BuildApplication.Build();
 builder.Services.AddAutoServices("Byte.Core_XD.Business");
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+
+
+
+
 builder.Services.BuildAspectCoreWithAutofacServiceProvider();//builder 注入结束
 builder.Host.UseServiceProviderFactory(new DynamicProxyServiceProviderFactory());//动态代理
 var app = builder.Build();
