@@ -6,7 +6,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 角色-菜单
     /// </summary>
-    [SugarTable("Byte_Role_Menu")]
+    [SugarTable("byte_role_menu")]
     
     public class Role_Menu
     {

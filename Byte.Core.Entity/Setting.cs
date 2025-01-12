@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Byte.Core.SqlSugar.Base;
+using SqlSugar;
 
 namespace Byte.Core.Entity
 {
@@ -11,7 +8,7 @@ namespace Byte.Core.Entity
     /// 系统设置
     /// </summary>
     [SugarTable("sys_setting")]
-    public class Setting : BaseEntityNoDataScope
+    public class Setting : BaseEntityNoDataScope<long>
     {
         /// <summary>
         /// 名称

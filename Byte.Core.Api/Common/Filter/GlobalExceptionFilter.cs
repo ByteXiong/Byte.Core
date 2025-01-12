@@ -57,7 +57,7 @@ public class GlobalExceptionFilter : IAsyncExceptionFilter
         string throwMsg = context.Exception.Message; //错误信息
         context.Result = new ContentResult
         {
-            Content = err
+            //Content = err
             
             
             //new ActionResultVm

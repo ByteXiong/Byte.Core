@@ -8,7 +8,7 @@ namespace Byte.Core.Entity
     /// 部门
     /// </summary>
 
-    [SugarTable("Byte_Dept")]
+    [SugarTable("byte_dept")]
     public class Dept : BaseEntity<long>
     {
 

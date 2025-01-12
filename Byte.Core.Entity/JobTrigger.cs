@@ -9,7 +9,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 系统作业触发器表
     /// </summary>
-    [SugarTable("JobTrigger", "系统作业触发器表")]
+    [SugarTable("jobtrigger", "系统作业触发器表")]
     public partial class JobTrigger : BaseEntity<long>
     {
 

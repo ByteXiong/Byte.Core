@@ -9,7 +9,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 系统作业信息表
     /// </summary>
-    [SugarTable("JobDetail", "系统作业信息表")]
+    [SugarTable("jobdetail", "系统作业信息表")]
     public partial class JobDetail : BaseEntity<long>
     {
 

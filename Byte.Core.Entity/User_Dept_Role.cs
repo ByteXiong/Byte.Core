@@ -6,10 +6,10 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 用户-部门-角色
     /// </summary>
-    [SugarTable("Byte_User_Dept_Role")]
+    [SugarTable("byte_user_dept_role")]
     
     public class User_Dept_Role
-    {
+      
 
         /// <summary>
         /// 用户Id

@@ -7,7 +7,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 数据库 
     /// </summary>
-    [SugarTable("Byte_Tenant")]
+    [SugarTable("byte_tenant")]
     public class Tenant : BaseEntity<long>
     {
         /// <summary>

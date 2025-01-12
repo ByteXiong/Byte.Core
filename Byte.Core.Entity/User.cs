@@ -9,7 +9,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 用户
     /// </summary>
-    [SugarTable("Byte_User")]
+    [SugarTable("byte_user")]
     
     public class User : BaseEntity<long>
     {

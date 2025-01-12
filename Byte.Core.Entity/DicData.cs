@@ -7,7 +7,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 字典
     /// </summary>
-    [SugarTable("Byte_DicData")]
+    [SugarTable("byte_dicData")]
     
     public class DicData : BaseEntity<long> , ISoftDeletedEntity
     {

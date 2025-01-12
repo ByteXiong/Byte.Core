@@ -8,7 +8,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 系统作业集群表
     /// </summary>
-    [SugarTable("JobCluster", "系统作业集群表")]
+    [SugarTable("jobcluster", "系统作业集群表")]
 
     public  class JobCluster  : BaseEntity<long>
     {

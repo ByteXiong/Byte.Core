@@ -6,7 +6,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 组织-数据库
     /// </summary>
-    [SugarTable("Byte_Dept_DbConfig")]
+    [SugarTable("byte_dept_dbconfig")]
     
     public class Dept_Tenant
     {

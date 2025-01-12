@@ -9,7 +9,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 菜单
     /// </summary>
-    [SugarTable("Byte_Menu")]
+    [SugarTable("byte_menu")]
     
     public class Menu : BaseEntity<long>
     {

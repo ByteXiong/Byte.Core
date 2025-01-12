@@ -7,7 +7,7 @@ namespace Byte.Core.Entity
     /// <summary>
     /// 角色
     /// </summary>
-    [SugarTable("Byte_Role")]
+    [SugarTable("byte_role")]
     
     public class Role : BaseEntity<long>
     {
